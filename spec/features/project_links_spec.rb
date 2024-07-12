@@ -41,7 +41,7 @@ RSpec.feature "Project::Links", type: :feature do
     visit project_path(project)
 
     within("#link_#{link.id}") do
-      click_link "Delete"
+      click_button "Delete"
     end
 
     expect(page).not_to have_text(link.title)
