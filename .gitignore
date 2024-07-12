@@ -33,8 +33,7 @@
 
 # Ignore carrierwave uploads
 /public/uploads/*
-!/public/uploads/
-!/public/storage/.keep
+!/public/uploads/.keep
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
