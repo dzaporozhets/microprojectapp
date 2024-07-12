@@ -4,8 +4,5 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
 import TaskFormController from "./task_form_controller"
 application.register("task-form", TaskFormController)
