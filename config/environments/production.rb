@@ -94,4 +94,23 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  # Email config for Sendgrid service
+  if ENV['SENDGRID_USERNAME'].present?
+    config.action_mailer.delivery_method = :smtp
+
+    config.action_mailer.smtp_settings = {
+      address: ENV['MAILGUN_SMTP_SERVER'],
+      port: 587,
+      domain: ENV['MAILGUN_DOMAIN'],
+      user_name: ENV['MAILGUN_SMTP_LOGIN'],
+      password: ENV['MAILGUN_SMTP_PASSWORD'],
+      authentication: 'plain',
+      enable_starttls_auto: true
+    }
+  end
+
+  if ENV['APP_DOMAIN'].present?
+    config.action_mailer.default_url_options = { host: ENV['APP_DOMAIN'] }
+  end
 end

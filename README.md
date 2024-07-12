@@ -57,6 +57,13 @@ The last command should open the application in your browser.
 
 Extra:
 
+Emails
+
+```
+heroku addons:create mailgun:starter
+heroku config:set APP_DOMAIN=yourapp.herokuapp.com
+```
+
 File uploads via Amazon S3.
 
 Create the S3 bucket and set following credentilas with heroku:
