@@ -15,8 +15,10 @@
     <h2 class="font-semibold text-xl">Application Instance</h2>
     <ul class="space-y-1 mt-2">
       <li>Application Version: <%= @version %></li>
-      <li>Rails environment: <%= ENV['RAILS_ENV'] %></li>
-      <li>File uploads storage: <%= ENV['AWS_S3_BUCKET'].present? ? 'AWS S3' : 'Local'%></li>
+      <li>Rails environment: <%= @rails_env %></li>
+      <li>File uploads storage: <%= @file_storage %></li>
+      <li>Application domain: <%= @domain %></li>
+      <li>Mail delivery: <%= @mail_delivery %></li>
     </ul>
   </div>
 </div>
