@@ -96,7 +96,7 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
   # Email config for Sendgrid service
-  if ENV['SENDGRID_USERNAME'].present?
+  if ENV['MAILGUN_SMTP_SERVER'].present?
     config.action_mailer.delivery_method = :smtp
 
     config.action_mailer.smtp_settings = {
