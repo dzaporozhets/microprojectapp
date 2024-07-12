@@ -1,13 +1,22 @@
 <div class="mx-auto md:w-2/3 w-full">
   <h1 class="font-bold text-4xl mt-5">Admin Dashboard</h1>
 
-  <div class="statistics mt-5">
-    <h2 class="">Application Statistics</h2>
-    <ul>
+  <div class="statistics mt-8">
+    <h2 class="font-semibold text-xl">Application Statistics</h2>
+    <ul class="space-y-1 mt-2">
       <li>Total Users: <%= @total_users %></li>
       <li>Total Projects: <%= @total_projects %></li>
       <li>Total Files: <%= @total_files %></li>
       <li>Total Tasks: <%= @total_tasks %></li>
+    </ul>
+  </div>
+
+  <div class="appinfo mt-8">
+    <h2 class="font-semibold text-xl">Application Instance</h2>
+    <ul class="space-y-1 mt-2">
+      <li>Application Version: <%= @version %></li>
+      <li>Rails environment: <%= ENV['RAILS_ENV'] %></li>
+      <li>File uploads storage: <%= ENV['AWS_S3_BUCKET'].present? ? 'AWS S3' : 'Local'%></li>
     </ul>
   </div>
 </div>

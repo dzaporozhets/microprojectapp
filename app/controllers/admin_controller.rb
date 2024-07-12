@@ -9,6 +9,7 @@ class AdminController < ApplicationController
     @total_projects = Project.count
     @total_files = Project.count(:project_files)
     @total_tasks = Task.count
+    @version = '0.1'
   end
 
   private
