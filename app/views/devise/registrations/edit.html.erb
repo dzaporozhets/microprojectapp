@@ -1,0 +1,85 @@
+<div class="mb-5 text-blue-700">&larr; <%= link_to "Go back to the application", root_path %></div>
+
+<div>
+  <div class="sm:px-0">
+    <h2 class="text-3xl font-extrabold">Your account</h2>
+    <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and settings.</p>
+  </div>
+  <div class="mt-6 border-t border-gray-100">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <% if resource.errors.any? %>
+        <div id="error_explanation" data-turbo-cache="false" class="shadow p-4 bg-yellow-50 text-yellow-900">
+          <h2 class="mt-2 text-md font-semibold">
+            <%= I18n.t("errors.messages.not_saved",
+                       count: resource.errors.count,
+                       resource: resource.class.model_name.human.downcase)
+                     %>
+          </h2>
+          <ul class="mt-2 text-sm list-disc list-inside">
+            <% resource.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <dl class="divide-y divide-gray-100">
+        <div class="py-6">
+          <%= f.check_box :allow_invites %>
+          <%= f.label :allow_invites, "Allow other users to add you to projects", class: 'ml-2 text-sm' %>
+        </div>
+
+        <div class="py-6">
+          <dt class="font-medium leading-6 text-gray-900">
+            <%= f.label :email, class: 'font-semibold' %>
+          </dt>
+          <dd class="mt-2 text-sm leading-6 text-gray-700">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'base-input w-full' %>
+          </dd>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+        </div>
+
+        <div class="py-6">
+          <dt class="font-medium leading-6 text-gray-900">
+            <%= f.label :password, class: 'font-semibold' %>
+          </dt>
+          <dd class="mt-2 text-sm leading-6 text-gray-700">
+            <span class="block text-sm text-gray-500">Leave blank if you don't want to change it.</span>
+            <%= f.password_field :password, autocomplete: "new-password", class: 'base-input w-full' %>
+            <% if @minimum_password_length %>
+              <span class="block text-sm text-gray-500"><%= @minimum_password_length %> characters minimum</span>
+            <% end %>
+            <div class="mt-2">
+              <%= f.label :password_confirmation, class: 'text-sm' %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'base-input w-full' %>
+            </div>
+          </dd>
+        </div>
+
+        <div class="py-6">
+          <dt class="font-medium leading-6 text-gray-900">
+            <%= f.label :current_password, class: "font-semibold" %>
+          </dt>
+          <dd class="mt-2 text-sm leading-6 text-gray-700">
+            <span class="block text-sm text-gray-500">We need your current password to confirm your changes</span>
+            <%= f.password_field :current_password, autocomplete: "current-password", class: 'base-input w-full' %>
+          </dd>
+          <div class="mt-2">
+            <%= f.submit "Update", class: "flex w-full justify-center btn-primary" %>
+          </div>
+        </div>
+      </dl>
+    <% end %>
+  </div>
+</div>
+
+<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+</div>
+
+<div class="mt-10 rounded-md bg-red-50 p-4 border-red-700 border">
+  <span class="block text-sm text-red-900">This will completely remove your account. <br/>All data will be lost.</span>
+  <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Delete account with all the data? Are you sure?", turbo_confirm: "Delete account with all the data? Are you sure?" }, method: :delete, class: "rounded bg-white px-2 py-1 text-sm text-red-700 shadow-red-400 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 mt-2 font-semibold" %>
+</div>
