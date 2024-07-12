@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Project2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <nav class="bg-gray-50">
+      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 py-3">
+        <%= render 'projects/project', project: @project %>
+
+        <%= link_to root_path, class: "flex items-center space-x-3 rtl:space-x-reverse p-3 pr-0" do %>
+          <span class="self-center text-sm whitespace-nowrap text-gray-500 hover:text-gray-700">
+            <span class="hidden md:inline">Back to homepage</span>
+
+            <%#<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 md:hidden text-sm">%>
+              <%#<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />%>
+            <%#</svg>%>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 md:hidden text-sm">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>
+
+          </span>
+        <% end %>
+      </div>
+    </nav>
+
+    <main class="container mx-auto max-w-screen-xl p-4 flex">
+      <%= yield %>
+    </main>
+  </body>
+</html>
+

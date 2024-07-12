@@ -1,0 +1,13 @@
+<div class="text-sm font-medium leading-6 text-gray-900 mt-4">Tasks</div>
+
+<%= render 'project/tasks/form', task: @project.tasks.new, project: @project %>
+<%= render 'project/tasks/tasks' %>
+
+<% if false#@project.tasks.done.count > 20 %>
+  <div class="mt-10 text-center">
+    <%= link_to project_tasks_path(@project), class: "block py-2 px-3 text-sm leading-6 text-indigo-600 hover:text-indigo-500" do %>
+      <p>Show all completed tasks</p>
+    <% end %>
+  </div>
+<% end %>
+

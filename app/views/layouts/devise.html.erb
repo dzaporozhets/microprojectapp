@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Project2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <main class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+      <div class="flex min-h-[500px] flex-col bg-white">
+        <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
+          <%= yield %>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
