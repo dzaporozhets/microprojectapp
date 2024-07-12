@@ -10,6 +10,7 @@ class Project < ApplicationRecord
   has_many :users, through: :project_users
 
   validates :name, presence: true
+  validates :name, uniqueness: { scope: :user_id, message: "should be unique per user" }
   validates :user_id, presence: true
 
   validate :project_files_count_within_limit
