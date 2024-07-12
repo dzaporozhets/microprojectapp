@@ -314,6 +314,5 @@ Devise.setup do |config|
   # Configure sender based on domain of the app
   if ENV['APP_DOMAIN'].present?
     config.mailer_sender = 'no-reply@' + ENV['APP_DOMAIN']
-    config.mailer.default_url_options = { host: ENV['APP_DOMAIN'], protocol: 'https' }
   end
 end
