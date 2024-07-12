@@ -1,0 +1,21 @@
+<%= turbo_frame_tag "tasks" do %>
+  <ul role="list" class="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-2">
+    <% @project.tasks.todo.order(created_at: :desc).each do |task| %>
+      <%= render partial: "project/tasks/task", locals: { task: task } %>
+    <% end %>
+  </ul>
+
+  <% if @project.tasks.done.any? %>
+    <div class="flex items-center justify-center my-5 text-sm">
+      <span class="flex-grow border-t border-gray-100"></span>
+      <span class="px-4 text-center text-gray-400">Done!</span>
+      <span class="flex-grow border-t border-gray-100"></span>
+    </div>
+
+    <ul role="list" class="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <% @project.tasks.done.order(updated_at: :desc).each do |task| %>
+        <%= render partial: "project/tasks/task", locals: { task: task } %>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

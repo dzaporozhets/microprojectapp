@@ -1,0 +1,44 @@
+<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md">
+  <%= form_for @project, url: project_files_path(project_id: @project.id), html: { multipart: true, method: :post, class: "contents" } do |f| %>
+    <% if @project.errors.any? %>
+      <div id="error_explanation" class="my-5">
+        <h2 class="mb-2 text-md font-semibold text-gray-900"><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+        <ul class="max-w-md text-sm space-y-1 text-gray-500 list-disc list-inside">
+          <% @project.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="my-4 shadow p-4 rounded">
+      <%= f.label :project_files, class: "flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 mb-4" do %>
+        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+        </svg>
+        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span></p>
+        <p class="text-xs text-gray-500 dark:text-gray-400">Images and documents (Max. 5MB)</p>
+      <% end %>
+      <%= f.file_field :project_files,
+        multiple: true, required: true,
+        accept: allowed_file_types,
+        class: "appearance-none w-full
+            text-gray-700 leading-tight focus:outline-none
+            focus:shadow-outline file:mr-5 file:py-2 file:px-6
+            file:rounded-md file:border-0
+            file:text-sm file:font-medium
+            file:bg-gray-100 file:text-gray-700" %>
+    </div>
+
+    <% if s3_storage? %>
+      <div class="my-4">
+        <p class="text-sm text-gray-400">
+          Your app is configured to use aws s3 for file storage. If there are any errors with uploading, make sure your s3 env variables are set and correct.
+        </p>
+      </div>
+    <% end %>
+
+    <%= f.submit "Upload Files", class: "btn-primary" %>
+  <% end %>
+</div>

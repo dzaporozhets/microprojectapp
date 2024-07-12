@@ -1,0 +1,24 @@
+<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md">
+  <h1 class="font-bold text-2xl">Add user to the project</h1>
+
+  <div class="mt-3">
+    <p class="mt-2 text-sm text-gray-700">
+      The user must have an account in the application to be added to the project.
+    </p>
+  </div>
+
+  <% if defined?(alert) && alert.present? %>
+    <p class="p-4 text-sm text-gray-800 rounded-lg bg-gray-50"><%= alert %></p>
+  <% end %>
+
+  <%= form_with url: add_member_project_users_path(@project), method: :post, class: "space-y-6 contents" do |form| %>
+    <div class="form-group">
+      <%= form.label :email, "User Email", class: "block text-sm font-medium text-gray-700" %>
+      <%= form.email_field :email, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full text-sm" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit "Add user", class: "btn-primary" %>
+    </div>
+  <% end %>
+</div>

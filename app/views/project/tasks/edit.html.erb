@@ -1,0 +1,25 @@
+<div class="w-full">
+  <div class="mx-auto">
+    <div class="flex flex-col md:flex-row md:space-x-12">
+      <div class="mb-4 md:mb-0 md:w-2/3">
+        <%= turbo_frame_tag "tasks" do %>
+          <%#= link_to project_task_url(@project, @task), project_task_url(@project, @task), target: :_blank, class: "text-indigo-700" %>
+
+          <%= link_to project_path(@project), class: "rounded-md py-2 px-5 bg-gray-100 text-gray-500 inline-block cursor-pointer text-sm" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3 text-gray-500 inline">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+            </svg>
+            <span>Back to tasks</span>
+          <% end %>
+          <%= link_to 'Open in a new tab', project_task_path(@project, @task), class: "rounded-md py-2 px-5 bg-gray-100 text-gray-500 inline-block cursor-pointer text-sm ms-3", target: :_blank %>
+
+          <%= render 'edit_form' %>
+
+          <%= button_to "Delete this task", [@project, @task], method: :delete, class: "rounded-lg py-3 px-5 bg-gray-100 text-sm text-red-800", form_class: "float-right" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
