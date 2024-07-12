@@ -310,4 +310,10 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+
+  # Configure sender based on domain of the app
+  if ENV['APP_DOMAIN']
+    config.mailer_sender = 'no-reply@' + ENV['APP_DOMAIN']
+    config.mailer.default_url_options = { host: ENV['APP_DOMAIN'], protocol: 'https' }
+  end
 end
