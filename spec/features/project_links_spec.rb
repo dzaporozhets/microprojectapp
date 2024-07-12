@@ -29,13 +29,12 @@ RSpec.feature "Project::Links", type: :feature do
     expect(page).to have_link("http://example.com", href: "http://example.com")
   end
 
-  # TODO
-  #scenario "User views a link" do
-    #visit project_link_path(project, link)
+  scenario "User views a link" do
+    visit project_link_path(project, link)
 
-    #expect(page).to have_text(link.title)
-    #expect(page).to have_link(link.url, href: link.url)
-  #end
+    expect(page).to have_text(link.title)
+    expect(page).to have_link(link.title, href: link.url)
+  end
 
   scenario "User deletes a link" do
     visit project_path(project)
