@@ -315,4 +315,11 @@ Devise.setup do |config|
   if ENV['APP_DOMAIN'].present?
     config.mailer_sender = 'no-reply@' + ENV['APP_DOMAIN']
   end
+
+  if ENV['GOOGLE_CLIENT_ID'].present?
+    config.omniauth :google_oauth2,
+      ENV['GOOGLE_CLIENT_ID'],
+      ENV['GOOGLE_CLIENT_SECRET'],
+      { scope: 'userinfo.email, userinfo.profile' }
+  end
 end

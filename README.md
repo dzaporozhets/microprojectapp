@@ -95,3 +95,36 @@ bundle exec rake user:make_admin EMAIL=user@example.com
 heroku run rake user:make_admin EMAIL=user@example.com
 ```
 
+
+## ENV variables
+
+Database:
+
+* `DATABASE_URL`
+
+Rails variables:
+
+* `RAILS_ENV` - can be `development`, `test`, `production`
+* `CI`
+
+App variables:
+
+* `APP_DOMAIN`
+
+AWS S3:
+
+* `AWS_ACCESS_KEY_ID`
+* `AWS_SECRET_ACCESS_KEY`
+* `AWS_REGION`
+* `AWS_S3_BUCKET`
+
+Google oauth:
+
+* `GOOGLE_CLIENT_ID`
+* `GOOGLE_CLIENT_SECRET`
+
+Mailgun:
+
+* `MAILGUN_SMTP_SERVER`
+* `MAILGUN_SMTP_LOGIN`
+* `MAILGUN_SMTP_PASSWORD`

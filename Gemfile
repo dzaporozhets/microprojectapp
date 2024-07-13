@@ -56,6 +56,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'database_cleaner-active_record'
   gem 'faker'
+  gem 'climate_control'
 end
 
 group :development do
@@ -83,3 +84,7 @@ end
 gem "devise", "~> 4.9"
 gem 'carrierwave', '~> 3.0'
 gem "fog-aws"
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+
+gem 'dotenv', groups: [:development, :test]
