@@ -33,10 +33,7 @@ class User < ApplicationRecord
         # TODO: Decide if we want to prevent existing user link their
         # google account to local one. Maybe give them choice
         # raise 'User with such email already exists'
-        user.update(
-          uid: access_token['uid'],
-          provider: access_token['provider']
-        )
+        user.update(uid: uid, provider: provider)
       end
     else
       user = User.new(provider: provider, uid: uid, email: email)
