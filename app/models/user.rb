@@ -27,15 +27,24 @@ class User < ApplicationRecord
 
     if user
       if user.provider == provider && user.uid == uid
+        # User logged in with provider before, nothing to do here.
         user
       else
-        raise 'User with such email already exists'
+        # TODO: Decide if we want to prevent existing user link their
+        # google account to local one. Maybe give them choice
+        # raise 'User with such email already exists'
+        user.update(
+          uid: access_token['uid'],
+          provider: access_token['provider']
+        )
       end
     else
       user = User.new(provider: provider, uid: uid, email: email)
       user.password = Devise.friendly_token[0,20]
       user.save
     end
+
+    user
   end
 
   def invited?

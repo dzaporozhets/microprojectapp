@@ -85,3 +85,5 @@ gem 'carrierwave', '~> 3.0'
 gem "fog-aws"
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
+
+gem 'dotenv', groups: [:development, :test]
