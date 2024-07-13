@@ -57,15 +57,9 @@ The last command should open the application in your browser.
 
 Extra:
 
-Emails
+##### File uploads via Amazon S3.
 
-```
-heroku addons:create mailgun:starter
-heroku config:set APP_DOMAIN=yourapp.herokuapp.com
-```
-
-File uploads via Amazon S3.
-
+This is required for file uploads to workon Heroku.
 Create the S3 bucket and set following credentilas with heroku:
 
 ```
@@ -75,9 +69,23 @@ heroku config:set AWS_REGION=
 heroku config:set AWS_S3_BUCKET=
 ```
 
-### Extra commands
+##### Emails
 
-How to make user an admin
+If you don't need to send emails like signup emails or password reset, then you can skip it.
+You can use mailgun to send emails. For that you need to quite a few things.
+You need to use your own domain, activate add-on, setup mailgun domain verification etc.
+
+```
+heroku addons:create mailgun:starter
+heroku config:set APP_DOMAIN=yourapp.herokuapp.com
+```
+
+## Extra commands
+
+
+##### Admin users
+
+How to make user an admin:
 
 ```
 # When run locally
@@ -86,3 +94,4 @@ bundle exec rake user:make_admin EMAIL=user@example.com
 # When deployed to heroku
 heroku run rake user:make_admin EMAIL=user@example.com
 ```
+
