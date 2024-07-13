@@ -40,6 +40,10 @@
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
           <% end %>
+
+          <% if resource.provider.present? %>
+            <p class="text-sm text-blue-700 mt-2 font-semibold">You logged in with Google with this email address.</p>
+          <% end %>
         </div>
 
         <div class="py-6">
