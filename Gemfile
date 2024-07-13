@@ -83,3 +83,5 @@ end
 gem "devise", "~> 4.9"
 gem 'carrierwave', '~> 3.0'
 gem "fog-aws"
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
