@@ -29,12 +29,19 @@ If you plan to use it for production then make sure to change `RAILS_ENV` and `S
 
 ### Running on Heroku
 
-Clone the repository and cd into it. Then execute next commands:
+Clone the repository and cd into it. Then create a heroku project:
 
 ```
 # Create a heroku project
 heroku create
 
+# If you are in Europe, its better to use eu region instead
+heroku create --region eu
+```
+
+Now let's deploy the app:
+
+```
 # Add Postgresql database
 heroku addons:create heroku-postgresql:essential-0
 
