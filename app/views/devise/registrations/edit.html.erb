@@ -34,7 +34,11 @@
             <%= f.label :email, class: 'font-semibold' %>
           </dt>
           <dd class="mt-2 text-sm leading-6 text-gray-700">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'base-input w-full' %>
+            <% if resource.oauth_enabled? %>
+              <%= f.email_field :email, disabled: true, class: 'base-input w-full bg-gray-100 text-gray-500' %>
+            <% else %>
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'base-input w-full' %>
+            <% end %>
           </dd>
 
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -42,7 +46,7 @@
           <% end %>
 
           <% if resource.provider.present? %>
-            <p class="text-sm text-blue-700 mt-2 font-semibold">You logged in with Google with this email address.</p>
+            <p class="text-sm text-blue-700 mt-2 font-semibold">You logged in with Google with this email.</p>
           <% end %>
         </div>
 

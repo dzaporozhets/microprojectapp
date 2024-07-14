@@ -76,4 +76,14 @@ class User < ApplicationRecord
     projects.include?(project) ||
       invited_projects.include?(project)
   end
+
+  def oauth_enabled?
+    self.uid.present? && self.provider.present?
+  end
+
+  # def valid_password?(password)
+  #   return false if oauth_enabled?
+  #
+  #   super
+  # end
 end

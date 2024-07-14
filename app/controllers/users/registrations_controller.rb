@@ -20,9 +20,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    # Don't allow email and password change if user log in with google
+    if resource.oauth_enabled?
+      params[:user].delete(:email)
+    end
+
+    super
+  end
 
   # DELETE /resource
   # def destroy
