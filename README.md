@@ -1,100 +1,26 @@
 # README
 
 * [Website](https://about.microproject.app/)
-* [Installation instructions](INSTALL.md)
 * [MIT License](LICENSE)
 
 ## Running
 
-Create the database:
+### Using cloud platform as a service (easy)
 
-    rails db:setup
+If you want an easy and fast way to run the application, we recommend using [Heroku](https://www.heroku.com/).
+We made a simple guide on how to [deploy this app to HEROKU](HEROKU.md).
 
-To start a web server for the application, run:
+### Using your own server or VPS
 
-    rails s
-
-Now visit http://localhost:3000/ to see the app running.
+See [installation instructions](INSTALL.md) for running application on your laptop or any linux server.
 
 ### Run as container
 
-The repository contains the `Dockerfile`. You can build and run the app with Docker.
-App will be running on port `3000` by default. Database is not included.
-So make sure to pass a `DATABASE_URL` to the container.
-
-Docker compose:
-
-```
-docker-compose up --build
-docker-compose run web bundle exec rake db:migrate
-```
-
-If you plan to use it for production then make sure to change `RAILS_ENV` and `SECRET_KEY_BASE_DUMMY` in `docker-compose.yml`.
-
-### Running on Heroku
-
-Clone the repository and cd into it. Then create a heroku project:
-
-```
-# Create a heroku project
-heroku create
-
-# If you are in Europe, its better to use eu region instead
-heroku create --region eu
-```
-
-Now let's deploy the app:
-
-```
-# Add Postgresql database
-heroku addons:create heroku-postgresql:essential-0
-
-# Deploy application
-git push heroku main
-
-# Prepare the database.
-# If command below fails, maybe postgresql provision is not ready yet.
-# Give it a try in a minute or two.
-heroku run rails db:migrate
-
-# Fill database with necessary data
-heroku run rails db:seed
-
-# Open the app in web browser
-heroku open
-```
-
-The last command should open the application in your browser.
-
-Extra:
-
-##### File uploads via Amazon S3.
-
-This is required for file uploads to workon Heroku.
-Create the S3 bucket and set following credentilas with heroku:
-
-```
-heroku config:set AWS_ACCESS_KEY_ID=
-heroku config:set AWS_SECRET_ACCESS_KEY=
-heroku config:set AWS_REGION=
-heroku config:set AWS_S3_BUCKET=
-```
-
-##### Emails
-
-If you don't need to send emails like signup emails or password reset, then you can skip it.
-You can use mailgun to send emails. For that you need to quite a few things.
-You need to use your own domain, activate add-on, setup mailgun domain verification etc.
-
-```
-heroku addons:create mailgun:starter
-heroku config:set APP_DOMAIN=yourapp.herokuapp.com
-```
+See [Docker instructions](DOCKER.md) for that.
 
 ## Extra commands
 
-
-##### Admin users
+#### Admin users
 
 How to make user an admin:
 
@@ -106,7 +32,6 @@ bundle exec rake user:make_admin EMAIL=user@example.com
 heroku run rake user:make_admin EMAIL=user@example.com
 ```
 
-
 ## ENV variables
 
 Database:
@@ -116,7 +41,6 @@ Database:
 Rails variables:
 
 * `RAILS_ENV` - can be `development`, `test`, `production`
-* `CI`
 
 App variables:
 
