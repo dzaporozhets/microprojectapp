@@ -51,6 +51,8 @@ Done! The last command should open the application in your browser.
 
 ### Extras:
 
+
+
 #### File uploads via Amazon S3 (optional, but recommended).
 
 This is required for file uploads to work on Heroku.
@@ -69,7 +71,24 @@ If you don't need to send emails like signup emails or password reset, then you 
 You can use mailgun to send emails. For that you need to quite a few things.
 You need to use your own domain, activate add-on, setup mailgun domain verification etc.
 
-```
-heroku addons:create mailgun:starter
-heroku config:set APP_DOMAIN=yourapp.herokuapp.com
-```
+1. **Activate mailgun addon:**
+    ```sh
+    heroku addons:create mailgun:starter
+    ```
+
+2. **Got to heroku app page, click mailgun addon and get redirected to mailgun dashboard**
+3. **Go through adding new domain setup and receive credentails from mailgun**
+4. **Pass those credentilas to heroku**
+    ```sh
+    heroku config:set MAILGUN_DOMAIN=
+    heroku config:set MAILGUN_SMTP_LOGIN=
+    heroku config:set MAILGUN_SMTP_PASSWORD=
+    heroku config:set MAILGUN_SMTP_SERVER=
+    ```
+
+#### Use your domain
+
+If you decide to go with our own domain, make sure to update the app with `APP_DOMAIN` variable:
+
+    heroku config:set ADD_DOMAIN=
+
