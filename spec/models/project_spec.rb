@@ -16,9 +16,9 @@ RSpec.describe Project, type: :model do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:user_id) }
 
-    describe "PROJECTS_LIMITS" do
+    describe "PROJECT_LIMIT" do
       before do
-        stub_const("Project::PROJECTS_LIMITS", 3)
+        stub_const("Project::PROJECT_LIMIT", 3)
       end
 
       it "allows creation of a project if the user has less than the limit of projects" do

@@ -14,6 +14,18 @@ RSpec.describe Task, type: :model do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:user_id) }
     it { should validate_presence_of(:project_id) }
+
+    describe "TASK_LIMIT" do
+      it "does not allow creation of a task if the project already has the limit of tasks" do
+        2.times { create(:task, project: project, user: user) }
+        task = build(:task, project: project, user: user)
+
+        stub_const("Task::TASK_LIMIT", 2)
+
+        expect(task).not_to be_valid
+        expect(task.errors[:base]).to include("This project has reached the limit of 2 tasks.")
+      end
+    end
   end
 
   describe "scopes" do

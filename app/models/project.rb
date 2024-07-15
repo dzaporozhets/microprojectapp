@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
-  FILE_LIMITS = 100
-  PROJECTS_LIMITS = 999
+  FILE_LIMIT = 100
+  PROJECT_LIMIT = 999
 
   belongs_to :user, required: true
 
@@ -73,14 +73,14 @@ class Project < ApplicationRecord
   end
 
   def project_files_count_within_limit
-    if project_files.count > FILE_LIMITS
-      errors.add(:project_files, "exceeds the limit of #{FILE_LIMITS} files per project")
+    if project_files.count > FILE_LIMIT
+      errors.add(:project_files, "exceeds the limit of #{FILE_LIMIT} files per project")
     end
   end
 
   def project_limit
-    if user && user.projects.count >= PROJECTS_LIMITS
-      errors.add(:base, "You have reached the limit of #{PROJECTS_LIMITS} projects.")
+    if user && user.projects.count >= PROJECT_LIMIT
+      errors.add(:base, "You have reached the limit of #{PROJECT_LIMIT} projects.")
     end
   end
 end
