@@ -15,6 +15,26 @@ RSpec.describe Project, type: :model do
   describe "validations" do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:user_id) }
+
+    describe "PROJECTS_LIMITS" do
+      before do
+        stub_const("Project::PROJECTS_LIMITS", 3)
+      end
+
+      it "allows creation of a project if the user has less than the limit of projects" do
+        project = build(:project, :with_random_name, user: user)
+
+        expect(project).to be_valid
+      end
+
+      it "does not allow creation of a project if the user already has the limit of projects" do
+        create(:project, :with_random_name, user: user)
+        project = build(:project, :with_random_name, user: user)
+
+        expect(project).not_to be_valid
+        expect(project.errors[:base]).to include("You have reached the limit of 3 projects.")
+      end
+    end
   end
 
   describe "methods" do

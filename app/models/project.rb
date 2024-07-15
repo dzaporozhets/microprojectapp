@@ -1,5 +1,6 @@
 class Project < ApplicationRecord
   FILE_LIMITS = 100
+  PROJECTS_LIMITS = 999
 
   belongs_to :user, required: true
 
@@ -13,6 +14,7 @@ class Project < ApplicationRecord
   validates :name, uniqueness: { scope: :user_id, message: "should be unique per user" }
   validates :user_id, presence: true
 
+  validate :project_limit, on: :create
   validate :project_files_count_within_limit
 
   mount_uploaders :project_files, ProjectFileUploader
@@ -73,6 +75,12 @@ class Project < ApplicationRecord
   def project_files_count_within_limit
     if project_files.count > FILE_LIMITS
       errors.add(:project_files, "exceeds the limit of #{FILE_LIMITS} files per project")
+    end
+  end
+
+  def project_limit
+    if user && user.projects.count >= PROJECTS_LIMITS
+      errors.add(:base, "You have reached the limit of #{PROJECTS_LIMITS} projects.")
     end
   end
 end
