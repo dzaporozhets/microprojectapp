@@ -52,11 +52,11 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
   gem "rspec-rails"
   gem 'pry-rails'
-
   gem 'factory_bot_rails'
   gem 'database_cleaner-active_record'
   gem 'faker'
   gem 'climate_control'
+  gem 'dotenv'
 end
 
 group :development do
@@ -87,5 +87,4 @@ gem "fog-aws"
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
-
-gem 'dotenv', groups: [:development, :test]
+gem 'kaminari'

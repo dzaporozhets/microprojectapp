@@ -1,5 +1,7 @@
 # Running on Heroku
 
+Before you proceed you need to install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#install-with-an-installer).
+
 1. **Clone the repository:**
     ```sh
     git clone https://gitlab.com/dzaporozhets/microprojectapp.git

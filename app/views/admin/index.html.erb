@@ -1,24 +1,75 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl mt-5">Admin Dashboard</h1>
+<div class="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
+  <div>
+    <div class="px-4 sm:px-0">
+      <h3 class="text-base font-semibold leading-7 text-gray-900">Application Information</h3>
+      <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Check documentation for all supported ENV variables.</p>
+    </div>
 
-  <div class="statistics mt-8">
-    <h2 class="font-semibold text-xl">Application Statistics</h2>
-    <ul class="space-y-1 mt-2">
-      <li>Total Users: <%= @total_users %></li>
-      <li>Total Projects: <%= @total_projects %></li>
-      <li>Total Files: <%= @total_files %></li>
-      <li>Total Tasks: <%= @total_tasks %></li>
-    </ul>
+    <div class="mt-6 border-t border-gray-100">
+      <dl class="divide-y divide-gray-100">
+        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Application Version</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @version %></dd>
+        </div>
+      </dl>
+      <dl class="divide-y divide-gray-100">
+        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Rails environment</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @rails_env %></dd>
+        </div>
+      </dl>
+      <dl class="divide-y divide-gray-100">
+        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">File uploads storage</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @file_storage %></dd>
+        </div>
+      </dl>
+      <dl class="divide-y divide-gray-100">
+        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Application domain</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @domain %></dd>
+        </div>
+      </dl>
+      <dl class="divide-y divide-gray-100">
+        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Mail delivery</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @mail_delivery %></dd>
+        </div>
+      </dl>
+    </div>
   </div>
+  <div>
+    <div class="px-4 sm:px-0">
+      <h3 class="text-base font-semibold leading-7 text-gray-900">Database Information</h3>
+      <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500"><%= ActiveRecord::Base.connection.current_database %></p>
+    </div>
 
-  <div class="appinfo mt-8">
-    <h2 class="font-semibold text-xl">Application Instance</h2>
-    <ul class="space-y-1 mt-2">
-      <li>Application Version: <%= @version %></li>
-      <li>Rails environment: <%= @rails_env %></li>
-      <li>File uploads storage: <%= @file_storage %></li>
-      <li>Application domain: <%= @domain %></li>
-      <li>Mail delivery: <%= @mail_delivery %></li>
-    </ul>
+    <div class="mt-6 border-t border-gray-100">
+      <dl class="divide-y divide-gray-100">
+        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Users</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @total_users %></dd>
+        </div>
+      </dl>
+      <dl class="divide-y divide-gray-100">
+        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Projects</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @total_projects %></dd>
+        </div>
+      </dl>
+      <dl class="divide-y divide-gray-100">
+        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">File uploads</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @total_files %></dd>
+        </div>
+      </dl>
+      <dl class="divide-y divide-gray-100">
+        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Tasks</dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @total_tasks %></dd>
+        </div>
+      </dl>
+    </div>
   </div>
 </div>
+
