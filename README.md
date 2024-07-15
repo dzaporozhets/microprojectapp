@@ -1,5 +1,9 @@
 # README
 
+* [Website](https://about.microproject.app/)
+* [Installation instructions](INSTALL.md)
+* [MIT License](LICENSE)
+
 ## Running
 
 Create the database:
