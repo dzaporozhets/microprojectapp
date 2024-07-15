@@ -1,8 +1,8 @@
 class AdminController < ApplicationController
   before_action :authenticate_user!
-  before_action :admin_only
+  before_action :authenticate_admin!
 
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  layout 'admin'
 
   def index
     @total_users = User.count
@@ -14,11 +14,5 @@ class AdminController < ApplicationController
     @domain = ENV['APP_DOMAIN'] || 'Not configured'
     @file_storage = ENV['AWS_S3_BUCKET'].present? ? 'AWS S3' : 'Local'
     @mail_delivery = Rails.application.config.action_mailer.delivery_method || 'Not configured'
-  end
-
-  private
-
-  def admin_only
-    raise ActiveRecord::RecordNotFound unless current_user.admin?
   end
 end

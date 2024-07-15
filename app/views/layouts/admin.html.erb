@@ -13,9 +13,10 @@
 
   <body>
     <nav class="bg-gray-50">
-      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 py-0">
-        <%= render 'projects/project', project: @project %>
-
+      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+        <%= link_to admin_path, class: "flex items-center space-x-3 rtl:space-x-reverse" do %>
+          <span class="self-center text-xl whitespace-nowrap leading-6">Admin area</span>
+        <% end %>
         <%= link_to root_path, class: "flex items-center space-x-3 rtl:space-x-reverse pr-0" do %>
           <span class="self-center text-sm whitespace-nowrap text-gray-500 hover:text-gray-700">
             <span class="hidden md:inline">Back to homepage</span>
@@ -28,9 +29,16 @@
       </div>
     </nav>
 
+
     <main class="container mx-auto max-w-screen-xl p-4 flex">
-      <%= yield %>
+      <div class="mx-auto w-full">
+        <div class="mx-auto max-w-7xl flex flex-col sm:flex-row mb-5">
+          <%= link_to 'Application', admin_path, class: "bg-gray-200 px-3 py-2 rounded-md hover:bg-gray-300 mb-2 sm:mb-0 sm:mr-3" %>
+          <%= link_to 'Users', admin_users_path, class: "bg-gray-200 px-3 py-2 rounded-md hover:bg-gray-300 mb-2 sm:mb-0 sm:mr-3" %>
+        </div>
+
+        <%= yield %>
+      </div>
     </main>
   </body>
 </html>
-
