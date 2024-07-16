@@ -10,6 +10,7 @@
   </div>
 
   <div class="text-sm text-gray-500 my-5">
+    <p>Created by: <span class="font-medium"><%= @task.user.email %></span></p>
     <p>Last updated at: <span class="font-medium"><%= l(@task.updated_at, format: :long) %></span></p>
   </div>
 
