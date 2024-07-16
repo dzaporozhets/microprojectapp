@@ -28,7 +28,7 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     uid = auth.uid
     provider = auth.provider
-    email = auth.info.email
+    email = auth.info&.email
 
     return nil unless provider.present? && uid.present? && email.present?
 
