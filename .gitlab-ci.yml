@@ -43,11 +43,12 @@ rspec:
     - bundle exec rails db:seed
     - bundle exec rails assets:precompile
     - bundle exec rspec spec
-  artifacts:
-    reports:
-      coverage_report:
-        coverage_format: cobertura
-        path: coverage/coverage.xml
+  coverage: '/Code coverage: \d+(?:\.\d+)?/'
+  #artifacts:
+    #reports:
+      #coverage_report:
+        #coverage_format: cobertura
+        #path: coverage/coverage.xml
 
 # This deploy job uses a simple deploy flow to Heroku, other providers, e.g. AWS Elastic Beanstalk
 # are supported too: https://github.com/travis-ci/dpl
