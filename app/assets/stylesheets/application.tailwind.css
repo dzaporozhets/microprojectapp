@@ -18,4 +18,8 @@
   .base-input {
     @apply flex-grow shadow rounded-md border border-gray-400 outline-none p-2 text-sm;
   }
+
+  .btn-tab {
+    @apply bg-gray-200 px-3 py-1 rounded-md hover:bg-gray-300 mb-2 sm:mb-0 sm:mr-3 text-sm;
+  }
 }
