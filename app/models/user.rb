@@ -16,6 +16,8 @@ class User < ApplicationRecord
 
   scope :admins, -> { where(admin: true) }
 
+  validate :email_domain_check, on: :create
+
   def self.from_omniauth(auth)
     uid = auth.uid
     provider = auth.provider
@@ -96,6 +98,18 @@ class User < ApplicationRecord
       false
     else
       super
+    end
+  end
+
+  private
+
+  def email_domain_check
+    allowed_domain = ENV['APP_ALLOWED_EMAIL_DOMAIN']
+
+    return true unless allowed_domain.present?
+
+    unless email.end_with?("@#{allowed_domain}")
+      errors.add(:email, "is not from an allowed domain.")
     end
   end
 end

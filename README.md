@@ -44,7 +44,8 @@ Rails variables:
 
 App variables:
 
-* `APP_DOMAIN`
+* `APP_DOMAIN` - set domain name to use for links and other resources. For example `APP_DOMAIN=myapp.heroku.com`
+* `APP_ALLOWED_EMAIL_DOMAIN` - restrict users to certain domain. For example `APP_ALLOWED_EMAIL_DOMAIN=company.com`
 
 AWS S3:
 
