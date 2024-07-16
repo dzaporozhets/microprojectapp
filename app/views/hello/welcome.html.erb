@@ -18,9 +18,17 @@
     <p>The Sample project is here to give you an impression of what a filled-out project looks like. It contains example data so you can explore the app's features. You can remove it when you are ready.</p>
   </div>
 
-  <div class="my-5 border-t border-gray-200">
-    <p class="py-5">Enjoy using the app, and if you have any questions or need assistance visit <a href="https://gitlab.com/dzaporozhets/project2">project page</a></p>
+  <div class="mt-5 border-t border-gray-200">
+    <p class="pt-5">Enjoy using the app, and if you have any questions or need assistance visit <a href="https://gitlab.com/dzaporozhets/project2">project page</a></p>
   </div>
 
-  <%= link_to "Go to projects page", root_path, class: 'btn-primary' %>
+  <% if Devise.mappings[:user].confirmable? %>
+    <p class= "p-5 mt-5 bg-gray-100 rounded">
+    P.S. Check your inbox for the confirmation link. Make sure to confirm your email within 1 hour.
+    </p>
+  <% end %>
+
+  <div class="mt-5">
+    <%= link_to "Go to projects page", root_path, class: 'btn-primary' %>
+  </div>
 </div>

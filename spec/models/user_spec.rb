@@ -25,6 +25,50 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe 'class_methods' do
+    describe '.from_omniauth' do
+      let(:auth) do
+        OmniAuth::AuthHash.new(
+          provider: 'google_oauth2',
+          uid: '123456789',
+          info: {
+            email: 'user@mydomain.com'
+          }
+        )
+      end
+
+      context 'when the user does not exist' do
+        it 'creates a new user' do
+          expect { User.from_omniauth(auth) }.to change(User, :count).by(1)
+
+          user = User.last
+
+          expect(user.email).to eq('user@mydomain.com')
+          expect(user.provider).to eq('google_oauth2')
+          expect(user.uid).to eq('123456789')
+        end
+      end
+
+      context 'when the user exists' do
+        let!(:existing_user) { create(:user, email: 'user@mydomain.com', provider: 'google_oauth2', uid: '123456789') }
+
+        it 'returns the existing user without creating a new one' do
+          expect { User.from_omniauth(auth) }.not_to change(User, :count)
+        end
+
+        it 'updates the user provider and uid if they differ' do
+          existing_user.update(provider: 'old_provider', uid: 'old_uid')
+
+          User.from_omniauth(auth)
+          existing_user.reload
+
+          expect(existing_user.provider).to eq('google_oauth2')
+          expect(existing_user.uid).to eq('123456789')
+        end
+      end
+    end
+  end
+
   describe "methods" do
     describe "#invited?" do
       it "returns false (TODO: needs implementation)" do
@@ -101,4 +145,3 @@ RSpec.describe User, type: :model do
     end
   end
 end
-
