@@ -1,9 +1,16 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :lockable, :omniauthable, omniauth_providers: [:google_oauth2]
+
+  devise_modules = [
+    :database_authenticatable, :registerable,
+    :recoverable, :rememberable, :validatable,
+    :lockable, :omniauthable
+  ]
+
+  devise_modules << :confirmable if ENV['APP_EMAIL_CONFIRMATION'].present?
+
+  devise *devise_modules, omniauth_providers: [:google_oauth2]
 
   after_create :create_personal_project,
     :create_sample_project
@@ -40,6 +47,7 @@ class User < ApplicationRecord
     else
       user = User.new(provider: provider, uid: uid, email: email)
       user.password = Devise.friendly_token[0,20]
+      user.skip_confirmation! if Devise.mappings[:user].confirmable?
       user.save
     end
 
