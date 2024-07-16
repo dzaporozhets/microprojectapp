@@ -86,4 +86,16 @@ class User < ApplicationRecord
   #
   #   super
   # end
+  #
+
+  # Override Devise's send_reset_password_instructions method
+  def send_reset_password_instructions
+    if reset_password_sent_at && reset_password_sent_at > 5.minutes.ago
+      # Skip sending instructions if the last request was less than 5 minutes ago
+      errors.add(:email, 'Password reset request already sent, please check your email.')
+      false
+    else
+      super
+    end
+  end
 end
