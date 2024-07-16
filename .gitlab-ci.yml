@@ -43,7 +43,7 @@ rspec:
     - bundle exec rails db:seed
     - bundle exec rails assets:precompile
     - bundle exec rspec spec
-  coverage: '/Code coverage: \d+(?:\.\d+)?/'
+  coverage: '/\((\d+\.\d+)%\) covered/'
   #artifacts:
     #reports:
       #coverage_report:
