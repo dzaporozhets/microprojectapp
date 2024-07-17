@@ -44,12 +44,21 @@ class Project::TasksController < Project::BaseController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        tasks
+        if @task.saved_change_to_done?
+          # If tasks was marked as done (or undone), we rebuild the list
+          # so the done task is going under "done" section
+          # and and vice versa
+          tasks
 
-        # Find a way to hide form, render the list again and replace task with updated one
-        #render turbo_stream: turbo_stream.replace("task_#{@task.id}", partial: "project/tasks/task", locals: { task: @task })
+          format.turbo_stream
+        else
+          # If we simply edit task name or description,
+          # we just update a single turbo stream
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.replace("task_#{@task.id}", partial: "project/tasks/task", locals: { task: @task })
+          end
+        end
 
-        format.turbo_stream
         format.html { redirect_to project_url(@project), notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
