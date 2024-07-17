@@ -32,15 +32,14 @@
             <% else %>
               <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'base-input w-full' %>
             <% end %>
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <p class="text-sm text-gray-600 mt-2">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+            <% end %>
+
+            <% if resource.provider.present? %>
+              <p class="text-sm text-blue-700 mt-2 font-semibold">You logged in with Google with this email.</p>
+            <% end %>
           </dd>
-
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-          <% end %>
-
-          <% if resource.provider.present? %>
-            <p class="text-sm text-blue-700 mt-2 font-semibold">You logged in with Google with this email.</p>
-          <% end %>
         </div>
 
         <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
