@@ -1,3 +1,3 @@
 <%= turbo_stream.replace "tasks" do %>
-  <%= render 'project/tasks/tasks' %>
+  <%= render 'project/tasks/tasks', tasks_todo: @tasks_todo, tasks_done: @tasks_done %>
 <% end %>

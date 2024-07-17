@@ -19,4 +19,8 @@ module ApplicationHelper
     else 'bg-gray-100 border rounded border-gray-500 text-gray-700'
     end
   end
+
+  def current_page
+    params[:page].to_i || 1
+  end
 end
