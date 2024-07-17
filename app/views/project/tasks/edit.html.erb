@@ -15,7 +15,7 @@
 
               <div class="mt-4 border-t pt-4">
                 <%= link_to 'Open in a new tab', project_task_path(@project, @task), class: "rounded-md py-2 px-5 bg-gray-100 text-gray-500 inline-block cursor-pointer text-sm", target: :_blank %>
-                <%= button_to "Delete this task", [@project, @task], method: :delete, class: "rounded-lg py-2 px-5 bg-gray-100 text-sm text-red-800 hover:bg-red-100", form_class: "float-right" %>
+                <%= button_to "Delete this task", [@project, @task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?' }, class: "rounded-lg py-2 px-5 bg-gray-100 text-sm text-red-800 hover:bg-red-100", form_class: "float-right" %>
               </div>
             </div>
           </div>
