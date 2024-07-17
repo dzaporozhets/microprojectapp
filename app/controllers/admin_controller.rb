@@ -9,7 +9,7 @@ class AdminController < ApplicationController
     @total_projects = Project.count
     @total_files = Project.count(:project_files)
     @total_tasks = Task.count
-    @version = '0.1.1'
+    @version = '0.1.2'
     @rails_env = ENV['RAILS_ENV']
     @domain = ENV['APP_DOMAIN'] || 'Not configured'
     @file_storage = ENV['AWS_S3_BUCKET'].present? ? 'AWS S3' : 'Local'
