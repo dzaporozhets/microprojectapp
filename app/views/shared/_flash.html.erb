@@ -1,0 +1,6 @@
+<% flash.each do |type, text| %>
+
+  <div class="p-4 mb-4 <%= flash_css(type) %>" role="alert">
+    <p><%= text %></p>
+  </div>
+<% end %>

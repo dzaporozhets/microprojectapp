@@ -1,0 +1,33 @@
+<div>
+  <%= render 'shared/flash' %>
+
+  <div class="mt-6 border-t border-gray-100">
+    <%= form_for(@user, url: users_settings_path, html: { method: :put }) do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation" data-turbo-cache="false" class="shadow p-4 bg-yellow-50 text-yellow-900">
+          <h2 class="mt-2 text-md font-semibold">
+            <%= I18n.t("errors.messages.not_saved", count: @user.errors.count, resource: 'user') %>
+          </h2>
+          <ul class="mt-2 text-sm list-disc list-inside">
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <dl class="divide-y divide-gray-100">
+        <div class="py-6">
+          <%= f.check_box :allow_invites %>
+          <%= f.label :allow_invites, "Allow other users to add you to projects", class: 'ml-2 text-sm' %>
+        </div>
+
+        <div class="py-6">
+          <div class="mt-2">
+            <%= f.submit "Save settings", class: "justify-center btn-primary" %>
+          </div>
+        </div>
+      </dl>
+    <% end %>
+  </div>
+</div>

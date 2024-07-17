@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MicroProject.app</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <nav class="bg-gray-50">
+      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+        <%= link_to root_path, class: "flex items-center space-x-3 rtl:space-x-reverse" do %>
+          <span class="self-center text-xl whitespace-nowrap leading-6"><%= formatted_date Date.today %></span>
+        <% end %>
+        <div class="flex items-center space-x-6 rtl:space-x-reverse">
+          <% if current_user %>
+            <% if current_user.admin? %>
+              <%= link_to admin_path do %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
+                </svg>
+              <% end %>
+            <% end %>
+            <%= link_to edit_registration_path(current_user) do %>
+              <%= gravatar_tag(current_user.email, "h-6 w-6 flex-none rounded-full bg-gray-50") %>
+            <% end %>
+            <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: 'text-sm  text-gray-500  hover:underline' %>
+          <% else %>
+            <%= link_to 'Login', new_session_path, class: 'text-sm text-blue-600 hover:underline' %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <main class="flex min-h-full flex-1 flex-col justify-center px-6 py-6 lg:px-8">
+      <div class="flex min-h-[500px] flex-col bg-white">
+        <div class="mt-5 sm:mx-auto sm:w-full sm:max-w-lg">
+          <div class="mx-auto max-w-7xl flex flex-col sm:flex-row mb-5">
+            <%= link_to 'Settings', users_settings_path, class: "btn-tab" %>
+            <%= link_to 'Email and password', edit_registration_path(current_user), class: "btn-tab" %>
+          </div>
+
+          <%= yield %>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

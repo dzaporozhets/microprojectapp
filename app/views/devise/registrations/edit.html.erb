@@ -1,10 +1,8 @@
-<div class="mb-5 text-blue-700">&larr; <%= link_to "Go back to the application", root_path %></div>
-
 <div>
-  <div class="sm:px-0">
-    <h2 class="text-3xl font-extrabold">Your account</h2>
-    <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and settings.</p>
-  </div>
+  <%#<div class="sm:px-0">%>
+    <%#<h2 class="text-3xl font-extrabold">Your account</h2>%>
+    <%#<p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and settings.</p>%>
+  <%#</div>%>
   <div class="mt-6 border-t border-gray-100">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <% if resource.errors.any? %>
@@ -24,16 +22,11 @@
       <% end %>
 
       <dl class="divide-y divide-gray-100">
-        <div class="py-6">
-          <%= f.check_box :allow_invites %>
-          <%= f.label :allow_invites, "Allow other users to add you to projects", class: 'ml-2 text-sm' %>
-        </div>
-
-        <div class="py-6">
+        <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="font-medium leading-6 text-gray-900">
             <%= f.label :email, class: 'font-semibold' %>
           </dt>
-          <dd class="mt-2 text-sm leading-6 text-gray-700">
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
             <% if resource.oauth_enabled? %>
               <%= f.email_field :email, disabled: true, class: 'base-input w-full bg-gray-100 text-gray-500' %>
             <% else %>
@@ -50,11 +43,11 @@
           <% end %>
         </div>
 
-        <div class="py-6">
+        <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="font-medium leading-6 text-gray-900">
             <%= f.label :password, class: 'font-semibold' %>
           </dt>
-          <dd class="mt-2 text-sm leading-6 text-gray-700">
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
             <span class="block text-sm text-gray-500">Leave blank if you don't want to change it.</span>
             <%= f.password_field :password, autocomplete: "new-password", class: 'base-input w-full' %>
             <% if @minimum_password_length %>
@@ -67,17 +60,17 @@
           </dd>
         </div>
 
-        <div class="py-6">
+        <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="font-medium leading-6 text-gray-900">
             <%= f.label :current_password, class: "font-semibold" %>
           </dt>
-          <dd class="mt-2 text-sm leading-6 text-gray-700">
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
             <span class="block text-sm text-gray-500">We need your current password to confirm your changes</span>
             <%= f.password_field :current_password, autocomplete: "current-password", class: 'base-input w-full' %>
+            <div class="mt-2">
+              <%= f.submit "Update", class: "flex w-full justify-center btn-primary" %>
+            </div>
           </dd>
-          <div class="mt-2">
-            <%= f.submit "Update", class: "flex w-full justify-center btn-primary" %>
-          </div>
         </div>
       </dl>
     <% end %>
