@@ -3,7 +3,7 @@ class Project::TasksController < Project::BaseController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = project.tasks.all
+    tasks
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -26,7 +26,10 @@ class Project::TasksController < Project::BaseController
 
     respond_to do |format|
       if @task.save
-        format.turbo_stream
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.prepend('tasks', partial: "project/tasks/task", locals: { task: @task })
+        end
+
         format.html { redirect_to project_url(@project), notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
       else
@@ -41,6 +44,11 @@ class Project::TasksController < Project::BaseController
   def update
     respond_to do |format|
       if @task.update(task_params)
+        tasks
+
+        # Find a way to hide form, render the list again and replace task with updated one
+        #render turbo_stream: turbo_stream.replace("task_#{@task.id}", partial: "project/tasks/task", locals: { task: @task })
+
         format.turbo_stream
         format.html { redirect_to project_url(@project), notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
@@ -63,6 +71,11 @@ class Project::TasksController < Project::BaseController
   end
 
   private
+
+  def tasks
+    @tasks_todo = @project.tasks.todo.order(created_at: :desc)
+    @tasks_done = @project.tasks.done.order(updated_at: :desc).page(params[:page]).per(100)
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_task
