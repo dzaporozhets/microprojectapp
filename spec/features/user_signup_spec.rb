@@ -21,7 +21,7 @@ RSpec.feature "User Signup", type: :feature do
     fill_in 'Password confirmation', with: 'wrongpassword'
     click_button 'Sign up'
 
-    expect(page).to have_content('error')
+    expect(page).to have_content('Password confirmation doesn\'t match')
   end
 
   scenario "User with allowed email domain can sign up" do

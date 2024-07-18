@@ -42,10 +42,10 @@ class User < ApplicationRecord
         # TODO: Decide if we want to prevent existing user link their
         # google account to local one. Maybe give them choice
         # raise 'User with such email already exists'
-        user.update(uid: uid, provider: provider)
+        user.update(uid: uid, provider: provider, oauth_linked_at: Time.now)
       end
     else
-      user = User.new(provider: provider, uid: uid, email: email)
+      user = User.new(provider: provider, uid: uid, email: email, created_from_oauth: true)
       user.password = Devise.friendly_token[0,20]
       user.skip_confirmation! if Devise.mappings[:user].confirmable?
       user.save
