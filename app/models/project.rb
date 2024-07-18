@@ -19,6 +19,10 @@ class Project < ApplicationRecord
 
   mount_uploaders :project_files, ProjectFileUploader
 
+  scope :active, -> { where(archived: false) }
+  scope :archived, -> { where(archived: true) }
+  scope :ordered_by_id_desc, -> { order(id: :desc) }
+  scope :without_personal, -> { where.not(name: 'Personal') }
 
   def personal?
     self.name == "Personal"

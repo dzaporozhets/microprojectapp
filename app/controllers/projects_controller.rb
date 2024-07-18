@@ -10,9 +10,16 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    @projects = current_user.projects.all.order(created_at: :desc).to_a
-    @projects.sort_by! { |project| project.personal? ? 0 : 1 }
-    @projects += current_user.invited_projects
+    personal_project = current_user.personal_project
+    user_projects = current_user.projects.without_personal
+    invited_projects = current_user.invited_projects
+
+    @projects = []
+    @projects << personal_project
+    @projects += user_projects
+    @projects += invited_projects
+
+    @archived_projects, @projects = @projects.partition { |project| project.archived? }
   end
 
   # GET /projects/1 or /projects/1.json
@@ -77,7 +84,7 @@ class ProjectsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def project_params
-    params.require(:project).permit(:name)
+    params.require(:project).permit(:name, :archived)
   end
 
   def authorize_update

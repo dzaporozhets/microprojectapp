@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_13_170601) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_18_101953) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_13_170601) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.json "project_files"
+    t.boolean "archived", default: false, null: false
     t.index ["user_id", "name"], name: "index_projects_on_user_id_and_name", unique: true
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
