@@ -55,27 +55,27 @@
       <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500"><%= ActiveRecord::Base.connection.current_database %></p>
     </div>
 
-    <div class="mt-6 border-t border-gray-100">
+  <div class="mt-6 border-t border-gray-100">
       <dl class="divide-y divide-gray-100">
-        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Users</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @total_users %></dd>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @total_users %></dd>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Projects</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @total_projects %></dd>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @total_projects %></dd>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">File uploads</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @total_files %></dd>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @total_files %></dd>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Tasks</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @total_tasks %></dd>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @total_tasks %></dd>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Comments</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @total_comments %></dd>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @total_comments %></dd>
         </div>
       </dl>
     </div>
