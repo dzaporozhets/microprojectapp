@@ -4,6 +4,8 @@ class Task < ApplicationRecord
   belongs_to :project, required: true
   belongs_to :user, required: true
 
+  has_many :comments, dependent: :destroy
+
   scope :todo, -> { where(done: false) }
   scope :done, -> { where(done: true) }
 

@@ -1,5 +1,5 @@
 class Project::TasksController < Project::BaseController
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_task, only: %i[ show edit update destroy details ]
 
   # GET /tasks or /tasks.json
   def index
@@ -8,6 +8,9 @@ class Project::TasksController < Project::BaseController
 
   # GET /tasks/1 or /tasks/1.json
   def show
+  end
+
+  def details
   end
 
   # GET /tasks/new
@@ -26,15 +29,11 @@ class Project::TasksController < Project::BaseController
 
     respond_to do |format|
       if @task.save
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.prepend('tasks', partial: "project/tasks/task", locals: { task: @task })
-        end
-
+        format.turbo_stream
         format.html { redirect_to project_url(@project), notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('form_errors', partial: 'project/tasks/form_errors', locals: { task: @task }) }
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to project_url(@project), alert: 'Task could not be created.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end

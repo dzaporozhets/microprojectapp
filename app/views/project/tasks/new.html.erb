@@ -1,10 +1,12 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">New task</h1>
+<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md">
+  <h1 class="font-bold text-2xl">New task</h1>
 
-  <%= form_with(model: [@project, @task], class: "contents") do |form| %>
+  <%= form_with(model: [@project, @task], class: "contents", data: { turbo: false }) do |form| %>
+    <%= render "shared/errors", resource: @task %>
+
     <div class="my-5">
       <%= form.label :name %>
-      <%= form.text_field :name, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+      <%= form.text_field :name, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", required: true %>
     </div>
 
     <div class="my-5">
@@ -13,9 +15,9 @@
     </div>
 
     <div class="inline">
-      <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+      <%= form.submit class: "btn-primary" %>
     </div>
   <% end %>
 
-  <%= link_to "Back to project", project_path(@project), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <%= link_to "Back to project", project_path(@project), class: "btn-gray ml-2 inline-block" %>
 </div>

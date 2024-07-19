@@ -1,3 +1,2 @@
-<%= turbo_stream.replace "tasks" do %>
-  <%= render 'project/tasks/tasks', tasks_todo: @tasks_todo, tasks_done: @tasks_done %>
-<% end %>
+<%= turbo_stream.prepend('tasks', partial: "project/tasks/task", locals: { task: @task }) %>
+<%= turbo_stream.replace 'new_task', partial: 'project/tasks/form', locals: { project: @project } %>
