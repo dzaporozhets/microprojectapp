@@ -7,33 +7,44 @@
 
     <div class="mt-6 border-t border-gray-100">
       <dl class="divide-y divide-gray-100">
-        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Application Version</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @version %></dd>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @version %></dd>
         </div>
-      </dl>
-      <dl class="divide-y divide-gray-100">
-        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Rails environment</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @rails_env %></dd>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @rails_env %></dd>
         </div>
-      </dl>
-      <dl class="divide-y divide-gray-100">
-        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">File uploads storage</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @file_storage %></dd>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @file_storage %></dd>
         </div>
-      </dl>
-      <dl class="divide-y divide-gray-100">
-        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Application domain</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @domain %></dd>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @domain %></dd>
         </div>
-      </dl>
-      <dl class="divide-y divide-gray-100">
-        <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">
+            Restrict signup to single domain
+            <span class="text-sm text-gray-500 font-normal inline-block">
+              For instance, only users whose email addresses end with @yourcompany.com can register.
+            </span>
+          </dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @allowed_domain %></dd>
+        </div>
+        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">
+            Require email confirmation on sign up
+
+            <span class="text-sm text-gray-500 font-normal inline-block">
+              Make sure your have sending emails enabled for this app.
+            </span>
+          </dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @email_confirmation %></dd>
+        </div>
+        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Mail delivery</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @mail_delivery %></dd>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @mail_delivery %></dd>
         </div>
       </dl>
     </div>
@@ -50,20 +61,14 @@
           <dt class="text-sm font-medium leading-6 text-gray-900">Users</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @total_users %></dd>
         </div>
-      </dl>
-      <dl class="divide-y divide-gray-100">
         <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Projects</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @total_projects %></dd>
         </div>
-      </dl>
-      <dl class="divide-y divide-gray-100">
         <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">File uploads</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @total_files %></dd>
         </div>
-      </dl>
-      <dl class="divide-y divide-gray-100">
         <div class="p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Tasks</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @total_tasks %></dd>
@@ -72,4 +77,3 @@
     </div>
   </div>
 </div>
-
