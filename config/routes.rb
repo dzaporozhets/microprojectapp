@@ -5,8 +5,12 @@ Rails.application.routes.draw do
   }
 
   resources :projects do
-    resources :tasks, controller: 'project/tasks'
+    resources :tasks, controller: 'project/tasks' do
+      member { get :details }
+    end
+
     resources :links, controller: 'project/links', only: [:index, :new, :create, :show, :destroy]
+
     resources :files, controller: 'project/files', only: [:index, :new, :create] do
       collection do
         get :download

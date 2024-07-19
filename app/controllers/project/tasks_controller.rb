@@ -1,5 +1,5 @@
 class Project::TasksController < Project::BaseController
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_task, only: %i[ show edit update destroy details ]
 
   # GET /tasks or /tasks.json
   def index
@@ -8,6 +8,9 @@ class Project::TasksController < Project::BaseController
 
   # GET /tasks/1 or /tasks/1.json
   def show
+  end
+
+  def details
   end
 
   # GET /tasks/new

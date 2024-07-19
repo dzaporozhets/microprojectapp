@@ -1,21 +1,5 @@
 <div class="w-full">
   <div class="mx-auto">
-    <div class="flex flex-col md:flex-row md:space-x-12">
-      <div class="mb-4 md:mb-0 md:w-2/3">
-        <h1 class="text-2xl font-bold leading-6 text-gray-900 mt-4"><%= @task.name %></h1>
-        <div class="text-base leading-6 text-gray-900 mt-4 prose max-w-none"><%= simple_format @task.description %></div>
-      </div>
-      <div class="mb-4 md:mb-0 md:w-1/3">
-        <%= render partial: "project/tasks/task", locals: { task: @task } %>
-
-        <div class="text-sm text-gray-500 mt-4">
-          <p>Task: <span class="font-medium"><%= @task.id %></span></p>
-          <p>Project ID: <span class="font-medium"><%= @task.project_id %></span></p>
-          <p>Created by: <span class="font-medium"><%= @task.user.email %></span></p>
-          <p>Created at: <span class="font-medium"><%= l(@task.created_at, format: :long) %></span></p>
-          <p>Last updated at: <span class="font-medium"><%= l(@task.updated_at, format: :long) %></span></p>
-        </div>
-      </div>
-    </div>
+    <%= render partial: "project/tasks/task", locals: { task: @task } %>
   </div>
 </div>
