@@ -5,6 +5,6 @@ class Admin::UsersController < ApplicationController
   layout 'admin'
 
   def index
-    @users = User.page(params[:page]).per(50)
+    @users = User.order(id: :desc).page(params[:page]).per(50)
   end
 end

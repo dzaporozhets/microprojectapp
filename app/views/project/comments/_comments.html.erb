@@ -1,5 +1,5 @@
 <div id="comments">
-  <% @task.comments.each do |comment| %>
+  <% @task.comments.order(id: :asc).each do |comment| %>
     <%= render comment %>
   <% end %>
 </div>
