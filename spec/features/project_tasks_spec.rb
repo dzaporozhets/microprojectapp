@@ -25,7 +25,7 @@ RSpec.feature "Project::Tasks", type: :feature do
 
     fill_in "Name", with: "Updated Task Name"
     fill_in "Description", with: "Updated Task Description"
-    click_button "Update Task"
+    click_button "Update"
 
     expect(page).to have_text("Updated Task Name")
     expect(page).to have_text("Updated Task Description")
@@ -35,7 +35,7 @@ RSpec.feature "Project::Tasks", type: :feature do
     visit project_path(project)
 
     click_link task.name
-    click_button "Delete this task"
+    click_button "Delete"
 
     expect(page).to have_current_path(project_path(project))
     expect(page).not_to have_text(task.name)
