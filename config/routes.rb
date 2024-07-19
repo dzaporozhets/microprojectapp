@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :projects do
     resources :tasks, controller: 'project/tasks' do
       member { get :details }
+
+      resources :comments, controller: 'project/comments', only: [:create, :destroy]
     end
 
     resources :links, controller: 'project/links', only: [:index, :new, :create, :show, :destroy]
