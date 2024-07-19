@@ -1,4 +1,4 @@
-<div id="<%= dom_id(comment) %>" class="border-b border-gray-200 py-4">
+<div id="<%= dom_id(comment) %>" class="border-t border-gray-200 py-4">
   <div class="flex items-start space-x-4">
     <div class="flex-shrink-0">
       <%= gravatar_tag(comment.user.email, "h-6 w-6 flex-none rounded-full bg-gray-50") %>
@@ -6,7 +6,10 @@
       <%#<span class="inline-block h-10 w-10 rounded-full bg-gray-200"></span>%>
     </div>
     <div class="flex-1">
-      <div class="text-sm text-gray-400 mb-2"><%= comment.user.email %></div>
+      <div class="text-sm text-gray-500 mb-2">
+        <%= comment.user.email %>
+        <span class="text-xs text-gray-400 ml-2 inline"><%= time_ago_in_words comment.created_at %> ago</span>
+      </div>
       <div class="text-sm text-gray-900 font-medium">
         <%= comment.body %>
       </div>

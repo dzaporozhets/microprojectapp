@@ -2,10 +2,9 @@
   <div class="mx-auto lg:w-2/3 w-full">
     <h1 class="text-2xl font-bold leading-6 text-gray-900 mt-4"><%= @task.name %></h1>
     <div class="text-base leading-6 text-gray-900 mt-4 prose max-w-none"><%= simple_format @task.description %></div>
-
-    <div class="flex flex-col md:flex-row md:space-x-12">
+    <div class="flex flex-col md:flex-row md:space-x-12 mt-10">
       <div class="mb-4 md:mb-0 md:w-2/3">
-        <div class="mt-4">
+        <div class="">
           <h3 class="text-sm font-medium leading-6 text-gray-900">Comments</h3>
 
           <%= render 'project/comments/form' %>
@@ -16,7 +15,7 @@
         </div>
       </div>
       <div class="mb-4 md:mb-0 md:w-1/3">
-        <div class="text-sm text-gray-500 border-l border-gray-500 p-4 mt-4">
+        <div class="text-sm text-gray-500 border-l border-gray-500 p-4">
           <p>Task: <span class="font-medium"><%= @task.id %></span></p>
           <p>Status: <span class="font-medium"><%= @task.done ? 'Done' : 'Open' %></span></p>
           <p>Project ID: <span class="font-medium"><%= @task.project_id %></span></p>

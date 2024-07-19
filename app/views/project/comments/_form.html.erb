@@ -3,17 +3,14 @@
     <div class="mb-2">
       <%= form.text_area :body, required: true, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full resize-y" %>
     </div>
-    <div class="float-right">
-      <%= form.label :attachment, class: 'btn-gray' do %>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
-        </svg>
-      <% end %>
 
-      <%= form.file_field :attachment, class: "hidden" %>
-    </div>
-    <div class="mt-2">
-      <%= form.submit 'Add Comment', class: 'btn-primary' %>
+    <div class="mt-2 flex flex-col md:flex-row md:items-center">
+      <div class="flex-grow md:order-2 mb-2 md:mb-0 md:ml-2">
+        <%= form.file_field :attachment,
+          accept: allowed_file_types,
+          class: "appearance-none text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline file:mr-5 file:py-3 file:px-5 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 w-full file:cursor-pointer" %>
+      </div>
+      <%= form.submit 'Add Comment', class: 'btn-primary w-full md:w-auto md:order-1' %>
     </div>
   <% end %>
 <% end %>
