@@ -15,7 +15,7 @@
                 <%= link_to project_task_path(@project, @task), class: "rounded-md py-2 px-5 bg-gray-100 text-gray-500 inline-block cursor-pointer inline-block text-sm" do %>
                   <span>Cancel</span>
                 <% end %>
-                <%= button_to "Delete Task", [@project, @task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?' }, class: "rounded-lg py-2 px-5 bg-gray-100 text-sm text-red-800 hover:bg-red-100", form_class: "float-right" %>
+                <%= button_to "Delete", [@project, @task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?' }, class: "rounded-lg py-2 px-5 bg-gray-100 text-sm text-red-800 hover:bg-red-100", form_class: "float-right" %>
               </div>
             </div>
           </div>
