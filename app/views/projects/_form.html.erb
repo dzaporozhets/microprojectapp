@@ -1,12 +1,12 @@
 <%= form_with(model: project, class: "contents") do |form| %>
   <%= render "shared/errors", resource: project %>
 
-  <div class="my-5">
+  <div class="mt-5">
     <%= form.label :name %>
     <%= form.text_field :name, required: true, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
-  <div class="inline">
+  <div class="mt-5">
     <%= form.submit class: "btn-primary" %>
   </div>
 <% end %>

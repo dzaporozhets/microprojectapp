@@ -14,7 +14,5 @@
     <p>Last updated at: <span class="font-medium"><%= l(@task.updated_at, format: :long) %></span></p>
   </div>
 
-  <div class="inline">
-    <%= form.submit 'Update', class: "rounded-lg py-3 px-5 bg-indigo-700 text-white inline-block text-sm cursor-pointer" %>
-  </div>
+  <%= form.submit 'Update', class: "rounded-lg py-3 px-5 bg-indigo-700 text-white inline-block text-sm cursor-pointer" %>
 <% end %>
