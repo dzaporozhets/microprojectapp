@@ -3,12 +3,10 @@
     <h1 class="font-bold text-2xl">Editing the project</h1>
 
     <%= render "form", project: @project %>
-
-    <%= link_to "Show this project", @project, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block text-sm" %>
   </div>
 
-  <div class="mt-20 rounded-md bg-red-50 p-4 border-red-700 border">
-    <span class="block text-sm text-red-900">This will completely remove your project. <br/>All data will be lost.</span>
-    <%= button_to "Destroy this project", @project, method: :delete, data: { turbo_confirm: 'Remove the project? Are you sure?' }, class: "rounded bg-white px-2 py-1 text-sm text-red-700 shadow-red-400 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 mt-2 font-semibold" %>
+  <div class="mt-20 rounded-md p-4 bg-red-50 border-red-700 border">
+    <span class="block text-sm text-red-900 mb-5">This will completely remove your project. <br/>All data will be lost.</span>
+    <%= button_to "Destroy this project", @project, method: :delete, data: { turbo_confirm: 'Remove the project? Are you sure?' }, class: "btn-remove" %>
   </div>
 </div>
