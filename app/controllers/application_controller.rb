@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_action :touch_flash
+
   def record_not_found
     render file: Rails.root.join("public", "404.html"), status: :not_found, layout: false
   end
@@ -17,5 +19,9 @@ class ApplicationController < ActionController::Base
     unless current_user&.admin?
       raise ActiveRecord::RecordNotFound
     end
+  end
+
+  def touch_flash
+    flash
   end
 end

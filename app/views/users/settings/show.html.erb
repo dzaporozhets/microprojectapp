@@ -1,22 +1,18 @@
-<div>
-  <%= render "shared/flash" %>
+<div class="mt-6 border-t border-gray-100">
+  <%= form_for(@user, url: users_settings_path, html: { method: :put }) do |f| %>
+    <%= render "shared/errors", resource: @user %>
 
-  <div class="mt-6 border-t border-gray-100">
-    <%= form_for(@user, url: users_settings_path, html: { method: :put }) do |f| %>
-      <%= render "shared/errors", resource: @user %>
+    <dl class="divide-y divide-gray-100">
+      <div class="py-6">
+        <%= f.check_box :allow_invites %>
+        <%= f.label :allow_invites, "Allow other users to add you to projects", class: 'ml-2 text-sm' %>
+      </div>
 
-      <dl class="divide-y divide-gray-100">
-        <div class="py-6">
-          <%= f.check_box :allow_invites %>
-          <%= f.label :allow_invites, "Allow other users to add you to projects", class: 'ml-2 text-sm' %>
+      <div class="py-6">
+        <div class="mt-2">
+          <%= f.submit "Save settings", class: "justify-center btn-primary" %>
         </div>
-
-        <div class="py-6">
-          <div class="mt-2">
-            <%= f.submit "Save settings", class: "justify-center btn-primary" %>
-          </div>
-        </div>
-      </dl>
-    <% end %>
-  </div>
+      </div>
+    </dl>
+  <% end %>
 </div>

@@ -45,7 +45,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
@@ -73,6 +73,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
       hello_path
     else
       super
+    end
+  end
+
+  def after_update_path_for(resource)
+    if resource
+      edit_registration_path(resource)
+    else
+      root_path
     end
   end
 end

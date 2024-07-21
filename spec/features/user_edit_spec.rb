@@ -26,6 +26,7 @@ RSpec.feature "User Edit", type: :feature do
       click_button "Update"
 
       expect(user.reload.email).to eq(new_email)
+      expect(page).to have_content("Your account has been updated successfully.")
     end
   end
 end
