@@ -67,3 +67,11 @@ Mailgun:
 * `MAILGUN_SMTP_SERVER`
 * `MAILGUN_SMTP_LOGIN`
 * `MAILGUN_SMTP_PASSWORD`
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Developer Certificate of Origin
+
+By contributing to this project, you agree to the [Developer Certificate of Origin (DCO)](DCO). We encourage all contributors to sign off their commits using `Signed-off-by: Your Name <your.email@example.com>`. You can do this by adding `-s` to your git commit command.
