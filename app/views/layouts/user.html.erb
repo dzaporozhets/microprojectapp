@@ -17,13 +17,11 @@
         <ol role="list" class="flex space-x-4">
           <li class="flex">
             <%= render 'layouts/home_link' %>
-
-            <svg class="h-full w-6 flex-shrink-0 text-gray-200" viewBox="0 0 24 44" preserveAspectRatio="none" fill="currentColor" aria-hidden="true">
-              <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-            </svg>
           </li>
           <li class="flex">
-            <div class="flex items-center justify-between gap-x-6">
+            <%= render 'layouts/separator' %>
+
+            <div class="flex items-center justify-between gap-x-6 ml-4">
               <div class="min-w-0">
                 <%= link_to edit_user_registration_path(current_user)do %>
                   <div class="flex items-start gap-x-3">

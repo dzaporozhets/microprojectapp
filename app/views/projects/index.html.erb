@@ -7,7 +7,7 @@
     <%= link_to "New Project", new_project_path, class: "rounded-md py-2 px-4 bg-indigo-700 text-white block text-sm" %>
   </div>
 
-  <div id="projects" class="min-w-full grid grid-cols-1 md:grid-cols-3 gap-4">
+  <div id="projects" class="min-w-full grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
     <% @projects.each do |project| %>
       <%= render project %>
     <% end %>
