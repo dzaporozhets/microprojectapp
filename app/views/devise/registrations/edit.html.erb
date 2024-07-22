@@ -1,8 +1,4 @@
 <div>
-  <%#<div class="sm:px-0">%>
-    <%#<h2 class="text-3xl font-extrabold">Your account</h2>%>
-    <%#<p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Personal details and settings.</p>%>
-  <%#</div>%>
   <div class="mt-6 border-t border-gray-100">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "shared/errors", resource: resource %>
