@@ -28,7 +28,7 @@ RSpec.feature "User Lockable", type: :feature do
     fill_in "Password", with: user.password
     click_button "Log in"
 
-    expect(page).to have_content("Log out")
+    expect(page).to have_link("Log out")
     expect(page).to have_current_path(root_path)
   end
 
