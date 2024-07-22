@@ -14,11 +14,17 @@ class Task < ApplicationRecord
   validates :project_id, presence: true
   validate :task_limit, on: :create
 
+  before_save :set_done_at, if: :done_changed?
+
   private
 
   def task_limit
     if project && project.tasks.count >= TASK_LIMIT
       errors.add(:base, "This project has reached the limit of #{TASK_LIMIT} tasks.")
     end
+  end
+
+  def set_done_at
+    self.done_at = Time.current if done && done_changed?(from: false, to: true)
   end
 end

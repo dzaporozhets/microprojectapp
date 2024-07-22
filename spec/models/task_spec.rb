@@ -44,4 +44,21 @@ RSpec.describe Task, type: :model do
       expect(Task.done).not_to include(@todo_task)
     end
   end
+
+  describe 'callbacks' do
+    it 'sets done_at when done changes to true' do
+      expect(task.done_at).to be_nil
+
+      task.update(done: true)
+
+      expect(task.done_at).not_to be_nil
+    end
+
+    it 'does not change done_at if done is false' do
+      task = create(:task, user: user, project: project, done: false)
+      task.update(done: false)
+
+      expect(task.done_at).to be_nil
+    end
+  end
 end
