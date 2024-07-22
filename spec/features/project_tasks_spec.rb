@@ -50,5 +50,14 @@ RSpec.feature "Project::Tasks", type: :feature do
 
     expect(page).to have_text("The page you were looking for doesn't exist.")
   end
+
+  scenario 'User visits tasks details' do
+    visit details_project_task_path(project, task)
+
+    expect(page).to have_content('Task ID')
+    expect(page).to have_content('Project ID')
+    expect(page).to have_content(user.email)
+    expect(page).to have_content(task.name)
+  end
 end
 
