@@ -23,8 +23,8 @@ RSpec.feature "Project::Tasks", type: :feature do
 
     click_link task.name
 
-    fill_in "Name", with: "Updated Task Name"
-    fill_in "Description", with: "Updated Task Description"
+    fill_in "task_name", with: "Updated Task Name"
+    fill_in "task_description", with: "Updated Task Description"
     click_button "Update"
 
     expect(page).to have_text("Updated Task Name")
