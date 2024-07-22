@@ -1,5 +1,5 @@
 <%= turbo_frame_tag dom_id(task) do %>
-  <div id="<%= dom_id(task) %>" class="flex col-span-1 rounded-md border shadow-sm p-3 items-center h-20">
+  <div id="<%= dom_id(task) %>" class="flex col-span-1 rounded-md border border-gray-200 shadow-sm p-3 items-center h-20 <%= 'bg-gray-50' if task.done %>">
     <div class="mr-2">
       <%= form_with(model: task, url: project_task_path(task.project, task), local: false, data: { turbo_frame: dom_id(task) }) do |form| %>
         <%= form.check_box :done,
