@@ -13,7 +13,7 @@ RSpec.feature "Task Comments", type: :feature do
     visit details_project_task_path(project, task)
 
     fill_in 'comment_body', with: 'This is a test comment'
-    click_button 'Add Comment'
+    click_button 'Comment'
 
     expect(page).to have_content('This is a test comment')
     expect(page).to have_content(user.email)
