@@ -39,7 +39,7 @@
           <p>Created at: <span class="font-medium"><%= l(@task.created_at, format: :long) %></span></p>
           <p>Last updated at: <span class="font-medium"><%= l(@task.updated_at, format: :long) %></span></p>
 
-          <% if @task.done %>
+          <% if @task.done && @task.done_at %>
             <p>Marked as done at: <span class="font-medium"><%= l(@task.done_at, format: :long) %></span></p>
           <% end %>
         </div>
