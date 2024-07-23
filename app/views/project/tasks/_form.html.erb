@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "new_task" do %>
   <%= form_with(model: [project, Task.new], local: false, id: 'new_task_form', data: { turbo_frame: 'task_form' }) do |form| %>
     <div class="mt-5 mb-5 flex w-full">
-      <%= form.text_field :name, class: "flex-grow shadow rounded-md border border-gray-400 outline-none px-4 py-2 text-sm", required: true %>
+      <%= form.text_field :name, class: "flex-grow shadow-sm rounded-md border border-gray-400 outline-none px-4 py-2 text-sm", required: true %>
       <%= form.submit "Add task", class: "rounded-md py-2 px-4 bg-indigo-700 text-white inline-block cursor-pointer text-sm ms-3" %>
       <%= link_to new_project_task_path(project), class: "hidden rounded-md py-2 px-4 bg-gray-100 text-gray-500 cursor-pointer text-sm ms-3", data: { turbo: false } do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
