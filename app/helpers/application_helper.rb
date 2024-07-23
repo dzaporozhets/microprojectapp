@@ -28,6 +28,7 @@ module ApplicationHelper
   def time_ago_short(time)
     return unless time
 
-    time_ago_in_words(time).gsub('less than a minute', 'now').gsub('about ', '')
+    time_ago_in_words(time).gsub('less than a minute', 'now')
+      .gsub('about ', '')
   end
 end

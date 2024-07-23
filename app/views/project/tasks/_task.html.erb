@@ -13,12 +13,11 @@
 
     <div class="ml-2 text-sm w-0 flex-1">
       <%= link_to details_project_task_path(task.project, task), data: { turbo: true } do %>
-        <div class="flex items-center">
-          <div class="grow mr-2">
+        <div class="items-center">
+          <div class="">
             <p class="font-semibold text-gray-900 line-clamp-2"><%= task.name %></p>
             <p class="text-xs font-normal text-gray-900 line-clamp-1"><%= task.description %></p>
           </div>
-          <p class="flex-none w-14 text-xs font-normal text-gray-400"><%= time_ago_short(task.created_at) %></p>
         </div>
       <% end %>
     </div>
