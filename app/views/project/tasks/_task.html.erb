@@ -1,25 +1,27 @@
-<%= turbo_frame_tag dom_id(task), class: "border border-gray-200 shadow-sm rounded-md p-3 #{'bg-gray-50' if task.done}" do %>
-  <div class="flex col-span-1 items-center h-16">
-    <div class="mr-2">
-      <%= form_with(model: task, url: project_task_path(task.project, task), local: false, data: { turbo_frame: dom_id(task) }) do |form| %>
-        <%= form.check_box :done,
-          checked: task.done,
-          id: "task_#{task.id}",
-          class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2",
-          data: { turbo_action: "advance" },
-          onchange: "this.form.requestSubmit()" %>
-      <% end %>
-    </div>
+<%= turbo_frame_tag dom_id(task) do %>
+  <%= content_tag :div, class: "border border-gray-200 shadow-sm rounded-md p-3 #{'bg-gray-50' if task.done}" do %>
+    <div class="flex col-span-1 items-center h-16">
+      <div class="mr-2">
+        <%= form_with(model: task, url: project_task_path(task.project, task), local: false, data: { turbo_frame: dom_id(task) }) do |form| %>
+          <%= form.check_box :done,
+            checked: task.done,
+            id: "task_#{task.id}",
+            class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2",
+            data: { turbo_action: "advance" },
+            onchange: "this.form.requestSubmit()" %>
+        <% end %>
+      </div>
 
-    <div class="ml-2 text-sm w-0 flex-1">
-      <%= link_to details_project_task_path(task.project, task), data: { turbo: true } do %>
-        <div class="items-center">
-          <div class="">
-            <p class="font-semibold text-gray-900 line-clamp-2"><%= task.name %></p>
-            <p class="text-xs font-normal text-gray-900 line-clamp-1"><%= task.description %></p>
+      <div class="ml-2 text-sm w-0 flex-1">
+        <%= link_to details_project_task_path(task.project, task), data: { turbo: true } do %>
+          <div class="items-center">
+            <div class="">
+              <p class="font-semibold text-gray-900 line-clamp-2"><%= task.name %></p>
+              <p class="text-xs font-normal text-gray-900 line-clamp-1"><%= task.description %></p>
+            </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 <% end %>

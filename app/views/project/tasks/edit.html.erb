@@ -3,7 +3,7 @@
     <div class="flex flex-col md:flex-row md:space-x-12">
       <div class="md:mb-0 md:w-2/3">
         <%= turbo_frame_tag "task_#{@task.id}", data: { edit_task: true } do %>
-          <div class="">
+          <%= content_tag :div, class: "border border-gray-200 shadow-sm rounded-md p-3" do %>
             <%#= link_to project_task_url(@project, @task), project_task_url(@project, @task), target: :_blank, class: "text-indigo-700" %>
 
             <%= form_with(model: [@project, @task], class: "contents") do |form| %>
@@ -28,7 +28,7 @@
               <% end %>
               <%= button_to "Delete", [@project, @task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?' }, class: "rounded-lg py-2 px-4 bg-gray-100 text-sm text-red-800 hover:bg-red-100", form_class: "float-right" %>
             </div>
-          </div>
+          <% end %>
         <% end %>
       </div>
     </div>
