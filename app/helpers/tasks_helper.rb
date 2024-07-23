@@ -8,4 +8,12 @@ module TasksHelper
     # Return the greater value between the number of lines and the default rows
     [lines * 1.5, default_rows].max
   end
+
+  def dom_task_comments_id(task)
+    "task_#{task.id}_comments"
+  end
+
+  def dom_task_comment_form_id(task)
+    "task_#{task.id}_new_comment"
+  end
 end

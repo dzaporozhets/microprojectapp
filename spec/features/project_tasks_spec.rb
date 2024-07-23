@@ -22,6 +22,7 @@ RSpec.feature "Project::Tasks", type: :feature do
     visit project_path(project)
 
     click_link task.name
+    click_link "Edit"
 
     fill_in "task_name", with: "Updated Task Name"
     fill_in "task_description", with: "Updated Task Description"
@@ -35,6 +36,7 @@ RSpec.feature "Project::Tasks", type: :feature do
     visit project_path(project)
 
     click_link task.name
+    click_link "Edit"
     click_button "Delete"
 
     expect(page).to have_current_path(project_path(project))

@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "new_comment" do %>
+<%= turbo_frame_tag dom_task_comment_form_id(@task) do %>
   <%= form_with(model: [ @task.project, @task, Comment.new ], local: true, html: { multipart: true }) do |form| %>
     <div class="mb-2">
       <%= form.text_area :body, required: true, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full resize-y" %>

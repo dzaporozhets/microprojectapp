@@ -1,4 +1,4 @@
-<div id="comments">
+<div id="<%= dom_task_comments_id(@task) %>">
   <% @task.comments.order(id: :asc).each do |comment| %>
     <%= render comment %>
   <% end %>

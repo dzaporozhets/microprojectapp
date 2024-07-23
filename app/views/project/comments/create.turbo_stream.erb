@@ -1,2 +1,2 @@
-<%= turbo_stream.append 'comments', partial: 'project/comments/comment', locals: { comment: @comment } %>
-<%= turbo_stream.replace 'new_comment', partial: 'project/comments/form' %>
+<%= turbo_stream.append dom_task_comments_id(@comment.task), partial: 'project/comments/comment', locals: { comment: @comment } %>
+<%= turbo_stream.replace dom_task_comment_form_id(@comment.task), partial: 'project/comments/form' %>
