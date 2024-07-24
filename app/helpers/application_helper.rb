@@ -31,4 +31,18 @@ module ApplicationHelper
     time_ago_in_words(time).gsub('less than a minute', 'now')
       .gsub('about ', '')
   end
+
+  def render_tabs(tabs, selected = nil)
+    content_tag(:nav, class: 'flex space-x-3', aria: { label: 'Tabs' }) do
+      tabs.map do |tab|
+        current_tab = selected == tab[:name]
+
+        link_class = 'rounded-md px-4 py-2 text-sm font-medium hover:text-indigo-700'
+        link_class += current_tab ? ' bg-gray-100 text-gray-700' : ' text-gray-500'
+        link_options = current_tab ? { 'aria-current' => 'page' } : {}
+
+        link_to tab[:name], tab[:path], class: link_class, **link_options
+      end.join.html_safe
+    end
+  end
 end
