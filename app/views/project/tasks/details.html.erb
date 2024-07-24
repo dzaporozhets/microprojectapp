@@ -23,7 +23,7 @@
               <%#= link_to 'Open in a new tab', details_project_task_path(@project, @task), class: "ml-2", target: :_blank %>
             </div>
 
-            <h1 class="text-2xl font-bold leading-6 text-gray-900"><%= @task.name %></h1>
+            <h1 class="text-xl font-bold leading-6 text-gray-900"><%= @task.name %></h1>
 
             <% if @task.description.present? %>
               <div class="text-base leading-6 text-gray-900 mt-2 prose max-w-none"><%= simple_format @task.description %></div>
