@@ -1,5 +1,5 @@
 <%= turbo_frame_tag dom_id(task) do %>
-  <%= content_tag :div, class: "border border-gray-100 shadow-sm rounded-md p-3 py-1.5 md:py-2 #{'bg-gray-50' if task.done}" do %>
+  <%= content_tag :div, class: "border border-gray-100 shadow-sm rounded-md p-3 py-1.5 md:py-2 #{task.done ? 'bg-gray-100 line-through' : 'bg-gray-50'}" do %>
     <div class="flex col-span-1 items-center h-14">
       <div class="mr-3 flex">
         <%= form_with(model: task, url: project_task_path(task.project, task), local: false, data: { turbo_frame: dom_id(task) }) do |form| %>
