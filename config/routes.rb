@@ -26,6 +26,8 @@ Rails.application.routes.draw do
         post 'add_member', to: 'project/users#add_member'
       end
     end
+
+    resource :schedule, only: :show, controller: 'project/schedule'
   end
 
   namespace :admin do
