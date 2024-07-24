@@ -29,6 +29,8 @@ RSpec.feature "Project::Tasks", type: :feature do
     click_button "Update"
 
     expect(page).to have_text("Updated Task Name")
+
+    click_link('Updated Task Name')
     expect(page).to have_text("Updated Task Description")
   end
 
