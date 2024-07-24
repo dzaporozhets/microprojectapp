@@ -26,7 +26,12 @@
               <div class="text-base leading-6 text-gray-900 mt-2 prose max-w-none"><%= simple_format @task.description %></div>
             <% end %>
 
+            <% if @task.due_date.present? %>
+              <p class="leading-6 text-gray-700 mt-2 font-medium">Due date at: <span><%= l(@task.due_date.to_date, format: :long) %></span></p>
+            <% end %>
+
             <p class="mt-1 text-xs text-gray-400">created <%= time_ago_short(@task.created_at) %> ago</p>
+
 
 
             <div class="comments mt-4">

@@ -93,6 +93,6 @@ class Project::TasksController < Project::BaseController
 
   # Only allow a list of trusted parameters through.
   def task_params
-    params.require(:task).permit(:name, :description, :done)
+    params.require(:task).permit(:name, :description, :done, :due_date)
   end
 end

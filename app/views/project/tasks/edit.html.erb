@@ -7,14 +7,19 @@
             <%#= link_to project_task_url(@project, @task), project_task_url(@project, @task), target: :_blank, class: "text-indigo-700" %>
 
             <%= form_with(model: [@project, @task], class: "contents") do |form| %>
-              <div class="mb-2">
-                <%#= form.label :name, class: "text-sm text-gray-500" %>
+              <div class="mb-3">
+                <%= form.label :name, class: "text-sm text-gray-500" %>
                 <%= form.text_field :name, class: "block rounded-md border border-gray-400 outline-none text-sm px-2 py-1.5 w-full" %>
               </div>
 
-              <div class="mb-4">
-                <%#= form.label :description, class: "text-sm text-gray-500" %>
+              <div class="mb-3">
+                <%= form.label :description, class: "text-sm text-gray-500" %>
                 <%= form.text_area :description, rows: calc_textarea_rows(@task.description), class: "block rounded-md text-sm border border-gray-400 outline-none px-2 py-1.5 mt-2 w-full resize-y" %>
+              </div>
+
+              <div class="mb-3">
+                <%= form.label :due_date, class: "text-sm text-gray-500" %>
+                <%= form.select :due_date, options_for_select(due_date_options(@task.due_date)), {}, { class: "mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" } %>
               </div>
 
               <%= form.submit 'Update', class: "rounded-lg py-2 px-4 bg-indigo-700 text-white inline-block text-sm cursor-pointer" %>
