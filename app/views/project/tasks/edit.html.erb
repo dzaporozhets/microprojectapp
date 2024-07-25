@@ -1,6 +1,6 @@
 <div class="mt-6 md:mt-10 sm:mx-auto sm:w-full sm:max-w-md">
   <%= turbo_frame_tag "task_#{@task.id}", data: { edit_task: true } do %>
-    <%= content_tag :div, class: "border border-gray-200 shadow-sm rounded-md p-3" do %>
+    <%= content_tag :div, class: "border border-gray-400 shadow-sm rounded-md p-3" do %>
       <%#= link_to project_task_url(@project, @task), project_task_url(@project, @task), target: :_blank, class: "text-indigo-700" %>
 
       <%= form_with(model: [@project, @task], class: "contents", data: { turbo: turbo_frame_request? }) do |form| %>
