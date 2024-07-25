@@ -6,7 +6,10 @@ Rails.application.routes.draw do
 
   resources :projects do
     resources :tasks, controller: 'project/tasks' do
-      member { get :details }
+      member do
+        get :details
+        get :expand
+      end
 
       resources :comments, controller: 'project/comments', only: [:create, :destroy]
     end

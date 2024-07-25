@@ -1,5 +1,5 @@
 class Project::TasksController < Project::BaseController
-  before_action :set_task, only: %i[ show edit update destroy details ]
+  before_action :set_task, only: %i[ show edit update destroy details expand ]
 
   # GET /tasks or /tasks.json
   def index
@@ -8,9 +8,6 @@ class Project::TasksController < Project::BaseController
 
   # GET /tasks/1 or /tasks/1.json
   def show
-  end
-
-  def details
   end
 
   # GET /tasks/new
@@ -77,6 +74,12 @@ class Project::TasksController < Project::BaseController
       format.html { redirect_to project_url(@project), notice: "Task was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def details
+  end
+
+  def expand
   end
 
   private

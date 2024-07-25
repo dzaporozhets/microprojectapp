@@ -1,52 +1,26 @@
-<div class="flex flex-col md:flex-row md:space-x-12 mt-10">
+<div class="flex flex-col md:flex-row md:space-x-12 mt-6">
   <div class="mb-4 lg:mb-0 lg:w-2/3">
-    <%= turbo_frame_tag dom_id(@task), data: { details: true } do %>
-      <%= content_tag :div, class: "border border-gray-200 shadow-sm rounded-md p-3" do %>
-        <div class="mb-4 border-b pb-2 text-sm text-gray-600 flex items-center">
-          <%= link_to edit_project_task_path(@task.project, @task), data: { turbo: true }, class: 'flex-none', title: 'Edit' do %>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 inline-block">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-            </svg>
-            <!--
-              <span class="inline-block ml-1 text-xs text-gray-400"><%= time_ago_short(@task.updated_at) %></span>
-            -->
-          <% end %>
-          <div class="grow mx-2">
-          </div>
-          <%= link_to project_task_path(@project, @task), class: "flex-none w-5" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-            </svg>
-          <% end %>
-          <%#= link_to 'Open in a new tab', details_project_task_path(@project, @task), class: "ml-2", target: :_blank %>
-        </div>
+    <h1 class="text-xl font-bold leading-6 text-gray-900 break-all"><%= @task.name %></h1>
 
-        <h1 class="text-xl font-bold leading-6 text-gray-900 break-all"><%= @task.name %></h1>
-
-        <% if @task.description.present? %>
-          <div class="text-base leading-6 text-gray-900 mt-2 prose max-w-none break-all"><%= simple_format @task.description %></div>
-        <% end %>
-
-        <% if @task.due_date.present? %>
-          <p class="leading-6 text-gray-700 mt-2 font-medium">Due date at: <span><%= l(@task.due_date.to_date, format: :long) %></span></p>
-        <% end %>
-
-        <!--
-          <p class="mt-1 text-xs text-gray-400">created <%= time_ago_short(@task.created_at) %> ago</p>
-        -->
-
-        <div class="comments mt-4">
-          <%#<h3 class="text-sm font-medium leading-6 text-gray-900">Comments</h3>%>
-
-          <div class="mt-4">
-            <%= render 'project/comments/comments' %>
-          </div>
-
-          <%= render 'project/comments/form' %>
-        </div>
-      <% end %>
+    <% if @task.description.present? %>
+      <div class="text-base leading-6 text-gray-900 mt-2 prose max-w-none break-all"><%= simple_format @task.description %></div>
     <% end %>
+
+    <% if @task.due_date.present? %>
+      <p class="leading-6 text-gray-700 mt-2 font-medium">Due date at: <span><%= l(@task.due_date.to_date, format: :long) %></span></p>
+    <% end %>
+
+    <div class="comments mt-4">
+      <h3 class="font-semibold font-medium leading-6 text-gray-900">Comments</h3>
+
+      <div class="mt-2">
+        <%= render 'project/comments/comments' %>
+      </div>
+
+      <%= render 'project/comments/form' %>
+    </div>
   </div>
+
   <div class="mb-4 lg:mb-0 lg:w-1/3">
     <div class="text-sm text-gray-500 border-l border-gray-400 p-4">
       <p>Task ID: <span class="font-medium"><%= @task.id %></span></p>

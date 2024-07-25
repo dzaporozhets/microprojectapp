@@ -1,0 +1,1 @@
+<%= render partial: "project/tasks/task", locals: { task: @task } %>
