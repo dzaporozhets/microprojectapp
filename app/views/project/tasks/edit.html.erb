@@ -3,7 +3,7 @@
     <%= content_tag :div, class: "border border-gray-200 shadow-sm rounded-md p-3" do %>
       <%#= link_to project_task_url(@project, @task), project_task_url(@project, @task), target: :_blank, class: "text-indigo-700" %>
 
-      <%= form_with(model: [@project, @task], class: "contents") do |form| %>
+      <%= form_with(model: [@project, @task], class: "contents", data: { turbo: turbo_frame_request? }) do |form| %>
         <div class="mb-3">
           <%= form.label :name, class: "text-sm text-gray-500" %>
           <%= form.text_field :name, class: "block rounded-md border border-gray-400 outline-none text-sm px-2 py-1.5 w-full" %>

@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   before_action :touch_flash
 
+  helper_method :turbo_frame_request?
+
   def record_not_found
     render file: Rails.root.join("public", "404.html"), status: :not_found, layout: false
   end
@@ -23,5 +25,9 @@ class ApplicationController < ActionController::Base
 
   def touch_flash
     flash
+  end
+
+  def turbo_frame_request?
+    request.headers["Turbo-Frame"].present?
   end
 end

@@ -33,17 +33,18 @@
         <p class="leading-6 text-gray-700 mt-2 font-medium">Due date at: <span><%= l(@task.due_date.to_date, format: :long) %></span></p>
       <% end %>
 
-      <div class="comments mt-4">
-        <div class="mt-4">
+    </div>
+
+    <div class="mt-3 border-t text-sm text-gray-500 flex items-center p-3 bg-gray-50 rounded-b-md">
+      <div class="comments">
+        <h3 class="font-medium leading-6 text-gray-700">Comments</h3>
+
+        <div class="mt-2">
           <%= render 'project/comments/comments' %>
         </div>
 
         <%= render 'project/comments/form' %>
       </div>
-    </div>
-
-    <div class="mt-3 border-t text-sm text-gray-500 flex items-center p-3 bg-gray-50 rounded-b-md">
-      <p>Created at: <span class=""><%= l(@task.created_at, format: :long) %></span></p>
     </div>
   <% end %>
 <% end %>
