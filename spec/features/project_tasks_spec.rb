@@ -40,12 +40,12 @@ RSpec.feature "Project::Tasks", type: :feature do
     click_link task.name
     click_link "Edit"
 
-    select 'Next Month', from: 'task_due_date'
+    select 'Tomorrow', from: 'task_due_date'
     click_button "Update"
 
     click_link task.name
     expect(page).to have_text(task.name)
-    expect(page).to have_text((Date.today + 1.month).strftime("%B %d, %Y"))
+    expect(page).to have_text((Date.today + 1.day).strftime("%B %d, %Y"))
   end
 
   scenario "User deletes a task from the edit page" do
