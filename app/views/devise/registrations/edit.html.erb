@@ -1,61 +1,59 @@
-<div>
-  <div class="mt-6 border-t border-gray-100">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= render "shared/errors", resource: resource %>
+<div class="mt-6 border-t border-gray-100">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "shared/errors", resource: resource %>
 
-      <dl class="divide-y divide-gray-100">
-        <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
-          <dt class="font-medium leading-6 text-gray-900">
-            <%= f.label :email, class: 'font-semibold' %>
-          </dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-            <% if resource.oauth_enabled? %>
-              <%= f.email_field :email, disabled: true, class: 'base-input w-full bg-gray-100 text-gray-500' %>
-            <% else %>
-              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'base-input w-full' %>
-            <% end %>
-            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-              <p class="text-sm text-gray-600 mt-2">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-            <% end %>
+    <dl class="divide-y divide-gray-100">
+      <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
+        <dt class="font-medium leading-6 text-gray-900">
+          <%= f.label :email, class: 'font-semibold' %>
+        </dt>
+        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <% if resource.oauth_enabled? %>
+            <%= f.email_field :email, disabled: true, class: 'base-input w-full bg-gray-100 text-gray-500' %>
+          <% else %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'base-input w-full' %>
+          <% end %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <p class="text-sm text-gray-600 mt-2">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+          <% end %>
 
-            <% if resource.provider.present? %>
-              <p class="text-sm text-blue-700 mt-2 font-semibold">You logged in with Google with this email.</p>
-            <% end %>
-          </dd>
-        </div>
+          <% if resource.provider.present? %>
+            <p class="text-sm text-blue-700 mt-2 font-semibold">You logged in with Google with this email.</p>
+          <% end %>
+        </dd>
+      </div>
 
-        <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
-          <dt class="font-medium leading-6 text-gray-900">
-            <%= f.label :password, class: 'font-semibold' %>
-          </dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-            <span class="block text-sm text-gray-500">Leave blank if you don't want to change it.</span>
-            <%= f.password_field :password, autocomplete: "new-password", class: 'base-input w-full' %>
-            <% if @minimum_password_length %>
-              <span class="block text-sm text-gray-500"><%= @minimum_password_length %> characters minimum</span>
-            <% end %>
-            <div class="mt-2">
-              <%= f.label :password_confirmation, class: 'text-sm' %>
-              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'base-input w-full' %>
-            </div>
-          </dd>
-        </div>
+      <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
+        <dt class="font-medium leading-6 text-gray-900">
+          <%= f.label :password, class: 'font-semibold' %>
+        </dt>
+        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <p class="text-gray-500">Leave blank if you don't want to change it.</p>
+          <%= f.password_field :password, autocomplete: "new-password", class: 'base-input w-full' %>
+          <% if @minimum_password_length %>
+            <p class="text-gray-500"><%= @minimum_password_length %> characters minimum</p>
+          <% end %>
+          <div class="mt-2">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'base-input w-full' %>
+          </div>
+        </dd>
+      </div>
 
-        <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
-          <dt class="font-medium leading-6 text-gray-900">
-            <%= f.label :current_password, class: "font-semibold" %>
-          </dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-            <span class="block text-sm text-gray-500">We need your current password to confirm your changes</span>
-            <%= f.password_field :current_password, autocomplete: "current-password", class: 'base-input w-full' %>
-            <div class="mt-2">
-              <%= f.submit "Update", class: "flex w-full justify-center btn-primary" %>
-            </div>
-          </dd>
-        </div>
-      </dl>
-    <% end %>
-  </div>
+      <div class="py-6 sm:grid sm:grid-cols-3 sm:gap-4">
+        <dt class="font-medium leading-6 text-gray-900">
+          <%= f.label :current_password, class: "font-semibold" %>
+        </dt>
+        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+          <p class="text-gray-500">We need your current password to confirm your changes</p>
+          <%= f.password_field :current_password, autocomplete: "current-password", class: 'base-input w-full' %>
+          <div class="mt-2">
+            <%= f.submit "Update", class: "flex w-full justify-center btn-primary" %>
+          </div>
+        </dd>
+      </div>
+    </dl>
+  <% end %>
 </div>
 
 <div class="mt-20 rounded-md bg-red-50 p-4 border-red-700 border">

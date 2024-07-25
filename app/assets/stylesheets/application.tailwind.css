@@ -20,7 +20,7 @@
   }
 
   .base-input {
-    @apply flex-grow shadow rounded-md border border-gray-400 outline-none p-2 text-sm;
+    @apply shadow-sm rounded-md border border-gray-400 outline-none;
   }
 
   .btn-tab {
