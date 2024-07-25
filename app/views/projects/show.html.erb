@@ -1,18 +1,3 @@
-<div class="w-full">
-  <div class="mx-auto">
-    <div class="flex flex-col md:flex-row md:space-x-12">
-      <div class="mb-4 md:mb-0 md:w-2/3">
-        <%= project_tabs 'Tasks' %>
+<%= project_tabs 'Tasks' %>
 
-        <%= render 'tasks' %>
-      </div>
-      <div class="mb-4 md:mb-0 md:w-1/3">
-        <%= render 'team' unless @project.personal? %>
-        <%= render 'files' %>
-        <%= render 'links' %>
-        <%#= render 'activity' unless @project.personal? %>
-        <%= render 'extra' if !@project.personal? && @project.user == current_user %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render 'tasks' %>

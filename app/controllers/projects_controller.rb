@@ -6,7 +6,8 @@ class ProjectsController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
-  layout 'project', only: [:show, :edit]
+  layout 'project', only: [:edit]
+  layout 'project_with_sidebar', only: [:show]
 
   # GET /projects or /projects.json
   def index
