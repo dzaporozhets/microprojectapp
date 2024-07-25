@@ -4,7 +4,7 @@
       <time datetime="<%= task.due_date %>" class="w-28 flex-none"><%= task.due_date.strftime("%a, %b %d") %></time>
     </div>
 
-    <%= link_to details_project_task_path(task.project, task), data: { turbo: true }, class: "text-sm min-w-0 grow flex h-12 items-center" do %>
+    <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "text-sm min-w-0 grow flex h-12 items-center" do %>
       <p class="font-medium text-gray-900 line-clamp-2"><%= task.name %></p>
     <% end %>
   </div>
