@@ -32,44 +32,57 @@ RSpec.describe TasksHelper, type: :helper do
   end
 
   describe '#due_date_options' do
-    context 'when no existing due date is provided' do
-      it 'returns predefined options with "No Due Date" at the top' do
-        options = helper.due_date_options
-
-        expect(options).to include(['No Due Date', nil])
-        expect(options).to include(['Tomorrow', 1.day.from_now.to_date])
-        expect(options).to include(['Next Week', 1.week.from_now.to_date])
-        expect(options).to include(['Next Month', 1.month.from_now.to_date])
-        expect(options).to include(['Next Year', 1.year.from_now.to_date])
-      end
+    it 'includes "No Due Date" option' do
+      options = helper.due_date_options
+      expect(options).to include(['No Due Date', nil])
     end
 
-    context 'when an existing due date is provided' do
-      let(:existing_due_date) { Date.new(2024, 7, 24) }
+    it 'includes "Tomorrow" option' do
+      options = helper.due_date_options
+      expect(options).to include(["Tomorrow (+1 day)", 1.day.from_now.to_date])
+    end
 
-      it 'includes the existing due date formatted as a human-readable date' do
-        options = helper.due_date_options(existing_due_date)
+    it 'includes "Monday" option' do
+      days_until_monday = (1 - Date.today.wday) % 7
+      days_until_monday = 7 if days_until_monday == 0
+      next_monday = Date.today + days_until_monday
+      options = helper.due_date_options
+      expect(options).to include(["Monday (+#{days_until_monday} days)", next_monday])
+    end
 
-        human_readable_date = I18n.l(existing_due_date.to_date, format: :long)
-        expect(options).to include([human_readable_date, existing_due_date])
-      end
+    it 'includes "End of the Week" option' do
+      end_of_week = Date.today.end_of_week
+      days_until_end_of_week = (end_of_week - Date.today).to_i
+      options = helper.due_date_options
+      expect(options).to include(["End of the Week (+#{days_until_end_of_week} days)", end_of_week])
+    end
 
-      it 'places the existing due date at the top of the options list' do
-        options = helper.due_date_options(existing_due_date)
+    it 'includes "End of the Month" option' do
+      end_of_month = Date.today.end_of_month
+      days_until_end_of_month = (end_of_month - Date.today).to_i
+      options = helper.due_date_options
+      expect(options).to include(["End of the Month (+#{days_until_end_of_month} days)", end_of_month])
+    end
 
-        human_readable_date = I18n.l(existing_due_date.to_date, format: :long)
-        expect(options.first).to eq([human_readable_date, existing_due_date])
-      end
+    it 'includes "End of the Year" option' do
+      end_of_year = Date.today.end_of_year
+      days_until_end_of_year = (end_of_year - Date.today).to_i
+      options = helper.due_date_options
+      expect(options).to include(["End of the Year (+#{days_until_end_of_year} days)", end_of_year])
+    end
 
-      it 'includes all predefined options' do
-        options = helper.due_date_options(existing_due_date)
+    it 'includes "Two Weeks from Now" option' do
+      two_weeks_from_now = 2.weeks.from_now.to_date
+      options = helper.due_date_options
+      expect(options).to include(["Two Weeks from Now (+14 days)", two_weeks_from_now])
+    end
 
-        expect(options).to include(['No Due Date', nil])
-        expect(options).to include(['Tomorrow', 1.day.from_now.to_date])
-        expect(options).to include(['Next Week', 1.week.from_now.to_date])
-        expect(options).to include(['Next Month', 1.month.from_now.to_date])
-        expect(options).to include(['Next Year', 1.year.from_now.to_date])
-      end
+    it 'prepends existing due date if provided' do
+      existing_due_date = 10.days.from_now.to_date
+      human_readable_date = I18n.l(existing_due_date.to_date, format: :long)
+      days_difference = (existing_due_date.to_date - Date.today).to_i
+      options = helper.due_date_options(existing_due_date)
+      expect(options.first).to eq(["#{human_readable_date} (+#{days_difference} days)", existing_due_date])
     end
   end
 end
