@@ -51,18 +51,39 @@ if ENV['DEV_DATA'].present?
   }
 
   projects_with_tasks.each do |project_name, tasks|
-    project = Project.create!(name: project_name, user: user)
+    project = Project.find_or_create_by!(name: project_name, user: user)
+    print '.'
 
     tasks.each do |task_name|
-      project.tasks.create!(name: task_name, user: user)
+      project.tasks.find_or_create_by!(name: task_name, user: user)
+      print '.'
     end
+  end
+
+  project = user.projects.find_by!(name: "Personal Finance Management")
+  task = project.tasks.find_by!(name: "Plan for large purchases like a car or home")
+
+  # Comments to be added
+  comments = [
+    "Have you considered setting a specific savings goal for the down payment? It might be helpful to create a separate savings account to track progress more easily.",
+    "Don't forget to research different financing options. Comparing interest rates from various lenders could save a significant amount of money over time.",
+    "It’s important to factor in long-term costs such as maintenance, insurance, and property taxes. Have you included these in your budget plan?",
+    "Improving your credit score can significantly impact the interest rates you qualify for. Have you checked your current score and considered steps to improve it before making a purchase?",
+    "Conducting a market analysis can be crucial. For example, understanding current housing market trends or car depreciation rates can help make a more informed decision."
+  ]
+
+  # Add comments to the task
+  comments.each do |comment_text|
+    task.comments.find_or_create_by!(body: comment_text, user: user)
+    print '.'
   end
 
   # Generate one big project with 100+ tasks
   big_project_name = "Very large project"
-  big_project = Project.create!(name: big_project_name, user: user)
+  big_project = Project.find_or_create_by!(name: big_project_name, user: user)
+  print '.'
 
   200.times do |i|
-    big_project.tasks.create!(name: "Task #{i + 1}", user: user, done: (i > 20))
+    big_project.tasks.find_or_create_by!(name: "Task #{i + 1}", user: user, done: (i > 20))
   end
 end
