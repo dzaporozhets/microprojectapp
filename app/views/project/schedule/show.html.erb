@@ -3,7 +3,7 @@
 
   <section class="mt-8">
     <h2 class="text-base font-semibold leading-6 text-gray-900">Today</h2>
-    <ol class="mt-2 text-sm leading-6 text-gray-500">
+    <ol class="mt-2 text-sm leading-6 text-gray-500 ">
       <% if @tasks_due_today.any? %>
         <% @tasks_due_today.each do |task| %>
           <%= render 'project/schedule/task', task: task %>

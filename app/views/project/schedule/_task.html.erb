@@ -1,5 +1,11 @@
-<li class="py-2 sm:flex">
-  <time datetime="<%= task.due_date %>" class="w-28 flex-none"><%= task.due_date.strftime("%a, %b %d") %></time>
-  <p class="flex-auto font-medium text-gray-900"><%= task.name %></p>
-</li>
+<%= content_tag :div, class: "mt-2 border border-gray-100 shadow-sm rounded-md p-3 py-1.5 md:py-2 #{task.done ? 'bg-gray-100 line-through' : 'bg-gray-50'}" do %>
+  <div class="flex col-span-1 items-center h-12">
+    <div class="mr-3 flex">
+      <time datetime="<%= task.due_date %>" class="w-28 flex-none"><%= task.due_date.strftime("%a, %b %d") %></time>
+    </div>
 
+    <%= link_to details_project_task_path(task.project, task), data: { turbo: true }, class: "text-sm min-w-0 grow flex h-12 items-center" do %>
+      <p class="font-medium text-gray-900 line-clamp-2"><%= task.name %></p>
+    <% end %>
+  </div>
+<% end %>
