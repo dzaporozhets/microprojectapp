@@ -1,7 +1,7 @@
 <div class="mt-6 md:mt-10 sm:mx-auto sm:w-full sm:max-w-lg">
   <%= turbo_frame_tag "task_#{@task.id}", data: { edit_task: true } do %>
     <%= content_tag :div, class: "border border-gray-400 shadow-sm rounded-md" do %>
-      <div class="border-b text-sm text-fuchsia-900 flex items-center p-3 bg-fuchsia-100 rounded-t-md">
+      <div class="border-b text-sm text-gray-700 flex items-center p-3 bg-orange-50 rounded-t-md">
         <% if turbo_frame_request? %>
           <%= link_to expand_project_task_path(@task.project, @task), data: { turbo: true }, class: 'flex-none', title: 'Edit' do %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block">
@@ -47,10 +47,10 @@
             <%= form.select :due_date, options_for_select(due_date_options(@task.due_date)), {}, { class: "mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" } %>
           </div>
 
-          <%= form.submit 'Update', class: "rounded-lg py-2 px-4 bg-indigo-700 text-white inline-block text-sm cursor-pointer" %>
+          <%= form.submit 'Update', class: "btn-primary py-2 px-4 inline-block" %>
         <% end %>
 
-        <%= button_to "Delete", [@project, @task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?' }, class: "rounded-lg py-2 px-4 bg-gray-100 text-sm text-red-800 hover:bg-red-100", form_class: "float-right" %>
+        <%= button_to "Delete", [@project, @task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?' }, class: "rounded-md py-2 px-4 bg-gray-100 text-sm text-red-800 hover:bg-red-100", form_class: "float-right" %>
       </div>
     <% end %>
   <% end %>
