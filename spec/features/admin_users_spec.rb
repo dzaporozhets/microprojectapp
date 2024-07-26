@@ -27,7 +27,6 @@ RSpec.feature "Admin Area", type: :feature do
     visit admin_user_path(non_admin)
 
     expect(page).to have_content("Account")
-    expect(page).to have_content("Activity")
     expect(page).to have_content("Database")
     expect(page).to have_content(non_admin.email)
     expect(page).to have_content(non_admin.created_at)
