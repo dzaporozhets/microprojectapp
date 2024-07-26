@@ -6,8 +6,7 @@ class ProjectsController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
-  layout 'project', only: [:edit]
-  layout 'project_with_sidebar', only: [:show]
+  layout :set_layout
 
   # GET /projects or /projects.json
   def index
@@ -93,6 +92,15 @@ class ProjectsController < ApplicationController
       true
     else
       raise ActiveRecord::RecordNotFound
+    end
+  end
+
+  def set_layout
+    case action_name
+    when 'show' then 'project_with_sidebar'
+    when 'edit' then 'project'
+    else
+      'application'
     end
   end
 end
