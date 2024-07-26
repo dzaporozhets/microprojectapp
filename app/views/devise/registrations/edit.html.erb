@@ -56,7 +56,7 @@
   <% end %>
 </div>
 
-<div class="mt-20 rounded-md bg-red-50 p-4 border-red-700 border">
+<div class="my-20 rounded-md bg-red-50 p-4 border-red-700 border">
   <span class="block text-sm text-red-900 mb-5">This will completely remove your account. <br/>All data will be lost.</span>
   <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Delete account with all the data? Are you sure?", turbo_confirm: "Delete account with all the data? Are you sure?" }, method: :delete, class: "btn-remove" %>
 </div>
