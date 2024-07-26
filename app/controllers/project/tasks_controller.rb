@@ -1,6 +1,8 @@
 class Project::TasksController < Project::BaseController
   before_action :set_task, only: %i[ show edit update destroy details expand ]
 
+  layout :set_layout
+
   # GET /tasks or /tasks.json
   def index
     tasks
@@ -97,5 +99,9 @@ class Project::TasksController < Project::BaseController
   # Only allow a list of trusted parameters through.
   def task_params
     params.require(:task).permit(:name, :description, :done, :due_date)
+  end
+
+  def set_layout
+    action_name == 'index' ? 'project_with_sidebar' : 'project'
   end
 end
