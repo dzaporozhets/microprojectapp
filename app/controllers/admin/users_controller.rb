@@ -10,5 +10,6 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @confirmable = ENV['APP_EMAIL_CONFIRMATION'].present?
   end
 end
