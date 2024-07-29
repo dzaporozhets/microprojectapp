@@ -30,20 +30,16 @@
   </ol>
 </section>
 
-<section class="mt-8">
-  <h2 class="text-base font-semibold leading-6 text-gray-900">This Month</h2>
-  <ol class="mt-2 text-sm leading-6 text-gray-500">
-    <% if @tasks_due_this_month.any? %>
+<% if @tasks_due_this_month.any? %>
+  <section class="mt-8">
+    <h2 class="text-base font-semibold leading-6 text-gray-900">This Month</h2>
+    <ol class="mt-2 text-sm leading-6 text-gray-500">
       <% @tasks_due_this_month.each do |task| %>
         <%= render 'project/schedule/task', task: task %>
       <% end %>
-    <% else %>
-      <li class="py-2 sm:flex">
-        <p class="">No tasks due this month.</p>
-      </li>
-    <% end %>
-  </ol>
-</section>
+    </ol>
+  </section>
+<% end %>
 
 <section class="mt-8">
   <h2 class="text-base font-semibold leading-6 text-gray-900">This Year</h2>
