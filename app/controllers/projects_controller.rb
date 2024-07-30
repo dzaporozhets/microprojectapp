@@ -11,8 +11,8 @@ class ProjectsController < ApplicationController
   # GET /projects or /projects.json
   def index
     personal_project = current_user.personal_project
-    user_projects = current_user.projects.without_personal
-    invited_projects = current_user.invited_projects
+    user_projects = current_user.projects.without_personal.ordered_by_id_desc
+    invited_projects = current_user.invited_projects.ordered_by_id_desc
 
     @projects = []
     @projects << personal_project
