@@ -87,7 +87,12 @@ class Project::TasksController < Project::BaseController
   private
 
   def tasks
-    @tasks_todo = @project.tasks.todo.order(created_at: :desc)
+    if params.dig(:filter, :done)
+      @tasks_todo = @project.tasks.none
+    else
+      @tasks_todo = @project.tasks.todo.order(created_at: :desc)
+    end
+
     @tasks_done = @project.tasks.done.order(updated_at: :desc).page(params[:page]).per(100)
   end
 
