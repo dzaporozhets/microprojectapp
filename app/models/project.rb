@@ -21,6 +21,7 @@ class Project < ApplicationRecord
 
   scope :active, -> { where(archived: false) }
   scope :archived, -> { where(archived: true) }
+  scope :ordered_by_id, -> { order(id: :asc) }
   scope :ordered_by_id_desc, -> { order(id: :desc) }
   scope :without_personal, -> { where.not(name: 'Personal') }
 
