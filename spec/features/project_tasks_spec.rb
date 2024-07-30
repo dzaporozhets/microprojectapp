@@ -76,5 +76,15 @@ RSpec.feature "Project::Tasks", type: :feature do
     expect(page).to have_content(user.email)
     expect(page).to have_content(task.name)
   end
+
+  scenario 'User visits tasks page with status=done' do
+    create(:task, name: 'New task', project: project, user: user, done: false)
+    create(:task, name: 'Completed task', project: project, user: user, done: true)
+
+    visit project_tasks_path(project, task, status: 'done')
+
+    expect(page).to have_content('Completed task')
+    expect(page).not_to have_content('New task')
+  end
 end
 
