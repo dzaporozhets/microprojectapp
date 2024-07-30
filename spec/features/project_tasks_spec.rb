@@ -18,7 +18,8 @@ RSpec.feature "Project::Tasks", type: :feature do
     expect(page).to have_text("Task Without Description")
   end
 
-  scenario "User updates a task from the project page" do
+  # TODO: test the same scenario with js: true
+  scenario "User updates a task from the project page (no turbo)" do
     visit project_path(project)
 
     click_link task.name
@@ -29,12 +30,11 @@ RSpec.feature "Project::Tasks", type: :feature do
     click_button "Update"
 
     expect(page).to have_text("Updated Task Name")
-
-    click_link('Updated Task Name')
     expect(page).to have_text("Updated Task Description")
   end
 
-  scenario "User updates the due date of a task from the edit page" do
+  # TODO: test the same scenario with js: true
+  scenario "User updates the due date of a task from the edit page (no turbo)" do
     visit project_path(project)
 
     click_link task.name
@@ -43,7 +43,6 @@ RSpec.feature "Project::Tasks", type: :feature do
     select 'Tomorrow', from: 'task_due_date'
     click_button "Update"
 
-    click_link task.name
     expect(page).to have_text(task.name)
     expect(page).to have_text((Date.today + 1.day).strftime("%B %d, %Y"))
   end
