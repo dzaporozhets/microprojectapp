@@ -1,56 +1,45 @@
 <%= project_tabs 'Schedule' %>
 
 <section class="mt-8">
-  <h2 class="text-base font-semibold leading-6 text-gray-900">Today</h2>
+  <h2 class="text-base font-semibold leading-6 text-gray-900"><%= Date.current.strftime("%B") %></h2>
   <ol class="mt-2 text-sm leading-6 text-gray-500 ">
-    <% if @tasks_due_today.any? %>
-      <% @tasks_due_today.each do |task| %>
-        <%= render 'project/schedule/task', task: task %>
-      <% end %>
-    <% else %>
-      <li class="py-2 sm:flex">
-        <p class="">No tasks due today.</p>
-      </li>
-    <% end %>
-  </ol>
-</section>
-
-<section class="mt-8">
-  <h2 class="text-base font-semibold leading-6 text-gray-900">This Week</h2>
-  <ol class="mt-2 text-sm leading-6 text-gray-500">
-    <% if @tasks_due_this_week.any? %>
-      <% @tasks_due_this_week.each do |task| %>
-        <%= render 'project/schedule/task', task: task %>
-      <% end %>
-    <% else %>
-      <li class="py-2 sm:flex">
-        <p class="">No tasks due this week.</p>
-      </li>
-    <% end %>
-  </ol>
-</section>
-
-<% if @tasks_due_this_month.any? %>
-  <section class="mt-8">
-    <h2 class="text-base font-semibold leading-6 text-gray-900">This Month</h2>
-    <ol class="mt-2 text-sm leading-6 text-gray-500">
+    <% if @tasks_due_this_month.any? %>
       <% @tasks_due_this_month.each do |task| %>
         <%= render 'project/schedule/task', task: task %>
       <% end %>
-    </ol>
-  </section>
-<% end %>
+    <% else %>
+      <li class="py-2 sm:flex">
+        <p class="">No tasks due this month.</p>
+      </li>
+    <% end %>
+  </ol>
+</section>
 
 <section class="mt-8">
-  <h2 class="text-base font-semibold leading-6 text-gray-900">This Year</h2>
+  <h2 class="text-base font-semibold leading-6 text-gray-900"><%= Date.current.next_month.strftime("%B") %></h2>
   <ol class="mt-2 text-sm leading-6 text-gray-500">
-    <% if @tasks_due_this_year.any? %>
-      <% @tasks_due_this_year.each do |task| %>
+    <% if @tasks_due_next_month.any? %>
+      <% @tasks_due_next_month.each do |task| %>
         <%= render 'project/schedule/task', task: task %>
       <% end %>
     <% else %>
       <li class="py-2 sm:flex">
-        <p class="">No tasks due this year.</p>
+        <p class="">No tasks due next month.</p>
+      </li>
+    <% end %>
+  </ol>
+</section>
+
+<section class="mt-8">
+  <h2 class="text-base font-semibold leading-6 text-gray-900"><%= Date.current.next_month.next_month.strftime("%B") %></h2>
+  <ol class="mt-2 text-sm leading-6 text-gray-500">
+    <% if @tasks_due_month_after_next.any? %>
+      <% @tasks_due_month_after_next.each do |task| %>
+        <%= render 'project/schedule/task', task: task %>
+      <% end %>
+    <% else %>
+      <li class="py-2 sm:flex">
+        <p class="">No tasks due <%= Date.current.next_month.next_month.strftime("%B") %>.</p>
       </li>
     <% end %>
   </ol>
