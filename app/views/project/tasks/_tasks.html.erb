@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "tasks", class: "mt-3 grid grid-cols-1 gap-2 lg:gap-3 lg:grid-cols-2" do %>
-  <% if tasks_todo.any? %>
+  <% unless params[:status] == 'done' %>
     <% tasks_todo.each do |task| %>
       <%= render partial: "project/tasks/task", locals: { task: task } %>
     <% end %>
