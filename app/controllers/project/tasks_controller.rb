@@ -87,7 +87,7 @@ class Project::TasksController < Project::BaseController
   private
 
   def tasks
-    if params.dig(:filter, :done)
+    if params[:status] == 'done'
       @tasks_todo = @project.tasks.none
     else
       @tasks_todo = @project.tasks.todo.order(created_at: :desc)

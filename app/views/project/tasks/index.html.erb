@@ -1,6 +1,13 @@
 <%= project_tabs 'Tasks' %>
 
-<%= render 'project/tasks/form', project: @project %>
+<% if params[:status] == 'done' %>
+  <div class="mt-3">
+    <%= link_to 'Showing only completed tasks (x)', project_path(@project), class: 'btn-tab text-sm text-gray-500' %>
+  </div>
+<% else %>
+  <%= render 'project/tasks/form', project: @project %>
+<% end %>
+
 <%= render 'project/tasks/tasks', tasks_todo: @tasks_todo, tasks_done: @tasks_done %>
 
 <%= paginate @tasks_done %>
