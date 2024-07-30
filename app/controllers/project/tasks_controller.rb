@@ -1,5 +1,5 @@
 class Project::TasksController < Project::BaseController
-  before_action :set_task, only: %i[ show edit update destroy details expand ]
+  before_action :set_task, only: %i[ show edit update destroy details expand toggle_done ]
 
   layout :set_layout
 
@@ -42,19 +42,10 @@ class Project::TasksController < Project::BaseController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        if @task.saved_change_to_done?
-          # If tasks was marked as done (or undone), we rebuild the list
-          # so the done task is going under "done" section
-          # and and vice versa
-          tasks
-
-          format.turbo_stream
-        else
-          # If we simply edit task name or description,
-          # we just update a single turbo stream
-          format.turbo_stream do
-            render turbo_stream: turbo_stream.replace("task_#{@task.id}", partial: "project/tasks/task", locals: { task: @task })
-          end
+        # When we change task name or description,
+        # we just update a single item with a task
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("task_#{@task.id}", partial: "project/tasks/task", locals: { task: @task })
         end
 
         format.html { redirect_to project_url(@project), notice: "Task was successfully updated." }
@@ -82,6 +73,24 @@ class Project::TasksController < Project::BaseController
   end
 
   def expand
+  end
+
+  def toggle_done
+    respond_to do |format|
+      if @task.update(params.require(:task).permit(:done))
+        # If tasks was marked as done (or undone), we rebuild the list
+        # so the done task is going under "done" section
+        # and and vice versa
+        tasks
+
+        format.turbo_stream
+        format.html { redirect_to project_url(@project), notice: "Task status was successfully updated." }
+        format.json { render :show, status: :ok, location: @task }
+      else
+        format.html { redirect_to project_url(@project), alert: 'Failed to update task status.' }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private
