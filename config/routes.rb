@@ -31,7 +31,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resource :schedule, only: :show, controller: 'project/schedule'
+    resource :schedule, only: :show, controller: 'project/schedule' do
+      member do
+        post 'saturate'
+      end
+    end
   end
 
   namespace :admin do

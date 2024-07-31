@@ -8,6 +8,8 @@ class Task < ApplicationRecord
 
   scope :todo, -> { where(done: false) }
   scope :done, -> { where(done: true) }
+  scope :no_due_date, -> { where(due_date: nil) }
+  scope :ordered_by_id, -> { order(id: :asc) }
 
   validates :name, presence: true
   validates :user_id, presence: true

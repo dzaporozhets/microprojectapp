@@ -15,5 +15,9 @@
     <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "text-sm min-w-0 grow flex h-12 items-center" do %>
       <p class="font-medium text-gray-900 line-clamp-2"><%= task.name %></p>
     <% end %>
+
+    <div class="ml-2 flex-none mr-1">
+      <time datetime="<%= task.due_date %>" class=""><%= I18n.l(task.due_date.to_date, format: :short) %></time>
+    </div>
   </div>
 <% end %>

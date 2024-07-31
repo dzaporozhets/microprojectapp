@@ -14,6 +14,20 @@ class Project::ScheduleController < Project::BaseController
     @tasks_due_month_after_next = tasks.where(due_date: Date.current.next_month.next_month.beginning_of_month..Date.current.next_month.next_month.end_of_month)
   end
 
+  def saturate
+    tasks_no_due = project.tasks.todo.no_due_date.ordered_by_id.limit(10)
+
+    date = Date.current
+
+    tasks_no_due.each do |task|
+      task.update(due_date: date.beginning_of_month + rand(1..27).days)
+    end
+
+    redirect_to project_schedule_path(@project)
+  end
+
+  private
+
   def tasks
     project.tasks.todo.order(due_date: :asc)
   end

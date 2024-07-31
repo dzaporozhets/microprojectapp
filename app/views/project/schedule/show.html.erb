@@ -10,6 +10,7 @@
     <% else %>
       <li class="py-2 sm:flex">
         <p class="">No tasks due this month.</p>
+        <%= link_to 'Assign some random tasks?', saturate_project_schedule_path(@project, month: Date.current.strftime("%Y-%m")), method: :post, data: { turbo_method: :post }, class: "text-indigo-600 ml-1" %>
       </li>
     <% end %>
   </ol>
