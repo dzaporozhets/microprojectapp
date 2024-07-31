@@ -3,10 +3,12 @@ module ScheduleHelper
     options = [
       ['No Due Date', nil],
       ["Tomorrow (#{formatted_date(1.day.from_now.to_date)})", 1.day.from_now.to_date],
-      ["Monday (#{formatted_date(next_monday)})", next_monday.to_date],
-      ["In Two Weeks (#{formatted_date(2.weeks.from_now.to_date)})", 2.weeks.from_now.to_date],
-      ["In Four Weeks (#{formatted_date(4.weeks.from_now.to_date)})", 4.weeks.from_now.to_date],
-      ["In Eight Weeks (#{formatted_date(8.weeks.from_now.to_date)})", 8.weeks.from_now.to_date]
+      ["Next month (#{formatted_date(1.month.from_now.to_date)})", 1.month.from_now.to_date],
+      [formatted_month(2.months.from_now.beginning_of_month), 2.months.from_now.beginning_of_month],
+      [formatted_month(3.months.from_now.beginning_of_month), 3.months.from_now.beginning_of_month],
+      [formatted_month(4.months.from_now.beginning_of_month), 4.months.from_now.beginning_of_month],
+      [formatted_month(5.months.from_now.beginning_of_month), 5.months.from_now.beginning_of_month],
+      [formatted_month(6.months.from_now.beginning_of_month), 6.months.from_now.beginning_of_month],
     ]
 
     if existing_due_date
@@ -20,15 +22,16 @@ module ScheduleHelper
   private
 
   def formatted_date(date)
-    date.strftime('%b %d')
+    I18n.l(date, format: :short)
   end
 
-  def days_until_next_monday
-    today = Date.today
-    (1 - today.wday) % 7 + (today.wday.zero? ? 7 : 0)
-  end
+  def formatted_month(date)
+    current_year = Date.today.year
 
-  def next_monday
-    Date.today + days_until_next_monday
+    if date.year == current_year
+      I18n.l(date, format: '%B')
+    else
+      I18n.l(date, format: '%B %Y')
+    end
   end
 end

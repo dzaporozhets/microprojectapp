@@ -18,19 +18,19 @@ RSpec.describe ScheduleHelper, type: :helper do
       expect(options).to include(["Tomorrow (Jul 13)", Date.new(2024, 7, 13)])
     end
 
-    it 'includes "Monday" option' do
+    it 'includes "Next month" option' do
       options = helper.due_date_options
-      expect(options).to include(["Monday (Jul 15)", Date.new(2024, 7, 15)])
+      expect(options).to include(["Next month (Aug 12)", Date.new(2024, 8, 12)])
     end
 
-    it 'includes "In Two Weeks" option' do
+    it 'includes two months from now option' do
       options = helper.due_date_options
-      expect(options).to include(["In Two Weeks (Jul 26)", Date.new(2024, 7, 26)])
+      expect(options).to include(["September", Date.new(2024, 9, 1)])
     end
 
-    it 'includes "In Four Weeks" option' do
+    it 'includes three months from now option' do
       options = helper.due_date_options
-      expect(options).to include(["In Four Weeks (Aug 09)", Date.new(2024, 8, 9)])
+      expect(options).to include(["October", Date.new(2024, 10, 1)])
     end
 
     it 'prepends existing due date if provided' do
