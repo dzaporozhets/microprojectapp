@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe ScheduleHelper, type: :helper do
+  around(:each) do |spec|
+    travel_to Date.new(2024, 7, 12) do
+      spec.run
+    end
+  end
+
   describe '#due_date_options' do
     it 'includes "No Due Date" option' do
       options = helper.due_date_options
@@ -9,34 +15,30 @@ RSpec.describe ScheduleHelper, type: :helper do
 
     it 'includes "Tomorrow" option' do
       options = helper.due_date_options
-      expect(options).to include(["Tomorrow (+1 day)", 1.day.from_now.to_date])
+      expect(options).to include(["Tomorrow (Jul 13)", Date.new(2024, 7, 13)])
     end
 
     it 'includes "Monday" option' do
-      days_until_monday = (1 - Date.today.wday) % 7
-      days_until_monday = 7 if days_until_monday == 0
-      next_monday = Date.today + days_until_monday
       options = helper.due_date_options
-      expect(options).to include(["Monday (+#{days_until_monday} days)", next_monday])
+      expect(options).to include(["Monday (Jul 15)", Date.new(2024, 7, 15)])
     end
 
-    it 'includes "Two Weeks from Now" option' do
-      two_weeks_from_now = 2.weeks.from_now.to_date
+    it 'includes "In Two Weeks" option' do
       options = helper.due_date_options
-      expect(options).to include(["Two Weeks from Now (+14 days)", two_weeks_from_now])
+      expect(options).to include(["In Two Weeks (Jul 26)", Date.new(2024, 7, 26)])
     end
 
-    it 'includes "Four Weeks from Now" option' do
+    it 'includes "In Four Weeks" option' do
       options = helper.due_date_options
-      expect(options).to include(["Four Weeks from Now (+28 days)", 4.weeks.from_now.to_date])
+      expect(options).to include(["In Four Weeks (Aug 09)", Date.new(2024, 8, 9)])
     end
 
     it 'prepends existing due date if provided' do
-      existing_due_date = 10.days.from_now.to_date
-      human_readable_date = I18n.l(existing_due_date.to_date, format: :long)
-      days_difference = (existing_due_date.to_date - Date.today).to_i
+      existing_due_date = Date.new(2024, 7, 22)
+      human_readable_date = I18n.l(existing_due_date, format: :long)
       options = helper.due_date_options(existing_due_date)
-      expect(options.first).to eq(["#{human_readable_date} (+#{days_difference} days)", existing_due_date])
+
+      expect(options.first).to eq([human_readable_date, existing_due_date])
     end
   end
 end
