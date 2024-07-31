@@ -1,7 +1,15 @@
 <%= content_tag :div, class: "mt-2 border border-gray-100 shadow-sm rounded-md p-3 py-1.5 md:py-2 #{task.done ? 'bg-gray-100 line-through' : 'bg-gray-50'}" do %>
   <div class="flex col-span-1 items-center h-12">
     <div class="mr-3 flex">
-      <time datetime="<%= task.due_date %>" class="w-28 flex-none"><%= task.due_date.strftime("%a, %b %d") %></time>
+      <%= form_with(model: task, url: toggle_done_project_task_path(task.project, task), local: false, data: { turbo: false }) do |form| %>
+
+        <%= form.check_box :done,
+          checked: task.done,
+          id: "task_#{task.id}",
+          class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2",
+          data: { turbo_action: "advance" },
+          onchange: "this.form.requestSubmit()" %>
+      <% end %>
     </div>
 
     <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "text-sm min-w-0 grow flex h-12 items-center" do %>

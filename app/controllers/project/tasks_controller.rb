@@ -81,13 +81,13 @@ class Project::TasksController < Project::BaseController
         # If tasks was marked as done (or undone), we rebuild the list
         # so the done task is going under "done" section
         # and and vice versa
-        tasks
+        # tasks
 
-        format.turbo_stream
-        format.html { redirect_to project_url(@project), notice: "Task status was successfully updated." }
+        format.turbo_stream { tasks }
+        format.html { redirect_back fallback_location: project_path(@project), notice: "Task status was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
-        format.html { redirect_to project_url(@project), alert: 'Failed to update task status.' }
+        format.html { redirect_back fallback_location: project_path(@project), alert: 'Failed to update task status.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
