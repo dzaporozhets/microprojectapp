@@ -17,4 +17,12 @@ module TasksHelper
   def dom_task_comment_form_id(task)
     "task_#{task.id}_new_comment"
   end
+
+  def collapse_task_path
+    if request.referer&.ends_with?('/schedule')
+      project_schedule_path(@project)
+    else
+      project_tasks_path(@project)
+    end
+  end
 end
