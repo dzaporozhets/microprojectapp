@@ -21,6 +21,8 @@ module TasksHelper
   def collapse_task_path
     if request.referer&.ends_with?('/schedule')
       project_schedule_path(@project)
+    elsif request.referer&.ends_with?('/activity')
+      project_activity_path(@project)
     else
       project_tasks_path(@project)
     end

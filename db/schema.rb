@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_24_105844) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_01_125951) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string "trackable_type"
+    t.bigint "trackable_id"
+    t.bigint "user_id", null: false
+    t.string "action"
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_activities_on_project_id"
+    t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable"
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text "body"
@@ -105,6 +118,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_24_105844) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "activities", "projects"
+  add_foreign_key "activities", "users"
   add_foreign_key "comments", "tasks"
   add_foreign_key "comments", "users"
   add_foreign_key "links", "projects"

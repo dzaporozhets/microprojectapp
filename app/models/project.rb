@@ -1,14 +1,15 @@
 class Project < ApplicationRecord
   FILE_LIMIT = 100
   PROJECT_LIMIT = 999
+  ACTIVITY_LIMIT = 999
 
   belongs_to :user, required: true
 
   has_many :tasks, dependent: :destroy
   has_many :links, dependent: :destroy
-
   has_many :project_users, dependent: :destroy
   has_many :users, through: :project_users
+  has_many :activities, dependent: :destroy
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :user_id, message: "should be unique per user" }
@@ -86,6 +87,23 @@ class Project < ApplicationRecord
   def project_limit
     if user && user.projects.count >= PROJECT_LIMIT
       errors.add(:base, "You have reached the limit of #{PROJECT_LIMIT} projects.")
+    end
+  end
+
+  def add_activity(user, action, trackable)
+    unless personal? # add ability to enable/disable per project
+
+      # Keep only ACTIVITY_LIMIT amount of records.
+      # Remove older one after that
+      if self.activities.count > ACTIVITY_LIMIT
+        self.activities.order(id: :asc).first.delete
+      end
+
+      self.activities.create(
+        user: user,
+        action: action,
+        trackable: trackable
+      )
     end
   end
 end

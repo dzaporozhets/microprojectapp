@@ -36,6 +36,8 @@ Rails.application.routes.draw do
         post 'saturate'
       end
     end
+
+    resource :activity, only: :show, controller: 'project/activity'
   end
 
   namespace :admin do
