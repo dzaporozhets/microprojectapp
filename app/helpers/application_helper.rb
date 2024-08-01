@@ -37,8 +37,8 @@ module ApplicationHelper
       tabs.map do |tab|
         current_tab = selected == tab[:name]
 
-        link_class = 'rounded-md px-4 py-2 text-sm font-medium hover:text-indigo-700'
-        link_class += current_tab ? ' bg-gray-100 text-gray-900' : ' text-gray-500'
+        link_class = 'rounded-md px-4 py-2 text-sm font-medium'
+        link_class += current_tab ? ' bg-indigo-100 text-indigo-900' : ' text-gray-500 hover:text-gray-900'
         link_options = current_tab ? { 'aria-current' => 'page' } : {}
 
         link_to tab[:name], tab[:path], class: link_class, **link_options
