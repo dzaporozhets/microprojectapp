@@ -90,7 +90,8 @@ Devise.setup do |config|
   # It will change confirmation, password recovery and other workflows
   # to behave the same regardless if the e-mail provided was right or wrong.
   # Does not affect registerable.
-  # config.paranoid = true
+  config.paranoid = true
+
   config.allow_unconfirmed_access_for = 1.hour
 
   # By default Devise will store the user in session. You can skip storage for
