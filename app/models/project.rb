@@ -6,9 +6,9 @@ class Project < ApplicationRecord
 
   has_many :tasks, dependent: :destroy
   has_many :links, dependent: :destroy
-
   has_many :project_users, dependent: :destroy
   has_many :users, through: :project_users
+  has_many :activities, dependent: :destroy
 
   validates :name, presence: true
   validates :name, uniqueness: { scope: :user_id, message: "should be unique per user" }
@@ -86,6 +86,16 @@ class Project < ApplicationRecord
   def project_limit
     if user && user.projects.count >= PROJECT_LIMIT
       errors.add(:base, "You have reached the limit of #{PROJECT_LIMIT} projects.")
+    end
+  end
+
+  def add_activity(user, action, trackable)
+    if true # add ability to enable/disable per project
+      self.activities.create(
+        user: user,
+        action: action,
+        trackable: trackable
+      )
     end
   end
 end
