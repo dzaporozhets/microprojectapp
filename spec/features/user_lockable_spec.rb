@@ -16,7 +16,9 @@ RSpec.feature "User Lockable", type: :feature do
       click_button "Log in"
     end
 
-    expect(page).to have_content("Your account is locked.")
+    user.reload
+    expect(user.access_locked?).to be_truthy
+    expect(page).to have_content("Invalid Email or password")
   end
 
   scenario "unlocks an account after the unlock period" do
@@ -28,20 +30,10 @@ RSpec.feature "User Lockable", type: :feature do
     fill_in "Password", with: user.password
     click_button "Log in"
 
+    user.reload
+
+    expect(user.access_locked?).to be_falsey
     expect(page).to have_link("Log out")
     expect(page).to have_current_path(root_path)
   end
-
-  scenario "warns on the last attempt before account is locked" do
-    visit new_user_session_path
-
-    (Devise.maximum_attempts - 1).times do
-      fill_in "Email", with: user.email
-      fill_in "Password", with: "wrongpassword"
-      click_button "Log in"
-    end
-
-    expect(page).to have_content("You have one more attempt before your account is locked.")
-  end
 end
-

@@ -1,8 +1,8 @@
-# spec/features/password_reset_spec.rb
 require 'rails_helper'
 
 RSpec.feature "PasswordResets", type: :feature do
   let(:user) { create(:user) }
+  let(:error_message) { 'If your email address exists in our database, you will receive a password recovery link'.freeze }
 
   scenario "User requests a password reset" do
     visit new_user_password_path
@@ -10,7 +10,7 @@ RSpec.feature "PasswordResets", type: :feature do
     fill_in "Email", with: user.email
     click_button "Reset password"
 
-    expect(page).to have_content("You will receive an email with instructions on how to reset your password in a few minutes.")
+    expect(page).to have_content(error_message)
     expect(ActionMailer::Base.deliveries.last.to).to include(user.email)
   end
 
@@ -20,7 +20,8 @@ RSpec.feature "PasswordResets", type: :feature do
     fill_in "Email", with: 'some@example.com'
     click_button "Reset password"
 
-    expect(page).to have_content("Email not found")
+    # In paranoid mode, the message should be the same as for a known email
+    expect(page).to have_content(error_message)
   end
 
   scenario "User requests a password reset within throttle period" do
@@ -31,7 +32,10 @@ RSpec.feature "PasswordResets", type: :feature do
     fill_in "Email", with: user.email
     click_button "Reset password"
 
-    expect(page).to have_content("Password reset request already sent, please check your email.")
+    # The message remains the same due to paranoid mode
+    expect(page).to have_content(error_message)
+    # Ensure no new email is sent
+    expect(ActionMailer::Base.deliveries).to be_empty
   end
 
   scenario "User requests a password reset after throttle period" do
@@ -42,7 +46,7 @@ RSpec.feature "PasswordResets", type: :feature do
     fill_in "Email", with: user.email
     click_button "Reset password"
 
-    expect(page).to have_content("You will receive an email with instructions on how to reset your password in a few minutes.")
+    expect(page).to have_content(error_message)
     expect(ActionMailer::Base.deliveries.last.to).to include(user.email)
   end
 end
