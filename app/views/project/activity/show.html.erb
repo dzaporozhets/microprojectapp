@@ -1,0 +1,9 @@
+<%= project_tabs 'Activity' %>
+
+<div class="mt-8">
+  <ul role="list" class="space-y-6 mt-2">
+    <% @records.each do |record| %>
+      <%= render 'project/activity/record', record: record %>
+    <% end %>
+  </ul>
+</div>

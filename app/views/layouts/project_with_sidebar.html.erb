@@ -55,7 +55,6 @@
               <%= render 'projects/team' unless @project.personal? %>
               <%= render 'projects/files' %>
               <%= render 'projects/links' %>
-              <%#= render 'projects/activity' unless @project.personal? %>
               <%= render 'projects/extra' if !@project.personal? && @project.user == current_user %>
             </div>
           </div>

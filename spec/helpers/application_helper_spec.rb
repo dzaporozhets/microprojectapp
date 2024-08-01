@@ -41,7 +41,7 @@ RSpec.describe ApplicationHelper, type: :helper do
     it 'highlights the selected tab' do
       html = helper.render_tabs(tabs, 'Company')
 
-      expect(html).to have_css('a.bg-gray-100.text-gray-700', text: 'Company')
+      expect(html).to have_css('a.bg-gray-100.text-gray-900', text: 'Company')
     end
 
     it 'does not highlight non-selected tabs' do

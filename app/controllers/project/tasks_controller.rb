@@ -28,6 +28,8 @@ class Project::TasksController < Project::BaseController
 
     respond_to do |format|
       if @task.save
+        @project.add_activity(current_user, 'created', @task)
+
         format.turbo_stream
         format.html { redirect_to project_url(@project), notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
@@ -62,6 +64,8 @@ class Project::TasksController < Project::BaseController
   def destroy
     @task.destroy!
 
+    @project.add_activity(current_user, 'removed', @task)
+
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove("task_#{@task.id}") }
       format.html { redirect_to project_url(@project), notice: "Task was successfully destroyed." }
@@ -78,6 +82,8 @@ class Project::TasksController < Project::BaseController
   def toggle_done
     respond_to do |format|
       if @task.update(params.require(:task).permit(:done))
+        @project.add_activity(current_user, (@task.done ? 'closed' : 'opened'), @task)
+
         # If tasks was marked as done (or undone), we rebuild the list
         # so the done task is going under "done" section
         # and and vice versa

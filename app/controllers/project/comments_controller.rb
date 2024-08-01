@@ -6,6 +6,8 @@ class Project::CommentsController < Project::BaseController
     @comment.user = current_user
 
     if @comment.save
+      @project.add_activity(current_user, 'commented on', @task)
+
       respond_to do |format|
         format.html { redirect_to task_path, notice: 'Comment was successfully created.' }
         format.turbo_stream

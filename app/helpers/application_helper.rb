@@ -15,8 +15,8 @@ module ApplicationHelper
 
   def flash_css(type)
     case type.to_sym
-    when :notice then 'bg-blue-100 border rounded border-blue-500 text-blue-700'
-    when :alert then 'bg-red-100 border rounded border-red-500 text-red-700'
+    when :notice then 'bg-blue-50 border rounded border-blue-400 text-blue-700'
+    when :alert then 'bg-red-50 border rounded border-red-400 text-red-700'
     else 'bg-gray-100 border rounded border-gray-500 text-gray-700'
     end
   end
@@ -38,7 +38,7 @@ module ApplicationHelper
         current_tab = selected == tab[:name]
 
         link_class = 'rounded-md px-4 py-2 text-sm font-medium hover:text-indigo-700'
-        link_class += current_tab ? ' bg-gray-100 text-gray-700' : ' text-gray-500'
+        link_class += current_tab ? ' bg-gray-100 text-gray-900' : ' text-gray-500'
         link_options = current_tab ? { 'aria-current' => 'page' } : {}
 
         link_to tab[:name], tab[:path], class: link_class, **link_options

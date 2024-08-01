@@ -11,6 +11,8 @@ class Project::UsersController < Project::BaseController
       if user.allow_invites
         if project.user != user && project.users.exclude?(user)
           if project.users << user
+            project.add_activity(current_user, 'invited', user)
+
             redirect_to project_path(project)
             return
           else

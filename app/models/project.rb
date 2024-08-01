@@ -90,7 +90,7 @@ class Project < ApplicationRecord
   end
 
   def add_activity(user, action, trackable)
-    if true # add ability to enable/disable per project
+    unless personal? # add ability to enable/disable per project
       self.activities.create(
         user: user,
         action: action,
