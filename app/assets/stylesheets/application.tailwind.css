@@ -20,7 +20,7 @@
   }
 
   .base-input {
-    @apply shadow-sm rounded-md border border-gray-400 outline-none;
+    @apply shadow-sm rounded-md border border-gray-400 outline-none focus:border-indigo-500 focus:ring-indigo-500;
   }
 
   .btn-tab {
