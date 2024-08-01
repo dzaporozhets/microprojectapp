@@ -1,6 +1,7 @@
 class Project < ApplicationRecord
   FILE_LIMIT = 100
   PROJECT_LIMIT = 999
+  ACTIVITY_LIMIT = 999
 
   belongs_to :user, required: true
 
@@ -91,6 +92,13 @@ class Project < ApplicationRecord
 
   def add_activity(user, action, trackable)
     unless personal? # add ability to enable/disable per project
+
+      # Keep only ACTIVITY_LIMIT amount of records.
+      # Remove older one after that
+      if self.activities.count > ACTIVITY_LIMIT
+        self.activities.order(id: :asc).first.delete
+      end
+
       self.activities.create(
         user: user,
         action: action,
