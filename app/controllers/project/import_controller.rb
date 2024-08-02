@@ -1,4 +1,6 @@
 class Project::ImportController < Project::BaseController
+  MAX_FILE_SIZE = 5.megabytes # Set the file size limit
+
   def new
   end
 
@@ -6,6 +8,13 @@ class Project::ImportController < Project::BaseController
     file = params[:file]
 
     if file
+
+      if file.size > MAX_FILE_SIZE
+        redirect_to new_project_import_path(project), alert: "File size should be less than #{MAX_FILE_SIZE / 1.megabyte} MB."
+
+        return
+      end
+
       begin
         data = JSON.parse(file.read)
 
