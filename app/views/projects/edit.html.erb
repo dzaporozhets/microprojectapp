@@ -1,9 +1,16 @@
-<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md flex-grow">
-  <div class="">
+<div class="mt-2 sm:mx-auto sm:w-full sm:max-w-md flex-grow">
+  <div class="flex justify-between items-center mb-4 pb-4 border-b">
     <h1 class="font-bold text-2xl">Project settings</h1>
-
-    <%= render "form", project: @project %>
   </div>
+
+  <%= render "form", project: @project %>
+
+  <section class="mt-10">
+    <h2 class="section-title">Import and Export</h2>
+
+    <%= button_to "Export Tasks", project_export_path(@project, format: :json), method: :post, class: "btn-gray inline-block", form: { 'data-turbo': 'false', class: 'inline-block' } %>
+    <%= link_to "Import Tasks", new_project_import_path(@project), class: "btn-gray inline-block ml-2" %>
+  </section>
 
   <div class="mt-20 rounded-md p-4 bg-red-50 border-red-700 border">
     <span class="block text-sm text-red-900 mb-5">This will completely remove your project. <br/>All data will be lost.</span>
