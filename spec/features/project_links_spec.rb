@@ -46,5 +46,15 @@ RSpec.feature "Project::Links", type: :feature do
     expect(page).not_to have_text(link.title)
     expect(page).to have_current_path(project_path(project))
   end
+
+  scenario "User visits links page" do
+    visit project_path(project)
+
+    click_link 'Links'
+
+    expect(page).to have_current_path(project_links_path(project))
+    expect(page).to have_text(link.title)
+    expect(page).to have_link(link.title, href: link.url)
+  end
 end
 
