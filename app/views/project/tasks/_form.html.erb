@@ -1,5 +1,7 @@
 <%= turbo_frame_tag "new_task" do %>
-  <%= form_with(model: [project, Task.new], local: false) do |form| %>
+  <%= form_with(model: [project, @task || Task.new], local: false) do |form| %>
+    <%= render("shared/errors", resource: @task) if @task %>
+
     <div class="mt-5 mb-5 flex w-full">
       <%= form.text_field :name, class: "base-input flex-grow text-sm", required: true %>
       <%= form.submit "Add task", class: "rounded-md py-2 px-4 bg-indigo-700 text-white inline-block cursor-pointer text-sm ms-3" %>

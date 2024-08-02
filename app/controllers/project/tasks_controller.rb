@@ -34,6 +34,7 @@ class Project::TasksController < Project::BaseController
         format.html { redirect_to project_url(@project), notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
       else
+        format.turbo_stream
         format.html { redirect_to project_url(@project), alert: 'Task could not be created.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
