@@ -15,7 +15,7 @@ class Link < ApplicationRecord
     uri = URI.parse(url)
     segments = uri.path.split('/')
     title_segment = segments.last
-    title_text = title_segment ? title_segment.split('_').map(&:capitalize).join(' ') : ''
+    title_text = title_segment ? title_segment.split(/[_-]/).map(&:capitalize).join(' ') : ''
 
     if title_text.present?
       title_text

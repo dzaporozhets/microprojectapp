@@ -26,12 +26,12 @@ RSpec.describe Link, type: :model do
 
       it 'handles URLs with complex paths' do
         link = build(:link, title: nil, url: 'https://example.com/some/complex_path-here')
-        expect(link.safe_title).to eq('Complex Path-here')
+        expect(link.safe_title).to eq('Complex Path Here')
       end
 
       it 'handles URLs with file extension' do
         link = build(:link, title: nil, url: 'https://example.com/some/complex_path-here.pdf')
-        expect(link.safe_title).to eq('Complex Path-here.pdf')
+        expect(link.safe_title).to eq('Complex Path Here.pdf')
       end
 
       it 'handles URLs with underscores in path' do
