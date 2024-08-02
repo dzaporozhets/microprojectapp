@@ -38,6 +38,9 @@ Rails.application.routes.draw do
     end
 
     resource :activity, only: :show, controller: 'project/activity'
+
+    resource :import, only: [:new, :create], controller: 'project/import'
+    resource :export, only: [:new, :create], controller: 'project/export'
   end
 
   namespace :admin do
