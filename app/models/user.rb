@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
   devise *devise_modules, omniauth_providers: [:google_oauth2]
 
+  # TODO: move create_sample_project in the controller
+  # so we don't create it in Rspec for no need
   after_create :create_personal_project,
     :create_sample_project
 
