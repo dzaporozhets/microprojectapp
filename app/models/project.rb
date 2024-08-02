@@ -69,8 +69,8 @@ class Project < ApplicationRecord
     }
 
     links = [
-      { title: "https://en.wikipedia.org/wiki/Project_management", url: "https://en.wikipedia.org/wiki/Project_management" },
-      { title: "https://en.wikipedia.org/wiki/Time_management", url: "https://en.wikipedia.org/wiki/Time_management" },
+      { url: "https://en.wikipedia.org/wiki/Project_management" },
+      { url: "https://en.wikipedia.org/wiki/Time_management" },
     ]
 
     links.each do |link|
