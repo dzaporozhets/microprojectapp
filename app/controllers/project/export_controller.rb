@@ -3,7 +3,7 @@ class Project::ExportController < Project::BaseController
   end
 
   def create
-    tasks_data = project.tasks.as_json(except: [:id, :user_id, :project_id])
+    tasks_data = project.tasks.as_json(only: [:name, :description, :done, :done_at, :due_date])
 
     export_data = {
       project_name: project.name,
