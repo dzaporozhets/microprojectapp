@@ -26,4 +26,8 @@
   .btn-tab {
     @apply bg-gray-200 px-3 py-1 rounded-md hover:bg-gray-300 mb-2 sm:mb-0 sm:mr-3 text-sm;
   }
+
+  .section-title {
+    @apply font-semibold text-gray-900 mb-4 pb-4 border-b;
+  }
 }
