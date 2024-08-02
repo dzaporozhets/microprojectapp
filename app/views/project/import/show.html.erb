@@ -11,8 +11,8 @@
         <% @imported_tasks.first(20).each do |task| %>
           <li class="mb-2"><%= task.name %></li>
         <% end %>
-        <% if @imported_tasks.size > 20 %>
-          <li class="mb-2"><strong>and <%= @imported_tasks.size - 20 %> more...</strong></li>
+        <% if @imported_task_count > 20 %>
+          <li class="mb-2"><strong>and <%= @imported_task_count - 20 %> more...</strong></li>
         <% end %>
       </ul>
     <% end %>

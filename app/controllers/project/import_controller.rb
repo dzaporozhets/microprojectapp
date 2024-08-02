@@ -23,7 +23,8 @@ class Project::ImportController < Project::BaseController
           project.tasks.create!(task_params)
         end
 
-        session[:imported_task_ids] = imported_tasks.map(&:id)
+        session[:imported_task_ids] = imported_tasks.first(20).map(&:id)
+        session[:imported_task_count] = imported_tasks.size
 
         redirect_to project_import_path(project), notice: 'Tasks were successfully imported.'
       rescue JSON::ParserError => e
@@ -39,6 +40,7 @@ class Project::ImportController < Project::BaseController
   def show
     task_ids = session.delete(:imported_task_ids) || []
 
+    @imported_task_count = session.delete(:imported_task_count) || 0
     @imported_tasks = project.tasks.where(id: task_ids)
   end
 end
