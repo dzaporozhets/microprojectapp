@@ -19,7 +19,7 @@ class Project::ImportController < Project::BaseController
         data = JSON.parse(file.read)
 
         imported_tasks = data["tasks"].map do |task_data|
-          task_params = task_data.except("id", "created_at", "updated_at").merge(user: current_user)
+          task_params = task_data.slice("name", "description", "done", "done_at", "due_date").merge(user: current_user)
           project.tasks.create!(task_params)
         end
 
