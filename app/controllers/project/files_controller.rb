@@ -1,5 +1,6 @@
 class Project::FilesController < Project::BaseController
   def index
+    @files = project.project_files
   end
 
   def new

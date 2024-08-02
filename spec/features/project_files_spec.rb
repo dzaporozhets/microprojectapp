@@ -35,5 +35,14 @@ RSpec.feature "Project::Files", type: :feature do
     expect(page).not_to have_content('test_file.txt')
     expect(project_with_files.reload.project_files).to be_empty
   end
+
+  scenario "User visits files page" do
+    visit project_path(project_with_files)
+
+    click_link 'Files'
+
+    expect(page).to have_current_path(project_files_path(project_with_files))
+    expect(page).to have_text('test_file.txt')
+  end
 end
 
