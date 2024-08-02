@@ -8,8 +8,8 @@
   <section class="mt-10">
     <h2 class="section-title">Import and Export</h2>
 
-    <%= button_to "Export tasks", project_export_path(@project, format: :json), method: :post, class: "btn-gray inline-block", form: { 'data-turbo': 'false', class: 'inline-block' } %>
-    <%= link_to "Import tasks", new_project_import_path(@project), class: "btn-gray inline-block ml-2" %>
+    <%= button_to "Export Tasks", project_export_path(@project, format: :json), method: :post, class: "btn-gray inline-block", form: { 'data-turbo': 'false', class: 'inline-block' } %>
+    <%= link_to "Import Tasks", new_project_import_path(@project), class: "btn-gray inline-block ml-2" %>
   </section>
 
   <div class="mt-20 rounded-md p-4 bg-red-50 border-red-700 border">

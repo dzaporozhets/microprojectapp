@@ -1,0 +1,26 @@
+<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-lg">
+  <div class="">
+    <h1 class="mb-4 font-bold text-2xl">Tasks Imported Successfully</h1>
+
+    <% if @imported_tasks.empty? %>
+      <p class="mb-6">No tasks were imported.</p>
+    <% else %>
+      <p class="mb-6 text-gray-600">The following tasks were successfully imported into the project:</p>
+
+      <ul class="list-disc list-inside mb-6 text-sm">
+        <% @imported_tasks.first(20).each do |task| %>
+          <li class="mb-2"><%= task.name %></li>
+        <% end %>
+        <% if @imported_tasks.size > 20 %>
+          <li class="mb-2"><strong>and <%= @imported_tasks.size - 20 %> more...</strong></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <div class="flex space-x-4">
+      <%= link_to 'Back to Project', @project, class: 'btn-primary' %>
+      <%= link_to 'Import More Tasks', new_project_import_path(@project), class: 'btn-gray' %>
+    </div>
+  </div>
+</div>
+

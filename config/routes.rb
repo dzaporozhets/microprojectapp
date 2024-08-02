@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
     resource :activity, only: :show, controller: 'project/activity'
 
-    resource :import, only: [:new, :create], controller: 'project/import'
+    resource :import, only: [:new, :create, :show], controller: 'project/import'
     resource :export, only: [:new, :create], controller: 'project/export'
   end
 

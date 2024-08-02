@@ -18,12 +18,14 @@ class Project::ImportController < Project::BaseController
       begin
         data = JSON.parse(file.read)
 
-        data["tasks"].each do |task_data|
+        imported_tasks = data["tasks"].map do |task_data|
           task_params = task_data.except("id", "created_at", "updated_at").merge(user: current_user)
           project.tasks.create!(task_params)
         end
 
-        redirect_to project, notice: 'Tasks were successfully imported.'
+        session[:imported_task_ids] = imported_tasks.map(&:id)
+
+        redirect_to project_import_path(project), notice: 'Tasks were successfully imported.'
       rescue JSON::ParserError => e
         redirect_to new_project_import_path(project), alert: 'Invalid JSON file.'
       rescue ActiveRecord::RecordInvalid => e
@@ -32,5 +34,11 @@ class Project::ImportController < Project::BaseController
     else
       redirect_to new_project_import_path(project), alert: 'Please upload a file.'
     end
+  end
+
+  def show
+    task_ids = session.delete(:imported_task_ids) || []
+
+    @imported_tasks = project.tasks.where(id: task_ids)
   end
 end
