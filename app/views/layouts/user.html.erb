@@ -26,7 +26,7 @@
                 <%= link_to edit_user_registration_path(current_user)do %>
                   <div class="flex items-start gap-x-3">
                     <div class="font-semibold leading-6 text-gray-900 text-base">
-                      <span>User account</span>
+                      <span><%= current_user.email %></span>
                     </div>
                   </div>
                 <% end %>
@@ -42,13 +42,6 @@
 
     <main>
       <div class="mx-auto w-full max-w-lg px-4">
-        <div class="my-5">
-          <%= link_to 'Settings', users_settings_path, class: "btn-tab" %>
-          <%= link_to 'Email and password', edit_registration_path(current_user), class: "btn-tab" %>
-        </div>
-
-        <%= render "shared/flash" %>
-
         <%= yield %>
       </div>
     </main>

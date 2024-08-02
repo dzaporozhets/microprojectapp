@@ -13,30 +13,37 @@
 
   <body>
     <nav class="bg-gray-200">
-      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
-        <%= link_to admin_path, class: "flex items-center space-x-3 rtl:space-x-reverse" do %>
-          <span class="self-center text-xl whitespace-nowrap leading-6">Admin area</span>
-        <% end %>
-        <%= link_to root_path, class: "flex items-center space-x-3 rtl:space-x-reverse pr-0" do %>
-          <span class="self-center text-sm whitespace-nowrap text-gray-500 hover:text-gray-700">
-            <span class="hidden md:inline">Back to homepage</span>
+      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4">
+        <ol role="list" class="flex space-x-4">
+          <li class="flex">
+            <%= render 'layouts/home_link' %>
+          </li>
+          <li class="flex">
+            <%= render 'layouts/separator' %>
 
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 md:hidden text-sm">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-            </svg>
-          </span>
-        <% end %>
+            <div class="flex items-center justify-between gap-x-6 ml-4">
+              <div class="min-w-0">
+                <%= link_to admin_path do %>
+                  <div class="flex items-start gap-x-3">
+                    <div class="font-semibold leading-6 text-gray-900 text-base">
+                      <span>Admin area</span>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        </ol>
+        <div class="flex items-center space-x-6 rtl:space-x-reverse hidden md:flex">
+          <%= render 'layouts/user' %>
+        </div>
       </div>
     </nav>
 
 
+
     <main class="container mx-auto max-w-screen-xl p-4 flex">
       <div class="mx-auto w-full">
-        <div class="mx-auto max-w-7xl flex flex-col sm:flex-row mb-5">
-          <%= link_to 'Application', admin_path, class: "btn-tab" %>
-          <%= link_to 'Users', admin_users_path, class: "btn-tab" %>
-        </div>
-
         <%= yield %>
       </div>
     </main>

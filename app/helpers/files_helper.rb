@@ -23,7 +23,7 @@ module FilesHelper
       accept: allowed_file_types,
       class: "appearance-none w-full
             text-gray-700 leading-tight focus:outline-none
-            focus:shadow-outline file:mr-5 file:py-2 file:px-6
+            focus:shadow-outline file:mr-5 file:py-2 file:px-4
             file:rounded-md file:border-0
             file:text-sm file:font-medium
             file:bg-gray-100 file:text-gray-700"

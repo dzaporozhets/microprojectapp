@@ -36,11 +36,8 @@ module ApplicationHelper
     content_tag(:nav, class: 'flex space-x-3', aria: { label: 'Tabs' }) do
       tabs.map do |tab|
         current_tab = selected == tab[:name]
-
-        link_class = 'rounded-md px-4 py-2 text-sm font-medium'
-        link_class += current_tab ? ' bg-indigo-100 text-indigo-900' : ' text-gray-500 hover:text-gray-900'
+        link_class = current_tab ? 'btn-tab-active' : 'btn-tab'
         link_options = current_tab ? { 'aria-current' => 'page' } : {}
-
         link_to tab[:name], tab[:path], class: link_class, **link_options
       end.join.html_safe
     end
