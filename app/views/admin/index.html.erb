@@ -60,7 +60,7 @@
       <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500"><%= ActiveRecord::Base.connection.current_database %></p>
     </div>
 
-  <div class="mt-6 border-t border-gray-100">
+    <div class="mt-6 border-t border-gray-100">
       <dl class="divide-y divide-gray-100">
         <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Users</dt>
@@ -81,6 +81,14 @@
         <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
           <dt class="text-sm font-medium leading-6 text-gray-900">Comments</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @total_comments %></dd>
+        </div>
+        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Activities <span class="font-light">(24 hours)</span></dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @recent_activities_count %></dd>
+        </div>
+        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
+          <dt class="text-sm font-medium leading-6 text-gray-900">Users <span class="font-light">(24 hours)</span></dt>
+          <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-0"><%= @recent_users_count %></dd>
         </div>
       </dl>
     </div>
