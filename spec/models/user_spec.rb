@@ -143,5 +143,109 @@ RSpec.describe User, type: :model do
         expect(user.has_access_to?(another_project)).to be false
       end
     end
+
+    describe '#valid_password?' do
+      let(:user) { create(:user, :google) }
+
+      context 'when disable_password is false' do
+        it 'returns true if the password is correct' do
+          expect(user.valid_password?('password')).to be true
+        end
+
+        it 'returns false if the password is incorrect' do
+          expect(user.valid_password?('wrongpassword')).to be false
+        end
+      end
+
+      context 'when disable_password is true and OAuth is enabled' do
+        let(:user) { create(:user, :google, disable_password: true) }
+
+        before do
+          allow(Devise.mappings[:user]).to receive(:omniauthable?).and_return(true)
+        end
+
+        it 'returns false regardless of the password' do
+          ClimateControl.modify GOOGLE_CLIENT_ID: 'google_client_id' do
+            expect(user.valid_password?('password')).to be false
+            expect(user.valid_password?('wrongpassword')).to be false
+          end
+        end
+      end
+
+      context 'when disable_password is true and OAuth is not enabled' do
+        let(:user) { create(:user, :google, disable_password: true) }
+
+        it 'returns true if the password is correct' do
+          expect(user.valid_password?('password')).to be true
+        end
+
+        it 'returns false if the password is incorrect' do
+          expect(user.valid_password?('wrongpassword')).to be false
+        end
+      end
+    end
+
+    describe '#oauth_enabled?' do
+      let(:user) { create(:user, uid: uid, provider: provider) }
+      let(:uid) { nil }
+      let(:provider) { nil }
+
+      context 'when both uid and provider are present' do
+        let(:uid) { 'some_uid' }
+        let(:provider) { 'google' }
+
+        it 'returns true' do
+          expect(user.oauth_enabled?).to be true
+        end
+      end
+
+      context 'when uid is nil' do
+        it 'returns false' do
+          expect(user.oauth_enabled?).to be false
+        end
+      end
+
+      context 'when provider is nil' do
+        it 'returns false' do
+          expect(user.oauth_enabled?).to be false
+        end
+      end
+    end
+
+    describe '#oauth_config?' do
+      before do
+        allow(Devise.mappings[:user]).to receive(:omniauthable?).and_return(omniauthable)
+      end
+
+      context 'when omniauthable and GOOGLE_CLIENT_ID is present' do
+        let(:omniauthable) { true }
+
+        it 'returns true' do
+          ClimateControl.modify GOOGLE_CLIENT_ID: 'google_client_id' do
+            expect(user.oauth_config?).to be true
+          end
+        end
+      end
+
+      context 'when omniauthable is false' do
+        let(:omniauthable) { false }
+
+        it 'returns false' do
+          ClimateControl.modify GOOGLE_CLIENT_ID: 'google_client_id' do
+            expect(user.oauth_config?).to be false
+          end
+        end
+      end
+
+      context 'when GOOGLE_CLIENT_ID is nil' do
+        let(:omniauthable) { true }
+
+        it 'returns false' do
+          ClimateControl.modify GOOGLE_CLIENT_ID: nil do
+            expect(user.oauth_config?).to be false
+          end
+        end
+      end
+    end
   end
 end

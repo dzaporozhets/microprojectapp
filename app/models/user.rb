@@ -90,16 +90,20 @@ class User < ApplicationRecord
       invited_projects.include?(project)
   end
 
+  def oauth_config?
+    Devise.mappings[:user].omniauthable? && ENV['GOOGLE_CLIENT_ID'].present?
+  end
+
   def oauth_enabled?
     self.uid.present? && self.provider.present?
   end
 
-  # def valid_password?(password)
-  #   return false if oauth_enabled?
-  #
-  #   super
-  # end
-  #
+  def valid_password?(password)
+    # Allow user to disable login with password when login with OAuth was used
+    return false if disable_password && oauth_enabled? && oauth_config?
+
+    super
+  end
 
   # Override Devise's send_reset_password_instructions method
   def send_reset_password_instructions

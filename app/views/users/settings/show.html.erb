@@ -15,6 +15,13 @@
         <%= f.label :allow_invites, "Allow other users to add you to projects", class: 'ml-2 text-sm' %>
       </div>
 
+      <%- if @user.oauth_enabled? %>
+        <div class="py-6">
+          <%= f.check_box :disable_password %>
+          <%= f.label :disable_password, "Disable Password Authentication (only login with Google)", class: 'ml-2 text-sm' %>
+        </div>
+      <% end %>
+
       <div class="py-6">
         <div class="mt-2">
           <%= f.submit "Save settings", class: "justify-center btn-primary" %>
