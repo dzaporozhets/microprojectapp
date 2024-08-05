@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_id(@task), data: { details: true } do %>
   <%= content_tag :div, class: "border border-gray-400 shadow-sm rounded-md" do %>
-    <div class="border-b text-sm flex items-center p-3 rounded-t-md <%= @task.done ? 'bg-gray-300 text-gray-700' : 'bg-indigo-100 text-indigo-900' %>">
+    <div class="border-b text-sm flex items-center p-3 rounded-t-md <%= @task.done ? 'bg-gray-300 text-gray-700' : 'bg-violet-100 text-violet-900' %>">
       <div class="flex-none">
       </div>
 

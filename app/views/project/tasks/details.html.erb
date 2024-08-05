@@ -1,6 +1,6 @@
 <div class="mt-6 md:mt-10 sm:mx-auto sm:w-full sm:max-w-lg">
   <%= content_tag :div, class: "border border-gray-400 shadow-sm rounded-md" do %>
-    <div class="border-b text-sm flex items-center p-3 <%= @task.done ? 'bg-gray-300 text-gray-700' : 'bg-indigo-100 text-indigo-900' %> rounded-t-md">
+    <div class="border-b text-sm flex items-center p-3 <%= @task.done ? 'bg-gray-300 text-gray-700' : 'bg-violet-100 text-violet-900' %> rounded-t-md">
       <div class="flex-none">
         <%= form_with(model: @task, url: project_task_path(@task.project, @task), local: false, data: { turbo: false }) do |form| %>
           <%= form.check_box :done,

@@ -59,20 +59,20 @@
         <%= form_with(model: [@project, @task], class: "contents", data: { turbo: turbo_frame_request? }) do |form| %>
           <div class="mb-3">
             <%= form.label :name, class: "text-sm text-gray-500" %>
-            <%= form.text_field :name, class: "block rounded-md border border-gray-400 outline-none text-sm px-2 py-1.5 w-full" %>
+            <%= form.text_field :name, class: "block base-input w-full" %>
           </div>
 
           <div class="mb-3">
             <%= form.label :description, class: "text-sm text-gray-500" %>
-            <%= form.text_area :description, rows: calc_textarea_rows(@task.description), class: "block rounded-md text-sm border border-gray-400 outline-none px-2 py-1.5 mt-2 w-full resize-y" %>
+            <%= form.text_area :description, rows: calc_textarea_rows(@task.description), class: "block base-input mt-2 w-full resize-y" %>
           </div>
 
           <div class="mb-3">
             <%= form.label :due_date, class: "text-sm text-gray-500" %>
-            <%= form.select :due_date, options_for_select(due_date_options(@task.due_date)), {}, { class: "mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" } %>
+            <%= form.select :due_date, options_for_select(due_date_options(@task.due_date)), {}, { class: "mt-2 block w-full base-input" } %>
           </div>
 
-          <%= form.submit 'Update', class: "btn-primary py-2 px-4 inline-block" %>
+          <%= form.submit 'Update', class: "btn-primary inline-block" %>
         <% end %>
 
         <%= button_to "Delete", [@project, @task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?' }, class: "rounded-md py-2 px-4 bg-gray-100 text-sm text-red-800 hover:bg-red-100", form_class: "float-right" %>

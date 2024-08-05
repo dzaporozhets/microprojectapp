@@ -20,7 +20,7 @@
               <img src="<%= comment.attachment.url %>" alt="Attachment" class="max-w-full h-auto">
             <% end %>
           <% else %>
-            <%= link_to comment.attachment.file.filename, comment.attachment.url, class: "text-sm text-indigo-600 hover:underline", target: :blank %>
+            <%= link_to comment.attachment.file.filename, comment.attachment.url, class: "text-sm text-violet-600 hover:underline", target: :blank %>
           <% end %>
         </div>
       <% end %>
