@@ -28,4 +28,5 @@ If you plan to use it for production then make sure to change next things in `do
 
 1. Change `RAILS_ENV` to `production` 
 2. Replace `SECRET_KEY_BASE_DUMMY` with `SECRET_KEY_BASE` containing your secret key. You can generate one with `bin/rails secret`.
+3. Rails production environment requires https by default
 
