@@ -9,8 +9,8 @@
       <tr>
         <th class="px-4 py-2 border">ID</th>
         <th class="px-4 py-2 border">Email</th>
-        <th class="px-4 py-2 border">Created At</th>
-        <th class="px-4 py-2 border">Updated at</th>
+        <th class="px-4 py-2 border hidden sm:table-cell">Created At</th>
+        <th class="px-4 py-2 border hidden sm:table-cell">Updated at</th>
       </tr>
     </thead>
     <tbody>
@@ -30,8 +30,8 @@
               </svg>
             <% end %>
           </td>
-          <td class="px-4 py-2 border"><%= user.created_at.to_formatted_s(:short) %></td>
-          <td class="px-4 py-2 border"><%= user.updated_at.to_formatted_s(:short) %></td>
+          <td class="px-4 py-2 border hidden sm:table-cell"><%= user.created_at.to_formatted_s(:short) %></td>
+          <td class="px-4 py-2 border hidden sm:table-cell"><%= user.updated_at.to_formatted_s(:short) %></td>
         </tr>
       <% end %>
     </tbody>
