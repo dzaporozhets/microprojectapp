@@ -1,15 +1,26 @@
 # Docker
 
-The repository contains the `Dockerfile`. You can build and run the app with Docker.
-App will be running on port `3000` by default. Database is not included.
+You can build and run the app with Docker. App will be running on port `3000` by default.
+
+## Dockerfile 
+
+The repository contains the `Dockerfile`. Database is not included there. 
 So make sure to pass a `DATABASE_URL` to the container.
 
-Docker compose:
+## Docker compose
+
+The repository contains `docker-compose.yml`. It includes Rails and Postgres database. 
+Its enough to get application running and function. 
 
 ```
 docker-compose up --build
 docker-compose run web bundle exec rake db:migrate
 ```
 
-If you plan to use it for production then make sure to change `RAILS_ENV` and `SECRET_KEY_BASE_DUMMY` in `docker-compose.yml`.
+## Production env
+
+If you plan to use it for production then make sure to change next things in `docker-compose.yml`: 
+
+1. Change `RAILS_ENV` to `production` 
+2. Replace `SECRET_KEY_BASE_DUMMY` with `SECRET_KEY_BASE` containing your secret key. 
 
