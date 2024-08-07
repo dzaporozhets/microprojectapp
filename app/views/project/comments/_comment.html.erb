@@ -1,7 +1,7 @@
 <div id="<%= dom_id(comment) %>" class="border-t border-gray-200 py-3">
   <div class="flex">
     <div class="flex items-center">
-      <%= gravatar_tag(comment.user.email, "h-6 w-6 mr-2 rounded-full bg-gray-50") %>
+      <%= avatar_tag(comment.user.email, "h-6 w-6 mr-2 rounded-full bg-gray-200") %>
       <div class="text-sm mr-3 text-gray-900 dark:text-white font-semibold"><%= comment.user.email %></div>
       <div class="text-sm text-gray-600 dark:text-gray-400"><%= time_ago_short(comment.created_at) %></div>
     </div>

@@ -3,7 +3,7 @@
   <ul role="list" class="divide-y divide-gray-100">
     <li class="flex justify-between py-3 px-4">
       <div class="flex min-w-0 gap-x-4">
-        <%= gravatar_tag(@project.user.email, "h-6 w-6 flex-none rounded-full bg-gray-50") %>
+        <%= avatar_tag(@project.user.email, "h-6 w-6 flex-none rounded-full bg-gray-200") %>
         <div class="min-w-0 flex-auto">
           <p class="text-sm leading-6 text-gray-600"><%= @project.user.email %></p>
         </div>
@@ -13,7 +13,7 @@
     <% @project.users.each do |user| %>
       <li id="project_<%= dom_id user %>" class="flex justify-between py-3 px-4">
         <div class="flex min-w-0 gap-x-4">
-          <%= gravatar_tag(user.email, "h-6 w-6 flex-none rounded-full bg-gray-50") %>
+          <%= avatar_tag(user.email, "h-6 w-6 flex-none rounded-full bg-gray-200") %>
           <div class="min-w-0 flex-auto">
             <p class="text-sm leading-6 text-gray-600"><%= user.email %></p>
           </div>

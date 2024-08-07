@@ -58,4 +58,16 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect(html).to have_css('a[aria-current="page"]', text: 'Team Members')
     end
   end
+
+  describe '#avatar_tag' do
+    let(:email) { 'test@example.com' }
+    let(:default_options) { { size: 40, alt: 'Avatar' } }
+
+    it 'generates a div with the correct initial' do
+      result = helper.avatar_tag(email)
+
+      expect(result).to include('T')
+      expect(result).to include('alt="Avatar"')
+    end
+  end
 end
