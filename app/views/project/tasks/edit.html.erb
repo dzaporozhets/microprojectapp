@@ -75,7 +75,7 @@
           <%= form.submit 'Update', class: "btn-primary inline-block" %>
         <% end %>
 
-        <%= button_to "Delete", [@project, @task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?' }, class: "rounded-md py-2 px-4 bg-gray-100 text-sm text-red-800 hover:bg-red-100", form_class: "float-right" %>
+        <%= button_to "Delete", [@project, @task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?', turbo: turbo_frame_request? }, class: "rounded-md py-2 px-4 bg-gray-100 text-sm text-red-800 hover:bg-red-100", form_class: "float-right" %>
       </div>
     <% end %>
   <% end %>
