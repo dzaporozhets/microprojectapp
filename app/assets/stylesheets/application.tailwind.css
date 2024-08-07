@@ -34,4 +34,8 @@
   .section-title {
     @apply font-semibold text-gray-900 mb-4 pb-4 border-b;
   }
+
+  .turbo-progress-bar {
+    @apply bg-indigoo-500;
+  }
 }
