@@ -322,7 +322,7 @@ Devise.setup do |config|
     config.omniauth :google_oauth2,
       ENV['GOOGLE_CLIENT_ID'],
       ENV['GOOGLE_CLIENT_SECRET'],
-      { scope: 'userinfo.email', redirect_uri: ENV['GOOGLE_REDIRECT_URI'] }
+      { scope: 'userinfo.email,userinfo.profile', redirect_uri: ENV['GOOGLE_REDIRECT_URI'] }
   end
 
   # We need this for spec/features/user_oauth_login_spec.rb
