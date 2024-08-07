@@ -27,5 +27,5 @@ docker-compose run web bundle exec rake db:migrate
 If you plan to use it for production then make sure to change next things in `docker-compose.yml`: 
 
 1. Change `RAILS_ENV` to `production` 
-2. Replace `SECRET_KEY_BASE_DUMMY` with `SECRET_KEY_BASE` containing your secret key. 
+2. Replace `SECRET_KEY_BASE_DUMMY` with `SECRET_KEY_BASE` containing your secret key. You can generate one with `bin/rails secret`.
 
