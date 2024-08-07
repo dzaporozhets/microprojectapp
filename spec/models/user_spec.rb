@@ -24,7 +24,8 @@ RSpec.describe User, type: :model do
           provider: 'google_oauth2',
           uid: '123456789',
           info: {
-            email: 'user@mydomain.com'
+            email: 'user@mydomain.com',
+            image: 'http://example.com/avatar.jpg'
           }
         )
       end
@@ -38,24 +39,45 @@ RSpec.describe User, type: :model do
           expect(user.email).to eq('user@mydomain.com')
           expect(user.provider).to eq('google_oauth2')
           expect(user.uid).to eq('123456789')
+          expect(user.avatar_url).to eq('http://example.com/avatar.jpg')
         end
       end
 
       context 'when the user exists' do
-        let!(:existing_user) { create(:user, email: 'user@mydomain.com', provider: 'google_oauth2', uid: '123456789') }
+        context 'uid is nil' do
+          let!(:existing_user) { create(:user, email: 'user@mydomain.com') }
 
-        it 'returns the existing user without creating a new one' do
-          expect { User.from_omniauth(auth) }.not_to change(User, :count)
+          it 'returns the existing user without creating a new one' do
+            expect { User.from_omniauth(auth) }.not_to change(User, :count)
+          end
+
+          it 'updates the user provider and uid' do
+            User.from_omniauth(auth)
+            existing_user.reload
+
+            expect(existing_user.provider).to eq('google_oauth2')
+            expect(existing_user.uid).to eq('123456789')
+            expect(existing_user.avatar_url).to eq('http://example.com/avatar.jpg')
+          end
         end
 
-        it 'updates the user provider and uid if they differ' do
-          existing_user.update(provider: 'old_provider', uid: 'old_uid')
+        context 'uid is the same' do
+          let!(:existing_user) { create(:user, email: 'user@mydomain.com', provider: 'google_oauth2', uid: '123456789') }
 
-          User.from_omniauth(auth)
-          existing_user.reload
+          it 'returns the existing user without creating a new one' do
+            expect { User.from_omniauth(auth) }.not_to change(User, :count)
+          end
 
-          expect(existing_user.provider).to eq('google_oauth2')
-          expect(existing_user.uid).to eq('123456789')
+          it 'updates the user provider and uid if they differ' do
+            existing_user.update(provider: 'old_provider', uid: 'old_uid')
+
+            User.from_omniauth(auth)
+            existing_user.reload
+
+            expect(existing_user.provider).to eq('google_oauth2')
+            expect(existing_user.uid).to eq('123456789')
+            expect(existing_user.avatar_url).to eq('http://example.com/avatar.jpg')
+          end
         end
       end
     end

@@ -48,12 +48,12 @@ class User < ApplicationRecord
         # raise 'User with such email already exists'
         user.update(uid: uid,
                     provider: provider,
-                    avatar_url: auth.info.image,
+                    avatar_url: auth.info&.image,
                     oauth_linked_at: Time.now)
       end
     else
       user = User.new(provider: provider, uid: uid, email: email, created_from_oauth: true)
-      user.avatar_url = auth.info.image
+      user.avatar_url = auth.info&.image
       user.password = Devise.friendly_token[0,20]
       user.skip_confirmation! if Devise.mappings[:user].confirmable?
       user.save
