@@ -14,6 +14,11 @@ Its enough to get application running and function.
 
 ```
 docker-compose up --build
+```
+
+Once you have the app running, you need to run database migrations:
+
+```
 docker-compose run web bundle exec rake db:migrate
 ```
 
