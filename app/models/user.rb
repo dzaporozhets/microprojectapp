@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  def self.skip_email_confirmation?
+    ENV['APP_EMAIL_CONFIRMATION'].blank?
+  end
 
   devise_modules = [
     :database_authenticatable, :registerable,
@@ -8,7 +9,9 @@ class User < ApplicationRecord
     :lockable, :omniauthable
   ]
 
-  devise_modules << :confirmable if ENV['APP_EMAIL_CONFIRMATION'].present?
+  unless skip_email_confirmation?
+    devise_modules << :confirmable
+  end
 
   devise *devise_modules, omniauth_providers: [:google_oauth2]
 
