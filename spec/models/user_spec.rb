@@ -15,14 +15,6 @@ RSpec.describe User, type: :model do
     it "creates a personal project after user creation" do
       expect(user.projects.find_by(name: "Personal")).not_to be_nil
     end
-
-    it "creates a sample project after user creation" do
-      sample_project = user.projects.find_by(name: "Sample")
-
-      expect(sample_project).not_to be_nil
-      expect(sample_project.tasks.count).to eq(14)
-      expect(sample_project.links.count).to eq(2)
-    end
   end
 
   describe 'class_methods' do
@@ -109,9 +101,7 @@ RSpec.describe User, type: :model do
 
     describe "#create_sample_project" do
       it "creates a sample project with sample tasks and links" do
-        user.projects.find_by(name: "Sample")&.destroy
-        user.create_sample_project
-        sample_project = user.projects.find_by(name: "Sample")
+        sample_project = user.create_sample_project
 
         expect(sample_project).not_to be_nil
         expect(sample_project.tasks.count).to eq(14)

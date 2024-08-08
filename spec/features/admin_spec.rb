@@ -10,7 +10,7 @@ RSpec.feature "Admin Area", type: :feature do
     visit admin_path
 
     expect(page).to have_content('Users 2')
-    expect(page).to have_content('Projects 4')
+    expect(page).to have_content('Projects 2')
   end
 
   scenario "Non-admin user cannot access admin dashboard" do
