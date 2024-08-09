@@ -2,6 +2,14 @@
   <%= content_tag :div, class: "border border-gray-400 shadow-sm rounded-md" do %>
     <div class="border-b text-sm flex items-center p-3 rounded-t-md <%= @task.done ? 'bg-gray-300 text-gray-700' : 'bg-indigo-100 text-indigo-900' %>">
       <div class="flex-none">
+        <%= form_with(model: @task, url: toggle_done_project_task_path(@task.project, @task), local: false, data: { turbo: true }) do |form| %>
+          <%= form.check_box :done,
+            checked: @task.done,
+            id: "task_#{@task.id}",
+            class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-500 rounded focus:ring-blue-500 focus:ring-2",
+            data: { turbo_action: "advance" },
+            onchange: "this.form.requestSubmit()" %>
+        <% end %>
       </div>
 
       <div class="grow mx-2 text-center">
@@ -42,16 +50,6 @@
       </div>
     <% end %>
 
-    <div class="border-t text-sm text-gray-500 flex items-center p-3 bg-gray-50 rounded-b-md">
-      <div class="comments w-full">
-        <h3 class="font-medium leading-6 text-gray-700">Comments</h3>
-
-        <div class="mt-2">
-          <%= render 'project/comments/comments' %>
-        </div>
-
-        <%= render 'project/comments/form' %>
-      </div>
-    </div>
+    <%= render 'project/tasks/comments' %>
   <% end %>
 <% end %>

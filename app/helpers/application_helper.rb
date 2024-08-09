@@ -4,13 +4,17 @@ module ApplicationHelper
     date.strftime("%A, #{day_with_ordinal}")
   end
 
-  def gravatar_tag(email, css_class = '', options = { size: 40, width: nil, alt: 'Gravatar' })
-    gravatar_id = Digest::MD5.hexdigest(email.downcase)
-    size = options[:size]
-    width = options[:width] || size
-    alt = options[:alt]
-    gravatar_url = "https://www.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
-    image_tag(gravatar_url, alt: alt, class: "gravatar #{css_class}", width: width)
+  def avatar_tag(user, css_class = '', options = { size: 40, alt: 'Avatar' })
+    if user.avatar_url.present?
+      image_tag(user.avatar_url, class: "rounded-full #{css_class}", size: options[:size], alt: options[:alt])
+    else
+      first_letter = user.email[0].upcase
+      size = options[:size]
+      alt = options[:alt]
+      style = ""
+
+      content_tag(:div, first_letter, class: "flex items-center justify-center rounded-full #{css_class}", style: style, alt: alt)
+    end
   end
 
   def flash_css(type)

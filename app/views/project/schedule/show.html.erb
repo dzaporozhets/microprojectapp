@@ -8,7 +8,7 @@
         <%= render 'project/schedule/task', task: task %>
       <% end %>
     <% else %>
-      <li class="py-2 sm:flex">
+      <li class="py-2 flex">
         <p class="">No tasks due this month.</p>
         <%= link_to 'Assign some random tasks?', saturate_project_schedule_path(@project, month: Date.current.strftime("%Y-%m")), method: :post, data: { turbo_method: :post }, class: "text-indigo-600 ml-1" %>
       </li>
@@ -24,7 +24,7 @@
         <%= render 'project/schedule/task', task: task %>
       <% end %>
     <% else %>
-      <li class="py-2 sm:flex">
+      <li class="py-2 flex">
         <p class="">No tasks due next month.</p>
       </li>
     <% end %>
@@ -39,7 +39,7 @@
         <%= render 'project/schedule/task', task: task %>
       <% end %>
     <% else %>
-      <li class="py-2 sm:flex">
+      <li class="py-2 flex">
         <p class="">No tasks due <%= Date.current.next_month.next_month.strftime("%B") %>.</p>
       </li>
     <% end %>

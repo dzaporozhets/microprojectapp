@@ -7,7 +7,7 @@
     <% end %>
   <% end %>
   <%= link_to edit_registration_path(current_user) do %>
-    <%= gravatar_tag(current_user.email, "flex-none rounded-full bg-gray-50 w-5 h-5") %>
+    <%= avatar_tag(current_user, "flex-none rounded-full bg-gray-300 w-6 h-6") %>
   <% end %>
   <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: 'text-sm  text-gray-600  hover:underline', title: 'Log out' do %>
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 items-center">

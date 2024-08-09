@@ -16,6 +16,6 @@ class Admin::UsersController < ApplicationController
   private
 
   def confirmable
-    @confirmable ||= ENV['APP_EMAIL_CONFIRMATION'].present?
+    @confirmable ||= !User.skip_email_confirmation?
   end
 end

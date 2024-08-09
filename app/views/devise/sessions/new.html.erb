@@ -1,4 +1,8 @@
 <h2 class="text-4xl font-extrabold">Log in</h2>
+<% if ENV['APP_DOMAIN'].present? %>
+  <p class="text-gray-500"><%= ENV['APP_DOMAIN'] %></p>
+<% end %>
+
 
 <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
   <%= render 'devise/shared/alerts' %>

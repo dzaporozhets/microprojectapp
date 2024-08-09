@@ -18,7 +18,7 @@ RSpec.describe Project, type: :model do
 
     describe "PROJECT_LIMIT" do
       before do
-        stub_const("Project::PROJECT_LIMIT", 3)
+        stub_const("Project::PROJECT_LIMIT", 2)
       end
 
       it "allows creation of a project if the user has less than the limit of projects" do
@@ -32,7 +32,7 @@ RSpec.describe Project, type: :model do
         project = build(:project, :with_random_name, user: user)
 
         expect(project).not_to be_valid
-        expect(project.errors[:base]).to include("You have reached the limit of 3 projects.")
+        expect(project.errors[:base]).to include("You have reached the limit of 2 projects.")
       end
     end
   end

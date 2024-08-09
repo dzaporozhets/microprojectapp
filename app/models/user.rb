@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  def self.skip_email_confirmation?
+    ENV['APP_EMAIL_CONFIRMATION'].blank?
+  end
 
   devise_modules = [
     :database_authenticatable, :registerable,
@@ -8,14 +9,14 @@ class User < ApplicationRecord
     :lockable, :omniauthable
   ]
 
-  devise_modules << :confirmable if ENV['APP_EMAIL_CONFIRMATION'].present?
+  unless skip_email_confirmation?
+    devise_modules << :confirmable
+  end
 
   devise *devise_modules, omniauth_providers: [:google_oauth2]
 
-  # TODO: move create_sample_project in the controller
-  # so we don't create it in Rspec for no need
-  after_create :create_personal_project,
-    :create_sample_project
+  after_create :create_personal_project
+  after_create :create_sample_project, unless: -> { Rails.env.test? }
 
   has_many :projects, dependent: :destroy
   has_many :tasks, dependent: :destroy
@@ -45,10 +46,14 @@ class User < ApplicationRecord
         # TODO: Decide if we want to prevent existing user link their
         # google account to local one. Maybe give them choice
         # raise 'User with such email already exists'
-        user.update(uid: uid, provider: provider, oauth_linked_at: Time.now)
+        user.update(uid: uid,
+                    provider: provider,
+                    avatar_url: auth.info&.image,
+                    oauth_linked_at: Time.now)
       end
     else
       user = User.new(provider: provider, uid: uid, email: email, created_from_oauth: true)
+      user.avatar_url = auth.info&.image
       user.password = Devise.friendly_token[0,20]
       user.skip_confirmation! if Devise.mappings[:user].confirmable?
       user.save
