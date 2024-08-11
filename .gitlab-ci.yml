@@ -9,10 +9,6 @@ variables:
   POSTGRES_PASSWORD: mypassword
   DATABASE_URL: postgres://myuser:mypassword@postgres:5432/$POSTGRES_DB
 
-
-include:
-  - template: Jobs/Deploy.gitlab-ci.yml
-
 # Cache gems in between builds
 cache:
   paths:
@@ -21,7 +17,6 @@ cache:
 stages:
   - build
   - test
-  - deploy
 
 build:
   only:
