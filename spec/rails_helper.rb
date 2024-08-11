@@ -95,6 +95,7 @@ RSpec.configure do |config|
 
   # Configure Capybara
   #Capybara.default_driver = :selenium_chrome # Or :selenium_chrome_headless
+  Capybara.javascript_driver = :selenium_chrome_headless # Or :selenium_chrome_headless
 
   Shoulda::Matchers.configure do |config|
     config.integrate do |with|
