@@ -1,19 +1,30 @@
 <div class="mt-2 sm:mx-auto sm:w-full sm:max-w-md flex-grow">
-  <div class="flex justify-between items-center mb-4 pb-4 border-b">
-    <h1 class="font-bold text-2xl">Project settings</h1>
-  </div>
+  <section class="mt-10">
+    <h2 class="section-title">Project settings</h2>
 
-  <%= render "form", project: @project %>
+    <%= form_with(model: @project) do |form| %>
+      <%= render "shared/errors", resource: @project %>
+
+      <div>
+        <%= form.text_field :name, required: true, class: "base-input w-full" %>
+      </div>
+
+      <div class="mt-5">
+        <%= form.submit class: "btn-primary border border-indigo-900" %>
+      </div>
+    <% end %>
+  </section>
 
   <section class="mt-10">
     <h2 class="section-title">Import and Export</h2>
 
-    <%= button_to "Export Tasks", project_export_path(@project, format: :json), method: :post, class: "btn-gray inline-block", form: { 'data-turbo': 'false', class: 'inline-block' } %>
-    <%= link_to "Import Tasks", new_project_import_path(@project), class: "btn-gray inline-block ml-2" %>
+    <%= button_to "Export Tasks", project_export_path(@project, format: :json), method: :post, class: "btn-gray inline-block border", form: { 'data-turbo': 'false', class: 'inline-block' } %>
+    <%= link_to "Import Tasks", new_project_import_path(@project), class: "btn-gray inline-block ml-2 border" %>
   </section>
 
-  <div class="mt-20 rounded-md p-4 bg-red-50 border-red-700 border">
-    <span class="block text-sm text-red-900 mb-5">This will completely remove your project. <br/>All data will be lost.</span>
-    <%= button_to "Destroy this project", @project, method: :delete, data: { turbo_confirm: 'Remove the project? Are you sure?' }, class: "btn-remove" %>
-  </div>
+  <section class="mt-10">
+    <h2 class="section-title">Delete this project</h2>
+    <span class="block text-sm text-gray-700 mb-5">Deleting this project will permanently erase all data.<br/> Please consider exporting tasks before proceeding.</span>
+    <%= button_to "Delete this project", @project, method: :delete, data: { turbo_confirm: 'Remove the project? Are you sure?' }, class: "btn-remove border" %>
+  </section>
 </div>
