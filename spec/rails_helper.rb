@@ -95,6 +95,14 @@ RSpec.configure do |config|
 
   # Configure Capybara
   #Capybara.default_driver = :selenium_chrome # Or :selenium_chrome_headless
+
+  Capybara.register_driver :selenium_chrome_headless do |app|
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--headless')
+
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+  end
+
   Capybara.javascript_driver = :selenium_chrome_headless # Or :selenium_chrome_headless
 
   Shoulda::Matchers.configure do |config|
