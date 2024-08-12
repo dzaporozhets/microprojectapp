@@ -2,6 +2,8 @@
 
 apt-get update -qq -y && \
     apt-get install -y \
+        unzip \
+        curl \
         libasound2 \
         libatk-bridge2.0-0 \
         libgtk-4-1 \
