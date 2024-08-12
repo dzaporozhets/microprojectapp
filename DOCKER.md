@@ -7,10 +7,32 @@ You can build and run the app with Docker. App will be running on port `3000` by
 The repository contains the `Dockerfile`. Database is not included there.
 So make sure to pass a `DATABASE_URL` to the container.
 
-You can find build docker images at the following address:
+You can build image yourself or use our container registry with build images:
 
 ```
 docker run registry.gitlab.com/dzaporozhets/microprojectapp:main
+```
+
+The run the app.
+
+```
+# Running in production mode 
+# 
+# 1. DATABASE_URL is required. 
+# 2. SECRET_KEY_BASE is required. 
+# 3. HTTPS web server is required 
+# 4. Volume (optional) for file uploads
+#
+docker run -p 3000:3000 \
+  -e DATABASE_URL=REPLACE_WITH_YOUR_DATABASE_URL_HERE \
+  -e SECRET_KEY_BASE=REPLACE_WITH_YOUR_SECRET_HERE \
+  registry.gitlab.com/dzaporozhets/microprojectapp:main
+
+# Example running locally (still requires nginx in front to handle https)
+docker run -p 3000:3000 \
+  -e DATABASE_URL=postgres://username@host.docker.internal:5432/mydatabase \
+  -e SECRET_KEY_BASE=$(docker run --rm registry.gitlab.com/dzaporozhets/microprojectapp:main bin/rails secret) \
+  registry.gitlab.com/dzaporozhets/microprojectapp:main
 ```
 
 ## Docker compose
