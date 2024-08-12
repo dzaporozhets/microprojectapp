@@ -27,4 +27,12 @@ module TasksHelper
       project_tasks_path(@project)
     end
   end
+
+  def task_star_icon(task)
+    return unless task.star
+
+    content_tag :div, class: 'inline-block text-yellow-400 mr-2' do
+      render 'project/tasks/star', task: task
+    end
+  end
 end

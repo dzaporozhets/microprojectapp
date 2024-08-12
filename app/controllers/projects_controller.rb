@@ -24,7 +24,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1 or /projects/1.json
   def show
-    @tasks_todo = @project.tasks.todo.order(created_at: :desc)
+    @tasks_todo = @project.tasks.todo.basic_order
     @tasks_done = @project.tasks.done.order(updated_at: :desc).limit(50)
   end
 
