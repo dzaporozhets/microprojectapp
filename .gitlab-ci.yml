@@ -38,6 +38,9 @@ rspec:
     RAILS_ENV: test
   before_script:
     - ruby -v
+    - apt-get update -qq
+    - apt-get install -y wget curl unzip
+    - sh chrome_install.sh
     - bundle config set --local deployment true
     - bundle install -j $(nproc)
   script:

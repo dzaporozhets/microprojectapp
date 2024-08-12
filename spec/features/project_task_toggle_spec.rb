@@ -9,29 +9,27 @@ RSpec.feature 'Project::Task Toggle', type: :feature do
     sign_in user
   end
 
-  # TODO: make it work in CI
-  #scenario 'marks a task as done', js: true do
-    #visit project_path(project)
-    #click_link task.name
+  scenario 'marks a task as done', js: true do
+    visit project_path(project)
+    click_link task.name
 
-    #find('input[name="task[done]"]').click
+    find('input[name="task[done]"]').click
 
-    #expect(page).to have_content('Completed')
-    #expect(task.reload.done).to be(true)
-  #end
+    expect(page).to have_content('Completed')
+    expect(task.reload.done).to be(true)
+  end
 
-  # TODO: make it work in CI
-  #scenario 'marks a task as not done', js: true do
-    #task.update(done: true)
+  scenario 'marks a task as not done', js: true do
+    task.update(done: true)
 
-    #visit project_path(project)
-    #click_link task.name
+    visit project_path(project)
+    click_link task.name
 
-    #find('input[name="task[done]"]').click
+    find('input[name="task[done]"]').click
 
-    #expect(page).not_to have_content('Completed')
-    #expect(task.reload.done).to be(false)
-  #end
+    expect(page).not_to have_content('Completed')
+    expect(task.reload.done).to be(false)
+  end
 
   scenario 'marks a task as starred' do
     visit project_path(project)
