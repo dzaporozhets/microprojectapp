@@ -5,28 +5,28 @@
 
 <%= render "shared/flash" %>
 
-<div class="mt-6 border-t border-gray-100">
+<section class="mt-10">
+  <h2 class="section-title">Privacy and Security</h2>
   <%= form_for(@user, url: users_settings_path, html: { method: :put }) do |f| %>
     <%= render "shared/errors", resource: @user %>
 
-    <dl class="divide-y divide-gray-100">
-      <div class="py-6">
+    <dl class="space-y-4">
+      <div class="">
         <%= f.check_box :allow_invites %>
         <%= f.label :allow_invites, "Allow other users to add you to projects", class: 'ml-2 text-sm' %>
       </div>
 
       <%- if @user.oauth_user? %>
-        <div class="py-6">
+        <div class="">
           <%= f.check_box :disable_password %>
           <%= f.label :disable_password, "Disable Password Authentication (only login with Google)", class: 'ml-2 text-sm' %>
         </div>
       <% end %>
 
-      <div class="py-6">
-        <div class="mt-2">
-          <%= f.submit "Save settings", class: "justify-center btn-primary" %>
-        </div>
-      </div>
     </dl>
+
+    <div class="mt-5">
+      <%= f.submit "Save Settings", class: "justify-center btn-primary" %>
+    </div>
   <% end %>
-</div>
+</section>
