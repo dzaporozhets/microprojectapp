@@ -6,24 +6,17 @@ echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | tee
 apt-get update -qq
 apt-get install -y google-chrome-stable
 
-# Get the installed Chrome version
-CHROME_VERSION=$(google-chrome --version)
-# | grep -oP '\d+\.\d+\.\d+' | head -n1)
-echo "Chrome version installed: $CHROME_VERSION"
+# Hardcoded Chrome version
+CHROME_VERSION="115.0.5790.102"
+echo "Using hardcoded Chrome version: $CHROME_VERSION"
 
-# Get the major version of Chrome to fetch the correct Chromedriver
-CHROME_MAJOR_VERSION=$(echo $CHROME_VERSION | cut -d '.' -f 1)
-
-# Fetch the correct Chromedriver version based on Chrome major version
-CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_MAJOR_VERSION)
-
-if [ -z "$CHROMEDRIVER_VERSION" ]; then
-    echo "No matching Chromedriver version found for Chrome $CHROME_VERSION"
-    exit 1
-fi
+# Hardcoded Chromedriver version
+CHROMEDRIVER_VERSION="115.0.5790.102"
+echo "Using hardcoded Chromedriver version: $CHROMEDRIVER_VERSION"
 
 echo "Installing chromedriver https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
 wget https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
 unzip chromedriver_linux64.zip -d /usr/local/bin/
 chmod +x /usr/local/bin/chromedriver
 rm chromedriver_linux64.zip
+
