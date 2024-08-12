@@ -57,6 +57,7 @@ group :development, :test do
   gem 'faker'
   gem 'climate_control'
   gem 'dotenv'
+  gem 'brakeman'
 end
 
 group :development do
