@@ -1,5 +1,5 @@
 class Project::TasksController < Project::BaseController
-  before_action :set_task, only: %i[ show edit update destroy details expand toggle_done ]
+  before_action :set_task, only: %i[ show edit update destroy details expand toggle_done toggle_star]
 
   layout :set_layout
 
@@ -100,13 +100,30 @@ class Project::TasksController < Project::BaseController
     end
   end
 
+  def toggle_star
+    @task.star = !@task.star
+
+    if @task.save
+      respond_to do |format|
+        format.turbo_stream { tasks }
+        format.html { redirect_to project_url(@project), notice: "Task star status was successfully updated." }
+        format.json { render :show, status: :ok, location: @task }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to project_url(@project), alert: 'Failed to update task star status.' }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def tasks
     if params[:status] == 'done'
       @tasks_todo = @project.tasks.none
     else
-      @tasks_todo = @project.tasks.todo.order(created_at: :desc)
+      @tasks_todo = @project.tasks.todo.basic_order
     end
 
     @tasks_done = @project.tasks.done.order(updated_at: :desc).page(params[:page]).per(100)

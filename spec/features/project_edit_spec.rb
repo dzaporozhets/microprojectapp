@@ -11,7 +11,7 @@ RSpec.feature "Project", type: :feature do
   scenario "User updates a project" do
     visit edit_project_path(project)
 
-    fill_in "Name", with: "Updated Project Name"
+    fill_in "project_name", with: "Updated Project Name"
     click_button "Update Project"
 
     expect(page).to have_text("Updated Project Name")
@@ -21,7 +21,7 @@ RSpec.feature "Project", type: :feature do
   scenario "User deletes a project from the edit page" do
     visit edit_project_path(project)
 
-    expect { click_button "Destroy this project" }.to change(Project, :count).by(-1)
+    expect { click_button "Delete this project" }.to change(Project, :count).by(-1)
     expect(page).to have_current_path(projects_path)
   end
 

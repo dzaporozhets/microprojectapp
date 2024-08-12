@@ -12,6 +12,7 @@ Rails.application.routes.draw do
         get :details
         get :expand
         patch :toggle_done
+        patch :toggle_star
       end
 
       resources :comments, controller: 'project/comments', only: [:create, :destroy]
