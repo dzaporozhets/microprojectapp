@@ -7,16 +7,17 @@ apt-get update -qq
 apt-get install -y google-chrome-stable
 
 # Hardcoded Chrome version
-CHROME_VERSION="115.0.5790.102"
+CHROME_VERSION="114.0.5735.198"
 echo "Using hardcoded Chrome version: $CHROME_VERSION"
 
 # Hardcoded Chromedriver version
-CHROMEDRIVER_VERSION="115.0.5790.102"
+CHROMEDRIVER_VERSION="114.0.5735.90"
 echo "Using hardcoded Chromedriver version: $CHROMEDRIVER_VERSION"
 
-echo "Installing chromedriver https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+echo "Installing chromedriver from https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
 wget https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
 unzip chromedriver_linux64.zip -d /usr/local/bin/
 chmod +x /usr/local/bin/chromedriver
 rm chromedriver_linux64.zip
 
+echo "Chrome and Chromedriver setup complete."
