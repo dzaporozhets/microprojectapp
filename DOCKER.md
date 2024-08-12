@@ -24,13 +24,25 @@ docker run registry.gitlab.com/dzaporozhets/microprojectapp:main
 Docker compose file includes Rails and Postgres database.
 Its enough to get application running and function.
 
-#### Development
+### Development
 
 ```
+# Run application
 docker-compose -f docker-compose.dev.yml up
+
+# Create database
+docker-compose -f docker-compose.dev.yml run web bundle exec rails db:setup
+
+# Compile assets (like css). We don't precompile assets in Dockerfile.dev
+docker-compose -f docker-compose.dev.yml run web bundle exec rails assets:precompile
 ```
 
-#### Production
+### Production
+
+Requirements:
+
+1. Rails production environment requires https by default
+1. `SECRET_KEY_BASE` containing your secret key. You can generate one with `bin/rails secret`.
 
 ```
 # Generate ssl cert
@@ -52,11 +64,3 @@ Once you have the app running, you need to run database migrations:
 ```
 SECRET_KEY_BASE=your_secret_key_base  docker-compose -f docker-compose.prod.yml run web bundle exec rails db:setup
 ```
-
-## Production env
-
-Requirements:
-
-1. Rails production environment requires https by default
-1. `SECRET_KEY_BASE` containing your secret key. You can generate one with `bin/rails secret`.
-
