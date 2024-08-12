@@ -7,7 +7,8 @@ apt-get update -qq
 apt-get install -y google-chrome-stable
 
 # Get the installed Chrome version
-CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -n1)
+CHROME_VERSION=$(google-chrome --version)
+# | grep -oP '\d+\.\d+\.\d+' | head -n1)
 echo "Chrome version installed: $CHROME_VERSION"
 
 # Get the major version of Chrome to fetch the correct Chromedriver
