@@ -21,6 +21,17 @@ services:
       RAILS_ENV: production
       SECRET_KEY_BASE: ${SECRET_KEY_BASE} # Pass this securely via environment variables
       DATABASE_URL: postgres://postgres:password@db:5432/myapp_production
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/nginx/certs
+      - uploads_data:/myapp/public/uploads
+    depends_on:
+      - web
 volumes:
   postgres_data:
   uploads_data:

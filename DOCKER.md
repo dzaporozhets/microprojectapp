@@ -33,15 +33,24 @@ docker-compose -f docker-compose.dev.yml up
 #### Production
 
 ```
-docker-compose -f docker-compose.prod.yml up
+# Generate ssl cert
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./certs/server.key -out ./certs/server.crt -subj "/CN=localhost"
+
+# Run application
+SECRET_KEY_BASE=your_secret_key_base docker-compose -f docker-compose.prod.yml up
+
+# Create database
+SECRET_KEY_BASE=your_secret_key_base  docker-compose -f docker-compose.prod.yml run web bundle exec rails db:setup
 ```
+
+Open app at https://localhost
 
 #### Migrations
 
 Once you have the app running, you need to run database migrations:
 
 ```
-docker-compose run web bundle exec rake db:migrate
+SECRET_KEY_BASE=your_secret_key_base  docker-compose -f docker-compose.prod.yml run web bundle exec rails db:setup
 ```
 
 ## Production env
