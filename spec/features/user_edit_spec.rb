@@ -23,7 +23,7 @@ RSpec.feature "User Edit", type: :feature do
 
       fill_in "Email", with: new_email
       fill_in "Current password", with: user.password
-      click_button "Update"
+      click_button "Save Changes"
 
       expect(user.reload.email).to eq(new_email)
       expect(page).to have_content("Your account has been updated successfully.")

@@ -15,7 +15,7 @@ RSpec.feature "User Settings", type: :feature do
 
   scenario "User updates the settings" do
     check "Allow other users to add you to projects"
-    click_button "Save settings"
+    click_button "Save Settings"
 
     expect(page).to have_content("Saved")
     expect(user.reload.allow_invites).to be_truthy
@@ -24,7 +24,7 @@ RSpec.feature "User Settings", type: :feature do
   scenario "User sees validation errors" do
     allow_any_instance_of(User).to receive(:update).and_return(false)
 
-    click_button "Save settings"
+    click_button "Save Settings"
 
     expect(page).to have_content("An error occurred")
   end
