@@ -1,43 +1,19 @@
 #!/bin/bash
 
-# Install necessary dependencies
-apt-get update -qq
-apt-get install -y \
-  libnss3 \
-  libgconf-2-4 \
-  libxi6 \
-  libxcursor1 \
-  libxcomposite1 \
-  libasound2 \
-  libxdamage1 \
-  libxtst6 \
-  libglib2.0-0 \
-  libxrandr2 \
-  libxss1 \
-  libx11-xcb1 \
-  wget \
-  curl \
-  unzip
-
-# Hardcoded Chrome version
-CHROME_VERSION="114.0.5735.198"
-echo "Using hardcoded Chrome version: $CHROME_VERSION"
-
-# Download and install the specific version of Google Chrome
-wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}-1_amd64.deb
-dpkg -i google-chrome-stable_${CHROME_VERSION}-1_amd64.deb
-apt-get install -f -y  # Install any dependencies that might be missing
-rm google-chrome-stable_${CHROME_VERSION}-1_amd64.deb
-
-# Hardcoded Chromedriver version
-CHROMEDRIVER_VERSION="114.0.5735.90"
-echo "Using hardcoded Chromedriver version: $CHROMEDRIVER_VERSION"
-
-echo "Installing chromedriver from https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
-wget https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
-unzip chromedriver_linux64.zip -d /usr/local/bin/
-chmod +x /usr/local/bin/chromedriver
-rm chromedriver_linux64.zip
-
-echo "Chrome and Chromedriver setup complete."
-
+apt-get update -qq -y && \
+    apt-get install -y \
+        libasound2 \
+        libatk-bridge2.0-0 \
+        libgtk-4-1 \
+        libnss3 \
+        xdg-utils \
+        wget && \
+    wget -q -O chrome-linux64.zip https://bit.ly/chrome-linux64-121-0-6167-85 && \
+    unzip chrome-linux64.zip && \
+    rm chrome-linux64.zip && \
+    mv chrome-linux64 /opt/chrome/ && \
+    ln -s /opt/chrome/chrome /usr/local/bin/ && \
+    wget -q -O chromedriver-linux64.zip https://bit.ly/chromedriver-linux64-121-0-6167-85 && \
+    unzip -j chromedriver-linux64.zip chromedriver-linux64/chromedriver && \
+    rm chromedriver-linux64.zip && \
+    mv chromedriver /usr/local/bin/
