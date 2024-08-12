@@ -4,6 +4,9 @@ You can build and run the app with Docker. App will be running on port `3000` by
 
 ## Dockerfile
 
+- Dockerfile - for production env
+- Dockerfile.dev - for development env
+
 The repository contains the `Dockerfile`. Database is not included there.
 So make sure to pass a `DATABASE_URL` to the container.
 
@@ -15,12 +18,25 @@ docker run registry.gitlab.com/dzaporozhets/microprojectapp:main
 
 ## Docker compose
 
-The repository contains `docker-compose.yml`. It includes Rails and Postgres database.
+- docker-compose.dev.yml
+- docker-compose.prod.yml
+
+Docker compose file includes Rails and Postgres database.
 Its enough to get application running and function.
 
+#### Development
+
 ```
-docker-compose up --build
+docker-compose -f docker-compose.dev.yml up
 ```
+
+#### Production
+
+```
+docker-compose -f docker-compose.prod.yml up
+```
+
+#### Migrations
 
 Once you have the app running, you need to run database migrations:
 
@@ -30,9 +46,8 @@ docker-compose run web bundle exec rake db:migrate
 
 ## Production env
 
-If you plan to use it for production then make sure to change next things in `docker-compose.yml`:
+Requirements:
 
-1. Change `RAILS_ENV` to `production`
-2. Replace `SECRET_KEY_BASE_DUMMY` with `SECRET_KEY_BASE` containing your secret key. You can generate one with `bin/rails secret`.
-3. Rails production environment requires https by default
+1. Rails production environment requires https by default
+1. `SECRET_KEY_BASE` containing your secret key. You can generate one with `bin/rails secret`.
 
