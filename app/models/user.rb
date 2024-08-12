@@ -99,13 +99,13 @@ class User < ApplicationRecord
     Devise.mappings[:user].omniauthable? && ENV['GOOGLE_CLIENT_ID'].present?
   end
 
-  def oauth_enabled?
+  def oauth_user?
     self.uid.present? && self.provider.present?
   end
 
   def valid_password?(password)
     # Allow user to disable login with password when login with OAuth was used
-    return false if disable_password && oauth_enabled? && oauth_config?
+    return false if disable_password && oauth_user? && oauth_config?
 
     super
   end

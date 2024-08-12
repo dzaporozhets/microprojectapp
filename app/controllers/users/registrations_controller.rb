@@ -24,7 +24,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     # Don't allow email and password change if user log in with google
-    if resource.oauth_enabled?
+    if resource.oauth_user?
       params[:user].delete(:email)
     end
 

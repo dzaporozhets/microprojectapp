@@ -197,7 +197,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe '#oauth_enabled?' do
+    describe '#oauth_user?' do
       let(:user) { create(:user, uid: uid, provider: provider) }
       let(:uid) { nil }
       let(:provider) { nil }
@@ -207,19 +207,19 @@ RSpec.describe User, type: :model do
         let(:provider) { 'google' }
 
         it 'returns true' do
-          expect(user.oauth_enabled?).to be true
+          expect(user.oauth_user?).to be true
         end
       end
 
       context 'when uid is nil' do
         it 'returns false' do
-          expect(user.oauth_enabled?).to be false
+          expect(user.oauth_user?).to be false
         end
       end
 
       context 'when provider is nil' do
         it 'returns false' do
-          expect(user.oauth_enabled?).to be false
+          expect(user.oauth_user?).to be false
         end
       end
     end
