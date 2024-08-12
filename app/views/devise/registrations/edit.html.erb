@@ -15,7 +15,7 @@
           <%= f.label :email, class: 'font-semibold' %>
         </dt>
         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-          <% if resource.oauth_enabled? %>
+          <% if resource.oauth_user? %>
             <%= f.email_field :email, disabled: true, class: 'base-input w-full bg-gray-100 text-gray-500' %>
           <% else %>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'base-input w-full' %>

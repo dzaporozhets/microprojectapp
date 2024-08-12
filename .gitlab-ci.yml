@@ -38,6 +38,7 @@ rspec:
     RAILS_ENV: test
   before_script:
     - ruby -v
+    - sh chrome_install.sh
     - bundle config set --local deployment true
     - bundle install -j $(nproc)
   script:
@@ -46,3 +47,13 @@ rspec:
     - bundle exec rails assets:precompile
     - bundle exec rspec spec
   coverage: '/\((\d+\.\d+)%\) covered/'
+
+brakeman:
+  stage: test
+  variables:
+    RAILS_ENV: test
+  before_script:
+    - bundle config set --local deployment true
+    - bundle install -j $(nproc)
+  script:
+    - bundle exec brakeman -z -q

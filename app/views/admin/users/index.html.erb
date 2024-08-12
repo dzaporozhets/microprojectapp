@@ -1,37 +1,37 @@
 <div class="mx-auto max-w-7xl flex flex-col sm:flex-row mb-5">
-  <%= link_to 'Application', admin_path, class: "btn-tab" %>
-  <%= link_to 'Users', admin_users_path, class: "btn-tab-active" %>
+  <%= link_to 'Application', admin_path, class: "btn-tab dark:hover:text-gray-100" %>
+  <%= link_to 'Users', admin_users_path, class: "btn-tab-active dark:bg-indigo-900 dark:text-indigo-100" %>
 </div>
 
 <div class="my-5">
-  <table class="min-w-full bg-white border text-sm">
+  <table class="min-w-full bg-white dark:bg-black border dark:border-gray-700 text-sm">
     <thead>
       <tr>
-        <th class="px-4 py-2 border">ID</th>
-        <th class="px-4 py-2 border">Email</th>
-        <th class="px-4 py-2 border hidden sm:table-cell">Created At</th>
-        <th class="px-4 py-2 border hidden sm:table-cell">Updated at</th>
+        <th class="px-4 py-2 border dark:border-gray-700 dark:text-white">ID</th>
+        <th class="px-4 py-2 border dark:border-gray-700 dark:text-white">Email</th>
+        <th class="px-4 py-2 border dark:border-gray-700 hidden sm:table-cell dark:text-white">Created At</th>
+        <th class="px-4 py-2 border dark:border-gray-700 hidden sm:table-cell dark:text-white">Updated at</th>
       </tr>
     </thead>
     <tbody>
       <% @users.each do |user| %>
-        <tr class="odd:bg-gray-100 even:bg-white">
-          <td class="px-4 py-2 border"><%= link_to user.id, admin_user_path(user), class: 'cursor-pointer underline' %></td>
-          <td class="px-4 py-2 border">
+        <tr class="odd:bg-gray-100 dark:odd:bg-gray-900 even:bg-white dark:even:bg-black">
+          <td class="px-4 py-2 border dark:border-gray-700 dark:text-white"><%= link_to user.id, admin_user_path(user), class: 'cursor-pointer underline' %></td>
+          <td class="px-4 py-2 border dark:border-gray-700 dark:text-white">
             <%= user.email %>
             <% if user.admin %>
-              <span class="font-bold">
+              <span class="font-bold dark:text-white">
                 (admin)
               </span>
             <% end %>
             <% if @confirmable && user.confirmed_at %>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block ml-1">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block ml-1 dark:text-white">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
               </svg>
             <% end %>
           </td>
-          <td class="px-4 py-2 border hidden sm:table-cell"><%= user.created_at.to_formatted_s(:short) %></td>
-          <td class="px-4 py-2 border hidden sm:table-cell"><%= user.updated_at.to_formatted_s(:short) %></td>
+          <td class="px-4 py-2 border dark:border-gray-700 hidden sm:table-cell dark:text-white"><%= user.created_at.to_formatted_s(:short) %></td>
+          <td class="px-4 py-2 border dark:border-gray-700 hidden sm:table-cell dark:text-white"><%= user.updated_at.to_formatted_s(:short) %></td>
         </tr>
       <% end %>
     </tbody>
