@@ -1,19 +1,5 @@
 image: ruby:3.1.6
 
-services:
-  - postgres:latest
-
-variables:
-  POSTGRES_DB: microproject
-  POSTGRES_USER: myuser
-  POSTGRES_PASSWORD: mypassword
-  DATABASE_URL: postgres://myuser:mypassword@postgres:5432/$POSTGRES_DB
-
-# Cache gems in between builds
-cache:
-  paths:
-    - vendor/ruby
-
 stages:
   - build
   - test
@@ -33,6 +19,17 @@ build:
     - docker push $IMAGE_TAG
 
 rspec:
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-bundle
+    paths:
+      - vendor/bundle
+  services:
+    - postgres:latest
+  variables:
+    POSTGRES_DB: microproject
+    POSTGRES_USER: myuser
+    POSTGRES_PASSWORD: mypassword
+    DATABASE_URL: postgres://myuser:mypassword@postgres:5432/$POSTGRES_DB
   stage: test
   variables:
     RAILS_ENV: test
@@ -40,7 +37,8 @@ rspec:
     - ruby -v
     - sh chrome_install.sh
     - bundle config set --local deployment true
-    - bundle install -j $(nproc)
+    - bundle config set --local path 'vendor/bundle'
+    - bundle install -j $(nproc) --clean
   script:
     - bundle exec rails db:migrate
     - bundle exec rails db:seed
@@ -50,10 +48,15 @@ rspec:
 
 brakeman:
   stage: test
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}-bundle
+    paths:
+      - vendor/bundle
   variables:
     RAILS_ENV: test
   before_script:
     - bundle config set --local deployment true
-    - bundle install -j $(nproc)
+    - bundle config set --local path 'vendor/bundle'
+    - bundle install -j $(nproc) --clean
   script:
     - bundle exec brakeman -z -q
