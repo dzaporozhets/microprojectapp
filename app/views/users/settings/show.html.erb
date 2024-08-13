@@ -5,10 +5,11 @@
 
 <%= render "shared/flash" %>
 
-<section class="mt-10">
-  <h2 class="section-title">Privacy and Security</h2>
-  <%= form_for(@user, url: users_settings_path, html: { method: :put }) do |f| %>
-    <%= render "shared/errors", resource: @user %>
+<%= form_for(@user, url: users_settings_path, html: { method: :put }, data: { turbo: false }) do |f| %>
+  <%= render "shared/errors", resource: @user %>
+
+  <section class="mt-10">
+    <h2 class="section-title">Privacy and Security</h2>
 
     <dl class="space-y-4">
       <div class="">
@@ -24,30 +25,30 @@
       <% end %>
 
     </dl>
+  </section>
 
-    <div class="mt-5">
-      <%= f.submit "Save Settings", class: "justify-center btn-primary" %>
+  <section class="mt-10">
+    <h2 class="section-title">Appearance</h2>
+    <p class="mt-1 text-sm leading-6 text-gray-600">How do you want app to handle dark mode</p>
+    <div class="mt-6 space-y-6 sm:flex sm:items-center sm:space-x-10 sm:space-y-0 mb-2">
+      <div class="flex items-center">
+        <%= f.radio_button :dark_mode, :on, class: "h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" %>
+        <%= f.label :dark_mode_on, "Light", class: "ml-3 block text-sm font-medium leading-6 text-gray-900" %><br>
+      </div>
+
+      <div class="flex items-center">
+        <%= f.radio_button :dark_mode, :off, class: "h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" %>
+        <%= f.label :dark_mode_off, "Dark", class: "ml-3 block text-sm font-medium leading-6 text-gray-900"  %><br>
+      </div>
+
+      <div class="flex items-center">
+        <%= f.radio_button :dark_mode, :auto, class: "h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" %>
+        <%= f.label :dark_mode_auto, "Auto", class: "ml-3 block text-sm font-medium leading-6 text-gray-900"  %>
+      </div>
     </div>
-  <% end %>
-</section>
+  </section>
 
-<section class="mt-10">
-  <h2 class="section-title">Appearance</h2>
-  <%= form_for(@user, url: users_settings_path, html: { method: :put }, data: { turbo: false }) do |f| %>
-    <%= render "shared/errors", resource: @user %>
-    <div class="form-group">
-      <%= f.radio_button :dark_mode, :on %>
-      <%= f.label :dark_mode_on, "Light" %><br>
-
-      <%= f.radio_button :dark_mode, :off %>
-      <%= f.label :dark_mode_off, "Dark" %><br>
-
-      <%= f.radio_button :dark_mode, :auto %>
-      <%= f.label :dark_mode_auto, "Auto" %>
-    </div>
-
-    <div class="mt-5">
-      <%= f.submit "Save Settings", class: "justify-center btn-primary" %>
-    </div>
-  <% end %>
-</section>
+  <div class="mt-5">
+    <%= f.submit "Save Settings", class: "justify-center btn-primary" %>
+  </div>
+<% end %>
