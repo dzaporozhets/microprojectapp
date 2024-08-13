@@ -12,13 +12,13 @@
 
     <dl class="space-y-4">
       <div class="">
-        <%= f.check_box :allow_invites %>
+        <%= f.check_box :allow_invites, class: 'checkbox' %>
         <%= f.label :allow_invites, "Allow other users to add you to projects", class: 'ml-2 text-sm' %>
       </div>
 
       <%- if @user.oauth_user? %>
         <div class="">
-          <%= f.check_box :disable_password %>
+          <%= f.check_box :disable_password, class: 'checkbox' %>
           <%= f.label :disable_password, "Disable Password Authentication (only login with Google)", class: 'ml-2 text-sm' %>
         </div>
       <% end %>
