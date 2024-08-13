@@ -30,3 +30,24 @@
     </div>
   <% end %>
 </section>
+
+<section class="mt-10">
+  <h2 class="section-title">Appearance</h2>
+  <%= form_for(@user, url: users_settings_path, html: { method: :put }, data: { turbo: false }) do |f| %>
+    <%= render "shared/errors", resource: @user %>
+    <div class="form-group">
+      <%= f.radio_button :dark_mode, :on %>
+      <%= f.label :dark_mode_on, "Light" %><br>
+
+      <%= f.radio_button :dark_mode, :off %>
+      <%= f.label :dark_mode_off, "Dark" %><br>
+
+      <%= f.radio_button :dark_mode, :auto %>
+      <%= f.label :dark_mode_auto, "Auto" %>
+    </div>
+
+    <div class="mt-5">
+      <%= f.submit "Save Settings", class: "justify-center btn-primary" %>
+    </div>
+  <% end %>
+</section>
