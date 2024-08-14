@@ -18,7 +18,7 @@ class Users::SettingsController < ApplicationController
   private
 
   def settings_params
-    params.require(:user).permit(:allow_invites, :disable_password)
+    params.require(:user).permit(:allow_invites, :disable_password, :dark_mode)
   end
 end
 

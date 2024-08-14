@@ -46,4 +46,17 @@ module ApplicationHelper
       end.join.html_safe
     end
   end
+
+  def dark_mode_class
+    return unless current_user
+
+    case current_user.dark_mode
+    when 'on'
+      'light'
+    when 'off'
+      'dark'
+    else
+      ''
+    end
+  end
 end

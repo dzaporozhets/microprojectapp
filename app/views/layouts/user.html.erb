@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="<%= dark_mode_class %>">
   <head>
     <title>MicroProject.app</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -40,8 +40,8 @@
       </div>
     </nav>
 
-    <main>
-      <div class="mx-auto w-full max-w-lg px-4">
+    <main class="container mx-auto max-w-lg p-4 flex">
+      <div class="w-full">
         <%= yield %>
       </div>
     </main>

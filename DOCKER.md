@@ -4,35 +4,80 @@ You can build and run the app with Docker. App will be running on port `3000` by
 
 ## Dockerfile
 
-The repository contains the `Dockerfile`. Database is not included there.
-So make sure to pass a `DATABASE_URL` to the container.
+- Dockerfile - for production env
+- Dockerfile.dev - for development env
 
-You can find build docker images at the following address:
+Database is not included here. So make sure to pass a `DATABASE_URL` to the container.
+
+You can build image yourself or use our container registry with build images:
 
 ```
 docker run registry.gitlab.com/dzaporozhets/microprojectapp:main
 ```
 
+The run the app.
+
+```
+# Running in production mode
+#
+# 1. DATABASE_URL is required.
+# 2. SECRET_KEY_BASE is required.
+# 3. HTTPS web server is required
+# 4. Volume (optional) for file uploads
+#
+docker run -p 3000:3000 \
+  -e DATABASE_URL=REPLACE_WITH_YOUR_DATABASE_URL_HERE \
+  -e SECRET_KEY_BASE=REPLACE_WITH_YOUR_SECRET_HERE \
+  registry.gitlab.com/dzaporozhets/microprojectapp:main
+```
+
 ## Docker compose
 
-The repository contains `docker-compose.yml`. It includes Rails and Postgres database.
+- docker-compose.dev.yml
+- docker-compose.prod.yml
+
+### Development env
+
+Docker compose file includes Rails and Postgres database.
 Its enough to get application running and function.
 
 ```
-docker-compose up --build
+# Run application
+docker-compose -f docker-compose.dev.yml up
+
+# Create database
+docker-compose -f docker-compose.dev.yml run web bundle exec rails db:setup
+
+# Compile assets (like css). We don't precompile assets in Dockerfile.dev
+docker-compose -f docker-compose.dev.yml run web bundle exec rails assets:precompile
 ```
+
+### Production env
+
+Docker compose file includes Rails, Postgres database and nginx web server.
+
+Requirements:
+
+1. Rails production environment requires https by default. We included nginx in compose file.
+1. `SECRET_KEY_BASE` containing your secret key. You can generate one with `bin/rails secret`.
+
+```
+# Generate ssl cert
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./certs/server.key -out ./certs/server.crt -subj "/CN=localhost"
+
+# Run application
+SECRET_KEY_BASE=your_secret_key_base docker-compose -f docker-compose.prod.yml up
+
+# Create database
+SECRET_KEY_BASE=your_secret_key_base  docker-compose -f docker-compose.prod.yml run web bundle exec rails db:setup
+```
+
+Open app at https://localhost
+
+#### Migrations
 
 Once you have the app running, you need to run database migrations:
 
 ```
-docker-compose run web bundle exec rake db:migrate
+SECRET_KEY_BASE=your_secret_key_base  docker-compose -f docker-compose.prod.yml run web bundle exec rails db:setup
 ```
-
-## Production env
-
-If you plan to use it for production then make sure to change next things in `docker-compose.yml`:
-
-1. Change `RAILS_ENV` to `production`
-2. Replace `SECRET_KEY_BASE_DUMMY` with `SECRET_KEY_BASE` containing your secret key. You can generate one with `bin/rails secret`.
-3. Rails production environment requires https by default
-
