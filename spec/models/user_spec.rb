@@ -260,4 +260,25 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'enums' do
+    it { should define_enum_for(:dark_mode).with_values(off: 0, on: 1, auto: 2) }
+
+    it 'should map dark_mode correctly' do
+      expect(User.dark_modes[:off]).to eq(0)
+      expect(User.dark_modes[:on]).to eq(1)
+      expect(User.dark_modes[:auto]).to eq(2)
+    end
+
+    it 'should be able to switch between dark modes' do
+      user = User.new(dark_mode: :off)
+      expect(user.dark_mode).to eq('off')
+
+      user.dark_mode = :on
+      expect(user.dark_mode).to eq('on')
+
+      user.dark_mode = :auto
+      expect(user.dark_mode).to eq('auto')
+    end
+  end
 end
