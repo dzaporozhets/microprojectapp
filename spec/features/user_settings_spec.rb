@@ -45,7 +45,7 @@ RSpec.feature "User Settings", type: :feature do
     expect(page).to have_selector :css, 'html.light'
   end
 
-  scenario "User chooses light mode" do
+  scenario "User chooses auto mode" do
     choose "Dark"
 
     click_button "Save Settings"
