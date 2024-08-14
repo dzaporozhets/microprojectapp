@@ -4,7 +4,7 @@
     <%= render("shared/errors", resource: task) %>
 
     <div class="mt-5 mb-5 flex w-full">
-      <%= form.text_field :name, class: "base-input flex-grow text-sm", required: true %>
+      <%= form.text_field :name, class: "base-input flex-grow text-sm px-3", required: true, placeholder: "What needs to be done?", autocomplete: "off", inputmode: 'text' %>
       <%= form.submit "Add task", class: "btn-primary inline-block ms-3" %>
       <%= link_to new_project_task_path(project), class: "hidden rounded-md py-2 px-4 bg-gray-100 text-gray-500 cursor-pointer text-sm ms-3", data: { turbo: false } do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
