@@ -30,4 +30,3 @@ RSpec.feature "User Edit", type: :feature do
     end
   end
 end
-

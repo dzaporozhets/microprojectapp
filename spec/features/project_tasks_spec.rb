@@ -86,4 +86,3 @@ RSpec.feature "Project::Tasks", type: :feature do
     expect(page).not_to have_content('New task')
   end
 end
-

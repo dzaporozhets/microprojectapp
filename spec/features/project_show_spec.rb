@@ -23,4 +23,3 @@ RSpec.feature "Project", type: :feature do
     expect(page).to have_text("The page you were looking for doesn't exist.")
   end
 end
-

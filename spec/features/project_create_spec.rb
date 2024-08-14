@@ -18,4 +18,3 @@ RSpec.feature "Project", type: :feature do
     expect(page).to have_current_path(project_path(Project.last))
   end
 end
-

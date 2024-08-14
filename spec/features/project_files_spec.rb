@@ -45,4 +45,3 @@ RSpec.feature "Project::Files", type: :feature do
     expect(page).to have_text('test_file.txt')
   end
 end
-

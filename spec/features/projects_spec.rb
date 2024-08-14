@@ -25,4 +25,3 @@ RSpec.feature "Projects", type: :feature do
     expect(page).to have_content("Old project")
   end
 end
-

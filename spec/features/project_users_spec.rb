@@ -68,4 +68,3 @@ RSpec.feature "Project::Users", type: :feature do
     expect(page).to have_text("User is already added to the project")
   end
 end
-

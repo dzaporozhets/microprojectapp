@@ -28,4 +28,3 @@ RSpec.feature "Task Comments", type: :feature do
     expect(page).to have_content(user.email)
   end
 end
-

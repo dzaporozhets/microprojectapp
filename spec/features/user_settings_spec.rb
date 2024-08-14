@@ -28,5 +28,34 @@ RSpec.feature "User Settings", type: :feature do
 
     expect(page).to have_content("An error occurred")
   end
-end
 
+  scenario "User chooses dark mode" do
+    choose "Dark"
+
+    click_button "Save Settings"
+
+    expect(page).to have_selector :css, 'html.dark'
+  end
+
+  scenario "User chooses light mode" do
+    choose "Light"
+
+    click_button "Save Settings"
+
+    expect(page).to have_selector :css, 'html.light'
+  end
+
+  scenario "User chooses light mode" do
+    choose "Dark"
+
+    click_button "Save Settings"
+
+    expect(page).to have_selector :css, 'html.dark'
+
+    choose "Auto"
+
+    click_button "Save Settings"
+
+    expect(page).to have_selector :css, 'html'
+  end
+end
