@@ -49,4 +49,3 @@ RSpec.feature 'Project::Task Toggle', type: :feature do
     expect(task.reload.star).to be(false)
   end
 end
-

@@ -34,4 +34,3 @@ RSpec.feature "Archive and Unarchive Projects", type: :feature do
     expect(project.reload.archived).to be false
   end
 end
-

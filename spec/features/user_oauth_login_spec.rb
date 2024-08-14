@@ -56,4 +56,3 @@ RSpec.feature "User login with Google", type: :feature do
     expect(page).to have_current_path(new_user_session_path)
   end
 end
-

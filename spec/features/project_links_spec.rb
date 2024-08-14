@@ -57,4 +57,3 @@ RSpec.feature "Project::Links", type: :feature do
     expect(page).to have_link(link.title, href: link.url)
   end
 end
-

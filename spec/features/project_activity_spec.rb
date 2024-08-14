@@ -51,4 +51,3 @@ RSpec.feature "Activity", type: :feature do
     expect(page).to have_content("invited (removed)")
   end
 end
-
