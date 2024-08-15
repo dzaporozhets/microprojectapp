@@ -4,6 +4,7 @@ RSpec.describe Task, type: :model do
   let(:user) { create(:user) }
   let(:project) { create(:project, user: user) }
   let(:task) { create(:task, user: user, project: project) }
+  let(:done_task) { create(:task, user: user, project: project, done: true) }
 
   describe "associations" do
     it { should belong_to(:project) }
@@ -29,19 +30,34 @@ RSpec.describe Task, type: :model do
   end
 
   describe "scopes" do
-    before do
-      @todo_task = create(:task, user: user, project: project, done: false)
-      @done_task = create(:task, user: user, project: project, done: true)
+    describe ".todo" do
+      it "returns tasks that are not done" do
+        task
+        done_task
+
+        expect(Task.todo).to include(task)
+        expect(Task.todo).not_to include(done_task)
+      end
     end
 
-    it "returns tasks that are not done" do
-      expect(Task.todo).to include(@todo_task)
-      expect(Task.todo).not_to include(@done_task)
+    describe ".done" do
+      it "returns tasks that are done" do
+        task
+        done_task
+
+        expect(Task.done).to include(done_task)
+        expect(Task.done).not_to include(task)
+      end
     end
 
-    it "returns tasks that are done" do
-      expect(Task.done).to include(@done_task)
-      expect(Task.done).not_to include(@todo_task)
+    describe ".order_by_star_then_old" do
+      let!(:task1) { create(:task, user: user, project: project, star: false, created_at: 3.days.ago) }
+      let!(:task2) { create(:task, user: user, project: project, star: false, created_at: 2.day.ago) }
+      let!(:task3) { create(:task, user: user, project: project, star: true, created_at: 1.day.ago) }
+
+      it "orders by star in descending order and then by created_at in ascending order" do
+        expect(Task.order_by_star_then_old).to eq([task3, task1, task2])
+      end
     end
   end
 

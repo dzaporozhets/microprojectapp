@@ -15,7 +15,7 @@ class Project::ScheduleController < Project::BaseController
   end
 
   def saturate
-    tasks_no_due = project.tasks.todo.no_due_date.ordered_by_id.limit(5)
+    tasks_no_due = project.tasks.todo.no_due_date.order_by_star_then_old.limit(5)
 
     tasks_no_due.each do |task|
       task.update(due_date: (Date.current..Date.current.end_of_month).to_a.sample)

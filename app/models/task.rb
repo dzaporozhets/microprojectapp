@@ -11,6 +11,7 @@ class Task < ApplicationRecord
   scope :no_due_date, -> { where(due_date: nil) }
   scope :ordered_by_id, -> { order(id: :asc) }
   scope :basic_order, -> { order(star: :desc, created_at: :desc) }
+  scope :order_by_star_then_old, -> { order(star: :desc, created_at: :asc) }
 
   validates :name, presence: true
   validates :user_id, presence: true
