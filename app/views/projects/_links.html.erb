@@ -1,20 +1,20 @@
 <div class="mb-4">
-  <dt class="text-sm font-medium leading-6 text-gray-900">
+  <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">
     <%= link_to 'Links', project_links_path(@project) %>
   </dt>
-  <dd class="mt-2 text-sm text-gray-900">
-    <ul role="list" class="divide-y divide-gray-100 text-sm">
+  <dd class="mt-2 text-sm text-gray-900 dark:text-gray-100">
+    <ul role="list" class="divide-y divide-gray-100 dark:divide-gray-900 text-sm">
       <% @project.links.each do |link| %>
         <%= render 'project/links/link', link: link %>
       <% end %>
       <li class="flex items-center justify-between px-4 py-2 text-sm leading-6">
         <div class="flex w-0 flex-1 items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 flex-shrink-0 fill-gray-200 text-gray-400">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 flex-shrink-0 fill-gray-200 text-gray-400 dark:text-gray-600">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
           </svg>
 
           <div class="ml-4 flex min-w-0 flex-1 gap-2">
-            <%= link_to "Add a link", new_project_link_path(@project), class: "truncate text-gray-600 hover:text-indigo-700" %>
+            <%= link_to "Add a link", new_project_link_path(@project), class: "truncate text-gray-600 dark:text-gray-400 hover:text-indigo-700 dark:hover:text-indigo-700" %>
           </div>
         </div>
       </li>

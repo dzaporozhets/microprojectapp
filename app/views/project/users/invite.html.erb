@@ -1,8 +1,8 @@
 <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md">
-  <h1 class="font-bold text-2xl">Add user to the project</h1>
+  <h1 class="font-bold text-2xl dark:text-gray-100">Add user to the project</h1>
 
   <div class="mt-3">
-    <p class="mt-2 text-sm text-gray-700">
+    <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">
       The user must have an account in the application to be added to the project.
     </p>
   </div>
@@ -11,8 +11,8 @@
     <%= render "shared/flash" %>
 
     <div class="form-group">
-      <%= form.label :email, "User Email", class: "block text-sm font-medium text-gray-700" %>
-      <%= form.email_field :email, required: true, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full text-sm" %>
+      <%= form.label :email, "User Email", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+      <%= form.email_field :email, required: true, class: "block shadow rounded-md border border-gray-400 dark:text-gray-600 outline-none px-3 py-2 mt-2 w-full text-sm" %>
     </div>
 
     <div class="form-group">
