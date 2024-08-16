@@ -1,5 +1,5 @@
 <%= turbo_frame_tag dom_id(task) do %>
-  <%= content_tag :div, class: "border border-gray-100 shadow-sm rounded-md p-3 py-1.5 md:py-2 #{task.done ? 'bg-gray-100 line-through' : 'bg-gray-50'}" do %>
+  <%= content_tag :div, class: "border border-gray-100 dark:border-gray-800 shadow-sm dark:shadow-gray-700 rounded-md p-3 py-1.5 md:py-2 #{task.done ? 'bg-gray-100 dark:bg-gray-900 line-through dark:decoration-gray-100' : 'bg-gray-50 dark:bg-gray-950'}" do %>
     <div class="flex col-span-1 items-center h-14">
       <div class="mr-3 flex">
         <%= form_with(model: task, url: toggle_done_project_task_path(task.project, task), local: false, data: { turbo_frame: dom_id(task) }) do |form| %>
@@ -16,8 +16,8 @@
         <% end %>
       </div>
 
-      <%= link_to expand_project_task_path(task.project, task), data: { turbo: true }, class: "text-sm min-w-0 grow flex h-14 items-center" do %>
-        <p class="font-medium text-gray-900 line-clamp-2"><%= task_star_icon(task) %><%= task.name %></p>
+      <%= link_to expand_project_task_path(task.project, task), data: { turbo: true }, class: "text-sm min-w-0 grow flex h-14 items-center dark:text-gray-100 " do %>
+        <p class="font-medium text-gray-900 dark:text-gray-100 line-clamp-2"><%= task_star_icon(task) %><%= task.name %></p>
       <% end %>
     </div>
   <% end %>

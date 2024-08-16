@@ -3,7 +3,7 @@
 
 <% if @project.tasks.done.count > 50 %>
   <div class="my-10 text-center">
-    <%= link_to project_tasks_path(@project, status: 'done'), class: "block py-2 px-3 text-sm leading-6 text-indigo-700 hover:text-indigo-500" do %>
+    <%= link_to project_tasks_path(@project, status: 'done'), class: "block py-2 px-3 text-sm leading-6 text-indigo-700 dark:text-indigo-300 hover:text-indigo-500" do %>
       Show all completed tasks
     <% end %>
   </div>

@@ -1,6 +1,6 @@
 <div class="mt-6 md:mt-10 sm:mx-auto sm:w-full sm:max-w-lg">
-  <%= content_tag :div, class: "border border-gray-400 shadow-sm rounded-md" do %>
-    <div class="border-b text-sm flex items-center p-3 <%= @task.done ? 'bg-gray-300 text-gray-700' : 'bg-indigo-100 text-indigo-900' %> rounded-t-md">
+  <%= content_tag :div, class: "border border-gray-400 dark:border-gray-600 shadow-sm rounded-md" do %>
+    <div class="border-b dark:border-b-gray-600 text-sm flex items-center p-3 <%= @task.done ? 'bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300' : 'bg-indigo-100 dark:bg-indigo-900 text-indigo-900 dark:text-indigo-100' %> rounded-t-md">
       <div class="flex-none">
         <%= form_with(model: @task, url: project_task_path(@task.project, @task), local: false, data: { turbo: false }) do |form| %>
           <%= form.check_box :done,
@@ -32,20 +32,20 @@
 
 
     <div class="p-3 my-3">
-      <h1 class="text-2xl font-bold text-gray-900 break-words"><%= @task.name %></h1>
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 break-words"><%= @task.name %></h1>
 
       <% if @task.description.present? %>
-        <div class="text-base leading-6 text-gray-900 mt-2 prose max-w-none break-words"><%= simple_format @task.description %></div>
+        <div class="text-base leading-6 text-gray-900 dark:text-gray-100 mt-2 prose max-w-none break-words"><%= simple_format @task.description %></div>
       <% end %>
     </div>
 
     <% if @task.due_date.present? %>
-      <div class="text-sm text-gray-600 border-t p-3">
+      <div class="text-sm text-gray-600 dark:text-gray-400 border-t dark:border-t-gray-600 p-3">
         <p>Due on <span class="font-bold"><%= l(@task.due_date.to_date, format: :long) %></span></p>
       </div>
     <% end %>
 
-    <div class="text-xs text-gray-500 border-t p-3">
+    <div class="text-xs text-gray-500 border-t dark:border-t-gray-600 p-3">
       <p>Created by: <span class="font-medium"><%= @task.user.email %></span></p>
       <p>Created at: <span class="font-medium"><%= l(@task.created_at, format: :long) %></span></p>
       <p>Last updated at: <span class="font-medium"><%= l(@task.updated_at, format: :long) %></span></p>

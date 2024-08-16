@@ -1,7 +1,7 @@
 <div class="mt-6 md:mt-10 sm:mx-auto sm:w-full sm:max-w-lg">
   <%= turbo_frame_tag "task_#{@task.id}", data: { edit_task: true } do %>
-    <%= content_tag :div, class: "border border-gray-400 shadow-sm rounded-md" do %>
-      <div class="border-b text-sm text-gray-700 flex items-center p-3 bg-orange-50 rounded-t-md">
+    <%= content_tag :div, class: "border border-gray-400 dark:border-gray-600 shadow-sm rounded-md" do %>
+      <div class="border-b dark:border-b-gray-600 text-sm text-gray-700 dark:text-gray-300 flex items-center p-3 bg-orange-50 dark:bg-orange-950 rounded-t-md">
         <% if turbo_frame_request? %>
           <div class="flex-none">
             Edit mode
@@ -75,7 +75,7 @@
           <%= form.submit 'Update', class: "btn-primary inline-block" %>
         <% end %>
 
-        <%= button_to "Delete", [@project, @task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?', turbo: turbo_frame_request? }, class: "rounded-md py-2 px-4 bg-gray-100 text-sm text-red-800 hover:bg-red-100", form_class: "float-right" %>
+        <%= button_to "Delete", [@project, @task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?', turbo: turbo_frame_request? }, class: "rounded-md py-2 px-4 bg-gray-100 text-sm text-red-800 dark:hover:text-gray-100 hover:bg-red-100 dark:hover:bg-red-900", form_class: "float-right" %>
       </div>
     <% end %>
   <% end %>

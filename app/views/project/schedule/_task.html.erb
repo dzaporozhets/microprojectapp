@@ -1,4 +1,4 @@
-<%= content_tag :div, class: "mt-2 border border-gray-100 shadow-sm rounded-md p-3 py-1.5 md:py-2 #{task.done ? 'bg-gray-100 line-through' : 'bg-gray-50'}" do %>
+<%= content_tag :div, class: "mt-2 border border-gray-100 dark:border-gray-900 shadow-sm rounded-md p-3 py-1.5 md:py-2 bg-gray-50 dark:bg-gray-950" do %>
   <div class="flex col-span-1 items-center h-12">
     <div class="mr-3 flex">
       <%= form_with(model: task, url: toggle_done_project_task_path(task.project, task), local: false, data: { turbo: false }) do |form| %>
@@ -13,7 +13,7 @@
     </div>
 
     <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "text-sm min-w-0 grow flex h-12 items-center" do %>
-      <p class="font-medium text-gray-900 line-clamp-2"><%= task_star_icon(task) %><%= task.name %></p>
+      <p class="font-medium text-gray-900 dark:text-gray-100 line-clamp-2"><%= task.name %></p>
     <% end %>
 
     <div class="ml-2 flex-none mr-1">
