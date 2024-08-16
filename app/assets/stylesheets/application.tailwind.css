@@ -4,7 +4,7 @@
 
 @layer components {
   .btn-gray {
-    @apply py-2 px-4 bg-gray-100 dark:bg-gray-900 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-md text-sm text-black dark:text-white dark:hover:text-white cursor-pointer shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300;
+    @apply py-2 px-4 bg-gray-100 dark:text-gray-300 dark:border-gray-500 dark:bg-gray-800 hover:bg-gray-200 dark:hover:text-white dark:hover:bg-gray-700 rounded-md text-sm text-black cursor-pointer shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300;
   }
 
   .btn-green {
@@ -16,11 +16,11 @@
   }
 
   .btn-remove {
-    @apply py-2 px-4 border-red-700 bg-gray-50 hover:bg-red-600 rounded-md text-sm text-red-700 cursor-pointer shadow-sm hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500;
+    @apply py-2 px-4 border-red-700 bg-gray-50 hover:bg-red-600 rounded-md text-sm text-red-700 cursor-pointer shadow-sm hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 dark:bg-gray-800;
   }
 
   .base-input {
-    @apply rounded-md px-2 py-2 shadow-sm border border-gray-400 outline-none focus:border-indigo-500 focus:ring-indigo-500 text-sm;
+    @apply rounded-md px-2 py-2 shadow-sm border border-gray-400 outline-none focus:border-indigo-500 focus:ring-indigo-500 text-sm bg-white dark:bg-gray-700 dark:focus:bg-gray-300 dark:border-gray-600 dark:text-gray-300 dark:focus:text-gray-600;
   }
 
   .btn-tab {
@@ -36,7 +36,11 @@
   }
 
   .checkbox {
-    @apply text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-500 focus:ring-2
+    @apply text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-600 focus:ring-2 dark:bg-gray-700 dark:border-gray-600;
+  }
+
+  .radio {
+    @apply text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600;
   }
 
   .turbo-progress-bar {

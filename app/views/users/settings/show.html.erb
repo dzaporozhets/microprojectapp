@@ -33,17 +33,17 @@
       <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">How do you want app to handle dark mode</p>
       <div class="mt-6 space-y-6 sm:flex sm:items-center sm:space-x-10 sm:space-y-0 mb-2">
         <div class="flex items-center">
-          <%= f.radio_button :dark_mode, :on, class: "h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" %>
+          <%= f.radio_button :dark_mode, :on, class: "h-4 w-4 radio" %>
           <%= f.label :dark_mode_on, "Light", class: "ml-3 block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100" %><br>
         </div>
 
         <div class="flex items-center">
-          <%= f.radio_button :dark_mode, :off, class: "h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" %>
+          <%= f.radio_button :dark_mode, :off, class: "h-4 w-4 radio" %>
           <%= f.label :dark_mode_off, "Dark", class: "ml-3 block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100"  %><br>
         </div>
 
         <div class="flex items-center">
-          <%= f.radio_button :dark_mode, :auto, class: "h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" %>
+          <%= f.radio_button :dark_mode, :auto, class: "h-4 w-4 radio" %>
           <%= f.label :dark_mode_auto, "Auto", class: "ml-3 block text-sm font-medium leading-6 text-gray-900 dark:text-gray-100"  %>
         </div>
       </div>
