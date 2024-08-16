@@ -9,7 +9,7 @@
         </svg>
 
         <div class="ml-4 flex min-w-0 flex-1 gap-2">
-          <%= link_to "Settings", edit_project_path(@project), class: "text-sm" %>
+          <%= link_to "Settings", edit_project_path(@project), class: "text-sm dark:text-gray-400  hover:text-indigo-700 dark:hover:text-indigo-300" %>
         </div>
       </div>
     </div>
@@ -21,9 +21,9 @@
 
         <div class="ml-4 flex min-w-0 flex-1 gap-2">
           <% if @project.archived? %>
-            <%= button_to 'Unarchive', project_path(@project, project: { archived: false }), method: :patch, class: "", data: { confirm: "Are you sure you want to unarchive this project?" } %>
+            <%= button_to 'Unarchive', project_path(@project, project: { archived: false }), method: :patch, class: " dark:text-gray-400  hover:text-indigo-700 dark:hover:text-indigo-300", data: { confirm: "Are you sure you want to unarchive this project?" } %>
           <% else %>
-            <%= button_to 'Archive', project_path(@project, project: { archived: true }), method: :patch, class: "", data: { confirm: "Are you sure you want to archive this project?" }  %>
+            <%= button_to 'Archive', project_path(@project, project: { archived: true }), method: :patch, class: " dark:text-gray-400  hover:text-indigo-700 dark:hover:text-indigo-300", data: { confirm: "Are you sure you want to archive this project?" }  %>
           <% end %>
         </div>
       </div>
