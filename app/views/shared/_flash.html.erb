@@ -1,5 +1,5 @@
 <% flash.each do |type, text| %>
-  <div class="p-4 text-sm <%= flash_css(type) %>" role="alert">
+  <div class="p-4 text-sm <%= flash_css(type) %> dark:bg-indigo-950 dark:border-indigo-600 dark:text-indigo-300" role="alert">
     <p><%= text %></p>
   </div>
 <% end %>

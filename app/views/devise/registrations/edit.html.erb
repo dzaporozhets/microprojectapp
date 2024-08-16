@@ -1,20 +1,20 @@
 <div class="my-5">
-  <%= link_to 'Account', edit_registration_path(current_user), class: "btn-tab-active" %>
-  <%= link_to 'Settings', users_settings_path, class: "btn-tab" %>
+  <%= link_to 'Account', edit_registration_path(current_user), class: "btn-tab-active dark:bg-indigo-900 dark:text-indigo-100" %>
+  <%= link_to 'Settings', users_settings_path, class: "btn-tab dark:hover:text-gray-100" %>
 </div>
 
 <div class="my-5">
   <%= render "shared/flash" %>
 
   <section class="mt-10">
-    <h2 class="section-title">Email and password</h2>
+    <h2 class="section-title dark:text-gray-100">Email and password</h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "shared/errors", resource: resource %>
 
       <dl class="space-y-4">
         <div class="space-y-1">
-          <%= f.label :email, class: 'font-semibold text-sm mt-2' %>
+          <%= f.label :email, class: 'font-semibold text-sm mt-2 dark:text-gray-100' %>
 
           <% if resource.oauth_user? %>
             <%= f.email_field :email, disabled: true, class: 'base-input w-full bg-gray-100 text-gray-500' %>
@@ -23,16 +23,16 @@
           <% end %>
 
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <p class="text-sm text-gray-600 mt-2">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
           <% end %>
 
           <% if resource.provider.present? %>
-            <p class="text-sm text-blue-700 mt-2 font-semibold">You logged in with Google with this email.</p>
+            <p class="text-sm text-blue-700 dark:text-blue-300 mt-2 font-semibold">You logged in with Google with this email.</p>
           <% end %>
         </div>
 
         <div class="pt-4 space-y-1">
-          <%= f.label :password, 'New password', class: 'font-semibold text-sm mt-2' %>
+          <%= f.label :password, 'New password', class: 'font-semibold text-sm mt-2 dark:text-gray-100' %>
 
           <p class="text-sm text-gray-500">
           <% if @minimum_password_length %>
@@ -45,13 +45,13 @@
 
 
           <div class="mt-2">
-            <%= f.label :password_confirmation, class: 'text-sm text-gray-700' %>
+            <%= f.label :password_confirmation, class: 'text-sm text-gray-700 dark:text-gray-300' %>
             <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'base-input w-full' %>
           </div>
         </div>
 
         <div class="pt-4 space-y-1">
-          <%= f.label :current_password, class: "font-semibold text-sm mt-2" %>
+          <%= f.label :current_password, class: "font-semibold text-sm mt-2 dark:text-gray-100" %>
 
           <p class="text-sm text-gray-500">We need your current password to confirm your changes</p>
 
@@ -66,8 +66,8 @@
   </section>
 
   <section class="mt-10">
-    <h2 class="section-title">Delete the account</h2>
-    <span class="block text-sm text-gray-700 mb-5">This will completely remove your account. <br/>All data will be lost.</span>
-    <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Delete account with all the data? Are you sure?", turbo_confirm: "Delete account with all the data? Are you sure?" }, method: :delete, class: "btn-remove border" %>
+    <h2 class="section-title dark:text-gray-100">Delete the account</h2>
+    <span class="block text-sm text-gray-700 dark:text-gray-300 mb-5">This will completely remove your account. <br/>All data will be lost.</span>
+    <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Delete account with all the data? Are you sure?", turbo_confirm: "Delete account with all the data? Are you sure?" }, method: :delete, class: "btn-remove border dark:hover:bg-red-700" %>
   </section>
 </div>
