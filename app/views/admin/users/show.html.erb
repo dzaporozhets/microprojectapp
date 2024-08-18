@@ -2,102 +2,102 @@
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
   <div class="shadow-md rounded border dark:border-gray-800 p-6 mb-6 lg:mb-0">
-    <h2 class="text-xl font-semibold mb-4 dark:text-gray-100">Account</h2>
+    <h2 class="text-xl font-semibold mb-4 dark:text-gray-200">Account</h2>
     <dl class="divide-y divide-gray-200 dark:divide-gray-800">
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">ID</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.id %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.id %></dd>
       </div>
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">Email</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.email %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.email %></dd>
       </div>
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">Confirmed At</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.confirmed_at %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.confirmed_at %></dd>
       </div>
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">Confirmation Sent At</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.confirmation_sent_at %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.confirmation_sent_at %></dd>
       </div>
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">Unconfirmed Email</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.unconfirmed_email %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.unconfirmed_email %></dd>
       </div>
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">Created At</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.created_at %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.created_at %></dd>
       </div>
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">Updated At</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.updated_at %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.updated_at %></dd>
       </div>
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">Admin</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.admin %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.admin %></dd>
       </div>
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">Allow Invites</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.allow_invites %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.allow_invites %></dd>
       </div>
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">Provider</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.provider %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.provider %></dd>
       </div>
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">Created from OAuth</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.created_from_oauth %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.created_from_oauth %></dd>
       </div>
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">OAuth Linked At</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.oauth_linked_at %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.oauth_linked_at %></dd>
       </div>
     </dl>
   </div>
 
   <div class="shadow-md rounded border dark:border-gray-800 p-6">
-    <h2 class="text-xl font-semibold mb-4 dark:text-gray-100">Database</h2>
+    <h2 class="text-xl font-semibold mb-4 dark:text-gray-200">Database</h2>
     <dl class="divide-y divide-gray-200 dark:divide-gray-800">
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">Projects created</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.projects.count %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.projects.count %></dd>
       </div>
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">Tasks created</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.tasks.count %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.tasks.count %></dd>
       </div>
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">Comments created</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.comments.count %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.comments.count %></dd>
       </div>
     </dl>
 
-    <h2 class="text-xl font-semibold mb-4 mt-10 dark:text-gray-100">Lockable</h2>
+    <h2 class="text-xl font-semibold mb-4 mt-10 dark:text-gray-200">Lockable</h2>
     <dl class="divide-y divide-gray-200 dark:divide-gray-800">
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">Failed Attempts</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.failed_attempts %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.failed_attempts %></dd>
       </div>
       <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
         <dt class="text-sm font-medium text-gray-500">Locked At</dt>
-        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.locked_at %></dd>
+        <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.locked_at %></dd>
       </div>
     </dl>
 
     <% if @confirmable %>
-      <h2 class="text-xl font-semibold mb-4 mt-10 dark:text-gray-100">Email confirmation</h2>
+      <h2 class="text-xl font-semibold mb-4 mt-10 dark:text-gray-200">Email confirmation</h2>
       <dl class="divide-y divide-gray-200 dark:divide-gray-800">
         <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="text-sm font-medium text-gray-500">Confirmation sent at</dt>
-          <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.confirmation_sent_at %></dd>
+          <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.confirmation_sent_at %></dd>
         </div>
         <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="text-sm font-medium text-gray-500">Confirmed at</dt>
-          <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.confirmed_at %></dd>
+          <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.confirmed_at %></dd>
         </div>
         <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
           <dt class="text-sm font-medium text-gray-500">Unconfirmed email</dt>
-          <dd class="mt-1 text-sm text-gray-900 dark:text-gray-100 sm:mt-0 sm:col-span-2"><%= @user.unconfirmed_email %></dd>
+          <dd class="mt-1 text-sm text-gray-900 dark:text-gray-200 sm:mt-0 sm:col-span-2"><%= @user.unconfirmed_email %></dd>
         </div>
       </dl>
     <% end %>

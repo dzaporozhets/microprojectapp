@@ -32,10 +32,10 @@
 
 
     <div class="p-3 my-3">
-      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 break-words"><%= @task.name %></h1>
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-200 break-words"><%= @task.name %></h1>
 
       <% if @task.description.present? %>
-        <div class="text-base leading-6 text-gray-900 dark:text-gray-100 mt-2 prose max-w-none break-words"><%= simple_format @task.description %></div>
+        <div class="text-base leading-6 text-gray-900 dark:text-gray-200 mt-2 prose max-w-none break-words"><%= simple_format @task.description %></div>
       <% end %>
     </div>
 

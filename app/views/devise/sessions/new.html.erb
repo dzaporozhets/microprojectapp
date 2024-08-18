@@ -1,4 +1,4 @@
-<h2 class="text-4xl font-extrabold dark:text-gray-100">Log in</h2>
+<h2 class="text-4xl font-extrabold dark:text-gray-200">Log in</h2>
 <% if ENV['APP_DOMAIN'].present? %>
   <p class="text-gray-500"><%= ENV['APP_DOMAIN'] %></p>
 <% end %>
@@ -15,7 +15,7 @@
         <path d="M5.26498 14.2949C5.02498 13.5699 4.88501 12.7999 4.88501 11.9999C4.88501 11.1999 5.01998 10.4299 5.26498 9.7049L1.275 6.60986C0.46 8.22986 0 10.0599 0 11.9999C0 13.9399 0.46 15.7699 1.28 17.3899L5.26498 14.2949Z" fill="#FBBC05" />
         <path d="M12.0004 24.0001C15.2404 24.0001 17.9654 22.935 19.9454 21.095L16.0804 18.095C15.0054 18.82 13.6204 19.245 12.0004 19.245C8.8704 19.245 6.21537 17.135 5.2654 14.29L1.27539 17.385C3.25539 21.31 7.3104 24.0001 12.0004 24.0001Z" fill="#34A853" />
       </svg>
-      <span class="text-sm leading-6 pl-2 dark:text-gray-100">Sign in with Google</span>
+      <span class="text-sm leading-6 pl-2 dark:text-gray-200">Sign in with Google</span>
     <% end %>
     <div>
       <div class="relative mt-10">
@@ -23,7 +23,7 @@
           <div class="w-full border-t border-gray-200 dark:border-gray-800"></div>
         </div>
         <div class="relative flex justify-center text-sm font-medium leading-6">
-          <span class="bg-white px-6 text-gray-900 dark:text-gray-100">Or continue with email</span>
+          <span class="bg-white px-6 text-gray-900 dark:text-gray-200">Or continue with email</span>
         </div>
       </div>
     </div>
@@ -31,19 +31,19 @@
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }) do |f| %>
     <div class="mt-2">
-      <%= f.label :email, class:"dark:text-gray-100" %>
+      <%= f.label :email, class:"dark:text-gray-200" %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: 'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-m sm:leading-6' %>
     </div>
 
     <div class="mt-2">
-      <%= f.label :password, class:"dark:text-gray-100" %>
+      <%= f.label :password, class:"dark:text-gray-200" %>
       <%= f.password_field :password, autocomplete: "current-password", class: 'block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-m sm:leading-6' %>
     </div>
 
     <% if devise_mapping.rememberable? %>
       <div class="mt-2">
         <%= f.check_box :remember_me, class: 'checkbox mr-1', checked: true %>
-        <%= f.label :remember_me, class:"dark:text-gray-100" %>
+        <%= f.label :remember_me, class:"dark:text-gray-200" %>
       </div>
     <% end %>
 

@@ -6,30 +6,30 @@
 <div class="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
   <div>
     <div class="px-4 sm:px-0">
-      <h3 class="text-base font-semibold leading-7 text-gray-900 dark:text-gray-100">Application Information</h3>
+      <h3 class="text-base font-semibold leading-7 text-gray-900 dark:text-gray-200">Application Information</h3>
       <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Check documentation for all supported ENV variables.</p>
     </div>
 
     <div class="mt-6 border-t border-gray-100 dark:border-gray-900">
       <dl class="divide-y divide-gray-100 dark:divide-gray-900">
         <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">Application Version</dt>
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Application Version</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @version %></dd>
         </div>
         <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">Rails environment</dt>
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Rails environment</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @rails_env %></dd>
         </div>
         <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">File uploads storage</dt>
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">File uploads storage</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @file_storage %></dd>
         </div>
         <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">Application domain</dt>
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Application domain</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @domain %></dd>
         </div>
         <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">
             Restrict signup to single domain
             <span class="text-sm text-gray-500 font-normal inline-block">
               For instance, only users whose email addresses end with @yourcompany.com can register.
@@ -38,7 +38,7 @@
           <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @allowed_domain %></dd>
         </div>
         <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">
             Email confirmation features
 
             <span class="text-sm text-gray-500 font-normal inline-block">
@@ -49,7 +49,7 @@
           <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @email_confirmation %></dd>
         </div>
         <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">Mail delivery</dt>
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Mail delivery</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @mail_delivery %></dd>
         </div>
       </dl>
@@ -57,38 +57,38 @@
   </div>
   <div>
     <div class="px-4 sm:px-0">
-      <h3 class="text-base font-semibold leading-7 text-gray-900 dark:text-gray-100">Database Information</h3>
+      <h3 class="text-base font-semibold leading-7 text-gray-900 dark:text-gray-200">Database Information</h3>
       <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500"><%= ActiveRecord::Base.connection.current_database %></p>
     </div>
 
     <div class="mt-6 border-t border-gray-100 dark:border-gray-900">
       <dl class="divide-y divide-gray-100 dark:divide-gray-900">
         <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">Users</dt>
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Users</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @total_users %></dd>
         </div>
         <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">Projects</dt>
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Projects</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @total_projects %></dd>
         </div>
         <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">File uploads</dt>
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">File uploads</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @total_files %></dd>
         </div>
         <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">Tasks</dt>
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Tasks</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @total_tasks %></dd>
         </div>
         <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">Comments</dt>
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Comments</dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @total_comments %></dd>
         </div>
         <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">Activities <span class="font-light">(24 hours)</span></dt>
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Activities <span class="font-light">(24 hours)</span></dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @recent_activities_count %></dd>
         </div>
         <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">Users <span class="font-light">(24 hours)</span></dt>
+          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Users <span class="font-light">(24 hours)</span></dt>
           <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @recent_users_count %></dd>
         </div>
       </dl>
