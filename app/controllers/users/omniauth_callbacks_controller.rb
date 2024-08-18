@@ -34,6 +34,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user.present?
       sign_out_all_scopes
+      user.remember_me!
       sign_in_and_redirect user, event: :authentication
     else
       flash[:alert] = "Login with Google failed"
