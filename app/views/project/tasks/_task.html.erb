@@ -16,8 +16,8 @@
         <% end %>
       </div>
 
-      <%= link_to expand_project_task_path(task.project, task), data: { turbo: true }, class: "text-sm min-w-0 grow flex h-14 items-center dark:text-gray-100 " do %>
-        <p class="font-medium text-gray-900 dark:text-gray-100 line-clamp-2"><%= task_star_icon(task) %><%= task.name %></p>
+      <%= link_to expand_project_task_path(task.project, task), data: { turbo: true }, class: "text-sm min-w-0 grow flex h-14 items-center dark:text-gray-200 " do %>
+        <p class="font-medium text-gray-900 dark:text-gray-200 line-clamp-2"><%= task_star_icon(task) %><%= task.name %></p>
       <% end %>
     </div>
   <% end %>

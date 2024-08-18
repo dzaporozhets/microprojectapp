@@ -1,8 +1,8 @@
 <div class="mb-4">
-  <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-100">
+  <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">
     <%= link_to 'Links', project_links_path(@project) %>
   </dt>
-  <dd class="mt-2 text-sm text-gray-900 dark:text-gray-100">
+  <dd class="mt-2 text-sm text-gray-900 dark:text-gray-200">
     <ul role="list" class="divide-y divide-gray-100 dark:divide-gray-900 text-sm">
       <% @project.links.each do |link| %>
         <%= render 'project/links/link', link: link %>

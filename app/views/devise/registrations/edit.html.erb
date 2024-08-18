@@ -7,14 +7,14 @@
   <%= render "shared/flash" %>
 
   <section class="mt-10">
-    <h2 class="section-title dark:text-gray-100">Email and password</h2>
+    <h2 class="section-title dark:text-gray-200">Email and password</h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "shared/errors", resource: resource %>
 
       <dl class="space-y-4">
         <div class="space-y-1">
-          <%= f.label :email, class: 'font-semibold text-sm mt-2 dark:text-gray-100' %>
+          <%= f.label :email, class: 'font-semibold text-sm mt-2 dark:text-gray-200' %>
 
           <% if resource.oauth_user? %>
             <%= f.email_field :email, disabled: true, class: 'base-input w-full bg-gray-100 text-gray-500' %>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="pt-4 space-y-1">
-          <%= f.label :password, 'New password', class: 'font-semibold text-sm mt-2 dark:text-gray-100' %>
+          <%= f.label :password, 'New password', class: 'font-semibold text-sm mt-2 dark:text-gray-200' %>
 
           <p class="text-sm text-gray-500">
           <% if @minimum_password_length %>
@@ -51,7 +51,7 @@
         </div>
 
         <div class="pt-4 space-y-1">
-          <%= f.label :current_password, class: "font-semibold text-sm mt-2 dark:text-gray-100" %>
+          <%= f.label :current_password, class: "font-semibold text-sm mt-2 dark:text-gray-200" %>
 
           <p class="text-sm text-gray-500">We need your current password to confirm your changes</p>
 
@@ -66,7 +66,7 @@
   </section>
 
   <section class="mt-10">
-    <h2 class="section-title dark:text-gray-100">Delete the account</h2>
+    <h2 class="section-title dark:text-gray-200">Delete the account</h2>
     <span class="block text-sm text-gray-700 dark:text-gray-300 mb-5">This will completely remove your account. <br/>All data will be lost.</span>
     <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Delete account with all the data? Are you sure?", turbo_confirm: "Delete account with all the data? Are you sure?" }, method: :delete, class: "btn-remove border dark:hover:bg-red-700" %>
   </section>

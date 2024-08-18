@@ -1,16 +1,16 @@
 <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md">
-  <h1 class="font-bold text-2xl dark:text-gray-100">New task</h1>
+  <h1 class="font-bold text-2xl dark:text-gray-200">New task</h1>
 
   <%= form_with(model: [@project, @task], class: "contents", data: { turbo: false }) do |form| %>
     <%= render "shared/errors", resource: @task %>
 
     <div class="my-5">
-      <%= form.label :name, class:"dark:text-gray-100" %>
+      <%= form.label :name, class:"dark:text-gray-200" %>
       <%= form.text_field :name, class: "block shadow rounded-md border border-gray-400 dark:border-gray-600 outline-none px-3 py-2 mt-2 w-full", required: true %>
     </div>
 
     <div class="my-5">
-      <%= form.label :description, class:"dark:text-gray-100" %>
+      <%= form.label :description, class:"dark:text-gray-200" %>
       <%= form.text_area :description, rows: 4, class: "block shadow rounded-md border border-gray-400 dark:border-gray-600 outline-none px-3 py-2 mt-2 w-full" %>
     </div>
 
