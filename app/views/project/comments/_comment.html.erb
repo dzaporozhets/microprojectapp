@@ -2,7 +2,7 @@
   <div class="flex">
     <div class="flex items-center">
       <%= avatar_tag(comment.user, "h-6 w-6 mr-2 rounded-full bg-gray-200 dark:bg-gray-800") %>
-      <div class="text-sm mr-3 text-gray-900 dark:text-gray-200 font-semibold"><%= comment.user.email %></div>
+      <div class="text-sm text-gray-900 dark:text-gray-400 mr-3 font-semibold"><%= comment.user.email %></div>
       <div class="text-sm text-gray-600 dark:text-gray-400"><%= time_ago_short(comment.created_at) %></div>
     </div>
   </div>
