@@ -46,4 +46,8 @@
   .turbo-progress-bar {
     background: #312e81 !important;
   }
+
+  .file-select {
+    @apply focus:outline-none focus:shadow-outline text-gray-700 dark:text-gray-300 file:bg-gray-100 dark:file:bg-gray-800 file:text-gray-700 dark:file:text-gray-300 file:cursor-pointer;
+  }
 }
