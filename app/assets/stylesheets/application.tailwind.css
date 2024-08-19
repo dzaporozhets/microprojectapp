@@ -20,7 +20,7 @@
   }
 
   .base-input {
-    @apply rounded-md px-2 py-2 shadow-sm border text-gray-900 border-gray-400 outline-none focus:border-indigo-500 focus:ring-indigo-500 text-sm bg-white dark:bg-gray-700 dark:focus:bg-gray-600 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-400;
+    @apply rounded-md px-2 py-2 shadow-sm border text-gray-900 border-gray-400 outline-none focus:border-indigo-500 focus:ring-indigo-500 text-sm bg-white dark:bg-gray-700 dark:focus:bg-gray-600 dark:focus:border-indigo-500 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-400;
   }
 
   .btn-tab {
@@ -48,6 +48,6 @@
   }
 
   .file-select {
-    @apply focus:outline-none focus:shadow-outline text-gray-700 dark:text-gray-300 file:bg-gray-100 dark:file:bg-gray-800 file:text-gray-700 dark:file:text-gray-300 file:cursor-pointer;
+    @apply focus:outline-none text-gray-700 dark:text-gray-300 file:bg-gray-100 dark:file:bg-gray-800 file:text-gray-700 dark:file:text-gray-300 file:cursor-pointer;
   }
 }
