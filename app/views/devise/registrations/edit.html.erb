@@ -68,6 +68,6 @@
   <section class="mt-10">
     <h2 class="section-title dark:text-gray-200">Delete the account</h2>
     <span class="block text-sm text-gray-700 dark:text-gray-300 mb-5">This will completely remove your account. <br/>All data will be lost.</span>
-    <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Delete account with all the data? Are you sure?", turbo_confirm: "Delete account with all the data? Are you sure?" }, method: :delete, class: "btn-remove border dark:hover:bg-red-700" %>
+    <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Delete account with all the data? Are you sure?", turbo_confirm: "Delete account with all the data? Are you sure?" }, method: :delete, class: "btn-remove border" %>
   </section>
 </div>
