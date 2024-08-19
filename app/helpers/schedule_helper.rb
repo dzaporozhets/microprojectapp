@@ -3,6 +3,7 @@ module ScheduleHelper
     options = [
       ['No Due Date', nil],
       ["Tomorrow (#{formatted_date(1.day.from_now.to_date)})", 1.day.from_now.to_date],
+      ["Next week (#{formatted_date(1.week.from_now.to_date)})", 1.week.from_now.to_date],
       ["Next month (#{formatted_date(1.month.from_now.to_date)})", 1.month.from_now.to_date],
       [formatted_month(2.months.from_now.beginning_of_month), 2.months.from_now.beginning_of_month],
       [formatted_month(3.months.from_now.beginning_of_month), 3.months.from_now.beginning_of_month],
