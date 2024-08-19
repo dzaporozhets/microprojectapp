@@ -1,7 +1,7 @@
 <div class="mt-6 md:mt-10 sm:mx-auto sm:w-full sm:max-w-lg">
   <%= turbo_frame_tag "task_#{@task.id}", data: { edit_task: true } do %>
     <%= content_tag :div, class: "border border-gray-400 dark:border-gray-600 shadow-sm rounded-md" do %>
-      <div class="border-b dark:border-b-gray-600 text-sm text-gray-700 dark:text-gray-300 flex items-center p-3 bg-orange-50 dark:bg-orange-950 rounded-t-md">
+      <div class="border-b dark:border-b-gray-600 text-sm text-gray-700 dark:text-gray-300 flex items-center p-3 bg-sky-100 dark:bg-sky-900 rounded-t-md">
         <% if turbo_frame_request? %>
           <div class="flex-none">
             Edit mode
