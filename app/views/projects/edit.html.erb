@@ -1,19 +1,21 @@
 <div class="mt-2 sm:mx-auto sm:w-full sm:max-w-md flex-grow">
-  <section class="mt-10">
-    <h2 class="section-title dark:text-gray-200">Project settings</h2>
+  <% unless @project.personal? %>
+    <section class="mt-10">
+      <h2 class="section-title dark:text-gray-200">Project settings</h2>
 
-    <%= form_with(model: @project) do |form| %>
-      <%= render "shared/errors", resource: @project %>
+      <%= form_with(model: @project) do |form| %>
+        <%= render "shared/errors", resource: @project %>
 
-      <div>
-        <%= form.text_field :name, required: true, class: "base-input w-full" %>
-      </div>
+        <div>
+          <%= form.text_field :name, required: true, class: "base-input w-full" %>
+        </div>
 
-      <div class="mt-5">
-        <%= form.submit class: "btn-primary border border-indigo-900" %>
-      </div>
-    <% end %>
-  </section>
+        <div class="mt-5">
+          <%= form.submit class: "btn-primary border border-indigo-900" %>
+        </div>
+      <% end %>
+    </section>
+  <% end %>
 
   <section class="mt-10">
     <h2 class="section-title dark:text-gray-200">Import and Export</h2>

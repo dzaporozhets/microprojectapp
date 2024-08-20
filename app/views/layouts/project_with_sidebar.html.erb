@@ -15,10 +15,7 @@
               <%= yield %>
             </div>
             <div class="mb-4 md:mb-0 md:w-1/3 mt-2">
-              <%= render 'projects/team' unless @project.personal? %>
-              <%= render 'projects/files' %>
-              <%= render 'projects/links' %>
-              <%= render 'projects/extra' if !@project.personal? && @project.user == current_user %>
+              <%= render 'projects/sidebar' %>
             </div>
           </div>
         </div>
