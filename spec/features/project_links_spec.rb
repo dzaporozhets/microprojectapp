@@ -48,9 +48,7 @@ RSpec.feature "Project::Links", type: :feature do
   end
 
   scenario "User visits links page" do
-    visit project_path(project)
-
-    click_link 'Links'
+    visit project_links_path(project)
 
     expect(page).to have_current_path(project_links_path(project))
     expect(page).to have_text(link.title)
