@@ -57,6 +57,7 @@ class User < ApplicationRecord
       user = User.new(provider: provider, uid: uid, email: email, created_from_oauth: true)
       user.avatar_url = auth.info&.image
       user.password = Devise.friendly_token[0,20]
+      user.disable_password = true
       user.skip_confirmation! if Devise.mappings[:user].confirmable?
       user.save
     end
