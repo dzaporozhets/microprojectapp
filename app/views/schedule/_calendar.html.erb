@@ -1,0 +1,42 @@
+<% date = @date || Date.today %>
+<% start_date = date.beginning_of_month.beginning_of_week(:monday) %>
+<% end_date = date.end_of_month.end_of_week(:monday) %>
+
+<div class="flex items-center text-center text-gray-900">
+  <%= link_to schedule_path(date: date.prev_month), class: "-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500" do %>
+    <span class="sr-only">Previous month</span>
+    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+    </svg>
+  <% end %>
+  <div class="flex-auto text-sm font-semibold"><%= date.strftime("%B %Y") %></div>
+  <%= link_to schedule_path(date: date.next_month), class: "-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500" do %>
+    <span class="sr-only">Next month</span>
+    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+    </svg>
+  <% end %>
+</div>
+
+<div class="mt-6 grid grid-cols-7 text-center text-xs leading-6 text-gray-500">
+  <div>M</div>
+  <div>T</div>
+  <div>W</div>
+  <div>T</div>
+  <div>F</div>
+  <div>S</div>
+  <div>S</div>
+</div>
+
+<div class="isolate mt-2 grid grid-cols-7 gap-px rounded-lg bg-gray-200 text-sm shadow ring-1 ring-gray-200">
+  <% (start_date..end_date).each do |day| %>
+    <% is_current_month = day.month == date.month %>
+    <% is_today = day == Date.today %>
+
+    <div class="py-2<%= " rounded-tl-lg" if day == start_date %><%= " rounded-tr-lg" if day == start_date + 6 %><%= " rounded-bl-lg" if day == end_date - 6 %><%= " rounded-br-lg" if day == end_date %> <%= is_current_month ? 'bg-white text-gray-900' : 'bg-gray-50 text-gray-400' %> <%= is_today ? 'font-semibold text-indigo-600' : '' %>">
+      <time datetime="<%= day %>" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full <%= is_today ? 'bg-red-700 text-white font-semibold' : '' %> ">
+        <%= day.day %>
+      </time>
+    </div>
+  <% end %>
+</div>
