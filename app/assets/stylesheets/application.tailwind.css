@@ -36,7 +36,7 @@
   }
 
   .section-title {
-    @apply font-semibold text-gray-900 mb-4 pb-4 border-b dark:border-gray-600;
+    @apply font-semibold text-gray-900 mb-4 pb-4 border-b dark:border-gray-600 dark:text-gray-200;
   }
 
   .checkbox {
