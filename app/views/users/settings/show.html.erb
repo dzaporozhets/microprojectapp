@@ -1,7 +1,4 @@
-<div class="my-5">
-  <%= link_to 'Account', edit_registration_path(current_user), class: "btn-tab dark:hover:text-gray-100" %>
-  <%= link_to 'Settings', users_settings_path, class: "btn-tab-active dark:bg-indigo-900 dark:text-indigo-100" %>
-</div>
+<%= users_tabs 'Settings' %>
 
 <div class="my-5">
   <%= render "shared/flash" %>
