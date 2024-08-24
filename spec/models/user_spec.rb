@@ -17,6 +17,27 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe 'enums' do
+    it { should define_enum_for(:dark_mode).with_values(off: 0, on: 1, auto: 2) }
+
+    it 'should map dark_mode correctly' do
+      expect(User.dark_modes[:off]).to eq(0)
+      expect(User.dark_modes[:on]).to eq(1)
+      expect(User.dark_modes[:auto]).to eq(2)
+    end
+
+    it 'should be able to switch between dark modes' do
+      user = User.new(dark_mode: :off)
+      expect(user.dark_mode).to eq('off')
+
+      user.dark_mode = :on
+      expect(user.dark_mode).to eq('on')
+
+      user.dark_mode = :auto
+      expect(user.dark_mode).to eq('auto')
+    end
+  end
+
   describe 'class_methods' do
     describe '.from_omniauth' do
       let(:auth) do
@@ -259,26 +280,44 @@ RSpec.describe User, type: :model do
         end
       end
     end
-  end
 
-  describe 'enums' do
-    it { should define_enum_for(:dark_mode).with_values(off: 0, on: 1, auto: 2) }
+    describe '#all_active_projects' do
+      let(:user) { create(:user) }
+      let!(:personal_project) { user.personal_project }
+      let!(:active_project_owned) { create(:project, user: user) }
+      let!(:inactive_project_owned) { create(:project, user: user, archived: true) }
+      let!(:invited_active_project) { create(:project, users: [user]) }
+      let!(:invited_inactive_project) { create(:project, users: [user], archived: true) }
+      let!(:other_user) { create(:user) }
+      let!(:other_user_project) { create(:project, user: other_user) }
 
-    it 'should map dark_mode correctly' do
-      expect(User.dark_modes[:off]).to eq(0)
-      expect(User.dark_modes[:on]).to eq(1)
-      expect(User.dark_modes[:auto]).to eq(2)
-    end
+      it 'returns the user’s personal project' do
+        expect(user.all_active_projects).to include(personal_project)
+      end
 
-    it 'should be able to switch between dark modes' do
-      user = User.new(dark_mode: :off)
-      expect(user.dark_mode).to eq('off')
+      it 'returns active projects owned by the user' do
+        expect(user.all_active_projects).to include(active_project_owned)
+      end
 
-      user.dark_mode = :on
-      expect(user.dark_mode).to eq('on')
+      it 'does not return inactive projects owned by the user' do
+        expect(user.all_active_projects).not_to include(inactive_project_owned)
+      end
 
-      user.dark_mode = :auto
-      expect(user.dark_mode).to eq('auto')
+      it 'returns active projects the user is invited to' do
+        expect(user.all_active_projects).to include(invited_active_project)
+      end
+
+      it 'does not return inactive projects the user is invited to' do
+        expect(user.all_active_projects).not_to include(invited_inactive_project)
+      end
+
+      it 'does not return projects the user is not involved in' do
+        expect(user.all_active_projects).not_to include(other_user_project)
+      end
+
+      it 'returns projects in the correct order' do
+        expect(user.all_active_projects).to eq([personal_project, active_project_owned, invited_active_project])
+      end
     end
   end
 end

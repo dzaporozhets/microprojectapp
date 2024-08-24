@@ -106,4 +106,8 @@ class Project < ApplicationRecord
       )
     end
   end
+
+  def owner
+    user
+  end
 end
