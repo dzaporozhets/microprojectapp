@@ -19,26 +19,28 @@
     <% end %>
   </div>
 
-  <div class="mt-6 grid grid-cols-7 text-center text-xs leading-6 text-gray-500">
-    <div>M</div>
-    <div>T</div>
-    <div>W</div>
-    <div>T</div>
-    <div>F</div>
-    <div>S</div>
-    <div>S</div>
-  </div>
+  <div class="hidden md:block">
+    <div class="mt-6 grid grid-cols-7 text-center text-xs leading-6 text-gray-500">
+      <div>M</div>
+      <div>T</div>
+      <div>W</div>
+      <div>T</div>
+      <div>F</div>
+      <div>S</div>
+      <div>S</div>
+    </div>
 
-  <div class="isolate mt-2 grid grid-cols-7 gap-px rounded-lg bg-gray-200 text-sm shadow ring-1 ring-gray-200 dark:ring-gray-700 dark:bg-gray-700">
-    <% (start_date..end_date).each do |day| %>
-      <% is_current_month = day.month == date.month %>
-      <% is_today = day == Date.today %>
+    <div class="isolate mt-2 grid grid-cols-7 gap-px rounded-lg bg-gray-200 text-sm shadow ring-1 ring-gray-200 dark:ring-gray-700 dark:bg-gray-700">
+      <% (start_date..end_date).each do |day| %>
+        <% is_current_month = day.month == date.month %>
+        <% is_today = day == Date.today %>
 
-      <div class="py-2 dark:border-gray-700 <%= " rounded-tl-lg" if day == start_date %><%= " rounded-tr-lg" if day == start_date + 6 %><%= " rounded-bl-lg" if day == end_date - 6 %><%= " rounded-br-lg" if day == end_date %> <%= is_current_month ? 'bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-300' : 'bg-gray-50 text-gray-400 dark:bg-gray-800 dark:text-gray-500' %> <%= is_today ? 'font-semibold text-indigo-600' : '' %>">
-        <time datetime="<%= day %>" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full <%= is_today ? 'bg-red-700 text-white font-semibold' : '' %> ">
-          <%= day.day %>
-        </time>
-      </div>
-    <% end %>
+        <div class="py-2 dark:border-gray-700 <%= " rounded-tl-lg" if day == start_date %><%= " rounded-tr-lg" if day == start_date + 6 %><%= " rounded-bl-lg" if day == end_date - 6 %><%= " rounded-br-lg" if day == end_date %> <%= is_current_month ? 'bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-300' : 'bg-gray-50 text-gray-400 dark:bg-gray-800 dark:text-gray-500' %> <%= is_today ? 'font-semibold text-indigo-600' : '' %>">
+          <time datetime="<%= day %>" class="mx-auto flex h-7 w-7 items-center justify-center rounded-full <%= is_today ? 'bg-red-700 text-white font-semibold' : '' %> ">
+            <%= day.day %>
+          </time>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

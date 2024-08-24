@@ -1,15 +1,37 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the ProjectsHelper. For example:
-#
-# describe ProjectsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe ProjectsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe '#project_tabs' do
+    let(:project) { create(:project) }
+
+    before do
+      assign(:project, project)
+      allow(helper).to receive(:project_path).and_return("/projects/#{project.id}")
+      allow(helper).to receive(:project_schedule_path).and_return("/projects/#{project.id}/schedule")
+    end
+
+    it 'constructs the correct tabs array' do
+      expected_tabs = [
+        { name: 'Tasks', path: "/projects/#{project.id}" },
+        { name: 'Schedule', path: "/projects/#{project.id}/schedule" }
+      ]
+
+      expect(helper).to receive(:render_tabs).with(expected_tabs, nil)
+
+      helper.project_tabs
+    end
+
+    it 'passes the selected tab to render_tabs' do
+      selected_tab = 'Tasks'
+
+      expected_tabs = [
+        { name: 'Tasks', path: "/projects/#{project.id}" },
+        { name: 'Schedule', path: "/projects/#{project.id}/schedule" }
+      ]
+
+      expect(helper).to receive(:render_tabs).with(expected_tabs, selected_tab)
+
+      helper.project_tabs(selected_tab)
+    end
+  end
 end
