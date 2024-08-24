@@ -92,4 +92,35 @@ RSpec.describe ApplicationHelper, type: :helper do
       end
     end
   end
+
+  describe '#home_tabs' do
+    before do
+      allow(helper).to receive(:projects_path).and_return("/projects")
+      allow(helper).to receive(:schedule_path).and_return("/schedule")
+    end
+
+    it 'constructs the correct tabs array' do
+      expected_tabs = [
+        { name: 'Projects', path: "/projects" },
+        { name: 'Schedule', path: "/schedule" }
+      ]
+
+      expect(helper).to receive(:render_tabs).with(expected_tabs, nil)
+
+      helper.home_tabs
+    end
+
+    it 'passes the selected tab to render_tabs' do
+      selected_tab = 'Projects'
+
+      expected_tabs = [
+        { name: 'Projects', path: "/projects" },
+        { name: 'Schedule', path: "/schedule" }
+      ]
+
+      expect(helper).to receive(:render_tabs).with(expected_tabs, selected_tab)
+
+      helper.home_tabs(selected_tab)
+    end
+  end
 end
