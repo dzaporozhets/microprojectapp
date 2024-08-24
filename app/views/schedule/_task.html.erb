@@ -18,7 +18,7 @@
 
     <div class="ml-2 flex-none mr-1 text-right">
       <time datetime="<%= task.due_date %>" class=""><%= I18n.l(task.due_date.to_date, format: :short) %></time><br/>
-      <%= task.project.name %>
+      <%#= task.project.name %>
     </div>
   </div>
 <% end %>

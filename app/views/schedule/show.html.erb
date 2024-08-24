@@ -13,10 +13,17 @@
 
     <div class="mb-4 md:mb-0 md:w-2/3">
       <section class="task-list">
-        <ol class="mt-2 text-sm leading-6 text-gray-500">
+        <ol class="text-sm leading-6 text-gray-500">
           <% if @tasks.any? %>
-            <% @tasks.each do |task| %>
-              <%= render 'schedule/task', task: task %>
+            <% @tasks.includes(:project).group_by(&:project).each do |project, tasks| %>
+              <div class="project-group mb-6">
+                <h2 class="py-2 text-base font-semibold text-gray-900 dark:text-gray-200"><%= project.name %></h2>
+                <ol class="mt-2 text-sm leading-6 text-gray-500">
+                  <% tasks.each do |task| %>
+                    <%= render 'schedule/task', task: task %>
+                  <% end %>
+                </ol>
+              </div>
             <% end %>
             <%= paginate @tasks %>
           <% else %>
