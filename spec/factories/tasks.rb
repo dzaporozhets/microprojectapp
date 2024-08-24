@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :task do
-    name { "Test Task" }
+    sequence(:name) { |n| "Task Name #{n}" }
     description { "Test Task Description" }
     association :user
     association :project

@@ -4,8 +4,7 @@ class ScheduleController < ApplicationController
 
     @current_month_name = @date.strftime("%B")
 
-    # Get tasks that are due this month (including past tasks up to today).
-    @tasks_due_this_month = tasks.where(due_date: @date.beginning_of_month..@date.end_of_month).page(params[:page]).per(200)
+    @tasks = tasks.where(due_date: @date.beginning_of_month..@date.end_of_month).page(params[:page]).per(200)
   end
 
   private
