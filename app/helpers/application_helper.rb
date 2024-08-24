@@ -1,4 +1,13 @@
 module ApplicationHelper
+  def home_tabs(selected = nil)
+    tabs = [
+      { name: 'Projects', path: projects_path },
+      { name: 'Schedule', path: schedule_path }
+    ]
+
+    render_tabs(tabs, selected)
+  end
+
   def formatted_date(date)
     day_with_ordinal = date.day.ordinalize
     date.strftime("%A, #{day_with_ordinal}")
