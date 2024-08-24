@@ -124,6 +124,12 @@ class User < ApplicationRecord
     end
   end
 
+  def all_active_projects
+    [self.personal_project] +
+      self.projects.active.without_personal.ordered_by_id +
+      self.invited_projects.active.ordered_by_id
+  end
+
   private
 
   def email_domain_check

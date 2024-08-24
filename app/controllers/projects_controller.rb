@@ -10,16 +10,8 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    personal_project = current_user.personal_project
-    user_projects = current_user.projects.without_personal.ordered_by_id
-    invited_projects = current_user.invited_projects.ordered_by_id
-
-    @projects = []
-    @projects << personal_project
-    @projects += user_projects
-    @projects += invited_projects
-
-    @archived_projects, @projects = @projects.partition { |project| project.archived? }
+    @projects = current_user.all_active_projects
+    @archived_projects = current_user.projects.archived
   end
 
   # GET /projects/1 or /projects/1.json
