@@ -1,7 +1,4 @@
-<div class="mx-auto max-w-7xl flex flex-col sm:flex-row mb-5">
-  <%= link_to 'Application', admin_path, class: "btn-tab dark:hover:text-gray-100" %>
-  <%= link_to 'Users', admin_users_path, class: "btn-tab-active dark:bg-indigo-900 dark:text-indigo-100" %>
-</div>
+<%= admin_tabs 'Users' %>
 
 <div class="my-5">
   <table class="min-w-full bg-white dark:bg-black border dark:border-gray-700 text-sm">
