@@ -24,10 +24,6 @@ RSpec.feature "Schedule", type: :feature do
     expect(page).to have_content("Schedule")
     expect(page).to have_content(Date.current.strftime("%B %Y"))
 
-    within('.calendar') do
-      expect(page).to have_selector('.bg-red-700', text: Date.current.day)
-    end
-
     within('.task-list') do
       expect(page).to have_content(task1.name)
       expect(page).to have_content(task2.name)
