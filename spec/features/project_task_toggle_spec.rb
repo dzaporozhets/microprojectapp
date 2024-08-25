@@ -15,7 +15,10 @@ RSpec.feature 'Project::Task Toggle', type: :feature do
 
     find('input[name="task[done]"]').click
 
-    expect(page).to have_content('Completed')
+    within('#tasks') do
+      expect(page).to have_content('Completed')
+    end
+
     expect(task.reload.done).to be(true)
   end
 
@@ -27,7 +30,10 @@ RSpec.feature 'Project::Task Toggle', type: :feature do
 
     find('input[name="task[done]"]').click
 
-    expect(page).not_to have_content('Completed')
+    within('#tasks') do
+      expect(page).not_to have_content('Completed')
+    end
+
     expect(task.reload.done).to be(false)
   end
 
