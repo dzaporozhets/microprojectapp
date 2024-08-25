@@ -1,7 +1,5 @@
-<%= project_tabs 'Tasks' %>
-
 <% if params[:status] == 'done' %>
-  <div class="mt-3 flex">
+  <div class="flex">
     <%= link_to 'Showing only completed tasks (x)', project_path(@project), class: 'btn-tab-active' %>
   </div>
 <% else %>
