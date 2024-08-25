@@ -1,18 +1,20 @@
-<%= admin_tabs 'Users' %>
+<div class="flex justify-between items-center mb-4 pb-4 border-b dark:border-gray-600">
+  <%= admin_tabs 'Users' %>
+</div>
 
 <div class="my-5">
   <table class="min-w-full bg-white dark:bg-black border dark:border-gray-700 text-sm">
     <thead>
       <tr>
-        <th class="px-4 py-2 border dark:border-gray-700 dark:text-white">ID</th>
-        <th class="px-4 py-2 border dark:border-gray-700 dark:text-white">Email</th>
-        <th class="px-4 py-2 border dark:border-gray-700 hidden sm:table-cell dark:text-white">Created At</th>
-        <th class="px-4 py-2 border dark:border-gray-700 hidden sm:table-cell dark:text-white">Updated at</th>
+        <th class="px-4 py-2 bg-gray-200 dark:bg-gray-800 border dark:border-gray-700 dark:text-white">ID</th>
+        <th class="px-4 py-2 bg-gray-200 dark:bg-gray-800 border dark:border-gray-700 dark:text-white">Email</th>
+        <th class="px-4 py-2 bg-gray-200 dark:bg-gray-800 border dark:border-gray-700 hidden sm:table-cell dark:text-white">Created At</th>
+        <th class="px-4 py-2 bg-gray-200 dark:bg-gray-800 border dark:border-gray-700 hidden sm:table-cell dark:text-white">Updated at</th>
       </tr>
     </thead>
     <tbody>
       <% @users.each do |user| %>
-        <tr class="odd:bg-gray-100 dark:odd:bg-gray-900 even:bg-white dark:even:bg-black">
+        <tr class="odd:bg-gray-50 dark:odd:bg-gray-900 even:bg-white dark:even:bg-black">
           <td class="px-4 py-2 border dark:border-gray-700 dark:text-white"><%= link_to user.id, admin_user_path(user), class: 'cursor-pointer underline' %></td>
           <td class="px-4 py-2 border dark:border-gray-700 dark:text-white">
             <%= user.email %>
