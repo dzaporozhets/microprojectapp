@@ -59,12 +59,12 @@
         <%= form_with(model: [@project, @task], class: "contents", data: { turbo: turbo_frame_request? }) do |form| %>
           <div class="mb-3">
             <%= form.label :name, class: "text-sm text-gray-500" %>
-            <%= form.text_field :name, class: "block base-input w-full" %>
+            <%= form.text_area :name, class: "block base-input w-full", required: true, rows: 3 %>
           </div>
 
           <div class="mb-3">
             <%= form.label :description, class: "text-sm text-gray-500" %>
-            <%= form.text_area :description, rows: calc_textarea_rows(@task.description), class: "block base-input mt-2 w-full resize-y" %>
+            <%= form.text_area :description, class: "block base-input mt-2 w-full resize-y" %>
           </div>
 
           <div class="mb-3">

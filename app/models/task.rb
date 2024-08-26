@@ -13,7 +13,7 @@ class Task < ApplicationRecord
   scope :basic_order, -> { order(star: :desc, created_at: :desc) }
   scope :order_by_star_then_old, -> { order(star: :desc, created_at: :asc) }
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 512 }
   validates :user_id, presence: true
   validates :project_id, presence: true
   validate :task_limit, on: :create
