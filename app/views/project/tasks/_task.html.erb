@@ -20,7 +20,7 @@
         <p class="font-medium text-gray-900 dark:text-gray-200 line-clamp-2"><%= task.name %></p>
       <% end %>
 
-      <% if task.star %>
+      <% if task.star && !task.done %>
         <div class="ml-2 flex-none mr-1 text-right">
           <%= task_star_icon(task) %>
         </div>
