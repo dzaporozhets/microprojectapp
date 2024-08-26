@@ -1,4 +1,4 @@
-<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-md">
+<div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-md">
   <h1 class="font-bold text-2xl dark:text-gray-200">New task</h1>
 
   <%= form_with(model: [@project, @task], class: "contents", data: { turbo: false }) do |form| %>
@@ -6,7 +6,7 @@
 
     <div class="my-5">
       <%= form.label :name, class:"dark:text-gray-200" %>
-      <%= form.text_field :name, class: "block shadow rounded-md border border-gray-400 dark:border-gray-600 outline-none px-3 py-2 mt-2 w-full", required: true %>
+      <%= form.text_area :name, rows: 2, class: "block shadow rounded-md border border-gray-400 dark:border-gray-600 outline-none px-3 py-2 mt-2 w-full", required: true %>
     </div>
 
     <div class="my-5">
