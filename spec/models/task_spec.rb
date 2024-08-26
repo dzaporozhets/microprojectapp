@@ -77,4 +77,23 @@ RSpec.describe Task, type: :model do
       expect(task.done_at).to be_nil
     end
   end
+
+  describe '.group_by_projects' do
+    let!(:project_a) { create(:project, name: 'Project A') }
+    let!(:project_b) { create(:project, name: 'Project B') }
+    let!(:project_c) { create(:project, name: 'Project C') }
+    let!(:task1) { create(:task, project: project_b) }
+    let!(:task2) { create(:task, project: project_a) }
+    let!(:task3) { create(:task, project: project_c) }
+    let!(:task4) { create(:task, project: project_a) }
+
+    it 'groups tasks by project and sorts by project name' do
+      grouped_tasks = Task.all.group_by_projects
+
+      expect(grouped_tasks.map(&:first)).to eq([project_a, project_b, project_c])
+      expect(grouped_tasks[0].last).to contain_exactly(task2, task4)
+      expect(grouped_tasks[1].last).to contain_exactly(task1)
+      expect(grouped_tasks[2].last).to contain_exactly(task3)
+    end
+  end
 end

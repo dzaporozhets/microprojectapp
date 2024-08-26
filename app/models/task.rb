@@ -20,6 +20,10 @@ class Task < ApplicationRecord
 
   before_save :set_done_at, if: :done_changed?
 
+  def self.group_by_projects
+    self.includes(:project).group_by(&:project).sort_by { |project, _| project.name }
+  end
+
   private
 
   def task_limit
