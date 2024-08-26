@@ -1,11 +1,11 @@
-<%= users_tabs 'Account' %>
+<div class="mb-4 pb-4 border-b dark:border-gray-600">
+  <%= users_tabs 'Account' %>
+</div>
 
 <div class="my-5">
   <%= render "shared/flash" %>
 
-  <section class="mt-10">
-    <h2 class="section-title dark:text-gray-200">Email and password</h2>
-
+  <section class="">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "shared/errors", resource: resource %>
 
