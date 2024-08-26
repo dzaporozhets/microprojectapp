@@ -21,7 +21,6 @@ RSpec.feature "Schedule", type: :feature do
   scenario "user views the schedule for the current month" do
     visit schedule_path
 
-    expect(page).to have_content("Schedule")
     expect(page).to have_content(Date.current.strftime("%B %Y"))
 
     within('.task-list') do
@@ -65,7 +64,6 @@ RSpec.feature "Schedule", type: :feature do
   scenario "user tries to view a non-existing date" do
     visit schedule_path(date: 'invalid-date')
 
-    expect(page).to have_content("Schedule")
     expect(page).to have_content(Date.current.strftime("%B %Y"))
   end
 
@@ -74,7 +72,6 @@ RSpec.feature "Schedule", type: :feature do
 
     visit schedule_path
 
-    expect(page).to have_content("Schedule")
     expect(page).to have_content("No tasks due this month.")
   end
 end

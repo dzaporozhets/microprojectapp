@@ -2,7 +2,7 @@ module ApplicationHelper
   def home_tabs(selected = nil)
     tabs = [
       { name: 'Projects', path: projects_path },
-      { name: 'Schedule', path: schedule_path }
+      { name: 'Tasks', path: tasks_path }
     ]
 
     render_tabs(tabs, selected)

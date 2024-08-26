@@ -13,6 +13,10 @@ module TasksHelper
 
     if referer_uri.path.ends_with?(project_schedule_path(@project))
       project_schedule_path(@project)
+    elsif referer_uri.path.ends_with?(project_tasks_path(@project))
+      project_tasks_path(@project)
+    elsif referer_uri.path.ends_with?('/tasks')
+      tasks_path
     elsif referer_uri.path.ends_with?('/schedule')
       schedule_path
     elsif referer_uri.path.ends_with?('/activity')
