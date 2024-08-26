@@ -1,0 +1,86 @@
+<%= turbo_frame_tag "task_#{task.id}", data: { edit_task: true } do %>
+  <%= content_tag :div, class: "border border-gray-400 dark:border-gray-600 shadow-sm rounded-md" do %>
+    <div class="border-b dark:border-b-gray-600 text-sm text-gray-700 dark:text-gray-300 flex items-center p-3 bg-sky-100 dark:bg-sky-900 rounded-t-md">
+      <% if turbo_frame_request? %>
+        <div class="flex-none">
+          Edit mode
+        </div>
+
+        <div class="grow mx-2 text-center">
+        </div>
+
+        <div class="flex-none">
+          <%= link_to expand_project_task_path(task.project, task), data: { turbo: true }, title: 'Show' do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+          <% end %>
+
+          <%= link_to edit_project_task_path(task.project, task), class: "ml-6", data: { turbo: false }, title: 'Expand' do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+            </svg>
+          <% end %>
+
+          <%= link_to project_task_path(task.project, task), class: "ml-6" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+            </svg>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="flex-none">
+          Edit mode
+        </div>
+
+        <div class="grow mx-2">
+        </div>
+
+        <div class="flex-none">
+          <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, title: 'Show' do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+          <% end %>
+
+          <%= link_to collapse_task_path, class: "ml-6", data: { turbo: false } do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 inline-block">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25" />
+            </svg>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="p-3">
+      <%= form_with(model: [task.project, task], class: "contents", data: { turbo: turbo_frame_request? }) do |form| %>
+        <% if task.errors.any? %>
+          <div id="ar-errors-text" data-turbo-cache="false" class="p-3 mb-3 bg-gray-50 rounded border">
+            <%= render("project/tasks/form_errors", resource: task) %>
+          </div>
+        <% end %>
+
+        <div class="mb-3">
+          <%= form.label :name, class: "text-sm text-gray-500" %>
+          <%= form.text_area :name, class: "block base-input w-full", required: true, rows: 3 %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :description, class: "text-sm text-gray-500" %>
+          <%= form.text_area :description, class: "block base-input mt-2 w-full resize-y" %>
+        </div>
+
+        <div class="mb-3">
+          <%= form.label :due_date, class: "text-sm text-gray-500" %>
+          <%= form.select :due_date, options_for_select(due_date_options(task.due_date)), {}, { class: "mt-2 block w-full base-input" } %>
+        </div>
+
+        <%= form.submit 'Update', class: "btn-primary inline-block" %>
+      <% end %>
+
+      <%= button_to "Delete", [task.project, task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?', turbo: turbo_frame_request? }, class: "btn-remove", form_class: "float-right" %>
+    </div>
+  <% end %>
+<% end %>

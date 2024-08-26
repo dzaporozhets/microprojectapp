@@ -54,7 +54,7 @@ class Project::TasksController < Project::BaseController
         format.html { redirect_to details_project_task_url(@project, @task), notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
-        format.turbo_stream { render turbo_stream: turbo_stream.replace(@task, partial: "project/tasks/task", locals: { task: @task }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(@task, partial: "project/tasks/edit_form", locals: { task: @task }) }
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
