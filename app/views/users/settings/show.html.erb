@@ -2,9 +2,9 @@
   <%= users_tabs 'Settings' %>
 </div>
 
-<div class="my-5">
-  <%= render "shared/flash" %>
+<%= render "shared/flash" %>
 
+<div class="mb-5">
   <%= form_for(@user, url: users_settings_path, html: { method: :put }, data: { turbo: false }) do |f| %>
     <%= render "shared/errors", resource: @user %>
 
