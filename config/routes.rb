@@ -57,7 +57,11 @@ Rails.application.routes.draw do
   end
 
   resource :schedule, only: :show, controller: 'schedule'
-  resources :tasks, only: :index, controller: 'tasks'
+  resources :tasks, only: :index, controller: 'tasks' do
+    member do
+      patch :toggle_done
+    end
+  end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
