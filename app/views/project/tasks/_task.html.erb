@@ -16,14 +16,14 @@
         <% end %>
       </div>
 
-      <% if task.star %>
-        <div class="mr-3 flex">
-          <%= task_star_icon(task) %>
-        </div>
-      <% end %>
-
       <%= link_to expand_project_task_path(task.project, task), data: { turbo: true }, class: "text-sm min-w-0 grow flex h-14 items-center dark:text-gray-200 " do %>
         <p class="font-medium text-gray-900 dark:text-gray-200 line-clamp-2"><%= task.name %></p>
+      <% end %>
+
+      <% if task.star %>
+        <div class="ml-2 flex-none mr-1 text-right">
+          <%= task_star_icon(task) %>
+        </div>
       <% end %>
     </div>
   <% end %>
