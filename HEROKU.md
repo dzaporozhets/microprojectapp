@@ -92,3 +92,14 @@ If you decide to go with our own domain, make sure to update the app with `APP_D
 
     heroku config:set ADD_DOMAIN=
 
+
+
+#### Updating to a newest version
+
+Just pull latest changes from main branch and run db:migrate
+
+```
+git pull https://gitlab.com/dzaporozhets/microprojectapp.git main
+git push heroku main
+heroku run rails db:migrate
+```
