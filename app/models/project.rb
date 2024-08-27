@@ -44,16 +44,16 @@ class Project < ApplicationRecord
       { name: "Grocery shopping for weekly supplies" },
       { name: "Finish annual financial report for manager" },
       { name: "Thoroughly clean the entire house" },
-      { name: "Prepare comprehensive project meeting presentation" },
+      { name: "Prepare comprehensive project meeting presentation", due_date: Date.current },
       { name: "Book doctor appointment for next Monday" },
-      { name: "Update website with new content and features" },
+      { name: "Update website with new content and features", due_date: 1.week.from_now.to_date },
       { name: "Organize and lead team meeting on project progress" },
       { name: "Pay monthly electricity and water bills online" },
-      { name: "One-hour workout session at the gym" },
-      { name: "Read initial chapters of the book" },
+      { name: "One-hour workout session at the gym", star: true },
+      { name: "Read initial chapters of the book", done: true },
       { name: "Follow up with client on project proposal" },
       { name: "Plan and book summer vacation destinations" },
-      { name: "Sort and organize computer files" },
+      { name: "Sort and organize computer files", done: true },
       { name: "Draft and publish blog post on productivity tips" }
     ]
 
