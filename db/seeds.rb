@@ -55,7 +55,7 @@ if ENV['DEV_DATA'].present?
     print '.'
 
     tasks.each do |task_name|
-      project.tasks.find_or_create_by!(name: task_name, user: user)
+      project.tasks.find_or_create_by!(name: task_name, user: user, star: [true, false, false].sample, done: [true, false].sample)
       print '.'
     end
   end
