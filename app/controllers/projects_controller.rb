@@ -11,7 +11,7 @@ class ProjectsController < ApplicationController
   # GET /projects or /projects.json
   def index
     @projects = current_user.all_active_projects
-    @archived_projects = current_user.projects.archived
+    @archived_projects = current_user.projects.archived.page(params[:page]).per(39)
   end
 
   # GET /projects/1 or /projects/1.json
