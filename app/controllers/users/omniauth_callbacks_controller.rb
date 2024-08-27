@@ -40,6 +40,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:alert] = "Login with Google failed"
       redirect_to new_user_session_path
     end
+
+  rescue User::SignupsDisabledError => e
+    flash[:alert] = e.message
+    redirect_to new_user_session_path
   end
 
   private

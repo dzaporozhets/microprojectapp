@@ -62,6 +62,16 @@ RSpec.describe User, type: :model do
           expect(user.uid).to eq('123456789')
           expect(user.avatar_url).to eq('http://example.com/avatar.jpg')
         end
+
+        context 'when sign-ups are disabled' do
+          it 'raises a SignupsDisabledError' do
+            ClimateControl.modify APP_DISABLE_SIGNUP: '1' do
+              expect {
+                User.from_omniauth(auth)
+              }.to raise_error(User::SignupsDisabledError, 'New registrations are currently disabled.')
+            end
+          end
+        end
       end
 
       context 'when the user exists' do

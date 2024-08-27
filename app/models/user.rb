@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  class SignupsDisabledError < StandardError; end
+
   def self.skip_email_confirmation?
     ENV['APP_EMAIL_CONFIRMATION'].blank?
   end
@@ -54,6 +56,11 @@ class User < ApplicationRecord
                     oauth_linked_at: Time.now)
       end
     else
+      # Check if sign-up is disabled for new users
+      if ENV['APP_DISABLE_SIGNUP'].present?
+        raise SignupsDisabledError, 'New registrations are currently disabled.'
+      end
+
       user = User.new(provider: provider, uid: uid, email: email, created_from_oauth: true)
       user.avatar_url = auth.info&.image
       user.password = Devise.friendly_token[0,20]
