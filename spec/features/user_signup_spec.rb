@@ -49,4 +49,13 @@ RSpec.feature "User Signup", type: :feature do
       expect(page).to have_content("Email is not from an allowed domain.")
     end
   end
+
+  scenario "Sign up is disabled when APP_DISABLE_SIGNUP is present" do
+    ClimateControl.modify APP_DISABLE_SIGNUP: '1' do
+      visit new_user_registration_path
+
+      expect(page).to have_content('New registrations are currently disabled.')
+      expect(page).to have_current_path(new_user_session_path)
+    end
+  end
 end
