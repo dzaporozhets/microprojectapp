@@ -329,5 +329,21 @@ RSpec.describe User, type: :model do
         expect(user.all_active_projects).to eq([personal_project, active_project_owned, invited_active_project])
       end
     end
+
+    describe "#created_today?" do
+      context "when the user is created today" do
+        it "returns true" do
+          user = create(:user, created_at: Time.current)
+          expect(user.created_today?).to be true
+        end
+      end
+
+      context "when the user is not created today" do
+        it "returns false" do
+          user = create(:user, created_at: 2.days.ago)
+          expect(user.created_today?).to be false
+        end
+      end
+    end
   end
 end

@@ -137,6 +137,10 @@ class User < ApplicationRecord
       self.invited_projects.active.ordered_by_id
   end
 
+  def created_today?
+    created_at.to_date == Date.current
+  end
+
   private
 
   def email_domain_check

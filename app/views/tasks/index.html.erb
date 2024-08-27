@@ -11,6 +11,10 @@
   </div>
 
   <div class="mb-4 md:mb-0 md:w-2/3 mx-auto">
+    <% if current_user.created_today? %>
+      <p class="text-sm text-gray-500 mb-4">Active tasks from your projects. To create a new task or view completed ones, visit the project page.</p>
+    <% end %>
+
     <section class="task-list">
       <ol class="text-sm leading-6 text-gray-500">
         <% if @tasks.any? %>
