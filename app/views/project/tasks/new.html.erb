@@ -6,12 +6,17 @@
 
     <div class="my-5">
       <%= form.label :name, class:"dark:text-gray-200" %>
-      <%= form.text_area :name, rows: 2, class: "block shadow rounded-md border border-gray-400 dark:border-gray-600 outline-none px-3 py-2 mt-2 w-full", required: true %>
+      <%= form.text_area :name, rows: 2, class: "base-input block w-full", required: true %>
     </div>
 
     <div class="my-5">
       <%= form.label :description, class:"dark:text-gray-200" %>
-      <%= form.text_area :description, rows: 4, class: "block shadow rounded-md border border-gray-400 dark:border-gray-600 outline-none px-3 py-2 mt-2 w-full" %>
+      <%= form.text_area :description, rows: 4, class: "base-input block w-full" %>
+    </div>
+
+    <div class="my-5">
+      <%= form.label :due_date, class: "dark:text-gray-200" %>
+      <%= form.select :due_date, options_for_select(due_date_options(@task.due_date)), {}, { class: "block w-full base-input" } %>
     </div>
 
     <div class="inline">
