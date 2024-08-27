@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  before_action :check_signup_disabled, only: [:new, :create]
 
   layout 'user', only: [:edit, :update]
 
@@ -81,6 +82,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
       edit_registration_path(resource)
     else
       root_path
+    end
+  end
+
+  def check_signup_disabled
+    if ENV['APP_DISABLE_SIGNUP'].present?
+      flash[:alert] = "New registrations are currently disabled."
+
+      redirect_to new_user_session_path
     end
   end
 end
