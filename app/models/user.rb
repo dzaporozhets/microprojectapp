@@ -15,7 +15,7 @@ class User < ApplicationRecord
     devise_modules << :confirmable
   end
 
-  devise *devise_modules, omniauth_providers: [:google_oauth2]
+  devise *devise_modules, omniauth_providers: [:google_oauth2, :azure_activedirectory_v2]
 
   after_create :create_personal_project
   after_create :create_sample_project, unless: -> { Rails.env.test? }
@@ -34,9 +34,10 @@ class User < ApplicationRecord
   validate :email_domain_check, on: :create
 
   def self.from_omniauth(auth)
-    uid = auth.uid
-    provider = auth.provider
-    email = auth.info&.email
+    uid = auth[:uid]
+    provider = auth[:provider]
+    email = auth[:email]
+    image = auth[:image]
 
     return nil unless provider.present? && uid.present? && email.present?
 
@@ -52,7 +53,7 @@ class User < ApplicationRecord
         # raise 'User with such email already exists'
         user.update(uid: uid,
                     provider: provider,
-                    avatar_url: auth.info&.image,
+                    avatar_url: image,
                     oauth_linked_at: Time.now)
       end
     else
@@ -62,7 +63,7 @@ class User < ApplicationRecord
       end
 
       user = User.new(provider: provider, uid: uid, email: email, created_from_oauth: true)
-      user.avatar_url = auth.info&.image
+      user.avatar_url = image
       user.password = Devise.friendly_token[0,20]
       user.disable_password = true
       user.skip_confirmation! if Devise.mappings[:user].confirmable?

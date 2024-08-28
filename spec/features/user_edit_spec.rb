@@ -8,7 +8,7 @@ RSpec.feature "User Edit", type: :feature do
       sign_in google_user
       visit edit_user_registration_path
 
-      expect(page).to have_content("You logged in with Google with this email.")
+      expect(page).to have_content("You sign-up with Google account. You can't change your email.")
       expect(page).to have_field("Email", disabled: true)
     end
   end

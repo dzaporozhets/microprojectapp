@@ -60,7 +60,14 @@ Google oauth:
 
 * `GOOGLE_CLIENT_ID`
 * `GOOGLE_CLIENT_SECRET`
-* `GOOGLE_REDIRECT_URI`
+* `GOOGLE_REDIRECT_URI` - Should be `https://YOUR_DOMAIN_NAME/users/auth/google_oauth2/callback`
+
+Microsoft oauth:
+
+Redirect URI should be like `https://YOUR_DOMAIN_NAME/users/auth/azure_activedirectory_v2/callback`
+
+* `MICROSOFT_CLIENT_ID`
+* `MICROSOFT_CLIENT_SECRET`
 
 Mailgun:
 

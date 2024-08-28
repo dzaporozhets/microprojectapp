@@ -20,7 +20,7 @@
         <%- if @user.oauth_user? %>
           <div class="">
             <%= f.check_box :disable_password, class: 'checkbox' %>
-            <%= f.label :disable_password, "Disable Password Authentication (only login with Google)", class: 'ml-2 text-sm' %>
+            <%= f.label :disable_password, "Disable Password Authentication", class: 'ml-2 text-sm' %>
           </div>
         <% end %>
 

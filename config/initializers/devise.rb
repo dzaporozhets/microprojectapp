@@ -325,8 +325,15 @@ Devise.setup do |config|
       { scope: 'userinfo.email,userinfo.profile', redirect_uri: ENV['GOOGLE_REDIRECT_URI'] }
   end
 
+  if ENV['MICROSOFT_CLIENT_ID'].present?
+    config.omniauth :azure_activedirectory_v2,
+      client_id: ENV['MICROSOFT_CLIENT_ID'],
+      client_secret: ENV['MICROSOFT_CLIENT_SECRET']
+  end
+
   # We need this for spec/features/user_oauth_login_spec.rb
   if ENV["RAILS_ENV"] == "test"
     config.omniauth :google_oauth2, '1234', 'abcd'
+    config.omniauth :azure_activedirectory_v2, client_id: '1234', client_secret: 'abcd'
   end
 end

@@ -24,7 +24,7 @@
           <% end %>
 
           <% if resource.provider.present? %>
-            <p class="text-sm text-blue-700 dark:text-blue-300 mt-2 font-semibold">You logged in with Google with this email.</p>
+            <p class="text-sm text-gray-700 dark:text-gray-300 mt-2 font-medium">You sign-up with <%= oauth_provider_name resource.provider %> account. You can't change your email.</p>
           <% end %>
         </div>
 

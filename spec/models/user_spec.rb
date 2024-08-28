@@ -41,14 +41,12 @@ RSpec.describe User, type: :model do
   describe 'class_methods' do
     describe '.from_omniauth' do
       let(:auth) do
-        OmniAuth::AuthHash.new(
+        {
           provider: 'google_oauth2',
           uid: '123456789',
-          info: {
-            email: 'user@mydomain.com',
-            image: 'http://example.com/avatar.jpg'
-          }
-        )
+          email: 'user@mydomain.com',
+          image: 'http://example.com/avatar.jpg'
+        }
       end
 
       context 'when the user does not exist' do
