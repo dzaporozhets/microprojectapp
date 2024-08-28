@@ -64,6 +64,8 @@ Google oauth:
 
 Microsoft oauth:
 
+Redirect URI should be like `https://YOUR_DOMAIN_NAME/users/auth/azure_activedirectory_v2/callback`
+
 * `MICROSOFT_CLIENT_ID`
 * `MICROSOFT_CLIENT_SECRET`
 
