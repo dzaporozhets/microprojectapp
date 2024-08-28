@@ -30,7 +30,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   # Google oauth
   def google_oauth2
-    user = User.from_omniauth(auth)
+    auth_info = {
+      uid: auth.uid,
+      provider: auth.provider,
+      email: auth.info&.email,
+      image: auth.info&.image
+    }
+
+    user = User.from_omniauth(auth_info)
 
     if user.present?
       sign_out_all_scopes
@@ -38,6 +45,30 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect user, event: :authentication
     else
       flash[:alert] = "Login with Google failed"
+      redirect_to new_user_session_path
+    end
+
+  rescue User::SignupsDisabledError => e
+    flash[:alert] = e.message
+    redirect_to new_user_session_path
+  end
+
+  def azure_activedirectory_v2
+    auth_info = {
+      uid: auth['uid'],
+      provider: auth['provider'],
+      email: auth['info']['email'],
+      image: auth['info']['image']
+    }
+
+    user = User.from_omniauth(auth_info)
+
+    if user.present?
+      sign_out_all_scopes
+      user.remember_me!
+      sign_in_and_redirect user, event: :authentication
+    else
+      flash[:alert] = "Login with Microsoft failed"
       redirect_to new_user_session_path
     end
 

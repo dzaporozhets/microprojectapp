@@ -7,4 +7,8 @@ module UsersHelper
 
     render_tabs(tabs, selected)
   end
+
+  def oauth_provider_name(provider)
+    provider == 'azure_activedirectory_v2' ? 'Microsoft' : 'Google'
+  end
 end

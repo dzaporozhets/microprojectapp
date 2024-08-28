@@ -253,6 +253,8 @@ GEM
       hashie (>= 3.4.6)
       rack (>= 2.2.3)
       rack-protection
+    omniauth-azure-activedirectory-v2 (2.3.0)
+      omniauth-oauth2 (~> 1.8)
     omniauth-google-oauth2 (1.1.2)
       jwt (>= 2.0)
       oauth2 (~> 2.0)
@@ -450,6 +452,7 @@ DEPENDENCIES
   jbuilder
   kaminari
   omniauth
+  omniauth-azure-activedirectory-v2
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
   pg (~> 1.1)

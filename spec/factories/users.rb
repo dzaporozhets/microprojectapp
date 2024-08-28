@@ -13,5 +13,11 @@ FactoryBot.define do
       provider { 'google_oauth2' }
       created_from_oauth { true }
     end
+
+    trait :msft do
+      uid { '0000-0000-abcd-12345678' }
+      provider { 'azure_activedirectory_v2' }
+      created_from_oauth { true }
+    end
   end
 end
