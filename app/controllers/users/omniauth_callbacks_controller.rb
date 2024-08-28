@@ -57,8 +57,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     auth_info = {
       uid: auth['uid'],
       provider: auth['provider'],
-      email: auth['info']['email'],
-      image: auth['info']['image']
+      email: auth.dig('info', 'email'),
+      image: auth.dig('info', 'image')
     }
 
     user = User.from_omniauth(auth_info)
