@@ -47,12 +47,12 @@ RSpec.feature "User login with Microsoft", type: :feature do
   end
 
   scenario "User handles OmniAuth failure" do
-    OmniAuth.config.mock_auth[:google_oauth2] = :invalid_credentials
+    OmniAuth.config.mock_auth[:azure_activedirectory_v2] = :invalid_credentials
 
     visit new_user_session_path
     click_button "Sign in with Microsoft"
 
-    expect(page).to have_content("Login with Microsoft failed")
+    expect(page).to have_content("Invalid credentials")
     expect(page).to have_current_path(new_user_session_path)
   end
 end
