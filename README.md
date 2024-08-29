@@ -2,6 +2,10 @@
 
 * [Website](https://about.microproject.app/)
 * [MIT License](LICENSE)
+* [Running](#running)
+* [Admin users](#admin-users)
+* [Configuration](#env-variables)
+* [Contact](#contact)
 
 ## Running
 
@@ -75,6 +79,12 @@ Mailgun:
 * `MAILGUN_SMTP_SERVER`
 * `MAILGUN_SMTP_LOGIN`
 * `MAILGUN_SMTP_PASSWORD`
+
+## Contact
+
+If you have questions, feedback, or suggestions, feel free to reach out:
+* **Create an Issue**: Open an issue on this project to report bugs, request features, or ask questions.
+* **Twitter** Mention me on [Twitter](https://x.com/dzaporozhets) at `@dzaporozhets`.
 
 ## License
 
