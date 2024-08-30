@@ -1,7 +1,7 @@
 <div class="mb-4">
   <dt class="text-sm font-medium leading-7 text-gray-900 dark:text-gray-200 mb-2 pb-2 border-b dark:border-gray-800">Team</dt>
   <ul role="list">
-    <li class="flex justify-between py-3 px-4">
+    <li class="flex justify-between py-2 px-4">
       <div class="flex min-w-0 gap-x-4">
         <%= avatar_tag(@project.user, "h-6 w-6 flex-none rounded-full bg-gray-200 dark:bg-gray-800") %>
         <div class="min-w-0 flex-auto">
@@ -11,7 +11,7 @@
     </li>
 
     <% @project.users.each do |user| %>
-      <li id="project_<%= dom_id user %>" class="flex justify-between py-3 px-4">
+      <li id="project_<%= dom_id user %>" class="flex justify-between py-2 px-4">
         <div class="flex min-w-0 gap-x-4">
           <%= avatar_tag(user, "h-6 w-6 flex-none rounded-full bg-gray-200 dark:bg-gray-800") %>
           <div class="min-w-0 flex-auto">
@@ -29,7 +29,7 @@
       </li>
     <% end %>
 
-    <li class="flex justify-between py-3 px-4">
+    <li class="flex justify-between py-2 px-4">
       <div class="flex min-w-0 gap-x-4">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 flex-shrink-0 fill-gray-200 dark:fill-gray-800 text-gray-400 dark:text-gray-600">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
