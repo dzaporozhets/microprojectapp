@@ -20,9 +20,16 @@
         <p class="font-medium text-gray-900 dark:text-gray-200 line-clamp-2"><%= task.name %></p>
       <% end %>
 
-      <% if task.star && !task.done %>
-        <div class="ml-2 flex-none mr-1 text-right">
-          <%= task_star_icon(task) %>
+
+      <% unless task.done %>
+        <div class="ml-2 flex-none text-right">
+          <% if task.assigned_user_id %>
+            <%= avatar_tag(task.assigned_user, "h-5 w-5 inline-block text-xs rounded-full text-gray-500 border border-gray-300 dark:border-gray-700") %>
+          <% end %>
+
+          <% if task.star %>
+            <%= task_star_icon(task) %>
+          <% end %>
         </div>
       <% end %>
     </div>

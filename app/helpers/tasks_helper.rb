@@ -29,8 +29,6 @@ module TasksHelper
   def task_star_icon(task)
     return unless task.star
 
-    content_tag :span, class: 'inline-block text-yellow-400' do
-      render 'project/tasks/star', task: task
-    end
+    render 'project/tasks/star', task: task
   end
 end
