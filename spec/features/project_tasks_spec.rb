@@ -58,6 +58,7 @@ RSpec.feature "Project::Tasks", type: :feature do
 
     visit project_tasks_path(project, task, status: 'done')
 
+    expect(page).to have_content('Completed tasks only')
     expect(page).to have_content('Completed task')
     expect(page).not_to have_content('New task')
   end
@@ -68,7 +69,7 @@ RSpec.feature "Project::Tasks", type: :feature do
 
     visit project_tasks_path(project, task, assigned_user_id: user.id)
 
-    expect(page).to have_content("Showing only tasks assigned to #{user.email}")
+    expect(page).to have_content("Tasks assigned to #{user.email}")
     expect(page).to have_content('Assigned task')
     expect(page).not_to have_content('Just a task')
   end
