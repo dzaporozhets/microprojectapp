@@ -34,6 +34,14 @@ class Project < ApplicationRecord
     [user] + users
   end
 
+  def find_user(user_id)
+    return unless user_id
+
+    team.find do |user|
+      user.id == user_id.to_i
+    end
+  end
+
   def create_sample_tasks
     extra_params = {
       user_id: self.user_id,
