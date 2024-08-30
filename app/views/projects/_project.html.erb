@@ -14,7 +14,11 @@
         </div>
       </div>
       <div class="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
-        Created by <%= project.user.email %>
+        <% if project.user_id == current_user.id %>
+          Created by you on <%= project.created_at.to_date.to_formatted_s(:long) %>
+        <% else %>
+          Created by <%= project.user.email %>
+        <% end %>
       </div>
     <% end %>
   </div>
