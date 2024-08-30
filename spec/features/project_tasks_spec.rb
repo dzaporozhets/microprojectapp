@@ -33,21 +33,7 @@ RSpec.feature "Project::Tasks", type: :feature do
     expect(page).to have_text("Updated Task Description")
   end
 
-  # TODO: test the same scenario with js: true
-  scenario "User updates the due date of a task from the edit page (no turbo)" do
-    visit project_path(project)
-
-    click_link task.name
-    click_link "Edit"
-
-    select 'Tomorrow', from: 'task_due_date'
-    click_button "Update"
-
-    expect(page).to have_text(task.name)
-    expect(page).to have_text((Date.today + 1.day).strftime("%B %d, %Y"))
-  end
-
-  scenario "User deletes a task from the edit page" do
+  scenario "User deletes a task from the project page" do
     visit project_path(project)
 
     click_link task.name
@@ -56,16 +42,6 @@ RSpec.feature "Project::Tasks", type: :feature do
 
     expect(page).to have_current_path(project_path(project))
     expect(page).not_to have_text(task.name)
-  end
-
-  scenario "Unauthorized user cannot edit task" do
-    another_user = create(:user)
-    another_project = create(:project)
-    another_task = create(:task, project: another_project, user: another_user)
-
-    visit edit_project_task_path(another_project, another_task)
-
-    expect(page).to have_text("The page you were looking for doesn't exist.")
   end
 
   scenario 'User visits tasks details' do

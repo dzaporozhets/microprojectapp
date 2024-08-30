@@ -129,14 +129,26 @@ class Project::TasksController < Project::BaseController
     @tasks_done = @project.tasks.done.order(updated_at: :desc).page(params[:page]).per(100)
   end
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_task
     @task = project.tasks.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def task_params
-    params.require(:task).permit(:name, :description, :done, :due_date)
+    @task_params ||= filter_params(params.require(:task).permit(:name, :description, :done, :due_date, :assigned_user_id))
+  end
+
+  def filter_params(permitted_params)
+    if permitted_params[:assigned_user_id].present?
+      assigned_user_id = permitted_params[:assigned_user_id].to_i
+
+      unless project.team.map(&:id).include?(assigned_user_id)
+        permitted_params.delete(:assigned_user_id)
+
+        flash[:alert] = 'Assigned user must be a member of the project team.'
+      end
+    end
+
+    permitted_params
   end
 
   def set_layout

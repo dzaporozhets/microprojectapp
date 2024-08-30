@@ -77,6 +77,11 @@
           <%= form.select :due_date, options_for_select(due_date_options(task.due_date)), {}, { class: "mt-2 block w-full base-input" } %>
         </div>
 
+        <div class="mb-3">
+          <%= form.label :assigned_user_id, class: "text-sm text-gray-500" %>
+          <%= form.collection_select :assigned_user_id, task.project.team, :id, :email, { include_blank: "None" }, { class: "mt-2 block w-full base-input" } %>
+        </div>
+
         <%= form.submit 'Update', class: "btn-primary inline-block" %>
       <% end %>
 
