@@ -64,23 +64,25 @@
 
         <div class="mb-3">
           <%= form.label :name, class: "text-sm text-gray-500" %>
-          <%= form.text_area :name, class: "block base-input w-full", required: true, rows: 2 %>
+          <%= form.text_area :name, class: "mt-1 block base-input w-full", required: true, rows: 2 %>
         </div>
 
         <div class="mb-3">
           <%= form.label :description, class: "text-sm text-gray-500" %>
-          <%= form.text_area :description, class: "block base-input mt-2 w-full resize-y" %>
+          <%= form.text_area :description, class: "block base-input mt-1 w-full resize-y" %>
         </div>
 
         <div class="mb-3">
           <%= form.label :due_date, class: "text-sm text-gray-500" %>
-          <%= form.select :due_date, options_for_select(due_date_options(task.due_date)), {}, { class: "mt-2 block w-full base-input" } %>
+          <%= form.select :due_date, options_for_select(due_date_options(task.due_date)), {}, { class: "mt-1 block w-full base-input" } %>
         </div>
 
-        <div class="mb-3">
-          <%= form.label :assigned_user_id, class: "text-sm text-gray-500" %>
-          <%= form.collection_select :assigned_user_id, task.project.team, :id, :email, { include_blank: "None" }, { class: "mt-2 block w-full base-input" } %>
-        </div>
+        <% unless @project.personal? %>
+          <div class="mb-3">
+            <%= form.label :assigned_user_id, class: "text-sm text-gray-500" %>
+            <%= form.collection_select :assigned_user_id, task.project.team, :id, :email, { include_blank: "None" }, { class: "mt-1 block w-full base-input" } %>
+          </div>
+        <% end %>
 
         <%= form.submit 'Update', class: "btn-primary inline-block" %>
       <% end %>
