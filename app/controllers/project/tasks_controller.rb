@@ -120,13 +120,30 @@ class Project::TasksController < Project::BaseController
   private
 
   def tasks
-    if params[:status] == 'done'
-      @tasks_todo = @project.tasks.none
+    if params[:assigned_user_id].present?
+      @tasks_todo = assigned_tasks
+      @tasks_done = none_tasks
+    elsif params[:status] == 'done'
+      @tasks_todo = none_tasks
+      @tasks_done = done_tasks
     else
       @tasks_todo = @project.tasks.todo.basic_order
+      @tasks_done = done_tasks
     end
 
-    @tasks_done = @project.tasks.done.order(updated_at: :desc).page(params[:page]).per(100)
+    @tasks_done = @tasks_done.page(params[:page]).per(100)
+  end
+
+  def done_tasks
+    @project.tasks.done.order(updated_at: :desc)
+  end
+
+  def none_tasks
+    @project.tasks.none
+  end
+
+  def assigned_tasks
+    @project.tasks.todo.where(assigned_user_id: params[:assigned_user_id].to_i)
   end
 
   def set_task
@@ -139,9 +156,7 @@ class Project::TasksController < Project::BaseController
 
   def filter_params(permitted_params)
     if permitted_params[:assigned_user_id].present?
-      assigned_user_id = permitted_params[:assigned_user_id].to_i
-
-      unless project.team.map(&:id).include?(assigned_user_id)
+      unless project.find_user(permitted_params[:assigned_user_id])
         permitted_params.delete(:assigned_user_id)
 
         flash[:alert] = 'Assigned user must be a member of the project team.'

@@ -61,4 +61,15 @@ RSpec.feature "Project::Tasks", type: :feature do
     expect(page).to have_content('Completed task')
     expect(page).not_to have_content('New task')
   end
+
+  scenario 'User visits tasks page filtering by assigned user' do
+    create(:task, name: 'Assigned task', project: project, user: user, assigned_user: user)
+    create(:task, name: 'Just a task', project: project, user: user)
+
+    visit project_tasks_path(project, task, assigned_user_id: user.id)
+
+    expect(page).to have_content("Showing only tasks assigned to #{user.email}")
+    expect(page).to have_content('Assigned task')
+    expect(page).not_to have_content('Just a task')
+  end
 end
