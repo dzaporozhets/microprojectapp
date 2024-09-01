@@ -5,6 +5,10 @@ class User < ApplicationRecord
     ENV['APP_SKIP_EMAIL_CONFIRMATION'].present?
   end
 
+  def self.disabled_signup?
+    ENV['APP_DISABLE_SIGNUP'].present?
+  end
+
   devise_modules = [
     :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable,
@@ -65,7 +69,7 @@ class User < ApplicationRecord
       end
     else
       # Check if sign-up is disabled for new users
-      if ENV['APP_DISABLE_SIGNUP'].present?
+      if User.disabled_signup?
         raise SignupsDisabledError, 'New registrations are currently disabled.'
       end
 

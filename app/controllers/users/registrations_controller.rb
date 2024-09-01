@@ -86,7 +86,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def check_signup_disabled
-    if ENV['APP_DISABLE_SIGNUP'].present?
+    if User.disabled_signup?
       flash[:alert] = "New registrations are currently disabled."
 
       redirect_to new_user_session_path
