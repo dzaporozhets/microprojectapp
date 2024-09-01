@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Users::ConfirmationsController < Devise::ConfirmationsController
+  before_action :render_404_if_skip_confirmation
+
   # GET /resource/confirmation/new
   # def new
   #   super
@@ -27,4 +29,10 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # def after_confirmation_path_for(resource_name, resource)
   #   super(resource_name, resource)
   # end
+
+  def render_404_if_skip_confirmation
+    if User.skip_email_confirmation?
+      render plain: 'Feature is disabled', status: :not_found
+    end
+  end
 end

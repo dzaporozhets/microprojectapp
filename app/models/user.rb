@@ -2,23 +2,22 @@ class User < ApplicationRecord
   class SignupsDisabledError < StandardError; end
 
   def self.skip_email_confirmation?
-    ENV['APP_EMAIL_CONFIRMATION'].blank?
+    ENV['APP_SKIP_EMAIL_CONFIRMATION'].present?
   end
 
   devise_modules = [
     :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable,
-    :lockable, :omniauthable
+    :lockable, :omniauthable, :confirmable
   ]
-
-  unless skip_email_confirmation?
-    devise_modules << :confirmable
-  end
 
   devise *devise_modules, omniauth_providers: [:google_oauth2, :azure_activedirectory_v2]
 
   after_create :create_personal_project
   after_create :create_sample_project, unless: -> { Rails.env.test? }
+
+  # In case the app is configured to skip email confirmation
+  before_create :skip_email_confirmation, if: -> { User.skip_email_confirmation? }
 
   has_many :projects, dependent: :destroy
   has_many :tasks, dependent: :destroy
@@ -60,6 +59,9 @@ class User < ApplicationRecord
                     provider: provider,
                     avatar_url: image,
                     oauth_linked_at: Time.now)
+
+        user.skip_confirmation!
+        user.save
       end
     else
       # Check if sign-up is disabled for new users
@@ -71,7 +73,7 @@ class User < ApplicationRecord
       user.avatar_url = image
       user.password = Devise.friendly_token[0,20]
       user.disable_password = true
-      user.skip_confirmation! if Devise.mappings[:user].confirmable?
+      user.skip_confirmation!
       user.save
     end
 
@@ -145,6 +147,17 @@ class User < ApplicationRecord
 
   def created_today?
     created_at.to_date == Date.current
+  end
+
+  def skip_email_confirmation
+    if new_record? || email_changed?
+      self.skip_confirmation!
+      self.skip_confirmation_notification!
+    end
+  end
+
+  def postpone_email_change?
+    !User.skip_email_confirmation?
   end
 
   private

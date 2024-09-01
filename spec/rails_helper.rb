@@ -90,6 +90,12 @@ RSpec.configure do |config|
     #end
   #end
 
+  config.around(:each) do |example|
+    ClimateControl.modify APP_SKIP_EMAIL_CONFIRMATION: '1' do
+      example.run
+    end
+  end
+
   # Include FactoryBot syntax to simplify calls to factories
   config.include FactoryBot::Syntax::Methods
 
