@@ -15,7 +15,8 @@ RSpec.feature "Project", type: :feature do
     click_button "Update Project"
 
     expect(page).to have_text("Updated Project Name")
-    expect(page).to have_current_path(project_path(project))
+    expect(page).to have_text("Project was successfully updated")
+    expect(page).to have_current_path(edit_project_path(project))
   end
 
   scenario "User deletes a project from the edit page" do

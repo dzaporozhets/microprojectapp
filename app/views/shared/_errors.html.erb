@@ -1,5 +1,5 @@
 <% if resource.errors.any? %>
-  <div id="ar-errors-text" data-turbo-cache="false" class="p-4 my-5 bg-gray-50 rounded border">
+  <div id="ar-errors-text" data-turbo-cache="false" class="p-4 my-5 bg-gray-50 rounded border dark:bg-gray-800 dark:border-gray-700">
     <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside text-sm">
       <% resource.errors.full_messages.each do |message| %>
         <li><%= message %></li>

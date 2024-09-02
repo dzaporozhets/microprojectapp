@@ -48,7 +48,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to project_url(@project), notice: "Project was successfully updated." }
+        format.html { redirect_back fallback_location: project_url(@project), notice: "Project was successfully updated." }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -90,7 +90,7 @@ class ProjectsController < ApplicationController
   def set_layout
     case action_name
     when 'show' then 'project_with_sidebar'
-    when 'edit' then 'project'
+    when 'edit', 'update' then 'project'
     else
       'application'
     end
