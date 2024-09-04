@@ -3,7 +3,7 @@
     <%= link_to project do %>
       <div class="flex items-start gap-x-3">
         <div class="leading-6 text-base <%= project.archived ? 'font-medium text-gray-600 dark:text-gray-400' : 'font-semibold text-gray-900 dark:text-gray-200' %>">
-          <span><%= project.name %></span>
+          <span><%= project.name.truncate(100) %></span>
 
           <% if project.archived? %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-gray-400 dark:text-gray-600 inline ml-2">
