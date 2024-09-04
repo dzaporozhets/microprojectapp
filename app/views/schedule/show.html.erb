@@ -21,7 +21,7 @@
         <% if @tasks.any? %>
           <% @tasks.group_by_projects.each do |project, tasks| %>
             <div class="project-group mb-6">
-              <h2 class="py-2 text-base font-semibold text-gray-900 dark:text-gray-200"><%= link_to project.name, project, class: 'hover:underline' %></h2>
+              <h2 class="py-2 text-base font-semibold text-gray-900 dark:text-gray-200"><%= link_to project.name.truncate(100), project, class: 'hover:underline' %></h2>
               <ol class="mt-2 text-sm leading-6 text-gray-500 grid grid-cols-1 gap-2 lg:gap-3 lg:grid-cols-2">
                 <% tasks.each do |task| %>
                   <%= render 'schedule/task', task: task %>
