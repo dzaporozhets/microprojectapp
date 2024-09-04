@@ -57,12 +57,12 @@
 
   @media (prefers-color-scheme: dark) {
     .file-select::file-selector-button {
-      @apply text-gray-300 bg-gray-700;
+      @apply text-gray-300 bg-gray-800;
     }
   }
 
   .dark .file-select::file-selector-button {
-    @apply text-gray-300 bg-gray-700;
+    @apply text-gray-300 bg-gray-800;
   }
 
   .light .file-select::file-selector-button {
