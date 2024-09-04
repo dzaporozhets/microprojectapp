@@ -52,6 +52,20 @@
   }
 
   .file-select {
-    @apply focus:outline-none text-gray-700 dark:text-gray-300 file:bg-gray-100 dark:file:bg-gray-800 file:text-gray-700 dark:file:text-gray-300 file:cursor-pointer;
+    @apply focus:outline-none text-gray-700 dark:text-gray-300 file:bg-gray-100 file:text-gray-700 file:cursor-pointer;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .file-select::file-selector-button {
+      @apply text-gray-300 bg-gray-700;
+    }
+  }
+
+  .dark .file-select::file-selector-button {
+    @apply text-gray-300 bg-gray-700;
+  }
+
+  .light .file-select::file-selector-button {
+    @apply text-gray-700 bg-gray-100;
   }
 }
