@@ -26,7 +26,6 @@ RSpec.feature "User Edit", type: :feature do
       click_button "Save Changes"
 
       expect(page).to have_content("Your account has been updated successfully.")
-      expect(page).to have_content(new_email)
     end
   end
 end

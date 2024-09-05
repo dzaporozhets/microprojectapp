@@ -22,6 +22,7 @@ class User < ApplicationRecord
 
   # In case the app is configured to skip email confirmation
   before_create :skip_email_confirmation, if: -> { User.skip_email_confirmation? }
+  before_update :confirm_email_changed, if: -> { User.skip_email_confirmation? }
 
   has_many :projects, dependent: :destroy
   has_many :tasks, dependent: :destroy
@@ -64,7 +65,6 @@ class User < ApplicationRecord
                     avatar_url: image,
                     oauth_linked_at: Time.now)
 
-        user.skip_confirmation!
         user.save
       end
     else
@@ -154,14 +154,12 @@ class User < ApplicationRecord
   end
 
   def skip_email_confirmation
-    if new_record? || email_changed?
-      self.skip_confirmation!
-      self.skip_confirmation_notification!
-    end
+    self.skip_confirmation!
+    self.skip_confirmation_notification!
   end
 
-  def postpone_email_change?
-    !User.skip_email_confirmation?
+  def confirm_email_changed
+    self.confirm if self.unconfirmed_email_changed?
   end
 
   private
