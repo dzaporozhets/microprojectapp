@@ -78,6 +78,7 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
       user.disable_password = true
       user.skip_confirmation!
+      user.skip_confirmation_notification!
       user.save
     end
 
