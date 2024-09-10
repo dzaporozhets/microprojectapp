@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
   before_action :touch_flash
 
+  # Run authentication before any action except for Devise controllers
+  before_action :authenticate_user!, unless: :devise_controller?
+
   helper_method :turbo_frame_request?
 
   def record_not_found
