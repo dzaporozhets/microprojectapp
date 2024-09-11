@@ -80,6 +80,15 @@ Mailgun:
 * `MAILGUN_SMTP_LOGIN`
 * `MAILGUN_SMTP_PASSWORD`
 
+Database encryption:
+
+Some features like 2FA requires ecryption key for the database. You can either generate it with `./bin/rails db:encryption:init` and put into variables below or generate it yourself with random hex 32.
+
+* `ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY`
+* `ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY`
+* `ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT`
+
+
 ## Contact
 
 If you have questions, feedback, or suggestions, feel free to reach out:
