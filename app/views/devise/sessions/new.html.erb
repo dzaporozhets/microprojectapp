@@ -6,7 +6,7 @@
 <div class="sm:mx-auto sm:w-full sm:max-w-sm">
   <%= render 'devise/shared/alerts' %>
 
-  <%= render 'devise/sessions/oauth' if devise_mapping.omniauthable? %>
+  <%= render 'devise/sessions/oauth' if devise_mapping.omniauthable? && Devise.omniauth_providers.any? %>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }, data: { turbo: false }) do |f| %>
     <div class="mt-2">
