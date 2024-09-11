@@ -119,7 +119,7 @@ Rails.application.configure do
     config.active_record.encryption.deterministic_key = ENV['ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY']
     config.active_record.encryption.key_derivation_salt = ENV['ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT']
   else
-    puts 'Warning: Using randomly generated encyption key for AR'
+    puts 'Warning: Using randomly generated encyption key for ActiveRecord. See https://gitlab.com/dzaporozhets/microprojectapp#env-variables'
 
     config.active_record.encryption.primary_key = SecureRandom.hex(32)
     config.active_record.encryption.deterministic_key = SecureRandom.hex(32)
