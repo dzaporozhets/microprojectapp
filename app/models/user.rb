@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  devise :two_factor_authenticatable
   class SignupsDisabledError < StandardError; end
 
   def self.skip_email_confirmation?
@@ -10,7 +11,7 @@ class User < ApplicationRecord
   end
 
   devise_modules = [
-    :database_authenticatable, :registerable,
+    :two_factor_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable,
     :lockable, :omniauthable, :confirmable
   ]
@@ -23,6 +24,8 @@ class User < ApplicationRecord
   # In case the app is configured to skip email confirmation
   before_create :skip_email_confirmation, if: -> { User.skip_email_confirmation? }
   before_update :confirm_email_changed, if: -> { User.skip_email_confirmation? }
+
+  before_save :generate_otp_secret, if: -> { otp_required_for_login_changed? }
 
   has_many :projects, dependent: :destroy
   has_many :tasks, dependent: :destroy
@@ -161,6 +164,18 @@ class User < ApplicationRecord
 
   def confirm_email_changed
     self.confirm if self.unconfirmed_email_changed?
+  end
+
+  def two_factor_enabled?
+    otp_required_for_login
+  end
+
+  def generate_otp_secret
+    if otp_required_for_login
+      self.otp_secret ||= User.generate_otp_secret
+    else
+      self.otp_secret = nil
+    end
   end
 
   private

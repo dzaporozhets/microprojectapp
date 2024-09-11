@@ -63,4 +63,8 @@ Rails.application.configure do
   config.action_controller.raise_on_missing_callback_actions = true
 
   config.action_mailer.default_url_options = { :host => 'localhost' }
+
+  config.active_record.encryption.primary_key = SecureRandom.hex(32)
+  config.active_record.encryption.deterministic_key = SecureRandom.hex(32)
+  config.active_record.encryption.key_derivation_salt = SecureRandom.hex(32)
 end

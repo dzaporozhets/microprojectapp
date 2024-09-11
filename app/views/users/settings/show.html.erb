@@ -24,6 +24,10 @@
           </div>
         <% end %>
 
+        <div class="">
+          <%= f.check_box :otp_required_for_login, class: 'checkbox' %>
+          <%= f.label :otp_required_for_login, "Enable Two-Factor Authentication", class: 'ml-2 text-sm' %>
+        </div>
       </dl>
     </section>
 
