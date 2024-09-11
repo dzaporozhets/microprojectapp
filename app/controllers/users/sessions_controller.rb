@@ -29,14 +29,17 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def auth_with_two_factor
-    self.resource = find_user
+    user = find_user
+    return unless user
+
+    self.resource = user
 
     # If second step (after otp input)
     if user_params[:otp_attempt].present? && session[:otp_user_id]
       auth_user_with_otp(resource)
 
     # If first step (after login and password)
-    elsif resource&.valid_password?(user_params[:password])
+    elsif resource.valid_password?(user_params[:password])
       session[:otp_user_id] = resource.id
       send_two_factor_authentication_code(resource)
 

@@ -25,6 +25,8 @@ class User < ApplicationRecord
   before_create :skip_email_confirmation, if: -> { User.skip_email_confirmation? }
   before_update :confirm_email_changed, if: -> { User.skip_email_confirmation? }
 
+  before_save :generate_otp_secret, if: -> { otp_required_for_login_changed? }
+
   has_many :projects, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -166,6 +168,14 @@ class User < ApplicationRecord
 
   def two_factor_enabled?
     otp_required_for_login
+  end
+
+  def generate_otp_secret
+    if otp_required_for_login
+      self.otp_secret ||= User.generate_otp_secret
+    else
+      self.otp_secret = nil
+    end
   end
 
   private
