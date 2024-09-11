@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_30_110142) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_11_100258) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -117,6 +117,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_30_110142) do
     t.boolean "disable_password", default: false, null: false
     t.string "avatar_url"
     t.integer "dark_mode", default: 2, null: false
+    t.string "otp_secret"
+    t.integer "consumed_timestep"
+    t.boolean "otp_required_for_login"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -113,4 +113,8 @@ Rails.application.configure do
   if ENV['APP_DOMAIN'].present?
     config.action_mailer.default_url_options = { host: ENV['APP_DOMAIN'] }
   end
+
+  config.active_record.encryption.primary_key = ENV['ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY']
+  config.active_record.encryption.deterministic_key = ENV['ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY']
+  config.active_record.encryption.key_derivation_salt = ENV['ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT']
 end

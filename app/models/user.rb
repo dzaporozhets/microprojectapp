@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  devise :two_factor_authenticatable
   class SignupsDisabledError < StandardError; end
 
   def self.skip_email_confirmation?
@@ -10,7 +11,7 @@ class User < ApplicationRecord
   end
 
   devise_modules = [
-    :database_authenticatable, :registerable,
+    :two_factor_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable,
     :lockable, :omniauthable, :confirmable
   ]
@@ -161,6 +162,10 @@ class User < ApplicationRecord
 
   def confirm_email_changed
     self.confirm if self.unconfirmed_email_changed?
+  end
+
+  def two_factor_enabled?
+    otp_required_for_login
   end
 
   private

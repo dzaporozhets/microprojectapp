@@ -83,6 +83,7 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+gem "devise-two-factor"
 gem 'carrierwave', '~> 3.0'
 gem "fog-aws"
 gem 'omniauth'
