@@ -36,13 +36,31 @@
 This will run the application in the development mode.
 
 
-### 3. Production environment
+### 3. ENV variables
 
-For production environment make sure to follow next steps: 
+
+The rails app requires at least 2 secret keys to run: `RAILS_MASTER_KEY` and `SECRET_KEY_BASE`.
+
+There are 2 ways to handle it:
+
+1. Manually set all ENV variables. Probably the easiest option.
+    You can run `bin/generate-env-vars` to get a list of generated keys you can than export in your environment.
+
+2. Run the script to generate all necessary secrets into `config/credentials.yml.enc`
+
+    ```sh
+    rails setup:credentials_and_db_encryption
+    ```
+
+    Then export `RAILS_MASTER_KEY` that will allow the app to read from `config/credentials.yml.enc` and pick other variables from there.
+
+
+### 4. Production environment
+
+For production environment make sure to do next:
 
 1. Set `RAILS_ENV` variable to `production`.
-2. Set `SECRET_KEY_BASE` with your secret key. You can generate one with `bin/rails secret`.
-3. Rails production environment requires https by default. Use web server like Nginx or Apache in front of your application. See sample nginx config example below.
+2. Rails production environment requires https by default. Use web server like Nginx or Apache in front of your application. See sample nginx config example below.
 
 
 #### Nginx
