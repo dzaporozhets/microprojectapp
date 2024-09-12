@@ -45,6 +45,8 @@ Database:
 Rails variables:
 
 * `RAILS_ENV` - can be `development`, `test`, `production`
+* `RAILS_MASTER_KEY` - for `rails credentials:edit`
+* `SECRET_KEY_BASE` - for securing signed cookies, sessions, and other encrypted data. You can generate one with `rails secret`
 
 App variables:
 
