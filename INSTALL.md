@@ -1,12 +1,16 @@
-# Installation
+# Installation Guide
 
-### 1. Prerequisites
+## 1. Prerequisites
 
-- Ruby 3.1.6
-- Rails 7
-- PostgreSQL
+Ensure that the following are installed on your system:
 
-### 2. Prepare and start the rails app
+- **Ruby 3.1.6**
+- **Rails 7**
+- **PostgreSQL**
+
+## 2. Setting Up the Rails Application
+
+Follow these steps to prepare and start the Rails app:
 
 1. **Clone the repository:**
     ```sh
@@ -29,89 +33,97 @@
     rails server
     ```
 
-5. **Visit the app:**
-    Open `http://localhost:3000` in your web browser.
+5. **Visit the application:**
+    Open your web browser and navigate to `http://localhost:3000`.
 
+   This will run the application in development mode.
 
-This will run the application in the development mode.
+## 3. Environment Variables
 
+The Rails app requires at least two secret keys to run: `RAILS_MASTER_KEY` and `SECRET_KEY_BASE`.
 
-### 3. ENV variables
+You can handle these keys in one of two ways:
 
+1. **Manually set all environment variables:**
 
-The rails app requires at least 2 secret keys to run: `RAILS_MASTER_KEY` and `SECRET_KEY_BASE`.
+    This is likely the simplest option. Run the following command to generate a list of keys that you can then export into your environment:
+    ```sh
+    bin/generate-env-vars
+    ```
 
-There are 2 ways to handle it:
+2. **Automatically generate all necessary secrets:**
 
-1. Manually set all ENV variables. Probably the easiest option.
-    You can run `bin/generate-env-vars` to get a list of generated keys you can than export in your environment.
-
-2. Run the script to generate all necessary secrets into `config/credentials.yml.enc`
-
+    Run the script to generate all required secrets into `config/credentials.yml.enc`:
     ```sh
     rails setup:credentials_and_db_encryption
     ```
 
-    Then export `RAILS_MASTER_KEY` that will allow the app to read from `config/credentials.yml.enc` and pick other variables from there.
+    Then, export the `RAILS_MASTER_KEY` to allow the app to read from `config/credentials.yml.enc` and load other variables from there.
+
+## 4. Production Environment Setup
+
+For setting up the application in a production environment:
+
+1. Set the `RAILS_ENV` environment variable to `production`.
+
+2. **HTTPS Configuration:**
+
+   Rails requires HTTPS in production mode by default. It's recommended to use a web server like **Nginx** or **Apache** in front of your application. Below is a sample Nginx configuration:
+
+### Nginx Setup
 
 
-### 4. Production environment
+### Nginx Setup
 
-For production environment make sure to do next:
+1. **Install Nginx:**
 
-1. Set `RAILS_ENV` variable to `production`.
-2. Rails production environment requires https by default. Use web server like Nginx or Apache in front of your application. See sample nginx config example below.
+    ```
+    sudo apt install nginx
+    ```
 
+2. **Obtain SSL Certificate with Certbot:**
 
-#### Nginx
+    ```
+    sudo apt install certbot python3-certbot-nginx
+    sudo certbot --nginx -d your_domain.com
+    ```
 
+3. **Create an Nginx Configuration File for the App:**
 
-Start with intalling nginx
+   Create a new file at `/etc/nginx/sites-available/microprojectapp` with the following content:
 
-```
-sudo apt install nginx
-```
-
-Get SSL using certbot
-
-```
-sudo apt install certbot python3-certbot-nginx
-sudo certbot --nginx -d your_domain.com
-```
-
-Create an app config file `/etc/nginx/sites-available/microprojectapp`
-
-```
-server {
-    listen 80;
-    server_name microprojectapp.example.com;
-    return 301 https://$host$request_uri;
-}
-
-server {
-    listen 443 ssl;
-    server_name your_domain.com;
-
-    ssl_certificate /etc/letsencrypt/live/microprojectapp.example.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/microprojectapp.example.com/privkey.pem;
-
-    root /path/to/your/microprojectapp/public;
-
-    location / {
-        proxy_pass http://localhost:3000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+    ```
+    server {
+        listen 80;
+        server_name microprojectapp.example.com;
+        return 301 https://$host$request_uri;
     }
-}
 
-```
+    server {
+        listen 443 ssl;
+        server_name your_domain.com;
 
-Enable config and restart nginx
+        ssl_certificate /etc/letsencrypt/live/microprojectapp.example.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/microprojectapp.example.com/privkey.pem;
 
-```
-sudo ln -s /etc/nginx/sites-available/microprojectapp /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl restart nginx
-```
+        root /path/to/your/microprojectapp/public;
+
+        location / {
+            proxy_pass http://localhost:3000;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+    }
+    ```
+
+4. **Enable the Nginx Configuration and Restart Nginx:**
+
+    ```
+    sudo ln -s /etc/nginx/sites-available/microprojectapp /etc/nginx/sites-enabled/
+    sudo nginx -t
+    sudo systemctl restart nginx
+    ```
+
+You have successfully set up your Rails application in the production environment with HTTPS enabled!
