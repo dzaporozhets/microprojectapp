@@ -36,7 +36,28 @@ bundle exec rake user:make_admin EMAIL=user@example.com
 heroku run rake user:make_admin EMAIL=user@example.com
 ```
 
+## Rails credentials
+
+1. Generate `config/credentials.yml.encrypted` and `config/master.key`
+
+```
+rails credentials:edit
+```
+
+2. Copy `config/master.key` into `RAILS_MASTER_KEY` variable.
+
+```
+export RAILS_MASTER_KEY="your-unique-rails-master-key"
+```
+
+3. Make sure both `config/credentials.yml.encrypted` and `RAILS_MASTER_KEY` are present for deployed app.
+
+
 ## ENV variables
+
+The bare minimum for Rails app to work in production: `DATABASE_URL`, `RAILS_MASTER_KEY`.
+
+Below are all available ENV variables used by the app
 
 Database:
 
