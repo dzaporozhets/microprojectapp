@@ -52,7 +52,11 @@ The Docker Compose file includes Rails, a Postgres database, and an Nginx web se
 Requirements:
 
 1. Rails production environment requires HTTPS by default. We included Nginx in the compose file.
-2. `SECRET_KEY_BASE` containing your secret key. You can generate one with `bin/rails secret`.
+2. `SECRET_KEY_BASE` containing your secret key. You can generate one with `bin/rails secret` or with `bin/generate-env-vars`.
+
+
+Now we can genereate certificate and run the application:
+
 
     # Generate SSL cert
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./certs/server.key -out ./certs/server.crt -subj "/CN=localhost"
@@ -62,6 +66,7 @@ Requirements:
 
     # Create database
     SECRET_KEY_BASE=your_secret_key_base docker-compose -f docker-compose.prod.yml run web bundle exec rails db:setup
+
 
 Open the app at https://localhost
 
