@@ -1,6 +1,6 @@
 # Microproject App
 
-A brief introduction to what the app does, its purpose, and its main features.
+Microproject App is a lightweight project management tool designed for individuals and small teams to collaborate, track progress, and manage tasks efficiently without the complexity of traditional project management software.
 
 * [Website](https://about.microproject.app/)
 * [MIT License](LICENSE)
