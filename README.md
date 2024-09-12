@@ -57,6 +57,8 @@ export RAILS_MASTER_KEY="your-unique-rails-master-key"
 
 The bare minimum for Rails app to work in production: `DATABASE_URL`, `RAILS_MASTER_KEY`.
 
+You can run `./bin/generate-env-vars` to generate some of the ENV variables for you.
+
 Below are all available ENV variables used by the app
 
 Database:
