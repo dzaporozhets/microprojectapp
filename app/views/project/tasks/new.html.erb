@@ -1,5 +1,8 @@
 <div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-md">
-  <h1 class="font-bold text-2xl dark:text-gray-200">New task</h1>
+  <div class="mb-2 pb-2 border-b dark:border-gray-600">
+    <h1 class="font-bold text-xl dark:text-gray-200 leading-7">New Task</h1>
+  </div>
+
 
   <%= form_with(model: [@project, @task], class: "contents", data: { turbo: false }) do |form| %>
     <%= render "shared/errors", resource: @task %>
