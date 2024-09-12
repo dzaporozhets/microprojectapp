@@ -51,8 +51,6 @@ Done! The last command should open the application in your browser.
 
 ### Extras:
 
-
-
 #### File uploads via Amazon S3 (optional, but recommended).
 
 This is required for file uploads to work on Heroku.
