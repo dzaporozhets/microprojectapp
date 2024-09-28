@@ -34,12 +34,17 @@ Follow these steps to prepare and start the Rails app:
     rails db:setup
     ```
 
-4. **Run the application:**
+4. **Compile assets:**
+    ```sh
+    rails assets:precompile
+    ```
+
+5. **Run the application:**
     ```sh
     rails server -b 0.0.0.0
     ```
 
-5. **Visit the application:**
+6. **Visit the application:**
     Open your web browser and navigate to `http://localhost:3000`.
 
    This will run the application in development mode.
