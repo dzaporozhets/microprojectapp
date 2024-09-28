@@ -53,7 +53,7 @@ Follow these steps to prepare and start the Rails app:
 
 The Rails app requires at least two secret keys to run: `RAILS_MASTER_KEY` and `SECRET_KEY_BASE`.
 
-You can handle these keys in one of two ways:
+You can handle these keys manually or automatically. **Choose either step 1 or step 2**. 
 
 1. **Manually set all environment variables:**
 
@@ -68,6 +68,8 @@ You can handle these keys in one of two ways:
     ```sh
     rails setup:credentials_and_db_encryption
     ```
+   
+    **MAKE SURE TO SAVE config/credentials.yml.enc**
 
     Then, export the `RAILS_MASTER_KEY` to allow the app to read from `config/credentials.yml.enc` and load other variables from there.
 
