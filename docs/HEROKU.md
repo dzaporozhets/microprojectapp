@@ -78,10 +78,9 @@ You need to use your own domain, activate add-on, setup mailgun domain verificat
 3. **Go through adding new domain setup and receive credentails from mailgun**
 4. **Pass those credentilas to heroku**
     ```sh
-    heroku config:set MAILGUN_DOMAIN=
-    heroku config:set MAILGUN_SMTP_LOGIN=
-    heroku config:set MAILGUN_SMTP_PASSWORD=
-    heroku config:set MAILGUN_SMTP_SERVER=
+    heroku config:set SMTP_LOGIN=
+    heroku config:set SMTP_PASSWORD=
+    heroku config:set SMTP_SERVER=
     ```
 
 #### Use your domain
