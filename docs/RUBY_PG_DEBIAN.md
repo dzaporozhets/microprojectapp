@@ -67,6 +67,7 @@ This guide provides step-by-step instructions on how to install Ruby and Postgre
     # psql -U postgres
     # CREATE USER your_user_name;
     # ALTER USER your_user_name WITH SUPERUSER; (optional, depends on your needs)
+    # \q
 
     createdb default
     ```
