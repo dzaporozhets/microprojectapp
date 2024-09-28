@@ -81,8 +81,13 @@ For setting up the application in a production environment:
 
    Rails requires HTTPS in production mode by default. It's recommended to use a web server like **Nginx** or **Apache** in front of your application. Below is a sample Nginx configuration:
 
-### Nginx Setup
 
+### Email sending (postfix)
+
+```
+sudo apt-get update
+sudo apt-get install postfix
+```
 
 ### Nginx Setup
 
