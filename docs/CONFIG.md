@@ -74,12 +74,11 @@ Redirect URI should be like `https://YOUR_DOMAIN_NAME/users/auth/azure_activedir
 - `MICROSOFT_CLIENT_ID`
 - `MICROSOFT_CLIENT_SECRET`
 
-### Mailgun
+### SMTP config
 
-- `MAILGUN_DOMAIN`
-- `MAILGUN_SMTP_SERVER`
-- `MAILGUN_SMTP_LOGIN`
-- `MAILGUN_SMTP_PASSWORD`
+- `SMTP_SERVER`
+- `SMTP_LOGIN`
+- `SMTP_PASSWORD`
 
 ### Active Record (Database) Encryption
 

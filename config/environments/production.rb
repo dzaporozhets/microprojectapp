@@ -99,18 +99,24 @@ Rails.application.configure do
   #=============== APP CONFIG ==============
   #=========================================
 
+  app_domain = ENV['APP_DOMAIN']
+
   #
   # 1. Email config
   #
-  if ENV['MAILGUN_SMTP_SERVER'].present?
+  smtp_server = ENV['SMTP_SERVER'] || ENV['MAILGUN_SMTP_SERVER']
+  smtp_login  = ENV['SMTP_LOGIN'] || ENV['MAILGUN_SMTP_LOGIN']
+  smtp_pass   = ENV['SMTP_PASSWORD'] || ENV['MAILGUN_SMTP_PASSWORD']
+
+  if smtp_server.present?
     config.action_mailer.delivery_method = :smtp
 
     config.action_mailer.smtp_settings = {
-      address: ENV['MAILGUN_SMTP_SERVER'],
+      address: smtp_server,
       port: 587,
-      domain: ENV['APP_DOMAIN'],
-      user_name: ENV['MAILGUN_SMTP_LOGIN'],
-      password: ENV['MAILGUN_SMTP_PASSWORD'],
+      domain: app_domain,
+      user_name: smtp_login,
+      password: smtp_pass,
       authentication: 'plain',
       enable_starttls_auto: true
     }
@@ -124,8 +130,8 @@ Rails.application.configure do
   #
   # 2. Domain config
   #
-  if ENV['APP_DOMAIN'].present?
-    config.action_mailer.default_url_options = { host: ENV['APP_DOMAIN'] }
+  if app_domain.present?
+    config.action_mailer.default_url_options = { host: app_domain }
   end
 
   #
@@ -139,7 +145,6 @@ Rails.application.configure do
     # Do nothing. Rails app will read it from config/credentials.yml.enc file
   else
     puts 'Warning: Using randomly generated encyption key for ActiveRecord. See https://gitlab.com/dzaporozhets/microprojectapp#env-variables'
-
     config.active_record.encryption.primary_key = SecureRandom.hex(32)
     config.active_record.encryption.deterministic_key = SecureRandom.hex(32)
     config.active_record.encryption.key_derivation_salt = SecureRandom.hex(32)
