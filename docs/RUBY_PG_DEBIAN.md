@@ -63,5 +63,10 @@ This guide provides step-by-step instructions on how to install Ruby and Postgre
 
 7. **Create a default database:**
     ```bash
+    # You might need to create a user first:
+    # psql -U postgres
+    # CREATE USER your_user_name;
+    # ALTER USER your_user_name WITH SUPERUSER; (optional, depends on your needs)
+
     createdb default
     ```
