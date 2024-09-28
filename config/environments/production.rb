@@ -95,7 +95,13 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
-  # Email config for Sendgrid service
+  #=========================================
+  #=============== APP CONFIG ==============
+  #=========================================
+
+  #
+  # 1. Email config
+  #
   if ENV['MAILGUN_SMTP_SERVER'].present?
     config.action_mailer.delivery_method = :smtp
 
@@ -108,12 +114,23 @@ Rails.application.configure do
       authentication: 'plain',
       enable_starttls_auto: true
     }
+  else
+    # Default to sendmail
+    config.action_mailer.delivery_method = :sendmail
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.perform_deliveries = true
   end
 
+  #
+  # 2. Domain config
+  #
   if ENV['APP_DOMAIN'].present?
     config.action_mailer.default_url_options = { host: ENV['APP_DOMAIN'] }
   end
 
+  #
+  # 3. Database encryption config
+  #
   if ENV['ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY'].present?
     config.active_record.encryption.primary_key = ENV['ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY']
     config.active_record.encryption.deterministic_key = ENV['ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY']
