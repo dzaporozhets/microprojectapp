@@ -12,7 +12,7 @@ RSpec.describe UserMailer, type: :mailer do
     it 'renders the headers' do
       expect(mail.subject).to eq('Your OTP Code for Two-Factor Authentication')
       expect(mail.to).to eq([user.email])
-      expect(mail.from).to eq([Rails.application.credentials.dig(:mailer, :default_from) || 'from@example.com'])
+      expect(mail.from).to eq([Rails.application.credentials.dig(:mailer, :default_from) || 'noreply@example.com'])
     end
 
     it 'renders the body with the correct OTP code' do
