@@ -8,6 +8,8 @@ Ensure that the following are installed on your system:
 - **Rails 7**
 - **PostgreSQL**
 
+See this preparation guide for [Debian or Ubuntu][RUBY_PG_DEBIAN.md] and then come back for step 2.
+
 ## 2. Setting Up the Rails Application
 
 Follow these steps to prepare and start the Rails app:
