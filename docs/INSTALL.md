@@ -133,8 +133,30 @@ For setting up the application in a production environment:
 
     ```
     sudo ln -s /etc/nginx/sites-available/microprojectapp /etc/nginx/sites-enabled/
+
+    # Optional: You might want to remove the default nginx landing page 
+    sudo rm /etc/nginx/sites-enabled/default 
+
+    # Check that config is OK
     sudo nginx -t
+
+    # Restart nginx
     sudo systemctl restart nginx
     ```
 
-You have successfully set up your Rails application in the production environment with HTTPS enabled!
+5. Prepare Rails app for production environment
+
+    ```
+    RAILS_ENV=production rails db:setup
+    RAILS_ENV=production rails assets:precompile
+    RAILS_ENV=production rails s
+    ```
+
+6. Start Rails app
+
+    ```
+    RAILS_ENV=production rails s
+    ```
+
+
+You have successfully set up your Rails application in the production environment with HTTPS enabled! Go to your domain to see the app running. 
