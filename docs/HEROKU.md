@@ -51,6 +51,20 @@ Done! The last command should open the application in your browser.
 
 ### Extras:
 
+#### Base keys for sessions, db encryption etc.  
+
+```
+# Generate random values
+heroku run ./bin/generate-env-vars
+
+# Copy next values from previous command output and set it below
+heroku config:set RAILS_MASTER_KEY=
+heroku config:set SECRET_KEY_BASE=
+heroku config:set ACTIVE_RECORD_PRIMARY_KEY=
+heroku config:set ACTIVE_RECORD_DETERMINISTIC_KEY=
+heroku config:set ACTIVE_RECORD_KEY_DERIVATION_SALT=
+```
+
 #### File uploads via Amazon S3 (optional, but recommended).
 
 This is required for file uploads to work on Heroku.
