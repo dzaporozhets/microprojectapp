@@ -36,7 +36,7 @@ Follow these steps to prepare and start the Rails app:
 
 4. **Run the application:**
     ```sh
-    rails server
+    rails server -b 0.0.0.0
     ```
 
 5. **Visit the application:**
