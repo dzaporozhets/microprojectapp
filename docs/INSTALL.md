@@ -20,6 +20,10 @@ Follow these steps to prepare and start the Rails app:
 
 2. **Install dependencies:**
     ```sh
+
+    # For Debian/Ubuntu you need to install the following dependencies before bundle install:
+    # sudo apt install libyaml-dev
+ 
     bundle install
     ```
 
