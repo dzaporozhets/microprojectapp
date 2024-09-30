@@ -12,6 +12,16 @@ To make a user an admin, use the following commands:
     # When deployed to Heroku
     heroku run rake user:make_admin EMAIL=user@example.com
 
+## Confirm Users
+
+In case email confirmation is not working, you can always confirm user manually with terminal:
+
+    # When run locally
+    bundle exec rake user:confirm_email EMAIL=user@example.com
+
+    # When deployed to Heroku
+    heroku run rake user:confirm_email EMAIL=user@example.com
+
 ## Rails Credentials
 
 The application uses Rails encrypted credentials to securely store sensitive information like API keys and secret tokens.
