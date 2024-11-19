@@ -39,6 +39,9 @@ class User < ApplicationRecord
   has_many :project_users, dependent: :destroy
   has_many :invited_projects, through: :project_users, source: :project
 
+  has_many :pins, dependent: :destroy
+  has_many :pinned_projects, through: :pins, source: :project
+
   enum dark_mode: { off: 0, on: 1, auto: 2 }
 
   scope :admins, -> { where(admin: true) }

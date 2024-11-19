@@ -9,6 +9,8 @@ RSpec.describe User, type: :model do
     it { should have_many(:tasks).dependent(:destroy) }
     it { should have_many(:project_users).dependent(:destroy) }
     it { should have_many(:invited_projects).through(:project_users).source(:project) }
+    it { should have_many(:pins).dependent(:destroy) }
+    it { should have_many(:pinned_projects).through(:pins).source(:project) }
   end
 
   describe "callbacks" do

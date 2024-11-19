@@ -10,6 +10,8 @@ RSpec.describe Project, type: :model do
     it { should have_many(:links).dependent(:destroy) }
     it { should have_many(:project_users).dependent(:destroy) }
     it { should have_many(:users).through(:project_users) }
+    it { should have_many(:pins).dependent(:destroy) }
+    it { should have_many(:users_who_pinned).through(:pins).source(:user) }
   end
 
   describe "validations" do

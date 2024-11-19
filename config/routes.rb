@@ -41,6 +41,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resource :pins, controller: 'project/pins', only: [:create, :destroy]
+
     resource :activity, only: :show, controller: 'project/activity'
 
     resource :import, only: [:new, :create, :show], controller: 'project/import'
