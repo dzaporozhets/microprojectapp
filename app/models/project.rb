@@ -11,6 +11,9 @@ class Project < ApplicationRecord
   has_many :users, through: :project_users
   has_many :activities, dependent: :destroy
 
+  has_many :pins, dependent: :destroy
+  has_many :users_who_pinned, through: :pins, source: :user
+
   validates :name, presence: true, length: { maximum: 512 }
   validates :name, uniqueness: { scope: :user_id, message: "should be unique per user" }
   validates :user_id, presence: true

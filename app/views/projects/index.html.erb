@@ -8,6 +8,24 @@
   </div>
 
   <div id="projects" class="min-w-full grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+    <% if @pinned_projects.present? %>
+      <div class="flex items-center justify-between gap-x-6 py-3 md:py-5 md:col-span-3">
+        <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
+        <span class="px-4 text-center text-gray-400 dark:border-gray-600">Favorite Projects</span>
+        <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
+      </div>
+
+      <% @pinned_projects.each do |project| %>
+        <%= render project %>
+      <% end %>
+
+      <div class="flex items-center justify-between gap-x-6 py-3 md:py-5 md:col-span-3">
+        <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
+        <span class="px-4 text-center text-gray-400 dark:border-gray-600">Other Projects</span>
+        <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
+      </div>
+    <% end %>
+
     <% @projects.each do |project| %>
       <%= render project %>
     <% end %>
