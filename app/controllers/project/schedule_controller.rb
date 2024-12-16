@@ -1,5 +1,5 @@
 class Project::ScheduleController < Project::BaseController
-  layout 'project_with_sidebar', only: [:show]
+  layout 'project_tasks', only: [:show]
 
   def show
     # TODO: Move query logic in the model and add tests

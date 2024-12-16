@@ -167,6 +167,6 @@ class Project::TasksController < Project::BaseController
   end
 
   def set_layout
-    action_name == 'index' ? 'project_with_sidebar' : 'project'
+    action_name == 'index' ? 'project_tasks' : 'project'
   end
 end

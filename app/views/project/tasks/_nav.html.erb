@@ -1,6 +1,5 @@
 <div class="mb-4">
-  <dt class="text-sm font-medium leading-7 text-gray-900 dark:text-gray-200 mb-2 pb-2 border-b dark:border-gray-800">Tasks</dt>
-  <dd class="mt-2 text-sm text-gray-900 dark:text-gray-200">
+  <dd class="text-sm text-gray-900 dark:text-gray-200">
     <div class="flex items-center justify-between px-4 py-2 text-sm leading-6">
       <div class="flex w-0 flex-1 items-center">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-gray-400 dark:text-gray-600">
@@ -39,3 +38,8 @@
   </dd>
 </div>
 
+<div class="">
+  <%= render 'project/tasks/sidebar/team' unless @project.personal? %>
+  <%= render 'project/tasks/sidebar/files' %>
+  <%= render 'project/tasks/sidebar/links' %>
+</div>
