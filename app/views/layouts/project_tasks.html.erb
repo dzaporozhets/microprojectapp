@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html class="<%= dark_mode_class %>">
+  <head>
+    <%= render 'layouts/head' %>
+  </head>
+
+  <body class="dark:bg-gray-950">
+    <%= render 'layouts/project_nav' %>
+
+    <div class="my-4 pb-4 border-b dark:border-gray-600">
+      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4">
+        <div class="flex flex-grow items-center">
+          <%= project_tabs "Tasks" %>
+        </div>
+
+        <% unless @project.personal? %>
+          <% if current_user.pinned_projects.include?(@project) %>
+            <%= button_to project_pins_path(@project), method: :delete, class: "block btn-gray", title: "Unmark Favorite", data: { turbo_method: :delete, confirm: "Are you sure you want to unarchive this project?" } do %>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5 text-gray-400 dark:text-gray-600">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m3 3 1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25 4.5 21V8.742m.164-4.078a2.15 2.15 0 0 1 1.743-1.342 48.507 48.507 0 0 1 11.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664 19.5 19.5" />
+              </svg>
+
+            <% end %>
+          <% else %>
+            <%= button_to project_pins_path(@project), method: :post, class: "block btn-gray", title: "Mark as Favorite", data: { confirm: "Are you sure you want to archive this project?" } do %>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-gray-400 dark:text-gray-600">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
+              </svg>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <main class="container mx-auto max-w-screen-xl p-4 flex">
+      <div class="w-full">
+        <div class="mx-auto">
+          <div class="flex flex-col-reverse md:flex-row md:space-x-12">
+            <div class="mb-4 md:mb-0 md:w-1/3">
+              <%= render 'project/tasks/nav' %>
+            </div>
+            <div class="mb-4 md:mb-0 md:w-2/3">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

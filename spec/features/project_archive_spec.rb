@@ -10,7 +10,7 @@ RSpec.feature "Archive and Unarchive Projects", type: :feature do
   end
 
   scenario "User archives a project" do
-    visit project_path(project)
+    visit edit_project_path(project)
 
     expect(page).to have_content(project.name)
     expect(page).to have_button("Archive")
@@ -23,7 +23,7 @@ RSpec.feature "Archive and Unarchive Projects", type: :feature do
 
   scenario "User unarchives a project" do
     project.update(archived: true)
-    visit project_path(project)
+    visit edit_project_path(project)
 
     expect(page).to have_content(project.name)
     expect(page).to have_button("Unarchive")
