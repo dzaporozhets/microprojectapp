@@ -28,6 +28,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    @tab_name = 'Settings'
   end
 
   # POST /projects or /projects.json
@@ -47,6 +48,8 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1 or /projects/1.json
   def update
+    @tab_name = 'Settings'
+
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_back fallback_location: project_url(@project), notice: "Project was successfully updated." }
@@ -91,7 +94,7 @@ class ProjectsController < ApplicationController
   def set_layout
     case action_name
     when 'show' then 'project_tasks'
-    when 'edit', 'update' then 'project_with_sidebar'
+    when 'edit', 'update' then 'project'
     else
       'application'
     end

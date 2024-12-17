@@ -13,7 +13,7 @@ RSpec.feature "Project::Users", type: :feature do
   end
 
   scenario "User invites a new member to the project" do
-    visit project_path(project)
+    visit project_activity_path(project)
 
     click_link "Invite people"
     fill_in "User Email", with: user2.email
@@ -24,7 +24,7 @@ RSpec.feature "Project::Users", type: :feature do
   end
 
   scenario "User attempts to invite a non-existing user" do
-    visit project_path(project)
+    visit project_activity_path(project)
 
     click_link "Invite people"
     fill_in "User Email", with: "nonexistent@example.com"
@@ -35,7 +35,7 @@ RSpec.feature "Project::Users", type: :feature do
   end
 
   scenario "User attempts to invite a user who has disabled invitations" do
-    visit project_path(project)
+    visit project_activity_path(project)
 
     click_link "Invite people"
     fill_in "User Email", with: non_invited_user.email
@@ -46,7 +46,7 @@ RSpec.feature "Project::Users", type: :feature do
   end
 
   scenario "User removes a member from the project" do
-    visit project_path(project)
+    visit project_activity_path(project)
 
     expect(page).to have_text(invited_user.email)
 
@@ -58,7 +58,7 @@ RSpec.feature "Project::Users", type: :feature do
   end
 
   scenario "User attempts to invite an existing project member" do
-    visit project_path(project)
+    visit project_activity_path(project)
 
     click_link "Invite people"
     fill_in "User Email", with: invited_user.email

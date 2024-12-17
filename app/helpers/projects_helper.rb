@@ -6,6 +6,7 @@ module ProjectsHelper
       #{ name: 'Files', path: project_files_path(@project) },
     ]
 
+    tabs << { name: 'Team', path: project_activity_path(@project) } unless @project.personal?
     tabs << { name: 'Settings', path: edit_project_path(@project) } if @project.user == current_user
 
     render_tabs(tabs, selected)

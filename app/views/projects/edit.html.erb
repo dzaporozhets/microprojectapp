@@ -27,6 +27,18 @@
   </section>
 
   <section class="mt-10">
+    <h2 class="section-title">Archive this project</h2>
+
+    <% if @project.archived? %>
+      <span class="block text-sm text-gray-700 dark:text-gray-300 mb-5">This project is archived. Unarchiving it will allow the creation of new tasks.</span>
+      <%= button_to 'Unarchive', project_path(@project, project: { archived: false }), method: :patch, class: "btn-gray", data: { confirm: "Are you sure you want to unarchive this project?" } %>
+    <% else %>
+      <span class="block text-sm text-gray-700 dark:text-gray-300 mb-5">Archiving this project will prevent the creation of new tasks. This action is easily reversible.</span>
+      <%= button_to 'Archive', project_path(@project, project: { archived: true }), method: :patch, class: "btn-gray", data: { confirm: "Are you sure you want to archive this project?" }  %>
+    <% end %>
+  </section>
+
+  <section class="mt-10">
     <h2 class="section-title">Delete this project</h2>
     <span class="block text-sm text-gray-700 dark:text-gray-300 mb-5">Deleting this project will permanently erase all data.<br/> Please consider exporting tasks before proceeding.</span>
     <%= button_to "Delete this project", @project, method: :delete, data: { turbo_confirm: 'Remove the project? Are you sure?' }, class: "btn-remove border" %>
