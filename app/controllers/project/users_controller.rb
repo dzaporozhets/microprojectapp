@@ -2,6 +2,7 @@ class Project::UsersController < Project::BaseController
   before_action :not_personal
 
   def invite
+    @tab_name = 'Team'
   end
 
   def add_member

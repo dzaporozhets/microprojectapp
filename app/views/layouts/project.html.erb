@@ -7,6 +7,16 @@
   <body class="dark:bg-gray-950">
     <%= render 'layouts/project_nav' %>
 
+    <% if @tab_name %>
+      <div class="my-4 pb-4 border-b dark:border-gray-600">
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4">
+          <div class="flex flex-grow items-center">
+            <%= project_tabs @tab_name %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
     <main class="container mx-auto max-w-screen-xl p-4 flex">
       <div class="w-full">
         <%= yield %>
