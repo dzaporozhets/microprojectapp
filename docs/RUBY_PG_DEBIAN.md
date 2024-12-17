@@ -1,15 +1,37 @@
-
 # Guide: Installing Ruby and PostgreSQL on Debian using asdf
 
-This guide provides step-by-step instructions on how to install Ruby and PostgreSQL on a Debian system using the `asdf` version manager. By following this guide, you will be able to manage multiple versions of these software packages effortlessly.
+This guide provides step-by-step instructions on how to install Ruby and PostgreSQL on a Debian system. 
 
-## 1. Install asdf
+It consists of the following steps:
+
+- 1. Prepare the user
+- 2. Install ruby
+- 3. Install PostgreSQL
+- 4. Prepare PostgreSQL user
+
+
+## 1. Prepare the user
+
+You can use any user you want. But we would expect it to have some sudo capabilities to be able to install packages. 
+
+## 2. Install ruby
 
 `asdf` is a version manager that allows you to easily manage multiple versions of various programming languages and tools. Follow the instructions on the official `asdf` website to install `asdf`:
 
 - [asdf Installation Guide](https://asdf-vm.com/guide/getting-started.html)
 
-## 2. Install Ruby with asdf
+Make sure to add it to your shell (like `echo '. "$HOME/.asdf/asdf.sh"' >> ~/.bashrc`). 
+
+
+Install Ruby dependencies:
+
+```
+sudo apt update
+sudo apt install -y build-essential libssl-dev zlib1g-dev libreadline-dev \
+    libsqlite3-dev libcurl4-openssl-dev libffi-dev libyaml-dev
+```
+
+Now lets proceed with installation of Ruby:
 
 1. **Add the asdf Ruby plugin:**
     ```bash
@@ -28,46 +50,62 @@ This guide provides step-by-step instructions on how to install Ruby and Postgre
     ruby -v
     ```
 
-## 3. Install PostgreSQL with asdf
+## 3. Install PostgreSQL
 
-1. **Install the necessary dependencies for PostgreSQL:**
-    ```bash
-    sudo apt-get install linux-headers-$(uname -r) build-essential libssl-dev libreadline-dev zlib1g-dev \
-    libcurl4-openssl-dev uuid-dev icu-devtools libicu-dev
-    ```
-2. **Add the asdf PostgreSQL plugin:**
-    ```bash
-    asdf plugin add postgres
-    ```
+We are going to install PostgreSQL version 14. For newer versions please adjust steps accordingly
 
-3. **Set the locale environment variables (to prevent potential issues):**
+```
+# Import the repository signing key 
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
+# Add PostgreSQL repository
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+```
+
+Now update package manager via `sudo apt update`
+
+
+1. **Set the locale environment variables (optional in Ubuntu):**
     ```bash
     export LC_ALL="en_US.UTF-8"
     export LC_CTYPE="en_US.UTF-8"
     ```
-
-4. **Install PostgreSQL version 14.12:**
+2. **Install PostgreSQL:**
     ```bash
-    asdf install postgres 14.12
+    sudo apt install -y postgresql-14 postgresql-client-14 libpq-dev
+    ```
+3. **Configrm PostgreSQL version installed:**
+    ```bash
+    psql --version
+    ```
+4. **Ensure PostgreSQL 14 is running and enabled on boot:**
+    ```bash
+    sudo systemctl enable postgresql
+    sudo systemctl start postgresql
     ```
 
-5. **Set PostgreSQL 14.12 as the global version:**
+5. **Check its running:**
     ```bash
-    asdf global postgres 14.12
+    sudo systemctl status postgresql
     ```
+Now you need to create a PostgreSQL user for the app. 
 
-6. **Start the PostgreSQL service:**
-    ```bash
-    pg_ctl start
-    ```
+Access PostgreSQL console
 
-7. **Create a default database:**
-    ```bash
-    # You might need to create a user first:
-    # psql -U postgres
-    # CREATE USER your_user_name;
-    # ALTER USER your_user_name WITH SUPERUSER; (optional, depends on your needs)
-    # \q
+```
+sudo -u postgres psql
+```
 
-    createdb default
-    ```
+Execute the command below replacing password with your choice. Username is `microproject` but you can change it if you want. 
+
+```
+CREATE USER microproject WITH PASSWORD 'your_secure_password';
+ALTER ROLE microproject CREATEDB;
+```
+
+
+## 5. Done
+
+Now you have both Ruby and PostgreSQL in your system. You also have login and password for PostgreSQL user that you will use later in `config/database.yml`. 
+
+You can proceed with `INSTALL.md`
