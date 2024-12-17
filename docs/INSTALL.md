@@ -29,7 +29,7 @@ Follow these steps to prepare and start the Rails app:
     bundle install
     ```
 
-3. **Set up the database:**
+3. **Set up the database: (this and futher steps might fail for production env unless you do "3. Environment Variables" first)**
     ```sh
     rails db:setup
     ```
