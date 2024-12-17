@@ -157,10 +157,11 @@ Rails requires HTTPS in production mode by default. It's recommended to use a we
 
 ## 9. Start the Rails app
 
-Start Rails app for production environment
+
+You need 2 more ENV variables: `APP_DOMAIN` and `RAILS_ENV`. Set them separately or include in the command below. Up to you. 
 
 ```
-RAILS_ENV=production bundle exec puma -C config/puma.rb
+APP_DOMAIN=your_domain.com RAILS_ENV=production bundle exec puma -C config/puma.rb
 ```
 
 Congrats! Now everything is running. Go to your domain to see the app running. 
