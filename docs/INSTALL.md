@@ -66,7 +66,7 @@ You can handle these keys manually or automatically. **Choose either step 1 or s
 
     Run the script to generate all required secrets into `config/credentials.yml.enc`:
     ```sh
-    rails setup:credentials_and_db_encryption
+    SECRET_KEY_BASE_DUMMY=1 rails setup:credentials_and_db_encryption
     ```
    
     **MAKE SURE TO SAVE config/credentials.yml.enc**
