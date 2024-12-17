@@ -7,7 +7,7 @@
         </svg>
 
         <div class="ml-4 flex min-w-0 flex-1 gap-2">
-          <%= link_to "Active", project_path(@project), class: "text-sm dark:text-gray-400  hover:text-indigo-700 dark:hover:text-indigo-300" %>
+          <%= link_to "Active", project_path(@project), class: "text-sm dark:text-gray-400  hover:text-indigo-700 dark:hover:text-indigo-300 #{ 'font-bold' if current_page?(project_path(@project)) }" %>
         </div>
       </div>
     </div>
@@ -19,7 +19,7 @@
         </svg>
 
         <div class="ml-4 flex min-w-0 flex-1 gap-2">
-          <%= link_to "Upcoming", project_schedule_path(@project), class: "text-sm dark:text-gray-400  hover:text-indigo-700 dark:hover:text-indigo-300" %>
+          <%= link_to "Upcoming", project_schedule_path(@project), class: "text-sm dark:text-gray-400  hover:text-indigo-700 dark:hover:text-indigo-300 #{ 'font-bold' if current_page?(project_schedule_path(@project)) }" %>
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@
         </svg>
 
         <div class="ml-4 flex min-w-0 flex-1 gap-2">
-          <%= link_to "Completed", project_tasks_path(@project, status: 'done'), class: "text-sm dark:text-gray-400  hover:text-indigo-700 dark:hover:text-indigo-300" %>
+          <%= link_to "Completed", project_tasks_path(@project, status: 'done'), class: "text-sm dark:text-gray-400  hover:text-indigo-700 dark:hover:text-indigo-300 #{ 'font-bold' if current_page?(project_tasks_path(@project, status: 'done')) }" %>
         </div>
       </div>
     </div>
