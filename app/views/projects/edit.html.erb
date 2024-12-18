@@ -1,9 +1,11 @@
 <div class="mt-2 sm:mx-auto sm:w-full sm:max-w-md flex-grow">
-  <%= render "shared/flash" %>
+  <div class="mb-2">
+    <%= render "shared/flash" %>
+  </div>
 
   <% unless @project.personal? %>
-    <section class="mt-10">
-      <h2 class="section-title">Project settings</h2>
+    <section class="mb-10">
+      <h2 class="section-title">Project name</h2>
 
       <%= form_with(model: @project) do |form| %>
         <%= render "shared/errors", resource: @project %>
@@ -19,14 +21,14 @@
     </section>
   <% end %>
 
-  <section class="mt-10">
+  <section class="mb-10">
     <h2 class="section-title">Import and Export</h2>
 
     <%= button_to "Export Tasks", project_export_path(@project, format: :json), method: :post, class: "btn-gray inline-block border", form: { 'data-turbo': 'false', class: 'inline-block' } %>
     <%= link_to "Import Tasks", new_project_import_path(@project), class: "btn-gray inline-block ml-2 border" %>
   </section>
 
-  <section class="mt-10">
+  <section class="mb-10">
     <h2 class="section-title">Archive this project</h2>
 
     <% if @project.archived? %>
@@ -38,7 +40,7 @@
     <% end %>
   </section>
 
-  <section class="mt-10">
+  <section class="mb-10">
     <h2 class="section-title">Delete this project</h2>
     <span class="block text-sm text-gray-700 dark:text-gray-300 mb-5">Deleting this project will permanently erase all data.<br/> Please consider exporting tasks before proceeding.</span>
     <%= button_to "Delete this project", @project, method: :delete, data: { turbo_confirm: 'Remove the project? Are you sure?' }, class: "btn-remove border" %>

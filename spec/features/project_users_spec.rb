@@ -20,7 +20,7 @@ RSpec.feature "Project::Users", type: :feature do
     click_button "Add user"
 
     expect(page).to have_text(user2.email)
-    expect(page).to have_current_path(project_path(project))
+    expect(page).to have_current_path(project_activity_path(project))
   end
 
   scenario "User attempts to invite a non-existing user" do

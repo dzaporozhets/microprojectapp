@@ -14,7 +14,7 @@ class Project::UsersController < Project::BaseController
           if project.users << user
             project.add_activity(current_user, 'invited', user)
 
-            redirect_to project_path(project)
+            redirect_to project_activity_path(project)
             return
           else
             error = 'User could not be added.'
@@ -38,9 +38,9 @@ class Project::UsersController < Project::BaseController
     if project.users.include?(user)
       project.users.delete(user)
 
-      redirect_to project_path(project), notice: 'User was successfully removed.'
+      redirect_to project_activity_path(project), notice: 'User was successfully removed.'
     else
-      redirect_to project_path(project), alert: 'User could not be found or removed.'
+      redirect_to project_activity_path(project), alert: 'User could not be found or removed.'
     end
   end
 
