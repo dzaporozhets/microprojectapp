@@ -13,22 +13,32 @@
           <%= project_tabs "Tasks" %>
         </div>
 
-        <% unless @project.personal? %>
-          <% if current_user.pinned_projects.include?(@project) %>
-            <%= button_to project_pins_path(@project), method: :delete, class: "block btn-gray", title: "Unmark Favorite", data: { turbo_method: :delete, confirm: "Are you sure you want to unarchive this project?" } do %>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5 text-gray-400 dark:text-gray-600">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m3 3 1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25 4.5 21V8.742m.164-4.078a2.15 2.15 0 0 1 1.743-1.342 48.507 48.507 0 0 1 11.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664 19.5 19.5" />
-              </svg>
-
-            <% end %>
-          <% else %>
-            <%= button_to project_pins_path(@project), method: :post, class: "block btn-gray", title: "Mark as Favorite", data: { confirm: "Are you sure you want to archive this project?" } do %>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-gray-400 dark:text-gray-600">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
+        <div class="flex space-x-4">
+          <% if @project.user == current_user %>
+            <%= link_to edit_project_path(@project), class: "block btn-gray", title: "Project Settings" do %>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-600 dark:text-gray-400">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
               </svg>
             <% end %>
           <% end %>
-        <% end %>
+
+          <% unless @project.personal? %>
+            <% if current_user.pinned_projects.include?(@project) %>
+              <%= button_to project_pins_path(@project), method: :delete, class: "block btn-gray", title: "Unmark Favorite", data: { turbo_method: :delete, confirm: "Are you sure you want to unarchive this project?" } do %>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5 text-gray-400 dark:text-gray-600">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m3 3 1.664 1.664M21 21l-1.5-1.5m-5.485-1.242L12 17.25 4.5 21V8.742m.164-4.078a2.15 2.15 0 0 1 1.743-1.342 48.507 48.507 0 0 1 11.186 0c1.1.128 1.907 1.077 1.907 2.185V19.5M4.664 4.664 19.5 19.5" />
+                </svg>
+
+              <% end %>
+            <% else %>
+              <%= button_to project_pins_path(@project), method: :post, class: "block btn-gray", title: "Mark as Favorite", data: { confirm: "Are you sure you want to archive this project?" } do %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-gray-400 dark:text-gray-600">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
+                </svg>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
       </div>
     </div>
 
