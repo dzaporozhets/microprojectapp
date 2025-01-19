@@ -92,3 +92,4 @@ gem 'omniauth-azure-activedirectory-v2'
 gem "omniauth-rails_csrf_protection"
 gem 'kaminari'
 gem 'rack-attack'
+gem 'paper_trail'
