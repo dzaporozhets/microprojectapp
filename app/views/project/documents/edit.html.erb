@@ -1,0 +1,43 @@
+<div class="mx-auto md:w-2/3 w-full">
+  <%= form_with(model: [@project, @document], class: "contents") do |form| %>
+    <div class="mb-4 bg-indigo-50 dark:bg-indigo-900 rounded-md">
+      <dd class="text-sm text-indigo-900 dark:text-indigo-200">
+        <div class="flex items-center justify-between space-x-6 px-4 py-2">
+          <div class="flex items-center gap-6">
+            <div class="flex items-center gap-1">
+              <h1 class="text-xl font-semibold text-indigo-800 dark:text-indigo-200 leading-10">
+                <%= @document.title %>
+              </h1>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 ml-auto text-indigo-600">
+            <%= form.submit 'Save changes', class: "btn-primary" %>
+            <%= link_to 'Read view', project_document_path(@document.project, @document), class: "btn" %>
+          </div>
+        </div>
+      </dd>
+    </div>
+
+    <%= render "shared/flash" %>
+    <%= render "shared/errors", resource: @document %>
+
+    <div class="mt-5 text-sm text-gray-500">
+      Last updated: <%= l(@document.updated_at, format: :long) %>
+    </div>
+
+    <div class="mt-5">
+      <%= form.label :title, 'Name of the document', class: 'text-gray-600 dark:text-gray-400 text-sm' %>
+      <%= form.text_field :title, class: "block base-input mt-2 w-full" %>
+    </div>
+
+    <div class="mt-5">
+      <%= form.label :content, "Put your text here", class: 'text-gray-600 dark:text-gray-400 text-sm' %>
+      <%= form.text_area :content, rows: 20, class: "block base-input mt-2 w-full", required: true %>
+    </div>
+
+    <div class="mt-5">
+      <%= form.submit 'Save changes', class: "btn-primary" %>
+    </div>
+  <% end %>
+</div>

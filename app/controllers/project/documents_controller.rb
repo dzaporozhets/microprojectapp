@@ -1,5 +1,6 @@
 class Project::DocumentsController < Project::BaseController
   before_action :set_document, only: %i[ show destroy edit update ]
+  before_action :set_tab, only: %i[ show edit index ]
 
   def index
     @documents = project.documents.all
@@ -9,28 +10,21 @@ class Project::DocumentsController < Project::BaseController
   end
 
   def new
-    @document = Document.new
+    @document = project.documents.new(title: 'New Document')
+    @document.user = current_user
+    @document.save
+
+    redirect_to edit_project_document_path(@project, @document)
   end
 
   def edit
   end
 
   def update
-    raise 'Not implemented'
-  end
-
-  def create
-    @document = project.documents.new(document_params)
-    @document.user = current_user
+    @document.update(document_params)
 
     respond_to do |format|
-      if @document.save
-        format.html { redirect_to project_files_url(project), notice: "Document was successfully created." }
-        format.json { render :show, status: :created, location: @document }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to edit_project_document_path(@project, @document), notice: 'Saved' }
     end
   end
 
@@ -48,6 +42,10 @@ class Project::DocumentsController < Project::BaseController
   # Use callbacks to share common setup or constraints between actions.
   def set_document
     @document = project.documents.find(params[:id])
+  end
+
+  def set_tab
+    @tab_name = 'Files'
   end
 
   # Only allow a list of trusted parameters through.
