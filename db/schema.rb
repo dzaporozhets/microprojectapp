@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_19_085748) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_19_170812) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,6 +36,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_19_085748) do
     t.string "attachment"
     t.index ["task_id"], name: "index_comments_on_task_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_documents_on_project_id"
+    t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
   create_table "links", force: :cascade do |t|
@@ -137,10 +148,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_19_085748) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  create_table "versions", force: :cascade do |t|
+    t.string "whodunnit"
+    t.datetime "created_at"
+    t.bigint "item_id", null: false
+    t.string "item_type", null: false
+    t.string "event", null: false
+    t.text "object"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
+  end
+
   add_foreign_key "activities", "projects"
   add_foreign_key "activities", "users"
   add_foreign_key "comments", "tasks"
   add_foreign_key "comments", "users"
+  add_foreign_key "documents", "projects"
+  add_foreign_key "documents", "users"
   add_foreign_key "links", "projects"
   add_foreign_key "links", "users"
   add_foreign_key "pins", "projects"

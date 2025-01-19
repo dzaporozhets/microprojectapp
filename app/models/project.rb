@@ -10,6 +10,7 @@ class Project < ApplicationRecord
   has_many :project_users, dependent: :destroy
   has_many :users, through: :project_users
   has_many :activities, dependent: :destroy
+  has_many :documents, dependent: :destroy
 
   has_many :pins, dependent: :destroy
   has_many :users_who_pinned, through: :pins, source: :user
