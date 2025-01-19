@@ -38,12 +38,10 @@ class Project::LinksController < Project::BaseController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_link
     @link = project.links.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def link_params
     params.require(:link).permit(:title, :url, :user_id, :project_id)
   end
