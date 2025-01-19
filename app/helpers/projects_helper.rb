@@ -3,7 +3,7 @@ module ProjectsHelper
     tabs = [
       #{ name: 'Project', path: '#' },
       { name: 'Tasks', path: project_path(@project) },
-      #{ name: 'Files', path: project_files_path(@project) },
+      { name: 'Files', path: project_files_path(@project) },
     ]
 
     tabs << { name: 'Team', path: project_activity_path(@project) } unless @project.personal?

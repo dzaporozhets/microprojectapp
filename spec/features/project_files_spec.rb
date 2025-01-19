@@ -20,7 +20,7 @@ RSpec.feature "Project::Files", type: :feature do
   end
 
   scenario "User downloads a file" do
-    visit project_path(project_with_files)
+    visit project_files_path(project_with_files)
 
     click_link 'test_file.txt', href: download_project_files_path(project_with_files, file: project_with_files.project_files[0].identifier)
 
@@ -28,7 +28,7 @@ RSpec.feature "Project::Files", type: :feature do
   end
 
   scenario "User deletes a file" do
-    visit project_path(project_with_files)
+    visit project_files_path(project_with_files)
 
     find("button[alt='Delete file']").click
 

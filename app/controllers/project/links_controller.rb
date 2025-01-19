@@ -18,7 +18,7 @@ class Project::LinksController < Project::BaseController
 
     respond_to do |format|
       if @link.save
-        format.html { redirect_to project_url(project), notice: "Link was successfully created." }
+        format.html { redirect_to project_files_url(project), notice: "Link was successfully created." }
         format.json { render :show, status: :created, location: @link }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -31,7 +31,7 @@ class Project::LinksController < Project::BaseController
     @link.destroy!
 
     respond_to do |format|
-      format.html { redirect_to project_url(project) }
+      format.html { redirect_to project_files_url(project) }
       format.json { head :no_content }
     end
   end

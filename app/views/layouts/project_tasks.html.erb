@@ -19,14 +19,11 @@
 
     <main class="container mx-auto max-w-screen-xl p-4 flex -mt-4">
       <div class="w-full">
-        <div class="mx-auto">
+        <div class="mb-4 md:mb-0 md:w-2/3 mx-auto">
           <div class="flex flex-col md:flex-row md:space-x-12">
             <div class="mb-4 md:mb-0 md:w-full">
               <%= render 'project/tasks/nav' %>
               <%= yield %>
-            </div>
-            <div class="mb-4 md:mb-0 md:w-72">
-              <%= render 'project/tasks/sidebar' %>
             </div>
           </div>
         </div>
