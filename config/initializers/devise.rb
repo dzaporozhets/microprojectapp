@@ -331,7 +331,8 @@ Devise.setup do |config|
   if ENV['MICROSOFT_CLIENT_ID'].present?
     config.omniauth :azure_activedirectory_v2,
       client_id: ENV['MICROSOFT_CLIENT_ID'],
-      client_secret: ENV['MICROSOFT_CLIENT_SECRET']
+      client_secret: ENV['MICROSOFT_CLIENT_SECRET'],
+      tenant_id: ENV['MICROSOFT_TENANT_ID']
   end
 
   # We need this for spec/features/user_oauth_login_spec.rb
