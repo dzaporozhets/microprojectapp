@@ -5,7 +5,7 @@
     </svg>
 
     <div class="ml-4 flex min-w-0 flex-1 gap-2 line-clamp-1">
-      <%= link_to document.title, edit_project_document_path(document.project, document), class: "truncate dark:text-gray-400 hover:text-indigo-700 dark:hover:text-indigo-300" %>
+      <%= link_to document.title, project_document_path(document.project, document), class: "truncate dark:text-gray-400 hover:text-indigo-700 dark:hover:text-indigo-300" %>
     </div>
 
     <% if current_user == document.user %>
