@@ -6,11 +6,43 @@
   </div>
 <% end %>
 
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+  <!-- Documents Column -->
+  <div class="col-span-1">
+    <div class="mb-4">
+      <dt class="mb-2 pb-2 border-b dark:border-gray-800">
+        <p class="text-xl font-bold leading-7 text-gray-900 dark:text-gray-200">Documents</p>
+        <p class="text-xs text-gray-500">Create and edit text-based content directly within the app to collaborate and document ideas.</p>
+      </dt>
+      <dd class="mt-2 text-sm text-gray-900 dark:text-gray-200">
+        <ul role="list">
+          <% @project.documents.each do |document| %>
+            <%= render 'project/documents/document', document: document %>
+          <% end %>
+          <li class="flex items-center justify-between px-4 py-2 text-sm leading-6">
+            <div class="flex w-0 flex-1 items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 flex-shrink-0 fill-gray-200 text-gray-400 dark:text-gray-600">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+
+              <div class="ml-4 flex min-w-0 flex-1 gap-2">
+                <%= link_to "Add a document", new_project_document_path(@project), class: "truncate text-gray-600 dark:text-gray-400 hover:text-indigo-700 dark:hover:text-indigo-300" %>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </dd>
+    </div>
+  </div>
+
   <!-- Files Column -->
   <div class="col-span-1">
     <div class="mb-4">
-      <dt class="text-xl font-bold leading-7 text-gray-900 dark:text-gray-200 mb-2 pb-2 border-b dark:border-gray-800">Files</dt>
+      <dt class="mb-2 pb-2 border-b dark:border-gray-800">
+        <p class="text-xl font-bold leading-7 text-gray-900 dark:text-gray-200">Files</p>
+        <p class="text-xs text-gray-500">Upload and organize project-related files to keep all your resources in one place.</p>
+      </dt>
       <dd class="mt-2 text-sm text-gray-900 dark:text-gray-200">
         <ul role="list">
           <% @project.project_files.each do |project_file| %>
@@ -35,7 +67,10 @@
   <!-- Links Column -->
   <div class="col-span-1">
     <div class="mb-4">
-      <dt class="text-xl font-bold leading-7 text-gray-900 dark:text-gray-200 mb-2 pb-2 border-b dark:border-gray-800">Links</dt>
+      <dt class="mb-2 pb-2 border-b dark:border-gray-800">
+        <p class="text-xl font-bold leading-7 text-gray-900 dark:text-gray-200">Links</p>
+        <p class="text-xs text-gray-500">Save and manage useful URLs to quickly access external resources or references.</p>
+      </dt>
       <dd class="mt-2 text-sm text-gray-900 dark:text-gray-200">
         <ul role="list">
           <% @project.links.each do |link| %>
@@ -49,31 +84,6 @@
 
               <div class="ml-4 flex min-w-0 flex-1 gap-2">
                 <%= link_to "Add a link", new_project_link_path(@project), class: "truncate text-gray-600 dark:text-gray-400 hover:text-indigo-700 dark:hover:text-indigo-300" %>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </dd>
-    </div>
-  </div>
-
-  <!-- Documents Column (Empty for now) -->
-  <div class="col-span-1">
-    <div class="mb-4">
-      <dt class="text-xl font-bold leading-7 text-gray-900 dark:text-gray-200 mb-2 pb-2 border-b dark:border-gray-800">Documents</dt>
-      <dd class="mt-2 text-sm text-gray-900 dark:text-gray-200">
-        <ul role="list">
-          <% @project.documents.each do |document| %>
-            <%= render 'project/documents/document', document: document %>
-          <% end %>
-          <li class="flex items-center justify-between px-4 py-2 text-sm leading-6">
-            <div class="flex w-0 flex-1 items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 flex-shrink-0 fill-gray-200 text-gray-400 dark:text-gray-600">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-              </svg>
-
-              <div class="ml-4 flex min-w-0 flex-1 gap-2">
-                <%= link_to "Add a document", new_project_document_path(@project), class: "truncate text-gray-600 dark:text-gray-400 hover:text-indigo-700 dark:hover:text-indigo-300" %>
               </div>
             </div>
           </li>
