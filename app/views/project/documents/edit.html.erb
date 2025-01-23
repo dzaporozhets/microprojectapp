@@ -2,18 +2,18 @@
   <%= form_with(model: [@project, @document], class: "contents", data: { controller: "local-storage", document_id: @document.id }) do |form| %>
     <div class="mb-4 bg-indigo-50 dark:bg-indigo-900 rounded-md">
       <dd class="text-sm text-indigo-900 dark:text-indigo-200">
-        <div class="flex items-center justify-between space-x-6 px-4 py-2">
-          <div class="flex items-center gap-6">
+        <div class="flex items-center justify-between md:space-x-6 px-4 py-2">
+          <div class="hidden md:flex items-center gap-6">
             <div class="flex items-center gap-1">
               <h1 class="text-xl font-semibold text-indigo-800 dark:text-indigo-200 leading-10">
-                <%= @document.title %>
+                <%= link_to @document.title, [@project, @document] %>
               </h1>
             </div>
           </div>
 
           <div class="flex items-center gap-2 ml-auto text-indigo-600">
             <%= form.submit 'Save changes', class: "btn-primary" %>
-            <%#= link_to 'Exit edit mode', project_document_path(@document.project, @document), class: "btn" %>
+            <%= link_to 'Exit', [@project, @document], class: 'btn-gray' %>
           </div>
         </div>
       </dd>
