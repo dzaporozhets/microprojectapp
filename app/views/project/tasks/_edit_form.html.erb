@@ -77,6 +77,11 @@
           <%= form.select :due_date, options_for_select(due_date_options(task.due_date)), {}, { class: "mt-1 block w-full base-input" } %>
         </div>
 
+        <div class="mb-3">
+          <%= form.label :document_id, class: "text-sm text-gray-500" %>
+          <%= form.collection_select :document_id, task.project.documents, :id, :title, { include_blank: "None" }, { class: "mt-1 block w-full base-input" } %>
+        </div>
+
         <% unless @project.personal? %>
           <div class="mb-3">
             <%= form.label :assigned_user_id, class: "text-sm text-gray-500" %>
