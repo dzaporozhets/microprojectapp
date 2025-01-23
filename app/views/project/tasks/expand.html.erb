@@ -48,6 +48,12 @@
       <% end %>
     </div>
 
+    <% if @task.document_id %>
+      <div class="text-sm text-gray-600 dark:text-gray-400 border-t dark:border-t-gray-600 p-3">
+        <p>Document <span class="font-bold"><%= link_to @task.document&.title, [@task.project, @task.document], target: '_blank', class: 'underline' %></span></p>
+      </div>
+    <% end %>
+
     <% if @task.assigned_user_id %>
       <div class="text-sm text-gray-600 dark:text-gray-400 border-t dark:border-t-gray-600 p-3">
         <p>Assigned to <span class="font-bold"><%= @task.assigned_user&.email %></span></p>

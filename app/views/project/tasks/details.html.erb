@@ -1,4 +1,4 @@
-<div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-lg">
+<div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-xl">
   <%= content_tag :div, class: "border border-gray-400 dark:border-gray-600 shadow-sm rounded-md" do %>
     <div class="border-b dark:border-b-gray-600 text-sm flex items-center p-3 <%= @task.done ? 'bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300' : 'bg-indigo-100 dark:bg-indigo-900 text-indigo-900 dark:text-indigo-100' %> rounded-t-md">
       <div class="flex-none">
@@ -41,6 +41,12 @@
         <div class="text-base leading-6 text-gray-900 dark:text-gray-200 mt-2 prose max-w-none break-words"><%= simple_format @task.description %></div>
       <% end %>
     </div>
+
+    <% if @task.document_id %>
+      <div class="text-sm text-gray-600 dark:text-gray-400 border-t dark:border-t-gray-600 p-3">
+        <p>Document <span class="font-bold"><%= link_to @task.document&.title, [@task.project, @task.document], target: '_blank', class: 'underline' %></span></p>
+      </div>
+    <% end %>
 
     <% if @task.assigned_user_id %>
       <div class="text-sm text-gray-600 dark:text-gray-400 border-t dark:border-t-gray-600 p-3">
