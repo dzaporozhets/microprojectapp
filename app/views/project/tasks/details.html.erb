@@ -1,16 +1,16 @@
 <div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-2xl">
   <%= content_tag :div, class: "border border-gray-400 dark:border-gray-600 shadow-sm rounded-md" do %>
-    <div class="border-b dark:border-b-gray-600 text-sm flex items-center p-3 <%= @task.done ? 'bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300' : 'bg-indigo-100 dark:bg-indigo-900 text-indigo-900 dark:text-indigo-100' %> rounded-t-md">
+    <div class="border-b border-b-indigo-200 dark:border-b-indigo-600 text-sm flex items-center p-3 <%= @task.done ? 'bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300' : 'bg-indigo-100 dark:bg-indigo-900 text-indigo-900 dark:text-indigo-100' %> rounded-t-md">
       <div class="flex-none">
         <%= form_with(model: @task, url: project_task_path(@task.project, @task), local: false, data: { turbo: false }) do |form| %>
-          <%= form.check_box :done,
-            checked: @task.done,
-            id: "task_#{@task.id}",
-            class: "w-4 h-4 checkbox",
-            data: { turbo_action: "advance" },
-            onchange: "this.form.requestSubmit()" %>
-          <% if @task.done? %>
-            Completed
+          <%= form.label :done do %>
+            <%= form.check_box :done,
+              checked: @task.done,
+              id: "task_#{@task.id}",
+              class: "w-4 h-4 checkbox mr-1 border-indigo-500",
+              data: { turbo_action: "advance" },
+              onchange: "this.form.requestSubmit()" %>
+            Mark task as completed
           <% end %>
         <% end %>
       </div>

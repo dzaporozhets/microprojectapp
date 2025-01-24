@@ -11,9 +11,10 @@ RSpec.feature 'Project::Task Toggle', type: :feature do
 
   scenario 'marks a task as done', js: true do
     visit project_path(project)
-    click_link task.name
 
-    find('input[name="task[done]"]').click
+    within "#task_#{task.id}" do
+      find('input[name="task[done]"]').click
+    end
 
     within('#tasks') do
       expect(page).to have_content('Completed')
@@ -26,9 +27,10 @@ RSpec.feature 'Project::Task Toggle', type: :feature do
     task.update(done: true)
 
     visit project_path(project)
-    click_link task.name
 
-    find('input[name="task[done]"]').click
+    within "#task_#{task.id}" do
+      find('input[name="task[done]"]').click
+    end
 
     within('#tasks') do
       expect(page).not_to have_content('Completed')
