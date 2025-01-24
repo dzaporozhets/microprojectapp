@@ -1,3 +1,7 @@
-<div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-xl">
-  <%= render 'project/tasks/edit_form', task: @task %>
+<div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-2xl">
+  <% if turbo_frame_request? %>
+    <%= render 'project/tasks/inline_edit', task: @task %>
+  <% else %>
+    <%= render 'project/tasks/full_edit', task: @task %>
+  <% end %>
 </div>

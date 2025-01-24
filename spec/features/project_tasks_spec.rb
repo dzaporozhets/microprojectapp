@@ -27,7 +27,7 @@ RSpec.feature "Project::Tasks", type: :feature do
 
     fill_in "task_name", with: "Updated Task Name"
     fill_in "task_description", with: "Updated Task Description"
-    click_button "Update"
+    click_button "Save changes"
 
     expect(page).to have_text("Updated Task Name")
     expect(page).to have_text("Updated Task Description")

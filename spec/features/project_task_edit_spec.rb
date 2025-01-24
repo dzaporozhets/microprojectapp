@@ -24,7 +24,7 @@ RSpec.feature "Project::Tasks", type: :feature do
 
     select 'Tomorrow', from: 'task_due_date'
     select user.email, from: 'task_assigned_user_id'
-    click_button "Update"
+    click_button "Save changes"
 
     expect(page).to have_text(task.name)
     expect(page).to have_text((Date.today + 1.day).strftime("%B %d, %Y"))
