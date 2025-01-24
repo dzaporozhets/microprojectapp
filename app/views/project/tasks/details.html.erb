@@ -10,7 +10,7 @@
               class: "w-4 h-4 checkbox mr-1 border-indigo-500",
               data: { turbo_action: "advance" },
               onchange: "this.form.requestSubmit()" %>
-            Mark task as completed
+            <p class="font-medium hidden md:inline-block">Mark task as completed</p>
           <% end %>
         <% end %>
       </div>
@@ -18,8 +18,8 @@
       <div class="grow mx-2">
       </div>
 
-      <div class="inline-block flex-none">
-        <%= link_to toggle_star_project_task_path(@task.project, @task), method: :patch, data: { turbo: true, turbo_method: :patch }, class: 'flex-none btn-gray', title: 'Star' do %>
+      <div class="inline-block flex">
+        <%= link_to toggle_star_project_task_path(@task.project, @task), method: :patch, data: { turbo: true, turbo_method: :patch }, class: 'btn-gray', title: 'Star' do %>
           <%= render 'project/tasks/star', task: @task, text: true %>
         <% end %>
 
