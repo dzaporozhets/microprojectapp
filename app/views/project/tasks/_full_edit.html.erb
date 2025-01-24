@@ -1,7 +1,7 @@
 <div class="border border-gray-400 dark:border-gray-600 shadow-sm rounded-md bg-gray-100 dark:bg-gray-800">
   <%= form_with(model: [task.project, task], class: "contents", data: { turbo: turbo_frame_request? }) do |form| %>
 
-    <div class="border-b border-b-indigo-200 dark:border-b-indigo-600 text-sm text-gray-700 dark:text-gray-300 flex items-center p-3 bg-indigo-100 dark:bg-indigo-900 rounded-t-md">
+    <div class="border-b border-b-indigo-200 dark:border-b-gray-600 text-sm text-gray-700 dark:text-gray-300 flex items-center p-3 bg-indigo-100 dark:bg-indigo-900 rounded-t-md">
       <div class="flex-none">
         <h1 class="text-lg font-semibold text-indigo-800 dark:text-indigo-200">
           Edit task
@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class="p-3 border-b">
+    <div class="p-3 border-b dark:border-gray-700">
       <%= render "shared/flash" %>
 
       <% if task.errors.any? %>
@@ -32,14 +32,14 @@
       </div>
     </div>
 
-    <div class="p-3 border-b">
+    <div class="p-3 border-b dark:border-gray-700">
       <%= form.label :done, class: "text-sm text-gray-500" do %>
         <%= form.check_box :done, class: "w-4 h-4 checkbox" %>
         Mark task as completed
       <% end %>
     </div>
 
-    <div class="p-3 border-b">
+    <div class="p-3 border-b dark:border-gray-700">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
         <div class="">
           <%= form.label :due_date, class: "text-sm text-gray-500" %>
@@ -53,7 +53,7 @@
       </div>
     </div>
 
-    <div class="p-3 border-b">
+    <div class="p-3 border-b dark:border-gray-700">
       <% if @project.documents.any? %>
         <div class="mb-3">
           <%= form.label :document_id, class: "text-sm text-gray-500" %>

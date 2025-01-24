@@ -1,4 +1,4 @@
-<div id="<%= dom_task_comments_id(@task) %>" class="divide-y divide-gray-200">
+<div id="<%= dom_task_comments_id(@task) %>" class="divide-y divide-gray-200 dark:divide-gray-700">
   <% @task.comments.order(id: :asc).each do |comment| %>
     <%= render comment %>
   <% end %>
