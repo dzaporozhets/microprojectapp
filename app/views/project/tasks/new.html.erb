@@ -1,36 +1,39 @@
 <div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-md">
-  <div class="mb-2 pb-2 border-b dark:border-gray-600">
-    <h1 class="font-bold text-xl dark:text-gray-200 leading-7">New Task</h1>
+  <div class="border border-gray-400 dark:border-gray-600 shadow-sm rounded-md bg-gray-100 dark:bg-gray-800">
+    <div class="border-b border-b-indigo-200 dark:border-b-indigo-600 text-sm text-gray-700 dark:text-gray-300 flex items-center p-3 bg-indigo-100 dark:bg-indigo-900 rounded-t-md">
+      <h1 class="text-lg font-semibold text-indigo-800 dark:text-indigo-200">New task</h1>
+    </div>
+
+    <div class="p-3 border-b text-sm">
+      <%= form_with(model: [@project, @task], class: "contents", data: { turbo: false }) do |form| %>
+        <%= render "shared/errors", resource: @task %>
+
+        <div class="mb-5">
+          <%= form.label :name, class:"dark:text-gray-200" %>
+          <%= form.text_area :name, rows: 2, class: "base-input block w-full", required: true %>
+        </div>
+
+        <div class="mb-5">
+          <%= form.label :description, class:"dark:text-gray-200" %>
+          <%= form.text_area :description, rows: 4, class: "base-input block w-full" %>
+        </div>
+
+        <div class="mb-5">
+          <%= form.label :due_date, class: "dark:text-gray-200" %>
+          <%= form.select :due_date, options_for_select(due_date_options(@task.due_date)), {}, { class: "block w-full base-input" } %>
+        </div>
+
+        <% unless @project.personal? %>
+          <div class="mb-5">
+            <%= form.label :assigned_user_id, class: "dark:text-gray-200" %>
+            <%= form.collection_select :assigned_user_id, @project.team, :id, :email, { include_blank: "None" }, { class: "block w-full base-input" } %>
+          </div>
+        <% end %>
+
+        <div class="inline">
+          <%= form.submit class: "btn-primary" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-
-  <%= form_with(model: [@project, @task], class: "contents", data: { turbo: false }) do |form| %>
-    <%= render "shared/errors", resource: @task %>
-
-    <div class="my-5">
-      <%= form.label :name, class:"dark:text-gray-200" %>
-      <%= form.text_area :name, rows: 2, class: "base-input block w-full", required: true %>
-    </div>
-
-    <div class="my-5">
-      <%= form.label :description, class:"dark:text-gray-200" %>
-      <%= form.text_area :description, rows: 4, class: "base-input block w-full" %>
-    </div>
-
-    <div class="my-5">
-      <%= form.label :due_date, class: "dark:text-gray-200" %>
-      <%= form.select :due_date, options_for_select(due_date_options(@task.due_date)), {}, { class: "block w-full base-input" } %>
-    </div>
-
-    <% unless @project.personal? %>
-      <div class="my-5">
-        <%= form.label :assigned_user_id, class: "dark:text-gray-200" %>
-        <%= form.collection_select :assigned_user_id, @project.team, :id, :email, { include_blank: "None" }, { class: "block w-full base-input" } %>
-      </div>
-    <% end %>
-
-    <div class="inline">
-      <%= form.submit class: "btn-primary" %>
-    </div>
-  <% end %>
 </div>
