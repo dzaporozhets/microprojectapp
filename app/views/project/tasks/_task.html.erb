@@ -9,14 +9,14 @@
 
           <%= form.check_box :done,
             checked: task.done,
-            id: "task_#{task.id}",
+            id: "checkbox_task_#{task.id}",
             class: "w-4 h-4 checkbox",
             data: { turbo_action: "advance" },
             onchange: "this.form.requestSubmit()" %>
         <% end %>
       </div>
 
-      <%= link_to expand_project_task_path(task.project, task), data: { turbo: true }, class: "text-sm min-w-0 grow flex h-12 items-center dark:text-gray-200 " do %>
+      <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "text-sm min-w-0 grow flex h-12 items-center dark:text-gray-200 " do %>
         <p class="font-medium text-gray-900 dark:text-gray-200 line-clamp-2"><%= task.name %></p>
       <% end %>
 
