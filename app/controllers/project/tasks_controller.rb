@@ -1,5 +1,5 @@
 class Project::TasksController < Project::BaseController
-  before_action :set_task, only: %i[ show edit update destroy details expand toggle_done toggle_star]
+  before_action :set_task, only: %i[ show edit update destroy details toggle_done toggle_star]
 
   layout :set_layout
 
@@ -75,9 +75,6 @@ class Project::TasksController < Project::BaseController
   end
 
   def details
-  end
-
-  def expand
   end
 
   def toggle_done

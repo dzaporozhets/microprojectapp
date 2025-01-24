@@ -11,7 +11,6 @@ Rails.application.routes.draw do
     resources :tasks, controller: 'project/tasks' do
       member do
         get :details
-        get :expand
         patch :toggle_done
         patch :toggle_star
       end
