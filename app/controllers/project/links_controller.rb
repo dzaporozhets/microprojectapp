@@ -1,11 +1,9 @@
 class Project::LinksController < Project::BaseController
   before_action :set_link, only: %i[ show destroy ]
+  before_action :set_tab
 
   def index
     @links = project.links.all
-  end
-
-  def show
   end
 
   def new
@@ -44,5 +42,9 @@ class Project::LinksController < Project::BaseController
 
   def link_params
     params.require(:link).permit(:title, :url, :user_id, :project_id)
+  end
+
+  def set_tab
+    @tab_name = 'Files'
   end
 end

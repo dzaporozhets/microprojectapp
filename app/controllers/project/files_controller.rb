@@ -5,6 +5,7 @@ class Project::FilesController < Project::BaseController
   end
 
   def new
+    @tab_name = 'Files'
   end
 
   def download
