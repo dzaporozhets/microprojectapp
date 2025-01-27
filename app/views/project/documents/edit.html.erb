@@ -26,10 +26,6 @@
     <%= render "shared/flash" %>
     <%= render "shared/errors", resource: @document %>
 
-    <div class="mt-5 text-sm text-gray-500">
-      Last updated: <%= l(@document.updated_at, format: :long) %>
-    </div>
-
     <div class="mt-5">
       <%= form.label :title, 'Name of the document', class: 'text-gray-600 dark:text-gray-400 text-sm' %>
       <%= form.text_field :title, class: "block base-input mt-2 w-full" %>
@@ -38,6 +34,11 @@
     <div class="mt-5">
       <%= form.label :content, "Put your text here", class: 'text-gray-600 dark:text-gray-400 text-sm' %>
       <%= form.text_area :content, data: { local_storage_target: "textarea" }, rows: 20, class: "block base-input mt-2 w-full", required: true %>
+    </div>
+
+    <div class="mt-5 text-sm text-gray-500 justify-between flex">
+      <p>Last updated: <%= l(@document.updated_at, format: :long) %></p>
+      <%= link_to "History of changes", history_project_document_path(@project, @document), class: 'underline' %>
     </div>
   <% end %>
 </div>

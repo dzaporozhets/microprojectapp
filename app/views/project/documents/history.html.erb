@@ -1,0 +1,47 @@
+<div class="max-w-4xl mx-auto mt-10">
+  <!-- Page Header -->
+  <div class="mb-8">
+    <h1 class="text-2xl font-bold text-gray-800">Versions for: <%= @document.title %></h1>
+    <p class="mt-1 text-gray-500 text-sm">Showing the last 10 versions of this document</p>
+  </div>
+
+  <!-- Versions List -->
+  <div class="bg-gray-50 border rounded-lg shadow-sm">
+    <% if @versions.any? %>
+      <ul>
+        <% @versions.each do |version| %>
+          <li class="p-4 border-b last:border-b-0">
+            <!-- Version Metadata -->
+            <div class="flex justify-between items-center">
+              <p class="text-sm font-medium text-gray-700">
+                Version ID: <%= version.id %> | Event: <%= version.event.capitalize %> | Changed by User ID: <%= version.whodunnit || "Unknown" %>
+              </p>
+              <p class="text-sm text-gray-500">Created at: <%= version.created_at %></p>
+            </div>
+
+            <!-- Changeset -->
+            <% if version.changeset.present? %>
+              <div class="mt-2 text-sm">
+                <h3 class="font-semibold text-gray-800">Changes:</h3>
+                <ul class="mt-1 pl-4 list-disc text-gray-600">
+                  <% version.changeset.each do |field, (old_value, new_value)| %>
+                    <li>
+                      <strong><%= field.humanize %>:</strong>
+                      <span class="text-gray-500">"<%= old_value || 'nil' %>"</span> →
+                      <span class="text-gray-800">"<%= new_value || 'nil' %>"</span>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            <% else %>
+              <p class="mt-2 text-sm text-gray-500">No changes tracked for this version.</p>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="p-4 text-gray-600">No versions available for this document.</p>
+    <% end %>
+  </div>
+</div>
+

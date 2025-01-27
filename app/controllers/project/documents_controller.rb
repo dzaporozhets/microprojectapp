@@ -1,5 +1,5 @@
 class Project::DocumentsController < Project::BaseController
-  before_action :set_document, only: %i[ show destroy edit update ]
+  before_action :set_document, only: %i[ show destroy edit update history]
   before_action :set_tab, only: %i[ show edit index ]
 
   def index
@@ -7,6 +7,10 @@ class Project::DocumentsController < Project::BaseController
   end
 
   def show
+  end
+
+  def history
+    @versions = @document.versions.order(created_at: :desc)
   end
 
   def new
