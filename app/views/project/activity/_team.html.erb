@@ -8,7 +8,7 @@
       <div class="flex min-w-0 gap-x-4">
         <%= avatar_tag(@project.user, "h-6 w-6 flex-none rounded-full bg-gray-200 dark:bg-gray-800") %>
         <div class="min-w-0 flex-auto">
-          <p class="text-sm leading-6 text-gray-600 dark:text-gray-400"><%= link_to @project.user.email, project_tasks_path(@project, assigned_user_id: @project.user_id) %></p>
+          <p class="text-sm leading-6 text-gray-600 dark:text-gray-400"><%= link_to @project.user.email, project_tasks_path(@project, assigned_user_id: @project.user_id), class: 'hover:text-indigo-700 dark:hover:text-indigo-300' %></p>
         </div>
       </div>
     </li>
@@ -18,7 +18,7 @@
         <div class="flex min-w-0 gap-x-4">
           <%= avatar_tag(user, "h-6 w-6 flex-none rounded-full bg-gray-200 dark:bg-gray-800") %>
           <div class="min-w-0 flex-auto">
-            <p class="text-sm leading-6 text-gray-600 dark:text-gray-400"><%= link_to user.email, project_tasks_path(@project, assigned_user_id: user.id) %></p>
+            <p class="text-sm leading-6 text-gray-600 dark:text-gray-400"><%= link_to user.email, project_tasks_path(@project, assigned_user_id: user.id), class: 'hover:text-indigo-700 dark:hover:text-indigo-300' %></p>
           </div>
         </div>
 
