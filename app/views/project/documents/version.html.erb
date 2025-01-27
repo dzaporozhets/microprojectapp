@@ -1,0 +1,50 @@
+<div class="">
+  <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-200 leading-10">
+    <%= @document.title %>
+  </h1>
+
+  <p class="mt-1 text-gray-500 text-base">
+  Changed at <%= l(@version.created_at, format: :long) %>
+  </p>
+</div>
+
+<div class="mt-4">
+  <% if @version.changeset.present? %>
+    <% if @version.changeset["title"].present? %>
+      <div class="mt-4">
+        <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Title Changes</h2>
+        <div class="mt-2">
+          <p class="text-sm">
+            <span class="text-gray-500 line-through"><%= @version.changeset["title"][0] || "nil" %></span>
+            <span class="ml-2 text-green-600 font-semibold"><%= @version.changeset["title"][1] || "nil" %></span>
+          </p>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Content Changes -->
+    <% if @version.changeset["content"].present? %>
+      <div class="mt-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+          <!-- Before Content -->
+          <div class="p-4 bg-red-50 dark:bg-red-950 border border-gray-200 dark:border-gray-700 rounded-lg">
+            <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300 mb-2">Before</h3>
+            <div class="text-sm text-gray-700 dark:text-gray-200 whitespace-pre-line">
+              <%= @version.changeset["content"][0] || "nil" %>
+            </div>
+          </div>
+
+          <!-- After Content -->
+          <div class="p-4 bg-green-50 dark:bg-green-950 border border-gray-200 dark:border-gray-700 rounded-lg">
+            <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300 mb-2">After</h3>
+            <div class="text-sm text-gray-700 dark:text-gray-200 whitespace-pre-line">
+              <%= @version.changeset["content"][1] || "nil" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-gray-600">No changes tracked for this version.</p>
+  <% end %>
+</div>

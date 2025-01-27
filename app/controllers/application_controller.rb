@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   # Run authentication before any action except for Devise controllers
   before_action :authenticate_user!, unless: :devise_controller?
 
+  before_action :set_paper_trail_whodunnit
+
   helper_method :turbo_frame_request?
 
   def record_not_found

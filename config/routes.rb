@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :documents, controller: 'project/documents' do
       member do
         get :history
+        get :version
       end
     end
 

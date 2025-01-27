@@ -1,6 +1,6 @@
 class Project::DocumentsController < Project::BaseController
-  before_action :set_document, only: %i[ show destroy edit update history]
-  before_action :set_tab, only: %i[ show edit index ]
+  before_action :set_document, only: %i[ show destroy edit update history version]
+  before_action :set_tab, only: %i[ show edit index history version ]
 
   def index
     @documents = project.documents.all
@@ -11,6 +11,17 @@ class Project::DocumentsController < Project::BaseController
 
   def history
     @versions = @document.versions.order(created_at: :desc)
+
+    user_ids = @versions.map(&:whodunnit).compact.uniq
+    users_by_id = User.where(id: user_ids).index_by(&:id)
+
+    @users_by_version = @versions.each_with_object({}) do |version, hash|
+      hash[version.id] = users_by_id[version.whodunnit.to_i]
+    end
+  end
+
+  def version
+    @version = @document.versions.find(params[:version_id])
   end
 
   def new
