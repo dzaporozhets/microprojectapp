@@ -15,8 +15,11 @@
         </div>
 
         <div class="flex-none">
-          <%= form.submit 'Save changes', class: "btn-primary" %>
-          <%= link_to 'Exit', details_project_task_path(task.project, task), data: { turbo: false }, title: 'Show', class: 'ml-2 btn-gray' %>
+          <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, title: 'Cancel', class: 'ml-2 btn-gray' do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 inline-block">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          <% end %>
         </div>
       </div>
 
@@ -69,15 +72,20 @@
           <%= form.text_area :description, class: "block base-input mt-1 w-full resize-y", rows: 5 %>
         </div>
       </div>
+
+      <div class="p-3 rounded-b-md flex justify-between">
+        <%= form.submit 'Save changes', class: "btn-primary" %>
+      </div>
     <% end %>
+  </div>
 
-
-    <div class="p-3 rounded-b-md">
-      <div class="text-sm text-gray-500">
+  <section class="mt-7 border rounded-md p-3 bg-gray-50 dark:bg-gray-800">
+    <div class="flex justify-between">
+      <div class="text-sm text-gray-500 py-2 hidden md:flex">
         Last updated: <%= l(task.updated_at, format: :long) %>
       </div>
 
-      <%= button_to "Delete", [task.project, task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?', turbo: turbo_frame_request? }, class: "btn-remove border", form_class: "mt-2" %>
+      <%= button_to "Delete this task", [task.project, task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?', turbo: turbo_frame_request? }, class: "btn-remove border", form_class: "" %>
     </div>
-  </div>
+  </section>
 </div>

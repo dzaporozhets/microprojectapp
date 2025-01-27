@@ -1,10 +1,23 @@
 <div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-md">
   <div class="border border-gray-400 dark:border-gray-600 shadow-sm rounded-md bg-gray-100 dark:bg-gray-800">
     <div class="border-b border-b-indigo-200 dark:border-b-indigo-600 text-sm text-gray-700 dark:text-gray-300 flex items-center p-3 bg-indigo-100 dark:bg-indigo-900 rounded-t-md">
-      <h1 class="text-lg font-semibold text-indigo-800 dark:text-indigo-200">New task</h1>
+      <div class="flex-none">
+        <h1 class="text-lg font-semibold text-indigo-800 dark:text-indigo-200">New task</h1>
+      </div>
+
+      <div class="grow mx-2">
+      </div>
+
+      <div class="inline-block flex">
+        <%= link_to collapse_task_path, class: "ml-2 btn-gray", data: { turbo: true }, title: 'Back to tasks list' do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 inline-block">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        <% end %>
+      </div>
     </div>
 
-    <div class="p-3 border-b text-sm">
+    <div class="p-3 text-sm">
       <%= form_with(model: [@project, @task], class: "contents", data: { turbo: false }) do |form| %>
         <%= render "shared/errors", resource: @task %>
 
