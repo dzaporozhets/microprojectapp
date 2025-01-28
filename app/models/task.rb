@@ -4,7 +4,7 @@ class Task < ApplicationRecord
   belongs_to :project, required: true
   belongs_to :user, required: true
   belongs_to :assigned_user, class_name: 'User', optional: true
-  belongs_to :document, optional: true
+  belongs_to :note, optional: true
 
   has_many :comments, dependent: :destroy
 

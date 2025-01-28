@@ -1,19 +1,19 @@
 <div class="mx-auto md:w-2/3 w-full">
-  <%= form_with(model: [@project, @document], class: "contents", data: { controller: "local-storage", document_id: @document.id }) do |form| %>
+  <%= form_with(model: [@project, @note], class: "contents", data: { controller: "local-storage", note_id: @note.id }) do |form| %>
     <div class="mb-4 bg-indigo-50 dark:bg-indigo-900 rounded-md">
       <dd class="text-sm text-indigo-900 dark:text-indigo-200">
         <div class="flex items-center justify-between md:space-x-6 px-4 py-2">
           <div class="hidden md:flex items-center gap-6">
             <div class="flex items-center gap-1">
               <h1 class="text-xl font-semibold text-indigo-800 dark:text-indigo-200 leading-10">
-                <%= link_to @document.title, [@project, @document] %>
+                <%= link_to @note.title, [@project, @note] %>
               </h1>
             </div>
           </div>
 
           <div class="flex items-center gap-2 ml-auto text-indigo-600">
             <%= form.submit 'Save changes', class: "btn-primary" %>
-            <%= link_to [@project, @document], class: 'btn-gray', title: 'Exit' do %>
+            <%= link_to [@project, @note], class: 'btn-gray', title: 'Exit' do %>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 inline-block">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
               </svg>
@@ -24,10 +24,10 @@
     </div>
 
     <%= render "shared/flash" %>
-    <%= render "shared/errors", resource: @document %>
+    <%= render "shared/errors", resource: @note %>
 
     <div class="mt-5">
-      <%= form.label :title, 'Name of the document', class: 'text-gray-600 dark:text-gray-400 text-sm' %>
+      <%= form.label :title, 'Name of the note', class: 'text-gray-600 dark:text-gray-400 text-sm' %>
       <%= form.text_field :title, class: "block base-input mt-2 w-full" %>
     </div>
 
@@ -37,8 +37,8 @@
     </div>
 
     <div class="mt-5 text-sm text-gray-500 justify-between flex">
-      <p>Last updated: <%= l(@document.updated_at, format: :long) %></p>
-      <%= link_to "History of changes", history_project_document_path(@project, @document), class: 'underline' %>
+      <p>Last updated: <%= l(@note.updated_at, format: :long) %></p>
+      <%= link_to "History of changes", history_project_note_path(@project, @note), class: 'underline' %>
     </div>
   <% end %>
 </div>

@@ -1,9 +1,9 @@
 <div class="mx-auto md:w-2/3 w-full">
   <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-200 leading-10">
-    <%= @document.title %>
+    <%= @note.title %>
   </h1>
 
-  <p class="mt-1 text-gray-500 text-sm">Showing the last 10 versions of this document</p>
+  <p class="mt-1 text-gray-500 text-sm">Showing the last 10 versions of this note</p>
 
   <!-- Versions Table -->
   <div class="mt-6">
@@ -27,7 +27,7 @@
                   <%= @users_by_version[version.id]&.email || "Unknown" %>
                 </td>
                 <td class="px-4 py-2 text-sm">
-                  <%= link_to "View Changes", version_project_document_path(@document.project, @document, version_id: version.id),
+                  <%= link_to "View Changes", version_project_note_path(@note.project, @note, version_id: version.id),
                     class: "text-indigo-700 hover:text-indigo-800 dark:text-indigo-200 dark:hover:text-indigo-300 hover:underline" %>
                 </td>
               </tr>
@@ -36,7 +36,7 @@
         </table>
       </div>
     <% else %>
-      <p class="p-4 text-gray-600">No versions available for this document.</p>
+      <p class="p-4 text-gray-600">No versions available for this note.</p>
     <% end %>
   </div>
 </div>

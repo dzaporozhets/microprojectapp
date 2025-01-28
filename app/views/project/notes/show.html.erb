@@ -5,15 +5,15 @@
         <div class="flex items-center gap-6">
           <div class="flex items-center gap-1">
             <h1 class="text-xl font-semibold text-indigo-800 dark:text-indigo-200 leading-10">
-              <%= link_to @document.title, [@project, @document] %>
+              <%= link_to @note.title, [@project, @note] %>
             </h1>
           </div>
         </div>
 
         <div class="flex items-center gap-2 ml-auto">
-          <%= link_to 'Edit', edit_project_document_path(@document.project, @document), class: "btn-primary" %>
+          <%= link_to 'Edit', edit_project_note_path(@note.project, @note), class: "btn-primary" %>
 
-          <%= link_to project_files_path(@document.project, @document), class: "btn-gray", data: { turbo: true }, title: 'Back to files list' do %>
+          <%= link_to project_files_path(@note.project, @note), class: "btn-gray", data: { turbo: true }, title: 'Back to files list' do %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 inline-block">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
@@ -24,6 +24,6 @@
   </div>
 
   <div class="prose prose-sm max-w-none text-gray-800 dark:text-gray-300">
-    <%= simple_format(@document.content) %>
+    <%= simple_format(@note.content) %>
   </div>
 </div>

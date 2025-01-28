@@ -60,10 +60,10 @@
       </div>
 
       <div class="p-3 border-b dark:border-gray-700">
-        <% if @project.documents.any? %>
+        <% if @project.notes.any? %>
           <div class="mb-3">
-            <%= form.label :document_id, class: "text-sm text-gray-500" %>
-            <%= form.collection_select :document_id, task.project.documents, :id, :title, { include_blank: "None" }, { class: "mt-1 block w-full base-input" } %>
+            <%= form.label :note_id, class: "text-sm text-gray-500" %>
+            <%= form.collection_select :note_id, task.project.notes, :id, :title, { include_blank: "None" }, { class: "mt-1 block w-full base-input" } %>
           </div>
         <% end %>
 

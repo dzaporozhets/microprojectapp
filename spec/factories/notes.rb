@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :document do
+  factory :note do
     title { "MyString" }
     content { "MyText" }
     association :user

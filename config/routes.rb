@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
 
     resources :links, controller: 'project/links', only: [:index, :new, :create, :show, :destroy]
-    resources :documents, controller: 'project/documents' do
+    resources :notes, controller: 'project/notes' do
       member do
         get :history
         get :version
