@@ -1,10 +1,10 @@
-<div class="flex mx-auto w-full h-screen">
+<div class="flex mx-auto w-full">
   <!-- Sidebar -->
   <%= render 'project/notes/sidebar' %>
 
   <!-- Main Content -->
   <div class="w-full md:w-2/3 p-4 overflow-y-auto">
-    <%= form_with(model: [@project, @note], class: "contents", data: { controller: "local-storage", note_id: @note.id }) do |form| %>
+    <%= form_with(model: [@project, @note], class: "contents", data: { controller: "local-storage", document_id: @note.id }) do |form| %>
       <div class="flex items-center justify-between mb-4">
         <h2 class="text-lg text-gray-900 dark:text-gray-200">
           Edit mode
