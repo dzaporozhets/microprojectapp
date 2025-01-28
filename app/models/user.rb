@@ -185,7 +185,7 @@ class User < ApplicationRecord
   end
 
   def img_url
-    avatar_url || oauth_avatar_url
+    avatar&.url || oauth_avatar_url
   end
 
   private
