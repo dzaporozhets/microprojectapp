@@ -71,7 +71,7 @@ class User < ApplicationRecord
         # raise 'User with such email already exists'
         user.update(uid: uid,
                     provider: provider,
-                    avatar_url: image,
+                    oauth_avatar_url: image,
                     oauth_linked_at: Time.now)
 
         user.save
@@ -83,7 +83,7 @@ class User < ApplicationRecord
       end
 
       user = User.new(provider: provider, uid: uid, email: email, created_from_oauth: true)
-      user.avatar_url = image
+      user.oauth_avatar_url = image
       user.password = Devise.friendly_token[0,20]
       user.disable_password = true
       user.skip_confirmation!
@@ -182,6 +182,10 @@ class User < ApplicationRecord
     else
       self.otp_secret = nil
     end
+  end
+
+  def img_url
+    avatar_url || oauth_avatar_url
   end
 
   private

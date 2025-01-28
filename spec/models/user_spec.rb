@@ -79,7 +79,7 @@ RSpec.describe User, type: :model do
           expect(user.email).to eq('user@mydomain.com')
           expect(user.provider).to eq('google_oauth2')
           expect(user.uid).to eq('123456789')
-          expect(user.avatar_url).to eq('http://example.com/avatar.jpg')
+          expect(user.oauth_avatar_url).to eq('http://example.com/avatar.jpg')
         end
 
         context 'when sign-ups are disabled' do
@@ -107,7 +107,7 @@ RSpec.describe User, type: :model do
 
             expect(existing_user.provider).to eq('google_oauth2')
             expect(existing_user.uid).to eq('123456789')
-            expect(existing_user.avatar_url).to eq('http://example.com/avatar.jpg')
+            expect(existing_user.oauth_avatar_url).to eq('http://example.com/avatar.jpg')
           end
         end
 
@@ -126,7 +126,7 @@ RSpec.describe User, type: :model do
 
             expect(existing_user.provider).to eq('google_oauth2')
             expect(existing_user.uid).to eq('123456789')
-            expect(existing_user.avatar_url).to eq('http://example.com/avatar.jpg')
+            expect(existing_user.oauth_avatar_url).to eq('http://example.com/avatar.jpg')
           end
         end
       end

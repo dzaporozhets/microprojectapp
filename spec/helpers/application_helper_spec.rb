@@ -63,9 +63,9 @@ RSpec.describe ApplicationHelper, type: :helper do
     let(:user) { double('User', email: 'test@example.com', avatar_url: nil) }
     let(:default_options) { { size: 40, alt: 'Avatar' } }
 
-    context 'when user has an avatar_url' do
+    context 'when user has an img_url' do
       before do
-        allow(user).to receive(:avatar_url).and_return('http://example.com/avatar.jpg')
+        allow(user).to receive(:img_url).and_return('http://example.com/avatar.jpg')
       end
 
       it 'generates an image tag with the avatar_url' do
@@ -78,9 +78,9 @@ RSpec.describe ApplicationHelper, type: :helper do
       end
     end
 
-    context 'when user does not have an avatar_url' do
+    context 'when user does not have an img_url' do
       before do
-        allow(user).to receive(:avatar_url).and_return(nil)
+        allow(user).to receive(:img_url).and_return(nil)
       end
 
       it 'generates a div with the correct initial' do

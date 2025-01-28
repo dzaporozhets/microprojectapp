@@ -14,9 +14,9 @@ module ApplicationHelper
   end
 
   def avatar_tag(user, css_class = '', options = { size: 40, alt: 'Avatar' })
-    if user.avatar_url.present?
+    if user.img_url.present?
       content_tag(:div, class: 'flex') do
-        image_tag(user.avatar_url, class: "rounded-full #{css_class}", size: options[:size], alt: options[:alt])
+        image_tag(user.img_url, class: "rounded-full #{css_class}", size: options[:size], alt: options[:alt])
       end
     else
       first_letter = user.email[0].upcase

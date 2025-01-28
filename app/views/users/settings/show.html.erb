@@ -52,6 +52,27 @@
       </div>
     </section>
 
+    <section class="mt-10">
+      <h2 class="section-title">Avatar</h2>
+      <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">A picture is worth a thousand words</p>
+
+      <div class="mt-6 flex items-center justify-between sm:space-x-6 mb-2">
+        <!-- File Upload -->
+        <div class="flex-grow">
+          <%= f.file_field :avatar,
+            accept: allowed_img_file_types,
+            class: "appearance-none file-select text-sm leading-tight file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-medium w-full" %>
+        </div>
+
+        <!-- Avatar Preview -->
+        <div class="flex-shrink-0">
+          <% if @user.img_url.present? %>
+            <%= image_tag @user.img_url, alt: "Current Avatar", class: "w-10 h-10 rounded-full object-cover ml-4" %>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
     <div class="mt-5">
       <%= f.submit "Save Settings", class: "justify-center btn-primary" %>
     </div>

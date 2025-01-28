@@ -1,4 +1,12 @@
 module FilesHelper
+  def allowed_img_file_types
+    %w(
+      image/jpeg
+      image/gif
+      image/png
+    ).join(',')
+  end
+
   def allowed_file_types
     %w(
       text/plain

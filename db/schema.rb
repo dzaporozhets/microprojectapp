@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_28_082852) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_28_084600) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -138,7 +138,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_28_082852) do
     t.boolean "created_from_oauth", default: false, null: false
     t.datetime "oauth_linked_at"
     t.boolean "disable_password", default: false, null: false
-    t.string "avatar_url"
+    t.string "oauth_avatar_url"
     t.integer "dark_mode", default: 2, null: false
     t.string "otp_secret"
     t.integer "consumed_timestep"
