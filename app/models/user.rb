@@ -18,6 +18,8 @@ class User < ApplicationRecord
 
   devise *devise_modules, omniauth_providers: [:google_oauth2, :azure_activedirectory_v2]
 
+  mount_uploader :avatar, AvatarUploader
+
   after_create :create_personal_project
   after_create :create_sample_project, unless: -> { Rails.env.test? }
 
