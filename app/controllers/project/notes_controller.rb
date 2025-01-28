@@ -60,6 +60,7 @@ class Project::NotesController < Project::BaseController
 
   def set_tab
     @tab_name = 'Files'
+    #@tab_name = 'Notes'
   end
 
   def note_params

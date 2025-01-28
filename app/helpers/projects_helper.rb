@@ -3,6 +3,7 @@ module ProjectsHelper
     tabs = [
       #{ name: 'Project', path: '#' },
       { name: 'Tasks', path: project_path(@project) },
+      #{ name: 'Notes', path: project_notes_path(@project) },
       { name: 'Files', path: project_files_path(@project) },
     ]
 
