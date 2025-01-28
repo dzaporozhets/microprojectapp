@@ -58,4 +58,13 @@ RSpec.feature "User Settings", type: :feature do
 
     expect(page).to have_selector :css, 'html'
   end
+
+  scenario "User uploads an avatar" do
+    attach_file('user[avatar]', "#{Rails.root}/spec/fixtures/files/test_img.png")
+    click_button 'Save Settings'
+
+    expect(page).to have_content('Saved')
+    expect(user.reload.avatar).to be_present
+    expect(user.reload.avatar.url).to be_present
+  end
 end

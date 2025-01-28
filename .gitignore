@@ -45,3 +45,4 @@
 
 /certs/*
 !/certs/.keep
+.DS_Store
