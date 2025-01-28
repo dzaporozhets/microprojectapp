@@ -1,29 +1,42 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <div class="mb-4 bg-indigo-50 dark:bg-indigo-900 rounded-md">
-    <dd class="text-sm text-indigo-900 dark:text-indigo-200">
-      <div class="flex items-center justify-between space-x-6 px-4 py-2">
-        <div class="flex items-center gap-6">
-          <div class="flex items-center gap-1">
-            <h1 class="text-xl font-semibold text-indigo-800 dark:text-indigo-200 leading-10">
-              <%= link_to @note.title, [@project, @note] %>
-            </h1>
-          </div>
-        </div>
-
-        <div class="flex items-center gap-2 ml-auto">
-          <%= link_to 'Edit', edit_project_note_path(@note.project, @note), class: "btn-primary" %>
-
-          <%= link_to project_files_path(@note.project, @note), class: "btn-gray", data: { turbo: true }, title: 'Back to files list' do %>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 inline-block">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg>
+<div class="flex mx-auto w-full h-screen">
+  <!-- Sidebar -->
+  <div class="hidden md:block w-1/3 overflow-y-auto mr-10">
+    <ul class="">
+      <% @project.notes.each do |note| %>
+        <li class="p-3 <%= ' bg-gray-100 rounded-md' if note.id == @note.id %>">
+          <%= link_to [@project, note], class: "text-gray-800 dark:text-gray-200 transition" do %>
+            <div class="text-sm font-semibold truncate"><%= truncate(note.title, length: 50) %></div>
+            <div class="text-xs text-gray-600 truncate dark:text-gray-400"><%= note.content ? truncate(note.content, length: 100) : '(No content)' %></div>
           <% end %>
-        </div>
-      </div>
-    </dd>
+        </li>
+      <% end %>
+    </ul>
   </div>
 
-  <div class="prose prose-sm max-w-none text-gray-800 dark:text-gray-300">
-    <%= simple_format(@note.content) %>
+  <!-- Main Content -->
+  <div class="w-full md:w-2/3 bg-yellow-50 dark:bg-yellow-950 border border-yellow-200 dark:border-yellow-600 p-4 overflow-y-auto">
+    <div class="flex items-center justify-between space-x-6 mb-4">
+      <h2 class="text-lg font-bold text-yellow-900 dark:text-yellow-200">
+        <%= link_to @note.title, [@project, @note] %>
+      </h2>
+
+      <div class="flex items-center gap-2 ml-auto">
+        <%= link_to edit_project_note_path(@note.project, @note), class: "btn-small", title: 'Edit' do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 inline-block">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+          </svg>
+        <% end %>
+
+        <%= link_to project_files_path(@note.project, @note), class: "btn-small ml-2", data: { turbo: true }, title: 'Back to files list' do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 inline-block">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="prose prose-sm max-w-none text-yellow-900 dark:text-yellow-200">
+      <%= simple_format(@note.content) %>
+    </div>
   </div>
 </div>
