@@ -75,6 +75,10 @@
 
       <div class="p-3 rounded-b-md flex justify-between">
         <%= form.submit 'Save changes', class: "btn-primary" %>
+
+        <div>
+          <%= link_to "History of changes", changes_project_task_path(task.project, task), class: 'underline text-sm text-gray-500' %>
+        </div>
       </div>
     <% end %>
   </div>
