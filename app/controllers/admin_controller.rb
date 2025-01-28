@@ -10,7 +10,7 @@ class AdminController < ApplicationController
     @total_files = Project.count(:project_files)
     @total_tasks = Task.count
     @total_comments = Comment.count
-    @version = '0.8.3'
+    @version = '0.8.4'
     @rails_env = ENV['RAILS_ENV']
     @domain = ENV['APP_DOMAIN'] || 'Not configured'
     @allowed_domain = ENV['APP_ALLOWED_EMAIL_DOMAIN'] || 'Not configured'
