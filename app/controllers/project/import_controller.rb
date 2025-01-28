@@ -26,6 +26,13 @@ class Project::ImportController < Project::BaseController
         session[:imported_task_ids] = imported_tasks.first(20).map(&:id)
         session[:imported_task_count] = imported_tasks.size
 
+        if data['notes'].present?
+          imported_notes = data['notes'].map do |note_data|
+            note_params = note_data.slice('title', 'content').merge(user: current_user)
+            project.notes.create(note_params)
+          end
+        end
+
         redirect_to project_import_path(project), notice: 'Tasks were successfully imported.'
       rescue JSON::ParserError => e
         redirect_to new_project_import_path(project), alert: 'Invalid JSON file.'
@@ -40,7 +47,7 @@ class Project::ImportController < Project::BaseController
   def show
     task_ids = session.delete(:imported_task_ids) || []
 
-    @imported_task_count = session.delete(:imported_task_count) || 0
     @imported_tasks = project.tasks.where(id: task_ids)
+    @imported_task_count = session.delete(:imported_task_count) || 0
   end
 end
