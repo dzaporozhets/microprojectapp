@@ -8,6 +8,12 @@ class Task < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
+  has_paper_trail(
+    only: [:name, :description],
+    on: [:update],
+    version_limit: 5
+  )
+
   scope :todo, -> { where(done: false) }
   scope :done, -> { where(done: true) }
   scope :no_due_date, -> { where(due_date: nil) }
