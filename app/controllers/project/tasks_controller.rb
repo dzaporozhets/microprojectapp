@@ -1,27 +1,35 @@
 class Project::TasksController < Project::BaseController
-  before_action :set_task, only: %i[ show edit update destroy details toggle_done toggle_star]
+  before_action :set_task, only: %i[ show edit update destroy details toggle_done toggle_star changes]
 
   layout :set_layout
 
-  # GET /tasks or /tasks.json
   def index
     tasks
   end
 
-  # GET /tasks/1 or /tasks/1.json
   def show
   end
 
-  # GET /tasks/new
+  def changes
+    @tab_name = 'Tasks'
+
+    @versions = @task.versions.order(created_at: :desc)
+
+    user_ids = @versions.map(&:whodunnit).compact.uniq
+    users_by_id = User.where(id: user_ids).index_by(&:id)
+
+    @users_by_version = @versions.each_with_object({}) do |version, hash|
+      hash[version.id] = users_by_id[version.whodunnit.to_i]
+    end
+  end
+
   def new
     @task = Task.new
   end
 
-  # GET /tasks/1/edit
   def edit
   end
 
-  # POST /tasks or /tasks.json
   def create
     @task = project.tasks.new(task_params)
     @task.user = current_user
@@ -41,7 +49,6 @@ class Project::TasksController < Project::BaseController
     end
   end
 
-  # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
     respond_to do |format|
       if @task.update(task_params)
