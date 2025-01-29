@@ -36,17 +36,17 @@
         </table>
       </div>
     <% else %>
-      <p class="p-4 text-gray-600 bg-gray-50 dark:bg-gray-800 rounded-md text-center">No versions available for this note.</p>
+      <p class="p-4 text-sm text-gray-600 bg-gray-50 dark:bg-gray-800 rounded-md text-center">No versions available for this note.</p>
     <% end %>
   </div>
 
-  <% if current_user == @note.user %>
-    <div class="mt-4">
-      <%= button_to project_note_path(@note.project, @note), method: :delete, data: { turbo_confirm: 'Delete the note? Are you sure?' }, alt: 'delete', title: 'Delete', class: 'btn-remove' do %>
-        Delete this note
-      <% end %>
-    </div>
-  <% end %>
+  <div class="mt-7 border dark:border-gray-700 p-4 text-sm bg-gray-50 dark:bg-gray-800 rounded-md flex justify-between">
+    <p class="text-sm text-gray-500 py-2 hidden md:flex">
+      Created by <%= @note.user.email %> at <%= l(@note.created_at, format: :long)  %>
+    </p>
+
+    <%= button_to 'Delete this note', project_note_path(@note.project, @note), method: :delete, data: { turbo_confirm: 'Delete the note? Are you sure?' }, alt: 'delete', title: 'Delete', class: 'btn-remove border' %>
+  </div>
 </div>
 
 
