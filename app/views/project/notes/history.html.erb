@@ -36,9 +36,17 @@
         </table>
       </div>
     <% else %>
-      <p class="p-4 text-gray-600">No versions available for this note.</p>
+      <p class="p-4 text-gray-600 bg-gray-50 dark:bg-gray-800 rounded-md text-center">No versions available for this note.</p>
     <% end %>
   </div>
+
+  <% if current_user == @note.user %>
+    <div class="mt-4">
+      <%= button_to project_note_path(@note.project, @note), method: :delete, data: { turbo_confirm: 'Delete the note? Are you sure?' }, alt: 'delete', title: 'Delete', class: 'btn-remove' do %>
+        Delete this note
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
 

@@ -39,7 +39,7 @@ RSpec.feature "Project::Notes", type: :feature do
   end
 
   scenario "User deletes a note" do
-    visit edit_project_note_path(project, note)
+    visit history_project_note_path(project, note)
 
     expect(page).to have_text(note.title)
 

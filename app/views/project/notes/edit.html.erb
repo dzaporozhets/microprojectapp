@@ -6,7 +6,7 @@
   <div class="w-full md:w-2/3 py-4 overflow-y-auto">
     <%= form_with(model: [@project, @note], class: "contents", data: { controller: "local-storage", document_id: @note.id }) do |form| %>
       <div class="flex items-center justify-between mb-4 text-sm">
-        <%= link_to history_project_note_path(@project, @note), class: 'underline' do %>
+        <%= link_to history_project_note_path(@project, @note), class: 'underline dark:text-gray-400' do %>
           <p>Last updated: <%= l(@note.updated_at, format: :long) %></p>
         <% end %>
         <div class="flex items-center gap-2 ml-auto dark:text-gray-400">
@@ -26,20 +26,12 @@
 
       <div class="mt-2 p-2 bg-yellow-50 dark:bg-yellow-950">
         <div>
-          <%= form.text_field :title, class: "block w-full text-lg font-semibold border-none bg-transparent outline-none focus:ring-0 focus:outline-none", required: true %>
+          <%= form.text_field :title, class: "block w-full text-lg font-semibold border-none bg-transparent outline-none focus:ring-0 focus:outline-none dark:text-yellow-600", required: true %>
         </div>
 
         <div>
-          <%= form.text_area :content, data: { local_storage_target: "textarea" }, rows: 24, class: "block w-full border-none bg-transparent outline-none focus:ring-0 focus:outline-none", required: true %>
+          <%= form.text_area :content, data: { local_storage_target: "textarea" }, rows: 24, class: "block w-full border-none bg-transparent outline-none focus:ring-0 focus:outline-none dark:text-yellow-600", required: true %>
         </div>
-      </div>
-    <% end %>
-
-    <% if current_user == @note.user %>
-      <div class="mt-4">
-        <%= button_to project_note_path(@note.project, @note), method: :delete, data: { turbo_confirm: 'Delete the note? Are you sure?' }, alt: 'delete', title: 'Delete', class: 'btn-remove' do %>
-          Delete this note
-        <% end %>
       </div>
     <% end %>
   </div>
