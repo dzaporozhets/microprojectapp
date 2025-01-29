@@ -15,7 +15,6 @@ RSpec.feature "Project::Notes", type: :feature do
     last_doc = project.notes.last
 
     expect(page).to have_current_path(edit_project_note_path(project, last_doc))
-    #expect(page).to have_link('Read view', href: project_note_path(project, last_doc))
   end
 
   scenario "User views a note" do
@@ -26,16 +25,28 @@ RSpec.feature "Project::Notes", type: :feature do
     expect(page).to have_link('Edit', href: edit_project_note_path(project, note))
   end
 
+  scenario "User edits a note" do
+    visit edit_project_note_path(project, note)
+
+    fill_in 'note_title', with: '123'
+    fill_in 'note_content', with: '456'
+
+    click_button 'Save Changes'
+
+    expect(page).to have_text('Saved')
+    expect(page).to have_text('123')
+    expect(page).to have_text('456')
+  end
+
   scenario "User deletes a note" do
-    visit project_files_path(project)
+    visit edit_project_note_path(project, note)
 
     expect(page).to have_text(note.title)
 
-    within("#note_#{note.id}") do
-      click_button "Delete"
-    end
+    click_button "Delete this note"
 
     expect(page).not_to have_text(note.title)
-    expect(page).to have_current_path(project_files_path(project))
+    expect(page).to have_text('New Note')
+    expect(page).to have_current_path(edit_project_note_path(project, project.notes.last))
   end
 end

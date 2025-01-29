@@ -34,5 +34,13 @@
         </div>
       </div>
     <% end %>
+
+    <% if current_user == @note.user %>
+      <div class="mt-4">
+        <%= button_to project_note_path(@note.project, @note), method: :delete, data: { turbo_confirm: 'Delete the note? Are you sure?' }, alt: 'delete', title: 'Delete', class: 'btn-remove' do %>
+          Delete this note
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
