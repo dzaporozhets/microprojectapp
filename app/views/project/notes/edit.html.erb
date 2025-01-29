@@ -1,40 +1,37 @@
-<div class="flex mx-auto w-full">
+<div class="flex mx-auto w-full md:-mt-8">
   <!-- Sidebar -->
   <%= render 'project/notes/sidebar' %>
 
   <!-- Main Content -->
-  <div class="w-full md:w-2/3 p-4 overflow-y-auto">
+  <div class="w-full md:w-2/3 py-4 overflow-y-auto">
     <%= form_with(model: [@project, @note], class: "contents", data: { controller: "local-storage", document_id: @note.id }) do |form| %>
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="text-lg text-gray-900 dark:text-gray-200">
-          Edit mode
-        </h2>
-
+      <div class="flex items-center justify-between mb-4 text-sm">
+        <%= link_to history_project_note_path(@project, @note), class: 'underline' do %>
+          <p>Last updated: <%= l(@note.updated_at, format: :long) %></p>
+        <% end %>
         <div class="flex items-center gap-2 ml-auto dark:text-gray-400">
-          <%= form.submit 'Save Changes', class: "btn-small" %>
-          <%= link_to [@project, @note], class: 'btn-small', title: 'Exit' do %>
-            Exit
+          <% if flash[:notice].present? %>
+            <div
+             data-controller="hide-div"
+             class="py-2 px-3 text-sm text-green-700 dark:text-green-300" role="alert">
+              <%= flash[:notice] %>
+            </div>
           <% end %>
+
+          <%= form.submit 'Save Changes', class: "btn-gray ml-2" %>
         </div>
       </div>
 
-      <%= render "shared/flash" %>
       <%= render "shared/errors", resource: @note %>
 
-      <div class="mt-2">
-        <div class="mb-4">
-          <%= form.text_field :title, class: "block base-input mt-2 w-full text-lg font-semibold" %>
+      <div class="mt-2 p-2 bg-yellow-50 dark:bg-yellow-950">
+        <div>
+          <%= form.text_field :title, class: "block w-full text-lg font-semibold border-none bg-transparent outline-none focus:ring-0 focus:outline-none", required: true %>
         </div>
 
         <div>
-          <%= form.text_area :content, data: { local_storage_target: "textarea" }, rows: 20, class: "block base-input mt-2 w-full", required: true %>
+          <%= form.text_area :content, data: { local_storage_target: "textarea" }, rows: 24, class: "block w-full border-none bg-transparent outline-none focus:ring-0 focus:outline-none", required: true %>
         </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="mt-5 text-sm text-gray-500 justify-between flex">
-        <p>Last updated: <%= l(@note.updated_at, format: :long) %></p>
-        <%= link_to "History of changes", history_project_note_path(@project, @note), class: 'underline' %>
       </div>
     <% end %>
   </div>

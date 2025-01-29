@@ -1,23 +1,22 @@
 <div class="hidden md:block w-1/3 overflow-y-auto mr-10 border-r border-gray-200 dark:border-gray-700">
   <ul class="">
-    <% @project.notes.each do |note| %>
+    <li class="p-3">
+      <%= link_to new_project_note_path(@project), class: "flex items-center h-12 text-sm text-gray-500 hover:text-indigo-700 dark:hover:text-indigo-300", data: { turbo: false } do %>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+
+        <div class="ml-2">Add a note</div>
+      <% end %>
+    </li>
+
+    <% @project.notes.order(id: :desc).each do |note| %>
       <li class="p-3 <%= ' bg-gray-100 dark:bg-gray-800' if note.id == @note.id %>">
-        <%= link_to [@project, note], class: "text-gray-800 dark:text-gray-300 transition" do %>
+        <%= link_to edit_project_note_path(@project, note), class: "text-gray-800 dark:text-gray-300 transition hover:text-indigo-700 dark:hover:text-indigo-300" do %>
           <div class="text-sm font-semibold truncate"><%= truncate(note.title, length: 50) %></div>
           <div class="text-xs text-gray-600 truncate dark:text-gray-400 pr-3"><%= note.content ? truncate(note.content, length: 100) : '(No content)' %></div>
         <% end %>
       </li>
     <% end %>
-    <li class="p-3">
-      <div class="flex w-0 flex-1 items-center text-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 flex-shrink-0 fill-gray-200 text-gray-400 dark:text-gray-600">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-        </svg>
-
-        <div class="ml-4 flex-1 gap-2">
-          <%= link_to "Add a note", new_project_note_path(@project), class: "truncate text-gray-600 dark:text-gray-400 hover:text-indigo-700 dark:hover:text-indigo-300", data: { turbo: false } %>
-        </div>
-      </div>
-    </li>
   </ul>
 </div>
