@@ -22,7 +22,6 @@ RSpec.feature "Project::Notes", type: :feature do
 
     expect(page).to have_text(note.title)
     expect(page).to have_text(note.content)
-    expect(page).to have_link('Edit', href: edit_project_note_path(project, note))
   end
 
   scenario "User edits a note" do

@@ -14,7 +14,7 @@
       <li class="p-3 <%= ' bg-gray-100 dark:bg-gray-800' if note.id == @note.id %>">
         <%= link_to edit_project_note_path(@project, note), class: "text-gray-800 dark:text-gray-300 transition hover:text-indigo-700 dark:hover:text-indigo-300" do %>
           <div class="text-sm font-semibold truncate"><%= truncate(note.title, length: 50) %></div>
-          <div class="text-xs text-gray-600 truncate dark:text-gray-400 pr-3"><%= note.content ? truncate(note.content, length: 100) : '(No content)' %></div>
+          <div class="text-xs text-gray-600 truncate dark:text-gray-400 pr-3"><%= note.content.present? ? truncate(note.content, length: 100) : '(No content)' %></div>
         <% end %>
       </li>
     <% end %>

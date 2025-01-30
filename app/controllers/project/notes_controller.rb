@@ -11,6 +11,7 @@ class Project::NotesController < Project::BaseController
   end
 
   def show
+    @tab_name = nil
   end
 
   def history
@@ -31,9 +32,14 @@ class Project::NotesController < Project::BaseController
   def new
     @note = project.notes.new(title: 'New Note')
     @note.user = current_user
-    @note.save
 
-    redirect_to edit_project_note_path(@project, @note)
+    if @note.save
+      @project.add_activity(current_user, 'created', @note)
+
+      redirect_to edit_project_note_path(@project, @note)
+    else
+      record_not_found
+    end
   end
 
   def edit
@@ -49,6 +55,7 @@ class Project::NotesController < Project::BaseController
 
   def destroy
     @note.destroy!
+    @project.add_activity(current_user, 'removed', @note)
 
     respond_to do |format|
       format.html { redirect_to project_notes_url(project) }
