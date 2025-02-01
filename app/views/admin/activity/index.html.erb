@@ -1,0 +1,26 @@
+<div class="flex justify-between items-center mb-4 pb-4 border-b dark:border-gray-600">
+  <%= admin_tabs 'Activity' %>
+</div>
+
+<div class="my-5">
+  <ul role="list" class="space-y-6 mt-2">
+    <% @records.each do |record| %>
+      <li class="relative flex gap-x-4">
+        <div class="absolute -bottom-6 left-0 top-0 flex w-6 justify-center">
+          <div class="w-px bg-gray-200 dark:bg-gray-800"></div>
+        </div>
+
+        <div class="relative flex h-6 w-6 flex-none items-center justify-center bg-white dark:bg-gray-950">
+          <div class="h-1.5 w-1.5 rounded-full bg-gray-100 dark:bg-gray-900 ring-1 ring-gray-300 dark:ring-gray-700"></div>
+        </div>
+
+        <p class="flex-auto py-0.5 text-sm leading-5 text-gray-500">
+        <span class="font-medium text-gray-900 dark:text-gray-200"><%= record.user.email %></span>
+        <span class=""> <%= record_to_text(record) %></span>
+        </p>
+
+        <time datetime="2023-01-23T10:32" class="flex-none py-0.5 text-sm leading-5 text-gray-500"><%= time_ago_short record.created_at %></time>
+      </li>
+    <% end %>
+  </ul>
+</div>

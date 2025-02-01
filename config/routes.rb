@@ -61,6 +61,7 @@ Rails.application.routes.draw do
   end
 
   get 'admin' => 'admin#index'
+  get 'admin/activity', to: 'admin/activity#index'
 
   namespace :users do
     resource :settings, only: [:show, :update]
