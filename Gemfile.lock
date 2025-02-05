@@ -130,7 +130,7 @@ GEM
     docile (1.4.1)
     dotenv (3.1.2)
     drb (2.2.1)
-    error_highlight (0.6.0)
+    error_highlight (0.7.0)
     erubi (1.13.0)
     excon (0.111.0)
     factory_bot (6.5.0)
