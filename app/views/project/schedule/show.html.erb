@@ -1,6 +1,6 @@
 <section class="mt-8">
   <h2 class="text-base font-semibold leading-6 text-gray-900 dark:text-gray-200"><%= Date.current.strftime("%B") %></h2>
-  <ol class="mt-2 text-sm leading-6 text-gray-500">
+  <ol class="mt-2 text-sm leading-6 text-gray-500 space-y-2">
     <% if @tasks_due_this_month.any? %>
       <% @tasks_due_this_month.each do |task| %>
         <%= render 'project/schedule/task', task: task %>
@@ -16,7 +16,7 @@
 
 <section class="mt-8">
   <h2 class="text-base font-semibold leading-6 text-gray-900 dark:text-gray-200"><%= Date.current.next_month.strftime("%B") %></h2>
-  <ol class="mt-2 text-sm leading-6 text-gray-500">
+  <ol class="mt-2 text-sm leading-6 text-gray-500 space-y-2">
     <% if @tasks_due_next_month.any? %>
       <% @tasks_due_next_month.each do |task| %>
         <%= render 'project/schedule/task', task: task %>
@@ -31,7 +31,7 @@
 
 <section class="mt-8">
   <h2 class="text-base font-semibold leading-6 text-gray-900 dark:text-gray-200"><%= Date.current.next_month.next_month.strftime("%B") %></h2>
-  <ol class="mt-2 text-sm leading-6 text-gray-500">
+  <ol class="mt-2 text-sm leading-6 text-gray-500 space-y-2">
     <% if @tasks_due_month_after_next.any? %>
       <% @tasks_due_month_after_next.each do |task| %>
         <%= render 'project/schedule/task', task: task %>

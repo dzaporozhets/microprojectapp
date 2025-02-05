@@ -4,13 +4,13 @@
     <%= render 'layouts/head' %>
   </head>
 
-  <body class='dark:bg-gray-950'>
-    <nav class="bg-gray-100 dark:bg-gray-900">
+  <body class='<%= body_color %>'>
+    <nav class="<%= nav_color %>">
       <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4">
-        <%= render 'layouts/home_link' %>
+        <%= render 'layouts/nav/home_link' %>
 
         <div class="flex items-center space-x-6 rtl:space-x-reverse">
-          <%= render 'layouts/user' %>
+          <%= render 'layouts/nav/user' %>
         </div>
       </div>
     </nav>
