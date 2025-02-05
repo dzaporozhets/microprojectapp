@@ -35,7 +35,13 @@
   }
 
   .base-input {
-    @apply rounded-md px-2 py-2 shadow-sm border text-gray-900 border-gray-400 outline-none focus:border-indigo-500 focus:ring-indigo-500 text-sm bg-white dark:bg-gray-700 dark:focus:bg-gray-600 dark:focus:border-indigo-500 dark:border-gray-600 dark:text-gray-200 dark:placeholder-gray-400;
+    @apply rounded-md
+    px-2 py-2 shadow-sm border text-sm
+    border-gray-400 dark:border-gray-600
+    outline-none focus:border-indigo-500 focus:ring-indigo-500
+    bg-white dark:bg-gray-600
+    text-gray-900 dark:text-gray-100
+    placeholder-gray-600 dark:placeholder-gray-300;
   }
 
   .btn-tab {
