@@ -1,6 +1,6 @@
 # Guide: Installing Ruby and PostgreSQL on Debian using asdf
 
-This guide provides step-by-step instructions on how to install Ruby and PostgreSQL on a Debian system. 
+This guide provides step-by-step instructions on how to install Ruby and PostgreSQL on a Debian system.
 
 It consists of the following steps:
 
@@ -12,7 +12,7 @@ It consists of the following steps:
 
 ## 1. Prepare the user
 
-You can use any user you want. But we would expect it to have some sudo capabilities to be able to install packages. 
+You can use any user you want. But we would expect it to have some sudo capabilities to be able to install packages.
 
 ## 2. Install ruby
 
@@ -20,7 +20,7 @@ You can use any user you want. But we would expect it to have some sudo capabili
 
 - [asdf Installation Guide](https://asdf-vm.com/guide/getting-started.html)
 
-Make sure to add it to your shell (like `echo '. "$HOME/.asdf/asdf.sh"' >> ~/.bashrc`). 
+Make sure to add it to your shell (like `echo '. "$HOME/.asdf/asdf.sh"' >> ~/.bashrc`).
 
 
 Install Ruby dependencies:
@@ -37,13 +37,13 @@ Now lets proceed with installation of Ruby:
     ```bash
     asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
     ```
-2. **Install Ruby version 3.1.6:**
+2. **Install Ruby version 3.2.6:**
     ```bash
-    asdf install ruby 3.1.6
+    asdf install ruby 3.2.6
     ```
-3. **Set Ruby 3.1.6 as the global version:**
+3. **Set Ruby 3.2.6 as the global version:**
     ```bash
-    asdf global ruby 3.1.6
+    asdf global ruby 3.2.6
     ```
 4. **Verify the Ruby installation:**
     ```bash
@@ -55,7 +55,7 @@ Now lets proceed with installation of Ruby:
 We are going to install PostgreSQL version 14. For newer versions please adjust steps accordingly
 
 ```
-# Import the repository signing key 
+# Import the repository signing key
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
 # Add PostgreSQL repository
@@ -88,7 +88,7 @@ Now update package manager via `sudo apt update`
     ```bash
     sudo systemctl status postgresql
     ```
-Now you need to create a PostgreSQL user for the app. 
+Now you need to create a PostgreSQL user for the app.
 
 Access PostgreSQL console
 
@@ -96,7 +96,7 @@ Access PostgreSQL console
 sudo -u postgres psql
 ```
 
-Execute the command below replacing password with your choice. Username is `microproject` but you can change it if you want. 
+Execute the command below replacing password with your choice. Username is `microproject` but you can change it if you want.
 
 ```
 CREATE USER microproject WITH PASSWORD 'your_secure_password';
@@ -106,6 +106,6 @@ ALTER ROLE microproject CREATEDB;
 
 ## 5. Done
 
-Now you have both Ruby and PostgreSQL in your system. You also have login and password for PostgreSQL user that you will use later in `config/database.yml`. 
+Now you have both Ruby and PostgreSQL in your system. You also have login and password for PostgreSQL user that you will use later in `config/database.yml`.
 
 You can proceed with `INSTALL.md`

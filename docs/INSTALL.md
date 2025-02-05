@@ -4,7 +4,7 @@
 
 Ensure that the following are installed on your system:
 
-- **Ruby 3.1.6**
+- **Ruby 3.2.6**
 - **Rails 7**
 - **PostgreSQL**
 
@@ -32,17 +32,17 @@ Follow these steps to prepare the Rails app:
 
 ## 3. Database config
 
-Now we need to make sure our rails app can connect to the PostgreSQL database. 
+Now we need to make sure our rails app can connect to the PostgreSQL database.
 
 * Option 1. Directly modifing `config/database.yml` with your PostgreSQL user credentials (see production section there)
-* Option 2. Provide ENV variable `DATABASE_URL`. 
-* Option 3. Provide ENV variables `POSTGRES_USER` and `POSTGRES_PASSWORD` 
+* Option 2. Provide ENV variable `DATABASE_URL`.
+* Option 3. Provide ENV variables `POSTGRES_USER` and `POSTGRES_PASSWORD`
 
-Choose whatever fits you best. 
+Choose whatever fits you best.
 
 ## 4. Rails secrets
 
-The Rails app requires several secret keys to run. Those include `RAILS_MASTER_KEY`, `SECRET_KEY_BASE` and database encryption keys. 
+The Rails app requires several secret keys to run. Those include `RAILS_MASTER_KEY`, `SECRET_KEY_BASE` and database encryption keys.
 
 
 * Option 1. Generate them manually and place into ENV variables.
@@ -54,7 +54,7 @@ Run the script to generate all required secrets into `config/credentials.yml.enc
 SECRET_KEY_BASE_DUMMY=1 rails setup:credentials_and_db_encryption
 ```
 
-After that copy `RAILS_MASTER_KEY` from the ouput of the last command and place it into ENV variable. 
+After that copy `RAILS_MASTER_KEY` from the ouput of the last command and place it into ENV variable.
 
 By exporting `RAILS_MASTER_KEY` we allow the app to read from `config/credentials.yml.enc` and load other variables from there.
 
@@ -70,7 +70,7 @@ RAILS_ENV=production rails db:setup
 
 ## 6. Compile css and javascript
 
-We need to precompile assets like css and javascript for the app to run. 
+We need to precompile assets like css and javascript for the app to run.
 
 ```sh
 RAILS_ENV=production rails assets:precompile
@@ -84,7 +84,7 @@ If the command below starts without error, we can proceed to setup webserver and
 RAILS_ENV=production rails server -b 0.0.0.0
 ```
 
-Cancel the command to stop the server. We will start it again later. 
+Cancel the command to stop the server. We will start it again later.
 
 
 ## 8. Web server (Nginx) setup + HTTPS
@@ -138,15 +138,15 @@ Rails requires HTTPS in production mode by default. It's recommended to use a we
 
     Replace all occurences of `your_domain.com` with your domain name.
 
-    Replace `/path/to/your/microprojectapp` with path to your microprojectapp directory. 
+    Replace `/path/to/your/microprojectapp` with path to your microprojectapp directory.
 
 4. **Enable the Nginx Configuration and Restart Nginx:**
 
     ```
     sudo ln -s /etc/nginx/sites-available/microprojectapp /etc/nginx/sites-enabled/
 
-    # Optional: You might want to remove the default nginx landing page 
-    sudo rm /etc/nginx/sites-enabled/default 
+    # Optional: You might want to remove the default nginx landing page
+    sudo rm /etc/nginx/sites-enabled/default
 
     # Check that config is OK
     sudo nginx -t
@@ -158,18 +158,18 @@ Rails requires HTTPS in production mode by default. It's recommended to use a we
 ## 9. Start the Rails app
 
 
-You need 2 more ENV variables: `APP_DOMAIN` and `RAILS_ENV`. Set them separately or include in the command below. Up to you. 
+You need 2 more ENV variables: `APP_DOMAIN` and `RAILS_ENV`. Set them separately or include in the command below. Up to you.
 
 ```
 APP_DOMAIN=your_domain.com RAILS_ENV=production bundle exec puma -C config/puma.rb
 ```
 
-Congrats! Now everything is running. Go to your domain to see the app running. 
+Congrats! Now everything is running. Go to your domain to see the app running.
 
 
 ## Extras
 
-Some of the features like email delivery or AWS S3 file storage requires extra configuration.  
+Some of the features like email delivery or AWS S3 file storage requires extra configuration.
 
 ### Email sending (postfix)
 
