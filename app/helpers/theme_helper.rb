@@ -3,6 +3,10 @@ module ThemeHelper
     'bg-gray-200 dark:bg-gray-900 text-gray-900 dark:text-gray-400 border-b border-gray-300 dark:border-gray-800'.freeze
   end
 
+  def subnav_color
+    'border-b border-gray-200 dark:border-gray-800'.freeze
+  end
+
   def body_color
     'bg-white dark:bg-gray-950 text-gray-800 dark:text-gray-300'.freeze
   end
