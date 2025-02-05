@@ -1,5 +1,5 @@
 <div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-2xl">
-  <%= content_tag :div, class: "border border-gray-400 dark:border-gray-600 shadow-sm rounded-md dark:bg-gray-900 bg-gray-50" do %>
+  <%= content_tag :div, class: "border border-gray-400 dark:border-gray-600 shadow-sm rounded-md dark:bg-gray-900 bg-white" do %>
     <div class="border-b border-b-indigo-200 dark:border-b-gray-600 text-sm flex items-center p-3 <%= @task.done ? 'bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300' : 'bg-indigo-100 dark:bg-indigo-900 text-indigo-900 dark:text-indigo-100' %> rounded-t-md">
       <div class="flex-none">
         <%= form_with(model: @task, url: project_task_path(@task.project, @task), local: false, data: { turbo: false }) do |form| %>
@@ -38,10 +38,10 @@
     </div>
 
     <div class="p-3 my-3">
-      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-200 break-words"><%= @task.name %></h1>
+      <h1 class="text-2xl font-bold break-words"><%= @task.name %></h1>
 
       <% if @task.description.present? %>
-        <div class="text-base leading-6 text-gray-900 dark:text-gray-200 mt-2 prose max-w-none break-words"><%= simple_format @task.description %></div>
+        <div class="text-base leading-6 mt-2 prose max-w-none break-words"><%= simple_format @task.description %></div>
       <% end %>
     </div>
 
