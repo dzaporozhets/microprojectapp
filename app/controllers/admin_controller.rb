@@ -12,11 +12,13 @@ class AdminController < ApplicationController
     @total_comments = Comment.count
     @version = '0.9.0'
     @rails_env = ENV['RAILS_ENV']
-    @domain = ENV['APP_DOMAIN'] || 'Not configured'
+    @domain = ENV['APP_DOMAIN']
     @allowed_domain = ENV['APP_ALLOWED_EMAIL_DOMAIN'] || 'Not configured'
     @app_signup = ENV['APP_DISABLE_SIGNUP'].present? ? 'Disabled' : 'Enabled'
     @file_storage = ENV['AWS_S3_BUCKET'].present? ? 'AWS S3' : 'Local'
     @mail_delivery = Rails.application.config.action_mailer.delivery_method || 'Not configured'
+    @disable_email_login = DISABLE_EMAIL_LOGIN
+    @oauth_providers = Devise.omniauth_providers
 
     # Last 24 hours activities
     @recent_activities_count = Activity.where('created_at >= ?', 24.hours.ago).count
