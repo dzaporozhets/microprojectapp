@@ -2,6 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   before_action :configure_sign_in_params, only: [:create]
+  before_action :check_oauth_user, only: [:create]
 
   prepend_before_action :auth_with_two_factor, only: [:create], if: -> { two_factor_enabled? }
 
@@ -82,5 +83,14 @@ class Users::SessionsController < Devise::SessionsController
 
   def valid_otp_attempt?(user)
     user.validate_and_consume_otp!(user_params[:otp_attempt])
+  end
+
+  def check_oauth_user
+    user = find_user
+    if user&.oauth_user?
+      flash[:alert] = "Please sign in with #{user.provider_human} instead."
+
+      redirect_to new_user_session_path
+    end
   end
 end

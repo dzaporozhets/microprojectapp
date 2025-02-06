@@ -4,12 +4,12 @@ RSpec.feature "User Edit", type: :feature do
   context "when user logs in with Google" do
     let(:google_user) { create(:user, uid: "12345", provider: "google_oauth2") }
 
-    scenario "shows Google login message and disables email field" do
+    scenario "redirect to account page and show the error message" do
       sign_in google_user
       visit edit_user_registration_path
 
-      expect(page).to have_content("You sign-up with Google account. You can't change your email.")
-      expect(page).to have_field("Email", disabled: true)
+      expect(page).to have_content("Not allowed for OAuth user.")
+      expect(page).to have_current_path(users_account_path)
     end
   end
 
