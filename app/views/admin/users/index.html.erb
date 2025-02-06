@@ -15,7 +15,7 @@
     <tbody>
       <% @users.each do |user| %>
         <tr class="odd:bg-gray-50 dark:odd:bg-gray-900 even:bg-white dark:even:bg-black">
-          <td class="px-4 py-2 border dark:border-gray-700 dark:text-white"><%= link_to user.id, admin_user_path(user), class: 'cursor-pointer underline' %></td>
+          <td class="px-4 py-2 border dark:border-gray-700 dark:text-white"><%= link_to user.id, admin_user_path(user), class: 'cursor-pointer hover:bg-indigo-400 lg:min-w-4 lg:justify-center bg-indigo-100 rounded-md flex dark:bg-gray-700' %></td>
           <td class="px-4 py-2 border dark:border-gray-700 dark:text-white">
             <%= user.email %>
 

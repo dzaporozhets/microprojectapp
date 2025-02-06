@@ -1,4 +1,13 @@
-<%= link_to 'Back to Users List', admin_users_path, class: 'mb-4 inline-block btn-gray' %>
+<div class="flex justify-between items-center mb-4 pb-4 border-b dark:border-gray-600">
+  <%= admin_tabs 'Users' %>
+</div>
+
+<div class="my-10">
+  <h2 class="text-xl font-semibold">
+    <span class="text-gray-500 block md:inline">User:</span>
+    <%= @user.email %>
+  </h2>
+</div>
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
   <div class="shadow-md rounded border dark:border-gray-800 p-6 mb-6 lg:mb-0">
@@ -101,3 +110,13 @@
     </dl>
   </div>
 </div>
+
+<% unless current_user == @user %>
+  <div class="w-full lg:max-w-md border-red-500 border rounded-md my-10">
+    <section class="p-4">
+      <h2 class="section-title">Delete the account</h2>
+      <span class="block text-sm text-gray-700 dark:text-gray-300 mb-5">This will completely remove your account. <br/>All data will be lost.</span>
+      <%= button_to 'Delete this account', admin_user_path(@user), method: :delete, data: { turbo_confirm: "Delete account with all the data? Are you sure?", confirm: "Are you sure you want to delete this user?" }, class: 'px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 text-sm' %>
+    </section>
+  </div>
+<% end %>
