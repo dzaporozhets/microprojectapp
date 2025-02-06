@@ -174,6 +174,13 @@ class User < ApplicationRecord
     avatar&.url || oauth_avatar_url
   end
 
+  def provider_human
+    case provider
+    when 'google_oauth2' then 'Google'
+    when 'azure_activedirectory_v2' then 'Microsoft'
+    end
+  end
+
   private
 
   def email_domain_check
