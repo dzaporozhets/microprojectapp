@@ -15,7 +15,6 @@ class AdminController < ApplicationController
     @domain = ENV['APP_DOMAIN'] || 'Not configured'
     @allowed_domain = ENV['APP_ALLOWED_EMAIL_DOMAIN'] || 'Not configured'
     @app_signup = ENV['APP_DISABLE_SIGNUP'].present? ? 'Disabled' : 'Enabled'
-    @email_confirmation = User.skip_email_confirmation? ? 'Disabled' : 'Enabled'
     @file_storage = ENV['AWS_S3_BUCKET'].present? ? 'AWS S3' : 'Local'
     @mail_delivery = Rails.application.config.action_mailer.delivery_method || 'Not configured'
 

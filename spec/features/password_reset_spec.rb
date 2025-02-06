@@ -27,6 +27,8 @@ RSpec.feature "PasswordResets", type: :feature do
   scenario "User requests a password reset within throttle period" do
     user.update(reset_password_sent_at: Time.now)
 
+    ActionMailer::Base.deliveries = []
+
     visit new_user_password_path
 
     fill_in "Email", with: user.email
@@ -34,6 +36,7 @@ RSpec.feature "PasswordResets", type: :feature do
 
     # The message remains the same due to paranoid mode
     expect(page).to have_content(error_message)
+
     # Ensure no new email is sent
     expect(ActionMailer::Base.deliveries).to be_empty
   end

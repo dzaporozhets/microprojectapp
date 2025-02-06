@@ -340,4 +340,7 @@ Devise.setup do |config|
     config.omniauth :google_oauth2, '1234', 'abcd'
     config.omniauth :azure_activedirectory_v2, client_id: '1234', client_secret: 'abcd'
   end
+
+  # Allow disable login via email and password (Use OAuth only)
+  DISABLE_EMAIL_LOGIN = ENV['DISABLE_EMAIL_LOGIN'] == 'true' # Or set it directly as needed
 end

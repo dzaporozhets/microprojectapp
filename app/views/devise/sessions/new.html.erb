@@ -8,28 +8,30 @@
 
   <%= render 'devise/sessions/oauth' if devise_mapping.omniauthable? && Devise.omniauth_providers.any? %>
 
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }, data: { turbo: false }) do |f| %>
-    <div class="mt-2">
-      <%= f.label :email, class:"dark:text-gray-200" %>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: 'base-input block w-full sm:text-m sm:leading-6' %>
-    </div>
-
-    <div class="mt-2">
-      <%= f.label :password, class:"dark:text-gray-200" %>
-      <%= f.password_field :password, autocomplete: "current-password", class: 'base-input block w-full sm:text-m sm:leading-6' %>
-    </div>
-
-    <% if devise_mapping.rememberable? %>
+  <% unless DISABLE_EMAIL_LOGIN %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }, data: { turbo: false }) do |f| %>
       <div class="mt-2">
-        <%= f.check_box :remember_me, class: 'checkbox mr-1', checked: true %>
-        <%= f.label :remember_me, class:"dark:text-gray-200" %>
+        <%= f.label :email, class:"dark:text-gray-200" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: 'base-input block w-full sm:text-m sm:leading-6' %>
+      </div>
+
+      <div class="mt-2">
+        <%= f.label :password, class:"dark:text-gray-200" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: 'base-input block w-full sm:text-m sm:leading-6' %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="mt-2">
+          <%= f.check_box :remember_me, class: 'checkbox mr-1', checked: true %>
+          <%= f.label :remember_me, class:"dark:text-gray-200" %>
+        </div>
+      <% end %>
+
+      <div class="mt-2">
+        <%= f.submit "Log in", class: "flex w-full justify-center rounded-md bg-indigo-600 px-3 py-3 text-m font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
       </div>
     <% end %>
 
-    <div class="mt-2">
-      <%= f.submit "Log in", class: "flex w-full justify-center rounded-md bg-indigo-600 px-3 py-3 text-m font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
-    </div>
+    <%= render "devise/shared/links" %>
   <% end %>
-
-  <%= render "devise/shared/links" %>
 </div>

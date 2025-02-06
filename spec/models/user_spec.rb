@@ -40,25 +40,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe 'APP_SKIP_EMAIL_CONFIRMATION' do
-    it 'creates a user with confirmation' do
-      ClimateControl.modify APP_SKIP_EMAIL_CONFIRMATION: '1' do
-        user = create(:user)
-
-        expect(user.confirmed_at).to be_present
-      end
-    end
-
-    it 'updates a user with confirmation' do
-      ClimateControl.modify APP_SKIP_EMAIL_CONFIRMATION: '1' do
-        user = create(:user)
-        user.update(email: 'new_unconfirmed_email@example.com')
-
-        expect(user.confirmed_at).to be_present
-      end
-    end
-  end
-
   describe 'class_methods' do
     describe '.from_omniauth' do
       let(:auth) do

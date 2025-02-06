@@ -2,19 +2,18 @@ class User < ApplicationRecord
   devise :two_factor_authenticatable
   class SignupsDisabledError < StandardError; end
 
-  def self.skip_email_confirmation?
-    ENV['APP_SKIP_EMAIL_CONFIRMATION'].present?
-  end
-
   def self.disabled_signup?
     ENV['APP_DISABLE_SIGNUP'].present?
   end
 
-  devise_modules = [
+
+  devise_modules = [:omniauthable]
+
+  devise_modules += [
     :two_factor_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable,
     :lockable, :omniauthable, :confirmable
-  ]
+  ] unless DISABLE_EMAIL_LOGIN
 
   devise *devise_modules, omniauth_providers: [:google_oauth2, :azure_activedirectory_v2]
 
@@ -22,10 +21,6 @@ class User < ApplicationRecord
 
   after_create :create_personal_project
   after_create :create_sample_project, unless: -> { Rails.env.test? }
-
-  # In case the app is configured to skip email confirmation
-  before_create :skip_email_confirmation, if: -> { User.skip_email_confirmation? }
-  before_update :confirm_email_changed, if: -> { User.skip_email_confirmation? }
 
   before_save :generate_otp_secret, if: -> { otp_required_for_login_changed? }
 
@@ -161,15 +156,6 @@ class User < ApplicationRecord
 
   def created_today?
     created_at.to_date == Date.current
-  end
-
-  def skip_email_confirmation
-    self.skip_confirmation!
-    self.skip_confirmation_notification!
-  end
-
-  def confirm_email_changed
-    self.confirm if self.unconfirmed_email_changed?
   end
 
   def two_factor_enabled?

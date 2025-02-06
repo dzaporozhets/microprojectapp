@@ -1,7 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_admin!
-  before_action :confirmable
 
   layout 'admin'
 
@@ -11,11 +10,5 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-  end
-
-  private
-
-  def confirmable
-    @confirmable ||= !User.skip_email_confirmation?
   end
 end

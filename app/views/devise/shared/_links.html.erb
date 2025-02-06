@@ -16,7 +16,7 @@
     <%= link_to "Forgot your password?", new_password_path(resource_name), class:"dark:hover:underline" %><br />
   <% end %>
 
-  <%- if devise_mapping.confirmable? && controller_name != 'confirmations' && !User.skip_email_confirmation? %>
+  <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
     <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
   <% end %>
 

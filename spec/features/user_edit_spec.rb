@@ -25,7 +25,7 @@ RSpec.feature "User Edit", type: :feature do
       fill_in "Current password", with: user.password
       click_button "Save Changes"
 
-      expect(page).to have_content("Your account has been updated successfully.")
+      expect(page).to have_content("You updated your account successfully")
     end
   end
 end

@@ -65,6 +65,7 @@ Rails.application.routes.draw do
 
   namespace :users do
     resource :settings, only: [:show, :update]
+    resource :account, only: [:show, :update, :delete]
   end
 
   resource :schedule, only: :show, controller: 'schedule'

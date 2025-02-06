@@ -61,8 +61,8 @@ To generate some ENV variables automatically, run:
 
 - `APP_DOMAIN` - set domain name to use for links and other resources, e.g., `APP_DOMAIN=myapp.heroku.com`
 - `APP_ALLOWED_EMAIL_DOMAIN` - restrict users to a certain domain, e.g., `APP_ALLOWED_EMAIL_DOMAIN=company.com`
-- `APP_SKIP_EMAIL_CONFIRMATION` - disable email confirmation for users after sign-up. OAuth users are confirmed by default.
 - `APP_DISABLE_SIGNUP` - disable user sign-up if you don't want to allow new users.
+- `DISABLE_EMAIL_LOGIN` - disable login and sign-up with email and password. Only OAuth (Google, Microsoft) is allowed
 
 ### AWS S3
 
