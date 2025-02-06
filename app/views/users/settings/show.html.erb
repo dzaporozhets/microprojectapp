@@ -17,10 +17,12 @@
           <%= f.label :allow_invites, "Allow other users to add you to projects", class: 'ml-2 text-sm' %>
         </div>
 
-        <div class="">
-          <%= f.check_box :otp_required_for_login, class: 'checkbox' %>
-          <%= f.label :otp_required_for_login, "Enable Two-Factor Authentication", class: 'ml-2 text-sm' %>
-        </div>
+        <% unless current_user.oauth_user? %>
+          <div class="">
+            <%= f.check_box :otp_required_for_login, class: 'checkbox' %>
+            <%= f.label :otp_required_for_login, "Enable Two-Factor Authentication", class: 'ml-2 text-sm' %>
+          </div>
+        <% end %>
       </dl>
     </section>
 
