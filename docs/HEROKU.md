@@ -47,22 +47,24 @@ Before you proceed you need to install [Heroku CLI](https://devcenter.heroku.com
     heroku open
     ```
 
+8. **Set domain ENV for your app:**
+
+    ```sh
+    # Attention! Replace value with your domain
+    heroku config:set APP_DOMAIN=your-domain-name-here.com
+    ```
+
 Done! The last command should open the application in your browser.
 
 ### Extras:
 
-#### Base keys for sessions, db encryption etc.
+#### Generate db encryption keys (optional, neccessary for two factor auth).
 
 ```
 # Generate random values
-heroku run ./bin/generate-env-vars
+heroku run ./bin/heroku-generate-db-encryption-vars
 
-# Copy next values from previous command output and set it below
-heroku config:set RAILS_MASTER_KEY=
-heroku config:set SECRET_KEY_BASE=
-heroku config:set ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY=
-heroku config:set ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY=
-heroku config:set ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT=
+# You will see 3 lines of instructions from the output from previous command output.
 ```
 
 #### File uploads via Amazon S3 (optional, but recommended).
