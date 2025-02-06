@@ -188,11 +188,11 @@ RSpec.describe User, type: :model do
     end
 
     describe '#valid_password?' do
-      let(:user) { create(:user, :google) }
+      context 'when OAuth user' do
+        let(:user) { create(:user, :google) }
 
-      context 'when disable_password is false' do
-        it 'returns true if the password is correct' do
-          expect(user.valid_password?('password')).to be true
+        it 'returns false if the password is correct' do
+          expect(user.valid_password?('password')).to be false
         end
 
         it 'returns false if the password is incorrect' do
@@ -200,23 +200,8 @@ RSpec.describe User, type: :model do
         end
       end
 
-      context 'when disable_password is true and OAuth is enabled' do
-        let(:user) { create(:user, :google, disable_password: true) }
-
-        before do
-          allow(Devise.mappings[:user]).to receive(:omniauthable?).and_return(true)
-        end
-
-        it 'returns false regardless of the password' do
-          ClimateControl.modify GOOGLE_CLIENT_ID: 'google_client_id' do
-            expect(user.valid_password?('password')).to be false
-            expect(user.valid_password?('wrongpassword')).to be false
-          end
-        end
-      end
-
-      context 'when disable_password is true and OAuth is not enabled' do
-        let(:user) { create(:user, :google, disable_password: true) }
+      context 'when normal user' do
+        let(:user) { create(:user) }
 
         it 'returns true if the password is correct' do
           expect(user.valid_password?('password')).to be true

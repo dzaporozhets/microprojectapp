@@ -17,13 +17,6 @@
           <%= f.label :allow_invites, "Allow other users to add you to projects", class: 'ml-2 text-sm' %>
         </div>
 
-        <%- if @user.oauth_user? %>
-          <div class="">
-            <%= f.check_box :disable_password, class: 'checkbox' %>
-            <%= f.label :disable_password, "Disable Password Authentication", class: 'ml-2 text-sm' %>
-          </div>
-        <% end %>
-
         <div class="">
           <%= f.check_box :otp_required_for_login, class: 'checkbox' %>
           <%= f.label :otp_required_for_login, "Enable Two-Factor Authentication", class: 'ml-2 text-sm' %>

@@ -5,7 +5,7 @@ module UsersHelper
       { name: 'Account', path: users_account_path }
     ]
 
-    tabs << { name: 'Password', path: edit_registration_path(current_user) } unless DISABLE_EMAIL_LOGIN
+    tabs << { name: 'Password', path: edit_registration_path(current_user) } unless DISABLE_EMAIL_LOGIN || current_user.oauth_user?
 
     render_tabs(tabs, selected)
   end

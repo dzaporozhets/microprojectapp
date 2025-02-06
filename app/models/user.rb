@@ -131,8 +131,8 @@ class User < ApplicationRecord
   end
 
   def valid_password?(password)
-    # Allow user to disable login with password when login with OAuth was used
-    return false if disable_password && oauth_user? && oauth_config?
+    # Disable login with password if OAuth user
+    return false if oauth_user?
 
     super
   end

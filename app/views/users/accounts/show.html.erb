@@ -4,9 +4,18 @@
 
 <%= render "shared/flash" %>
 
+<% if current_user.oauth_user? %>
+  <section class="mt-10">
+    <h2 class="section-title">Connected via OAuth</h2>
+    <p class="text-sm text-gray-700 dark:text-gray-300">
+      Your account was created using <strong><%= current_user.provider.capitalize %></strong>.<br/>
+      Email: <strong><%= current_user.email %></strong>
+    </p>
+  </section>
+<% end %>
 
 <section class="mt-10">
-  <h2 class="section-title dark:text-gray-200">Delete the account</h2>
+  <h2 class="section-title">Delete the account</h2>
   <span class="block text-sm text-gray-700 dark:text-gray-300 mb-5">This will completely remove your account. <br/>All data will be lost.</span>
   <%= button_to "Delete my account", users_account_path, data: { confirm: "Delete account with all the data? Are you sure?", turbo_confirm: "Delete account with all the data? Are you sure?" }, method: :delete, class: "btn-remove border" %>
 </section>
