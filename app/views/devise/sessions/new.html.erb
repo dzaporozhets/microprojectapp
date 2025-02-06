@@ -8,7 +8,14 @@
 
   <%= render 'devise/sessions/oauth' if devise_mapping.omniauthable? && Devise.omniauth_providers.any? %>
 
-  <% unless DISABLE_EMAIL_LOGIN %>
+  <% if DISABLE_EMAIL_LOGIN %>
+    <% unless Devise.omniauth_providers.any? %>
+      <p class="p-4 my-4 border border-gray-500">
+      Email login and signup are disabled due to <strong>DISABLE_EMAIL_LOGIN</strong>, but no OAuth providers have been configured.
+      As a result, login and signup are not available.
+      </p>
+    <% end %>
+  <% else %>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }, data: { turbo: false }) do |f| %>
       <div class="mt-2">
         <%= f.label :email, class:"dark:text-gray-200" %>
