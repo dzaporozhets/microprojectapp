@@ -26,8 +26,10 @@ RSpec.feature "Project::Tasks", type: :feature do
     select user.email, from: 'task_assigned_user_id'
     click_button "Save changes"
 
+    expected_due_date = Time.zone.tomorrow.strftime("%B %d, %Y")
+
     expect(page).to have_text(task.name)
-    expect(page).to have_text((Date.today + 1.day).strftime("%B %d, %Y"))
+    expect(page).to have_text(expected_due_date)
   end
 
   scenario "User deletes a task from the edit page" do

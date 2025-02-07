@@ -4,4 +4,14 @@ class ApplicationMailer < ActionMailer::Base
   default from: "noreply@#{from_domain}"
 
   layout "mailer"
+
+  def mail(*args)
+    if Rails.application.config.app_settings[:disable_email_login]
+      Rails.logger.info "Email delivery is disabled through DISABLE_EMAIL_LOGIN flag."
+
+      return
+    else
+      super
+    end
+  end
 end

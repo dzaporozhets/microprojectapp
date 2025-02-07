@@ -64,12 +64,14 @@ RSpec.describe User, type: :model do
         end
 
         context 'when sign-ups are disabled' do
-          it 'raises a SignupsDisabledError' do
-            ClimateControl.modify APP_DISABLE_SIGNUP: '1' do
-              expect {
-                User.from_omniauth(auth)
-              }.to raise_error(User::SignupsDisabledError, 'New registrations are currently disabled.')
-            end
+          before do
+            allow(Rails.application.config.app_settings).to receive(:[]).with(:disable_signup).and_return(true)
+          end
+
+          it "raises a SignupsDisabledError" do
+            expect {
+              User.from_omniauth(auth)
+            }.to raise_error(User::SignupsDisabledError, 'New registrations are currently disabled.')
           end
         end
       end
@@ -109,6 +111,54 @@ RSpec.describe User, type: :model do
             expect(existing_user.uid).to eq('123456789')
             expect(existing_user.oauth_avatar_url).to eq('http://example.com/avatar.jpg')
           end
+        end
+      end
+    end
+  end
+
+  describe 'validations' do
+    describe 'email_domain_check' do
+      context 'when email domain restriction is enabled' do
+        before do
+          allow(Rails.application.config.app_settings).to receive(:[]).with(:app_allowed_email_domain).and_return('example.com')
+        end
+
+        it 'allows emails from the allowed domain' do
+          user = build(:user, email: 'user@example.com')
+          expect(user.valid?).to be true
+        end
+
+        it 'rejects emails from other domains' do
+          user = build(:user, email: 'user@otherdomain.com')
+          user.valid?
+          expect(user.errors[:email]).to include("is not from an allowed domain.")
+        end
+
+        it 'allows emails from the allowed domain in mixed case' do
+          user = build(:user, email: 'User@Example.com')
+          expect(user.valid?).to be true
+        end
+
+        it 'rejects emails from other domains in mixed case' do
+          user = build(:user, email: 'User@OtherDomain.com')
+          user.valid?
+          expect(user.errors[:email]).to include("is not from an allowed domain.")
+        end
+      end
+
+      context 'when email domain restriction is disabled' do
+        before do
+          allow(Rails.application.config.app_settings).to receive(:[]).with(:app_allowed_email_domain).and_return(nil)
+        end
+
+        it 'allows any email domain' do
+          user = build(:user, email: 'user@randomdomain.com')
+          expect(user.valid?).to be true
+        end
+
+        it 'allows any email format' do
+          user = build(:user, email: 'test@anotherdomain.io')
+          expect(user.valid?).to be true
         end
       end
     end
@@ -243,15 +293,19 @@ RSpec.describe User, type: :model do
     describe '#oauth_config?' do
       before do
         allow(Devise.mappings[:user]).to receive(:omniauthable?).and_return(omniauthable)
+
+        allow(Rails.application.config).to receive(:app_settings).and_return(
+          Rails.application.config.app_settings.merge(
+            google_client_id: '123'
+          )
+        )
       end
 
       context 'when omniauthable and GOOGLE_CLIENT_ID is present' do
         let(:omniauthable) { true }
 
         it 'returns true' do
-          ClimateControl.modify GOOGLE_CLIENT_ID: 'google_client_id' do
-            expect(user.oauth_config?).to be true
-          end
+          expect(user.oauth_config?).to be true
         end
       end
 
@@ -259,19 +313,23 @@ RSpec.describe User, type: :model do
         let(:omniauthable) { false }
 
         it 'returns false' do
-          ClimateControl.modify GOOGLE_CLIENT_ID: 'google_client_id' do
-            expect(user.oauth_config?).to be false
-          end
+          expect(user.oauth_config?).to be false
         end
       end
 
       context 'when GOOGLE_CLIENT_ID is nil' do
         let(:omniauthable) { true }
 
+        before do
+          allow(Rails.application.config).to receive(:app_settings).and_return(
+            Rails.application.config.app_settings.merge(
+              google_client_id: nil
+            )
+          )
+        end
+
         it 'returns false' do
-          ClimateControl.modify GOOGLE_CLIENT_ID: nil do
-            expect(user.oauth_config?).to be false
-          end
+          expect(user.oauth_config?).to be false
         end
       end
     end

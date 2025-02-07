@@ -41,7 +41,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user.present?
       sign_out_all_scopes
-      user.remember_me! unless DISABLE_EMAIL_LOGIN
+      user.remember_me! unless Rails.application.config.app_settings[:disable_email_login]
       sign_in_and_redirect user, event: :authentication
     else
       flash[:alert] = "Login with Google failed"
@@ -53,19 +53,18 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     redirect_to new_user_session_path
   end
 
-  def azure_activedirectory_v2
+  def entra_id
     auth_info = {
-      uid: auth['uid'],
-      provider: auth['provider'],
-      email: auth.dig('info', 'email'),
-      image: auth.dig('info', 'image')
+      uid: auth.uid,
+      provider: auth.provider,
+      email: auth.info&.email
     }
 
     user = User.from_omniauth(auth_info)
 
     if user.present?
       sign_out_all_scopes
-      user.remember_me! unless DISABLE_EMAIL_LOGIN
+      user.remember_me! unless Rails.application.config.app_settings[:disable_email_login]
       sign_in_and_redirect user, event: :authentication
     else
       flash[:alert] = "Login with Microsoft failed"

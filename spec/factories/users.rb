@@ -16,7 +16,7 @@ FactoryBot.define do
 
     trait :msft do
       uid { '0000-0000-abcd-12345678' }
-      provider { 'azure_activedirectory_v2' }
+      provider { 'entra_id' }
       created_from_oauth { true }
     end
   end

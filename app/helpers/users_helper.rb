@@ -5,12 +5,12 @@ module UsersHelper
       { name: 'Account', path: users_account_path }
     ]
 
-    tabs << { name: 'Password', path: edit_registration_path(current_user) } unless DISABLE_EMAIL_LOGIN || current_user.oauth_user?
+    tabs << { name: 'Password', path: edit_registration_path(current_user) } unless disable_email_login? || current_user.oauth_user?
 
     render_tabs(tabs, selected)
   end
 
   def oauth_provider_name(provider)
-    provider == 'azure_activedirectory_v2' ? 'Microsoft' : 'Google'
+    provider == 'google_oauth2' ? 'Google' : 'Microsoft'
   end
 end
