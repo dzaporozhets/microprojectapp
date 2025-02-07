@@ -8,7 +8,7 @@
 
   <%= render 'devise/sessions/oauth' if devise_mapping.omniauthable? && Devise.omniauth_providers.any? %>
 
-  <% if DISABLE_EMAIL_LOGIN %>
+  <% if Rails.application.config.app_settings[:disable_email_login] %>
     <% unless Devise.omniauth_providers.any? %>
       <p class="p-4 my-4 border border-gray-500">
       Email login and signup are disabled due to <strong>DISABLE_EMAIL_LOGIN</strong>, but no OAuth providers have been configured.

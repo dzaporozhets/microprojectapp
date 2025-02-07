@@ -70,4 +70,8 @@ module ApplicationHelper
       ''
     end
   end
+
+  def disable_email_login?
+    Rails.application.config.app_settings[:disable_email_login]
+  end
 end

@@ -41,7 +41,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user.present?
       sign_out_all_scopes
-      user.remember_me! unless DISABLE_EMAIL_LOGIN
+      user.remember_me! unless Rails.application.config.app_settings[:disable_email_login]
       sign_in_and_redirect user, event: :authentication
     else
       flash[:alert] = "Login with Google failed"
@@ -64,7 +64,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user.present?
       sign_out_all_scopes
-      user.remember_me! unless DISABLE_EMAIL_LOGIN
+      user.remember_me! unless Rails.application.config.app_settings[:disable_email_login]
       sign_in_and_redirect user, event: :authentication
     else
       flash[:alert] = "Login with Microsoft failed"

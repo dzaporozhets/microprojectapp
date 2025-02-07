@@ -3,9 +3,10 @@ class User < ApplicationRecord
   class SignupsDisabledError < StandardError; end
 
   def self.disabled_signup?
-    ENV['APP_DISABLE_SIGNUP'].present?
+    Rails.application.config.app_settings[:disable_signup]
   end
 
+  app_settings = Rails.application.config.app_settings
 
   devise_modules = [:omniauthable]
 
@@ -13,7 +14,7 @@ class User < ApplicationRecord
     :two_factor_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable,
     :lockable, :omniauthable, :confirmable
-  ] unless DISABLE_EMAIL_LOGIN
+  ] unless app_settings[:disable_email_login]
 
   devise *devise_modules, omniauth_providers: [:google_oauth2, :entra_id]
 
@@ -61,7 +62,7 @@ class User < ApplicationRecord
         # User logged in with provider before, nothing to do here.
         user
       else
-        # Update user uid and provider based on emai
+        # Update user uid and provider based on email
         user.update(uid: uid,
                     provider: provider,
                     oauth_avatar_url: image,
@@ -77,7 +78,7 @@ class User < ApplicationRecord
 
       user = User.new(provider: provider, uid: uid, email: email, created_from_oauth: true)
       user.oauth_avatar_url = image
-      user.password = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0, 20]
       user.disable_password = true
       user.skip_confirmation!
       user.skip_confirmation_notification!
@@ -121,7 +122,7 @@ class User < ApplicationRecord
   end
 
   def oauth_config?
-    Devise.mappings[:user].omniauthable? && ENV['GOOGLE_CLIENT_ID'].present?
+    Devise.mappings[:user].omniauthable? && Rails.application.config.app_settings[:google_client_id].present?
   end
 
   def oauth_user?
@@ -182,7 +183,7 @@ class User < ApplicationRecord
   private
 
   def email_domain_check
-    allowed_domain = ENV['APP_ALLOWED_EMAIL_DOMAIN']
+    allowed_domain = Rails.application.config.app_settings[:app_allowed_email_domain]
 
     return true unless allowed_domain.present?
 

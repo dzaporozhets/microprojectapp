@@ -25,37 +25,49 @@ RSpec.feature "User Signup", type: :feature do
   end
 
   scenario "User with allowed email domain can sign up" do
-    ClimateControl.modify APP_ALLOWED_EMAIL_DOMAIN: 'company.com' do
-      visit new_user_registration_path
+    allow(Rails.application.config).to receive(:app_settings).and_return(
+      Rails.application.config.app_settings.merge(
+        app_allowed_email_domain: 'company.com'
+      )
+    )
 
-      fill_in "Email", with: 'user123@company.com'
-      fill_in "Password", with: "password"
-      fill_in "Password confirmation", with: "password"
-      click_button "Sign up"
+    visit new_user_registration_path
 
-      expect(page).to have_content("Welcome!")
-    end
+    fill_in "Email", with: 'user123@company.com'
+    fill_in "Password", with: "password"
+    fill_in "Password confirmation", with: "password"
+    click_button "Sign up"
+
+    expect(page).to have_content("Welcome!")
   end
 
   scenario "User with disallowed email domain cannot sign up" do
-    ClimateControl.modify APP_ALLOWED_EMAIL_DOMAIN: 'company.com' do
-      visit new_user_registration_path
+    allow(Rails.application.config).to receive(:app_settings).and_return(
+      Rails.application.config.app_settings.merge(
+        app_allowed_email_domain: 'company.com'
+      )
+    )
 
-      fill_in "Email", with: 'user123@example.com'
-      fill_in "Password", with: "password"
-      fill_in "Password confirmation", with: "password"
-      click_button "Sign up"
+    visit new_user_registration_path
 
-      expect(page).to have_content("Email is not from an allowed domain.")
-    end
+    fill_in "Email", with: 'user123@example.com'
+    fill_in "Password", with: "password"
+    fill_in "Password confirmation", with: "password"
+    click_button "Sign up"
+
+    expect(page).to have_content("Email is not from an allowed domain.")
   end
 
   scenario "Sign up is disabled when APP_DISABLE_SIGNUP is present" do
-    ClimateControl.modify APP_DISABLE_SIGNUP: '1' do
-      visit new_user_registration_path
+    allow(Rails.application.config).to receive(:app_settings).and_return(
+      Rails.application.config.app_settings.merge(
+        disable_signup: true
+      )
+    )
 
-      expect(page).to have_content('New registrations are currently disabled.')
-      expect(page).to have_current_path(new_user_session_path)
-    end
+    visit new_user_registration_path
+
+    expect(page).to have_content('New registrations are currently disabled.')
+    expect(page).to have_current_path(new_user_session_path)
   end
 end

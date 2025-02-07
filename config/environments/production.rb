@@ -1,6 +1,9 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  # Load cached environment settings
+  app_settings = Rails.application.config.app_settings
+
   #=========================================
   #============== GENERAL CONFIG ===========
   #=========================================
@@ -35,24 +38,18 @@ Rails.application.configure do
   #============== EMAIL CONFIG =============
   #=========================================
 
-  smtp_server = ENV["SMTP_SERVER"] || ENV["MAILGUN_SMTP_SERVER"]
-  smtp_login  = ENV["SMTP_LOGIN"] || ENV["MAILGUN_SMTP_LOGIN"]
-  smtp_pass   = ENV["SMTP_PASSWORD"] || ENV["MAILGUN_SMTP_PASSWORD"]
-  disable_email = ENV.fetch("DISABLE_EMAIL_LOGIN", "false") == "true"
-  app_domain = ENV["APP_DOMAIN"]
-
-  if disable_email
+  if app_settings[:disable_email_login]
     config.action_mailer.perform_deliveries = false
     config.action_mailer.raise_delivery_errors = false
     config.action_mailer.delivery_method = :test
-  elsif smtp_server.present?
+  elsif app_settings[:smtp_server].present?
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
-      address: smtp_server,
+      address: app_settings[:smtp_server],
       port: 587,
-      domain: app_domain,
-      user_name: smtp_login,
-      password: smtp_pass,
+      domain: app_settings[:app_domain],
+      user_name: app_settings[:smtp_login],
+      password: app_settings[:smtp_password],
       authentication: "plain",
       enable_starttls_auto: true
     }
@@ -63,16 +60,16 @@ Rails.application.configure do
   end
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: app_domain } if app_domain.present?
+  config.action_mailer.default_url_options = { host: app_settings[:app_domain] } if app_settings[:app_domain].present?
 
   #=========================================
   #==== DATABASE ENCRYPTION CONFIG =========
   #=========================================
 
-  if ENV["ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY"].present?
-    config.active_record.encryption.primary_key = ENV["ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY"]
-    config.active_record.encryption.deterministic_key = ENV["ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY"]
-    config.active_record.encryption.key_derivation_salt = ENV["ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT"]
+  if app_settings[:active_record_encryption_primary_key]
+    config.active_record.encryption.primary_key = app_settings[:active_record_encryption_primary_key]
+    config.active_record.encryption.deterministic_key = app_settings[:active_record_encryption_deterministic_key]
+    config.active_record.encryption.key_derivation_salt = app_settings[:active_record_encryption_key_derivation_salt]
   elsif Rails.application.credentials.active_record_encryption.present?
     # Credentials will be used automatically
   else

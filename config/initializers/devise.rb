@@ -2,6 +2,9 @@
 
 require 'devise/orm/active_record'
 
+# Load cached environment settings
+app_settings = Rails.application.config.app_settings
+
 # Allow OTP drift (in seconds)
 Devise.otp_allowed_drift = 600
 
@@ -33,26 +36,25 @@ Devise.setup do |config|
   #=========== EMAIL CONFIGURATION =========
   #=========================================
 
-  from_domain = ENV['MAILGUN_DOMAIN'] || ENV['APP_DOMAIN'] || 'example.com'
-  config.mailer_sender = "no-reply@#{from_domain}"
+  config.mailer_sender = "no-reply@#{app_settings[:email_domain]}"
 
   #=========================================
   #=========== OAUTH CONFIGURATION =========
   #=========================================
 
-  if ENV['GOOGLE_CLIENT_ID'].present?
+  if app_settings[:google_client_id]
     config.omniauth :google_oauth2,
-                    ENV['GOOGLE_CLIENT_ID'],
-                    ENV['GOOGLE_CLIENT_SECRET'],
+                    app_settings[:google_client_id],
+                    app_settings[:google_client_secret],
                     scope: 'userinfo.email,userinfo.profile',
-                    redirect_uri: ENV['GOOGLE_REDIRECT_URI']
+                    redirect_uri: app_settings[:google_redirect_uri]
   end
 
-  if ENV['MICROSOFT_CLIENT_ID'].present?
+  if app_settings[:microsoft_client_id]
     config.omniauth :entra_id,
-                    client_id: ENV['MICROSOFT_CLIENT_ID'],
-                    client_secret: ENV['MICROSOFT_CLIENT_SECRET'],
-                    tenant_id: ENV['MICROSOFT_TENANT_ID']
+                    client_id: app_settings[:microsoft_client_id],
+                    client_secret: app_settings[:microsoft_client_secret],
+                    tenant_id: app_settings[:microsoft_tenant_id]
   end
 
   # OAuth configuration for testing environment
@@ -60,10 +62,4 @@ Devise.setup do |config|
     config.omniauth :google_oauth2, '1234', 'abcd'
     config.omniauth :entra_id, client_id: '1234', client_secret: 'abcd', tenant_id: 'common'
   end
-
-  #=========================================
-  #======= DISABLE EMAIL LOGIN OPTION ======
-  #=========================================
-
-  DISABLE_EMAIL_LOGIN = %w[true 1 yes].include?(ENV.fetch('DISABLE_EMAIL_LOGIN', 'false').downcase)
 end
