@@ -11,6 +11,6 @@ module UsersHelper
   end
 
   def oauth_provider_name(provider)
-    provider == 'azure_activedirectory_v2' ? 'Microsoft' : 'Google'
+    provider == 'google_oauth2' ? 'Google' : 'Microsoft'
   end
 end

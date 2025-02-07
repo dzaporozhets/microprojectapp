@@ -15,7 +15,7 @@
 
   <% if ENV['MICROSOFT_CLIENT_ID'].present? %>
     <div class="mb-4">
-      <%= button_to user_azure_activedirectory_v2_omniauth_authorize_path, data: { turbo: false }, method: :post, class: "btn-gray btn-google flex w-full justify-center" do %>
+      <%= button_to user_entra_id_omniauth_authorize_path, data: { turbo: false }, method: :post, class: "btn-gray btn-google flex w-full justify-center" do %>
         <svg class="h-6 w-6" viewBox="0 0 48 48" aria-hidden="true">
           <g fill="none">
           <path fill="#F25022" d="M22 22H4V4h18v18z"/>

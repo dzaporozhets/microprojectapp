@@ -15,7 +15,7 @@ class User < ApplicationRecord
     :lockable, :omniauthable, :confirmable
   ] unless DISABLE_EMAIL_LOGIN
 
-  devise *devise_modules, omniauth_providers: [:google_oauth2, :azure_activedirectory_v2]
+  devise *devise_modules, omniauth_providers: [:google_oauth2, :entra_id]
 
   mount_uploader :avatar, AvatarUploader
 
@@ -61,9 +61,7 @@ class User < ApplicationRecord
         # User logged in with provider before, nothing to do here.
         user
       else
-        # TODO: Decide if we want to prevent existing user link their
-        # google account to local one. Maybe give them choice
-        # raise 'User with such email already exists'
+        # Update user uid and provider based on emai
         user.update(uid: uid,
                     provider: provider,
                     oauth_avatar_url: image,
@@ -177,7 +175,7 @@ class User < ApplicationRecord
   def provider_human
     case provider
     when 'google_oauth2' then 'Google'
-    when 'azure_activedirectory_v2' then 'Microsoft'
+    when 'azure_activedirectory_v2', 'entra_id' then 'Microsoft'
     end
   end
 

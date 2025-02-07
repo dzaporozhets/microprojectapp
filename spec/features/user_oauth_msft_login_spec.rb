@@ -20,8 +20,8 @@ RSpec.feature "User login with Microsoft", type: :feature do
   end
 
   scenario "User successfully signs in with Microsoft to existing account" do
-    OmniAuth.config.mock_auth[:azure_activedirectory_v2] = OmniAuth::AuthHash.new({
-      provider: 'azure_activedirectory_v2',
+    OmniAuth.config.mock_auth[:entra_id] = OmniAuth::AuthHash.new({
+      provider: 'entra_id',
       uid: '123456789',
       info: { email: user.email }
     })
@@ -34,8 +34,8 @@ RSpec.feature "User login with Microsoft", type: :feature do
   end
 
   scenario "User fails to sign in with Microsoft due to missing email" do
-    OmniAuth.config.mock_auth[:azure_activedirectory_v2] = OmniAuth::AuthHash.new({
-      provider: 'azure_activedirectory_v2',
+    OmniAuth.config.mock_auth[:entra_id] = OmniAuth::AuthHash.new({
+      provider: 'entra_id',
       uid: '123456789'
     })
 
@@ -47,7 +47,7 @@ RSpec.feature "User login with Microsoft", type: :feature do
   end
 
   scenario "User handles OmniAuth failure" do
-    OmniAuth.config.mock_auth[:azure_activedirectory_v2] = :invalid_credentials
+    OmniAuth.config.mock_auth[:entra_id] = :invalid_credentials
 
     visit new_user_session_path
     click_button "Sign in with Microsoft"

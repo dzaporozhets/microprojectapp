@@ -53,12 +53,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     redirect_to new_user_session_path
   end
 
-  def azure_activedirectory_v2
+  def entra_id
     auth_info = {
-      uid: auth['uid'],
-      provider: auth['provider'],
-      email: auth.dig('info', 'email'),
-      image: auth.dig('info', 'image')
+      uid: auth.uid,
+      provider: auth.provider,
+      email: auth.info&.email
     }
 
     user = User.from_omniauth(auth_info)

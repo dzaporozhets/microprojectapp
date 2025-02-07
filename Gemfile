@@ -88,7 +88,7 @@ gem 'carrierwave', '~> 3.0'
 gem "fog-aws"
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
-gem 'omniauth-azure-activedirectory-v2'
+gem 'omniauth-entra-id'
 gem "omniauth-rails_csrf_protection"
 gem 'kaminari'
 gem 'rack-attack'

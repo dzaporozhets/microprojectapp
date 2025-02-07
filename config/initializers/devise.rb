@@ -321,6 +321,7 @@ Devise.setup do |config|
     config.mailer_sender = 'no-reply@' + ENV['APP_DOMAIN']
   end
 
+  # Login with Google OAuth
   if ENV['GOOGLE_CLIENT_ID'].present?
     config.omniauth :google_oauth2,
       ENV['GOOGLE_CLIENT_ID'],
@@ -328,17 +329,18 @@ Devise.setup do |config|
       { scope: 'userinfo.email,userinfo.profile', redirect_uri: ENV['GOOGLE_REDIRECT_URI'] }
   end
 
+  # Login with Microsoft OAuth
   if ENV['MICROSOFT_CLIENT_ID'].present?
-    config.omniauth :azure_activedirectory_v2,
-      client_id: ENV['MICROSOFT_CLIENT_ID'],
+    config.omniauth :entra_id,
+      client_id:     ENV['MICROSOFT_CLIENT_ID'],
       client_secret: ENV['MICROSOFT_CLIENT_SECRET'],
-      tenant_id: ENV['MICROSOFT_TENANT_ID']
+      tenant_id:     ENV['MICROSOFT_TENANT_ID']
   end
 
   # We need this for spec/features/user_oauth_login_spec.rb
   if ENV["RAILS_ENV"] == "test"
     config.omniauth :google_oauth2, '1234', 'abcd'
-    config.omniauth :azure_activedirectory_v2, client_id: '1234', client_secret: 'abcd'
+    config.omniauth :entra_id, client_id: '1234', client_secret: 'abcd', tenant_id: 'common'
   end
 
   # Allow disable login via email and password (Use OAuth only)
