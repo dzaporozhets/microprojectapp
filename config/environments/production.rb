@@ -1,150 +1,82 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+  #=========================================
+  #============== GENERAL CONFIG ===========
+  #=========================================
 
-  # Code is not reloaded between requests.
   config.enable_reloading = false
-
-  # Eager load code on boot. This eager loads most of Rails and
-  # your application in memory, allowing both threaded web servers
-  # and those relying on copy on write to perform better.
-  # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
-
-  # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
-
-  # Ensures that a master key has been made available in ENV["RAILS_MASTER_KEY"], config/master.key, or an environment
-  # key such as config/credentials/production.key. This key is used to decrypt credentials (and other encrypted files).
-  # config.require_master_key = true
-
-  # Disable serving static files from `public/`, relying on NGINX/Apache to do so instead.
-  # config.public_file_server.enabled = false
-
-  # Compress CSS using a preprocessor.
-  # config.assets.css_compressor = :sass
-
-  # Do not fall back to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
-
-  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.asset_host = "http://assets.example.com"
-
-  # Specifies the header that your server uses for sending files.
-  # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for Apache
-  # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
-
-  # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
-
-  # Mount Action Cable outside main process or domain.
-  # config.action_cable.mount_path = nil
-  # config.action_cable.url = "wss://example.com/cable"
-  # config.action_cable.allowed_request_origins = [ "http://example.com", /http:\/\/example.*/ ]
-
-  # Assume all access to the app is happening through a SSL-terminating reverse proxy.
-  # Can be used together with config.force_ssl for Strict-Transport-Security and secure cookies.
-  # config.assume_ssl = true
-
-  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
 
-  # Log to STDOUT by default
-  config.logger = ActiveSupport::Logger.new(STDOUT)
-    .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
-    .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
-
-  # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
-
-  # "info" includes generic and useful information about system operation, but avoids logging too much
-  # information to avoid inadvertent exposure of personally identifiable information (PII). If you
-  # want to log everything, set the level to "debug".
+  # Logger settings
+  config.logger = ActiveSupport::TaggedLogging.new(
+    ActiveSupport::Logger.new(STDOUT).tap { |logger| logger.formatter = ::Logger::Formatter.new }
+  )
+  config.log_tags = [:request_id]
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 
-  # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  # Asset configuration
+  config.assets.compile = false
+  config.active_storage.service = :local
 
-  # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter = :resque
-  # config.active_job.queue_name_prefix = "project2_production"
-
-  config.action_mailer.perform_caching = false
-
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
-
-  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
-  # the I18n.default_locale when a translation cannot be found).
+  # Internationalization
   config.i18n.fallbacks = true
 
-  # Don't log any deprecations.
+  # Deprecation warnings
   config.active_support.report_deprecations = false
 
-  # Do not dump schema after migrations.
+  # Database settings
   config.active_record.dump_schema_after_migration = false
 
-  # Enable DNS rebinding protection and other `Host` header attacks.
-  # config.hosts = [
-  #   "example.com",     # Allow requests from example.com
-  #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
-  # ]
-  # Skip DNS rebinding protection for the default health check endpoint.
-  # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
-
   #=========================================
-  #=============== APP CONFIG ==============
+  #============== EMAIL CONFIG =============
   #=========================================
 
-  app_domain = ENV['APP_DOMAIN']
+  smtp_server = ENV["SMTP_SERVER"] || ENV["MAILGUN_SMTP_SERVER"]
+  smtp_login  = ENV["SMTP_LOGIN"] || ENV["MAILGUN_SMTP_LOGIN"]
+  smtp_pass   = ENV["SMTP_PASSWORD"] || ENV["MAILGUN_SMTP_PASSWORD"]
+  disable_email = ENV.fetch("DISABLE_EMAIL_LOGIN", "false") == "true"
+  app_domain = ENV["APP_DOMAIN"]
 
-  #
-  # 1. Email config
-  #
-  smtp_server = ENV['SMTP_SERVER'] || ENV['MAILGUN_SMTP_SERVER']
-  smtp_login  = ENV['SMTP_LOGIN'] || ENV['MAILGUN_SMTP_LOGIN']
-  smtp_pass   = ENV['SMTP_PASSWORD'] || ENV['MAILGUN_SMTP_PASSWORD']
-
-  if smtp_server.present?
+  if disable_email
+    config.action_mailer.perform_deliveries = false
+    config.action_mailer.raise_delivery_errors = false
+    config.action_mailer.delivery_method = :test
+  elsif smtp_server.present?
     config.action_mailer.delivery_method = :smtp
-
     config.action_mailer.smtp_settings = {
       address: smtp_server,
       port: 587,
       domain: app_domain,
       user_name: smtp_login,
       password: smtp_pass,
-      authentication: 'plain',
+      authentication: "plain",
       enable_starttls_auto: true
     }
   else
-    # Default to sendmail
     config.action_mailer.delivery_method = :sendmail
     config.action_mailer.raise_delivery_errors = true
     config.action_mailer.perform_deliveries = true
   end
 
-  #
-  # 2. Domain config
-  #
-  if app_domain.present?
-    config.action_mailer.default_url_options = { host: app_domain }
-  end
+  config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: app_domain } if app_domain.present?
 
-  #
-  # 3. Database encryption config
-  #
-  if ENV['ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY'].present?
-    config.active_record.encryption.primary_key = ENV['ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY']
-    config.active_record.encryption.deterministic_key = ENV['ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY']
-    config.active_record.encryption.key_derivation_salt = ENV['ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT']
+  #=========================================
+  #==== DATABASE ENCRYPTION CONFIG =========
+  #=========================================
+
+  if ENV["ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY"].present?
+    config.active_record.encryption.primary_key = ENV["ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY"]
+    config.active_record.encryption.deterministic_key = ENV["ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY"]
+    config.active_record.encryption.key_derivation_salt = ENV["ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT"]
   elsif Rails.application.credentials.active_record_encryption.present?
-    # Do nothing. Rails app will read it from config/credentials.yml.enc file
+    # Credentials will be used automatically
   else
-    puts 'Warning: Using randomly generated encyption key for ActiveRecord. See https://gitlab.com/dzaporozhets/microprojectapp#env-variables'
+    puts "Warning: Using randomly generated encryption keys for ActiveRecord. Configure ENV variables to secure data."
     config.active_record.encryption.primary_key = SecureRandom.hex(32)
     config.active_record.encryption.deterministic_key = SecureRandom.hex(32)
     config.active_record.encryption.key_derivation_salt = SecureRandom.hex(32)
