@@ -10,7 +10,7 @@
           <%= form.check_box :done,
             checked: task.done,
             id: "checkbox_task_#{task.id}",
-            class: "w-4 h-4 checkbox",
+            class: "w-5 h-5 checkbox-round flex",
             data: { turbo_action: "advance" },
             onchange: "this.form.requestSubmit()" %>
         <% end %>
@@ -26,12 +26,17 @@
           <% if task.assigned_user_id %>
             <%= avatar_tag(task.assigned_user, "h-5 w-5 inline-block text-xs rounded-full text-gray-500 border border-gray-300 dark:border-gray-700") %>
           <% end %>
+        </div>
+      <% end %>
 
-          <% if task.star %>
-            <%= task_star_icon(task) %>
+      <% unless task.done %>
+        <div class="ml-2 flex-none text-right text-gray-400">
+          <%= link_to toggle_star_project_task_path(task.project, task), method: :patch, data: { turbo: true, turbo_method: :patch }, title: 'Star' do %>
+            <%= render 'project/tasks/star', task: task %>
           <% end %>
         </div>
       <% end %>
+
     </div>
   <% end %>
 <% end %>

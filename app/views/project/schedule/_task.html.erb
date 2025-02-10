@@ -6,7 +6,7 @@
         <%= form.check_box :done,
           checked: task.done,
           id: "task_#{task.id}",
-          class: "w-4 h-4 checkbox",
+          class: "w-5 h-5 checkbox-round flex",
           data: { turbo_action: "advance" },
           onchange: "this.form.requestSubmit()" %>
       <% end %>
