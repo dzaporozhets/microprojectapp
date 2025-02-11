@@ -7,14 +7,16 @@
     @apply py-2 px-4 rounded-md text-sm cursor-pointer shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
 
+  .btn-base,
   .btn-gray {
     @apply btn border
-    bg-gray-200
+    shadow-sm
+    bg-zinc-200
     dark:bg-gray-800
-    border-gray-300
+    border-zinc-300
     dark:border-gray-500
-    hover:border-gray-400
-    hover:bg-gray-300
+    hover:border-zinc-400
+    hover:bg-transparent
     dark:hover:bg-gray-700
     focus:ring-gray-300;
   }
@@ -103,10 +105,10 @@
   }
 
   .window-block {
-    @apply border border-gray-300 dark:border-gray-600 shadow-sm rounded-md dark:bg-gray-900 bg-white;
+    @apply border border-zinc-300 dark:border-gray-600 shadow-sm rounded-md dark:bg-gray-900 bg-white;
   }
 
   .window-header {
-    @apply border-b text-sm flex items-center p-3 rounded-t-md;
+    @apply border-b text-sm flex items-center px-3 py-2 rounded-t-md md:py-3;
   }
 }

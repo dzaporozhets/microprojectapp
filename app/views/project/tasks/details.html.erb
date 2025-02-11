@@ -11,6 +11,7 @@
               data: { turbo_action: "advance" },
               onchange: "this.form.requestSubmit()" %>
             <p class="font-medium hidden md:inline-block">Mark task as completed</p>
+            <p class="font-medium md:hidden">Mark as completed</p>
           <% end %>
         <% end %>
       </div>
@@ -37,7 +38,7 @@
       </div>
     </div>
 
-    <div class="p-3 my-3">
+    <div class="p-3 md:my-3">
       <h1 class="text-2xl font-bold break-words"><%= @task.name %></h1>
 
       <% if @task.description.present? %>

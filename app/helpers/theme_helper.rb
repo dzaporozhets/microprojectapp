@@ -1,10 +1,10 @@
 module ThemeHelper
   def nav_color
-    'bg-gray-200 dark:bg-gray-900 text-gray-900 dark:text-gray-400 border-b border-gray-300 dark:border-gray-800'.freeze
+    'bg-zinc-200 dark:bg-gray-900 text-gray-900 dark:text-gray-400 border-b border-zinc-300 dark:border-gray-800'.freeze
   end
 
   def subnav_color
-    'border-b border-gray-200 dark:border-gray-800'.freeze
+    'border-b border-neutral-200 dark:border-gray-800'.freeze
   end
 
   def body_color
@@ -22,6 +22,6 @@ module ThemeHelper
   def task_details_css(task)
     @task.done ?
       'bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-b-gray-200 dark:border-b-gray-600 ' :
-      'bg-gray-100 dark:bg-slate-800 text-black dark:text-gray-100 border-b-gray-200 dark:border-b-gray-700 '
+      'bg-zinc-100 dark:bg-slate-800 text-black dark:text-gray-100 border-b-zinc-200 dark:border-b-gray-700 '
   end
 end
