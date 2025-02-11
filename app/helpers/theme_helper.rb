@@ -18,4 +18,10 @@ module ThemeHelper
 
     base_css + (task.done ? task_done_css : task_todo_css)
   end
+
+  def task_details_css(task)
+    @task.done ?
+      'bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-b-gray-200 dark:border-b-gray-600 ' :
+      'bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-slate-100 border-b-slate-300 dark:border-b-slate-700 '
+  end
 end

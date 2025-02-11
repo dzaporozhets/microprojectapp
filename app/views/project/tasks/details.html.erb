@@ -1,13 +1,13 @@
 <div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-2xl">
   <%= content_tag :div, class: "border border-gray-400 dark:border-gray-600 shadow-sm rounded-md dark:bg-gray-900 bg-white" do %>
-    <div class="border-b border-b-indigo-200 dark:border-b-gray-600 text-sm flex items-center p-3 <%= @task.done ? 'bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300' : 'bg-indigo-100 dark:bg-indigo-900 text-indigo-900 dark:text-indigo-100' %> rounded-t-md">
+    <div class="border-b text-sm flex items-center p-3 <%= task_details_css(@task) %> rounded-t-md">
       <div class="flex-none">
         <%= form_with(model: @task, url: project_task_path(@task.project, @task), local: false, data: { turbo: false }) do |form| %>
-          <%= form.label :done do %>
+          <%= form.label :done, class: 'flex' do %>
             <%= form.check_box :done,
               checked: @task.done,
               id: "task_#{@task.id}",
-              class: "w-4 h-4 checkbox mr-1 border-indigo-500",
+              class: "w-5 h-5 checkbox-round mr-2 border-slate-400",
               data: { turbo_action: "advance" },
               onchange: "this.form.requestSubmit()" %>
             <p class="font-medium hidden md:inline-block">Mark task as completed</p>
@@ -24,13 +24,13 @@
         <% end %>
 
         <%= link_to edit_project_task_path(@task.project, @task), data: { turbo: true }, class: 'ml-2 btn-small', title: 'Edit' do %>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 inline-block">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
           </svg>
         <% end %>
 
         <%= link_to collapse_task_path, class: 'ml-2 btn-small', data: { turbo: true }, title: 'Back to tasks list' do %>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 inline-block">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
           </svg>
         <% end %>
