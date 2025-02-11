@@ -1,19 +1,19 @@
 <div id="<%= dom_id(comment) %>" class="p-3">
   <div class="flex">
-    <div class="flex items-center">
-      <%= avatar_tag(comment.user, "h-6 w-6 mr-2 rounded-full bg-gray-200 dark:bg-gray-600") %>
-      <div class="text-sm mr-3 font-medium"><%= comment.user.email %></div>
-      <div class="text-sm text-gray-600 dark:text-gray-400"><%= time_ago_short(comment.created_at) %></div>
+    <div class="flex items-center text-gray-500 dark:text-gray-400 text-sm">
+      <%= avatar_tag(comment.user, "h-6 w-6 rounded-full bg-gray-200 dark:bg-gray-600") %>
+      <div class="ml-3"><%= comment.user.email %></div>
+      <div class="ml-3"><%= time_ago_short(comment.created_at) %></div>
     </div>
   </div>
 
-  <div class="ml-8">
-    <div class="text-sm break-words">
+  <div class="mt-1 ml-9">
+    <div class="text-sm break-words font-medium">
       <%= comment.body %>
     </div>
 
     <% if comment.attachment.present? %>
-      <div class="flex mt-1">
+      <div class="flex mt-2">
         <%= link_to comment.attachment.url, class: "btn-gray", target: :blank do %>
           <div class="flex text-xs">
             <svg class="h-4 w-4 mr-1 text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

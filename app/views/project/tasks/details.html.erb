@@ -1,5 +1,5 @@
 <div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-2xl">
-  <%= content_tag :div, class: "border border-gray-400 dark:border-gray-600 shadow-sm rounded-md dark:bg-gray-900 bg-white" do %>
+  <%= content_tag :div, class: "border border-gray-300 dark:border-gray-600 shadow-sm rounded-md dark:bg-gray-900 bg-white" do %>
     <div class="border-b text-sm flex items-center p-3 <%= task_details_css(@task) %> rounded-t-md">
       <div class="flex-none">
         <%= form_with(model: @task, url: project_task_path(@task.project, @task), local: false, data: { turbo: false }) do |form| %>
