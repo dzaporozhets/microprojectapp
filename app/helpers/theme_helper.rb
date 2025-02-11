@@ -24,4 +24,12 @@ module ThemeHelper
       'bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-b-gray-200 dark:border-b-gray-600 ' :
       'bg-zinc-100 dark:bg-slate-800 text-black dark:text-gray-100 border-b-zinc-200 dark:border-b-gray-700 '
   end
+
+  def flash_css(type)
+    case type.to_sym
+    when :notice then 'bg-violet-50 border rounded border-violet-300 text-violet-900 dark:bg-violet-950 dark:border-violet-800 dark:text-violet-200'
+    when :alert then 'bg-red-50 border rounded border-red-400 text-red-700 dark:bg-red-700 dark:text-white dark:border-red-800'
+    else 'bg-gray-100 border rounded border-gray-500 text-gray-700 dark:bg-gray-700 dark:text-white dark:border-gray-600'
+    end
+  end
 end

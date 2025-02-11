@@ -28,14 +28,6 @@ module ApplicationHelper
     end
   end
 
-  def flash_css(type)
-    case type.to_sym
-    when :notice then 'bg-indigo-50 border rounded border-indigo-400 text-indigo-700'
-    when :alert then 'bg-red-50 border rounded border-red-400 text-red-700'
-    else 'bg-gray-100 border rounded border-gray-500 text-gray-700'
-    end
-  end
-
   def current_page
     params[:page].to_i || 1
   end
