@@ -1,4 +1,4 @@
-<div class="mb-4 bg-slate-100 dark:bg-slate-800 rounded-md border border-slate-300 dark:border-slate-700 text-indigo-900 dark:text-indigo-100">
+<div class="mb-4 bg-violet-50 dark:bg-violet-800 rounded-md border border-violet-200 dark:border-violet-700 text-violet-900 dark:text-violet-100">
   <dd class="text-sm">
     <div class="flex items-center justify-between space-x-6 px-4 py-2">
       <div class="flex items-center gap-6">
@@ -7,7 +7,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
           </svg>
-          <%= link_to "Active", project_path(@project), class: "text-sm hover:text-indigo-700 dark:hover:text-indigo-300 #{'font-bold' if current_page?(project_path(@project))}" %>
+          <%= link_to "Active", project_path(@project), class: "text-sm hover:text-violet-700 dark:hover:text-violet-300 #{'font-bold' if current_page?(project_path(@project))}" %>
         </div>
 
         <!-- Upcoming Tab -->
@@ -15,7 +15,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
           </svg>
-          <%= link_to "Upcoming", project_schedule_path(@project), class: "text-sm hover:text-indigo-700 dark:hover:text-indigo-300 #{'font-bold' if current_page?(project_schedule_path(@project))}" %>
+          <%= link_to "Upcoming", project_schedule_path(@project), class: "text-sm hover:text-violet-700 dark:hover:text-violet-300 #{'font-bold' if current_page?(project_schedule_path(@project))}" %>
         </div>
 
         <!-- Completed Tab -->
@@ -23,18 +23,18 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
           </svg>
-          <%= link_to "Completed", project_tasks_path(@project, status: 'done'), class: "text-sm hover:text-indigo-700 dark:hover:text-indigo-300 #{'font-bold' if current_page?(project_tasks_path(@project, status: 'done'))}" %>
+          <%= link_to "Completed", project_tasks_path(@project, status: 'done'), class: "text-sm hover:text-violet-700 dark:hover:text-violet-300 #{'font-bold' if current_page?(project_tasks_path(@project, status: 'done'))}" %>
         </div>
       </div>
 
       <div class="flex items-center ml-auto space-x-2 hidden md:flex">
         <%= link_to project_tasks_path(@project, assigned_user_id: @project.user_id), title: @project.user.email do %>
-          <%= avatar_tag(@project.user, "h-8 w-8 rounded-full bg-slate-300 dark:bg-gray-800") %>
+          <%= avatar_tag(@project.user, "h-8 w-8 rounded-full bg-violet-300 dark:bg-gray-800") %>
         <% end %>
 
         <% @project.users.each do |user| %>
           <%= link_to project_tasks_path(@project, assigned_user_id: user.id), title: user.email do %>
-            <%= avatar_tag(user, "h-8 w-8 rounded-full bg-slate-300 dark:bg-gray-800") %>
+            <%= avatar_tag(user, "h-8 w-8 rounded-full bg-violet-300 dark:bg-gray-800") %>
           <% end %>
         <% end %>
       </div>

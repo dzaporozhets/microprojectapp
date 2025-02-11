@@ -22,11 +22,11 @@
   }
 
   .btn-small {
-    @apply py-1 px-2 rounded-md text-sm cursor-pointer shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply py-1 px-2 rounded-md text-sm cursor-pointer shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500;
   }
 
   .btn-primary {
-    @apply btn text-white bg-indigo-800 hover:bg-indigo-600 focus:ring-indigo-500;
+    @apply btn text-white bg-violet-800 hover:bg-violet-600 focus:ring-violet-500;
   }
 
   .btn-remove {
@@ -37,7 +37,7 @@
     @apply rounded-md
     px-2 py-2 shadow-sm border text-sm
     border-gray-300 dark:border-gray-600
-    outline-none focus:border-indigo-500 focus:ring-indigo-500
+    outline-none focus:border-violet-500 focus:ring-violet-500
     bg-white dark:bg-gray-600
     text-gray-900 dark:text-gray-100
     placeholder-gray-600 dark:placeholder-gray-300;
@@ -48,16 +48,18 @@
     px-4 py-2
     text-sm font-medium
     border-transparent
-    hover:text-indigo-800 dark:hover:text-indigo-200;
+    focus:ring-violet-500 focus:outline-none focus:ring-2
+    hover:text-violet-800 dark:hover:text-violet-200;
   }
 
   .btn-tab-active {
     @apply rounded-md border
     px-4 py-2
     text-sm font-medium
-    bg-indigo-100 dark:bg-indigo-900
-    border-indigo-300 dark:border-indigo-800
-    text-indigo-900 dark:text-indigo-100;
+    focus:ring-violet-500 focus:outline-none focus:ring-2
+    bg-violet-100 dark:bg-violet-900
+    border-violet-300 dark:border-violet-800
+    text-violet-900 dark:text-violet-100;
   }
 
   .section-title {
@@ -65,15 +67,15 @@
   }
 
   .checkbox {
-    @apply text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-600 focus:ring-2 dark:bg-gray-700 dark:border-gray-600;
+    @apply text-violet-600 bg-gray-100 border-gray-300 rounded focus:ring-violet-600 focus:ring-2 dark:bg-gray-700 dark:border-gray-600;
   }
 
   .checkbox-round {
-    @apply text-indigo-600 bg-slate-100 border-slate-300 rounded focus:ring-indigo-600 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 rounded-xl;
+    @apply text-violet-600 bg-slate-100 border-slate-300 rounded focus:ring-violet-600 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 rounded-xl;
   }
 
   .radio {
-    @apply text-indigo-600 bg-gray-100 border-gray-300 focus:ring-indigo-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600;
+    @apply text-violet-600 bg-gray-100 border-gray-300 focus:ring-violet-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600;
   }
 
   .turbo-progress-bar {

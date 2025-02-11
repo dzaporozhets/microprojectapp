@@ -7,9 +7,9 @@
       </div>
     <% end %>
 
-    <div class="mb-4 flex w-full bg-slate-100 p-2 rounded-md border border-slate-300 dark:bg-slate-800 dark:border-slate-700">
+    <div class="mb-4 flex w-full bg-zinc-100 p-2 rounded-md border border-zinc-300 dark:bg-violet-800 dark:border-violet-700">
       <div class="flex-grow">
-        <%= form.text_field :name, class: "base-input w-full text-sm px-3 border-slate-200", required: true, placeholder: "What needs to be done?", autocomplete: "off", inputmode: 'text' %>
+        <%= form.text_field :name, class: "base-input w-full text-sm px-3 border-violet-200", required: true, placeholder: "What needs to be done?", autocomplete: "off", inputmode: 'text' %>
       </div>
 
       <%= form.submit "Add task", class: "btn-primary inline-block ms-3" %>
