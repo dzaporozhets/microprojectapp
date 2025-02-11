@@ -1,5 +1,6 @@
 class Project::TasksController < Project::BaseController
   before_action :set_task, only: %i[ show edit update destroy details toggle_done toggle_star changes]
+  before_action :set_tab, only: %i[ details changes index ]
 
   layout :set_layout
 
@@ -11,8 +12,6 @@ class Project::TasksController < Project::BaseController
   end
 
   def changes
-    @tab_name = 'Tasks'
-
     @versions = @task.versions.order(created_at: :desc)
 
     user_ids = @versions.map(&:whodunnit).compact.uniq
@@ -168,6 +167,10 @@ class Project::TasksController < Project::BaseController
     end
 
     permitted_params
+  end
+
+  def set_tab
+    @tab_name = 'Tasks'
   end
 
   def set_layout

@@ -101,4 +101,12 @@
   .light .file-select::file-selector-button {
     @apply text-gray-700 bg-gray-100;
   }
+
+  .window-block {
+    @apply border border-gray-300 dark:border-gray-600 shadow-sm rounded-md dark:bg-gray-900 bg-white;
+  }
+
+  .window-header {
+    @apply border-b text-sm flex items-center p-3 rounded-t-md;
+  }
 }
