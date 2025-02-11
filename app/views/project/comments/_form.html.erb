@@ -1,16 +1,18 @@
 <%= turbo_frame_tag dom_task_comment_form_id(@task) do %>
   <%= form_with(model: [ @task.project, @task, Comment.new ], local: true, id: 'new_comment_form', html: { multipart: true }) do |form| %>
-    <div class="mb-2">
-      <%= form.text_field :body, required: true, class: "block base-input mt-2 w-full", placeholder: "Type your comment here...", autocomplete: "off", inputmode: 'text'  %>
-    </div>
+    <div class="flex gap-x-3 items-start">
+      <%= avatar_tag(current_user, "size-6 flex-none rounded-full bg-gray-50") %>
+      <div class="flex-auto">
+        <div class="overflow-hidden rounded-lg border border-gray-300 focus-within:ring-2 focus-within:ring-indigo-600 dark:border-gray-600">
+          <label for="comment" class="sr-only">Add your comment</label>
+          <%= form.text_area :body, required: true, rows: 3, class: "block w-full resize-none border-0 p-3 text-gray-900 placeholder-gray-400 focus:ring-0 sm:text-sm dark:bg-gray-700 dark:text-gray-300", placeholder: "Type your comment here..." %>
+        </div>
 
-    <div class="mt-2 flex flex-col md:flex-row md:items-center">
-      <div class="flex-grow md:order-2 mb-2 md:mb-0 md:ml-2">
-        <%= form.file_field :attachment,
-          accept: allowed_file_types,
-          class: "appearance-none file-select text-sm leading-tight file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-medium w-full" %>
+        <div class="mt-3 justify-between flex">
+          <%= styled_file_field(form, :attachment) %>
+          <%= form.submit 'Comment', class: 'btn-primary' %>
+        </div>
       </div>
-      <%= form.submit 'Comment', class: 'btn-gray w-full md:w-auto md:order-1 font-semibold' %>
     </div>
   <% end %>
 <% end %>
