@@ -43,6 +43,16 @@
     placeholder-gray-600 dark:placeholder-gray-300;
   }
 
+  .new-task-input {
+    @apply
+    outline-none border-none
+    bg-transparent
+    text-black dark:text-white font-medium
+    placeholder-gray-600 dark:placeholder-gray-300
+    focus:border-none focus:ring-0
+    outline-none focus:outline-none shadow-none;
+  }
+
   .btn-tab {
     @apply rounded-md border
     px-4 py-2

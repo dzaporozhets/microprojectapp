@@ -12,9 +12,9 @@ module ThemeHelper
   end
 
   def task_css(task)
-    base_css = 'border rounded-md px-3 py-1 shadow-xs '.freeze
+    base_css = 'border rounded-md px-3 py-1 shadow-sm '.freeze
     task_done_css = 'bg-neutral-100 dark:bg-gray-950 border-neutral-100 dark:border-gray-800 line-through dark:decoration-gray-400 decoration-black text-neutral-600 dark:text-gray-400'.freeze
-    task_todo_css = 'bg-white dark:bg-gray-900 border-neutral-200 dark:border-gray-800 text-black dark:text-neutral-200'.freeze
+    task_todo_css = 'bg-white dark:bg-gray-900 border-neutral-100 dark:border-gray-800 text-black dark:text-neutral-200'.freeze
 
     base_css + (task.done ? task_done_css : task_todo_css)
   end
