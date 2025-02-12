@@ -1,8 +1,10 @@
 <%= turbo_frame_tag dom_task_comment_form_id(@task) do %>
   <%= form_with(model: [ @task.project, @task, Comment.new ], local: true, id: 'new_comment_form', html: { multipart: true }) do |form| %>
-    <div class="flex gap-x-3 items-start">
-      <%= avatar_tag(current_user, "size-6 flex-none rounded-full bg-gray-50") %>
-      <div class="flex-auto">
+    <div class="flex items-start">
+      <div class="flex-none">
+        <%= avatar_tag(current_user, "size-6 rounded-full bg-gray-50") %>
+      </div>
+      <div class="flex-1 ml-3">
         <div class="overflow-hidden rounded-lg border border-gray-300 focus-within:ring-2 focus-within:ring-indigo-600 dark:border-gray-600">
           <label for="comment" class="sr-only">Add your comment</label>
           <%= form.text_area :body, required: true, rows: 3, class: "block w-full resize-none border-0 p-3 text-gray-900 placeholder-gray-400 focus:ring-0 sm:text-sm dark:bg-gray-700 dark:text-gray-300", placeholder: "Type your comment here..." %>
