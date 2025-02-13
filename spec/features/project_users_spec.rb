@@ -23,6 +23,13 @@ RSpec.feature "Project::Users", type: :feature do
     expect(page).to have_current_path(project_activity_path(project))
   end
 
+  scenario "User cant invite a new member to the someone elses project" do
+    sign_in invited_user
+    visit project_activity_path(project)
+
+    expect(page).not_to have_link('Invite people')
+  end
+
   scenario "User attempts to invite a non-existing user" do
     visit project_activity_path(project)
 

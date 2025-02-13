@@ -32,15 +32,17 @@
       </li>
     <% end %>
 
-    <li class="flex justify-between py-2 px-4">
-      <div class="flex min-w-0 gap-x-4">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 flex-shrink-0 fill-gray-200 dark:fill-gray-800 text-gray-400 dark:text-gray-600">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-        </svg>
-        <div class="min-w-0 flex-auto">
-          <%= link_to "Invite people", invite_project_users_path(@project), class: "text-sm leading-6 text-gray-600 dark:text-gray-400  hover:text-indigo-700 dark:hover:text-indigo-300" %>
+    <% if current_user == @project.owner %>
+      <li class="flex justify-between py-2 px-4">
+        <div class="flex min-w-0 gap-x-4">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 flex-shrink-0 fill-gray-200 dark:fill-gray-800 text-gray-400 dark:text-gray-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          <div class="min-w-0 flex-auto">
+            <%= link_to "Invite people", invite_project_users_path(@project), class: "text-sm leading-6 text-gray-600 dark:text-gray-400  hover:text-indigo-700 dark:hover:text-indigo-300" %>
+          </div>
         </div>
-      </div>
-    </li>
+      </li>
+    <% end %>
   </ul>
 </div>

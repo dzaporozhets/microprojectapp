@@ -35,4 +35,10 @@ class ApplicationController < ActionController::Base
   def turbo_frame_request?
     request.headers["Turbo-Frame"].present?
   end
+
+  def project_owner_only!
+    unless current_user == project.owner
+      raise ActiveRecord::RecordNotFound
+    end
+  end
 end

@@ -1,5 +1,6 @@
 class Project::UsersController < Project::BaseController
   before_action :not_personal
+  before_action :project_owner_only!
 
   def invite
     @tab_name = 'Team'
