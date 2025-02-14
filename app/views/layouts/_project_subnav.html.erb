@@ -1,0 +1,11 @@
+<% if @tab_name %>
+  <div class="py-4 <%= subnav_color %>">
+    <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4">
+      <div class="flex flex-grow items-center">
+        <%= project_tabs @tab_name %>
+      </div>
+
+      <%= render 'layouts/project_buttons' %>
+    </div>
+  </div>
+<% end %>

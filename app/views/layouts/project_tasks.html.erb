@@ -5,17 +5,8 @@
   </head>
 
   <body class='<%= body_color %>'>
-    <%= render 'layouts/project_nav' %>
-
-    <div class="py-4 <%= subnav_color %>">
-      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4">
-        <div class="flex flex-grow items-center">
-          <%= project_tabs "Tasks" %>
-        </div>
-
-        <%= render 'layouts/project_buttons' %>
-      </div>
-    </div>
+    <%= render 'layouts/project_header' %>
+    <%= render 'layouts/project_subnav' %>
 
     <main class="container mx-auto max-w-screen-xl p-4 flex">
       <div class="w-full">

@@ -2,6 +2,8 @@ class Project::ScheduleController < Project::BaseController
   layout 'project_tasks', only: [:show]
 
   def show
+    @tab_name = 'Tasks'
+
     # TODO: Move query logic in the model and add tests
     #
     # Get tasks that are due this month (including past tasks up to today).
