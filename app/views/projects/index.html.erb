@@ -1,11 +1,14 @@
 <div class="w-full">
   <% content_for :title, "Projects" %>
 
-
-  <div class="flex justify-between items-center mb-4 pb-4 border-b dark:border-gray-600">
-    <%= home_tabs "Projects" %>
-    <%= link_to "New Project", new_project_path, class: "btn-primary block" %>
-  </div>
+  <% content_for :subnav do %>
+    <div class="py-4 <%= subnav_color %>">
+      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4">
+        <%= home_tabs "Projects" %>
+        <%= link_to "New Project", new_project_path, class: "btn-primary block" %>
+      </div>
+    </div>
+  <% end %>
 
   <div id="projects" class="min-w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
     <% if @pinned_projects.present? %>
