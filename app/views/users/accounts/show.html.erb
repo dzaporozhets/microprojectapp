@@ -1,6 +1,10 @@
-<div class="mb-4 pb-4 border-b dark:border-gray-600">
-  <%= users_tabs 'Account' %>
-</div>
+<% content_for :subnav do %>
+  <div class="py-4 <%= subnav_color %>">
+    <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4">
+      <%= users_tabs 'Account' %>
+    </div>
+  </div>
+<% end %>
 
 <%= render "shared/flash" %>
 

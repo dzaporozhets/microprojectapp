@@ -26,7 +26,7 @@
   .btn-primary {
     @apply btn border text-white
            bg-violet-800 hover:bg-violet-900
-           border-violet-900 dark:border-violet-700;
+           border-violet-600 dark:border-violet-700;
   }
 
   .btn-remove {

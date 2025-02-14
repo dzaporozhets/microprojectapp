@@ -1,11 +1,15 @@
-<div class="mb-4 pb-4 border-b dark:border-gray-600">
-  <%= users_tabs 'Password' %>
-</div>
+<% content_for :subnav do %>
+  <div class="py-4 <%= subnav_color %>">
+    <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4">
+      <%= users_tabs 'Password' %>
+    </div>
+  </div>
+<% end %>
 
 <%= render "shared/flash" %>
 
 <div class="mb-5">
-  <section class="">
+  <section class="mt-10">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "shared/errors", resource: resource %>
 
