@@ -171,8 +171,9 @@
    * Window Components
    *----------------------------------------*/
   .window-block {
-    @apply border border-zinc-300 dark:border-gray-600 shadow-sm
-           rounded-md bg-white dark:bg-gray-900;
+    @apply border rounded-md shadow-sm
+           border-zinc-300 dark:border-gray-600
+           bg-white dark:bg-gray-800;
   }
 
   .window-header {
