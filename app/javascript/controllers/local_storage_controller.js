@@ -12,10 +12,8 @@ export default class extends Controller {
 
     // Ensure cached value is only rendered if it matches the current document ID
     const cachedValue = localStorage.getItem(storageKey);
-    if (cachedValue && localStorage.getItem("current-document-id") === documentId) {
+    if (cachedValue !== null && cachedValue !== "" && localStorage.getItem("current-document-id") === documentId) {
       textarea.value = cachedValue;
-    } else {
-      textarea.value = "";
     }
 
     localStorage.setItem("current-document-id", documentId);
@@ -37,10 +35,9 @@ export default class extends Controller {
     });
 
     document.addEventListener("turbo:load", () => {
-      if (localStorage.getItem("current-document-id") === documentId) {
-        textarea.value = localStorage.getItem(storageKey) || "";
-      } else {
-        textarea.value = "";
+      const cachedValue = localStorage.getItem(storageKey);
+      if (localStorage.getItem("current-document-id") === documentId && cachedValue !== null && cachedValue !== "") {
+        textarea.value = cachedValue;
       }
     });
   }
