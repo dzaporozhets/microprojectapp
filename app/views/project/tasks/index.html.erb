@@ -2,14 +2,14 @@
   <div class="flex">
     <%= link_to "Tasks assigned to #{@project.find_user(params[:assigned_user_id])&.email} only", project_path(@project), class: 'btn-tab-active' %>
   </div>
-<% elsif params[:status] == 'done' %>
-  <div class="flex">
-    <%= link_to 'Completed tasks only', project_path(@project), class: 'btn-tab-active' %>
-  </div>
 <% else %>
   <%= render 'project/tasks/form', project: @project %>
 <% end %>
 
-<%= render 'project/tasks/tasks', tasks_todo: @tasks_todo, tasks_done: @tasks_done %>
+<%= turbo_frame_tag "tasks", class: "mt-2 grid grid-cols-1 gap-1" do %>
+  <% @tasks.each do |task| %>
+    <%= render partial: "project/tasks/task", locals: { task: task } %>
+  <% end %>
+<% end %>
 
-<%= paginate @tasks_done %>
+<%= paginate @tasks %>

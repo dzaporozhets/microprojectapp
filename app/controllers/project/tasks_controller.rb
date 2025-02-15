@@ -1,11 +1,24 @@
 class Project::TasksController < Project::BaseController
+  PER_PAGE = 100
+
   before_action :set_task, only: %i[ show edit update destroy details toggle_done toggle_star changes]
-  before_action :set_tab, only: %i[ details changes index ]
+  before_action :set_tab, only: %i[ details changes index completed]
 
   layout :set_layout
 
   def index
-    tasks
+    if params[:assigned_user_id].present?
+      @tasks = assigned_tasks
+    else
+      @tasks = @project.tasks.basic_order
+    end
+
+    @tasks = @tasks.page(params[:page]).per(PER_PAGE)
+  end
+
+  def completed
+    @tasks = done_tasks
+    @tasks = @tasks.page(params[:page]).per(PER_PAGE)
   end
 
   def show
@@ -93,7 +106,7 @@ class Project::TasksController < Project::BaseController
         # and and vice versa
         # tasks
 
-        format.turbo_stream { tasks }
+        format.turbo_stream
         format.html { redirect_back fallback_location: project_path(@project), notice: "Task status was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
@@ -108,7 +121,7 @@ class Project::TasksController < Project::BaseController
 
     if @task.save
       respond_to do |format|
-        format.turbo_stream { tasks }
+        format.turbo_stream
         format.html { redirect_to project_url(@project), notice: "Task star status was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       end
@@ -122,21 +135,6 @@ class Project::TasksController < Project::BaseController
 
   private
 
-  def tasks
-    if params[:assigned_user_id].present?
-      @tasks_todo = assigned_tasks
-      @tasks_done = none_tasks
-    elsif params[:status] == 'done'
-      @tasks_todo = none_tasks
-      @tasks_done = done_tasks
-    else
-      @tasks_todo = @project.tasks.todo.basic_order
-      @tasks_done = done_tasks
-    end
-
-    @tasks_done = @tasks_done.page(params[:page]).per(100)
-  end
-
   def done_tasks
     @project.tasks.done.order(updated_at: :desc)
   end
@@ -146,7 +144,7 @@ class Project::TasksController < Project::BaseController
   end
 
   def assigned_tasks
-    @project.tasks.todo.where(assigned_user_id: params[:assigned_user_id].to_i)
+    @project.tasks.basic_order.where(assigned_user_id: params[:assigned_user_id].to_i)
   end
 
   def set_task
@@ -174,6 +172,10 @@ class Project::TasksController < Project::BaseController
   end
 
   def set_layout
-    action_name == 'index' ? 'project_tasks' : 'project'
+    case action_name
+    when 'index', 'completed' then 'project_tasks'
+    else
+      'project'
+    end
   end
 end

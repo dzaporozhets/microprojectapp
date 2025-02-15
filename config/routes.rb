@@ -17,6 +17,10 @@ Rails.application.routes.draw do
         get :changes
       end
 
+      collection do
+        get :completed
+      end
+
       resources :comments, controller: 'project/comments', only: [:create, :destroy]
     end
 

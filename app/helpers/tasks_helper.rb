@@ -9,12 +9,16 @@ module TasksHelper
 
   def collapse_task_path
     referer_uri = URI.parse(request.referer) rescue nil
-    return project_tasks_path(@project) unless referer_uri && referer_uri.path
+    return project_path(@project) unless referer_uri && referer_uri.path
 
     if referer_uri.path.ends_with?(project_schedule_path(@project))
       project_schedule_path(@project)
     elsif referer_uri.path.ends_with?(project_tasks_path(@project))
       project_tasks_path(@project)
+    elsif referer_uri.path.ends_with?(completed_project_tasks_path(@project))
+      completed_project_tasks_path(@project)
+    elsif referer_uri.path.ends_with?(project_path(@project))
+      project_path(@project)
     elsif referer_uri.path.ends_with?('/tasks')
       tasks_path
     elsif referer_uri.path.ends_with?('/schedule')
@@ -22,7 +26,7 @@ module TasksHelper
     elsif referer_uri.path.ends_with?('/activity')
       project_activity_path(@project)
     else
-      project_tasks_path(@project)
+      project_path(@project)
     end
   end
 

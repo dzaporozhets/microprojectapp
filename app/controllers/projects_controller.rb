@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  DONE_TASKS = 12
+
   before_action :authenticate_user!
   before_action :project, only: %i[ show edit update destroy ]
   before_action :authorize_access, except: [:index, :new, :create]
@@ -19,7 +21,7 @@ class ProjectsController < ApplicationController
   def show
     @tab_name = 'Tasks'
     @tasks_todo = @project.tasks.todo.basic_order
-    @tasks_done = @project.tasks.done.order(updated_at: :desc).limit(40)
+    @tasks_done = @project.tasks.done.order(updated_at: :desc).limit(DONE_TASKS)
   end
 
   # GET /projects/new

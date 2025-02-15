@@ -1,3 +1,11 @@
-<%= turbo_stream.replace "tasks" do %>
-  <%= render 'project/tasks/tasks', tasks_todo: @tasks_todo, tasks_done: @tasks_done %>
+<% if params[:sctl] == 'projects' %>
+  <%= turbo_stream.remove("task_#{@task.id}") %>
+
+  <% if @task.done %>
+    <%= turbo_stream.prepend('completed_tasks', partial: "project/tasks/task", locals: { task: @task }) %>
+  <% else %>
+    <%= turbo_stream.append('tasks', partial: "project/tasks/task", locals: { task: @task }) %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.replace("task_#{@task.id}", partial: "project/tasks/task", locals: { task: @task }) %>
 <% end %>

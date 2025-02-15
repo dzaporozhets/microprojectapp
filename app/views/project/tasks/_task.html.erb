@@ -6,6 +6,7 @@
 
           <%= hidden_field_tag :status, params[:status] %>
           <%= hidden_field_tag :page, params[:page] %>
+          <%= hidden_field_tag :sctl, params[:sctl] || (current_page?(project_path(task.project)) ? 'projects' : 'tasks') %>
 
           <%= form.check_box :done,
             checked: task.done,

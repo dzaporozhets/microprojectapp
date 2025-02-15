@@ -52,13 +52,14 @@ RSpec.feature "Project::Tasks", type: :feature do
     expect(page).to have_content(task.name)
   end
 
-  scenario 'User visits tasks page with status=done' do
+  scenario 'User visits completed tasks page' do
     create(:task, name: 'New task', project: project, user: user, done: false)
     create(:task, name: 'Completed task', project: project, user: user, done: true)
 
-    visit project_tasks_path(project, task, status: 'done')
 
-    expect(page).to have_content('Completed tasks only')
+    visit completed_project_tasks_path(project, task)
+
+    #expect(page).to have_selector('a.btn-seg-ctl-active', text: 'Completed')
     expect(page).to have_content('Completed task')
     expect(page).not_to have_content('New task')
   end

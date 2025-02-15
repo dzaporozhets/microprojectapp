@@ -1,8 +1,8 @@
 <div class="mb-4 text-black flex items-center justify-between space-x-6 text-sm">
   <div class="inline-flex items-center gap-1 p-1 bg-violet-100 dark:bg-violet-950 rounded-full">
-    <%= link_to "Active", project_path(@project), class: " #{current_page?(project_path(@project)) ? 'btn-seg-ctl-active' : 'btn-seg-ctl' }" %>
+    <%= link_to "Active", project_path(@project), class: " #{current_page?(project_path(@project)) || current_page?(project_tasks_path(@project)) ? 'btn-seg-ctl-active' : 'btn-seg-ctl' }" %>
     <%= link_to "Upcoming", project_schedule_path(@project), class: " #{current_page?(project_schedule_path(@project)) ? 'btn-seg-ctl-active' : 'btn-seg-ctl' }" %>
-    <%= link_to "Completed", project_tasks_path(@project, status: 'done'), class: " #{current_page?(project_tasks_path(@project, status: 'done')) ? 'btn-seg-ctl-active' : 'btn-seg-ctl'}" %>
+    <%= link_to "Completed", completed_project_tasks_path(@project), class: " #{current_page?(completed_project_tasks_path(@project)) ? 'btn-seg-ctl-active' : 'btn-seg-ctl'}" %>
   </div>
 
   <div class="flex items-center ml-auto space-x-2 hidden md:flex">
