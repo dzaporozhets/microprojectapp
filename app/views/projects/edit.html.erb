@@ -25,6 +25,9 @@
 
   <section class="mb-10">
     <h2 class="section-title">Import and Export</h2>
+    <p class="block text-sm text-gray-700 dark:text-gray-300 mb-5">
+    Export your project data as a JSON file including all tasks and notes, then import it into another project.
+    </p>
 
     <%= button_to "Export Tasks", project_export_path(@project, format: :json), method: :post, class: "btn-gray inline-block border", form: { 'data-turbo': 'false', class: 'inline-block' } %>
     <%= link_to "Import Tasks", new_project_import_path(@project), class: "btn-gray inline-block ml-2 border" %>
