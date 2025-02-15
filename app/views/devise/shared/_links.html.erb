@@ -1,13 +1,13 @@
 <div class="mt-10 text-center text-sm text-gray-500">
   <%- if controller_name == 'registrations' %>
     <p>
-      If you have an account, you can <%= link_to "Log in", new_session_path(resource_name), class: 'font-semibold leading-6 text-indigo-600 hover:text-indigo-500' %>
+      If you have an account, you can <%= link_to "Log in", new_session_path(resource_name), class: 'font-semibold leading-6 text-violet-600 hover:text-violet-500' %>
     </p>
   <% end %>
 
   <%- if devise_mapping.registerable? && (controller_name == 'sessions'  || controller_name == 'passwords') %>
     <p>
-      No account? <%= link_to "Sign up", new_registration_path(resource_name), class: 'font-semibold leading-6 text-indigo-600 hover:text-indigo-500' %><br />
+      No account? <%= link_to "Sign up", new_registration_path(resource_name), class: 'font-semibold leading-6 text-violet-600 hover:text-violet-500' %><br />
     </p>
   <% end %>
 
