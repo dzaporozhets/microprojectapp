@@ -1,26 +1,35 @@
 <div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-lg">
-  <div class="dark:text-gray-200">
-    <h1 class="mb-4 font-bold text-2xl">Tasks Imported Successfully</h1>
+  <div class="my-4 window-block">
+    <div class="window-header">
+      <h1 class="font-bold text-xl dark:text-gray-200">Import tasks and notes</h1>
+    </div>
 
-    <% if @imported_tasks.empty? %>
-      <p class="mb-6">No tasks were imported.</p>
-    <% else %>
-      <p class="mb-6 text-gray-600">The following tasks were successfully imported into the project:</p>
+    <div class="p-4 text-sm">
+      <% if @imported_task_count == 0 && @imported_note_count == 0 %>
+        <p class="mb-6">No tasks or notes were imported.</p>
+      <% else %>
+        <p class="mb-6 text-green-800 dark:text-green-400 font-medium">
+        Successfully imported <strong><%= @imported_task_count %></strong> tasks and
+        <strong><%= @imported_note_count %></strong> notes into the project.
+        </p>
 
-      <ul class="list-disc list-inside mb-6 text-sm">
-        <% @imported_tasks.first(20).each do |task| %>
-          <li class="mb-2"><%= task.name %></li>
+        <% if @imported_tasks.present? %>
+          <p class="mb-2 text-gray-500">Here are a few of the imported tasks:</p>
+          <ul class="list-disc list-inside mb-6 text-gray-500">
+            <% @imported_tasks.first(10).each do |task| %>
+              <li class="mb-2"><%= task.name %></li>
+            <% end %>
+            <% if @imported_task_count > 10 %>
+              <li class="mb-2">and <%= @imported_task_count - 10 %> more...</li>
+            <% end %>
+          </ul>
         <% end %>
-        <% if @imported_task_count > 20 %>
-          <li class="mb-2"><strong>and <%= @imported_task_count - 20 %> more...</strong></li>
-        <% end %>
-      </ul>
-    <% end %>
+      <% end %>
 
-    <div class="flex space-x-4">
-      <%= link_to 'Back to Project', @project, class: 'btn-primary' %>
-      <%= link_to 'Import More Tasks', new_project_import_path(@project), class: 'btn-gray' %>
+      <div class="flex space-x-4">
+        <%= link_to 'Back to Project', @project, class: 'btn-primary' %>
+        <%= link_to 'Import More', new_project_import_path(@project), class: 'btn-gray' %>
+      </div>
     </div>
   </div>
 </div>
-

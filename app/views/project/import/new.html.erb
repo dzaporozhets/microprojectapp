@@ -1,19 +1,24 @@
 <div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-lg">
-  <h1 class="mb-2 font-bold text-2xl dark:text-gray-200">Import tasks</h1>
-
   <%= render "shared/flash" %>
 
-  <%= form_with url: project_import_path(@project), local: true, multipart: true do |form| %>
-    <div class="my-4 shadow p-4 rounded border border-gray-200 dark:border-gray-800">
-      <%= form.label :file, class:"dark:text-gray-200" %>
-      <%= form.file_field :file,
-        accept: 'application/json',
-        class: "appearance-none file-select text-sm leading-tight file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-medium w-full" %>
+  <div class="my-4 window-block">
+    <div class="window-header">
+      <h1 class="font-bold text-xl dark:text-gray-200">Import tasks and notes</h1>
     </div>
 
-    <div class="actions">
-      <%= form.submit 'Import Tasks', class: 'btn btn-primary' %>
-    </div>
-  <% end %>
+    <div class="p-4">
+      <%= form_with url: project_import_path(@project), local: true, multipart: true do |form| %>
+        <div class="">
+          <%= form.label :file, class:"dark:text-gray-200" %>
+          <%= form.file_field :file,
+            accept: 'application/json',
+            class: "appearance-none file-select text-sm leading-tight file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-medium w-full" %>
+        </div>
 
+        <div class="mt-4">
+          <%= form.submit 'Upload file', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
