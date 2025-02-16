@@ -177,6 +177,26 @@
   }
 
   .window-header {
-    @apply border-b text-sm flex items-center px-3 py-2 rounded-t-md md:py-3;
+    @apply text-sm flex items-center
+           px-3 py-2 rounded-t-md md:py-3
+           border-b border-b-gray-200 dark:border-b-gray-600;
+  }
+
+  /*----------------------------------------*
+   * Task Components
+   *----------------------------------------*/
+  .task-item-todo {
+    @apply border rounded-md px-3 py-1 shadow-sm;
+    @apply bg-white dark:bg-gray-800
+           border-gray-100 dark:border-gray-800
+           text-black dark:text-gray-200;
+  }
+
+  .task-item-done {
+    @apply border rounded-md px-3 py-1 shadow-sm;
+    @apply bg-gray-100 dark:bg-gray-900
+           border-gray-100 dark:border-gray-800
+           line-through dark:decoration-gray-700 decoration-black
+           text-gray-600 dark:text-gray-500;
   }
 }

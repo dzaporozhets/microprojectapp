@@ -12,17 +12,13 @@ module ThemeHelper
   end
 
   def task_css(task)
-    base_css = 'border rounded-md px-3 py-1 shadow-sm '.freeze
-    task_done_css = 'bg-gray-100 dark:bg-gray-900 border-gray-100 dark:border-gray-800 line-through dark:decoration-gray-700 decoration-black text-gray-600 dark:text-gray-500'.freeze
-    task_todo_css = 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-800 text-black dark:text-gray-200'.freeze
-
-    base_css + (task.done ? task_done_css : task_todo_css)
+    task.done ? 'task-item-done' : 'task-item-todo'
   end
 
   def task_details_css(task)
     @task.done ?
-      'bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-b-gray-200 dark:border-b-gray-600 ' :
-      'bg-gray-100 dark:bg-gray-800 text-black dark:text-gray-100 border-b-gray-200 dark:border-b-gray-700 '
+      'bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300' :
+      'bg-gray-100 dark:bg-gray-800 text-black dark:text-gray-100'
   end
 
   def flash_css(type)
