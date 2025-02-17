@@ -10,7 +10,7 @@ MicroProject.app is a lightweight project management tool designed for individua
 
 ## Quick Start
 
-To run the application, you have several options:
+To run the application, you have 2 options:
 
 ### 1. Deploy to Cloud (Easy)
 
@@ -19,10 +19,6 @@ The simplest way to run the application is by deploying it to a cloud platform l
 ### 2. Run on Your Server or Local Machine
 
 For running the application on your own server or local machine, follow the [installation instructions](docs/INSTALL.md).
-
-### 3. Run as a Docker Container
-
-To run the application in a Docker container, see the [Docker instructions](docs/DOCKER.md).
 
 ## Configuration
 

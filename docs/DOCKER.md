@@ -1,5 +1,7 @@
 # Docker
 
+**This guide is in development. There are might be mistakes.**
+
 You can build and run the app with Docker. The app will be running on port `3000` by default.
 
 ## Dockerfile

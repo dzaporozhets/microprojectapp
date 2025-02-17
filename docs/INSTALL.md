@@ -1,5 +1,7 @@
 # Installation Guide (for production)
 
+**If you want to run application in a Docker container, see the [Docker instructions](docs/DOCKER.md).**
+
 ## 1. Prerequisites
 
 Ensure that the following are installed on your system:
