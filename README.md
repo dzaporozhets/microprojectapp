@@ -12,7 +12,7 @@ MicroProject.app is a lightweight project management tool designed for individua
 
 To run the application, you have 2 options:
 
-### 1. Deploy to Cloud (Easy)
+### 1. Deploy to Heroku
 
 The simplest way to run the application is by deploying it to a cloud platform like [Heroku](https://www.heroku.com/). For step-by-step instructions, see our [Heroku deployment guide](docs/HEROKU.md).
 

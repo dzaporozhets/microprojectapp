@@ -1,130 +1,146 @@
-# Running on Heroku
+# Deploying on Heroku
 
-Before you proceed you need to install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#install-with-an-installer).
+This guide details the steps required to deploy your application on Heroku. Before starting, ensure you have installed the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#install-with-an-installer).
+**Alternatively**, you can use the [Heroku Dashboard](https://dashboard.heroku.com) to create and manage your application, which allows you to skip installing the CLI. Note that some advanced tasks may still require the CLI.
 
-1. **Clone the repository:**
-    ```sh
+---
+
+## 1. Clone Your Repository
+
+Begin by cloning the repository and navigating into the project directory:
+
     git clone https://gitlab.com/dzaporozhets/microprojectapp.git
     cd microprojectapp
-    ```
 
-2. **Login to heroku:**
-    ```sh
+---
+
+## 2. Authenticate with Heroku
+
+Log in to your Heroku account via the CLI:
+
     heroku login
-    ```
 
-3. **Create an application:**
-    ```sh
-    # US region
+---
+
+## 3. Create a Heroku Application
+
+Create a new Heroku application. By default, this will set up your app in the US region. To deploy in the EU region, use the --region eu flag.
+
+- **US Region:**
+
     heroku create
 
-    # EU region
+- **EU Region:**
+
     heroku create --region eu
-    ```
 
-4. **Add PostgreSQL database:** (it costs money)
-    ```sh
+*Alternatively, you can create a new application using the Heroku Dashboard.*
+
+---
+
+## 4. Provision a PostgreSQL Database
+
+Add a PostgreSQL database add-on. (Note: This service incurs charges.)
+
     heroku addons:create heroku-postgresql:essential-0
-    ```
 
-5. **Push the code to Heroku:**
-    ```sh
+---
+
+## 5. Deploy Your Code
+
+Push your main branch to Heroku:
+
     git push heroku main
-    ```
 
-6. **Prepare the database:**
-    ```sh
-    # If command below fails, maybe postgresql provision is not ready yet.
-    # Give it a try in a minute or two.
+---
+
+## 6. Set Up the Database
+
+Run the necessary migrations and seed the database with initial data. If you encounter issues with migration (e.g., due to delayed PostgreSQL provisioning), wait a minute and try again.
+
+    heroku run rails db:migrate
+    heroku run rails db:seed
+
+---
+
+## 7. Launch Your Application
+
+Open your deployed application in the default web browser:
+
+    heroku open
+
+---
+
+## 8. Configure Your Domain
+
+Set your custom domain by replacing your-domain-name-here.com with your actual domain:
+
+    heroku config:set APP_DOMAIN=your-domain-name-here.com
+
+Your application should now be live at your specified domain.
+
+---
+
+# Additional Configuration Options
+
+## Generate Database Encryption Keys (Optional)
+
+For applications requiring two-factor authentication, generate encryption keys as follows:
+
+    heroku run ./bin/heroku-generate-db-encryption-vars
+
+This command outputs three lines of instructions—follow them to complete the setup.
+
+---
+
+## File Upload Configuration
+
+To support file uploads, choose one of the following methods:
+
+### Option 1: Using AWS S3
+
+1. Create an S3 bucket.
+2. Set the following Heroku environment variables with your AWS credentials and bucket information:
+
+    heroku config:set AWS_ACCESS_KEY_ID=your-access-key
+    heroku config:set AWS_SECRET_ACCESS_KEY=your-secret-key
+    heroku config:set AWS_REGION=your-region
+    heroku config:set AWS_S3_BUCKET=your-bucket-name
+
+### Option 2: Using the Bucketeer Add-on
+
+Provision the Bucketeer add-on to handle file uploads:
+
+    heroku addons:create bucketeer:hobbyist
+
+---
+
+## Email Functionality (Optional)
+
+Enable email features (e.g., for user signup and password resets) using Mailgun:
+
+1. **Activate the Mailgun Add-on:**
+
+    heroku addons:create mailgun:starter
+
+2. **Complete Domain Setup:**
+   - Navigate to your Heroku dashboard.
+   - Click the Mailgun add-on to access the Mailgun dashboard.
+   - Follow the steps to verify your domain and retrieve credentials.
+
+3. **Configure Mailgun Credentials:**
+
+    heroku config:set SMTP_LOGIN=your-smtp-login
+    heroku config:set SMTP_PASSWORD=your-smtp-password
+    heroku config:set SMTP_SERVER=your-smtp-server
+
+---
+
+## Updating Your Application
+
+To update your deployment with the latest changes from the main branch, run:
+
+    git pull https://gitlab.com/dzaporozhets/microprojectapp.git main
+    git push heroku main
     heroku run rails db:migrate
 
-    # Fill the database with necessary data
-    heroku run rails db:seed
-    ```
-
-7. **Open the application:**
-    ```sh
-    heroku open
-    ```
-
-8. **Set domain ENV for your app:**
-
-    ```sh
-    # Attention! Replace value with your domain
-    heroku config:set APP_DOMAIN=your-domain-name-here.com
-    ```
-
-Done! The last command should open the application in your browser.
-
-### Extras:
-
-#### Generate db encryption keys (optional, neccessary for two factor auth).
-
-```
-# Generate random values
-heroku run ./bin/heroku-generate-db-encryption-vars
-
-# You will see 3 lines of instructions from the output from previous command output.
-```
-
-#### File uploads via Heroku add-on or Amazon S3 (optional, but recommended).
-
-This is required for file uploads to work on Heroku.
-
-There are 2 ways to go: either manually configure AWS or use Heroku plugin bucketeer.
-If you know your way around S3 its cheaper to do it yourself.
-Otherwise Bucketeer can save you time and trouble.
-
-##### Using AWS s3
-
-Create the S3 bucket and set following credentilas with heroku:
-
-```
-heroku config:set AWS_ACCESS_KEY_ID=
-heroku config:set AWS_SECRET_ACCESS_KEY=
-heroku config:set AWS_REGION=
-heroku config:set AWS_S3_BUCKET=
-```
-
-##### Using addon (it costs money)
-
-```
-heroku addons:create bucketeer:hobbyist
-```
-
-#### Emails (optional, but recommended).
-
-If you don't need to send emails like signup emails or password reset, then you can skip it.
-You can use mailgun to send emails. For that you need to quite a few things.
-You need to use your own domain, activate add-on, setup mailgun domain verification etc.
-
-1. **Activate mailgun addon:**
-    ```sh
-    heroku addons:create mailgun:starter
-    ```
-
-2. **Got to heroku app page, click mailgun addon and get redirected to mailgun dashboard**
-3. **Go through adding new domain setup and receive credentails from mailgun**
-4. **Pass those credentilas to heroku**
-    ```sh
-    heroku config:set SMTP_LOGIN=
-    heroku config:set SMTP_PASSWORD=
-    heroku config:set SMTP_SERVER=
-    ```
-
-#### Use your domain
-
-If you decide to go with our own domain, make sure to update the app with `APP_DOMAIN` variable:
-
-    heroku config:set ADD_DOMAIN=
-
-
-#### Updating to a newest version
-
-Just pull latest changes from main branch and run db:migrate
-
-```
-git pull https://gitlab.com/dzaporozhets/microprojectapp.git main
-git push heroku main
-heroku run rails db:migrate
-```
