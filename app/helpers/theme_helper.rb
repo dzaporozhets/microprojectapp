@@ -23,9 +23,9 @@ module ThemeHelper
 
   def flash_css(type)
     case type.to_sym
-    when :notice then 'bg-violet-50 border rounded border-violet-300 text-violet-900 dark:bg-violet-950 dark:border-violet-800 dark:text-violet-200'
-    when :alert then 'bg-red-50 border rounded border-red-400 text-red-700 dark:bg-red-700 dark:text-white dark:border-red-800'
-    else 'bg-gray-100 border rounded border-gray-500 text-gray-700 dark:bg-gray-700 dark:text-white dark:border-gray-600'
+    when :notice then 'flash-notice'
+    when :alert then 'flash-alert'
+    else 'flash-info'
     end
   end
 end

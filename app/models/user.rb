@@ -13,7 +13,7 @@ class User < ApplicationRecord
   devise_modules += [
     :two_factor_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable,
-    :lockable, :omniauthable, :confirmable
+    :lockable, :confirmable
   ] unless app_settings[:disable_email_login]
 
   devise *devise_modules, omniauth_providers: [:google_oauth2, :entra_id]

@@ -4,7 +4,7 @@
     <%= hidden_field_tag :sctl, params[:sctl] || (current_page?(project_path(@project)) ? 'projects' : 'tasks') %>
 
     <% if task.errors.any? %>
-      <div id="ar-errors-text" data-turbo-cache="false" class="p-4 mb-4 bg-gray-50 rounded border text-red-700">
+      <div id="ar-errors-text" data-turbo-cache="false" class="p-4 mb-4 bg-gray-50 rounded-md border text-red-700">
         <%= render("project/tasks/form_errors", resource: task) %>
       </div>
     <% end %>
