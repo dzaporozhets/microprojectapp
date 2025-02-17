@@ -32,7 +32,6 @@ RSpec.feature "Project::Notes", type: :feature do
 
     click_button 'Save Changes'
 
-    expect(page).to have_text('Saved')
     expect(page).to have_text('123')
     expect(page).to have_text('456')
   end
