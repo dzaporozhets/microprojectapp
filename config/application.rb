@@ -25,11 +25,11 @@ module Project2
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.app_settings = {
-      # AWS S3 Config
-      aws_s3_bucket: ENV['AWS_S3_BUCKET'].presence,
-      aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'].presence,
-      aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'].presence,
-      aws_region: ENV['AWS_REGION'].presence,
+      # AWS S3 / Bucketeer Config
+      aws_s3_bucket: ENV['BUCKETEER_BUCKET_NAME'].presence || ENV['AWS_S3_BUCKET'].presence,
+      aws_access_key_id: ENV['BUCKETEER_AWS_ACCESS_KEY_ID'].presence || ENV['AWS_ACCESS_KEY_ID'].presence,
+      aws_secret_access_key: ENV['BUCKETEER_AWS_SECRET_ACCESS_KEY'].presence || ENV['AWS_SECRET_ACCESS_KEY'].presence,
+      aws_region: ENV['BUCKETEER_AWS_REGION'].presence || ENV['AWS_REGION'].presence,
 
       # SMTP (Email) Config
       smtp_server: ENV['SMTP_SERVER'].presence || ENV['MAILGUN_SMTP_SERVER'].presence,
