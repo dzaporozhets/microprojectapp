@@ -128,7 +128,8 @@
   }
 
   .checkbox-round {
-    @apply text-violet-600 bg-gray-100 border-gray-300 rounded-xl
+    @apply text-violet-600 dark:text-violet-600
+           bg-gray-100 border-gray-300 rounded-xl
            focus-visible:ring-2 focus-visible:ring-violet-600 dark:bg-gray-700 dark:border-gray-600;
   }
 
