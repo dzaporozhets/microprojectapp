@@ -27,7 +27,7 @@
         <%= render "shared/flash" %>
 
         <% if task.errors.any? %>
-          <div id="ar-errors-text" data-turbo-cache="false" class="p-3 mb-3 bg-gray-50 rounded border">
+          <div id="ar-errors-text" data-turbo-cache="false" class="p-3 mb-3 bg-gray-50 rounded-md border">
             <%= render("project/tasks/form_errors", resource: task) %>
           </div>
         <% end %>

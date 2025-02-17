@@ -25,7 +25,7 @@
   </div>
 
   <% if current_user && Devise.mappings[:user].confirmable? && !current_user.confirmed_at %>
-    <p class= "p-5 mt-5 bg-gray-100 rounded text-sm">P.S. Check your inbox for the confirmation link. Make sure to confirm your email within an hour.</p>
+    <p class= "p-5 mt-5 bg-gray-100 rounded-md text-sm">P.S. Check your inbox for the confirmation link. Make sure to confirm your email within an hour.</p>
   <% end %>
 
   <div class="mt-5">
