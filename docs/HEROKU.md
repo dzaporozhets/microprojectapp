@@ -22,7 +22,7 @@ Before you proceed you need to install [Heroku CLI](https://devcenter.heroku.com
     heroku create --region eu
     ```
 
-4. **Add PostgreSQL database:**
+4. **Add PostgreSQL database:** (it costs money)
     ```sh
     heroku addons:create heroku-postgresql:essential-0
     ```
@@ -67,9 +67,16 @@ heroku run ./bin/heroku-generate-db-encryption-vars
 # You will see 3 lines of instructions from the output from previous command output.
 ```
 
-#### File uploads via Amazon S3 (optional, but recommended).
+#### File uploads via Heroku add-on or Amazon S3 (optional, but recommended).
 
 This is required for file uploads to work on Heroku.
+
+There are 2 ways to go: either manually configure AWS or use Heroku plugin bucketeer.
+If you know your way around S3 its cheaper to do it yourself.
+Otherwise Bucketeer can save you time and trouble.
+
+##### Using AWS s3
+
 Create the S3 bucket and set following credentilas with heroku:
 
 ```
@@ -77,6 +84,12 @@ heroku config:set AWS_ACCESS_KEY_ID=
 heroku config:set AWS_SECRET_ACCESS_KEY=
 heroku config:set AWS_REGION=
 heroku config:set AWS_S3_BUCKET=
+```
+
+##### Using addon (it costs money)
+
+```
+heroku addons:create bucketeer:hobbyist
 ```
 
 #### Emails (optional, but recommended).
@@ -104,7 +117,6 @@ You need to use your own domain, activate add-on, setup mailgun domain verificat
 If you decide to go with our own domain, make sure to update the app with `APP_DOMAIN` variable:
 
     heroku config:set ADD_DOMAIN=
-
 
 
 #### Updating to a newest version
