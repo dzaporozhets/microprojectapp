@@ -8,4 +8,26 @@ module AdminHelper
 
     render_tabs(tabs, selected)
   end
+
+  def admin_config_email_delivery
+    if Rails.env.production? && Rails.application.config.action_mailer.delivery_method == :test
+      'Disabled'
+    elsif
+      Rails.application.config.action_mailer.delivery_method
+    else
+      'Not configured'
+    end
+  end
+
+  def admin_config_uploads_storage
+    if Rails.application.config.app_settings[:aws_s3_bucket].present?
+      if ENV['BUCKETEER_BUCKET_NAME'].present?
+        'AWS S3 (via Bucketeer)'
+      else
+        'AWS S3'
+      end
+    else
+      'Local'
+    end
+  end
 end

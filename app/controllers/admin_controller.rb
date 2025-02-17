@@ -18,17 +18,6 @@ class AdminController < ApplicationController
     @allowed_domain = app_settings[:app_allowed_email_domain] || 'Not configured'
     @app_signup = app_settings[:disable_signup] ? 'Disabled' : 'Enabled'
 
-    @file_storage = if app_settings[:aws_s3_bucket].present?
-                      if ENV['BUCKETEER_BUCKET_NAME'].present?
-                        'AWS S3 (via Bucketeer)'
-                      else
-                        'AWS S3'
-                      end
-                    else
-                      'Local'
-                    end
-
-    @mail_delivery = Rails.application.config.action_mailer.delivery_method || 'Not configured'
     @disable_email_login = app_settings[:disable_email_login]
     @oauth_providers = Devise.omniauth_providers
 
