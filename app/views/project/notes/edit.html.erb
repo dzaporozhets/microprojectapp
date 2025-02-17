@@ -6,10 +6,9 @@
   <div class="w-full md:w-2/3 py-4 overflow-y-auto">
     <%= form_with(model: [@project, @note], class: "contents", data: { controller: "local-storage", document_id: @note.id }) do |form| %>
       <div class="flex items-center justify-between mb-4 text-sm">
-        <%= link_to history_project_note_path(@project, @note), class: 'underline dark:text-gray-400' do %>
-          <p>Last updated: <%= l(@note.updated_at, format: :long) %></p>
-        <% end %>
-        <div class="flex items-center gap-2 ml-auto dark:text-gray-400">
+        <div class="flex items-center gap-2 dark:text-gray-400">
+          <%= form.submit 'Save Changes', class: "btn-gray mr-2" %>
+
           <% if flash[:notice].present? %>
             <div
              data-controller="hide-div"
@@ -17,9 +16,10 @@
               <%= flash[:notice] %>
             </div>
           <% end %>
-
-          <%= form.submit 'Save Changes', class: "btn-gray ml-2" %>
         </div>
+        <%= link_to history_project_note_path(@project, @note), class: 'underline dark:text-gray-400 ml-auto' do %>
+          <p>Last updated: <%= l(@note.updated_at, format: :long) %></p>
+        <% end %>
       </div>
 
       <%= render "shared/errors", resource: @note %>

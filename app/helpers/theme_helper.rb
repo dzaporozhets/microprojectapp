@@ -4,7 +4,7 @@ module ThemeHelper
   end
 
   def subnav_color
-    'border-b border-gray-200 dark:border-gray-800'.freeze
+    'border-b border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400'.freeze
   end
 
   def body_color
