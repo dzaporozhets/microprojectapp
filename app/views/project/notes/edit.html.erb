@@ -4,7 +4,7 @@
 
   <!-- Main Content -->
   <div class="w-full py-4 overflow-y-auto">
-    <%= form_with(model: [@project, @note], class: "contents", data: { controller: "local-storage", document_id: @note.id }) do |form| %>
+    <%= form_with(model: [@project, @note], class: "contents", data: { controller: "notes", note_id: @note.id }) do |form| %>
       <%= render "shared/errors", resource: @note %>
 
       <div class="mt-2 p-2 bg-yellow-100 dark:bg-gray-800 shadow-sm border dark:border-gray-600 border-gray-400">
@@ -36,7 +36,7 @@
         </div>
 
         <div>
-          <%= form.text_area :content, data: { local_storage_target: "textarea" }, rows: 24, class: "block w-full border-none bg-transparent outline-none focus:ring-0 focus:outline-none dark:text-yellow-600" %>
+          <%= form.text_area :content, data: { notes_target: "textarea" }, rows: 24, class: "block w-full border-none bg-transparent outline-none focus:ring-0 focus:outline-none dark:text-yellow-600" %>
         </div>
       </div>
     <% end %>
