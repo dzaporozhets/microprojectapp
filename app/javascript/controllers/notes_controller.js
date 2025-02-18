@@ -6,30 +6,76 @@ export default class extends Controller {
     const textarea = this.element.querySelector("#note_content");
     if (!textarea) return; // Only proceed if the textarea is present
 
-    let autoSaveTimeout; // Timer for auto-save after 3 seconds of inactivity
-    let reloadTimeout;   // Timer for reloading the page after 1 minute
+    // Create a countdown display element below the form with Tailwind styling
+    this.countdownEl = document.createElement("div");
+    this.countdownEl.className = "mt-2 text-xs text-gray-500";
+    this.countdownEl.innerHTML = `
+      <div id="autosave-countdown"></div>
+      <div id="autoreload-countdown"></div>
+    `;
+    // Insert the countdown element after the form element
+    this.element.insertAdjacentElement("afterend", this.countdownEl);
 
-    // Function to schedule a reload in 1 minute
-    const scheduleReload = () => {
-      reloadTimeout = setTimeout(() => {
-        Turbo.visit(window.location.href, { action: "replace" });
-      }, 120000); // 2 minutes
+    let autoSaveTimeout; // Timer for auto-save after inactivity
+    let reloadTimeout;   // Timer for auto-reloading the page
+    let autoSaveCountdownInterval;
+    let autoReloadCountdownInterval;
+
+    const AUTO_SAVE_DELAY = 5000;     // 5 seconds for auto-save
+    const AUTO_RELOAD_DELAY = 120000;   // 2 minutes for auto-reload
+
+    const autosaveCountdownEl = this.countdownEl.querySelector("#autosave-countdown");
+    const autoreloadCountdownEl = this.countdownEl.querySelector("#autoreload-countdown");
+
+    const clearAutoSaveCountdown = () => {
+      if (autoSaveCountdownInterval) {
+        clearInterval(autoSaveCountdownInterval);
+        autoSaveCountdownInterval = null;
+      }
+      autosaveCountdownEl.textContent = "";
     };
 
-    // On page load, schedule the reload timer
+    const clearAutoReloadCountdown = () => {
+      if (autoReloadCountdownInterval) {
+        clearInterval(autoReloadCountdownInterval);
+        autoReloadCountdownInterval = null;
+      }
+      autoreloadCountdownEl.textContent = "";
+    };
+
+    // Function to schedule an auto-reload via Turbo
+    const scheduleReload = () => {
+      clearAutoReloadCountdown();
+      const startTime = Date.now();
+      reloadTimeout = setTimeout(() => {
+        Turbo.visit(window.location.href, { action: "replace" });
+      }, AUTO_RELOAD_DELAY);
+
+      autoReloadCountdownInterval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, Math.ceil((AUTO_RELOAD_DELAY - elapsed) / 1000));
+        autoreloadCountdownEl.textContent = `Auto-reload in: ${remaining} seconds`;
+        if (remaining <= 0) {
+          clearAutoReloadCountdown();
+        }
+      }, 1000);
+    };
+
+    // Initially, schedule auto-reload when the page loads
     scheduleReload();
 
-    // If the user focuses on the textarea, kill the reload timer
+    // If the user focuses on the textarea, cancel the reload timer and its countdown
     textarea.addEventListener("focus", () => {
       if (reloadTimeout) {
         clearTimeout(reloadTimeout);
         reloadTimeout = null;
       }
+      clearAutoReloadCountdown();
     });
 
     // Listen for input events on the textarea
     textarea.addEventListener("input", () => {
-      // Clear any existing timers immediately when user starts typing
+      // Clear any existing timers and countdowns when the user types
       if (autoSaveTimeout) {
         clearTimeout(autoSaveTimeout);
         autoSaveTimeout = null;
@@ -38,18 +84,34 @@ export default class extends Controller {
         clearTimeout(reloadTimeout);
         reloadTimeout = null;
       }
+      clearAutoSaveCountdown();
+      clearAutoReloadCountdown();
 
-      // When user stops typing for 3 seconds, trigger auto-save and schedule reload
+      // Start auto-save countdown
+      const startTimeAutoSave = Date.now();
+      autoSaveCountdownInterval = setInterval(() => {
+        const elapsed = Date.now() - startTimeAutoSave;
+        const remaining = Math.max(0, Math.ceil((AUTO_SAVE_DELAY - elapsed) / 1000));
+        autosaveCountdownEl.textContent = `Auto-save in: ${remaining} seconds`;
+        if (remaining <= 0) {
+          clearAutoSaveCountdown();
+        }
+      }, 1000);
+
+      // Schedule auto-save after 5 seconds of inactivity
       autoSaveTimeout = setTimeout(() => {
-        this.element.submit(); // Auto-save (auto-submit) the form
+        this.element.submit(); // Auto-save the form
+        clearAutoSaveCountdown();
         scheduleReload();      // Schedule reload 1 minute after auto-save
-      }, 3000); // 3,000 ms = 3 seconds
+      }, AUTO_SAVE_DELAY);
     });
 
     // Optionally, clear timers when the form is submitted
     this.element.addEventListener("submit", () => {
       if (autoSaveTimeout) clearTimeout(autoSaveTimeout);
       if (reloadTimeout) clearTimeout(reloadTimeout);
+      clearAutoSaveCountdown();
+      clearAutoReloadCountdown();
     });
   }
 }
