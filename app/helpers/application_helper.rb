@@ -66,4 +66,8 @@ module ApplicationHelper
   def disable_email_login?
     Rails.application.config.app_settings[:disable_email_login]
   end
+
+  def last_update_text(entity)
+    "Last updated: #{l(entity.updated_at, format: :long)}"
+  end
 end

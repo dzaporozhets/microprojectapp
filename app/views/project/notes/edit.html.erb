@@ -9,9 +9,7 @@
 
       <div class="mt-2 p-2 bg-white dark:bg-gray-800 shadow-sm border dark:border-gray-600 border-gray-400">
         <div class="flex items-center justify-between mb-4 text-sm border-b pb-2 border-gray-400 dark:border-gray-600 h-12">
-          <%= link_to history_project_note_path(@project, @note), class: 'text-gray-600 dark:text-gray-400 hover:underline mr-2' do %>
-            <p>Last updated: <%= l(@note.updated_at, format: :long) %></p>
-          <% end %>
+          <%= link_to last_update_text(@note), history_project_note_path(@project, @note), class: 'text-gray-600 dark:text-gray-400 hover:underline mr-2' %>
           <div class="flex items-center gap-1 dark:text-gray-400 ml-auto">
             <% if flash[:notice].present? %>
               <div
