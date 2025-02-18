@@ -13,7 +13,7 @@ export default class extends Controller {
     const scheduleReload = () => {
       reloadTimeout = setTimeout(() => {
         Turbo.visit(window.location.href, { action: "replace" });
-      }, 60000); // 1 minute
+      }, 120000); // 2 minutes
     };
 
     // On page load, schedule the reload timer

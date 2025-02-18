@@ -7,9 +7,9 @@
     <%= form_with(model: [@project, @note], class: "contents", data: { controller: "notes", note_id: @note.id }) do |form| %>
       <%= render "shared/errors", resource: @note %>
 
-      <div class="mt-2 p-2 bg-yellow-100 dark:bg-gray-800 shadow-sm border dark:border-gray-600 border-gray-400">
+      <div class="mt-2 p-2 bg-white dark:bg-gray-800 shadow-sm border dark:border-gray-600 border-gray-400">
         <div class="flex items-center justify-between mb-4 text-sm border-b pb-2 border-gray-400 dark:border-gray-600 h-12">
-          <%= link_to history_project_note_path(@project, @note), class: 'text-gray-600 dark:text-gray-400 hover:underline' do %>
+          <%= link_to history_project_note_path(@project, @note), class: 'text-gray-600 dark:text-gray-400 hover:underline mr-2' do %>
             <p>Last updated: <%= l(@note.updated_at, format: :long) %></p>
           <% end %>
           <div class="flex items-center gap-1 dark:text-gray-400 ml-auto">
@@ -27,7 +27,7 @@
               </div>
             <% end %>
 
-            <%= form.submit 'Save Changes', class: "btn-primary-sm" %>
+            <%= form.submit 'Save Changes', class: "btn-base-sm" %>
           </div>
         </div>
 
