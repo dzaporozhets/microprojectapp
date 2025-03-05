@@ -18,12 +18,11 @@ RSpec.feature "Project::Tasks", type: :feature do
     expect(page).to have_text("Task Without Description")
   end
 
-  # TODO: test the same scenario with js: true
   scenario "User updates the due date and assignee of a task from the edit page (no turbo)" do
     visit edit_project_task_path(project, task)
 
-    select 'Tomorrow', from: 'task_due_date'
-    select user.email, from: 'task_assigned_user_id'
+    fill_in "task_due_date", with: Time.zone.tomorrow.strftime("%Y-%m-%d")
+    select user.email, from: "task_assigned_user_id"
     click_button "Save changes"
 
     expected_due_date = Time.zone.tomorrow.strftime("%B %d, %Y")
