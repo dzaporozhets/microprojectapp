@@ -80,8 +80,8 @@ class User < ApplicationRecord
       user.oauth_avatar_url = image
       user.password = Devise.friendly_token[0, 20]
       user.disable_password = true
-      user.skip_confirmation!
-      user.skip_confirmation_notification!
+      user.skip_confirmation! if user.respond_to?(:skip_confirmation!)
+      user.skip_confirmation_notification! if user.respond_to?(:skip_confirmation_notification!)
       user.save
     end
 
