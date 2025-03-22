@@ -1,20 +1,34 @@
-<div id="<%= dom_id project %>" class="flex items-center justify-between gap-x-6 py-2 lg:py-4">
-  <div class="min-w-0">
-    <%= link_to project do %>
-      <div class="flex items-start gap-x-3">
-        <div class="leading-6 text-base <%= project.archived ? 'font-medium text-gray-600 dark:text-gray-400' : 'font-semibold text-gray-900 dark:text-gray-200' %>">
-          <span><%= project.name.truncate(100) %></span>
-
+<li id="<%= dom_id project %>" class="bg-white dark:bg-gray-800 hover:shadow transition rounded-xl p-4 flex items-start justify-between gap-4 border border-gray-200 dark:border-gray-700">
+  <div class="min-w-0 flex-1">
+    <%= link_to project, class: "block" do %>
+      <div class="flex items-center justify-between">
+        <h3 class="text-sm font-medium <%= project.archived ? 'text-gray-500' : 'text-gray-900 dark:text-white' %>">
+          <%= project.name.truncate(100) %>
           <% if project.archived? %>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-gray-400 dark:text-gray-600 inline ml-2">
+            <svg class="inline h-4 w-4 ml-1 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
             </svg>
           <% end %>
-        </div>
+        </h3>
+
+        <% if !project.archived && project.tasks.todo.any? %>
+          <span class="ml-4 text-sm text-gray-700 dark:text-gray-300">
+            <%= pluralize(project.tasks.todo.count, 'task') %>
+          </span>
+        <% end %>
       </div>
-      <div class="mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
-        Created by <%= project.user.email %>
+
+      <div class="mt-2 flex justify-between items-center text-xs text-gray-500">
+        <span class="truncate">
+          Created by <%= project.user.email %>
+        </span>
+
+        <% if !project.archived && project.team.size > 1 %>
+          <span class="text-right space-x-2 shrink-0">
+            <span><%= pluralize(project.team.size, "member") %></span>
+          </span>
+        <% end %>
       </div>
     <% end %>
   </div>
-</div>
+</li>
