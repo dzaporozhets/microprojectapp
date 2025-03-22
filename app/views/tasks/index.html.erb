@@ -14,7 +14,7 @@
     </div>
   <% end %>
 
-  <div class="mb-4 md:mb-0 lg:w-3/4 mx-auto">
+  <div class="mb-4 md:mb-0 lg:w-2/3 mx-auto">
     <% if current_user.created_today? %>
       <p class="text-sm text-gray-500 mb-4">Active tasks from your projects. To create a new task or view completed ones, visit the project page.</p>
     <% end %>
@@ -33,7 +33,7 @@
                 <% end %>
               </div>
 
-              <ol class="mt-2 text-sm leading-6 text-gray-500 grid grid-cols-1 gap-2 lg:grid-cols-2">
+              <ol class="mt-2 text-sm leading-6 text-gray-500 grid grid-cols-1 gap-1">
                 <% tasks.each do |task| %>
                   <%= render 'tasks/task', task: task %>
                 <% end %>
