@@ -10,47 +10,46 @@
     </div>
   <% end %>
 
-  <div id="projects" class="min-w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+  <div id="projects" class="grid grid-cols-1 gap-6 sm:gap-8 lg:w-3/4 mx-auto mt-4">
     <% if @pinned_projects.present? %>
-      <div class="flex items-center justify-between gap-x-6 py-3 lg:py-5 md:col-span-2 lg:col-span-3">
-        <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
-        <span class="px-4 text-center dark:border-gray-600">Favorite Projects</span>
-        <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
-      </div>
-
-      <% @pinned_projects.each do |project| %>
-        <%= render project %>
-      <% end %>
-
-      <div class="flex items-center justify-between gap-x-6 py-3 lg:py-5 md:col-span-2 lg:col-span-3">
-        <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
-        <span class="px-4 text-center dark:border-gray-600">All Projects</span>
-        <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
+      <div>
+        <h2 class="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">Favorite Projects</h2>
+        <ul role="list" class="space-y-2">
+          <% @pinned_projects.each do |project| %>
+            <%= render project %>
+          <% end %>
+        </ul>
       </div>
     <% end %>
 
-    <% @projects.each do |project| %>
-      <%= render project %>
+    <% if @projects.present? %>
+      <div>
+        <% if @pinned_projects.present? %>
+          <h2 class="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">All Projects</h2>
+        <% end %>
+        <ul role="list" class="space-y-2">
+          <% @projects.each do |project| %>
+            <%= render project %>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
 
     <% if @archived_projects.any? %>
-      <div class="flex items-center justify-between gap-x-6 py-3 lg:py-5 md:col-span-2 lg:col-span-3">
-        <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
-        <span class="px-4 text-center dark:border-gray-600">Archived</span>
-        <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
+      <div>
+        <h2 class="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-3">Archived Projects</h2>
+        <ul role="list" class="space-y-2">
+          <% @archived_projects.each do |project| %>
+            <%= render project %>
+          <% end %>
+        </ul>
+
+        <% if @archived_projects.total_pages > 1 %>
+          <div class="mt-4">
+            <%= paginate @archived_projects %>
+          </div>
+        <% end %>
       </div>
-
-      <% @archived_projects.each do |project| %>
-        <%= render project %>
-      <% end %>
-
-      <% if @archived_projects.total_pages > 1 %>
-        <div class="flex items-center justify-between gap-x-6 py-3 lg:py-5 md:col-span-2 lg:col-span-3">
-          <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
-          <%= paginate @archived_projects %>
-          <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
-        </div>
-      <% end %>
     <% end %>
   </div>
 </div>

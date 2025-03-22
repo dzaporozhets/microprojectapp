@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
   # GET /projects or /projects.json
   def index
     @pinned_projects = current_user.pinned_projects
-    @projects = current_user.all_active_projects
+    @projects = current_user.all_active_projects - @pinned_projects
     @archived_projects = current_user.projects.archived.page(params[:page]).per(39)
   end
 
