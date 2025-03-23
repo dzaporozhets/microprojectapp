@@ -48,13 +48,11 @@ class User < ApplicationRecord
   validate :email_domain_check, on: :create
 
   THEMES = {
-    1 => "Gray",
-    2 => "Blue",
-    3 => "Green",
-    4 => "Red",
-    5 => "Yellow",
-    6 => "Black",
-    7 => "Violet"
+    1 => 'Gray',
+    2 => 'Black',
+    3 => 'Violet',
+    4 => 'Lime',
+    5 => 'Pink'
   }.freeze
 
   def self.available_themes
@@ -66,7 +64,7 @@ class User < ApplicationRecord
   end
 
   def theme_css_name
-    theme_name.downcase
+    theme_name&.downcase
   end
 
   def self.from_omniauth(auth)
