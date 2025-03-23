@@ -49,6 +49,12 @@
           <%= f.label :dark_mode_auto, "Auto", class: "ml-3 block text-sm font-medium leading-6 text-gray-900 dark:text-gray-200"  %>
         </div>
       </div>
+      <div class="mt-6">
+        <%= f.label :theme, "Theme", class: "block text-sm font-medium text-gray-900 dark:text-gray-200" %>
+        <%= f.select :theme,
+          User.available_themes.map { |id, name| [name, id] }, {},
+          class: "mt-1 block w-full base-input" %>
+      </div>
     </section>
 
     <section class="mt-10">
