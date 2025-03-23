@@ -24,11 +24,12 @@
   .btn-base,
   .btn-gray {
     @apply btn border bg-white dark:bg-gray-800
+           hover:shadow transition
            border-gray-300 dark:border-gray-700 dark:hover:bg-gray-700;
   }
 
   .btn-base-sm {
-    @apply btn-base py-1 px-2;
+    @apply btn-base py-1 px-2 text-xs;
   }
 
   .btn-primary {
@@ -208,9 +209,5 @@
 
    .flash-alert {
      @apply bg-red-50 border rounded-md border-red-400 text-red-700 dark:bg-red-700 dark:text-white dark:border-red-800;
-   }
-
-   .flash-info {
-     @apply bg-gray-100 border rounded-md border-gray-500 text-gray-700 dark:bg-gray-700 dark:text-white dark:border-gray-600;
    }
 }

@@ -70,4 +70,12 @@ module ApplicationHelper
   def last_update_text(entity)
     "Last updated: #{l(entity.updated_at, format: :long)}"
   end
+
+  def display_flash
+    if alert
+      content_tag(:p, alert, id: "notice", class: 'flash-alert p-3 text-sm mb-2')
+    elsif notice
+      content_tag(:p, notice, id: "alert", class: 'flash-notice p-3 text-sm mb-2')
+    end
+  end
 end

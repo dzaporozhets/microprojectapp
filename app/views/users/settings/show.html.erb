@@ -6,13 +6,13 @@
   </div>
 <% end %>
 
-<%= render "shared/flash" %>
+<%= display_flash %>
 
 <div class="mb-5">
   <%= form_for(@user, url: users_settings_path, html: { method: :put }, data: { turbo: false }) do |f| %>
     <%= render "shared/errors", resource: @user %>
 
-    <section class="mt-10 dark:text-gray-200">
+    <section class="mt-4 dark:text-gray-200">
       <h2 class="section-title">Privacy and Security</h2>
 
       <dl class="space-y-4">

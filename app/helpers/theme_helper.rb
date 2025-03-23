@@ -20,12 +20,4 @@ module ThemeHelper
       'bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300' :
       'bg-gray-100 dark:bg-gray-800 text-black dark:text-gray-100'
   end
-
-  def flash_css(type)
-    case type.to_sym
-    when :notice then 'flash-notice'
-    when :alert then 'flash-alert'
-    else 'flash-info'
-    end
-  end
 end
