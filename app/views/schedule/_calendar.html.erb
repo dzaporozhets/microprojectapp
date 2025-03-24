@@ -18,15 +18,15 @@
 
   <!-- Day Headings -->
   <div class="mt-6 grid grid-cols-7 text-center text-sm text-gray-500 dark:text-gray-400">
-    <% Date::ABBR_DAYNAMES.each do |day| %>
+    <% Date::ABBR_DAYNAMES.rotate(1).each do |day| %>
       <div><%= day.first %></div>
     <% end %>
   </div>
 
   <!-- Days Grid -->
   <div class="mt-2 grid grid-cols-7 text-xs">
-    <% start_day = @date.beginning_of_month.beginning_of_week(:sunday) %>
-    <% end_day = @date.end_of_month.end_of_week(:sunday) %>
+    <% start_day = @date.beginning_of_month.beginning_of_week(:monday) %>
+    <% end_day = @date.end_of_month.end_of_week(:monday) %>
 
     <% (start_day..end_day).each do |day| %>
       <div class="py-1.5 border-t border-gray-200 dark:border-gray-700">
@@ -37,8 +37,8 @@
 
         <% classes = [
           "mx-auto flex size-8 items-center justify-center rounded-full",
-          (count > 0) ? "bg-indigo-100 text-indigo-900 dark:bg-indigo-900 dark:text-indigo-400 font-semibold" :
-          is_selected ? (is_today ? "bg-indigo-600 text-white font-semibold" : "bg-gray-900 text-white font-semibold") :
+          (count > 0) ? "bg-violet-100 text-violet-900 dark:bg-violet-900 dark:text-violet-400 font-semibold" :
+          is_selected ? (is_today ? "bg-violet-600 text-white font-semibold" : "bg-gray-900 text-white font-semibold") :
           is_today ? "bg-black dark:bg-white text-white dark:text-black font-semibold" :
           is_current_month ? "text-gray-900 dark:text-gray-100" : "text-gray-400",
           "hover:bg-gray-200 dark:hover:bg-gray-800"
