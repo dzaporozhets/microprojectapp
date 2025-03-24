@@ -14,7 +14,6 @@ RSpec.describe Project::TasksController, type: :routing do
       expect(get: "/projects/1/tasks/1/edit").to route_to("project/tasks#edit", id: "1", project_id: '1')
     end
 
-
     it "routes to #create" do
       expect(post: "/projects/1/tasks").to route_to("project/tasks#create", project_id: '1')
     end

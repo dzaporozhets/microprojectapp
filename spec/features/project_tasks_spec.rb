@@ -56,7 +56,6 @@ RSpec.feature "Project::Tasks", type: :feature do
     create(:task, name: 'New task', project: project, user: user, done: false)
     create(:task, name: 'Completed task', project: project, user: user, done: true)
 
-
     visit completed_project_tasks_path(project, task)
 
     #expect(page).to have_selector('a.btn-seg-ctl-active', text: 'Completed')

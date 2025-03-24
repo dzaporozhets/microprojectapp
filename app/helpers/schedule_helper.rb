@@ -9,7 +9,7 @@ module ScheduleHelper
       [formatted_month(3.months.from_now.beginning_of_month), 3.months.from_now.beginning_of_month],
       [formatted_month(4.months.from_now.beginning_of_month), 4.months.from_now.beginning_of_month],
       [formatted_month(5.months.from_now.beginning_of_month), 5.months.from_now.beginning_of_month],
-      [formatted_month(6.months.from_now.beginning_of_month), 6.months.from_now.beginning_of_month],
+      [formatted_month(6.months.from_now.beginning_of_month), 6.months.from_now.beginning_of_month]
     ]
 
     if existing_due_date
