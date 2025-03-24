@@ -49,8 +49,7 @@ class User < ApplicationRecord
 
   THEMES = {
     1 => 'Gray',
-    2 => 'Black',
-    3 => 'Violet',
+    7 => 'Violet',
     4 => 'Lime',
     5 => 'Pink'
   }.freeze

@@ -2,7 +2,7 @@
   <% content_for :title, "Tasks" %>
 
   <% content_for :subnav do %>
-    <div class="subnav <%= subnav_color %>">
+    <div class="<%= subnav_css %>">
       <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4">
         <%= home_tabs "Tasks" %>
         <%= link_to schedule_path, class: "btn-gray block" do %>

@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationHelper, type: :helper do
+  let(:user) { build_stubbed(:user) }
+
+  before do
+    allow(helper).to receive(:current_user).and_return(user)
+  end
+
   describe '#time_ago_short' do
     it 'returns "now" for times less than a minute ago' do
       expect(helper.time_ago_short(Time.current)).to eq('now')

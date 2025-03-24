@@ -1,6 +1,6 @@
 <% if params[:assigned_user_id].present? %>
   <div class="flex">
-    <%= link_to "Tasks assigned to #{@project.find_user(params[:assigned_user_id])&.email} only", project_path(@project), class: 'btn-tab-active' %>
+    <%= link_to "Tasks assigned to #{@project.find_user(params[:assigned_user_id])&.email} only", project_path(@project), class: subnav_active_tab %>
   </div>
 <% else %>
   <%= render 'project/tasks/form', project: @project %>
