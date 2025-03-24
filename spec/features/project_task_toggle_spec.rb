@@ -9,7 +9,7 @@ RSpec.feature 'Project::Task Toggle', type: :feature do
     sign_in user
   end
 
-  scenario 'marks a task as done', js: true do
+  scenario 'marks a task as done', :js do
     visit project_path(project)
 
     within "#task_#{task.id}" do
@@ -23,7 +23,7 @@ RSpec.feature 'Project::Task Toggle', type: :feature do
     expect(task.reload.done).to be(true)
   end
 
-  scenario 'marks a task as not done', js: true do
+  scenario 'marks a task as not done', :js do
     task.update(done: true)
 
     visit project_path(project)

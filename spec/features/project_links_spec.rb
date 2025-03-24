@@ -20,14 +20,14 @@ RSpec.feature "Project::Links", type: :feature do
     expect(page).to have_link("New Link", href: "http://example.com")
   end
 
-   scenario "User creates a new link without a title" do
-    visit new_project_link_path(project)
+  scenario "User creates a new link without a title" do
+   visit new_project_link_path(project)
 
-    fill_in "link_url", with: "http://example.com"
-    click_button "Create Link"
+   fill_in "link_url", with: "http://example.com"
+   click_button "Create Link"
 
-    expect(page).to have_link("http://example.com", href: "http://example.com")
-  end
+   expect(page).to have_link("http://example.com", href: "http://example.com")
+ end
 
   scenario "User views a link" do
     visit project_link_path(project, link)

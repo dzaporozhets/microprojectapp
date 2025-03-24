@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Link, type: :model do
-  it { should belong_to(:project) }
+  it { is_expected.to belong_to(:project) }
 
-  it { should validate_presence_of(:url) }
+  it { is_expected.to validate_presence_of(:url) }
 
   describe '#safe_title' do
     context 'when title is present' do

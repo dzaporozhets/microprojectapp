@@ -90,9 +90,7 @@ RSpec.configure do |config|
     #end
   #end
 
-  config.around(:each) do |example|
-    example.run
-  end
+  
 
   # Include FactoryBot syntax to simplify calls to factories
   config.include FactoryBot::Syntax::Methods

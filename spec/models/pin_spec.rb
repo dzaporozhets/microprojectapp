@@ -4,8 +4,8 @@ RSpec.describe Pin, type: :model do
   subject { build(:pin) }
 
   describe 'associations' do
-    it { should belong_to(:user) }
-    it { should belong_to(:project) }
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:project) }
   end
 
   describe 'validations' do

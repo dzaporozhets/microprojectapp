@@ -27,9 +27,9 @@ module FilesHelper
 
   def project_file_field(f)
     f.file_field :project_files,
-      multiple: true, required: true,
-      accept: allowed_file_types,
-      class: "appearance-none file-select w-full
+                 multiple: true, required: true,
+                 accept: allowed_file_types,
+                 class: "appearance-none file-select w-full
             leading-tight file:mr-5 file:py-2 file:px-4
             file:rounded-md file:border-0
             file:text-sm file:font-medium"
@@ -37,12 +37,11 @@ module FilesHelper
 
   def styled_file_field(f, name)
     f.file_field name.to_sym,
-      multiple: false, required: false,
-      accept: allowed_file_types,
-      class: "appearance-none file-select w-full text-sm
+                 multiple: false, required: false,
+                 accept: allowed_file_types,
+                 class: "appearance-none file-select w-full text-sm
             leading-tight file:mr-5 file:py-2 file:px-4
             file:rounded-md file:border-0
             file:text-sm file:font-medium"
   end
 end
-

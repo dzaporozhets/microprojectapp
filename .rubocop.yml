@@ -35,3 +35,7 @@ Style/Documentation:
 
 Style/SymbolArray:
   Enabled: false
+
+Layout/LeadingCommentSpace:
+  Enabled: false
+

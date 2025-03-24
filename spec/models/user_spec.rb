@@ -5,12 +5,12 @@ RSpec.describe User, type: :model do
   let(:project) { create(:project, user: user) }
 
   describe "associations" do
-    it { should have_many(:projects).dependent(:destroy) }
-    it { should have_many(:tasks).dependent(:destroy) }
-    it { should have_many(:project_users).dependent(:destroy) }
-    it { should have_many(:invited_projects).through(:project_users).source(:project) }
-    it { should have_many(:pins).dependent(:destroy) }
-    it { should have_many(:pinned_projects).through(:pins).source(:project) }
+    it { is_expected.to have_many(:projects).dependent(:destroy) }
+    it { is_expected.to have_many(:tasks).dependent(:destroy) }
+    it { is_expected.to have_many(:project_users).dependent(:destroy) }
+    it { is_expected.to have_many(:invited_projects).through(:project_users).source(:project) }
+    it { is_expected.to have_many(:pins).dependent(:destroy) }
+    it { is_expected.to have_many(:pinned_projects).through(:pins).source(:project) }
   end
 
   describe "callbacks" do
@@ -20,15 +20,15 @@ RSpec.describe User, type: :model do
   end
 
   describe 'enums' do
-    it { should define_enum_for(:dark_mode).with_values(off: 0, on: 1, auto: 2) }
+    it { is_expected.to define_enum_for(:dark_mode).with_values(off: 0, on: 1, auto: 2) }
 
-    it 'should map dark_mode correctly' do
+    it 'maps dark_mode correctly' do
       expect(User.dark_modes[:off]).to eq(0)
       expect(User.dark_modes[:on]).to eq(1)
       expect(User.dark_modes[:auto]).to eq(2)
     end
 
-    it 'should be able to switch between dark modes' do
+    it 'is able to switch between dark modes' do
       user = User.new(dark_mode: :off)
       expect(user.dark_mode).to eq('off')
 

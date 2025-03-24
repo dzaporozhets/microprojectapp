@@ -33,4 +33,3 @@ class Users::AccountsController < ApplicationController
     params.require(:user).permit(:email)
   end
 end
-

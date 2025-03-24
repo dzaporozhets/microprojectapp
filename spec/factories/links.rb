@@ -6,4 +6,3 @@ FactoryBot.define do
     association :project
   end
 end
-

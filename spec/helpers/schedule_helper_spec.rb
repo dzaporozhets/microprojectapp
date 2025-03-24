@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ScheduleHelper, type: :helper do
-  around(:each) do |spec|
+  around do |spec|
     travel_to Date.new(2024, 7, 12) do
       spec.run
     end

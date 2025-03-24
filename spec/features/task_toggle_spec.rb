@@ -9,7 +9,7 @@ RSpec.feature 'Task Toggle', type: :feature do
     sign_in user
   end
 
-  scenario 'marks a task as done from tasks page', js: true do
+  scenario 'marks a task as done from tasks page', :js do
     visit tasks_path
 
     expect(page).to have_content(task.name)
@@ -24,7 +24,7 @@ RSpec.feature 'Task Toggle', type: :feature do
     expect(page).to have_current_path(tasks_path)
   end
 
-  scenario 'marks a task as done from schedule page', js: true do
+  scenario 'marks a task as done from schedule page', :js do
     visit schedule_path
 
     expect(page).to have_content(task.name)

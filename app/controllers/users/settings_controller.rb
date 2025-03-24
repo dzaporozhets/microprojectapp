@@ -23,4 +23,3 @@ class Users::SettingsController < ApplicationController
     params.require(:user).permit(:allow_invites, :dark_mode, :otp_required_for_login, :avatar, :theme)
   end
 end
-

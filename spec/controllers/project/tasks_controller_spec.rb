@@ -44,4 +44,3 @@ RSpec.describe Project::TasksController, type: :controller do
     end
   end
 end
-

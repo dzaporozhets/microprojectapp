@@ -31,9 +31,9 @@ class User < ApplicationRecord
   has_many :activities, dependent: :destroy
 
   has_many :assigned_tasks,
-    class_name: 'Task',
-    foreign_key: 'assigned_user_id',
-    dependent: :nullify
+           class_name: 'Task',
+           foreign_key: 'assigned_user_id',
+           dependent: :nullify
 
   has_many :project_users, dependent: :destroy
   has_many :invited_projects, through: :project_users, source: :project

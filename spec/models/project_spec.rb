@@ -5,18 +5,18 @@ RSpec.describe Project, type: :model do
   let(:project) { create(:project, user: user) }
 
   describe "associations" do
-    it { should belong_to(:user) }
-    it { should have_many(:tasks).dependent(:destroy) }
-    it { should have_many(:links).dependent(:destroy) }
-    it { should have_many(:project_users).dependent(:destroy) }
-    it { should have_many(:users).through(:project_users) }
-    it { should have_many(:pins).dependent(:destroy) }
-    it { should have_many(:users_who_pinned).through(:pins).source(:user) }
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_many(:tasks).dependent(:destroy) }
+    it { is_expected.to have_many(:links).dependent(:destroy) }
+    it { is_expected.to have_many(:project_users).dependent(:destroy) }
+    it { is_expected.to have_many(:users).through(:project_users) }
+    it { is_expected.to have_many(:pins).dependent(:destroy) }
+    it { is_expected.to have_many(:users_who_pinned).through(:pins).source(:user) }
   end
 
   describe "validations" do
-    it { should validate_presence_of(:name) }
-    it { should validate_presence_of(:user_id) }
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:user_id) }
 
     describe "PROJECT_LIMIT" do
       before do
@@ -53,17 +53,16 @@ RSpec.describe Project, type: :model do
     end
   end
 
-   describe "#team" do
-    it "returns an array containing the user and additional users" do
-      additional_user = create(:user)
-      project.users << additional_user
+  describe "#team" do
+   it "returns an array containing the user and additional users" do
+     additional_user = create(:user)
+     project.users << additional_user
 
-      expect(project.team).to contain_exactly(user, additional_user)
-    end
+     expect(project.team).to contain_exactly(user, additional_user)
+   end
 
-    it "returns an array containing only the user if there are no additional users" do
-      expect(project.team).to contain_exactly(user)
-    end
-  end
+   it "returns an array containing only the user if there are no additional users" do
+     expect(project.team).to contain_exactly(user)
+   end
+ end
 end
-

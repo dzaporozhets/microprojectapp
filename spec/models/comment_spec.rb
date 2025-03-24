@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  it { should belong_to(:task) }
-  it { should belong_to(:user) }
+  it { is_expected.to belong_to(:task) }
+  it { is_expected.to belong_to(:user) }
 
-  it { should validate_presence_of(:body) }
+  it { is_expected.to validate_presence_of(:body) }
 
   it 'has a valid factory' do
     expect(create(:comment)).to be_valid
