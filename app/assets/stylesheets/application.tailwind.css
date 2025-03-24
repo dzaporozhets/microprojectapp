@@ -86,19 +86,6 @@
     @apply text-black dark:text-gray-300;
   }
 
-  .btn-seg-ctl {
-    @apply px-3 py-1 text-sm font-medium text-violet-900 rounded-full
-           hover:bg-white hover:shadow-sm hover:ring-1 hover:ring-gray-300
-           focus:outline-none focus:ring-2 focus:ring-violet-500
-           dark:text-violet-200 dark:hover:bg-violet-300 dark:hover:text-violet-900;
-  }
-
-  .btn-seg-ctl-active {
-    @apply px-3 py-1 text-sm font-medium text-gray-800 bg-white rounded-full
-           shadow-sm ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-500
-           dark:bg-violet-300;
-  }
-
 
   /*----------------------------------------*
    * Section Titles
