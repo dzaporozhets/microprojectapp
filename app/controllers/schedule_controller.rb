@@ -4,13 +4,17 @@ class ScheduleController < ApplicationController
 
     @current_month_name = @date.strftime("%B")
 
-    @tasks = tasks.where(due_date: @date.beginning_of_month..@date.end_of_month).page(params[:page]).per(200)
+    @monthly_tasks = tasks.where(due_date: @date.beginning_of_month..@date.end_of_month).order(due_date: :asc)
+    @past_due_tasks = tasks.where("due_date < ?", @date.beginning_of_month).order(due_date: :asc)
+    @upcoming_tasks = tasks.where(due_date: (@date.end_of_month + 1.day)..(@date + 2.months).end_of_month).order(due_date: :asc)
+
+    @daily_task_counts = tasks.group(:due_date).count.transform_keys(&:to_date)
   end
 
   private
 
   def tasks
-    Task.where(project_id: current_user.all_active_projects).todo.order(due_date: :asc)
+    Task.where(project_id: current_user.all_active_projects).todo.with_due_date.order(due_date: :asc)
   end
 
   def user_date

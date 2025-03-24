@@ -6,39 +6,23 @@
       <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4">
         <%= home_tabs "Tasks" %>
         <%= link_to tasks_path, class: "btn-gray block" do %>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-gray-400 dark:text-gray-600">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400 dark:text-gray-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
           </svg>
         <% end %>
       </div>
     </div>
   <% end %>
 
-  <div class="mb-4 md:mb-0 lg:w-2/3 mx-auto">
-    <div class="mb-4">
-      <%= render 'schedule/calendar' %>
+  <div class="max-w-screen-xl mx-auto px-4 lg:flex lg:space-x-6">
+    <!-- Calendar Column -->
+    <div class="lg:w-1/3 mb-6 lg:mb-0">
+      <%= render 'calendar' %>
     </div>
 
-    <section class="task-list">
-      <ol class="text-sm leading-6 text-gray-500">
-        <% if @tasks.any? %>
-          <% @tasks.group_by_projects.each do |project, tasks| %>
-            <div class="project-group mb-6">
-              <h2 class="py-2 text-base font-semibold text-gray-900 dark:text-gray-200"><%= link_to project.name.truncate(100), project, class: 'hover:underline' %></h2>
-              <ol class="mt-2 text-sm leading-6 text-gray-500 grid grid-cols-1 gap-1">
-                <% tasks.each do |task| %>
-                  <%= render 'schedule/task', task: task %>
-                <% end %>
-              </ol>
-            </div>
-          <% end %>
-          <%= paginate @tasks %>
-        <% else %>
-          <li class="py-2 flex">
-            <p class="">No tasks due this month.</p>
-          </li>
-        <% end %>
-      </ol>
-    </section>
+    <!-- Task List Column -->
+    <div class="lg:w-2/3">
+      <%= render 'tasks' %>
+    </div>
   </div>
 </div>

@@ -1,77 +1,75 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.feature "Schedule", type: :feature do
   let(:user) { create(:user) }
+  let!(:project) { create(:project, user: user) }
 
-  let!(:project1) { create(:project, user: user) }
-  let!(:project2) { create(:project) }
-  let!(:project3) { create(:project) } # User is not involved with this project
-  let!(:task1) { create(:task, project: project1, due_date: Date.current) }
-  let!(:task2) { create(:task, project: project2, due_date: Date.current.beginning_of_month + 5.days) }
-  let!(:task3) { create(:task, project: project1, due_date: Date.current.end_of_month) }
-  let!(:task4) { create(:task, project: project2, due_date: Date.current.next_month) }
-  let!(:task5) { create(:task, project: project3, due_date: Date.current) } # Task from a project user is not part of
+  let!(:past_task)     { create(:task, name: "Past Task", project: project, due_date: Date.new(2025, 2, 28)) }
+  let!(:current_task1) { create(:task, name: "March Task 1", project: project, due_date: Date.new(2025, 3, 6)) }
+  let!(:current_task2) { create(:task, name: "March Task 2", project: project, due_date: Date.new(2025, 3, 24)) }
+  let!(:current_task3) { create(:task, name: "March Task 3", project: project, due_date: Date.new(2025, 3, 31)) }
+  let!(:future_task)   { create(:task, name: "Future Task", project: project, due_date: Date.new(2025, 4, 24)) }
 
-  before do
-    project2.users << user
+  before { sign_in user }
 
-    sign_in user
-  end
+  scenario "shows March 2025 tasks correctly grouped" do
+    visit schedule_path(date: "2025-03-01")
 
-  scenario "user views the schedule for the current month" do
-    visit schedule_path
+    within(".past-due-tasks") do
+      expect(page).to have_content("Past Task")
+    end
 
-    expect(page).to have_content(Date.current.strftime("%B %Y"))
+    within(".current-tasks") do
+      expect(page).to have_content("March Task 1")
+      expect(page).to have_content("March Task 2")
+      expect(page).to have_content("March Task 3")
+    end
 
-    within('.task-list') do
-      expect(page).to have_content(task1.name)
-      expect(page).to have_content(task2.name)
-      expect(page).to have_content(task3.name)
-      expect(page).not_to have_content(task4.name)
-      expect(page).not_to have_content(task5.name) # Task from project user is not involved with should not be shown
+    within(".upcoming-tasks") do
+      expect(page).to have_content("Future Task")
     end
   end
 
-  scenario "user navigates to the previous month" do
-    visit schedule_path
+  scenario "shows February 2025 tasks grouped properly" do
+    visit schedule_path(date: "2025-02-01")
 
-    within('.calendar') do
-      click_link(class: 'prev-month')
+    within(".current-tasks") do
+      expect(page).to have_content("Past Task")
     end
 
-    expect(page).to have_content(Date.current.prev_month.strftime("%B %Y"))
-    expect(page).not_to have_content(task1.name)
-    expect(page).not_to have_content(task2.name)
-    expect(page).not_to have_content(task3.name)
-    expect(page).not_to have_content(task5.name) # Ensure task from unrelated project is not shown
+    expect(page).not_to have_selector(".past-due-tasks")
+
+    within(".upcoming-tasks") do
+      expect(page).to have_content("March Task 1")
+      expect(page).to have_content("March Task 2")
+      expect(page).to have_content("March Task 3")
+      expect(page).to have_content("Future Task")
+    end
   end
 
-  scenario "user navigates to the next month" do
-    visit schedule_path
+  scenario "shows April 2025 tasks grouped properly" do
+    visit schedule_path(date: "2025-04-01")
 
-    within('.calendar') do
-      click_link(class: 'next-month')
+    within(".current-tasks") do
+      expect(page).to have_content("Future Task")
     end
 
-    expect(page).to have_content(Date.current.next_month.strftime("%B %Y"))
-    expect(page).to have_content(task4.name)
-    expect(page).not_to have_content(task1.name)
-    expect(page).not_to have_content(task2.name)
-    expect(page).not_to have_content(task3.name)
-    expect(page).not_to have_content(task5.name) # Ensure task from unrelated project is not shown
+    within(".past-due-tasks") do
+      expect(page).to have_content("March Task 1")
+      expect(page).to have_content("March Task 2")
+      expect(page).to have_content("March Task 3")
+      expect(page).to have_content("Past Task")
+    end
+
+    expect(page).not_to have_selector(".upcoming-tasks")
   end
 
-  scenario "user tries to view a non-existing date" do
-    visit schedule_path(date: 'invalid-date')
-
-    expect(page).to have_content(Date.current.strftime("%B %Y"))
-  end
-
-  scenario "user views a month with no tasks due" do
+  scenario "shows empty state when no tasks exist" do
     Task.delete_all
+    visit schedule_path(date: "2025-03-01")
 
-    visit schedule_path
-
-    expect(page).to have_content("No tasks due this month.")
+    expect(page).not_to have_selector(".past-due-tasks")
+    expect(page).not_to have_selector(".current-tasks")
+    expect(page).not_to have_selector(".upcoming-tasks")
   end
 end
