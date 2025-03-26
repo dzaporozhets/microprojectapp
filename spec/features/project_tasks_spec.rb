@@ -73,4 +73,75 @@ RSpec.feature "Project::Tasks", type: :feature do
     expect(page).to have_content('Assigned task')
     expect(page).not_to have_content('Just a task')
   end
+
+  describe 'Task version history' do
+    scenario 'User views task change history with no changes' do
+      # New task with no changes yet
+      new_task = create(:task, name: 'Task with no changes', project: project, user: user)
+
+      visit changes_project_task_path(project, new_task)
+
+      expect(page).to have_content('Task with no changes')
+      expect(page).to have_content('Showing the last 5 changes to this task')
+      expect(page).to have_content('No versions available for this task')
+    end
+
+    scenario 'User views task change history with multiple changes' do
+      # Create a task with PaperTrail enabled
+      task_to_change = create(:task,
+                              name: 'Original Task Name',
+                              description: 'Original description',
+                              project: project,
+                              user: user)
+
+      # Update the task to create versions
+      # First update
+      PaperTrail.request(whodunnit: user.id.to_s) do
+        task_to_change.update(name: 'Updated Task Name')
+      end
+
+      # Second update
+      PaperTrail.request(whodunnit: user.id.to_s) do
+        task_to_change.update(description: 'Updated description')
+      end
+
+      visit changes_project_task_path(project, task_to_change)
+
+      # Verify page content
+      expect(page).to have_content('Updated Task Name')
+      expect(page).to have_content('Showing the last 5 changes to this task')
+
+      # Check for version information
+      expect(page).to have_content('Changed By')
+      expect(page).to have_content(user.email)
+
+      # Check for change details
+      expect(page).to have_content('Name:')
+      expect(page).to have_content('Original Task Name')
+      expect(page).to have_content('Updated Task Name')
+
+      expect(page).to have_content('Description:')
+      expect(page).to have_content('Original description')
+      expect(page).to have_content('Updated description')
+    end
+
+    scenario 'User views task change history with unknown user' do
+      # Create a task with PaperTrail enabled
+      task_with_unknown = create(:task,
+                                name: 'Task with unknown editor',
+                                project: project,
+                                user: user)
+
+      # Update with non-existent user ID
+      PaperTrail.request(whodunnit: '99999') do
+        task_with_unknown.update(name: 'Changed by unknown')
+      end
+
+      visit changes_project_task_path(project, task_with_unknown)
+
+      # Verify page shows "Unknown" for the user
+      expect(page).to have_content('Changed by unknown')
+      expect(page).to have_content('Unknown')
+    end
+  end
 end
