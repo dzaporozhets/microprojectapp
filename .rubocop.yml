@@ -39,3 +39,5 @@ Style/SymbolArray:
 Layout/LeadingCommentSpace:
   Enabled: false
 
+Style/StringConcatenation:
+  Enabled: false

@@ -19,7 +19,8 @@ module ThemeHelper
     when 'pink'
       'btn-tab btn-tab-active text-pink-900 dark:text-pink-100 bg-pink-100 dark:bg-pink-950 border-pink-300 dark:border-pink-800'
     else
-      'btn-tab btn-tab-active text-violet-900 dark:text-violet-100 bg-violet-100 dark:bg-violet-950 border-violet-300 dark:border-violet-800'
+      'btn-tab btn-tab-active text-violet-900 dark:text-violet-100 ' \
+      'bg-violet-100 dark:bg-violet-950 border-violet-300 dark:border-violet-800'
     end
   end
 
@@ -33,12 +34,12 @@ module ThemeHelper
 
   def task_css(task)
     if task.done
-      'px-3 py-1 border-l-4 border-transparent hover:border-gray-400 transition' +
-        ' text-sm text-gray-600 dark:text-gray-500 bg-gray-100 dark:bg-gray-900 line-through' +
-        ' dark:decoration-gray-500 decoration-gray-600'
+      'px-3 py-1 border-l-4 border-transparent hover:border-gray-400 transition ' \
+        'text-sm text-gray-600 dark:text-gray-500 bg-gray-100 dark:bg-gray-900 line-through ' \
+        'dark:decoration-gray-500 decoration-gray-600'
     else
-      'px-3 py-1 border-l-4 border-transparent hover:border-violet-400 transition' +
-        ' text-sm text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800'
+      'px-3 py-1 border-l-4 border-transparent hover:border-violet-400 transition ' \
+        'text-sm text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800'
     end
   end
 
@@ -53,16 +54,16 @@ module ThemeHelper
   end
 
   def sub_subnav_tab
-    'px-3 py-1 text-sm font-medium text-violet-900 rounded-full' +
-      ' hover:bg-white hover:shadow-sm hover:ring-1 hover:ring-gray-300' +
-      ' focus:outline-none focus:ring-2 focus:ring-violet-500' +
-      ' dark:text-violet-200 dark:hover:bg-violet-300 dark:hover:text-violet-900'
+    'px-3 py-1 text-sm font-medium text-violet-900 rounded-full ' \
+      'hover:bg-white hover:shadow-sm hover:ring-1 hover:ring-gray-300 ' \
+      'focus:outline-none focus:ring-2 focus:ring-violet-500 ' \
+      'dark:text-violet-200 dark:hover:bg-violet-300 dark:hover:text-violet-900'
   end
 
   def sub_subnav_active_tab
-    'px-3 py-1 text-sm font-medium text-gray-800 bg-white rounded-full' +
-      ' shadow-sm ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-500' +
-      ' dark:bg-violet-300'
+    'px-3 py-1 text-sm font-medium text-gray-800 bg-white rounded-full ' \
+      'shadow-sm ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-500 ' \
+      'dark:bg-violet-300'
   end
 
   private
