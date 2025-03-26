@@ -45,6 +45,7 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
@@ -90,8 +91,6 @@ RSpec.configure do |config|
     #end
   #end
 
-  
-
   # Include FactoryBot syntax to simplify calls to factories
   config.include FactoryBot::Syntax::Methods
 
@@ -116,7 +115,7 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
-
   config.include ActiveSupport::Testing::TimeHelpers
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :controller
 end
