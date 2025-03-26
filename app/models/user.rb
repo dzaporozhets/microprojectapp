@@ -1,52 +1,8 @@
 class User < ApplicationRecord
-  devise :two_factor_authenticatable
+  # Custom exceptions
   class SignupsDisabledError < StandardError; end
 
-  def self.disabled_signup?
-    Rails.application.config.app_settings[:disable_signup]
-  end
-
-  app_settings = Rails.application.config.app_settings
-
-  devise_modules = [:omniauthable]
-
-  devise_modules += [
-    :two_factor_authenticatable, :registerable,
-    :recoverable, :rememberable, :validatable,
-    :lockable, :confirmable
-  ] unless app_settings[:disable_email_login]
-
-  devise *devise_modules, omniauth_providers: [:google_oauth2, :entra_id]
-
-  mount_uploader :avatar, AvatarUploader
-
-  after_create :create_personal_project
-  after_create :create_sample_project, unless: -> { Rails.env.test? }
-
-  before_save :generate_otp_secret, if: -> { otp_required_for_login_changed? }
-
-  has_many :projects, dependent: :destroy
-  has_many :tasks, dependent: :destroy
-  has_many :comments, dependent: :destroy
-  has_many :activities, dependent: :destroy
-
-  has_many :assigned_tasks,
-           class_name: 'Task',
-           foreign_key: 'assigned_user_id',
-           dependent: :nullify
-
-  has_many :project_users, dependent: :destroy
-  has_many :invited_projects, through: :project_users, source: :project
-
-  has_many :pins, dependent: :destroy
-  has_many :pinned_projects, through: :pins, source: :project
-
-  enum dark_mode: { off: 0, on: 1, auto: 2 }
-
-  scope :admins, -> { where(admin: true) }
-
-  validate :email_domain_check, on: :create
-
+  # Constants
   THEMES = {
     1 => 'Gray',
     7 => 'Violet',
@@ -54,98 +10,139 @@ class User < ApplicationRecord
     5 => 'Pink'
   }.freeze
 
-  def self.available_themes
-    THEMES
-  end
+  OAUTH_PROVIDERS = {
+    'google_oauth2' => 'Google',
+    'azure_activedirectory_v2' => 'Microsoft',
+    'entra_id' => 'Microsoft'
+  }.freeze
 
-  def theme_name
-    THEMES[theme]
-  end
+  PASSWORD_RESET_THROTTLE = 5.minutes
 
-  def theme_css_name
-    theme_name&.downcase
-  end
+  # Configuration
+  app_settings = Rails.application.config.app_settings
 
-  def self.from_omniauth(auth)
-    uid = auth[:uid]
-    provider = auth[:provider]
-    email = auth[:email]
-    image = auth[:image]
+  # Devise setup
+  devise_modules = [:omniauthable]
+  devise_modules += [
+    :two_factor_authenticatable, :registerable,
+    :recoverable, :rememberable, :validatable,
+    :lockable, :confirmable
+  ] unless app_settings[:disable_email_login]
 
-    return nil unless provider.present? && uid.present? && email.present?
+  devise *devise_modules, omniauth_providers: [:google_oauth2, :entra_id]
+  devise :two_factor_authenticatable
 
-    user = User.find_by(email: email)
+  # Uploaders
+  mount_uploader :avatar, AvatarUploader
 
-    if user
+  # Callbacks
+  after_create :create_personal_project
+  after_create :create_sample_project, unless: -> { Rails.env.test? }
+  before_save :generate_otp_secret, if: -> { otp_required_for_login_changed? }
+
+  # Associations
+  has_many :projects, dependent: :destroy
+  has_many :tasks, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :activities, dependent: :destroy
+  has_many :assigned_tasks,
+           class_name: 'Task',
+           foreign_key: 'assigned_user_id',
+           dependent: :nullify
+  has_many :project_users, dependent: :destroy
+  has_many :invited_projects, through: :project_users, source: :project
+  has_many :pins, dependent: :destroy
+  has_many :pinned_projects, through: :pins, source: :project
+
+  # Enums
+  enum dark_mode: { off: 0, on: 1, auto: 2 }
+
+  # Scopes
+  scope :admins, -> { where(admin: true) }
+
+  # Validations
+  validate :email_domain_check, on: :create
+
+  #
+  # Class methods
+  #
+  class << self
+    def disabled_signup?
+      Rails.application.config.app_settings[:disable_signup]
+    end
+
+    def available_themes
+      THEMES
+    end
+
+    def from_omniauth(auth)
+      uid = auth[:uid]
+      provider = auth[:provider]
+      email = auth[:email]
+      image = auth[:image]
+
+      return nil unless provider.present? && uid.present? && email.present?
+
+      user = find_by(email: email)
+
+      if user
+        handle_existing_user_oauth(user, provider, uid, image)
+      else
+        create_user_from_oauth(provider, uid, email, image)
+      end
+    end
+
+    private
+
+    def handle_existing_user_oauth(user, provider, uid, image)
       if user.provider == provider && user.uid == uid
-        # User logged in with provider before, nothing to do here.
+        # User logged in with provider before, nothing to do here
         user
       else
         # Update user uid and provider based on email
-        user.update(uid: uid,
-                    provider: provider,
-                    oauth_avatar_url: image,
-                    oauth_linked_at: Time.now)
-
-        user.save
+        user.update(
+          uid: uid,
+          provider: provider,
+          oauth_avatar_url: image,
+          oauth_linked_at: Time.current
+        )
+        user
       end
-    else
+    end
+
+    def create_user_from_oauth(provider, uid, email, image)
       # Check if sign-up is disabled for new users
-      if User.disabled_signup?
+      if disabled_signup?
         raise SignupsDisabledError, 'New registrations are currently disabled.'
       end
 
-      user = User.new(provider: provider, uid: uid, email: email, created_from_oauth: true)
-      user.oauth_avatar_url = image
-      user.password = Devise.friendly_token[0, 20]
-      user.disable_password = true
+      user = new(
+        provider: provider,
+        uid: uid,
+        email: email,
+        created_from_oauth: true,
+        oauth_avatar_url: image,
+        password: Devise.friendly_token[0, 20],
+        disable_password: true
+      )
+
       user.skip_confirmation! if user.respond_to?(:skip_confirmation!)
       user.skip_confirmation_notification! if user.respond_to?(:skip_confirmation_notification!)
       user.save
+      user
     end
-
-    user
   end
 
-  def invited?
-    # TODO
-    false
-  end
-
-  def admin?
-    self.admin
-  end
-
-  def owns?(project)
-    self == project.user
-  end
-
-  def create_personal_project
-    self.projects.find_or_create_by(name: "Personal")
-  end
-
-  def create_sample_project
-    project = self.projects.create(name: "Sample")
-    project.create_sample_tasks
-    project.create_sample_links
-    project
-  end
-
-  def personal_project
-    @personal_project ||= self.projects.find_by(name: "Personal")
-  end
-
-  def has_access_to?(project)
-    projects.include?(project) ||
-      invited_projects.include?(project)
-  end
-
+  #
+  # Authentication methods
+  #
   def oauth_config?
-    Devise.mappings[:user].omniauthable? && Rails.application.config.app_settings[:google_client_id].present?
+    Devise.mappings[:user].omniauthable? &&
+      Rails.application.config.app_settings[:google_client_id].present?
   end
 
   def oauth_user?
-    self.uid.present? && self.provider.present?
+    uid.present? && provider.present?
   end
 
   def valid_password?(password)
@@ -157,23 +154,13 @@ class User < ApplicationRecord
 
   # Override Devise's send_reset_password_instructions method
   def send_reset_password_instructions
-    if reset_password_sent_at && reset_password_sent_at > 5.minutes.ago
+    if reset_password_sent_at && reset_password_sent_at > PASSWORD_RESET_THROTTLE
       # Skip sending instructions if the last request was less than 5 minutes ago
       errors.add(:email, 'Password reset request already sent, please check your email.')
       false
     else
       super
     end
-  end
-
-  def all_active_projects
-    [self.personal_project] +
-      self.projects.active.without_personal.ordered_by_id +
-      self.invited_projects.active.ordered_by_id
-  end
-
-  def created_today?
-    created_at.to_date == Date.current
   end
 
   def two_factor_enabled?
@@ -188,15 +175,71 @@ class User < ApplicationRecord
     end
   end
 
+  #
+  # Project-related methods
+  #
+  def create_personal_project
+    projects.find_or_create_by(name: "Personal")
+  end
+
+  def create_sample_project
+    project = projects.create(name: "Sample")
+    project.create_sample_tasks
+    project.create_sample_links
+    project
+  end
+
+  def personal_project
+    @personal_project ||= projects.find_by(name: "Personal")
+  end
+
+  def all_active_projects
+    [personal_project] +
+      projects.active.without_personal.ordered_by_id +
+      invited_projects.active.ordered_by_id
+  end
+
+  def has_access_to?(project)
+    projects.include?(project) || invited_projects.include?(project)
+  end
+
+  def owns?(project)
+    self == project.user
+  end
+
+  #
+  # UI and display methods
+  #
+  def theme_name
+    THEMES[theme]
+  end
+
+  def theme_css_name
+    theme_name&.downcase
+  end
+
   def img_url
     avatar&.url || oauth_avatar_url
   end
 
   def provider_human
-    case provider
-    when 'google_oauth2' then 'Google'
-    when 'azure_activedirectory_v2', 'entra_id' then 'Microsoft'
-    end
+    OAUTH_PROVIDERS[provider]
+  end
+
+  #
+  # Status methods
+  #
+  def invited?
+    # TODO: Implement invitation logic
+    false
+  end
+
+  def admin?
+    admin
+  end
+
+  def created_today?
+    created_at.to_date == Date.current
   end
 
   private
