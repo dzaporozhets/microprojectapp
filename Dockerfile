@@ -56,8 +56,15 @@ COPY --from=build /rails /rails
 # Run and own only the runtime files as a non-root user for security
 RUN useradd rails --create-home --shell /bin/bash && \
     mkdir -p tmp log storage public/uploads && \
-    chown -R rails:rails tmp log storage public/uploads
+    chown -R rails:rails tmp log storage public/uploads && \
+    chown -R rails:rails /rails
+
 USER rails:rails
+
+# Copy entrypoint scripts end set the owner rails and rail group for the files being copied.
+COPY --chown=rails:rails bin/docker-entrypoint /usr/bin/docker-entrypoint
+COPY --chown=rails:rails bin/generate_secret_base-entrypoint.sh /usr/bin/generate_secret_base-entrypoint.sh
+COPY --chown=rails:rails bin/generate_certs-entrypoint.sh /usr/bin/generate_certs-entrypoint.sh
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
