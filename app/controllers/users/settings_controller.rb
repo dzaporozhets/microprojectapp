@@ -17,14 +17,6 @@ class Users::SettingsController < ApplicationController
     end
   end
 
-  def regenerate_calendar_token
-    if current_user.regenerate_calendar_token!
-      redirect_to users_settings_path, notice: 'Calendar token has been regenerated'
-    else
-      redirect_to users_settings_path, alert: 'Failed to regenerate calendar token'
-    end
-  end
-
   private
 
   def settings_params

@@ -15,6 +15,15 @@ RSpec.feature "User Account", type: :feature do
     expect(page).to have_button("Delete my account")
   end
 
+  scenario "User sees calendar token regeneration option" do
+    visit users_account_path
+    
+    expect(page).to have_content("Calendar Integration")
+    expect(page).to have_content("Calendar Token")
+    expect(page).to have_content("Your calendar token allows you to subscribe to your tasks")
+    expect(page).to have_link("Regenerate Calendar Token")
+  end
+
   # We'll skip the delete account test in feature specs since it requires JS confirmation
   # This is better tested in the controller spec where we can directly test the action
 
