@@ -69,10 +69,16 @@ Rails.application.routes.draw do
 
   namespace :users do
     resource :settings, only: [:show, :update]
-    resource :account, only: [:show, :update, :destroy]
+    resource :account, only: [:show, :update, :destroy] do
+      post :regenerate_calendar_token
+    end
   end
 
-  resource :schedule, only: :show, controller: 'schedule'
+  resource :schedule, only: :show, controller: 'schedule' do
+    member do
+      get :calendar
+    end
+  end
   resources :tasks, only: :index, controller: 'tasks' do
     member do
       patch :toggle_done

@@ -1,7 +1,7 @@
-<div class="calendar">
+<div class="calendar bg-white dark:bg-gray-800 shadow-sm rounded-md p-4 mb-4">
   <!-- Header with Month and Nav Buttons -->
   <div class="flex items-center">
-    <h2 class="flex-auto text-sm font-semibold text-gray-900 dark:text-gray-100"><%= @date.strftime("%B %Y") %></h2>
+    <h2 class="flex-auto text-base font-semibold text-gray-900 dark:text-gray-100"><%= @date.strftime("%B %Y") %></h2>
     <%= link_to schedule_path(date: @date.prev_month), class: "prev-month -my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500" do %>
       <span class="sr-only">Previous month</span>
       <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -29,7 +29,7 @@
     <% end_day = @date.end_of_month.end_of_week(:monday) %>
 
     <% (start_day..end_day).each do |day| %>
-      <div class="py-1.5 border-t border-gray-200 dark:border-gray-700">
+      <div class="py-1 border-t border-gray-200 dark:border-gray-700">
         <% count = @daily_task_counts[day] || 0 %>
         <% is_today = day == Date.current %>
         <% is_selected = false # set this if you want to highlight a selected day %>

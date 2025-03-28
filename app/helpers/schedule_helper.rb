@@ -1,4 +1,14 @@
 module ScheduleHelper
+  def calendar_url(user, host = nil)
+    return nil unless user&.calendar_token.present?
+    
+    calendar_schedule_url(
+      token: user.calendar_token,
+      format: :ics,
+      host: host || request.host_with_port
+    )
+  end
+
   def due_date_options(existing_due_date = nil)
     options = [
       ['No Due Date', nil],
