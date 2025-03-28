@@ -39,6 +39,7 @@ class User < ApplicationRecord
   after_create :create_personal_project
   after_create :create_sample_project, unless: -> { Rails.env.test? }
   before_save :generate_otp_secret, if: -> { otp_required_for_login_changed? }
+  before_create :ensure_calendar_token
 
   # Associations
   has_many :projects, dependent: :destroy
@@ -242,7 +243,20 @@ class User < ApplicationRecord
     created_at.to_date == Date.current
   end
 
+  # Calendar token methods
+  def regenerate_calendar_token!
+    update!(calendar_token: generate_calendar_token)
+  end
+
   private
+
+  def ensure_calendar_token
+    self.calendar_token ||= generate_calendar_token
+  end
+
+  def generate_calendar_token
+    Digest::SHA256.hexdigest("#{email}:#{SecureRandom.hex(16)}:#{Time.current.to_i}")
+  end
 
   def email_domain_check
     allowed_domain = Rails.application.config.app_settings[:app_allowed_email_domain]

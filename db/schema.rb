@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_23_091503) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_28_134447) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -145,6 +145,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_23_091503) do
     t.boolean "otp_required_for_login"
     t.string "avatar"
     t.integer "theme", default: 1, null: false
+    t.string "calendar_token"
+    t.index ["calendar_token"], name: "index_users_on_calendar_token"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

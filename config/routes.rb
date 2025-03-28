@@ -68,11 +68,17 @@ Rails.application.routes.draw do
   get 'admin/activity', to: 'admin/activity#index'
 
   namespace :users do
-    resource :settings, only: [:show, :update]
+    resource :settings, only: [:show, :update] do
+      post :regenerate_calendar_token
+    end
     resource :account, only: [:show, :update, :destroy]
   end
 
-  resource :schedule, only: :show, controller: 'schedule'
+  resource :schedule, only: :show, controller: 'schedule' do
+    member do
+      get :calendar
+    end
+  end
   resources :tasks, only: :index, controller: 'tasks' do
     member do
       patch :toggle_done
