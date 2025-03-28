@@ -67,7 +67,7 @@ class ScheduleController < ApplicationController
       event.summary = task.name
       event.description = task.description if task.description.present?
       event.uid = "task-#{task.id}@microprojectapp"
-      event.url = Rails.application.routes.url_helpers.project_task_url(task.project, task, host: request.host)
+      event.url = Rails.application.routes.url_helpers.details_project_task_url(task.project, task, host: request.host)
 
       # Add project name to location
       event.location = task.project.name if task.project.present?
