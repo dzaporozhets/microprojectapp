@@ -20,16 +20,19 @@
   <div class="mx-auto md:flex md:space-x-8">
     <div class="md:w-72 md:flex-none mb-6 md:mb-0">
       <%= render 'calendar' %>
-      <% if current_user.calendar_token.present? %>
-        <%= render 'calendar_export' %>
-      <% else %>
-        <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 text-yellow-800 dark:text-yellow-200 rounded-md p-4 my-4">
-          <h3 class="text-base font-semibold mb-2">Calendar Export Unavailable</h3>
-          <p class="text-sm">
-          You need to generate a calendar token before you can export or subscribe to your schedule. Please visit your <%= link_to 'account settings', users_account_path, class: "underline" %> to generate one.
-          </p>
-        </div>
-      <% end %>
+
+      <div class="hidden md:block">
+        <% if current_user.calendar_token.present? %>
+          <%= render 'calendar_export' %>
+        <% else %>
+          <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 text-yellow-800 dark:text-yellow-200 rounded-md p-4 my-4">
+            <h3 class="text-base font-semibold mb-2">Calendar Export Unavailable</h3>
+            <p class="text-sm">
+            You need to generate a calendar token before you can export or subscribe to your schedule. Please visit your <%= link_to 'account settings', users_account_path, class: "underline" %> to generate one.
+            </p>
+          </div>
+        <% end %>
+      </div>
     </div>
 
     <div class="md:flex-1">
