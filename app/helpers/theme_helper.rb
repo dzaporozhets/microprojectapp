@@ -50,7 +50,7 @@ module ThemeHelper
   end
 
   def sub_subnav
-    'inline-flex items-center gap-1 p-1 bg-violet-100 dark:bg-violet-950 rounded-full border border-violet-200 dark:border-violet-800'
+    'inline-flex items-center gap-1 p-1 bg-gray-100 dark:bg-violet-950 rounded-full border border-violet-200 dark:border-violet-800'
   end
 
   def sub_subnav_tab

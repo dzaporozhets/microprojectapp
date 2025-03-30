@@ -1,0 +1,6 @@
+<div class="flex justify-center items-center">
+  <%= content_tag :div, class: sub_subnav do %>
+    <%= link_to "Tasks", tasks_path, class: " #{ current_page?(tasks_path) ? sub_subnav_active_tab : sub_subnav_tab }" %>
+    <%= link_to "Calendar", schedule_path, class: " #{ current_page?(schedule_path) ? sub_subnav_active_tab : sub_subnav_tab }" %>
+  <% end %>
+</div>
