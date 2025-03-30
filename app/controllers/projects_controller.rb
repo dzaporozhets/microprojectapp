@@ -31,7 +31,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    #@tab_name = 'Settings'
+    @tab_name = 'Settings'
   end
 
   # POST /projects or /projects.json

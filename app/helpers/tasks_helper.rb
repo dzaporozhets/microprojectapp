@@ -35,4 +35,11 @@ module TasksHelper
 
     render 'project/tasks/star', task: task
   end
+
+  def tasks_lists_page?
+    current_page?(project_path(@project)) ||
+      current_page?(completed_project_tasks_path(@project)) ||
+      current_page?(project_tasks_path(@project)) ||
+      current_page?(project_schedule_path(@project))
+  end
 end
