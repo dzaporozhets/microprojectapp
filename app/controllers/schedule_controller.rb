@@ -17,8 +17,15 @@ class ScheduleController < ApplicationController
   def calendar
     respond_to do |format|
       format.ics do
-        calendar = generate_calendar
-        send_data calendar.to_ical, type: 'text/calendar', disposition: 'inline', filename: "tasks-#{@user.id}.ics"
+        calendar = CalendarTaskExporter.new(
+          tasks: tasks,
+          host: request.host
+        ).to_ical
+
+        send_data calendar.to_ical,
+                  type: 'text/calendar',
+                  disposition: 'inline',
+                  filename: "tasks-#{@user.id}.ics"
       end
     end
   end
@@ -45,36 +52,5 @@ class ScheduleController < ApplicationController
 
     @user = User.find_by(calendar_token: token)
     return head :unauthorized unless @user
-  end
-
-  def generate_calendar
-    require 'icalendar'
-    require 'icalendar/tzinfo'
-
-    cal = Icalendar::Calendar.new
-    cal.prodid = "-//MicroProjectApp//Calendar//EN"
-    cal.append_custom_property("X-WR-CALNAME", "MicroProjectApp Tasks")
-
-    tzid = "UTC"
-    tz = TZInfo::Timezone.get(tzid)
-    timezone = tz.ical_timezone(Time.current)
-    cal.add_timezone(timezone)
-
-    tasks.each do |task|
-      event = Icalendar::Event.new
-      event.dtstart = Icalendar::Values::Date.new(task.due_date)
-      event.dtend = Icalendar::Values::Date.new(task.due_date)
-      event.summary = task.name
-      event.description = task.description if task.description.present?
-      event.uid = "task-#{task.id}@microprojectapp"
-      event.url = Rails.application.routes.url_helpers.details_project_task_url(task.project, task, host: request.host)
-
-      # Add project name to location
-      event.location = task.project.name if task.project.present?
-
-      cal.add_event(event)
-    end
-
-    cal
   end
 end
