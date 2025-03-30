@@ -1,6 +1,4 @@
 class Project::ScheduleController < Project::BaseController
-  layout 'project_tasks', only: [:show]
-
   def show
     @tab_name = 'Tasks'
 

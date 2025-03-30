@@ -1,45 +1,53 @@
-<section class="mt-8">
-  <h2 class="text-base font-semibold leading-6 text-gray-900 dark:text-gray-200"><%= Date.current.strftime("%B") %></h2>
-  <ol class="mt-2 text-sm leading-6 text-gray-500 space-y-2">
-    <% if @tasks_due_this_month.any? %>
-      <% @tasks_due_this_month.each do |task| %>
-        <%= render 'project/schedule/task', task: task %>
-      <% end %>
-    <% else %>
-      <li class="py-2 flex">
-        <p class="">No tasks due this month.</p>
-        <%= link_to 'Assign some random tasks?', saturate_project_schedule_path(@project, month: Date.current.strftime("%Y-%m")), method: :post, data: { turbo_method: :post }, class: "text-violet-600 ml-1" %>
-      </li>
-    <% end %>
-  </ol>
-</section>
+<div class="w-full">
+  <div class="mb-4 md:mb-0 lg:w-2/3 mx-auto">
+    <div class="flex flex-col md:flex-row md:space-x-12">
+      <div class="mb-4 md:mb-0 md:w-full">
+        <section class="mt-2">
+          <h2 class="text-base font-semibold leading-6 text-gray-900 dark:text-gray-200"><%= Date.current.strftime("%B") %></h2>
+          <ol class="mt-2 text-sm leading-6 text-gray-500 space-y-2">
+            <% if @tasks_due_this_month.any? %>
+              <% @tasks_due_this_month.each do |task| %>
+                <%= render 'project/schedule/task', task: task %>
+              <% end %>
+            <% else %>
+              <li class="py-2 flex">
+                <p class="">No tasks due this month.</p>
+                <%= link_to 'Assign some random tasks?', saturate_project_schedule_path(@project, month: Date.current.strftime("%Y-%m")), method: :post, data: { turbo_method: :post }, class: "text-violet-600 ml-1" %>
+              </li>
+            <% end %>
+          </ol>
+        </section>
 
-<section class="mt-8">
-  <h2 class="text-base font-semibold leading-6 text-gray-900 dark:text-gray-200"><%= Date.current.next_month.strftime("%B") %></h2>
-  <ol class="mt-2 text-sm leading-6 text-gray-500 space-y-2">
-    <% if @tasks_due_next_month.any? %>
-      <% @tasks_due_next_month.each do |task| %>
-        <%= render 'project/schedule/task', task: task %>
-      <% end %>
-    <% else %>
-      <li class="py-2 flex">
-        <p class="">No tasks due next month.</p>
-      </li>
-    <% end %>
-  </ol>
-</section>
+        <section class="mt-8">
+          <h2 class="text-base font-semibold leading-6 text-gray-900 dark:text-gray-200"><%= Date.current.next_month.strftime("%B") %></h2>
+          <ol class="mt-2 text-sm leading-6 text-gray-500 space-y-2">
+            <% if @tasks_due_next_month.any? %>
+              <% @tasks_due_next_month.each do |task| %>
+                <%= render 'project/schedule/task', task: task %>
+              <% end %>
+            <% else %>
+              <li class="py-2 flex">
+                <p class="">No tasks due next month.</p>
+              </li>
+            <% end %>
+          </ol>
+        </section>
 
-<section class="mt-8">
-  <h2 class="text-base font-semibold leading-6 text-gray-900 dark:text-gray-200"><%= Date.current.next_month.next_month.strftime("%B") %></h2>
-  <ol class="mt-2 text-sm leading-6 text-gray-500 space-y-2">
-    <% if @tasks_due_month_after_next.any? %>
-      <% @tasks_due_month_after_next.each do |task| %>
-        <%= render 'project/schedule/task', task: task %>
-      <% end %>
-    <% else %>
-      <li class="py-2 flex">
-        <p class="">No tasks due <%= Date.current.next_month.next_month.strftime("%B") %>.</p>
-      </li>
-    <% end %>
-  </ol>
-</section>
+        <section class="mt-8">
+          <h2 class="text-base font-semibold leading-6 text-gray-900 dark:text-gray-200"><%= Date.current.next_month.next_month.strftime("%B") %></h2>
+          <ol class="mt-2 text-sm leading-6 text-gray-500 space-y-2">
+            <% if @tasks_due_month_after_next.any? %>
+              <% @tasks_due_month_after_next.each do |task| %>
+                <%= render 'project/schedule/task', task: task %>
+              <% end %>
+            <% else %>
+              <li class="py-2 flex">
+                <p class="">No tasks due <%= Date.current.next_month.next_month.strftime("%B") %>.</p>
+              </li>
+            <% end %>
+          </ol>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

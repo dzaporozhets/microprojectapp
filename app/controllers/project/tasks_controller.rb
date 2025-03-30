@@ -4,8 +4,6 @@ class Project::TasksController < Project::BaseController
   before_action :set_task, only: %i[ show edit update destroy details toggle_done toggle_star changes]
   before_action :set_tab, only: %i[ details changes index completed]
 
-  layout :set_layout
-
   def index
     if params[:assigned_user_id].present?
       @tasks = assigned_tasks
@@ -169,13 +167,5 @@ class Project::TasksController < Project::BaseController
 
   def set_tab
     @tab_name = 'Tasks'
-  end
-
-  def set_layout
-    case action_name
-    when 'index', 'completed' then 'project_tasks'
-    else
-      'project'
-    end
   end
 end

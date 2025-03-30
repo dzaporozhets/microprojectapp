@@ -5,6 +5,11 @@ module ApplicationHelper
       { name: 'Tasks', path: tasks_path }
     ]
 
+    unless selected
+      selected = 'Projects' if current_page?(projects_path)
+      selected = 'Tasks' if current_page?(tasks_path) || current_page?(schedule_path)
+    end
+
     render_tabs(tabs, selected)
   end
 

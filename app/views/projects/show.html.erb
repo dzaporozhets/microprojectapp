@@ -1,31 +1,40 @@
-<%= render 'project/tasks/form', project: @project %>
+<div class="w-full">
+  <div class="mb-4 md:mb-0 lg:w-2/3 mx-auto">
+    <div class="flex flex-col md:flex-row md:space-x-12">
+      <div class="mb-4 md:mb-0 md:w-full">
 
-<%= turbo_frame_tag "tasks", class: "mt-2 grid grid-cols-1 gap-1" do %>
-  <% @tasks_todo.each do |task| %>
-    <%= render partial: "project/tasks/task", locals: { task: task } %>
-  <% end %>
-<% end %>
+        <%= render 'project/tasks/form', project: @project %>
 
-<% if @tasks_done.any? %>
-  <div class="flex items-center justify-center my-5 text-sm">
-    <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
-    <span class="px-4 text-center text-gray-400 dark:text-gray-600">Completed</span>
-    <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
+        <%= turbo_frame_tag "tasks", class: "mt-2 grid grid-cols-1 gap-1" do %>
+          <% @tasks_todo.each do |task| %>
+            <%= render partial: "project/tasks/task", locals: { task: task } %>
+          <% end %>
+        <% end %>
+
+        <% if @tasks_done.any? %>
+          <div class="flex items-center justify-center my-5 text-sm">
+            <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
+            <span class="px-4 text-center text-gray-400 dark:text-gray-600">Completed</span>
+            <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
+          </div>
+        <% end %>
+
+        <%= turbo_frame_tag "completed_tasks", class: "mt-2 grid grid-cols-1 gap-1" do %>
+          <% if @tasks_done.any? %>
+            <% @tasks_done.each do |task| %>
+              <%= render partial: "project/tasks/task", locals: { task: task } %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <% if @project.tasks.done.count > ProjectsController::DONE_TASKS %>
+          <div class="my-10 text-center">
+            <%= link_to completed_project_tasks_path(@project), class: "block py-2 px-3 text-sm leading-6 text-violet-700 dark:text-violet-300 hover:text-violet-500" do %>
+              Show all completed tasks
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-<% end %>
-
-<%= turbo_frame_tag "completed_tasks", class: "mt-2 grid grid-cols-1 gap-1" do %>
-  <% if @tasks_done.any? %>
-    <% @tasks_done.each do |task| %>
-      <%= render partial: "project/tasks/task", locals: { task: task } %>
-    <% end %>
-  <% end %>
-<% end %>
-
-<% if @project.tasks.done.count > ProjectsController::DONE_TASKS %>
-  <div class="my-10 text-center">
-    <%= link_to completed_project_tasks_path(@project), class: "block py-2 px-3 text-sm leading-6 text-violet-700 dark:text-violet-300 hover:text-violet-500" do %>
-      Show all completed tasks
-    <% end %>
-  </div>
-<% end %>
+</div>
