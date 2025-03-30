@@ -31,7 +31,7 @@ RSpec.describe CalendarTaskExporter do
       expect(event.dtstart).to eq(Icalendar::Values::Date.new(task.due_date))
       expect(event.dtend).to eq(Icalendar::Values::Date.new(task.due_date))
       expect(event.location).to eq(project.name)
-      expect(event.url.to_s).to include("example.com/projects/#{project.id}/tasks/#{task.id}")
+      expect(event.url.to_s).to include("example.com/projects/#{project.id}/tasks/#{task.id}/details")
     end
 
     it "sets calendar name and timezone" do

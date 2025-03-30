@@ -32,21 +32,34 @@
       <div class="py-1 border-t border-gray-200 dark:border-gray-700">
         <% count = @daily_task_counts[day] || 0 %>
         <% is_today = day == Date.current %>
-        <% is_selected = false # set this if you want to highlight a selected day %>
+        <% is_selected = params[:date] && day == params[:date].to_date %>
         <% is_current_month = day.month == @date.month %>
 
         <% classes = [
-          "mx-auto flex size-8 items-center justify-center rounded-full",
-          (count > 0) ? "bg-violet-100 text-violet-900 dark:bg-violet-900 dark:text-violet-400 font-semibold" :
-          is_selected ? (is_today ? "bg-violet-600 text-white font-semibold" : "bg-gray-900 text-white font-semibold") :
-          is_today ? "bg-black dark:bg-white text-white dark:text-black font-semibold" :
-          is_current_month ? "text-gray-900 dark:text-gray-100" : "text-gray-400",
-          "hover:bg-gray-200 dark:hover:bg-gray-800"
+        "mx-auto flex size-8 items-center justify-center rounded-full transition",
+
+        # Selected + today = purple pastel
+        (is_selected && is_today) ? "bg-violet-300 text-white dark:bg-violet-500 dark:text-white font-semibold" :
+
+        # Selected only = indigo pastel
+        is_selected ? "bg-indigo-100 text-indigo-900 dark:bg-indigo-400 dark:text-black font-semibold" :
+
+        # Today only = ring with soft red
+        is_today ? "ring-2 ring-red-300 text-black dark:ring-red-500 font-semibold dark:text-red-500" :
+
+        # Day with tasks = faded violet
+        (count > 0) ? "bg-violet-50 text-violet-800 dark:bg-violet-800 dark:text-violet-200 font-semibold" :
+
+        # Current month vs out-of-month
+        is_current_month ? "text-gray-900 dark:text-gray-100" : "text-gray-400",
+
+        # Hover states
+        "hover:bg-gray-100 dark:hover:bg-gray-700"
         ].join(" ") %>
 
-        <button type="button" class="<%= classes %>">
+        <%= link_to schedule_path(date: day), class: classes do %>
           <time datetime="<%= day.iso8601 %>"><%= day.day %></time>
-        </button>
+        <% end %>
       </div>
     <% end %>
   </div>
