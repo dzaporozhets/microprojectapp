@@ -96,8 +96,7 @@ class ProjectsController < ApplicationController
 
   def set_layout
     case action_name
-    when 'show' then 'project_tasks'
-    when 'edit', 'update' then 'project'
+    when 'show', 'edit', 'update' then 'project'
     else
       'application'
     end
