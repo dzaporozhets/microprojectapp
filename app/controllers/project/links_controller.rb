@@ -1,4 +1,6 @@
 class Project::LinksController < Project::BaseController
+  layout 'project_extra'
+
   before_action :set_link, only: %i[ show destroy ]
   before_action :set_tab
 
@@ -45,6 +47,6 @@ class Project::LinksController < Project::BaseController
   end
 
   def set_tab
-    @tab_name = 'Files'
+    @tab_name = 'Project'
   end
 end

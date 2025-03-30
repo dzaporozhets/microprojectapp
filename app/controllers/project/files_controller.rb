@@ -1,11 +1,13 @@
 class Project::FilesController < Project::BaseController
+  layout 'project_extra'
+
+  before_action :set_tab
+
   def index
     @files = project.project_files
-    @tab_name = 'Files'
   end
 
   def new
-    @tab_name = 'Files'
   end
 
   def download
@@ -60,5 +62,9 @@ class Project::FilesController < Project::BaseController
     if remain_project_files.size != project.project_files.size
       project.project_files = remain_project_files.map(&:identifier)
     end
+  end
+
+  def set_tab
+    @tab_name = 'Project'
   end
 end
