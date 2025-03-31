@@ -53,7 +53,7 @@ class Project < ApplicationRecord
     user_id = user_id.to_i
     # Use more efficient lookup if the user is the owner
     return user if user.id == user_id
-    
+
     # Use ActiveRecord's find method for better performance
     users.find_by(id: user_id)
   end

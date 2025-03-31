@@ -31,14 +31,14 @@ RSpec.describe Admin::UsersController, type: :controller do
       end
 
       it "raises RecordNotFound for update action" do
-        expect { 
-          patch :update, params: { id: target_user.id, user: { confirmed_at: Time.current } } 
+        expect {
+          patch :update, params: { id: target_user.id, user: { confirmed_at: Time.current } }
         }.to raise_error(ActiveRecord::RecordNotFound)
       end
 
       it "raises RecordNotFound for destroy action" do
-        expect { 
-          delete :destroy, params: { id: target_user.id } 
+        expect {
+          delete :destroy, params: { id: target_user.id }
         }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
@@ -64,7 +64,7 @@ RSpec.describe Admin::UsersController, type: :controller do
       it "handles pagination" do
         # Create 51 additional users to test pagination (50 per page)
         create_list(:user, 51)
-        
+
         get :index
         # Just verify the response is successful
         expect(response).to be_successful
@@ -137,7 +137,7 @@ RSpec.describe Admin::UsersController, type: :controller do
     describe "DELETE #destroy" do
       it "destroys the requested user" do
         user_to_delete = create(:user)
-        
+
         expect {
           delete :destroy, params: { id: user_to_delete.id }
         }.to change(User, :count).by(-1)
