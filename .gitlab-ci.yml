@@ -45,7 +45,7 @@ rspec:
     paths:
       - vendor/bundle
 
-brakeman:
+brakeman_and_rubocop:
   stage: test
   variables:
     RAILS_ENV: test
@@ -55,6 +55,7 @@ brakeman:
     - bundle install -j $(nproc) --clean
   script:
     - bundle exec brakeman -z -q
+    - bundle exec rubocop
   cache:
     key: ${CI_COMMIT_REF_SLUG}-bundle
     paths:
