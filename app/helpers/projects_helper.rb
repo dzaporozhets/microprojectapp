@@ -14,12 +14,10 @@ module ProjectsHelper
     render_tabs(tabs, selected)
   end
 
-  def overview_nav_link(name, path, active)
-    classes = [
+  def project_nav_class(active)
+    [
       "group flex items-center px-3 py-2 text-sm font-medium rounded-md",
       active ? "bg-violet-100 text-violet-900 dark:bg-violet-800 dark:text-white" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
     ].join(" ")
-
-    link_to name, path, class: classes
   end
 end

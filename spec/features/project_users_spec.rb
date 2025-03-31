@@ -17,7 +17,7 @@ RSpec.feature "Project::Users", type: :feature do
 
     click_link "Invite people"
     fill_in "User Email", with: user2.email
-    click_button "Add user"
+    click_button "Add team member"
 
     expect(page).to have_text(user2.email)
     expect(page).to have_current_path(project_users_path(project))
@@ -35,7 +35,7 @@ RSpec.feature "Project::Users", type: :feature do
 
     click_link "Invite people"
     fill_in "User Email", with: "nonexistent@example.com"
-    click_button "Add user"
+    click_button "Add team member"
 
     expect(page).to have_current_path(invite_project_users_path(project))
     expect(page).to have_text("User not found")
@@ -46,7 +46,7 @@ RSpec.feature "Project::Users", type: :feature do
 
     click_link "Invite people"
     fill_in "User Email", with: non_invited_user.email
-    click_button "Add user"
+    click_button "Add team member"
 
     expect(page).to have_current_path(invite_project_users_path(project))
     expect(page).to have_text("User disabled invitations")
@@ -69,7 +69,7 @@ RSpec.feature "Project::Users", type: :feature do
 
     click_link "Invite people"
     fill_in "User Email", with: invited_user.email
-    click_button "Add user"
+    click_button "Add team member"
 
     expect(page).to have_current_path(invite_project_users_path(project))
     expect(page).to have_text("User is already added to the project")

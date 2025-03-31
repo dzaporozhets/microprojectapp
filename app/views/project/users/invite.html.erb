@@ -1,22 +1,39 @@
-<div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-md">
-  <h1 class="font-bold text-2xl dark:text-gray-200">Add user to the project</h1>
-
-  <div class="mt-3">
-    <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">
-      The user must have an account in the application to be added to the project.
-    </p>
+<div class="mb-6">
+  <div class="mb-4 pb-2 border-b dark:border-gray-600 flex justify-between items-center">
+    <h1 class="font-bold text-xl dark:text-gray-200 leading-7">Invite Team Member</h1>
+    <%= link_to project_users_path(@project), class: "text-sm text-gray-500 hover:text-violet-600 dark:text-gray-400 dark:hover:text-violet-400 flex items-center gap-x-1" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+      </svg>
+      Back to team members
+    <% end %>
   </div>
 
-  <%= form_with url: add_member_project_users_path(@project), method: :post, class: "space-y-6 contents" do |form| %>
-    <%= render "shared/flash" %>
-
-    <div class="form-group">
-      <%= form.label :email, "User Email", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
-      <%= form.email_field :email, required: true, class: "block base-input w-full mt-2" %>
+  <div class="overflow-hidden bg-white dark:bg-gray-800 shadow-sm ring-1 ring-gray-200 dark:ring-gray-700 sm:rounded-lg p-6">
+    <div class="mb-4">
+      <p class="text-sm text-gray-700 dark:text-gray-300">
+        The user must have an account in the application to be added to the project.
+      </p>
     </div>
 
-    <div class="form-group">
-      <%= form.submit "Add user", class: "btn-primary" %>
-    </div>
-  <% end %>
+    <%= form_with url: add_member_project_users_path(@project), method: :post, class: "space-y-6" do |form| %>
+      <%= render "shared/flash" %>
+
+      <div class="form-group">
+        <%= form.label :email, "User Email", class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+        <div class="mt-2 relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400 dark:text-gray-500">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+            </svg>
+          </div>
+          <%= form.email_field :email, required: true, class: "block base-input w-full pl-10", placeholder: "user@example.com" %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= form.submit "Add team member", class: "px-4 py-2 text-sm font-medium text-white bg-violet-600 hover:bg-violet-700 rounded-md shadow-sm dark:bg-violet-700 dark:hover:bg-violet-800 transition-colors" %>
+      </div>
+    <% end %>
+  </div>
 </div>

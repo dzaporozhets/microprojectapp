@@ -38,7 +38,7 @@ RSpec.feature "Activity", type: :feature do
     visit invite_project_users_path(project)
 
     fill_in "Email", with: invitee.email
-    click_button "Add user"
+    click_button "Add team member"
 
     visit project_activity_path(project)
 

@@ -1,13 +1,13 @@
 <nav class="space-y-1" aria-label="Sidebar">
-  <%= overview_nav_link "Files", project_files_path(@project), current_page?(project_files_path(@project)) %>
-  <%= overview_nav_link "Links", project_links_path(@project), current_page?(project_links_path(@project)) %>
+  <%= link_to "Files", project_files_path(@project), class: project_nav_class(current_page?(project_files_path(@project))) %>
+  <%= link_to "Links", project_links_path(@project), class: project_nav_class(current_page?(project_links_path(@project))) %>
 
   <% unless @project.personal? %>
-    <%= overview_nav_link "Users", project_users_path(@project), current_page?(project_users_path(@project)) %>
-    <%= overview_nav_link "Activity", project_activity_path(@project), current_page?(project_activity_path(@project)) %>
+    <%= link_to "Team", project_users_path(@project), class: project_nav_class(current_page?(project_users_path(@project))) %>
+    <%= link_to "Activity", project_activity_path(@project), class: project_nav_class(current_page?(project_activity_path(@project))) %>
   <% end %>
 
   <% if @project.user == current_user %>
-    <%= overview_nav_link "Settings", edit_project_path(@project), current_page?(edit_project_path(@project)) %>
+    <%= link_to "Settings", edit_project_path(@project), class: project_nav_class(current_page?(edit_project_path(@project))) %>
   <% end %>
 </nav>
