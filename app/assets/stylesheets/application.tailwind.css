@@ -169,4 +169,51 @@
    .flash-alert {
      @apply bg-red-50 border rounded-md border-red-400 text-red-700 dark:bg-red-700 dark:text-white dark:border-red-800;
    }
+
+  /*----------------------------------------*
+   * Project Resource Components
+   *----------------------------------------*/
+  .resource-container {
+    @apply bg-white dark:bg-gray-900 shadow-sm rounded-lg overflow-hidden;
+  }
+
+  .resource-header {
+    @apply p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-800;
+  }
+
+  .resource-title {
+    @apply text-lg font-medium leading-6 text-gray-900 dark:text-gray-100;
+  }
+
+  .resource-description {
+    @apply mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400;
+  }
+
+  .resource-list {
+    @apply divide-y divide-gray-200 dark:divide-gray-800;
+  }
+
+  .resource-empty-state {
+    @apply text-center py-12;
+  }
+
+  .resource-empty-icon {
+    @apply mx-auto h-12 w-12 text-gray-400 dark:text-gray-600;
+  }
+
+  .resource-empty-title {
+    @apply mt-2 text-sm font-medium text-gray-900 dark:text-gray-200;
+  }
+
+  .resource-empty-description {
+    @apply mt-1 text-sm text-gray-500 dark:text-gray-400;
+  }
+
+  .resource-empty-action {
+    @apply mt-6;
+  }
+
+  .resource-action-icon {
+    @apply -ml-1 mr-2 h-5 w-5;
+  }
 }

@@ -1,9 +1,9 @@
-<div class="bg-white dark:bg-gray-900 shadow-sm rounded-lg overflow-hidden">
+<div class="resource-container">
   <!-- Header with actions -->
-  <div class="px-4 py-5 sm:px-6 flex justify-between items-center border-b border-gray-200 dark:border-gray-800">
+  <div class="resource-header">
     <div>
-      <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">Project Activity</h3>
-      <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400">Track all actions and changes made to this project.</p>
+      <h3 class="resource-title">Project Activity</h3>
+      <p class="resource-description">Track all actions and changes made to this project.</p>
     </div>
   </div>
 
@@ -18,12 +18,12 @@
         </ol>
       </div>
     <% else %>
-      <div class="text-center py-12">
-        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div class="resource-empty-state">
+        <svg xmlns="http://www.w3.org/2000/svg" class="resource-empty-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-200">No activity yet</h3>
-        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Activity will appear here as you and your team work on this project.</p>
+        <h3 class="resource-empty-title">No activity yet</h3>
+        <p class="resource-empty-description">Activity will appear here as you and your team work on this project.</p>
       </div>
     <% end %>
   </div>
