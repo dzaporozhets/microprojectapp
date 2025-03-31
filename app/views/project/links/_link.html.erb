@@ -17,7 +17,7 @@
         <div class="mt-1 flex items-center text-xs text-gray-500 dark:text-gray-400">
           <span><%= link.url.truncate(50) %></span>
           <% if link.created_at.present? %>
-            <span class="mx-1">•</span>
+            <span class="mx-1">&middot;</span>
             <span>Added <%= time_ago_in_words(link.created_at) %> ago</span>
           <% end %>
         </div>

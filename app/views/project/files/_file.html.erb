@@ -30,9 +30,6 @@
           <%= link_to download_project_files_path(@project, file: project_file.identifier), data: { turbo: false }, class: "text-sm font-medium text-violet-600 dark:text-violet-400 hover:text-violet-800 dark:hover:text-violet-300 truncate" do %>
             <%= project_file.file.filename %>
           <% end %>
-          <span class="ml-2 inline-flex items-center rounded-md bg-blue-50 dark:bg-blue-900/30 px-2 py-1 text-xs font-medium text-blue-700 dark:text-blue-400">
-            <%= file_extension.present? ? file_extension[1..-1].upcase : 'FILE' %>
-          </span>
         </div>
         <div class="mt-1 flex items-center text-xs text-gray-500 dark:text-gray-400">
           <span><%= number_to_human_size project_file.file.size %></span>
@@ -45,7 +42,7 @@
                           end
           %>
           <% if content_type.present? %>
-            <span class="mx-1">•</span>
+            <span class="mx-1">&middot;</span>
             <span><%= content_type %></span>
           <% end %>
         </div>
