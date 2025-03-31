@@ -174,7 +174,7 @@
    * Project Resource Components
    *----------------------------------------*/
   .resource-container {
-    @apply bg-white dark:bg-gray-900 shadow-sm rounded-lg overflow-hidden;
+    @apply bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden;
   }
 
   .resource-header {
