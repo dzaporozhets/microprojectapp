@@ -10,6 +10,8 @@
     </div>
   <% end %>
 
+  <%= display_flash %>
+
   <div id="projects" class="grid grid-cols-1 gap-6 sm:gap-8 lg:w-2/3 mx-auto mt-4">
     <% if @pinned_projects.present? %>
       <div>

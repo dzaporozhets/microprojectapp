@@ -47,6 +47,7 @@ Rails.application.routes.draw do
       collection do
         get 'invite', to: 'project/users#invite'
         post 'add_member', to: 'project/users#add_member'
+        delete 'leave', to: 'project/users#leave'
       end
     end
 

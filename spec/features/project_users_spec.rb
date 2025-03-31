@@ -74,4 +74,26 @@ RSpec.feature "Project::Users", type: :feature do
     expect(page).to have_current_path(invite_project_users_path(project))
     expect(page).to have_text("User is already added to the project")
   end
+
+  scenario "Invited user leaves the project" do
+    sign_in invited_user
+    visit project_users_path(project)
+
+    expect(page).to have_button("Leave project")
+
+    click_button "Leave project"
+
+    # Should be redirected to projects index page
+    expect(page).to have_current_path(projects_path)
+    expect(page).to have_text("You left the project.")
+
+    # User should no longer be a member of the project
+    expect(project.reload.users).not_to include(invited_user)
+  end
+
+  scenario "Project owner does not see leave project button" do
+    visit project_users_path(project)
+
+    expect(page).not_to have_button("Leave project")
+  end
 end

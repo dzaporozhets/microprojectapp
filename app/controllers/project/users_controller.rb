@@ -2,7 +2,7 @@ class Project::UsersController < Project::BaseController
   layout 'project_extra'
 
   before_action :not_personal
-  before_action :project_owner_only!
+  before_action :project_owner_only!, except: [:index, :leave]
   before_action :set_tab
 
   def index
@@ -47,6 +47,14 @@ class Project::UsersController < Project::BaseController
       redirect_to project_activity_path(project), notice: 'User was successfully removed.'
     else
       redirect_to project_activity_path(project), alert: 'User could not be found or removed.'
+    end
+  end
+
+  def leave
+    if project.users.include?(current_user)
+      project.users.delete(current_user)
+
+      redirect_to projects_path, notice: 'You left the project.'
     end
   end
 

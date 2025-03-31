@@ -1,6 +1,11 @@
 <div class="mb-4">
-  <div class="mb-2 pb-2 border-b dark:border-gray-600">
+  <div class="mb-2 pb-2 border-b dark:border-gray-600 flex justify-between items-center">
     <h1 class="font-bold text-xl dark:text-gray-200 leading-7">Users</h1>
+    <% if current_user != @project.owner && @project.users.include?(current_user) %>
+      <%= button_to leave_project_users_path(@project), method: :delete, class: "text-sm text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300", data: { turbo_confirm: 'Are you sure you want to leave this project?' } do %>
+        Leave project
+      <% end %>
+    <% end %>
   </div>
 
   <ul role="list" class="mt-6">
