@@ -14,13 +14,13 @@ RSpec.describe Project::CommentsController, type: :controller do
   describe "DELETE #destroy" do
     context "with HTML format" do
       it "destroys the comment" do
-        expect {
+        expect do
           delete :destroy, params: {
             project_id: project.id,
             task_id: task.id,
             id: comment.id
           }
-        }.to change(Comment, :count).by(-1)
+        end.to change(Comment, :count).by(-1)
 
         expect(response).to redirect_to(details_project_task_path(project, task))
         expect(flash[:notice]).to eq('Comment was successfully deleted.')
@@ -29,13 +29,13 @@ RSpec.describe Project::CommentsController, type: :controller do
 
     context "with Turbo Stream format" do
       it "destroys the comment and responds with turbo_stream" do
-        expect {
+        expect do
           delete :destroy, params: {
             project_id: project.id,
             task_id: task.id,
             id: comment.id
           }, format: :turbo_stream
-        }.to change(Comment, :count).by(-1)
+        end.to change(Comment, :count).by(-1)
 
         expect(response.media_type).to eq('text/vnd.turbo-stream.html')
       end
@@ -48,13 +48,13 @@ RSpec.describe Project::CommentsController, type: :controller do
       end
 
       it "raises RecordNotFound" do
-        expect {
+        expect do
           delete :destroy, params: {
             project_id: project.id,
             task_id: task.id,
             id: comment.id
           }
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

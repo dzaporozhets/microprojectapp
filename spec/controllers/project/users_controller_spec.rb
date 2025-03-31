@@ -17,9 +17,9 @@ RSpec.describe Project::UsersController, type: :controller do
       end
 
       it "removes the current user from the project" do
-        expect {
+        expect do
           delete :leave, params: { project_id: project.id }
-        }.to change { project.reload.users.count }.by(-1)
+        end.to change { project.reload.users.count }.by(-1)
 
         expect(project.users).not_to include(member)
         expect(response).to redirect_to(projects_path)
@@ -33,12 +33,12 @@ RSpec.describe Project::UsersController, type: :controller do
       end
 
       it "does not remove the owner from the project" do
-        expect {
+        expect do
           delete :leave, params: { project_id: project.id }
-        }.not_to change { project.reload.users.count }
+        end.not_to(change { project.reload.users.count })
 
         # The controller returns a 204 No Content status for owners
-        expect(response.status).to eq(204)
+        expect(response).to have_http_status(:no_content)
       end
     end
 
@@ -48,9 +48,9 @@ RSpec.describe Project::UsersController, type: :controller do
       end
 
       it "raises RecordNotFound due to authorization" do
-        expect {
+        expect do
           delete :leave, params: { project_id: project.id }
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

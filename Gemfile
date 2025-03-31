@@ -90,6 +90,7 @@ gem 'carrierwave', '~> 3.0'
 gem "devise", "~> 4.9"
 gem "devise-two-factor"
 gem "fog-aws"
+gem 'icalendar'
 gem 'kaminari'
 gem 'omniauth'
 gem 'omniauth-entra-id'
@@ -97,4 +98,3 @@ gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
 gem 'paper_trail'
 gem 'rack-attack'
-gem 'icalendar'

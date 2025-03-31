@@ -3,18 +3,18 @@ require 'icalendar'
 require 'calendar_task_exporter'
 
 RSpec.describe CalendarTaskExporter do
+  subject(:exporter) { described_class.new(tasks: [task], host: host) }
+
   let(:project) { create(:project, name: "Test Project") }
   let(:task) do
     create(:task,
            name: "Sample Task",
            description: "This is a test task",
-           due_date: Date.today,
+           due_date: Time.zone.today,
            project: project)
   end
 
   let(:host) { "example.com" }
-
-  subject(:exporter) { described_class.new(tasks: [task], host: host) }
 
   describe "#to_ical" do
     it "returns an Icalendar::Calendar object" do

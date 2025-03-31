@@ -41,3 +41,9 @@ Layout/LeadingCommentSpace:
 
 Style/StringConcatenation:
   Enabled: false
+
+Style/EmptyMethod:
+  Enabled: false
+
+Style/RedundantReturn:
+  Enabled: false

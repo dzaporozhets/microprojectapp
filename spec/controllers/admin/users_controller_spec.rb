@@ -31,15 +31,15 @@ RSpec.describe Admin::UsersController, type: :controller do
       end
 
       it "raises RecordNotFound for update action" do
-        expect {
+        expect do
           patch :update, params: { id: target_user.id, user: { confirmed_at: Time.current } }
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
 
       it "raises RecordNotFound for destroy action" do
-        expect {
+        expect do
           delete :destroy, params: { id: target_user.id }
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
@@ -100,10 +100,10 @@ RSpec.describe Admin::UsersController, type: :controller do
         let(:new_attributes) { { confirmed_at: Time.current } }
 
         it "updates the requested user" do
-          expect {
+          expect do
             patch :update, params: { id: target_user.id, user: new_attributes }
             target_user.reload
-          }.to change { target_user.confirmed_at }
+          end.to(change(target_user, :confirmed_at))
         end
 
         it "redirects to the user" do
@@ -138,9 +138,9 @@ RSpec.describe Admin::UsersController, type: :controller do
       it "destroys the requested user" do
         user_to_delete = create(:user)
 
-        expect {
+        expect do
           delete :destroy, params: { id: user_to_delete.id }
-        }.to change(User, :count).by(-1)
+        end.to change(User, :count).by(-1)
       end
 
       it "redirects to the users list" do

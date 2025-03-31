@@ -128,9 +128,9 @@ RSpec.feature "Project::Tasks", type: :feature do
     scenario 'User views task change history with unknown user' do
       # Create a task with PaperTrail enabled
       task_with_unknown = create(:task,
-                                name: 'Task with unknown editor',
-                                project: project,
-                                user: user)
+                                 name: 'Task with unknown editor',
+                                 project: project,
+                                 user: user)
 
       # Update with non-existent user ID
       PaperTrail.request(whodunnit: '99999') do

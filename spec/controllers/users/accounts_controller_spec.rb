@@ -61,9 +61,9 @@ RSpec.describe Users::AccountsController, type: :controller do
   describe "DELETE #destroy" do
     context "when successful" do
       it "destroys the current user" do
-        expect {
+        expect do
           delete :destroy
-        }.to change(User, :count).by(-1)
+        end.to change(User, :count).by(-1)
       end
 
       it "signs out the user" do
@@ -88,9 +88,9 @@ RSpec.describe Users::AccountsController, type: :controller do
       end
 
       it "does not destroy the user" do
-        expect {
+        expect do
           delete :destroy
-        }.not_to change(User, :count)
+        end.not_to change(User, :count)
       end
 
       it "redirects to the account page" do
