@@ -12,7 +12,7 @@ RSpec.feature "Project", type: :feature do
     visit edit_project_path(project)
 
     fill_in "project_name", with: "Updated Project Name"
-    click_button "Update Project"
+    click_button "Save Changes"
 
     expect(page).to have_text("Updated Project Name")
     expect(page).to have_text("Project was successfully updated")
