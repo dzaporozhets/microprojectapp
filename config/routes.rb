@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   }
 
   resources :projects do
+    member do
+      get :overview
+    end
+
     resources :tasks, controller: 'project/tasks' do
       member do
         get :details
@@ -39,7 +43,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :users, only: [:destroy], controller: 'project/users' do
+    resources :users, only: [:index, :destroy], controller: 'project/users' do
       collection do
         get 'invite', to: 'project/users#invite'
         post 'add_member', to: 'project/users#add_member'

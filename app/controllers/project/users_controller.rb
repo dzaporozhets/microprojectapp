@@ -1,9 +1,14 @@
 class Project::UsersController < Project::BaseController
+  layout 'project_extra'
+
   before_action :not_personal
   before_action :project_owner_only!
+  before_action :set_tab
+
+  def index
+  end
 
   def invite
-    @tab_name = 'Team'
   end
 
   def add_member
@@ -15,7 +20,7 @@ class Project::UsersController < Project::BaseController
           if project.users << user
             project.add_activity(current_user, 'invited', user)
 
-            redirect_to project_activity_path(project)
+            redirect_to project_users_path(project)
             return
           else
             error = 'User could not be added.'
@@ -49,5 +54,9 @@ class Project::UsersController < Project::BaseController
 
   def not_personal
     redirect_to root_path if project.personal?
+  end
+
+  def set_tab
+    @tab_name = 'Project'
   end
 end

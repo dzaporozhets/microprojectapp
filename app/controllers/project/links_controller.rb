@@ -1,4 +1,6 @@
 class Project::LinksController < Project::BaseController
+  layout 'project_extra'
+
   before_action :set_link, only: %i[ show destroy ]
   before_action :set_tab
 
@@ -16,7 +18,7 @@ class Project::LinksController < Project::BaseController
 
     respond_to do |format|
       if @link.save
-        format.html { redirect_to project_files_url(project), notice: "Link was successfully created." }
+        format.html { redirect_to project_links_url(project), notice: "Link was successfully created." }
         format.json { render :show, status: :created, location: @link }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -29,7 +31,7 @@ class Project::LinksController < Project::BaseController
     @link.destroy!
 
     respond_to do |format|
-      format.html { redirect_to project_files_url(project) }
+      format.html { redirect_to project_links_url(project) }
       format.json { head :no_content }
     end
   end
@@ -45,6 +47,6 @@ class Project::LinksController < Project::BaseController
   end
 
   def set_tab
-    @tab_name = 'Files'
+    @tab_name = 'Project'
   end
 end

@@ -1,20 +1,11 @@
-<div class="mx-auto">
-  <div class="flex flex-col lg:flex-row lg:space-x-12">
-    <div class="mb-4 lg:mb-0 lg:w-1/3">
-      <%= render 'project/activity/team' %>
-    </div>
-    <div class="mb-4 lg:mb-0 lg:w-2/3">
-      <div class="mb-2 pb-2 border-b dark:border-gray-600">
-        <h1 class="font-bold text-xl dark:text-gray-200 leading-7">Activity</h1>
-      </div>
+<div class="mb-2 pb-2 border-b dark:border-gray-600">
+  <h1 class="font-bold text-xl dark:text-gray-200 leading-7">Activity</h1>
+</div>
 
-      <div class="mt-8">
-        <ul role="list" class="space-y-6 mt-2">
-          <% @records.each do |record| %>
-            <%= render 'project/activity/record', record: record %>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
+<div class="mt-8">
+  <ul role="list" class="space-y-6 mt-2">
+    <% @records.each do |record| %>
+      <%= render 'project/activity/record', record: record %>
+    <% end %>
+  </ul>
 </div>
