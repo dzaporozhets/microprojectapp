@@ -1,49 +1,84 @@
-<div class="mt-2 sm:mx-auto sm:w-full sm:max-w-md flex-grow">
+<div class="w-full lg:max-w-2xl mx-auto px-4 py-4">
   <%= display_flash %>
 
-  <% unless @project.personal? %>
-    <section class="mb-10">
-      <h2 class="section-title">Project name</h2>
+  <div class="space-y-10">
+    <!-- Page Header -->
+    <div>
+      <h1 class="text-2xl font-medium text-gray-900 dark:text-white">Project Settings</h1>
+      <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+        Manage your project settings and preferences.
+      </p>
+    </div>
 
-      <%= form_with(model: @project) do |form| %>
-        <%= render "shared/errors", resource: @project %>
-
-        <div>
-          <%= form.text_field :name, required: true, class: "base-input w-full" %>
+    <!-- Project Name Section -->
+    <% unless @project.personal? %>
+      <div class="pt-6">
+        <div class="mb-5">
+          <h2 class="text-lg font-medium text-gray-900 dark:text-white">Project Name</h2>
+          <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            Change the name of your project.
+          </p>
         </div>
 
-        <div class="mt-5">
-          <%= form.submit class: "btn-primary border border-violet-900" %>
-        </div>
-      <% end %>
-    </section>
-  <% end %>
+        <%= form_with(model: @project, class: "mt-6") do |form| %>
+          <%= render "shared/errors", resource: @project %>
 
-  <section class="mb-10">
-    <h2 class="section-title">Import and Export</h2>
-    <p class="block text-sm text-gray-700 dark:text-gray-300 mb-5">
-    Export your project data as a JSON file including all tasks and notes, then import it into another project.
-    </p>
+          <div>
+            <%= form.text_field :name, required: true, class: "base-input w-full" %>
+          </div>
 
-    <%= button_to "Export Tasks", project_export_path(@project, format: :json), method: :post, class: "btn-gray inline-block border", form: { 'data-turbo': 'false', class: 'inline-block' } %>
-    <%= link_to "Import Tasks", new_project_import_path(@project), class: "btn-gray inline-block ml-2 border" %>
-  </section>
-
-  <section class="mb-10">
-    <h2 class="section-title">Archive this project</h2>
-
-    <% if @project.archived? %>
-      <span class="block text-sm text-gray-700 dark:text-gray-300 mb-5">This project is archived. Unarchiving it will allow the creation of new tasks.</span>
-      <%= button_to 'Unarchive', project_path(@project, project: { archived: false }), method: :patch, class: "btn-gray", data: { confirm: "Are you sure you want to unarchive this project?" } %>
-    <% else %>
-      <span class="block text-sm text-gray-700 dark:text-gray-300 mb-5">Archiving this project will prevent the creation of new tasks. This action is easily reversible.</span>
-      <%= button_to 'Archive', project_path(@project, project: { archived: true }), method: :patch, class: "btn-gray", data: { confirm: "Are you sure you want to archive this project?" }  %>
+          <div class="mt-4">
+            <%= form.submit "Save Changes", class: "btn-primary-sm" %>
+          </div>
+        <% end %>
+      </div>
     <% end %>
-  </section>
 
-  <section class="mb-10">
-    <h2 class="section-title">Delete this project</h2>
-    <span class="block text-sm text-gray-700 dark:text-gray-300 mb-5">Deleting this project will permanently erase all data.<br/> Please consider exporting tasks before proceeding.</span>
-    <%= button_to "Delete this project", @project, method: :delete, data: { turbo_confirm: 'Remove the project? Are you sure?' }, class: "btn-remove border" %>
-  </section>
+    <!-- Import/Export Section -->
+    <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
+      <div class="mb-5">
+        <h2 class="text-lg font-medium text-gray-900 dark:text-white">Import and Export</h2>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+          Export your project data as a JSON file including all tasks and notes, then import it into another project.
+        </p>
+      </div>
+
+      <div class="flex space-x-3">
+        <%= button_to "Export Tasks", project_export_path(@project, format: :json), method: :post, class: "btn-base-sm", form: { 'data-turbo': 'false', class: 'inline-block' } %>
+        <%= link_to "Import Tasks", new_project_import_path(@project), class: "btn-base-sm" %>
+      </div>
+    </div>
+
+    <!-- Archive Section -->
+    <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
+      <div class="mb-5">
+        <h2 class="text-lg font-medium text-gray-900 dark:text-white">Project Status</h2>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+          <% if @project.archived? %>
+            This project is archived. Unarchiving it will allow the creation of new tasks.
+          <% else %>
+            Archiving this project will prevent the creation of new tasks. This action is easily reversible.
+          <% end %>
+        </p>
+      </div>
+
+      <% if @project.archived? %>
+        <%= button_to 'Unarchive Project', project_path(@project, project: { archived: false }), method: :patch, class: "btn-primary-sm", data: { confirm: "Are you sure you want to unarchive this project?" } %>
+      <% else %>
+        <%= button_to 'Archive Project', project_path(@project, project: { archived: true }), method: :patch, class: "btn-base-sm", data: { confirm: "Are you sure you want to archive this project?" } %>
+      <% end %>
+    </div>
+
+    <!-- Delete Section -->
+    <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
+      <div class="mb-5">
+        <h2 class="text-lg font-medium text-red-600 dark:text-red-400">Delete Project</h2>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+          Deleting this project will permanently erase all data. Please consider exporting tasks before proceeding.
+        </p>
+      </div>
+
+      <%= button_to "Delete this project", @project, method: :delete, data: { turbo_confirm: 'Remove the project? Are you sure?' }, class: "btn-remove" %>
+    </div>
+  </div>
 </div>
