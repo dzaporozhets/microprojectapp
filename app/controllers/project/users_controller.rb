@@ -20,7 +20,7 @@ class Project::UsersController < Project::BaseController
           if project.users << user
             project.add_activity(current_user, 'invited', user)
 
-            redirect_to project_activity_path(project)
+            redirect_to project_users_path(project)
             return
           else
             error = 'User could not be added.'

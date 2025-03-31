@@ -75,6 +75,9 @@ class ProjectsController < ApplicationController
   end
 
   def overview
+    # Put a temporary redirect until we design this page
+    redirect_to project_files_path(@project)
+
     @tab_name = 'Project'
   end
 
