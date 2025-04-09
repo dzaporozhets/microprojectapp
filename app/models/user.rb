@@ -107,6 +107,14 @@ class User < ApplicationRecord
           oauth_avatar_url: image,
           oauth_linked_at: Time.current
         )
+
+        # If user email is not confirmed, when connecting user we automatically
+        # confirm their email address.
+        if !user.confirmed? && user.respond_to?(:skip_confirmation!)
+          user.skip_confirmation!
+          user.save
+        end
+
         user
       end
     end
@@ -130,6 +138,7 @@ class User < ApplicationRecord
       user.skip_confirmation! if user.respond_to?(:skip_confirmation!)
       user.skip_confirmation_notification! if user.respond_to?(:skip_confirmation_notification!)
       user.save
+
       user
     end
   end

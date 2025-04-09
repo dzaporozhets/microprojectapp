@@ -61,6 +61,7 @@ RSpec.describe User, type: :model do
           expect(user.provider).to eq('google_oauth2')
           expect(user.uid).to eq('123456789')
           expect(user.oauth_avatar_url).to eq('http://example.com/avatar.jpg')
+          expect(user.confirmed?).to be true
         end
 
         context 'when sign-ups are disabled' do
@@ -91,6 +92,18 @@ RSpec.describe User, type: :model do
             expect(existing_user.provider).to eq('google_oauth2')
             expect(existing_user.uid).to eq('123456789')
             expect(existing_user.oauth_avatar_url).to eq('http://example.com/avatar.jpg')
+          end
+
+          it 'confirms the email when updating the user record' do
+            existing_user.update(confirmed_at: nil)
+            expect(existing_user.confirmed?).to be false
+
+            User.from_omniauth(auth)
+            existing_user.reload
+
+            expect(existing_user.confirmed?).to be true
+            expect(existing_user.provider).to eq('google_oauth2')
+            expect(existing_user.uid).to eq('123456789')
           end
         end
 
