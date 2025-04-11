@@ -9,7 +9,7 @@
       </div>
 
       <div class="inline-block flex">
-        <%= link_to collapse_task_path, class: "ml-2 btn-sm", data: { turbo: true }, title: 'Back to tasks list' do %>
+        <%= link_to collapse_task_path(@project), class: "ml-2 btn-sm", data: { turbo: true }, title: 'Back to tasks list' do %>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 inline-block">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
           </svg>

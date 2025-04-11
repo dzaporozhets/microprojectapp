@@ -44,7 +44,7 @@ module ThemeHelper
   end
 
   def task_details_css(task)
-    @task.done ?
+    task.done ?
       'bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300' :
       'bg-gray-100 dark:bg-gray-800 text-black dark:text-gray-100'
   end
