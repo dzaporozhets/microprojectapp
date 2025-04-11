@@ -1,6 +1,6 @@
 class Comment < ApplicationRecord
-  belongs_to :task, required: true
-  belongs_to :user, required: true
+  belongs_to :task, optional: false
+  belongs_to :user, optional: false
 
   validates :body, presence: true
 
@@ -10,7 +10,5 @@ class Comment < ApplicationRecord
     attachment.content_type.start_with?('image/')
   end
 
-  def user_email
-    user.email
-  end
+  delegate :email, to: :user, prefix: true
 end

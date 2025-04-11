@@ -25,7 +25,6 @@ module ApplicationHelper
       end
     else
       first_letter = user.email[0].upcase
-      size = options[:size]
       alt = options[:alt]
       style = ""
 

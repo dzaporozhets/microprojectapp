@@ -1,6 +1,13 @@
 class Project::ImportController < Project::BaseController
   MAX_FILE_SIZE = 5.megabytes # Set the file size limit
 
+  def show
+    task_ids = session.delete(:imported_task_ids) || []
+
+    @imported_tasks = project.tasks.where(id: task_ids)
+    @imported_task_count = session.delete(:imported_task_count) || 0
+    @imported_note_count = session.delete(:imported_note_count) || 0
+  end
   def new
   end
 
@@ -80,11 +87,4 @@ class Project::ImportController < Project::BaseController
     end
   end
 
-  def show
-    task_ids = session.delete(:imported_task_ids) || []
-
-    @imported_tasks = project.tasks.where(id: task_ids)
-    @imported_task_count = session.delete(:imported_task_count) || 0
-    @imported_note_count = session.delete(:imported_note_count) || 0
-  end
 end
