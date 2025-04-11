@@ -1,14 +1,11 @@
-# .rubocop.yml
+inherit_from: .rubocop_todo.yml
 
-require:
+plugins:
   - rubocop-rails
-  - rubocop-rspec
-  - rubocop-rspec_rails
-
-inherit_from:
-  - .rubocop_todo.yml
+  - rubocop-performance
 
 AllCops:
+  DisabledByDefault: true
   TargetRubyVersion: 3.2
   NewCops: enable
   Exclude:
@@ -16,34 +13,108 @@ AllCops:
     - 'db/schema.rb'
     - 'node_modules/**/*'
     - 'vendor/**/*'
+    - 'spec/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
 
-# Disable noisy or low-value cops
-Style/StringLiterals:
-  Enabled: false
+Rails:
+  Enabled: true
 
-Style/FrozenStringLiteralComment:
-  Enabled: false
+# --- Basic Syntax Improvements (autocorrectable) ---
 
-Layout/LineLength:
-  Max: 140
+Layout/TrailingWhitespace:
+  Enabled: true
 
-Style/ClassAndModuleChildren:
-  Enabled: false
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: true
 
-Style/Documentation:
-  Enabled: false
+Layout/SpaceAroundOperators:
+  Enabled: true
 
-Style/SymbolArray:
-  Enabled: false
+Layout/EmptyLines:
+  Enabled: true
 
-Layout/LeadingCommentSpace:
-  Enabled: false
+Style/Semicolon:
+  Enabled: true
 
-Style/StringConcatenation:
-  Enabled: false
+Style/RedundantBegin:
+  Enabled: true
 
-Style/EmptyMethod:
+Style/RedundantSelf:
   Enabled: false
 
 Style/RedundantReturn:
+  Enabled: true
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: true
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: true
+
+Style/EmptyCaseCondition:
+  Enabled: true
+
+Style/RedundantSortBy:
+  Enabled: true
+
+# --- Performance Improvements (via rubocop-performance) ---
+
+Performance/ReverseEach:
+  Enabled: true
+
+Performance/ChainArrayAllocation:
+  Enabled: true
+
+Performance/DoubleStartEndWith:
+  Enabled: true
+
+Performance/FixedSize:
+  Enabled: true
+
+Performance/StartWith:
+  Enabled: true
+
+Performance/EndWith:
+  Enabled: true
+
+# --- Correctness / Code Clarity ---
+
+Lint/BooleanSymbol:
+  Enabled: true
+
+Lint/DeprecatedClassMethods:
+  Enabled: true
+
+Lint/EmptyBlock:
+  Enabled: true
+
+Lint/EmptyClass:
+  Enabled: true
+
+Lint/LiteralInInterpolation:
+  Enabled: true
+
+Lint/RedundantCopDisableDirective:
+  Enabled: true
+
+Lint/ShadowingOuterLocalVariable:
+  Enabled: true
+
+Lint/UselessAssignment:
+  Enabled: true
+
+Lint/DuplicateRequire:
+  Enabled: true
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Rails/Date:
+  Enabled: false
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/TimeZone:
   Enabled: false
