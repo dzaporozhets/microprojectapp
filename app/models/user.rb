@@ -49,7 +49,8 @@ class User < ApplicationRecord
   has_many :assigned_tasks,
            class_name: 'Task',
            foreign_key: 'assigned_user_id',
-           dependent: :nullify
+           dependent: :nullify,
+           inverse_of: :assigned_user
   has_many :project_users, dependent: :destroy
   has_many :invited_projects, through: :project_users, source: :project
   has_many :pins, dependent: :destroy

@@ -72,7 +72,8 @@ class Project::ImportController < Project::BaseController
       end
 
       # Store only a subset of IDs (first 10) for UI preview purposes
-      session[:imported_task_ids] = imported_tasks.first(10).map(&:id)
+      first_ten_tasks = imported_tasks.first(10)
+      session[:imported_task_ids] = first_ten_tasks.map(&:id)
       session[:imported_task_count] = imported_tasks.size
       session[:imported_note_count] = imported_notes.size
 
