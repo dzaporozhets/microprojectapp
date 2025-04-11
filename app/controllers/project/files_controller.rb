@@ -48,7 +48,7 @@ class Project::FilesController < Project::BaseController
   private
 
   def project_params
-    params.require(:project).permit({project_files: []})
+    params.require(:project).permit({ project_files: [] })
   end
 
   def add_more_files(new_files)

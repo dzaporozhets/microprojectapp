@@ -5,7 +5,7 @@ RSpec.describe Project, type: :model do
   let(:project) { create(:project, user: user) }
 
   describe "associations" do
-    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:user).required(true) }
     it { is_expected.to have_many(:tasks).dependent(:destroy) }
     it { is_expected.to have_many(:links).dependent(:destroy) }
     it { is_expected.to have_many(:project_users).dependent(:destroy) }
@@ -16,7 +16,6 @@ RSpec.describe Project, type: :model do
 
   describe "validations" do
     it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_presence_of(:user_id) }
 
     describe "PROJECT_LIMIT" do
       before do

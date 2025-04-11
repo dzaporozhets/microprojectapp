@@ -8,6 +8,9 @@ class Project::LinksController < Project::BaseController
     @links = project.links.all
   end
 
+  def show
+  end
+
   def new
     @link = Link.new
   end

@@ -8,7 +8,7 @@ class Project < ApplicationRecord
   PERSONAL_PROJECT_NAME = 'Personal'
 
   # Associations
-  belongs_to :user, required: true
+  belongs_to :user, optional: false
 
   has_many :tasks, dependent: :destroy
   has_many :links, dependent: :destroy
@@ -22,7 +22,6 @@ class Project < ApplicationRecord
   # Validations
   validates :name, presence: true, length: { maximum: 512 }
   validates :name, uniqueness: { scope: :user_id, message: "should be unique per user" }
-  validates :user_id, presence: true
 
   validate :project_limit, on: :create
   validate :project_files_count_within_limit
@@ -48,7 +47,7 @@ class Project < ApplicationRecord
   end
 
   def find_user(user_id)
-    return unless user_id.present?
+    return if user_id.blank?
 
     user_id = user_id.to_i
     # Use more efficient lookup if the user is the owner

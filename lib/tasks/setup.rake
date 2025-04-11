@@ -5,8 +5,7 @@ namespace :setup do
     require 'rails'
 
     # 1. Check if credentials file exists otherwise generate one
-    credentials_path = Rails.root.join('config', 'credentials.yml.enc')
-    key_path = Rails.root.join('config', 'master.key')
+    credentials_path = Rails.root.join("config/credentials.yml.enc")
 
     if File.exist?(credentials_path)
       puts "Error: config/credentials.yml.enc already exists. Aborting task to avoid overwriting existing credentials."
@@ -30,8 +29,8 @@ namespace :setup do
     # 3. Read the current credentials
     puts "Reading current credentials..."
     require 'active_support/encrypted_configuration'
-    credentials_path = Rails.root.join('config', 'credentials.yml.enc')
-    key_path = Rails.root.join('config', 'master.key')
+    credentials_path = Rails.root.join("config/credentials.yml.enc")
+    key_path = Rails.root.join("config/master.key")
 
     encrypted_config = ActiveSupport::EncryptedConfiguration.new(
       config_path: credentials_path,

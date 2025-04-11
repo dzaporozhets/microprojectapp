@@ -9,7 +9,7 @@ class ApplicationMailer < ActionMailer::Base
     if Rails.application.config.app_settings[:disable_email_login]
       Rails.logger.info "Email delivery is disabled through DISABLE_EMAIL_LOGIN flag."
 
-      return
+      nil
     else
       super
     end

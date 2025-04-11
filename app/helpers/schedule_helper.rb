@@ -1,6 +1,6 @@
 module ScheduleHelper
   def calendar_url(user, host = nil)
-    return nil unless user&.calendar_token.present?
+    return nil if user&.calendar_token.blank?
 
     calendar_schedule_url(
       token: user.calendar_token,

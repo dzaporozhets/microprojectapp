@@ -1,8 +1,8 @@
 class Task < ApplicationRecord
   TASK_LIMIT = 2999
 
-  belongs_to :project, required: true
-  belongs_to :user, required: true
+  belongs_to :project, optional: false
+  belongs_to :user, optional: false
   belongs_to :assigned_user, class_name: 'User', optional: true
   belongs_to :note, optional: true
 
@@ -23,8 +23,6 @@ class Task < ApplicationRecord
   scope :order_by_star_then_old, -> { order(star: :desc, created_at: :asc) }
 
   validates :name, presence: true, length: { maximum: 512 }
-  validates :user_id, presence: true
-  validates :project_id, presence: true
   validate :task_limit, on: :create
 
   before_save :set_done_at, if: :done_changed?

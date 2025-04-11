@@ -22,7 +22,7 @@ class AdminController < ApplicationController
     @oauth_providers = Devise.omniauth_providers
 
     # Last 24 hours activities
-    @recent_activities_count = Activity.where('created_at >= ?', 24.hours.ago).count
-    @recent_users_count = User.where('created_at >= ?', 24.hours.ago).count
+    @recent_activities_count = Activity.where(created_at: 24.hours.ago..).count
+    @recent_users_count = User.where(created_at: 24.hours.ago..).count
   end
 end

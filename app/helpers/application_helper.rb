@@ -25,7 +25,6 @@ module ApplicationHelper
       end
     else
       first_letter = user.email[0].upcase
-      size = options[:size]
       alt = options[:alt]
       style = ""
 
@@ -46,12 +45,12 @@ module ApplicationHelper
 
   def render_tabs(tabs, selected = nil)
     content_tag(:nav, class: 'flex space-x-3', aria: { label: 'Tabs' }) do
-      tabs.map do |tab|
+      safe_join(tabs.map do |tab|
         current_tab = selected == tab[:name]
         link_class = current_tab ? subnav_active_tab : 'btn-tab'
         link_options = current_tab ? { 'aria-current' => 'page' } : {}
         link_to tab[:name], tab[:path], class: link_class, **link_options
-      end.join.html_safe
+      end)
     end
   end
 

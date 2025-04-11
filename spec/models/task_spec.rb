@@ -7,14 +7,12 @@ RSpec.describe Task, type: :model do
   let(:done_task) { create(:task, user: user, project: project, done: true) }
 
   describe "associations" do
-    it { is_expected.to belong_to(:project) }
-    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:project).required(true) }
+    it { is_expected.to belong_to(:user).required(true) }
   end
 
   describe "validations" do
     it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_presence_of(:user_id) }
-    it { is_expected.to validate_presence_of(:project_id) }
 
     describe "TASK_LIMIT" do
       it "does not allow creation of a task if the project already has the limit of tasks" do

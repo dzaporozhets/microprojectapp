@@ -9,19 +9,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   layout 'user', only: [:edit, :update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
-
-  # POST /resource
-  # def create
-  #   super
-  # end
+  def new
+    super
+  end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    super
+  end
+
+  # POST /resource
+  def create
+    super
+  end
 
   # PUT /resource
   def update

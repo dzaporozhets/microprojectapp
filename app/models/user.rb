@@ -35,11 +35,11 @@ class User < ApplicationRecord
   # Uploaders
   mount_uploader :avatar, AvatarUploader
 
+  before_save :generate_otp_secret, if: -> { otp_required_for_login_changed? }
+  before_create :ensure_calendar_token
   # Callbacks
   after_create :create_personal_project
   after_create :create_sample_project, unless: -> { Rails.env.test? }
-  before_save :generate_otp_secret, if: -> { otp_required_for_login_changed? }
-  before_create :ensure_calendar_token
 
   # Associations
   has_many :projects, dependent: :destroy
@@ -49,14 +49,15 @@ class User < ApplicationRecord
   has_many :assigned_tasks,
            class_name: 'Task',
            foreign_key: 'assigned_user_id',
-           dependent: :nullify
+           dependent: :nullify,
+           inverse_of: :assigned_user
   has_many :project_users, dependent: :destroy
   has_many :invited_projects, through: :project_users, source: :project
   has_many :pins, dependent: :destroy
   has_many :pinned_projects, through: :pins, source: :project
 
   # Enums
-  enum dark_mode: { off: 0, on: 1, auto: 2 }
+  enum :dark_mode, { off: 0, on: 1, auto: 2 }
 
   # Scopes
   scope :admins, -> { where(admin: true) }
@@ -270,7 +271,7 @@ class User < ApplicationRecord
   def email_domain_check
     allowed_domain = Rails.application.config.app_settings[:app_allowed_email_domain]
 
-    return true unless allowed_domain.present?
+    return true if allowed_domain.blank?
 
     unless email.end_with?("@#{allowed_domain}")
       errors.add(:email, "is not from an allowed domain.")

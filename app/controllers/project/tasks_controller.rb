@@ -25,7 +25,9 @@ class Project::TasksController < Project::BaseController
   def changes
     @versions = @task.versions.order(created_at: :desc)
 
-    user_ids = @versions.map(&:whodunnit).compact.uniq
+    user_ids = @versions.map(&:whodunnit)
+    user_ids.compact!
+    user_ids.uniq!
     users_by_id = User.where(id: user_ids).index_by(&:id)
 
     @users_by_version = @versions.each_with_object({}) do |version, hash|

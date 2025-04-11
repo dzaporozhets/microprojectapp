@@ -7,8 +7,8 @@ class ScheduleController < ApplicationController
 
     @current_month_name = @date.strftime("%B")
 
-    @monthly_tasks = tasks.where(due_date: @date.beginning_of_month..@date.end_of_month).order(due_date: :asc)
-    @past_due_tasks = tasks.where("due_date < ?", @date.beginning_of_month).order(due_date: :asc)
+    @monthly_tasks = tasks.where(due_date: @date.all_month).order(due_date: :asc)
+    @past_due_tasks = tasks.where(due_date: ...@date.beginning_of_month).order(due_date: :asc)
     @upcoming_tasks = tasks.where(due_date: (@date.end_of_month + 1.day)..(@date + 2.months).end_of_month).order(due_date: :asc)
 
     @daily_task_counts = tasks.group(:due_date).count.transform_keys(&:to_date)
@@ -37,7 +37,7 @@ class ScheduleController < ApplicationController
   end
 
   def user_date
-    return nil unless params[:date].present?
+    return nil if params[:date].blank?
 
     begin
       Date.parse(params[:date])
@@ -48,9 +48,9 @@ class ScheduleController < ApplicationController
 
   def authenticate_by_token
     token = params[:token]
-    return head :unauthorized unless token.present?
+    return head :unauthorized if token.blank?
 
     @user = User.find_by(calendar_token: token)
-    return head :unauthorized unless @user
+    head :unauthorized unless @user
   end
 end
