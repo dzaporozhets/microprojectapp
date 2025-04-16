@@ -47,6 +47,17 @@
             <% end %>
           </ol>
         </section>
+
+        <% if @tasks_past_due.any? %>
+          <section class="mt-8 border-t border-gray-200 dark:border-gray-700 pt-6">
+            <h2 class="text-base font-semibold leading-6 text-red-700 dark:text-red-400">Older Tasks</h2>
+            <ol class="mt-2 text-sm leading-6 text-gray-500 space-y-2">
+              <% @tasks_past_due.each do |task| %>
+                <%= render 'project/schedule/task', task: task %>
+              <% end %>
+            </ol>
+          </section>
+        <% end %>
       </div>
     </div>
   </div>

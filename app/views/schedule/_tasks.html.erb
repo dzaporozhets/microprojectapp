@@ -8,11 +8,20 @@
         <% end %>
       </ol>
     </div>
+  <% else %>
+    <div class="no-tasks py-6">
+      <p class="text-sm text-center text-gray-500 dark:text-gray-400">There are no tasks scheduled for <%= @date.strftime("%B") %>.</p>
+    </div>
+  <% end %>
+
+
+  <% if @past_due_tasks.any? || @upcoming_tasks.any? %>
+    <hr/>
   <% end %>
 
   <% if @past_due_tasks.any? %>
     <div class="past-due-tasks">
-      <h2 class="py-1 text-base font-semibold text-red-700 dark:text-red-400">Past Due</h2>
+      <h2 class="py-1 text-base font-semibold text-red-700 dark:text-red-400">Older tasks</h2>
       <ol class="mt-1 grid grid-cols-1 gap-1">
         <% @past_due_tasks.each do |task| %>
           <%= render 'schedule/task', task: task %>
@@ -23,18 +32,12 @@
 
   <% if @upcoming_tasks.any? %>
     <div class="upcoming-tasks">
-      <h2 class="py-1 text-base font-semibold text-green-700 dark:text-green-400">Upcoming</h2>
+      <h2 class="py-1 text-base font-semibold text-green-700 dark:text-green-400">Future tasks</h2>
       <ol class="mt-1 grid grid-cols-1 gap-1">
         <% @upcoming_tasks.each do |task| %>
           <%= render 'schedule/task', task: task %>
         <% end %>
       </ol>
-    </div>
-  <% end %>
-
-  <% unless @monthly_tasks.any? || @past_due_tasks.any? || @upcoming_tasks.any? %>
-    <div class="no-tasks">
-      <p class="text-sm text-center text-gray-500 dark:text-gray-400">There are no tasks scheduled for this month.</p>
     </div>
   <% end %>
 </section>
