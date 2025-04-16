@@ -14,7 +14,7 @@ class Project::ScheduleController < Project::BaseController
     @tasks_due_month_after_next = tasks.where(due_date: Date.current.next_month.next_month.all_month)
 
     # Get tasks that are past due and still active
-    @tasks_past_due = @project.tasks.where("due_date < ?", Date.current).order(:due_date)
+    @tasks_past_due = @project.tasks.where(due_date: ...Date.current).order(:due_date)
   end
 
   def saturate
