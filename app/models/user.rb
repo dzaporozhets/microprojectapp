@@ -204,8 +204,16 @@ class User < ApplicationRecord
     @personal_project ||= projects.find_by(name: "Personal")
   end
 
+  def personal_projects
+    if personal_project.present?
+      [personal_project]
+    else
+      []
+    end
+  end
+
   def all_active_projects
-    [personal_project] +
+    personal_projects +
       projects.active.without_personal.ordered_by_id +
       invited_projects.active.ordered_by_id
   end
