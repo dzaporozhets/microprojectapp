@@ -1,10 +1,11 @@
 <%- task = @task %>
 
-<div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-2xl">
-  <div class="border border-gray-400 dark:border-gray-600 shadow-sm rounded-md bg-gray-50 dark:bg-gray-800">
-    <%= form_with(model: [task.project, task], class: "contents", data: { turbo: turbo_frame_request? }) do |form| %>
+<div class="mt-2 sm:mx-auto sm:w-full sm:max-w-2xl">
+  <%= display_flash %>
 
-      <div class="border-b border-b-violet-200 dark:border-b-gray-600 text-sm text-gray-700 dark:text-gray-300 flex items-center p-3 bg-violet-100 dark:bg-violet-900 rounded-t-md">
+  <%= content_tag :div, class: "window-block" do %>
+    <%= form_with(model: [task.project, task], data: { turbo: turbo_frame_request? }) do |form| %>
+      <div class="window-header <%= task_details_css(task) %>">
         <div class="flex-none">
           <h1 class="text-lg font-semibold text-violet-800 dark:text-violet-200">
             Edit task
@@ -23,63 +24,61 @@
         </div>
       </div>
 
-      <div class="p-3 border-b dark:border-gray-700">
-        <%= display_flash %>
+      <% if task.errors.any? %>
+        <div id="ar-errors-text" data-turbo-cache="false" class="p-3 mb-3 bg-gray-50 rounded-md border dark:bg-gray-700 dark:border-gray-600">
+          <%= render("project/tasks/form_errors", resource: task) %>
+        </div>
+      <% end %>
 
-        <% if task.errors.any? %>
-          <div id="ar-errors-text" data-turbo-cache="false" class="p-3 mb-3 bg-gray-50 rounded-md border">
-            <%= render("project/tasks/form_errors", resource: task) %>
-          </div>
-        <% end %>
+      <div class="p-3 md:my-3">
+        <div class="mb-3">
+          <%= form.label :name, class: "text-sm text-gray-500 dark:text-gray-400" %>
+          <%= form.text_area :name, class: "mt-1 block base-input w-full", required: true, rows: 2 %>
+        </div>
 
         <div class="mb-3">
-          <%= form.label :name, class: "text-sm text-gray-500" %>
-          <%= form.text_area :name, class: "mt-1 block base-input w-full", required: true, rows: 2 %>
+          <%= form.label :description, class: "text-sm text-gray-500 dark:text-gray-400" %>
+          <%= form.text_area :description, class: "block base-input mt-1 w-full resize-y", rows: 5 %>
         </div>
       </div>
 
-      <div class="p-3 border-b dark:border-gray-700">
-        <%= form.label :done, class: "text-sm text-gray-500" do %>
+      <div class="text-sm text-gray-600 dark:text-gray-400 border-t dark:border-t-gray-600 p-3">
+        <%= form.label :done, class: "text-sm text-gray-500 dark:text-gray-400" do %>
           <%= form.check_box :done, class: "w-4 h-4 checkbox" %>
           Mark task as completed
         <% end %>
       </div>
 
-      <div class="p-3 border-b dark:border-gray-700">
+      <div class="text-sm text-gray-600 dark:text-gray-400 border-t dark:border-t-gray-600 p-3">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
-          <div class="">
-            <%= form.label :due_date, class: "text-sm text-gray-500" %>
+          <div>
+            <%= form.label :due_date, class: "text-sm text-gray-500 dark:text-gray-400" %>
             <%= form.date_field :due_date, class: "mt-1 block w-full base-input" %>
           </div>
 
-          <div class="">
-            <%= form.label :assigned_user_id, class: "text-sm text-gray-500" %>
+          <div>
+            <%= form.label :assigned_user_id, class: "text-sm text-gray-500 dark:text-gray-400" %>
             <%= form.collection_select :assigned_user_id, task.project.team, :id, :email, { include_blank: "None" }, { class: "mt-1 block w-full base-input" } %>
           </div>
         </div>
       </div>
 
-      <div class="p-3 border-b dark:border-gray-700">
-        <% if @project.notes.any? %>
+      <% if @project.notes.any? %>
+        <div class="text-sm text-gray-600 dark:text-gray-400 border-t dark:border-t-gray-600 p-3">
           <div class="mb-3">
-            <%= form.label :note_id, class: "text-sm text-gray-500" %>
+            <%= form.label :note_id, class: "text-sm text-gray-500 dark:text-gray-400" %>
             <%= form.collection_select :note_id, task.project.notes, :id, :title, { include_blank: "None" }, { class: "mt-1 block w-full base-input" } %>
           </div>
-        <% end %>
-
-        <div class="mb-3">
-          <%= form.label :description, class: "text-sm text-gray-500" %>
-          <%= form.text_area :description, class: "block base-input mt-1 w-full resize-y", rows: 5 %>
         </div>
-      </div>
+      <% end %>
 
-      <div class="p-3 rounded-b-md flex justify-between">
+      <div class="text-xs text-gray-500 border-t dark:border-t-gray-600 p-3 flex justify-between">
         <%= form.submit 'Save changes', class: "btn-primary" %>
       </div>
     <% end %>
-  </div>
+  <% end %>
 
-  <section class="mt-7 border rounded-md p-3 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+  <section class="mt-4 border rounded-md p-3 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
     <div class="flex justify-between">
       <div class="text-sm text-gray-500 py-2 flex">
         <%= link_to last_update_text(task), changes_project_task_path(task.project, task), class: 'underline text-sm text-gray-500' %>
