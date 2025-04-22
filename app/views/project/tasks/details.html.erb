@@ -9,7 +9,7 @@
             <%= form.check_box :done,
               checked: @task.done,
               id: "task_#{@task.id}",
-              class: "w-5 h-5 checkbox-round mr-2 border-gray-400",
+              class: "w-5 h-5 #{theme_checkbox_round} mr-2",
               data: { turbo_action: "advance" },
               onchange: "this.form.requestSubmit()" %>
             <p class="font-medium hidden md:inline-block">Mark task as completed</p>
