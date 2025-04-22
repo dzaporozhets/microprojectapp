@@ -60,18 +60,6 @@
            placeholder-gray-600 dark:placeholder-gray-300 dark:focus:bg-gray-800;
   }
 
-  .new-task-holder {
-    @apply bg-white focus:shadow p-2 rounded-lg border
-           border-gray-300 dark:bg-gray-800 dark:border-gray-700
-           focus-within:ring-violet-500 focus-within:ring-2 dark:focus-within:bg-gray-900;
-  }
-
-  .new-task-input {
-    @apply border-none bg-transparent text-black dark:text-white
-           font-medium placeholder-gray-600 dark:placeholder-gray-300
-           focus:border-none focus:ring-0
-           outline-none focus:outline-none shadow-none;
-  }
 
   /*----------------------------------------*
    * Tab Buttons
