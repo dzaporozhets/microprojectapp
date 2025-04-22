@@ -38,11 +38,11 @@ module ThemeHelper
 
   def task_css(task)
     if task.done
-      'px-3 py-1 border-l-4 border-transparent hover:border-gray-400 transition ' \
+      'px-4 py-1 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 ' \
         'text-sm text-gray-600 dark:text-gray-500 bg-gray-100 dark:bg-gray-900 line-through ' \
         'dark:decoration-gray-500 decoration-gray-600'
     else
-      'px-3 py-1 border-l-4 border-transparent hover:border-violet-400 transition ' \
+      'px-4 py-1 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 ' \
         'text-sm text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800'
     end
   end
