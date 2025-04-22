@@ -7,7 +7,7 @@
     <%= form_with(model: [task.project, task], data: { turbo: turbo_frame_request? }) do |form| %>
       <div class="window-header <%= task_details_css(task) %>">
         <div class="flex-none">
-          <h1 class="text-lg font-semibold text-violet-800 dark:text-violet-200">
+          <h1 class="text-lg font-semibold <%= theme_text_subtle %>">
             Edit task
           </h1>
         </div>
