@@ -36,14 +36,17 @@ module ThemeHelper
     'bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-300'.freeze
   end
 
+  def base_task_css
+    'px-4 py-1 rounded-md hover:bg-violet-50 hover:ring-1 hover:ring-violet-200 dark:hover:bg-violet-900/20 dark:hover:ring-violet-500/40 transition'
+  end
+
   def task_css(task)
     if task.done
-      'px-4 py-1 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 ' \
-        'text-sm text-gray-600 dark:text-gray-500 bg-gray-100 dark:bg-gray-900 line-through ' \
-        'dark:decoration-gray-500 decoration-gray-600'
+      base_task_css +
+        ' text-sm text-gray-600 dark:text-gray-500 bg-gray-100 dark:bg-gray-900 line-through dark:decoration-gray-500 decoration-gray-600'
     else
-      'px-4 py-1 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 ' \
-        'text-sm text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800'
+      base_task_css +
+        ' text-sm text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800'
     end
   end
 
