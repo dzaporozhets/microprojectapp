@@ -7,6 +7,8 @@ module ThemeHelper
       "text-lime-900 dark:text-lime-300 bg-lime-100 dark:bg-lime-950 border-b border-lime-200 dark:border-lime-900"
     when 'pink'
       "text-pink-900 dark:text-pink-300 bg-pink-100 dark:bg-pink-950 border-b border-pink-200 dark:border-pink-900"
+    when 'sky'
+      "text-sky-900 dark:text-sky-300 bg-sky-100 dark:bg-sky-950 border-b border-sky-200 dark:border-sky-900"
     else
       "text-gray-900 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 border-b border-gray-300 dark:border-gray-700"
     end
@@ -18,6 +20,8 @@ module ThemeHelper
       'btn-tab btn-tab-active text-lime-900 dark:text-lime-100 bg-lime-100 dark:bg-lime-950 border-lime-300 dark:border-lime-900'
     when 'pink'
       'btn-tab btn-tab-active text-pink-900 dark:text-pink-100 bg-pink-100 dark:bg-pink-950 border-pink-300 dark:border-pink-900'
+    when 'sky'
+      'btn-tab btn-tab-active text-sky-900 dark:text-sky-100 bg-sky-100 dark:bg-sky-950 border-sky-300 dark:border-sky-900'
     else
       'btn-tab btn-tab-active text-violet-900 dark:text-violet-100 ' \
       'bg-violet-100 dark:bg-violet-950 border-violet-300 dark:border-violet-900'

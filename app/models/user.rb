@@ -7,7 +7,8 @@ class User < ApplicationRecord
     1 => 'Gray',
     7 => 'Violet',
     4 => 'Lime',
-    5 => 'Pink'
+    5 => 'Pink',
+    3 => 'Sky'
   }.freeze
 
   OAUTH_PROVIDERS = {
