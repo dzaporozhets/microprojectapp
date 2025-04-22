@@ -145,6 +145,11 @@ module ThemeHelper
       "#{theme_active_bg}"
   end
 
+  # Button styles
+  def theme_button_primary
+    "btn border #{theme_bg} #{theme_text} #{theme_border} #{theme_hover}"
+  end
+
   private
 
   def theme_name
