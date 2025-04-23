@@ -153,14 +153,15 @@ module ThemeHelper
   # Checkbox round style
   def theme_checkbox_round
     checkbox_color = case theme_name
-                     when 'violet' then 'text-violet-400 dark:text-violet-600 focus-visible:ring-violet-500'
-                     when 'lime' then 'text-lime-400 dark:text-lime-600 focus-visible:ring-lime-500'
-                     when 'pink' then 'text-pink-400 dark:text-pink-600 focus-visible:ring-pink-500'
-                     when 'sky' then 'text-sky-400 dark:text-sky-600 focus-visible:ring-sky-500'
-                     else 'text-gray-400 dark:text-gray-600 focus-visible:ring-gray-500'
+                     when 'violet' then 'focus-visible:ring-violet-500'
+                     when 'lime' then 'focus-visible:ring-lime-500'
+                     when 'pink' then 'focus-visible:ring-pink-500'
+                     when 'sky' then 'focus-visible:ring-sky-500'
+                     else 'focus-visible:ring-gray-500'
                      end
 
-    "#{checkbox_color} bg-gray-100 border-gray-300 dark:border-gray-600 rounded-xl focus-visible:ring-2 dark:bg-gray-700"
+    "#{checkbox_color} #{theme_text_subtle} bg-gray-100" \
+      " border-gray-300 dark:border-gray-600 rounded-xl focus-visible:ring-2 dark:bg-gray-700"
   end
 
   private
