@@ -2,11 +2,13 @@
 
 MicroProject.app is a lightweight project management tool designed for individuals and small teams to collaborate, track progress, and manage tasks efficiently without the complexity of traditional project management software.
 
+
 * [Website](https://about.microproject.app/)
 * [MIT License](LICENSE)
 * [Quick Start](#quick-start)
 * [Configuration](docs/CONFIG.md)
 * [Contact](#contact)
+* [App Screenshot](https://microproject.app/screenshot_xl.png)
 
 ## Quick Start
 
@@ -38,3 +40,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Developer Certificate of Origin
 
 By contributing to this project, you agree to the [Developer Certificate of Origin (DCO)](DCO). We encourage all contributors to sign off their commits using `Signed-off-by: Your Name <your.email@example.com>`. You can do this by adding `-s` to your git commit command.
+
