@@ -199,4 +199,11 @@
   .resource-action-icon {
     @apply -ml-1 mr-2 h-5 w-5;
   }
+
+  /*----------------------------------------*
+   * Project Tasks
+   *----------------------------------------*/
+  .tasks-list {
+    @apply divide-y divide-dashed bg-white dark:bg-gray-800 rounded-lg divide-gray-200 dark:divide-gray-700;
+  }
 }

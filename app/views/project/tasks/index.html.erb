@@ -10,7 +10,7 @@
           <%= render 'project/tasks/form', project: @project %>
         <% end %>
 
-        <%= turbo_frame_tag "tasks", class: "mt-2 grid grid-cols-1 gap-1" do %>
+        <%= turbo_frame_tag "tasks", class: "mt-2 grid grid-cols-1 tasks-list" do %>
           <% @tasks.each do |task| %>
             <%= render partial: "project/tasks/task", locals: { task: task } %>
           <% end %>

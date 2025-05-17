@@ -2,7 +2,7 @@
   <div class="mb-4 md:mb-0 lg:w-2/3 mx-auto">
     <div class="flex flex-col md:flex-row md:space-x-12">
       <div class="mb-4 md:mb-0 md:w-full">
-        <%= turbo_frame_tag "completed_tasks", class: "mt-2 grid grid-cols-1 gap-1" do %>
+        <%= turbo_frame_tag "completed_tasks", class: "mt-2 grid grid-cols-1 tasks-list" do %>
           <% if @tasks.any? %>
             <% @tasks.each do |task| %>
               <%= render partial: "project/tasks/task", locals: { task: task } %>

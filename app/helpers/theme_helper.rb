@@ -108,17 +108,17 @@ module ThemeHelper
   end
 
   def base_task_css
-    'px-3 py-1 rounded-lg text-sm border'
+    'px-3 py-1 text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700'
   end
 
   def task_css(task)
     if task.done
-      "#{base_task_css} text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-900" \
+      "#{base_task_css} text-gray-600 dark:text-gray-400" \
       " line-through dark:decoration-gray-400 decoration-gray-600" \
-      " border-gray-200 dark:border-gray-900 #{theme_hover}"
+      "  #{theme_hover}"
     else
-      "#{base_task_css} text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800" \
-      " border-gray-200 dark:border-gray-700 #{theme_hover}"
+      "#{base_task_css} text-gray-900 dark:text-gray-100" \
+      "  #{theme_hover}"
     end
   end
 

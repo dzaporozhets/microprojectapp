@@ -4,7 +4,7 @@
       <div class="mb-4 md:mb-0 md:w-full">
         <section class="mt-2">
           <h2 class="text-base font-semibold leading-6 text-gray-900 dark:text-gray-200"><%= Date.current.strftime("%B") %></h2>
-          <ol class="mt-2 text-sm leading-6 text-gray-500 space-y-2">
+          <ol class="mt-2 text-sm leading-6 text-gray-500 tasks-list">
             <% if @tasks_due_this_month.any? %>
               <% @tasks_due_this_month.each do |task| %>
                 <%= render 'project/schedule/task', task: task %>
@@ -51,7 +51,7 @@
         <% if @tasks_past_due.any? %>
           <section class="mt-8 border-t border-gray-200 dark:border-gray-700 pt-6">
             <h2 class="text-base font-semibold leading-6 text-red-700 dark:text-red-400">Older Tasks</h2>
-            <ol class="mt-2 text-sm leading-6 text-gray-500 space-y-2">
+            <ol class="mt-2 text-sm leading-6 text-gray-500 tasks-list">
               <% @tasks_past_due.each do |task| %>
                 <%= render 'project/schedule/task', task: task %>
               <% end %>

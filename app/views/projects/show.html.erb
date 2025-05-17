@@ -5,7 +5,7 @@
 
         <%= render 'project/tasks/form', project: @project %>
 
-        <%= turbo_frame_tag "tasks", class: "mt-2 grid grid-cols-1 gap-1" do %>
+        <%= turbo_frame_tag "tasks", class: "mt-2 grid grid-cols-1 tasks-list" do %>
           <% @tasks_todo.each do |task| %>
             <%= render partial: "project/tasks/task", locals: { task: task } %>
           <% end %>
@@ -13,13 +13,13 @@
 
         <% if @tasks_done.any? %>
           <div class="flex items-center justify-center my-5 text-sm">
-            <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
-            <span class="px-4 text-center text-gray-400 dark:text-gray-600">Completed</span>
-            <span class="flex-grow border-t border-gray-100 dark:border-gray-900"></span>
+            <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
+            <span class="px-4 text-center text-gray-500 dark:text-gray-600">Completed</span>
+            <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
           </div>
         <% end %>
 
-        <%= turbo_frame_tag "completed_tasks", class: "mt-2 grid grid-cols-1 gap-1" do %>
+        <%= turbo_frame_tag "completed_tasks", class: "mt-2 grid grid-cols-1 done-tasks" do %>
           <% if @tasks_done.any? %>
             <% @tasks_done.each do |task| %>
               <%= render partial: "project/tasks/task", locals: { task: task } %>
