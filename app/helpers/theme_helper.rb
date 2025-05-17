@@ -9,10 +9,10 @@ module ThemeHelper
 
   def theme_bg
     case theme_name
-    when 'violet' then 'bg-violet-100 dark:bg-violet-950'
-    when 'lime' then 'bg-lime-100 dark:bg-lime-950'
-    when 'pink' then 'bg-pink-100 dark:bg-pink-950'
-    when 'sky' then 'bg-sky-100 dark:bg-sky-950'
+    when 'violet' then 'bg-violet-200 dark:bg-violet-900'
+    when 'lime' then 'bg-lime-200 dark:bg-lime-900'
+    when 'pink' then 'bg-pink-200 dark:bg-pink-900'
+    when 'sky' then 'bg-sky-200 dark:bg-sky-900'
     when 'gray' then 'bg-gray-200 dark:bg-gray-800'
     end
   end
@@ -51,21 +51,21 @@ module ThemeHelper
   # Border colors
   def theme_border
     case theme_name
-    when 'violet' then 'border-violet-200 dark:border-violet-900'
-    when 'lime' then 'border-lime-200 dark:border-lime-900'
-    when 'pink' then 'border-pink-200 dark:border-pink-900'
-    when 'sky' then 'border-sky-200 dark:border-sky-900'
-    when 'gray' then 'border-gray-300 dark:border-gray-700'
+    when 'violet' then 'border-violet-300 dark:border-violet-800'
+    when 'lime' then 'border-lime-300 dark:border-lime-800'
+    when 'pink' then 'border-pink-300 dark:border-pink-800'
+    when 'sky' then 'border-sky-300 dark:border-sky-800'
+    when 'gray' then 'border-gray-300 dark:border-gray-800'
     end
   end
 
   def theme_border_accent
     case theme_name
-    when 'violet' then 'border-violet-300 dark:border-violet-800'
-    when 'lime' then 'border-lime-300 dark:border-lime-800'
-    when 'pink' then 'border-pink-300 dark:border-pink-800'
-    when 'sky' then 'border-sky-300 dark:border-sky-800'
-    when 'gray' then 'border-gray-400 dark:border-gray-600'
+    when 'violet' then 'border-violet-400 dark:border-violet-700'
+    when 'lime' then 'border-lime-400 dark:border-lime-700'
+    when 'pink' then 'border-pink-400 dark:border-pink-700'
+    when 'sky' then 'border-sky-400 dark:border-sky-700'
+    when 'gray' then 'border-gray-400 dark:border-gray-700'
     end
   end
 
@@ -114,14 +114,14 @@ module ThemeHelper
   end
 
   def sub_subnav_tab
-    "px-3 py-1 text-sm font-medium #{theme_text} rounded-full " \
+    "px-3 py-1 text-sm font-medium rounded-full " \
       'hover:bg-white hover:shadow-sm hover:ring-1 hover:ring-gray-300 ' \
       'focus:outline-none focus:ring-2 focus:ring-violet-500 ' \
       'dark:hover:bg-violet-300 dark:hover:text-violet-900'
   end
 
   def sub_subnav_active_tab
-    "px-3 py-1 text-sm #{theme_bg} font-medium text-gray-800 rounded-full " \
+    "px-3 py-1 text-sm #{theme_bg} #{theme_text} font-medium rounded-full " \
       "shadow-sm ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-500 "
   end
 
