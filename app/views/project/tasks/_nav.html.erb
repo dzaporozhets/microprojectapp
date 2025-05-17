@@ -1,7 +1,7 @@
 <div class="w-full border-t dark:border-gray-700 md:border-none flex flex-col space-y-3 md:w-auto md:flex-row md:items-center md:space-y-0 md:space-x-6 md:mt-0 mt-3">
   <div class="flex items-center ml-auto space-x-2 hidden md:flex">
     <%= link_to project_tasks_path(@project, assigned_user_id: @project.user_id), title: @project.user.email do %>
-      <%= avatar_tag(@project.user, "h-8 w-8 rounded-full bg-violet-300 dark:bg-gray-800") %>
+      <%= avatar_tag(@project.user, "h-8 w-8 rounded-full #{theme_bg}") %>
     <% end %>
 
     <% @project.users.each do |user| %>
