@@ -16,7 +16,7 @@
           >
     </div>
     <button
-        class="ml-2 px-3 py-2 btn-primary flex items-center"
+        class="ml-2 px-3 py-2 btn-base flex items-center"
         onclick="navigator.clipboard.writeText('<%= calendar_url(current_user) %>'); this.querySelector('span').innerText = 'Copied!'; setTimeout(() => this.querySelector('span').innerText = 'Copy', 2000);"
         >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
