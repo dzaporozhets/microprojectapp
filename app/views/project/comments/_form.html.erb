@@ -2,7 +2,7 @@
   <%= form_with(model: [ @task.project, @task, Comment.new ], local: true, id: 'new_comment_form', html: { multipart: true }) do |form| %>
     <div class="flex items-start">
       <div class="flex-none">
-        <%= avatar_tag(current_user, "size-6 rounded-full bg-gray-50") %>
+        <%= avatar_tag(current_user, "size-6 rounded-full #{theme_bg_subtle}") %>
       </div>
       <div class="flex-1 ml-3">
         <div class="overflow-hidden rounded-lg border border-gray-300 focus-within:ring-2 focus-within:ring-violet-600 dark:border-gray-600">

@@ -79,7 +79,6 @@ module ThemeHelper
     end
   end
 
-  # Active state
   def theme_active_bg
     case theme_name
     when 'violet' then 'dark:bg-violet-300'
@@ -90,7 +89,6 @@ module ThemeHelper
     end
   end
 
-  # Maintain backward compatibility with existing methods
   def nav_color
     "#{theme_text} #{theme_bg} border-b #{theme_border}"
   end
@@ -104,7 +102,7 @@ module ThemeHelper
   end
 
   def body_color
-    'bg-neutral-100 dark:bg-gray-900 text-gray-800 dark:text-gray-300'
+    'bg-neutral-100 dark:bg-gray-950 text-gray-800 dark:text-gray-300'
   end
 
   def base_task_css
@@ -115,10 +113,10 @@ module ThemeHelper
     if task.done
       "#{base_task_css} text-gray-700 dark:text-gray-400" \
       " line-through dark:decoration-gray-400 decoration-gray-600" \
-      "  hover:bg-neutral-50 dark:hover:bg-neutral-700"
+      "  hover:bg-neutral-50 dark:hover:bg-gray-900"
     else
       "#{base_task_css} text-black dark:text-gray-100" \
-        " hover:bg-neutral-50 dark:hover:bg-neutral-700"
+        " hover:bg-neutral-50 dark:hover:bg-gray-900"
     end
   end
 
