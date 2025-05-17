@@ -1,7 +1,8 @@
 module ThemeHelper
-  # Theme CSS classes
+  def body_color
+    'bg-neutral-100 dark:bg-gray-950 text-gray-800 dark:text-gray-300'
+  end
 
-  # Background colors
   def theme_bg_neutral
     'bg-gray-200 dark:bg-gray-800'
   end
@@ -79,16 +80,6 @@ module ThemeHelper
     end
   end
 
-  def theme_active_bg
-    case theme_name
-    when 'violet' then 'dark:bg-violet-300'
-    when 'lime' then 'dark:bg-lime-300'
-    when 'pink' then 'dark:bg-pink-300'
-    when 'sky' then 'dark:bg-sky-300'
-    when 'gray' then 'dark:bg-gray-300'
-    end
-  end
-
   def nav_color
     "#{theme_text} #{theme_bg} border-b #{theme_border}"
   end
@@ -101,21 +92,13 @@ module ThemeHelper
     'py-3 border-b border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400'
   end
 
-  def body_color
-    'bg-neutral-100 dark:bg-gray-950 text-gray-800 dark:text-gray-300'
-  end
-
-  def base_task_css
-    'px-3 py-1 text-sm'
-  end
-
   def task_css(task)
     if task.done
-      "#{base_task_css} text-gray-700 dark:text-gray-400" \
+      "px-3 py-1 text-sm text-gray-700 dark:text-gray-400" \
       " line-through dark:decoration-gray-400 decoration-gray-600" \
       "  hover:bg-neutral-50 dark:hover:bg-gray-900"
     else
-      "#{base_task_css} text-black dark:text-gray-100" \
+      "px-3 py-1 text-sm text-black dark:text-gray-100" \
         " hover:bg-neutral-50 dark:hover:bg-gray-900"
     end
   end
@@ -127,7 +110,7 @@ module ThemeHelper
   end
 
   def sub_subnav
-    "inline-flex items-center gap-1 p-1 #{theme_bg_neutral} rounded-full border #{theme_border}"
+    "inline-flex items-center gap-1 p-1 #{theme_bg_subtle} rounded-full border #{theme_border}"
   end
 
   def sub_subnav_tab
@@ -138,9 +121,8 @@ module ThemeHelper
   end
 
   def sub_subnav_active_tab
-    "px-3 py-1 text-sm font-medium text-gray-800 bg-white rounded-full " \
-      "shadow-sm ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-500 " \
-      "#{theme_active_bg}"
+    "px-3 py-1 text-sm #{theme_bg} font-medium text-gray-800 rounded-full " \
+      "shadow-sm ring-1 ring-gray-300 focus:outline-none focus:ring-2 focus:ring-violet-500 "
   end
 
   # Button styles
@@ -150,19 +132,21 @@ module ThemeHelper
 
   # Checkbox round style
   def theme_checkbox_round
-    checkbox_color = case theme_name
-                     when 'violet' then 'focus-visible:ring-violet-500'
-                     when 'lime' then 'focus-visible:ring-lime-500'
-                     when 'pink' then 'focus-visible:ring-pink-500'
-                     when 'sky' then 'focus-visible:ring-sky-500'
-                     else 'focus-visible:ring-gray-500'
-                     end
-
-    "#{checkbox_color} #{theme_text_subtle} bg-gray-100" \
+    "#{theme_checkbox_color} #{theme_text_subtle} bg-gray-100" \
       " border-gray-300 dark:border-gray-600 rounded-xl focus-visible:ring-2 dark:bg-gray-700"
   end
 
   private
+
+  def theme_checkbox_color
+    case theme_name
+    when 'violet' then 'focus-visible:ring-violet-500'
+    when 'lime' then 'focus-visible:ring-lime-500'
+    when 'pink' then 'focus-visible:ring-pink-500'
+    when 'sky' then 'focus-visible:ring-sky-500'
+    when 'gray' then 'focus-visible:ring-gray-500'
+    end
+  end
 
   def theme_name
     @theme_name ||= current_user ? current_user.theme_css_name : 'gray'
