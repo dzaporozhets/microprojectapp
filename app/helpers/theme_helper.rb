@@ -12,7 +12,7 @@ module ThemeHelper
     when 'lime' then 'bg-lime-100 dark:bg-lime-950'
     when 'pink' then 'bg-pink-100 dark:bg-pink-950'
     when 'sky' then 'bg-sky-100 dark:bg-sky-950'
-    else 'bg-gray-200 dark:bg-gray-800'
+    when 'gray' then 'bg-gray-200 dark:bg-gray-800'
     end
   end
 
@@ -22,7 +22,7 @@ module ThemeHelper
     when 'lime' then 'bg-lime-50 dark:bg-lime-900'
     when 'pink' then 'bg-pink-50 dark:bg-pink-900'
     when 'sky' then 'bg-sky-50 dark:bg-sky-900'
-    else 'bg-gray-50 dark:bg-gray-700'
+    when 'gray' then 'bg-gray-50 dark:bg-gray-700'
     end
   end
 
@@ -33,7 +33,7 @@ module ThemeHelper
     when 'lime' then 'text-lime-900 dark:text-lime-300'
     when 'pink' then 'text-pink-900 dark:text-pink-300'
     when 'sky' then 'text-sky-900 dark:text-sky-300'
-    else 'text-gray-900 dark:text-gray-300'
+    when 'gray' then 'text-gray-900 dark:text-gray-300'
     end
   end
 
@@ -43,7 +43,7 @@ module ThemeHelper
     when 'lime' then 'text-lime-700 dark:text-lime-400'
     when 'pink' then 'text-pink-700 dark:text-pink-400'
     when 'sky' then 'text-sky-700 dark:text-sky-400'
-    else 'text-gray-700 dark:text-gray-400'
+    when 'gray' then 'text-gray-700 dark:text-gray-400'
     end
   end
 
@@ -54,7 +54,7 @@ module ThemeHelper
     when 'lime' then 'border-lime-200 dark:border-lime-900'
     when 'pink' then 'border-pink-200 dark:border-pink-900'
     when 'sky' then 'border-sky-200 dark:border-sky-900'
-    else 'border-gray-300 dark:border-gray-700'
+    when 'gray' then 'border-gray-300 dark:border-gray-700'
     end
   end
 
@@ -64,7 +64,7 @@ module ThemeHelper
     when 'lime' then 'border-lime-300 dark:border-lime-800'
     when 'pink' then 'border-pink-300 dark:border-pink-800'
     when 'sky' then 'border-sky-300 dark:border-sky-800'
-    else 'border-gray-400 dark:border-gray-600'
+    when 'gray' then 'border-gray-400 dark:border-gray-600'
     end
   end
 
@@ -75,7 +75,7 @@ module ThemeHelper
     when 'lime' then 'hover:bg-lime-50 hover:dark:bg-lime-800 hover:border-lime-100 hover:dark:border-lime-700'
     when 'pink' then 'hover:bg-pink-50 hover:dark:bg-pink-800 hover:border-pink-100 hover:dark:border-pink-700'
     when 'sky' then 'hover:bg-sky-50 hover:dark:bg-sky-800 hover:border-sky-100 hover:dark:border-sky-700'
-    else 'hover:bg-gray-50 hover:dark:bg-gray-700 hover:border-gray-100 hover:dark:border-gray-600'
+    when 'gray' then 'hover:bg-gray-50 hover:dark:bg-gray-700 hover:border-gray-100 hover:dark:border-gray-600'
     end
   end
 
@@ -86,7 +86,7 @@ module ThemeHelper
     when 'lime' then 'dark:bg-lime-300'
     when 'pink' then 'dark:bg-pink-300'
     when 'sky' then 'dark:bg-sky-300'
-    else 'dark:bg-gray-300'
+    when 'gray' then 'dark:bg-gray-300'
     end
   end
 
