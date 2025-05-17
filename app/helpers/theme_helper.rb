@@ -104,7 +104,7 @@ module ThemeHelper
   end
 
   def body_color
-    'bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-300'
+    'bg-neutral-100 dark:bg-gray-900 text-gray-800 dark:text-gray-300'
   end
 
   def base_task_css
@@ -115,10 +115,10 @@ module ThemeHelper
     if task.done
       "#{base_task_css} text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-900" \
       " line-through dark:decoration-gray-400 decoration-gray-600" \
-      " border-gray-100 dark:border-gray-900 #{theme_hover}"
+      " border-gray-200 dark:border-gray-900 #{theme_hover}"
     else
       "#{base_task_css} text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800" \
-      " border-gray-100 dark:border-gray-700 #{theme_hover}"
+      " border-gray-200 dark:border-gray-700 #{theme_hover}"
     end
   end
 
