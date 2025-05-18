@@ -11,6 +11,9 @@ class User < ApplicationRecord
     7 => 'Violet'
   }.freeze
 
+  # Set default theme to Violet (7)
+  attribute :theme, default: 7
+
   OAUTH_PROVIDERS = {
     'google_oauth2' => 'Google',
     'azure_activedirectory_v2' => 'Microsoft',

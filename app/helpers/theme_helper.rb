@@ -116,6 +116,6 @@ module ThemeHelper
   private
 
   def theme_name
-    @theme_name ||= current_user ? current_user.theme_css_name : 'gray'
+    @theme_name ||= current_user ? current_user.theme_css_name : 'violet'
   end
 end
