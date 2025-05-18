@@ -1,14 +1,14 @@
 class User < ApplicationRecord
-  # Custom exceptions
   class SignupsDisabledError < StandardError; end
 
-  # Constants
   THEMES = {
     1 => 'Gray',
-    7 => 'Violet',
-    4 => 'Lime',
+    2 => 'Indigo',
+    3 => 'Lime',
+    4 => 'Orange',
     5 => 'Pink',
-    3 => 'Sky'
+    6 => 'Sky',
+    7 => 'Violet'
   }.freeze
 
   OAUTH_PROVIDERS = {
