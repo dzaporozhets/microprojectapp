@@ -6,7 +6,7 @@
 
     <% @project.users.each do |user| %>
       <%= link_to project_tasks_path(@project, assigned_user_id: user.id), title: user.email do %>
-        <%= avatar_tag(user, "h-8 w-8 rounded-full #{theme_bg_subtle}") %>
+        <%= avatar_tag(user, "h-8 w-8 rounded-full #{theme_bg}") %>
       <% end %>
     <% end %>
   </div>
