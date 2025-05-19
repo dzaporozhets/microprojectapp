@@ -26,10 +26,10 @@ class User < ApplicationRecord
   app_settings = Rails.application.config.app_settings
 
   # Devise setup
-  devise_modules = [:omniauthable]
+  devise_modules = [:omniauthable, :rememberable]
   devise_modules += [
     :two_factor_authenticatable, :registerable,
-    :recoverable, :rememberable, :validatable,
+    :recoverable, :validatable,
     :lockable, :confirmable
   ] unless app_settings[:disable_email_login]
 
@@ -115,7 +115,7 @@ class User < ApplicationRecord
 
         # If user email is not confirmed, when connecting user we automatically
         # confirm their email address.
-        if !user.confirmed? && user.respond_to?(:skip_confirmation!)
+        if user.respond_to?(:confirmed?) && !user.confirmed? && user.respond_to?(:skip_confirmation!)
           user.skip_confirmation!
           user.save
         end
