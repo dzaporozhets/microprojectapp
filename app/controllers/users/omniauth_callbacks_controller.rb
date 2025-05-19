@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  include Devise::Controllers::Rememberable
+
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
 
@@ -41,7 +43,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user.present?
       sign_out_all_scopes
-      user.remember_me! unless Rails.application.config.app_settings[:disable_email_login]
+      remember_me(user)
       sign_in_and_redirect user, event: :authentication
     else
       flash[:alert] = "Login with Google failed"
@@ -64,7 +66,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user.present?
       sign_out_all_scopes
-      user.remember_me! unless Rails.application.config.app_settings[:disable_email_login]
+      remember_me(user)
       sign_in_and_redirect user, event: :authentication
     else
       flash[:alert] = "Login with Microsoft failed"
