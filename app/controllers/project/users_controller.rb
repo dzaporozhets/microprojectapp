@@ -65,6 +65,6 @@ class Project::UsersController < Project::BaseController
   end
 
   def set_tab
-    @tab_name = 'Project'
+    @tab_name = 'Team'
   end
 end
