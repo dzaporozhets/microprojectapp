@@ -1,84 +1,86 @@
-<div class="resource-container">
-  <!-- Header -->
-  <div class="resource-header">
-    <div>
-      <h3 class="resource-title">Project Settings</h3>
-      <p class="resource-description">Manage your project settings and preferences.</p>
-    </div>
-  </div>
-
-  <div class="p-4 space-y-8">
-    <%= display_flash %>
-
-    <!-- Project Name Section -->
-    <% unless @project.personal? %>
+<div class="lg:w-2/3 mx-auto">
+  <div class="resource-container">
+    <!-- Header -->
+    <div class="resource-header">
       <div>
+        <h3 class="resource-title">Project Settings</h3>
+        <p class="resource-description">Manage your project settings and preferences.</p>
+      </div>
+    </div>
+
+    <div class="p-4 space-y-8">
+      <%= display_flash %>
+
+      <!-- Project Name Section -->
+      <% unless @project.personal? %>
+        <div>
+          <div class="mb-4">
+            <h4 class="text-base font-medium text-gray-900 dark:text-white">Project Name</h4>
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+              Change the name of your project.
+            </p>
+          </div>
+
+          <%= form_with(model: @project, class: "mt-4") do |form| %>
+            <%= render "shared/errors", resource: @project %>
+
+            <div>
+              <%= form.text_field :name, required: true, class: "base-input w-full" %>
+            </div>
+
+            <div class="mt-4">
+              <%= form.submit "Save Changes", class: theme_button_primary %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <!-- Import/Export Section -->
+      <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
         <div class="mb-4">
-          <h4 class="text-base font-medium text-gray-900 dark:text-white">Project Name</h4>
+          <h4 class="text-base font-medium text-gray-900 dark:text-white">Import and Export</h4>
           <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            Change the name of your project.
+            Export your project data as a JSON file including all tasks and notes, then import it into another project.
           </p>
         </div>
 
-        <%= form_with(model: @project, class: "mt-4") do |form| %>
-          <%= render "shared/errors", resource: @project %>
+        <div class="flex space-x-3">
+          <%= button_to "Export Tasks", project_export_path(@project, format: :json), method: :post, class: "btn-base-sm", form: { 'data-turbo': 'false', class: 'inline-block' } %>
+          <%= link_to "Import Tasks", new_project_import_path(@project), class: "btn-base-sm" %>
+        </div>
+      </div>
 
-          <div>
-            <%= form.text_field :name, required: true, class: "base-input w-full" %>
-          </div>
+      <!-- Archive Section -->
+      <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
+        <div class="mb-4">
+          <h4 class="text-base font-medium text-gray-900 dark:text-white">Project Status</h4>
+          <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            <% if @project.archived? %>
+              This project is archived. Unarchiving it will allow the creation of new tasks.
+            <% else %>
+              Archiving this project will prevent the creation of new tasks. This action is easily reversible.
+            <% end %>
+          </p>
+        </div>
 
-          <div class="mt-4">
-            <%= form.submit "Save Changes", class: theme_button_primary %>
-          </div>
+        <% if @project.archived? %>
+          <%= button_to 'Unarchive Project', project_path(@project, project: { archived: false }), method: :patch, class: "btn-primary-sm", data: { confirm: "Are you sure you want to unarchive this project?" } %>
+        <% else %>
+          <%= button_to 'Archive Project', project_path(@project, project: { archived: true }), method: :patch, class: "btn-base-sm", data: { confirm: "Are you sure you want to archive this project?" } %>
         <% end %>
       </div>
-    <% end %>
 
-    <!-- Import/Export Section -->
-    <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
-      <div class="mb-4">
-        <h4 class="text-base font-medium text-gray-900 dark:text-white">Import and Export</h4>
-        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-          Export your project data as a JSON file including all tasks and notes, then import it into another project.
-        </p>
+      <!-- Delete Section -->
+      <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
+        <div class="mb-4">
+          <h4 class="text-base font-medium text-red-600 dark:text-red-400">Delete Project</h4>
+          <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+            Deleting this project will permanently erase all data. Please consider exporting tasks before proceeding.
+          </p>
+        </div>
+
+        <%= button_to "Delete this project", @project, method: :delete, data: { turbo_confirm: 'Remove the project? Are you sure?' }, class: "btn-remove" %>
       </div>
-
-      <div class="flex space-x-3">
-        <%= button_to "Export Tasks", project_export_path(@project, format: :json), method: :post, class: "btn-base", form: { 'data-turbo': 'false', class: 'inline-block' } %>
-        <%= link_to "Import Tasks", new_project_import_path(@project), class: "btn-base" %>
-      </div>
-    </div>
-
-    <!-- Archive Section -->
-    <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
-      <div class="mb-4">
-        <h4 class="text-base font-medium text-gray-900 dark:text-white">Project Status</h4>
-        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-          <% if @project.archived? %>
-            This project is archived. Unarchiving it will allow the creation of new tasks.
-          <% else %>
-            Archiving this project will prevent the creation of new tasks. This action is easily reversible.
-          <% end %>
-        </p>
-      </div>
-
-      <% if @project.archived? %>
-        <%= button_to 'Unarchive Project', project_path(@project, project: { archived: false }), method: :patch, class: "btn-primary", data: { confirm: "Are you sure you want to unarchive this project?" } %>
-      <% else %>
-        <%= button_to 'Archive Project', project_path(@project, project: { archived: true }), method: :patch, class: "btn-base", data: { confirm: "Are you sure you want to archive this project?" } %>
-      <% end %>
-    </div>
-
-    <!-- Delete Section -->
-    <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
-      <div class="mb-4">
-        <h4 class="text-base font-medium text-red-600 dark:text-red-400">Delete Project</h4>
-        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-          Deleting this project will permanently erase all data. Please consider exporting tasks before proceeding.
-        </p>
-      </div>
-
-      <%= button_to "Delete this project", @project, method: :delete, data: { turbo_confirm: 'Remove the project? Are you sure?' }, class: "btn-remove" %>
     </div>
   </div>
 </div>
