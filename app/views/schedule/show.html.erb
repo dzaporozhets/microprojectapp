@@ -4,9 +4,7 @@
   <% content_for :subnav do %>
     <div class="<%= subnav_css %>">
       <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4">
-        <%= home_tabs "Tasks" %>
-
-        <%= render 'tasks/nav' %>
+        <%= home_tabs "Calendar" %>
 
         <% link_to tasks_path, class: "btn-gray block" do %>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400 dark:text-gray-600">
