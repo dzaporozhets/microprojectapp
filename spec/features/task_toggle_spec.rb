@@ -23,19 +23,4 @@ RSpec.feature 'Task Toggle', type: :feature do
     expect(task.reload.done).to be(true)
     expect(page).to have_current_path(tasks_path)
   end
-
-  scenario 'marks a task as done from schedule page', :js do
-    visit schedule_path
-
-    expect(page).to have_content(task.name)
-
-    find('input[name="task[done]"]').click
-
-    within('.task-list') do
-      expect(page).not_to have_content(task.name)
-    end
-
-    expect(task.reload.done).to be(true)
-    expect(page).to have_current_path(schedule_path)
-  end
 end

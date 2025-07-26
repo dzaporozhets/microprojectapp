@@ -1,50 +1,86 @@
 <div class="calendar bg-white dark:bg-gray-800 shadow-sm rounded-md p-4 mb-4">
-  <!-- Three Month Layout -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    <!-- Previous Month -->
-    <%= render_calendar_month(@date.prev_month, @daily_task_counts, params[:date]) %>
+  <!-- Calendar Legend and Navigation -->
+  <div class="mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
+    <div class="flex items-center justify-between">
+      <!-- Calendar Legend -->
+      <div class="flex flex-wrap items-center gap-4 text-xs text-gray-600 dark:text-gray-400">
+        <div class="flex items-center gap-2">
+          <div class="w-4 h-4 rounded-full bg-violet-300 dark:bg-violet-500"></div>
+          <span>Selected & Today</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-4 h-4 rounded-full bg-indigo-100 dark:bg-indigo-400"></div>
+          <span>Selected Date</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-4 h-4 rounded-full ring-2 ring-red-300 dark:ring-red-500 bg-white dark:bg-gray-800"></div>
+          <span>Today</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="w-4 h-4 rounded-full <%= theme_bg %>"></div>
+          <span>Has Tasks</span>
+        </div>
+      </div>
 
+      <!-- Navigation Buttons -->
+      <div class="flex items-center gap-2">
+        <%= link_to schedule_path(date: @date.prev_month), class: "border rounded-full dark:border-gray-600 prev-month flex items-center justify-center p-2 text-gray-400 hover:text-gray-500" do %>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+        <% end %>
+        <%= link_to schedule_path(date: @date.next_month), class: "border rounded-full dark:border-gray-600 next-month flex items-center justify-center p-2 text-gray-400 hover:text-gray-500" do %>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Two Month Layout - Vertical Stack -->
+  <div class="space-y-0">
     <!-- Current Month -->
-    <%= render_calendar_month(@date, @daily_task_counts, params[:date]) %>
+    <div class="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 pb-6 border-b border-gray-200 dark:border-gray-700">
+      <div class="calendar-month">
+        <%= render_calendar_month(@date, @daily_task_counts, params[:date]) %>
+      </div>
+      
+      <!-- Current Month Tasks -->
+      <div class="task-list">
+        <h4 class="text-sm font-medium text-gray-900 dark:text-gray-100 mb-3">Tasks</h4>
+        <% current_month_tasks = @monthly_tasks.select { |task| task.due_date&.month == @date.month } %>
+        <% if current_month_tasks.any? %>
+          <div class="space-y-1">
+            <% current_month_tasks.each do |task| %>
+              <%= render 'schedule/task', task: task %>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-xs text-gray-400 dark:text-gray-500">No tasks scheduled</p>
+        <% end %>
+      </div>
+    </div>
 
     <!-- Next Month -->
-    <%= render_calendar_month(@date.next_month, @daily_task_counts, params[:date]) %>
-  </div>
-
-  <!-- Navigation Buttons -->
-  <div class="flex items-center justify-center mt-4">
-    <%= link_to schedule_path(date: @date.prev_month), class: "border rounded-full dark:border-gray-600 prev-month flex items-center justify-center p-2 text-gray-400 hover:text-gray-500" do %>
-      <span class="sr-only">Previous month</span>
-      <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
-      </svg>
-    <% end %>
-    <%= link_to schedule_path(date: @date.next_month), class: "border rounded-full dark:border-gray-600 next-month ml-2 flex items-center justify-center p-2 text-gray-400 hover:text-gray-500" do %>
-      <span class="sr-only">Next month</span>
-      <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-      </svg>
-    <% end %>
-  </div>
-
-  <!-- Calendar Legend -->
-  <div class="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
-    <div class="flex flex-wrap items-center justify-center gap-4 text-xs text-gray-600 dark:text-gray-400">
-      <div class="flex items-center gap-2">
-        <div class="w-4 h-4 rounded-full bg-violet-300 dark:bg-violet-500"></div>
-        <span>Selected & Today</span>
+    <div class="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 pt-6">
+      <div class="calendar-month">
+        <%= render_calendar_month(@date.next_month, @daily_task_counts, params[:date]) %>
       </div>
-      <div class="flex items-center gap-2">
-        <div class="w-4 h-4 rounded-full bg-indigo-100 dark:bg-indigo-400"></div>
-        <span>Selected Date</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <div class="w-4 h-4 rounded-full ring-2 ring-red-300 dark:ring-red-500 bg-white dark:bg-gray-800"></div>
-        <span>Today</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <div class="w-4 h-4 rounded-full <%= theme_bg %>"></div>
-        <span>Has Tasks</span>
+      
+      <!-- Next Month Tasks -->
+      <div class="task-list">
+        <h4 class="text-sm font-medium text-gray-900 dark:text-gray-100 mb-3">Tasks</h4>
+        <% next_month_tasks = @monthly_tasks.select { |task| task.due_date&.month == @date.next_month.month } %>
+        <% if next_month_tasks.any? %>
+          <div class="space-y-1">
+            <% next_month_tasks.each do |task| %>
+              <%= render 'schedule/task', task: task %>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-xs text-gray-400 dark:text-gray-500">No tasks scheduled</p>
+        <% end %>
       </div>
     </div>
   </div>

@@ -5,11 +5,11 @@ class ScheduleController < ApplicationController
   def show
     @date = user_date || Date.current
 
-    @current_month_name = @date.strftime("%B")
-
-    @monthly_tasks = tasks.where(due_date: @date.all_month).order(due_date: :asc)
-    @past_due_tasks = tasks.where(due_date: ...@date.beginning_of_month).order(due_date: :asc)
-    @upcoming_tasks = tasks.where(due_date: (@date.end_of_month + 1.day)..(@date + 2.months).end_of_month).order(due_date: :asc)
+    # Fetch tasks for current and next months for the calendar view
+    current_month_start = @date.beginning_of_month
+    next_month_end = @date.next_month.end_of_month
+    
+    @monthly_tasks = tasks.where(due_date: current_month_start..next_month_end).order(due_date: :asc)
 
     # Load task counts for previous, current, and next months including full weeks
     prev_month_start = @date.prev_month.beginning_of_month.beginning_of_week(:monday)

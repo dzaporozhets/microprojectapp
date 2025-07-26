@@ -26,22 +26,19 @@
     </button>
   </div>
 
-  <div class="mt-2 text-xs text-gray-500 dark:text-gray-500">
+  <div class="my-2 text-xs text-gray-500 dark:text-gray-500">
     <p>The URL above contains a secure token. If you suspect it has been compromised, you can regenerate it in your account settings.</p>
   </div>
-</div>
 
-<div class="bg-white dark:bg-gray-800 shadow-sm rounded-md p-4 my-4">
+  <hr/>
+
   <!-- Option 2: Download ICS -->
-  <div>
+  <div class="mt-2">
     <p class="text-xs text-gray-600 dark:text-gray-400 mb-3">
     Alternatively, download an .ics file and open it in your calendar app to import your tasks.
     </p>
-    <%= link_to calendar_schedule_path(token: current_user.calendar_token, format: :ics),
-      class: "flex items-center justify-center w-full btn-base-sm" do %>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-      </svg>
+
+    <%= link_to calendar_schedule_path(token: current_user.calendar_token, format: :ics), class: "btn-base-sm" do %>
       Download .ics File
     <% end %>
   </div>
