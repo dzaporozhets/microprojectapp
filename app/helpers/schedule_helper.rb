@@ -30,7 +30,76 @@ module ScheduleHelper
     options
   end
 
+  def calendar_day_classes(day, count, is_today, is_selected, is_current_month)
+    classes = [
+      "mx-auto flex size-6 items-center justify-center rounded-full transition"
+    ]
+
+    if is_selected && is_today
+      classes << "bg-violet-300 text-white dark:bg-violet-500 dark:text-white font-semibold"
+    elsif is_selected
+      classes << "bg-indigo-100 text-indigo-900 dark:bg-indigo-400 dark:text-black font-semibold"
+    elsif is_today
+      classes << "ring-2 ring-red-300 text-black dark:ring-red-500 font-semibold dark:text-red-500"
+    elsif count > 0
+      classes << "#{theme_bg} font-semibold"
+    elsif is_current_month
+      classes << "text-gray-900 dark:text-gray-100"
+    else
+      classes << "text-gray-400"
+    end
+
+    classes << "hover:bg-gray-200 dark:hover:bg-gray-700"
+    classes.join(" ")
+  end
+
+  def render_calendar_month(date, daily_task_counts, selected_date = nil)
+    start_day = date.beginning_of_month.beginning_of_week(:monday)
+    end_day = date.end_of_month.end_of_week(:monday)
+
+    content_tag(:div, class: "calendar-month") do
+      concat(calendar_month_header(date))
+      concat(calendar_day_headings)
+      concat(calendar_days_grid(start_day, end_day, daily_task_counts, selected_date, date))
+    end
+  end
+
   private
+
+  def calendar_month_header(date)
+    content_tag(:div, class: "flex items-center justify-center mb-4") do
+      content_tag(:h3, date.strftime("%B %Y"), class: "text-sm font-semibold text-gray-900 dark:text-gray-100")
+    end
+  end
+
+  def calendar_day_headings
+    content_tag(:div, class: "grid grid-cols-7 text-center text-xs text-gray-500 dark:text-gray-400") do
+      Date::ABBR_DAYNAMES.rotate(1).each do |day|
+        concat(content_tag(:div, day.first))
+      end
+    end
+  end
+
+  def calendar_days_grid(start_day, end_day, daily_task_counts, selected_date, current_month_date)
+    content_tag(:div, class: "mt-2 grid grid-cols-7 text-xs") do
+      (start_day..end_day).each do |day|
+        count = daily_task_counts[day] || 0
+        is_today = day == Date.current
+        is_selected = selected_date && day == selected_date.to_date
+        is_current_month = day.month == current_month_date.month
+
+        classes = calendar_day_classes(day, count, is_today, is_selected, is_current_month)
+
+        concat(
+          content_tag(:div, class: "py-1 border-t border-gray-200 dark:border-gray-700") do
+            link_to schedule_path(date: day), class: classes do
+              content_tag(:time, day.day, datetime: day.iso8601)
+            end
+          end
+        )
+      end
+    end
+  end
 
   def formatted_date(date)
     I18n.l(date, format: :short)

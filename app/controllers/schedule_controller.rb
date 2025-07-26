@@ -11,7 +11,14 @@ class ScheduleController < ApplicationController
     @past_due_tasks = tasks.where(due_date: ...@date.beginning_of_month).order(due_date: :asc)
     @upcoming_tasks = tasks.where(due_date: (@date.end_of_month + 1.day)..(@date + 2.months).end_of_month).order(due_date: :asc)
 
-    @daily_task_counts = tasks.group(:due_date).count.transform_keys(&:to_date)
+    # Load task counts for previous, current, and next months including full weeks
+    prev_month_start = @date.prev_month.beginning_of_month.beginning_of_week(:monday)
+    next_month_end = @date.next_month.end_of_month.end_of_week(:monday)
+    
+    @daily_task_counts = tasks.where(due_date: prev_month_start..next_month_end)
+                              .group(:due_date)
+                              .count
+                              .transform_keys(&:to_date)
   end
 
   def calendar

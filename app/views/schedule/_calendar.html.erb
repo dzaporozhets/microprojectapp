@@ -1,66 +1,51 @@
 <div class="calendar bg-white dark:bg-gray-800 shadow-sm rounded-md p-4 mb-4">
-  <!-- Header with Month and Nav Buttons -->
-  <div class="flex items-center">
-    <h2 class="flex-auto text-base font-semibold text-gray-900 dark:text-gray-100"><%= @date.strftime("%B %Y") %></h2>
-    <%= link_to schedule_path(date: @date.prev_month), class: "border rounded-full dark:border-gray-600 prev-month -my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500" do %>
+  <!-- Three Month Layout -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <!-- Previous Month -->
+    <%= render_calendar_month(@date.prev_month, @daily_task_counts, params[:date]) %>
+
+    <!-- Current Month -->
+    <%= render_calendar_month(@date, @daily_task_counts, params[:date]) %>
+
+    <!-- Next Month -->
+    <%= render_calendar_month(@date.next_month, @daily_task_counts, params[:date]) %>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="flex items-center justify-center mt-4">
+    <%= link_to schedule_path(date: @date.prev_month), class: "border rounded-full dark:border-gray-600 prev-month flex items-center justify-center p-2 text-gray-400 hover:text-gray-500" do %>
       <span class="sr-only">Previous month</span>
-      <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
         <path fill-rule="evenodd" d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
       </svg>
     <% end %>
-    <%= link_to schedule_path(date: @date.next_month), class: "border rounded-full dark:border-gray-600 next-month -my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500" do %>
+    <%= link_to schedule_path(date: @date.next_month), class: "border rounded-full dark:border-gray-600 next-month ml-2 flex items-center justify-center p-2 text-gray-400 hover:text-gray-500" do %>
       <span class="sr-only">Next month</span>
-      <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <svg class="size-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
         <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
       </svg>
     <% end %>
   </div>
 
-  <!-- Day Headings -->
-  <div class="mt-6 grid grid-cols-7 text-center text-sm text-gray-500 dark:text-gray-400">
-    <% Date::ABBR_DAYNAMES.rotate(1).each do |day| %>
-      <div><%= day.first %></div>
-    <% end %>
-  </div>
-
-  <!-- Days Grid -->
-  <div class="mt-2 grid grid-cols-7 text-xs">
-    <% start_day = @date.beginning_of_month.beginning_of_week(:monday) %>
-    <% end_day = @date.end_of_month.end_of_week(:monday) %>
-
-    <% (start_day..end_day).each do |day| %>
-      <div class="py-1 border-t border-gray-200 dark:border-gray-700">
-        <% count = @daily_task_counts[day] || 0 %>
-        <% is_today = day == Date.current %>
-        <% is_selected = params[:date] && day == params[:date].to_date %>
-        <% is_current_month = day.month == @date.month %>
-
-        <% classes = [
-        "mx-auto flex size-8 items-center justify-center rounded-full transition",
-
-        # Selected + today = purple pastel
-        (is_selected && is_today) ? "bg-violet-300 text-white dark:bg-violet-500 dark:text-white font-semibold" :
-
-        # Selected only = indigo pastel
-        is_selected ? "bg-indigo-100 text-indigo-900 dark:bg-indigo-400 dark:text-black font-semibold" :
-
-        # Today only = ring with soft red
-        is_today ? "ring-2 ring-red-300 text-black dark:ring-red-500 font-semibold dark:text-red-500" :
-
-        # Day with tasks = faded violet
-        (count > 0) ? "bg-violet-50 text-violet-800 dark:bg-violet-800 dark:text-violet-200 font-semibold" :
-
-        # Current month vs out-of-month
-        is_current_month ? "text-gray-900 dark:text-gray-100" : "text-gray-400",
-
-        # Hover states
-        "hover:bg-gray-100 dark:hover:bg-gray-700"
-        ].join(" ") %>
-
-        <%= link_to schedule_path(date: day), class: classes do %>
-          <time datetime="<%= day.iso8601 %>"><%= day.day %></time>
-        <% end %>
+  <!-- Calendar Legend -->
+  <div class="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+    <div class="flex flex-wrap items-center justify-center gap-4 text-xs text-gray-600 dark:text-gray-400">
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 rounded-full bg-violet-300 dark:bg-violet-500"></div>
+        <span>Selected & Today</span>
       </div>
-    <% end %>
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 rounded-full bg-indigo-100 dark:bg-indigo-400"></div>
+        <span>Selected Date</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 rounded-full ring-2 ring-red-300 dark:ring-red-500 bg-white dark:bg-gray-800"></div>
+        <span>Today</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="w-4 h-4 rounded-full <%= theme_bg %>"></div>
+        <span>Has Tasks</span>
+      </div>
+    </div>
   </div>
 </div>
