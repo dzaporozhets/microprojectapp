@@ -19,8 +19,8 @@
             <span class="text-gray-400 dark:text-gray-500">(No content)</span>
           <% end %>
           <% if note.updated_at.present? %>
-            <span class="mx-1">&middot;</span>
-            <span>Updated <%= time_ago_in_words(note.updated_at) %> ago</span>
+            <span class="mx-1 hidden sm:inline">&middot;</span>
+            <span class="hidden sm:inline">Updated <%= time_ago_in_words(note.updated_at) %> ago</span>
           <% end %>
         </div>
       </div>
