@@ -8,13 +8,13 @@ class ScheduleController < ApplicationController
     # Fetch tasks for current and next months for the calendar view
     current_month_start = @date.beginning_of_month
     next_month_end = @date.next_month.end_of_month
-    
+
     @monthly_tasks = tasks.where(due_date: current_month_start..next_month_end).order(due_date: :asc)
 
     # Load task counts for previous, current, and next months including full weeks
     prev_month_start = @date.prev_month.beginning_of_month.beginning_of_week(:monday)
     next_month_end = @date.next_month.end_of_month.end_of_week(:monday)
-    
+
     @daily_task_counts = tasks.where(due_date: prev_month_start..next_month_end)
                               .group(:due_date)
                               .count
@@ -40,7 +40,7 @@ class ScheduleController < ApplicationController
   private
 
   def tasks
-    Task.where(project_id: (current_user || @user).all_active_projects).todo.with_due_date.order(due_date: :asc)
+    Task.where(project_id: (current_user || @user).all_active_projects).with_due_date.order(due_date: :asc)
   end
 
   def user_date
