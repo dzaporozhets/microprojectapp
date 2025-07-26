@@ -1,36 +1,38 @@
-<div class="resource-container">
-  <!-- Header with actions -->
-  <div class="resource-header">
-    <div>
-      <h3 class="resource-title">Project Links</h3>
-      <p class="resource-description">Save and manage useful URLs to quickly access external resources or references.</p>
-    </div>
-    <div>
-      <%= link_to 'Add Link', new_project_link_path(@project), class: theme_button_primary %>
-    </div>
-  </div>
-
-  <!-- Links list -->
-  <div class="bg-white dark:bg-gray-800">
-    <% if @project.links.any? %>
-      <ul role="list" class="resource-list">
-        <% @project.links.each do |link| %>
-          <%= render 'project/links/link', link: link %>
-        <% end %>
-      </ul>
-    <% else %>
-      <div class="resource-empty-state">
-        <svg xmlns="http://www.w3.org/2000/svg" class="resource-empty-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
-        </svg>
-        <h3 class="resource-empty-title">No links</h3>
-        <p class="resource-empty-description">Get started by adding your first project link.</p>
-        <div class="resource-empty-action">
-          <%= link_to new_project_link_path(@project), class: theme_button_primary do %>
-            Add a link
-          <% end %>
-        </div>
+<div class="lg:w-2/3 mx-auto">
+  <div class="resource-container">
+    <!-- Header with actions -->
+    <div class="resource-header">
+      <div>
+        <h3 class="resource-title">Project Links</h3>
+        <p class="resource-description">Save and manage useful URLs to quickly access external resources or references.</p>
       </div>
-    <% end %>
+      <div>
+        <%= link_to 'Add Link', new_project_link_path(@project), class: theme_button_primary %>
+      </div>
+    </div>
+
+    <!-- Links list -->
+    <div class="bg-white dark:bg-gray-800">
+      <% if @project.links.any? %>
+        <ul role="list" class="resource-list">
+          <% @project.links.each do |link| %>
+            <%= render 'project/links/link', link: link %>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="resource-empty-state">
+          <svg xmlns="http://www.w3.org/2000/svg" class="resource-empty-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+          </svg>
+          <h3 class="resource-empty-title">No links</h3>
+          <p class="resource-empty-description">Get started by adding your first project link.</p>
+          <div class="resource-empty-action">
+            <%= link_to new_project_link_path(@project), class: theme_button_primary do %>
+              Add a link
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
