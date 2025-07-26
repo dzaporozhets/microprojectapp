@@ -1,6 +1,4 @@
 class Project::UsersController < Project::BaseController
-  layout 'project_extra'
-
   before_action :not_personal
   before_action :project_owner_only!, except: [:index, :leave]
   before_action :set_tab

@@ -1,6 +1,4 @@
 class Project::ActivityController < Project::BaseController
-  layout 'project_extra'
-
   def show
     @tab_name = 'Activity'
 

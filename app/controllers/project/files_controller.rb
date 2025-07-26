@@ -1,6 +1,4 @@
 class Project::FilesController < Project::BaseController
-  layout 'project_extra'
-
   before_action :set_tab
 
   def index

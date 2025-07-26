@@ -3,11 +3,11 @@ class Project::NotesController < Project::BaseController
   before_action :set_tab, only: %i[ show edit index history version ]
 
   def index
-    if note = project.notes.last
-      redirect_to edit_project_note_path(project, note)
-    else
-      redirect_to new_project_note_path(project)
-    end
+    #if note = project.notes.last
+      #redirect_to edit_project_note_path(project, note)
+    #else
+      #redirect_to new_project_note_path(project)
+    #end
   end
 
   def show

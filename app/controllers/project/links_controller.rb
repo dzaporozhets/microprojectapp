@@ -1,6 +1,4 @@
 class Project::LinksController < Project::BaseController
-  layout 'project_extra'
-
   before_action :set_link, only: %i[ show destroy ]
   before_action :set_tab
 
