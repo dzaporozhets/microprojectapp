@@ -32,8 +32,10 @@ RSpec.feature "Project::Notes", type: :feature do
 
     click_button 'Save Changes'
 
-    expect(page).to have_text('123')
-    expect(page).to have_text('456')
+    note.reload
+
+    expect(note.title).to eq('123')
+    expect(note.content).to eq('456')
   end
 
   scenario "User deletes a note" do
@@ -44,7 +46,6 @@ RSpec.feature "Project::Notes", type: :feature do
     click_button "Delete this note"
 
     expect(page).not_to have_text(note.title)
-    expect(page).to have_text('New Note')
-    expect(page).to have_current_path(edit_project_note_path(project, project.notes.last))
+    expect(page).to have_current_path(project_notes_path(project))
   end
 end

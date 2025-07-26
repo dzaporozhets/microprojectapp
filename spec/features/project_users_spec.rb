@@ -79,9 +79,9 @@ RSpec.feature "Project::Users", type: :feature do
     sign_in invited_user
     visit project_users_path(project)
 
-    expect(page).to have_button("Leave project")
+    expect(page).to have_button("Leave Project")
 
-    click_button "Leave project"
+    click_button "Leave Project"
 
     # Should be redirected to projects index page
     expect(page).to have_current_path(projects_path)

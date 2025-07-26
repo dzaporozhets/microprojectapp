@@ -10,7 +10,7 @@
 
       <div class="ml-4">
         <div class="flex items-center">
-          <%= link_to link.url, target: :_blank, class: "text-sm font-medium text-violet-600 dark:text-violet-400 hover:text-violet-800 dark:hover:text-violet-300 truncate" do %>
+          <%= link_to link.url, target: :_blank, class: "text-sm font-medium #{theme_link_primary} truncate" do %>
             <%= link.safe_title %>
           <% end %>
         </div>
