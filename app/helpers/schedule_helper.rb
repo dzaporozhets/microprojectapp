@@ -36,7 +36,7 @@ module ScheduleHelper
     ]
 
     if is_selected && is_today
-      classes << "bg-violet-300 text-white dark:bg-violet-500 dark:text-white font-semibold"
+      classes << "bg-red-300 text-white dark:bg-red-500 dark:text-white font-semibold"
     elsif is_selected
       classes << "bg-indigo-100 text-indigo-900 dark:bg-indigo-400 dark:text-black font-semibold"
     elsif is_today
