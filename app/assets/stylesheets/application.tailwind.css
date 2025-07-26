@@ -206,4 +206,11 @@
   .tasks-list {
     @apply divide-y divide-dashed bg-white dark:bg-gray-800 rounded-lg divide-gray-200 dark:divide-gray-700;
   }
+
+  /*----------------------------------------*
+   * Misc
+   *----------------------------------------*/
+  .nav-border {
+    @apply border-b border-gray-200 dark:border-gray-800;
+  }
 }
