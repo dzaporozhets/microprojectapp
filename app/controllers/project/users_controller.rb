@@ -4,6 +4,7 @@ class Project::UsersController < Project::BaseController
   before_action :set_tab
 
   def index
+    @recent_activity = project.activities.includes(:user).order(id: :desc).limit(20)
   end
 
   def invite
@@ -42,9 +43,9 @@ class Project::UsersController < Project::BaseController
     if project.users.include?(user)
       project.users.delete(user)
 
-      redirect_to project_activity_path(project), notice: 'User was successfully removed.'
+      redirect_to project_users_path(project), notice: 'User was successfully removed.'
     else
-      redirect_to project_activity_path(project), alert: 'User could not be found or removed.'
+      redirect_to project_users_path(project), alert: 'User could not be found or removed.'
     end
   end
 

@@ -7,7 +7,6 @@ module ProjectsHelper
 
     unless project.personal?
       tabs << { name: 'Team', path: project_users_path(project) }
-      tabs << { name: 'Activity', path: project_activity_path(project) }
     end
 
     if project.user == current_user
