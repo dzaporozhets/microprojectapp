@@ -8,61 +8,85 @@
 
 <%= render "shared/flash" %>
 
-<div class="mb-5">
-  <section class="mt-10">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= render "shared/errors", resource: resource %>
-
-      <dl class="space-y-4">
-        <div class="space-y-1">
-          <%= f.label :email, class: 'font-semibold text-sm mt-2 dark:text-gray-200' %>
-
-          <% if resource.oauth_user? %>
-            <%= f.email_field :email, disabled: true, class: 'base-input w-full bg-gray-100 text-gray-500' %>
-          <% else %>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'base-input w-full' %>
-          <% end %>
-
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-          <% end %>
-
-          <% if resource.provider.present? %>
-            <p class="text-sm text-gray-700 dark:text-gray-300 mt-2 font-medium">You sign-up with <%= oauth_provider_name resource.provider %> account. You can't change your email.</p>
-          <% end %>
-        </div>
-
-        <div class="pt-4 space-y-1">
-          <%= f.label :password, 'New password', class: 'font-semibold text-sm mt-2 dark:text-gray-200' %>
-
-          <p class="text-sm text-gray-500">
-          <% if @minimum_password_length %>
-            <%= @minimum_password_length %> characters minimum.
-          <% end %>
-          Leave blank if you don't want to change it.
-          </p>
-
-          <%= f.password_field :password, autocomplete: "new-password", class: 'base-input w-full' %>
-
-
-          <div class="mt-2">
-            <%= f.label :password_confirmation, class: 'text-sm text-gray-700 dark:text-gray-300' %>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'base-input w-full' %>
-          </div>
-        </div>
-
-        <div class="pt-4 space-y-1">
-          <%= f.label :current_password, class: "font-semibold text-sm mt-2 dark:text-gray-200" %>
-
-          <p class="text-sm text-gray-500">We need your current password to confirm your changes</p>
-
-          <%= f.password_field :current_password, autocomplete: "current-password", class: 'base-input w-full', required: true %>
-        </div>
-      </dl>
-
-      <div class="mt-2">
-        <%= f.submit "Save Changes", class: theme_button_primary %>
+<div class="lg:w-2/3 mx-auto mt-4">
+  <div class="resource-container">
+    <div class="resource-header">
+      <div>
+        <h1 class="resource-title">Account Settings</h1>
+        <p class="resource-description">Update your email address and change your password.</p>
       </div>
-    <% end %>
-  </section>
+    </div>
+
+    <div class="p-4">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "shared/errors", resource: resource %>
+
+        <section class="mb-8">
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Email Address</h2>
+          
+          <div class="space-y-4">
+            <div>
+              <%= f.label :email, class: 'block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2' %>
+
+              <% if resource.oauth_user? %>
+                <%= f.email_field :email, disabled: true, class: 'base-input w-full bg-gray-100 text-gray-500' %>
+              <% else %>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'base-input w-full' %>
+              <% end %>
+
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+              <% end %>
+
+              <% if resource.provider.present? %>
+                <p class="text-sm text-gray-700 dark:text-gray-300 mt-2 font-medium">You sign-up with <%= oauth_provider_name resource.provider %> account. You can't change your email.</p>
+              <% end %>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Change Password</h2>
+          
+          <div class="space-y-4">
+            <div>
+              <%= f.label :password, 'New password', class: 'block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2' %>
+
+              <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                <% if @minimum_password_length %>
+                  <%= @minimum_password_length %> characters minimum.
+                <% end %>
+                Leave blank if you don't want to change it.
+              </p>
+
+              <%= f.password_field :password, autocomplete: "new-password", class: 'base-input w-full' %>
+            </div>
+
+            <div>
+              <%= f.label :password_confirmation, class: 'block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2' %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'base-input w-full' %>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Confirm Changes</h2>
+          
+          <div class="space-y-4">
+            <div>
+              <%= f.label :current_password, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
+
+              <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">We need your current password to confirm your changes</p>
+
+              <%= f.password_field :current_password, autocomplete: "current-password", class: 'base-input w-full', required: true %>
+            </div>
+          </div>
+        </section>
+
+        <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+          <%= f.submit "Save Changes", class: theme_button_primary %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

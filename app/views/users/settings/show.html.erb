@@ -8,77 +8,90 @@
 
 <%= display_flash %>
 
-<div class="mb-5">
-  <%= form_for(@user, url: users_settings_path, html: { method: :put }, data: { turbo: false }) do |f| %>
-    <%= render "shared/errors", resource: @user %>
-
-    <section class="mt-4 dark:text-gray-200">
-      <h2 class="section-title">Privacy and Security</h2>
-
-      <dl class="space-y-4">
-        <div class="">
-          <%= f.check_box :allow_invites, class: 'checkbox' %>
-          <%= f.label :allow_invites, "Allow other users to add you to projects", class: 'ml-2 text-sm' %>
-        </div>
-
-        <% unless current_user.oauth_user? %>
-          <div class="">
-            <%= f.check_box :otp_required_for_login, class: 'checkbox' %>
-            <%= f.label :otp_required_for_login, "Enable Two-Factor Authentication", class: 'ml-2 text-sm' %>
-          </div>
-        <% end %>
-      </dl>
-    </section>
-
-    <section class="mt-10">
-      <h2 class="section-title">Appearance</h2>
-      <p class="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">Choose your preferred dark mode setting</p>
-      <div class="mt-6 space-y-6 sm:flex sm:items-center sm:space-x-10 sm:space-y-0 mb-2">
-        <div class="flex items-center">
-          <%= f.radio_button :dark_mode, :on, class: "h-4 w-4 radio" %>
-          <%= f.label :dark_mode_on, "Light", class: "ml-3 block text-sm font-medium leading-6 text-gray-900 dark:text-gray-200" %><br>
-        </div>
-
-        <div class="flex items-center">
-          <%= f.radio_button :dark_mode, :off, class: "h-4 w-4 radio" %>
-          <%= f.label :dark_mode_off, "Dark", class: "ml-3 block text-sm font-medium leading-6 text-gray-900 dark:text-gray-200"  %><br>
-        </div>
-
-        <div class="flex items-center">
-          <%= f.radio_button :dark_mode, :auto, class: "h-4 w-4 radio" %>
-          <%= f.label :dark_mode_auto, "Auto", class: "ml-3 block text-sm font-medium leading-6 text-gray-900 dark:text-gray-200"  %>
-        </div>
+<div class="lg:w-2/3 mx-auto mt-4">
+  <div class="resource-container">
+    <div class="resource-header">
+      <div>
+        <h1 class="resource-title">Settings</h1>
+        <p class="resource-description">Manage your account preferences, privacy settings, and appearance.</p>
       </div>
-      <div class="mt-6">
-        <%= f.label :theme, "Theme", class: "block text-sm font-medium text-gray-900 dark:text-gray-200" %>
-        <%= f.select :theme,
-          User.available_themes.map { |id, name| [name, id] }, {},
-          class: "mt-1 block w-full base-input" %>
-      </div>
-    </section>
-
-    <section class="mt-10">
-      <h2 class="section-title">Avatar</h2>
-
-      <div class="mt-6 flex items-center justify-between sm:space-x-6 mb-2">
-        <!-- File Upload -->
-        <div class="flex-grow">
-          <%= f.file_field :avatar,
-            accept: allowed_img_file_types,
-            class: "appearance-none file-select text-sm leading-tight file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-medium w-full" %>
-        </div>
-
-        <!-- Avatar Preview -->
-        <div class="flex-shrink-0">
-          <% if @user.img_url.present? %>
-            <%= image_tag @user.img_url, alt: "Current Avatar", class: "w-10 h-10 rounded-full object-cover ml-4" %>
-          <% end %>
-        </div>
-      </div>
-    </section>
-
-    <div class="mt-5">
-      <%= f.submit "Save Settings", class: theme_button_primary %>
     </div>
-  <% end %>
+
+    <div class="p-4">
+      <%= form_for(@user, url: users_settings_path, html: { method: :put }, data: { turbo: false }) do |f| %>
+        <%= render "shared/errors", resource: @user %>
+
+        <section class="mb-8">
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Privacy and Security</h2>
+
+          <div class="space-y-4">
+            <div class="flex items-center">
+              <%= f.check_box :allow_invites, class: 'checkbox' %>
+              <%= f.label :allow_invites, "Allow other users to add you to projects", class: 'ml-2 text-sm text-gray-700 dark:text-gray-300' %>
+            </div>
+
+            <% unless current_user.oauth_user? %>
+              <div class="flex items-center">
+                <%= f.check_box :otp_required_for_login, class: 'checkbox' %>
+                <%= f.label :otp_required_for_login, "Enable Two-Factor Authentication", class: 'ml-2 text-sm text-gray-700 dark:text-gray-300' %>
+              </div>
+            <% end %>
+          </div>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Appearance</h2>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Choose your preferred dark mode setting</p>
+
+          <div class="space-y-4 mb-6">
+            <div class="flex items-center">
+              <%= f.radio_button :dark_mode, :on, class: "h-4 w-4 radio" %>
+              <%= f.label :dark_mode_on, "Light", class: "ml-3 block text-sm font-medium text-gray-900 dark:text-gray-200" %>
+            </div>
+
+            <div class="flex items-center">
+              <%= f.radio_button :dark_mode, :off, class: "h-4 w-4 radio" %>
+              <%= f.label :dark_mode_off, "Dark", class: "ml-3 block text-sm font-medium text-gray-900 dark:text-gray-200" %>
+            </div>
+
+            <div class="flex items-center">
+              <%= f.radio_button :dark_mode, :auto, class: "h-4 w-4 radio" %>
+              <%= f.label :dark_mode_auto, "Auto", class: "ml-3 block text-sm font-medium text-gray-900 dark:text-gray-200" %>
+            </div>
+          </div>
+
+          <div>
+            <%= f.label :theme, "Theme", class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
+            <%= f.select :theme,
+              User.available_themes.map { |id, name| [name, id] }, {},
+              class: "block w-full base-input" %>
+          </div>
+        </section>
+
+        <section class="mb-4">
+          <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Avatar</h2>
+
+          <div class="flex items-center justify-between space-x-4">
+            <!-- File Upload -->
+            <div class="flex-grow">
+              <%= f.file_field :avatar,
+                accept: allowed_img_file_types,
+                class: "appearance-none file-select text-sm leading-tight file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-medium w-full" %>
+            </div>
+
+            <!-- Avatar Preview -->
+            <div class="flex-shrink-0">
+              <% if @user.img_url.present? %>
+                <%= image_tag @user.img_url, alt: "Current Avatar", class: "w-10 h-10 rounded-full object-cover" %>
+              <% end %>
+            </div>
+          </div>
+        </section>
+
+        <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+          <%= f.submit "Save Settings", class: theme_button_primary %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
