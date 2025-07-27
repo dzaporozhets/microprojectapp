@@ -22,12 +22,12 @@
     <% end %>
 
     <section class="task-list">
-      <ol class="text-sm leading-6 text-gray-500">
+      <div class="text-sm leading-6 text-gray-500 space-y-6">
         <% if @tasks.any? %>
           <% @tasks.group_by_projects.each do |project, tasks| %>
-            <div class="project-group mb-6">
+            <div class="project-group">
               <div class="flex justify-between items-center">
-                <h2 class="flex py-2 text-base font-semibold text-gray-900 dark:text-gray-200"><%= link_to project.name.truncate(100), project, class: 'hover:underline' %></h2>
+                <h2 class="flex text-base font-semibold text-gray-900 dark:text-gray-200"><%= link_to project.name.truncate(100), project, class: 'hover:underline' %></h2>
                 <%= link_to new_project_task_path(project), class: 'block' do %>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 flex-shrink-0 text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 0 0 2.25-2.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v2.25A2.25 2.25 0 0 0 6 10.5Zm0 9.75h2.25A2.25 2.25 0 0 0 10.5 18v-2.25a2.25 2.25 0 0 0-2.25-2.25H6a2.25 2.25 0 0 0-2.25 2.25V18A2.25 2.25 0 0 0 6 20.25Zm9.75-9.75H18a2.25 2.25 0 0 0 2.25-2.25V6A2.25 2.25 0 0 0 18 3.75h-2.25A2.25 2.25 0 0 0 13.5 6v2.25a2.25 2.25 0 0 0 2.25 2.25Z" />
@@ -48,7 +48,7 @@
             <p class="">No tasks due this month.</p>
           </li>
         <% end %>
-      </ol>
+      </div>
     </section>
   </div>
 </div>

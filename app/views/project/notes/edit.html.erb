@@ -1,5 +1,5 @@
 <div class="">
-  <div class="w-full py-4">
+  <div class="w-full">
     <%= form_with(model: [@project, @note], class: "contents", data: { controller: "notes", note_id: @note.id }) do |form| %>
       <%= render "shared/errors", resource: @note %>
 
