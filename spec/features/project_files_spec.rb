@@ -39,7 +39,7 @@ RSpec.feature "Project::Files", type: :feature do
   scenario "User visits files page" do
     visit project_files_path(project_with_files)
 
-    expect(page).to have_current_path(project_files_path(project_with_files))
+    expect(page).to have_current_path(overview_project_path(project_with_files))
     expect(page).to have_text('test_file.txt')
   end
 end
