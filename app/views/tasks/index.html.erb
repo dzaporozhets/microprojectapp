@@ -3,7 +3,7 @@
 
   <% content_for :subnav do %>
     <div class="<%= subnav_css %>">
-      <div class="flex flex-wrap justify-between lg:justify-center items-center mx-auto max-w-screen-xl px-4">
+      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-lg px-4">
         <%= home_tabs "Tasks" %>
 
         <% link_to schedule_path, class: "btn-gray block" do %>
@@ -15,7 +15,7 @@
     </div>
   <% end %>
 
-  <div class="mb-4 md:mb-0 lg:w-2/3 mx-auto">
+  <div class="mb-4 md:mb-0">
 
     <% if current_user.created_today? %>
       <p class="text-sm text-gray-500 mb-4">Active tasks from your projects. To create a new task or view completed ones, visit the project page.</p>

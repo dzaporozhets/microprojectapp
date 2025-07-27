@@ -3,7 +3,7 @@
 
   <% content_for :subnav do %>
     <div class="<%= subnav_css %>">
-      <div class="flex flex-wrap  justify-between lg:justify-center items-center mx-auto max-w-screen-xl px-4">
+      <div class="flex flex-wrap  justify-between items-center mx-auto max-w-screen-lg px-4">
         <%= home_tabs "Calendar" %>
 
         <% link_to tasks_path, class: "btn-gray block" do %>
@@ -17,24 +17,20 @@
 
   <!-- Calendar Section -->
   <div class="mb-8">
-    <div class="lg:w-2/3 mx-auto">
-      <%= render 'calendar' %>
-    </div>
+    <%= render 'calendar' %>
   </div>
 
   <!-- Calendar Export Section -->
   <div class="mb-8">
-    <div class="lg:w-2/3 mx-auto">
-      <% if current_user.calendar_token.present? %>
-        <%= render 'calendar_export' %>
-      <% else %>
-        <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 text-yellow-800 dark:text-yellow-200 rounded-md p-4">
-          <h3 class="text-base font-semibold mb-2">Calendar Export Unavailable</h3>
-          <p class="text-sm">
-          You need to generate a calendar token before you can export or subscribe to your schedule. Please visit your <%= link_to 'account settings', users_account_path, class: "underline" %> to generate one.
-          </p>
-        </div>
-      <% end %>
-    </div>
+    <% if current_user.calendar_token.present? %>
+      <%= render 'calendar_export' %>
+    <% else %>
+      <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 text-yellow-800 dark:text-yellow-200 rounded-md p-4">
+        <h3 class="text-base font-semibold mb-2">Calendar Export Unavailable</h3>
+        <p class="text-sm">
+        You need to generate a calendar token before you can export or subscribe to your schedule. Please visit your <%= link_to 'account settings', users_account_path, class: "underline" %> to generate one.
+        </p>
+      </div>
+    <% end %>
   </div>
 </div>
