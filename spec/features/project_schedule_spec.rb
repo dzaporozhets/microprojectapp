@@ -19,7 +19,7 @@ RSpec.feature "Project Schedule", type: :feature do
 
       visit project_schedule_path(project)
 
-      within("section", text: Date.current.strftime("%B")) do
+      within(".resource-container", text: Date.current.strftime("%B")) do
         expect(page).to have_content("Past Task")
         expect(page).to have_content("Today Task")
         expect(page).to have_content("Tomorrow Task")
@@ -27,13 +27,13 @@ RSpec.feature "Project Schedule", type: :feature do
         expect(page).not_to have_content("Next Month Task")
       end
 
-      within("section", text: Date.current.next_month.strftime("%B")) do
+      within(".resource-container", text: Date.current.next_month.strftime("%B")) do
         expect(page).to have_content("Next Month Task")
         expect(page).not_to have_content("End of Month Task")
         expect(page).not_to have_content("Month After Next Task")
       end
 
-      within("section", text: Date.current.next_month.next_month.strftime("%B")) do
+      within(".resource-container", text: Date.current.next_month.next_month.strftime("%B")) do
         expect(page).to have_content("Month After Next Task")
         expect(page).not_to have_content("Next Month Task")
       end
