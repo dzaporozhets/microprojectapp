@@ -1,90 +1,85 @@
 <%- task = @task %>
 
-<div class="mt-2 sm:mx-auto sm:w-full sm:max-w-2xl">
+<div class="lg:w-2/3 mx-auto mt-4">
   <%= display_flash %>
 
-  <%= content_tag :div, class: "window-block" do %>
-    <%= form_with(model: [task.project, task], data: { turbo: turbo_frame_request? }) do |form| %>
-      <div class="window-header <%= task_details_css(task) %>">
-        <div class="flex-none">
-          <h1 class="text-lg font-semibold <%= theme_text_subtle %>">
-            Edit task
-          </h1>
+  <div class="resource-container">
+    <div class="resource-header">
+      <div class="flex items-center justify-between w-full">
+        <div>
+          <h1 class="resource-title">Edit task</h1>
         </div>
 
-        <div class="grow mx-2 text-center">
-        </div>
-
-        <div class="flex-none">
-          <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, title: 'Cancel', class: 'ml-2 btn-sm' do %>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 inline-block">
+        <div class="flex items-center space-x-2">
+          <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, title: 'Cancel', class: 'btn-sm' do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
           <% end %>
         </div>
       </div>
+    </div>
 
+    <%= form_with(model: [task.project, task], data: { turbo: turbo_frame_request? }) do |form| %>
       <% if task.errors.any? %>
-        <div id="ar-errors-text" data-turbo-cache="false" class="p-3 mb-3 bg-gray-50 rounded-md border dark:bg-gray-700 dark:border-gray-600">
+        <div id="ar-errors-text" data-turbo-cache="false" class="p-4 mb-4 bg-red-50 border border-red-200 rounded-md dark:bg-red-900/20 dark:border-red-800">
           <%= render("project/tasks/form_errors", resource: task) %>
         </div>
       <% end %>
 
-      <div class="p-3 md:my-3">
-        <div class="mb-3">
-          <%= form.label :name, class: "text-sm text-gray-500 dark:text-gray-400" %>
-          <%= form.text_area :name, class: "mt-1 block base-input w-full", required: true, rows: 2 %>
+      <div class="p-4 space-y-6">
+        <div>
+          <%= form.label :name, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
+          <%= form.text_area :name, class: "block w-full base-input", required: true, rows: 2, placeholder: "Enter task name..." %>
         </div>
 
-        <div class="mb-3">
-          <%= form.label :description, class: "text-sm text-gray-500 dark:text-gray-400" %>
-          <%= form.text_area :description, class: "block base-input mt-1 w-full resize-y", rows: 5 %>
+        <div>
+          <%= form.label :description, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
+          <%= form.text_area :description, class: "block w-full base-input resize-y", rows: 5, placeholder: "Enter task description..." %>
         </div>
-      </div>
 
-      <div class="text-sm text-gray-600 dark:text-gray-400 border-t dark:border-t-gray-600 p-3">
-        <%= form.label :done, class: "text-sm text-gray-500 dark:text-gray-400" do %>
-          <%= form.check_box :done, class: "w-4 h-4 checkbox" %>
-          Mark task as completed
+        <div class="flex items-center py-3 border-t border-gray-200 dark:border-gray-700">
+          <%= form.label :done, class: "flex items-center text-sm text-gray-900 dark:text-gray-200" do %>
+            <%= form.check_box :done, class: "w-4 h-4 checkbox mr-2" %>
+            Mark task as completed
+          <% end %>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 py-3 border-t border-gray-200 dark:border-gray-700">
+          <div>
+            <%= form.label :due_date, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
+            <%= form.date_field :due_date, class: "block w-full base-input" %>
+          </div>
+
+          <div>
+            <%= form.label :assigned_user_id, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
+            <%= form.collection_select :assigned_user_id, task.project.team, :id, :email, { include_blank: "None" }, { class: "block w-full base-input" } %>
+          </div>
+        </div>
+
+        <% if @project.notes.any? %>
+          <div class="py-3 border-t border-gray-200 dark:border-gray-700">
+            <%= form.label :note_id, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
+            <%= form.collection_select :note_id, task.project.notes, :id, :title, { include_blank: "None" }, { class: "block w-full base-input" } %>
+          </div>
         <% end %>
-      </div>
 
-      <div class="text-sm text-gray-600 dark:text-gray-400 border-t dark:border-t-gray-600 p-3">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
-          <div>
-            <%= form.label :due_date, class: "text-sm text-gray-500 dark:text-gray-400" %>
-            <%= form.date_field :due_date, class: "mt-1 block w-full base-input" %>
-          </div>
-
-          <div>
-            <%= form.label :assigned_user_id, class: "text-sm text-gray-500 dark:text-gray-400" %>
-            <%= form.collection_select :assigned_user_id, task.project.team, :id, :email, { include_blank: "None" }, { class: "mt-1 block w-full base-input" } %>
-          </div>
+        <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+          <%= form.submit 'Save changes', class: theme_button_primary %>
         </div>
-      </div>
-
-      <% if @project.notes.any? %>
-        <div class="text-sm text-gray-600 dark:text-gray-400 border-t dark:border-t-gray-600 p-3">
-          <div class="mb-3">
-            <%= form.label :note_id, class: "text-sm text-gray-500 dark:text-gray-400" %>
-            <%= form.collection_select :note_id, task.project.notes, :id, :title, { include_blank: "None" }, { class: "mt-1 block w-full base-input" } %>
-          </div>
-        </div>
-      <% end %>
-
-      <div class="text-xs text-gray-500 border-t dark:border-t-gray-600 p-3 flex justify-between">
-        <%= form.submit 'Save changes', class: theme_button_primary %>
       </div>
     <% end %>
-  <% end %>
+  </div>
 
-  <section class="mt-4 border rounded-md p-3 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-    <div class="flex justify-between">
-      <div class="text-sm text-gray-500 py-2 flex">
-        <%= link_to last_update_text(task), changes_project_task_path(task.project, task), class: 'underline text-sm text-gray-500' %>
+  <div class="resource-container mt-6">
+    <div class="p-4">
+      <div class="flex items-center justify-between">
+        <div class="text-sm text-gray-600 dark:text-gray-400">
+          <%= link_to last_update_text(task), changes_project_task_path(task.project, task), class: 'underline hover:text-gray-900 dark:hover:text-gray-200' %>
+        </div>
+
+        <%= button_to "Delete this task", [task.project, task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?', turbo: turbo_frame_request? }, class: "btn-remove", form_class: "" %>
       </div>
-
-      <%= button_to "Delete this task", [task.project, task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?', turbo: turbo_frame_request? }, class: "btn-remove border", form_class: "" %>
     </div>
-  </section>
+  </div>
 </div>
