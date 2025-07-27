@@ -5,12 +5,20 @@ RSpec.feature "Admin Area", type: :feature do
   let(:non_admin) { create(:user) }
 
   scenario "Admin can view the users index page" do
+    # Ensure both users exist
+    admin
+    non_admin
+    
     sign_in admin
 
     visit admin_users_path
 
     expect(page).to have_content("Users")
-    expect(page).to have_css("table")
+    expect(page).to have_content("Manage all registered users in the system")
+    expect(page).to have_css(".resource-container")
+    expect(page).to have_content(admin.email)
+    # Check for at least one user being displayed (the admin user we're signed in as)
+    expect(page).to have_content("Admin")
   end
 
   scenario "Non-admin user cannot access admin users page" do
