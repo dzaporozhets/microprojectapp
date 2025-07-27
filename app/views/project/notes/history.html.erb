@@ -1,51 +1,70 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <h1 class="text-xl font-semibold text-gray-800 dark:text-gray-200 leading-10">
-    <%= @note.title %>
-  </h1>
-
-  <p class="mt-1 text-gray-500 text-sm">Showing the last 10 versions of this note</p>
-
-  <!-- Versions Table -->
-  <div class="mt-6">
-    <% if @versions.any? %>
-      <div class="overflow-x-auto">
-        <table class="min-w-full border border-gray-300 dark:border-gray-700 divide-y divide-gray-200 dark:divide-gray-600">
-          <thead class="bg-gray-50 dark:bg-gray-800">
-            <tr>
-              <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Version</th>
-              <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Changed By</th>
-              <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">Details</th>
-            </tr>
-          </thead>
-          <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
-            <% @versions.each_with_index do |version, index| %>
-              <tr>
-                <td class="px-4 py-2 text-sm text-gray-600 dark:text-gray-400">
-                  <%= l(version.created_at, format: :long) %>
-                </td>
-                <td class="px-4 py-2 text-sm text-gray-600 dark:text-gray-400">
-                  <%= @users_by_version[version.id]&.email || "Unknown" %>
-                </td>
-                <td class="px-4 py-2 text-sm">
-                  <%= link_to "View Changes", version_project_note_path(@note.project, @note, version_id: version.id),
-                    class: "text-violet-700 hover:text-violet-800 dark:text-violet-200 dark:hover:text-violet-300 hover:underline" %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
+<div class="lg:w-2/3 mx-auto space-y-6">
+  <div class="resource-container">
+    <div class="resource-header">
+      <div class="flex items-center justify-between w-full">
+        <div>
+          <h1 class="resource-title"><%= @note.title %></h1>
+          <p class="resource-description">Showing the last 10 versions of this note</p>
+        </div>
       </div>
-    <% else %>
-      <p class="p-4 text-sm text-gray-600 bg-gray-50 dark:bg-gray-800 rounded-md text-center">No versions available for this note.</p>
-    <% end %>
+    </div>
+
+    <div class="p-4">
+      <% if @versions.any? %>
+        <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
+          <% @versions.each_with_index do |version, index| %>
+            <div class="py-4">
+              <div class="flex items-center justify-between">
+                <div class="flex-1">
+                  <div class="flex items-center space-x-4">
+                    <div class="text-sm text-gray-600 dark:text-gray-400">
+                      <%= l(version.created_at, format: :long) %>
+                    </div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">
+                      by <%= @users_by_version[version.id]&.email || "Unknown" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex-shrink-0">
+                  <%= link_to "View Changes", version_project_note_path(@note.project, @note, version_id: version.id),
+                    class: theme_link_primary %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="resource-empty-state">
+          <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gray-100 dark:bg-gray-800 mx-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+            </svg>
+          </div>
+          <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-200">No versions available</h3>
+          <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">No version history found for this note.</p>
+        </div>
+      <% end %>
+    </div>
   </div>
 
-  <div class="mt-7 border dark:border-gray-700 p-4 text-sm bg-gray-50 dark:bg-gray-800 rounded-md flex justify-between">
-    <p class="text-sm text-gray-500 py-2 hidden md:flex">
-      Created by <%= @note.user.email %> at <%= l(@note.created_at, format: :long)  %>
-    </p>
+  <div class="resource-container">
+    <div class="resource-header">
+      <div class="flex items-center justify-between w-full">
+        <div>
+          <h2 class="resource-title">Note Information</h2>
+        </div>
+      </div>
+    </div>
 
-    <%= button_to 'Delete this note', project_note_path(@note.project, @note), method: :delete, data: { turbo_confirm: 'Delete the note? Are you sure?' }, alt: 'delete', title: 'Delete', class: 'btn-remove border' %>
+    <div class="p-4">
+      <div class="flex items-center justify-between">
+        <div class="text-sm text-gray-500 dark:text-gray-400">
+          Created by <%= @note.user.email %> at <%= l(@note.created_at, format: :long) %>
+        </div>
+
+        <%= button_to 'Delete this note', project_note_path(@note.project, @note), method: :delete, data: { turbo_confirm: 'Delete the note? Are you sure?' }, alt: 'delete', title: 'Delete', class: 'btn-remove' %>
+      </div>
+    </div>
   </div>
 </div>
 

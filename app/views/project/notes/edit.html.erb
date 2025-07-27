@@ -1,4 +1,4 @@
-<div class="">
+<div class="lg:w-2/3 mx-auto space-y-6">
   <div class="w-full">
     <%= form_with(model: [@project, @note], class: "contents", data: { controller: "notes", note_id: @note.id }) do |form| %>
       <%= render "shared/errors", resource: @note %>

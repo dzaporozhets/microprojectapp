@@ -83,7 +83,8 @@ RSpec.feature "Project::Tasks", type: :feature do
 
       expect(page).to have_content('Task with no changes')
       expect(page).to have_content('Showing the last 5 changes to this task')
-      expect(page).to have_content('No versions available for this task')
+      expect(page).to have_content('No versions available')
+      expect(page).to have_content('No version history found for this task')
     end
 
     scenario 'User views task change history with multiple changes' do
@@ -112,7 +113,7 @@ RSpec.feature "Project::Tasks", type: :feature do
       expect(page).to have_content('Showing the last 5 changes to this task')
 
       # Check for version information
-      expect(page).to have_content('Changed By')
+      expect(page).to have_content('by')
       expect(page).to have_content(user.email)
 
       # Check for change details
