@@ -25,39 +25,47 @@
         </div>
       <% end %>
 
-      <div class="p-4 space-y-6">
-        <div>
-          <%= form.label :name, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
-          <%= form.text_area :name, class: "block w-full base-input", required: true, rows: 2, placeholder: "Enter task name..." %>
-        </div>
-
-        <div>
-          <%= form.label :description, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
-          <%= form.text_area :description, class: "block w-full base-input resize-y", rows: 3, placeholder: "Enter task description..." %>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 py-3 border-t border-gray-200 dark:border-gray-700">
+      <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
+        <div class="p-4">
           <div>
-            <%= form.label :due_date, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
-            <%= form.date_field :due_date, class: "block w-full base-input" %>
+            <%= form.label :name, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
+            <%= form.text_area :name, class: "block w-full base-input", required: true, rows: 2, placeholder: "Enter task name..." %>
           </div>
+        </div>
 
-          <% unless @project.personal? %>
+        <div class="p-4">
+          <div>
+            <%= form.label :description, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
+            <%= form.text_area :description, class: "block w-full base-input resize-y", rows: 3, placeholder: "Enter task description..." %>
+          </div>
+        </div>
+
+        <div class="p-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <%= form.label :assigned_user_id, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
-              <%= form.collection_select :assigned_user_id, @project.team, :id, :email, { include_blank: "None" }, { class: "block w-full base-input" } %>
+              <%= form.label :due_date, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
+              <%= form.date_field :due_date, class: "block w-full base-input" %>
             </div>
-          <% end %>
+
+            <% unless @project.personal? %>
+              <div>
+                <%= form.label :assigned_user_id, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
+                <%= form.collection_select :assigned_user_id, @project.team, :id, :email, { include_blank: "None" }, { class: "block w-full base-input" } %>
+              </div>
+            <% end %>
+          </div>
         </div>
 
         <% if @project.notes.any? %>
-          <div class="py-3 border-t border-gray-200 dark:border-gray-700">
-            <%= form.label :note_id, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
-            <%= form.collection_select :note_id, @project.notes, :id, :title, { include_blank: "None" }, { class: "block w-full base-input" } %>
+          <div class="p-4">
+            <div>
+              <%= form.label :note_id, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
+              <%= form.collection_select :note_id, @project.notes, :id, :title, { include_blank: "None" }, { class: "block w-full base-input" } %>
+            </div>
           </div>
         <% end %>
 
-        <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+        <div class="p-4">
           <%= form.submit 'Create task', class: theme_button_primary %>
         </div>
       </div>
