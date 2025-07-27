@@ -3,11 +3,7 @@ class Project::NotesController < Project::BaseController
   before_action :set_tab, only: %i[ show edit index history version ]
 
   def index
-    #if note = project.notes.last
-      #redirect_to edit_project_note_path(project, note)
-    #else
-      #redirect_to new_project_note_path(project)
-    #end
+    redirect_to overview_project_path(@project)
   end
 
   def show
@@ -60,7 +56,7 @@ class Project::NotesController < Project::BaseController
     @project.add_activity(current_user, 'removed', @note)
 
     respond_to do |format|
-      format.html { redirect_to project_notes_url(project) }
+      format.html { redirect_to overview_project_path(@project) }
       format.json { head :no_content }
     end
   end
@@ -72,7 +68,7 @@ class Project::NotesController < Project::BaseController
   end
 
   def set_tab
-    @tab_name = 'Notes'
+    @tab_name = 'Project'
   end
 
   def note_params

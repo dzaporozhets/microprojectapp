@@ -2,7 +2,7 @@ class Project::FilesController < Project::BaseController
   before_action :set_tab
 
   def index
-    @files = project.project_files
+    redirect_to overview_project_path(@project)
   end
 
   def new
@@ -26,7 +26,7 @@ class Project::FilesController < Project::BaseController
     add_more_files(params[:project][:project_files])
 
     if project.save
-      redirect_to project_files_path(project), notice: 'Files were successfully uploaded.'
+      redirect_to overview_project_path(@project), notice: 'Files were successfully uploaded.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -38,7 +38,7 @@ class Project::FilesController < Project::BaseController
     project.save
 
     respond_to do |format|
-      format.html { redirect_to project_files_url(@project) }
+      format.html { redirect_to overview_project_path(@project) }
       format.json { head :no_content }
     end
   end
@@ -63,6 +63,6 @@ class Project::FilesController < Project::BaseController
   end
 
   def set_tab
-    @tab_name = 'Files'
+    @tab_name = 'Project'
   end
 end
