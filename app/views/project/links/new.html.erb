@@ -1,11 +1,16 @@
-<div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-md">
-  <h1 class="font-bold text-2xl dark:text-gray-200">New link (bookmark)</h1>
+<div class="lg:w-2/3 mx-auto mt-4">
+  <div class="resource-container">
+    <div class="resource-header">
+      <div>
+        <h1 class="resource-title">New link (bookmark)</h1>
+        <p class="resource-description">
+          Use the link feature to save URLs for external resources related to your project. This is ideal for links to documents, articles, or tools.
+        </p>
+      </div>
+    </div>
 
-  <div class="mt-3">
-    <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">
-      Use the link feature to save URLs for external resources related to your project. This is ideal for links to documents, articles, or tools.
-    </p>
+    <div class="p-4 pt-0">
+      <%= render "form", link: @link %>
+    </div>
   </div>
-
-  <%= render "form", link: @link %>
 </div>

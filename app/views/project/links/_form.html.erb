@@ -1,17 +1,19 @@
 <%= form_with(model: [@project, link], class: "contents") do |form| %>
   <%= render "shared/errors", resource: link %>
 
-  <div class="mt-5">
-    <%= form.label :url, "Put your URL here", class: 'text-gray-600 dark:text-gray-400 font-semibold' %>
-    <%= form.text_field :url, class: "block base-input mt-2 w-full", required: true %>
-  </div>
+  <div class="space-y-6">
+    <div>
+      <%= form.label :url, "Put your URL here", class: 'block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2' %>
+      <%= form.text_field :url, class: "block w-full base-input", required: true, placeholder: "https://example.com" %>
+    </div>
 
-  <div class="mt-5">
-    <%= form.label :title, 'Give it a name or leave blank', class: 'text-gray-600 dark:text-gray-400 text-sm' %>
-    <%= form.text_field :title, class: "block base-input mt-2 w-full" %>
-  </div>
+    <div>
+      <%= form.label :title, 'Give it a name or leave blank', class: 'block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2' %>
+      <%= form.text_field :title, class: "block w-full base-input", placeholder: "Optional title for the link" %>
+    </div>
 
-  <div class="mt-5">
-    <%= form.submit class: theme_button_primary %>
+    <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+      <%= form.submit class: theme_button_primary %>
+    </div>
   </div>
 <% end %>
