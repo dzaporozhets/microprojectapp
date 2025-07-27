@@ -8,7 +8,7 @@
     <%= render 'layouts/header_compact' %>
 
     <nav class="nav-border">
-      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-lg px-4 py-4">
+      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-md px-4 py-4">
         <%= link_to users_settings_path do %>
           <div class="flex items-start gap-x-3">
             <div class="font-medium leading-6 text-base">
@@ -21,7 +21,7 @@
 
     <%= yield :subnav %>
 
-    <main class="container mx-auto max-w-screen-lg p-4 flex">
+    <main class="container mx-auto max-w-screen-md p-4 flex">
       <div class="w-full">
         <%= yield %>
       </div>
