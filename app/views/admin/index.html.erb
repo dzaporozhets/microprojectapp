@@ -6,118 +6,133 @@
   </div>
 <% end %>
 
-<div class="my-5 grid grid-cols-1 gap-4 lg:grid-cols-2">
-  <div>
-    <div class="px-4 sm:px-0">
-      <h3 class="text-base font-semibold leading-7 text-gray-900 dark:text-gray-200">Application Information</h3>
-      <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Check documentation for all supported ENV variables.</p>
+<div class="lg:w-2/3 mx-auto mt-4 space-y-6">
+  <!-- Application Information Block -->
+  <div class="resource-container">
+    <div class="resource-header">
+      <div>
+        <h1 class="resource-title">Application Information</h1>
+        <p class="resource-description">Check documentation for all supported ENV variables.</p>
+      </div>
     </div>
 
-    <div class="mt-6 border-t border-gray-100 dark:border-gray-900">
-      <dl class="divide-y divide-gray-100 dark:divide-gray-900">
-        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Application Version</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @version %></dd>
+    <div class="p-4">
+      <div class="space-y-4">
+        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+          <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Application Version</dt>
+          <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @version %></dd>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Rails environment</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @rails_env %></dd>
+        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+          <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Rails environment</dt>
+          <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @rails_env %></dd>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">File uploads storage</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= admin_config_uploads_storage %></dd>
+        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+          <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">File uploads storage</dt>
+          <dd class="text-sm text-gray-700 dark:text-gray-300"><%= admin_config_uploads_storage %></dd>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Mail delivery</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= admin_config_email_delivery %></dd>
+        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+          <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Mail delivery</dt>
+          <dd class="text-sm text-gray-700 dark:text-gray-300"><%= admin_config_email_delivery %></dd>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Application domain</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0">
+        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+          <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Application domain</dt>
+          <dd class="text-sm text-gray-700 dark:text-gray-300">
             <% if @domain.present? %>
               <%= @domain %>
             <% else %>
-              Not configured
-
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="inline-block w-4 h-4 text-orange-500 ml-1">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
-              </svg>
+              <span class="flex items-center">
+                Not configured
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-orange-500 ml-1">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                </svg>
+              </span>
             <% end %>
           </dd>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">New users sign-up</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @app_signup %></dd>
+        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+          <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">New users sign-up</dt>
+          <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @app_signup %></dd>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">
-            Restrict sign-up to a single domain
-            <span class="text-sm text-gray-500 font-normal inline-block">
-              For instance, only users whose email addresses end with @yourcompany.com can register.
-            </span>
-          </dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @allowed_domain %></dd>
+        <div class="py-3 border-b border-gray-200 dark:border-gray-700">
+          <div class="flex justify-between items-start">
+            <div class="flex-1">
+              <dt class="text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">
+                Restrict sign-up to a single domain
+              </dt>
+              <dd class="text-sm text-gray-600 dark:text-gray-400">
+                For instance, only users whose email addresses end with @yourcompany.com can register.
+              </dd>
+            </div>
+            <dd class="text-sm text-gray-700 dark:text-gray-300 ml-4 text-right"><%= @allowed_domain %></dd>
+          </div>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">
-            OAuth Login Providers
-          </dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0">
+        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+          <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">OAuth Login Providers</dt>
+          <dd class="text-sm text-gray-700 dark:text-gray-300">
             <%= @oauth_providers.present? ? @oauth_providers : "Not configured" %>
           </dd>
         </div>
-
-        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">
-            Email Login
-            <span class="text-sm text-gray-500 font-normal inline-block">
-              Controls whether users can register and log in using email and password. This setting does not affect OAuth providers like Google or Microsoft.
-            </span>
-          </dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0">
-            <%= @disable_email_login ? "Disabled (OAuth only)" : "Enabled" %>
-          </dd>
+        <div class="py-3 border-b border-gray-200 dark:border-gray-700">
+          <div class="flex justify-between items-start">
+            <div class="flex-1">
+              <dt class="text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">Email Login</dt>
+              <dd class="text-sm text-gray-600 dark:text-gray-400">
+                Controls whether users can register and log in using email and password. This setting does not affect OAuth providers like Google or Microsoft.
+              </dd>
+            </div>
+            <dd class="text-sm text-gray-700 dark:text-gray-300 ml-4 text-right">
+              <%= @disable_email_login ? "Disabled (OAuth only)" : "Enabled" %>
+            </dd>
+          </div>
         </div>
-      </dl>
+      </div>
     </div>
   </div>
-  <div>
-    <div class="px-4 sm:px-0">
-      <h3 class="text-base font-semibold leading-7 text-gray-900 dark:text-gray-200">Database Information</h3>
-      <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500"><%= ActiveRecord::Base.connection.current_database %></p>
+
+  <!-- Database Information Block -->
+  <div class="resource-container">
+    <div class="resource-header">
+      <div>
+        <h1 class="resource-title">Database Information</h1>
+        <p class="resource-description"><%= ActiveRecord::Base.connection.current_database %></p>
+      </div>
     </div>
 
-    <div class="mt-6 border-t border-gray-100 dark:border-gray-900">
-      <dl class="divide-y divide-gray-100 dark:divide-gray-900">
-        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Users</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @total_users %></dd>
+    <div class="p-4">
+      <div class="space-y-4">
+        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+          <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Users</dt>
+          <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @total_users %></dd>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Projects</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @total_projects %></dd>
+        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+          <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Projects</dt>
+          <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @total_projects %></dd>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">File uploads</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @total_files %></dd>
+        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+          <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">File uploads</dt>
+          <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @total_files %></dd>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Tasks</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @total_tasks %></dd>
+        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+          <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Tasks</dt>
+          <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @total_tasks %></dd>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Comments</dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @total_comments %></dd>
+        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+          <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Comments</dt>
+          <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @total_comments %></dd>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Activities <span class="font-light">(24 hours)</span></dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @recent_activities_count %></dd>
+        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+          <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">
+            Activities <span class="font-light text-gray-500">(24 hours)</span>
+          </dt>
+          <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @recent_activities_count %></dd>
         </div>
-        <div class="p-4 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-0">
-          <dt class="text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">Users <span class="font-light">(24 hours)</span></dt>
-          <dd class="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-300 sm:mt-0"><%= @recent_users_count %></dd>
+        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+          <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">
+            Users <span class="font-light text-gray-500">(24 hours)</span>
+          </dt>
+          <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @recent_users_count %></dd>
         </div>
-      </dl>
+      </div>
     </div>
   </div>
 </div>
