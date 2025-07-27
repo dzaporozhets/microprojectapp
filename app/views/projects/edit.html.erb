@@ -8,12 +8,12 @@
       </div>
     </div>
 
-    <div class="p-4 space-y-8">
+    <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
       <%= display_flash %>
 
       <!-- Project Name Section -->
       <% unless @project.personal? %>
-        <div>
+        <div class="p-4">
           <div class="mb-4">
             <h4 class="text-base font-medium text-gray-900 dark:text-white">Project Name</h4>
             <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
@@ -36,7 +36,7 @@
       <% end %>
 
       <!-- Import/Export Section -->
-      <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
+      <div class="p-4">
         <div class="mb-4">
           <h4 class="text-base font-medium text-gray-900 dark:text-white">Import and Export</h4>
           <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
@@ -51,7 +51,7 @@
       </div>
 
       <!-- Archive Section -->
-      <div class="pt-6 border-t border-gray-200 dark:border-gray-700">
+      <div class="p-4">
         <div class="mb-4">
           <h4 class="text-base font-medium text-gray-900 dark:text-white">Project Status</h4>
           <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
