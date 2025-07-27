@@ -15,11 +15,10 @@
       </div>
     </div>
 
-    <div class="p-4">
+    <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
       <% if @users.any? %>
-        <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
-          <% @users.each do |user| %>
-            <div class="py-4">
+        <% @users.each do |user| %>
+          <div class="p-4">
               <div class="flex items-center justify-between">
                 <div class="flex items-center min-w-0">
                   <!-- User icon -->
