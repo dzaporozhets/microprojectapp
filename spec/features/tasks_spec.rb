@@ -19,10 +19,8 @@ RSpec.feature "Tasks", type: :feature do
   scenario "user views the tasks list" do
     visit tasks_path
 
-    within('.task-list') do
-      expect(page).to have_content(task1.name)
-      expect(page).to have_content(task2.name)
-      expect(page).not_to have_content(task3.name) # Task from project user is not involved with should not be shown
-    end
+    expect(page).to have_content(task1.name)
+    expect(page).to have_content(task2.name)
+    expect(page).not_to have_content(task3.name) # Task from project user is not involved with should not be shown
   end
 end

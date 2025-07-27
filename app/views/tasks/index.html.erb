@@ -15,41 +15,53 @@
     </div>
   <% end %>
 
-  <div class="mb-4 md:mb-0">
+  <div class="mx-auto space-y-6">
 
-    <% if current_user.created_today? %>
-      <p class="text-sm text-gray-500 mb-4">Active tasks from your projects. To create a new task or view completed ones, visit the project page.</p>
-    <% end %>
 
-    <section class="task-list">
-      <div class="text-sm leading-6 text-gray-500 space-y-6">
-        <% if @tasks.any? %>
-          <% @tasks.group_by_projects.each do |project, tasks| %>
-            <div class="project-group">
-              <div class="flex justify-between items-center">
-                <h2 class="flex text-base font-semibold text-gray-900 dark:text-gray-200"><%= link_to project.name.truncate(100), project, class: 'hover:underline' %></h2>
-                <%= link_to new_project_task_path(project), class: 'block' do %>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 flex-shrink-0 text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 0 0 2.25-2.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v2.25A2.25 2.25 0 0 0 6 10.5Zm0 9.75h2.25A2.25 2.25 0 0 0 10.5 18v-2.25a2.25 2.25 0 0 0-2.25-2.25H6a2.25 2.25 0 0 0-2.25 2.25V18A2.25 2.25 0 0 0 6 20.25Zm9.75-9.75H18a2.25 2.25 0 0 0 2.25-2.25V6A2.25 2.25 0 0 0 18 3.75h-2.25A2.25 2.25 0 0 0 13.5 6v2.25a2.25 2.25 0 0 0 2.25 2.25Z" />
-                  </svg>
-                <% end %>
+    <% if @tasks.any? %>
+      <% @tasks.group_by_projects.each do |project, tasks| %>
+        <div class="resource-container">
+          <div class="resource-header">
+            <div class="flex items-center justify-between w-full">
+              <div>
+                <h3 class="resource-title">
+                  <%= link_to project.name.truncate(100), project, class: theme_link_primary %>
+                </h3>
               </div>
 
-              <ol class="mt-2 text-sm leading-6 text-gray-500 grid grid-cols-1 tasks-list">
-                <% tasks.each do |task| %>
-                  <%= render 'tasks/task', task: task %>
-                <% end %>
-              </ol>
+              <%= link_to new_project_task_path(project), class: "block" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 flex-shrink-0 text-gray-400 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-400">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 0 0 2.25-2.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v2.25A2.25 2.25 0 0 0 6 10.5Zm0 9.75h2.25A2.25 2.25 0 0 0 10.5 18v-2.25a2.25 2.25 0 0 0-2.25-2.25H6a2.25 2.25 0 0 0-2.25 2.25V18A2.25 2.25 0 0 0 6 20.25Zm9.75-9.75H18a2.25 2.25 0 0 0 2.25-2.25V6A2.25 2.25 0 0 0 18 3.75h-2.25A2.25 2.25 0 0 0 13.5 6v2.25a2.25 2.25 0 0 0 2.25 2.25Z" />
+                </svg>
+              <% end %>
             </div>
-          <% end %>
-          <%= paginate @tasks %>
-        <% else %>
-          <li class="py-2 flex">
-            <p class="">No tasks due this month.</p>
-          </li>
-        <% end %>
+          </div>
+
+          <div>
+            <ol class="text-sm leading-6 text-gray-500 grid grid-cols-1 tasks-list">
+              <% tasks.each do |task| %>
+                <%= render 'tasks/task', task: task %>
+              <% end %>
+            </ol>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="flex justify-center">
+        <%= paginate @tasks %>
       </div>
-    </section>
+    <% else %>
+      <div class="resource-container">
+        <div class="resource-empty-state">
+          <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gray-100 dark:bg-gray-800 mx-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+          </div>
+          <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-200">No active tasks</h3>
+          <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">You have no active tasks across your projects. Create new tasks to get started.</p>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
-

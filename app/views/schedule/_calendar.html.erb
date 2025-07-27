@@ -47,7 +47,7 @@
       </div>
       
       <!-- Current Month Tasks -->
-      <div class="task-list">
+      <div class="tasks-list">
         <h4 class="text-sm font-medium text-gray-900 dark:text-gray-100 mb-3">Tasks</h4>
         <% current_month_tasks = @monthly_tasks.select { |task| task.due_date&.month == @date.month } %>
         <% if current_month_tasks.any? %>
@@ -69,7 +69,7 @@
       </div>
       
       <!-- Next Month Tasks -->
-      <div class="task-list">
+      <div class="tasks-list">
         <h4 class="text-sm font-medium text-gray-900 dark:text-gray-100 mb-3">Tasks</h4>
         <% next_month_tasks = @monthly_tasks.select { |task| task.due_date&.month == @date.next_month.month } %>
         <% if next_month_tasks.any? %>
