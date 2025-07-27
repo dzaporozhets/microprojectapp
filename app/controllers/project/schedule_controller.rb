@@ -24,7 +24,7 @@ class Project::ScheduleController < Project::BaseController
     date_range = if params[:month].present?
                    begin
                      target_month = Date.strptime(params[:month], "%Y-%m")
-                     (target_month.beginning_of_month..target_month.end_of_month)
+                     (target_month.all_month)
                    rescue Date::Error
                      (Date.current..Date.current.end_of_month)
                    end

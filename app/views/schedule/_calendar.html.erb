@@ -38,14 +38,14 @@
     </div>
   </div>
 
-  <!-- Two Month Layout - Vertical Stack -->
+  <!-- Three Month Layout - Vertical Stack -->
   <div class="space-y-0">
     <!-- Current Month -->
     <div class="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 pb-6 border-b border-gray-200 dark:border-gray-700">
       <div class="calendar-month">
         <%= render_calendar_month(@date, @daily_task_counts, params[:date]) %>
       </div>
-      
+
       <!-- Current Month Tasks -->
       <div class="tasks-list">
         <h4 class="text-sm font-medium text-gray-900 dark:text-gray-100 mb-3">Tasks</h4>
@@ -63,11 +63,11 @@
     </div>
 
     <!-- Next Month -->
-    <div class="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 pt-6">
+    <div class="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 py-6 border-b border-gray-200 dark:border-gray-700">
       <div class="calendar-month">
         <%= render_calendar_month(@date.next_month, @daily_task_counts, params[:date]) %>
       </div>
-      
+
       <!-- Next Month Tasks -->
       <div class="tasks-list">
         <h4 class="text-sm font-medium text-gray-900 dark:text-gray-100 mb-3">Tasks</h4>
@@ -75,6 +75,28 @@
         <% if next_month_tasks.any? %>
           <div class="space-y-1">
             <% next_month_tasks.each do |task| %>
+              <%= render 'schedule/task', task: task %>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-xs text-gray-400 dark:text-gray-500">No tasks scheduled</p>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Month After Next -->
+    <div class="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 pt-6">
+      <div class="calendar-month">
+        <%= render_calendar_month(@date.next_month.next_month, @daily_task_counts, params[:date]) %>
+      </div>
+
+      <!-- Month After Next Tasks -->
+      <div class="tasks-list">
+        <h4 class="text-sm font-medium text-gray-900 dark:text-gray-100 mb-3">Tasks</h4>
+        <% month_after_next_tasks = @monthly_tasks.select { |task| task.due_date&.month == @date.next_month.next_month.month } %>
+        <% if month_after_next_tasks.any? %>
+          <div class="space-y-1">
+            <% month_after_next_tasks.each do |task| %>
               <%= render 'schedule/task', task: task %>
             <% end %>
           </div>
