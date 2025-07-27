@@ -6,49 +6,100 @@
   </div>
 <% end %>
 
-<div class="my-5">
-  <table class="min-w-full bg-white dark:bg-black border dark:border-gray-700 text-sm">
-    <thead>
-      <tr>
-        <th class="px-4 py-2 bg-gray-200 dark:bg-gray-800 border dark:border-gray-700 dark:text-white">ID</th>
-        <th class="px-4 py-2 bg-gray-200 dark:bg-gray-800 border dark:border-gray-700 dark:text-white">Email</th>
-        <th class="px-4 py-2 bg-gray-200 dark:bg-gray-800 border dark:border-gray-700 hidden sm:table-cell dark:text-white">Created At</th>
-        <th class="px-4 py-2 bg-gray-200 dark:bg-gray-800 border dark:border-gray-700 hidden sm:table-cell dark:text-white">Updated at</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @users.each do |user| %>
-        <tr class="odd:bg-gray-50 dark:odd:bg-gray-900 even:bg-white dark:even:bg-black">
-          <td class="px-4 py-2 border dark:border-gray-700 dark:text-white"><%= link_to user.id, admin_user_path(user), class: 'cursor-pointer hover:bg-violet-200 min-w-4 justify-center bg-violet-100 rounded-md flex dark:bg-gray-700 dark:hover:bg-violet-800' %></td>
-          <td class="px-4 py-2 border dark:border-gray-700 dark:text-white">
-            <%= user.email %>
+<div class="lg:w-2/3 mx-auto mt-4">
+  <div class="resource-container">
+    <div class="resource-header">
+      <div>
+        <h1 class="resource-title">Users</h1>
+        <p class="resource-description">Manage all registered users in the system.</p>
+      </div>
+    </div>
 
-            <% if user.admin %>
-              <span class="font-bold dark:text-white">
-                (admin)
-              </span>
-            <% end %>
+    <div class="p-4">
+      <% if @users.any? %>
+        <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
+          <% @users.each do |user| %>
+            <div class="py-4">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center min-w-0">
+                  <!-- User icon -->
+                  <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-md bg-gray-100 dark:bg-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                    </svg>
+                  </div>
 
-            <% if user.confirmed_at %>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block ml-1 dark:text-white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-              </svg>
-            <% end %>
+                  <div class="ml-4 min-w-0 flex-1">
+                    <div class="flex items-center">
+                      <%= link_to user.email, admin_user_path(user), class: "text-sm font-medium #{theme_link_primary} truncate" %>
+                      
+                      <% if user.admin %>
+                        <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
+                          Admin
+                        </span>
+                      <% end %>
+                    </div>
+                    
+                    <div class="mt-1 flex items-center text-xs text-gray-500 dark:text-gray-400">
+                      <span>ID: <%= user.id %></span>
+                      
+                      <% if user.confirmed_at %>
+                        <span class="mx-1">&middot;</span>
+                        <span class="flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3 mr-1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                          </svg>
+                          Verified
+                        </span>
+                      <% end %>
 
-            <% if user.oauth_user? %>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block ml-1 dark:text-white" aria-label="<%= user.provider_human %>">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z" />
-              </svg>
-            <% end %>
-          </td>
-          <td class="px-4 py-2 border dark:border-gray-700 hidden sm:table-cell dark:text-white"><%= user.created_at.to_formatted_s(:short) %></td>
-          <td class="px-4 py-2 border dark:border-gray-700 hidden sm:table-cell dark:text-white"><%= user.updated_at.to_formatted_s(:short) %></td>
-        </tr>
+                      <% if user.oauth_user? %>
+                        <span class="mx-1">&middot;</span>
+                        <span class="flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3 mr-1" aria-label="<%= user.provider_human %>">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z" />
+                          </svg>
+                          <%= user.provider_human %>
+                        </span>
+                      <% end %>
+                    </div>
+
+                    <div class="mt-1 text-xs text-gray-400 dark:text-gray-500">
+                      Created <%= time_ago_in_words(user.created_at) %> ago
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex-shrink-0 flex items-center space-x-2">
+                  <!-- View button -->
+                  <%= link_to admin_user_path(user), class: "inline-flex items-center p-1.5 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500", title: "View details" do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="resource-empty-state">
+          <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gray-100 dark:bg-gray-800 mx-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+            </svg>
+          </div>
+          <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-200">No users found</h3>
+          <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">No users have been registered yet.</p>
+        </div>
       <% end %>
-    </tbody>
-  </table>
-</div>
+    </div>
+  </div>
 
-<div class="mt-4">
-  <%= paginate @users %>
+  <% if @users.any? %>
+    <div class="mt-6 flex justify-center">
+      <%= paginate @users %>
+    </div>
+  <% end %>
 </div>

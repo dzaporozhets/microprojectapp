@@ -17,24 +17,24 @@
     </div>
 
     <div class="p-4">
-      <div class="space-y-4">
-        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+      <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
+        <div class="flex justify-between items-center py-3">
           <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Application Version</dt>
           <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @version %></dd>
         </div>
-        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center py-3">
           <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Rails environment</dt>
           <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @rails_env %></dd>
         </div>
-        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center py-3">
           <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">File uploads storage</dt>
           <dd class="text-sm text-gray-700 dark:text-gray-300"><%= admin_config_uploads_storage %></dd>
         </div>
-        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center py-3">
           <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Mail delivery</dt>
           <dd class="text-sm text-gray-700 dark:text-gray-300"><%= admin_config_email_delivery %></dd>
         </div>
-        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center py-3">
           <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Application domain</dt>
           <dd class="text-sm text-gray-700 dark:text-gray-300">
             <% if @domain.present? %>
@@ -49,11 +49,11 @@
             <% end %>
           </dd>
         </div>
-        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center py-3">
           <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">New users sign-up</dt>
           <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @app_signup %></dd>
         </div>
-        <div class="py-3 border-b border-gray-200 dark:border-gray-700">
+        <div class="py-3">
           <div class="flex justify-between items-start">
             <div class="flex-1">
               <dt class="text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">
@@ -66,13 +66,13 @@
             <dd class="text-sm text-gray-700 dark:text-gray-300 ml-4 text-right"><%= @allowed_domain %></dd>
           </div>
         </div>
-        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center py-3">
           <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">OAuth Login Providers</dt>
           <dd class="text-sm text-gray-700 dark:text-gray-300">
             <%= @oauth_providers.present? ? @oauth_providers : "Not configured" %>
           </dd>
         </div>
-        <div class="py-3 border-b border-gray-200 dark:border-gray-700">
+        <div class="py-3">
           <div class="flex justify-between items-start">
             <div class="flex-1">
               <dt class="text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">Email Login</dt>
@@ -99,34 +99,34 @@
     </div>
 
     <div class="p-4">
-      <div class="space-y-4">
-        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+      <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
+        <div class="flex justify-between items-center py-3">
           <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Users</dt>
           <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @total_users %></dd>
         </div>
-        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center py-3">
           <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Projects</dt>
           <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @total_projects %></dd>
         </div>
-        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center py-3">
           <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">File uploads</dt>
           <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @total_files %></dd>
         </div>
-        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center py-3">
           <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Tasks</dt>
           <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @total_tasks %></dd>
         </div>
-        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center py-3">
           <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Comments</dt>
           <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @total_comments %></dd>
         </div>
-        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center py-3">
           <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">
             Activities <span class="font-light text-gray-500">(24 hours)</span>
           </dt>
           <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @recent_activities_count %></dd>
         </div>
-        <div class="flex justify-between items-center py-3 border-b border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between items-center py-3">
           <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">
             Users <span class="font-light text-gray-500">(24 hours)</span>
           </dt>
