@@ -75,9 +75,6 @@ class ProjectsController < ApplicationController
   end
 
   def overview
-    # Put a temporary redirect until we design this page
-    redirect_to project_files_path(@project)
-
     @tab_name = 'Project'
   end
 
@@ -103,7 +100,7 @@ class ProjectsController < ApplicationController
 
   def set_layout
     case action_name
-    when 'show', 'edit', 'update' then 'project'
+    when 'show', 'edit', 'update', 'overview' then 'project'
     else
       'application'
     end

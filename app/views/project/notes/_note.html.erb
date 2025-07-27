@@ -1,6 +1,6 @@
 <li id="<%= dom_id note %>" class="relative p-4 hover:bg-gray-50 dark:hover:bg-gray-800 focus-within:ring-2 focus-within:ring-inset focus-within:ring-violet-500">
-  <div class="flex items-center justify-between">
-    <div class="flex items-center min-w-0">
+  <div class="flex items-start justify-between">
+    <div class="flex items-start min-w-0">
       <!-- Note icon -->
       <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-md bg-gray-100 dark:bg-gray-800">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -8,21 +8,22 @@
         </svg>
       </div>
 
-      <div class="ml-4">
+      <div class="ml-4 min-w-0 flex-1">
         <div class="flex items-center">
           <%= link_to note.title, edit_project_note_path(note.project, note), class: "text-sm font-medium #{theme_link_primary} truncate" %>
         </div>
-        <div class="mt-1 flex items-center text-xs text-gray-500 dark:text-gray-400">
+        <div class="mt-1 text-xs text-gray-500 dark:text-gray-400">
           <% if note.content.present? %>
             <span><%= truncate(note.content, length: 100) %></span>
           <% else %>
             <span class="text-gray-400 dark:text-gray-500">(No content)</span>
           <% end %>
-          <% if note.updated_at.present? %>
-            <span class="mx-1 hidden sm:inline">&middot;</span>
-            <span class="hidden sm:inline">Updated <%= time_ago_in_words(note.updated_at) %> ago</span>
-          <% end %>
         </div>
+        <% if note.updated_at.present? %>
+          <div class="mt-1 text-xs text-gray-400 dark:text-gray-500">
+            Updated <%= time_ago_in_words(note.updated_at) %> ago
+          </div>
+        <% end %>
       </div>
     </div>
 

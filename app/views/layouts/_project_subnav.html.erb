@@ -2,16 +2,10 @@
   <div class="<%= subnav_css %>">
     <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-lg px-4">
       <div class="flex flex-grow items-center">
-        <% if tasks_lists_page?(@project) %>
-          <%= project_tabs @project, @tab_name %>
-        <% else %>
-          <%= project_tabs_more @project, @tab_name %>
-        <% end %>
+        <%= project_tabs @project, @tab_name %>
       </div>
 
       <%= render 'project/tasks/nav' if tasks_lists_page?(@project) %>
-
-      <%#= render 'layouts/project_buttons' %>
     </div>
   </div>
 <% end %>

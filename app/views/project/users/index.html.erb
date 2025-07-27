@@ -1,4 +1,5 @@
-<div class="">
+<div class="lg:w-2/3 mx-auto mt-4 space-y-6">
+  <!-- Team Members Section -->
   <div class="resource-container">
     <!-- Header with actions -->
     <div class="resource-header">
@@ -83,5 +84,40 @@
         </div>
       <% end %>
     </div>
+  </div>
+
+  <!-- Recent Activity Section -->
+  <div class="resource-container">
+    <div class="resource-header">
+      <div class="flex items-center justify-between w-full">
+        <div class="flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <h2 class="resource-title">Recent Activity</h2>
+        </div>
+        <%= link_to project_activity_path(@project), class: "text-sm text-gray-500 hover:text-violet-600 dark:text-gray-400 dark:hover:text-violet-400" do %>
+          View all activity
+        <% end %>
+      </div>
+    </div>
+
+    <% if @recent_activity.any? %>
+      <div class="px-4 py-4 sm:px-6">
+        <ol class="relative border-l border-gray-200 dark:border-gray-700 space-y-4">
+          <% @recent_activity.each do |record| %>
+            <%= render 'project/activity/record', record: record %>
+          <% end %>
+        </ol>
+      </div>
+    <% else %>
+      <div class="resource-empty-state">
+        <svg xmlns="http://www.w3.org/2000/svg" class="resource-empty-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <h3 class="resource-empty-title">No activity yet</h3>
+        <p class="resource-empty-description">Activity will appear here as you and your team work on this project.</p>
+      </div>
+    <% end %>
   </div>
 </div>
