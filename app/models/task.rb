@@ -1,5 +1,5 @@
 class Task < ApplicationRecord
-  TASK_LIMIT = 2999
+  TASK_LIMIT = 3999
 
   belongs_to :project, optional: false
   belongs_to :user, optional: false
