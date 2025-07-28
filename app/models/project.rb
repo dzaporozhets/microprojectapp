@@ -46,6 +46,10 @@ class Project < ApplicationRecord
     [user] + users
   end
 
+  def has_team?
+    users.any?
+  end
+
   def find_user(user_id)
     return if user_id.blank?
 

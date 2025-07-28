@@ -35,9 +35,23 @@
           </div>
         </li>
 
-        <li>
-          <%#= render 'layouts/project_buttons' %>
-        </li>
+        <% if @project.has_team? %>
+          <li>
+            <div class="flex items-center ml-auto -space-x-2 hidden md:flex">
+              <%= link_to project_tasks_path(@project, assigned_user_id: @project.user_id), title: @project.user.email do %>
+                <%= avatar_tag(@project.user, "h-8 w-8 rounded-full #{theme_bg}") %>
+              <% end %>
+
+              <% @project.users.each do |user| %>
+                <%= link_to project_tasks_path(@project, assigned_user_id: user.id), title: user.email do %>
+                  <%= avatar_tag(user, "h-8 w-8 rounded-full #{theme_bg}") %>
+                <% end %>
+              <% end %>
+            </div>
+          </li>
+        <% end %>
+
+        <%#= render 'layouts/project_buttons' %>
       </ol>
     </div>
   </div>
