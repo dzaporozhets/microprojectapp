@@ -46,7 +46,7 @@ RSpec.feature "Schedule", type: :feature do
     expect(page).to have_content(current_month)
     expect(page).to have_content(next_month)
     expect(page).to have_content(month_after_next)
-    expect(page).to have_content("No tasks due this month")
+    expect(page).to have_content("No tasks due #{current_month}")
   end
 
   scenario "navigates between months using arrows" do
