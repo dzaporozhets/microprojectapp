@@ -87,7 +87,7 @@
             </svg>
           </div>
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
-            No tasks due this month
+            No tasks due <%= @date.strftime("%B") %>
           </p>
         </div>
       <% end %>
@@ -120,7 +120,7 @@
             </svg>
           </div>
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
-            No tasks due next month
+            No tasks due <%= @date.next_month.strftime("%B") %>
           </p>
         </div>
       <% end %>
