@@ -40,7 +40,7 @@ class ScheduleController < ApplicationController
   private
 
   def tasks
-    Task.where(project_id: (current_user || @user).all_active_projects).with_due_date.order(due_date: :asc)
+    Task.todo.where(project_id: (current_user || @user).all_active_projects).with_due_date.order(due_date: :asc)
   end
 
   def user_date

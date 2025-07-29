@@ -47,7 +47,7 @@ RSpec.describe "Schedule", type: :request do
         expect(response.body).to include("END:VCALENDAR")
 
         # Should include the two tasks with due dates that are not completed
-        expect(response.body.scan("BEGIN:VEVENT").size).to eq(3)
+        expect(response.body.scan("BEGIN:VEVENT").size).to eq(2)
       end
     end
   end

@@ -49,7 +49,6 @@ module ScheduleHelper
       classes << "text-gray-400"
     end
 
-    classes << "hover:bg-gray-200 dark:hover:bg-gray-700"
     classes.join(" ")
   end
 
@@ -68,7 +67,7 @@ module ScheduleHelper
 
   def calendar_month_header(date)
     content_tag(:div, class: "flex items-center justify-center mb-4") do
-      content_tag(:h3, date.strftime("%B %Y"), class: "text-sm font-semibold text-gray-900 dark:text-gray-100")
+      content_tag(:h3, date.strftime("%B"), class: "text-sm font-semibold text-gray-900 dark:text-gray-100")
     end
   end
 
@@ -92,7 +91,7 @@ module ScheduleHelper
 
         concat(
           content_tag(:div, class: "py-1 border-t border-gray-200 dark:border-gray-700") do
-            link_to schedule_path(date: day), class: classes do
+            content_tag(:div, class: classes) do
               content_tag(:time, day.day, datetime: day.iso8601)
             end
           end

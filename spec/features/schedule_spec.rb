@@ -13,8 +13,8 @@ RSpec.feature "Schedule", type: :feature do
     visit schedule_path(date: "2025-03-01")
 
     # Check that both months are displayed
-    expect(page).to have_content("March 2025")
-    expect(page).to have_content("April 2025")
+    expect(page).to have_content("March")
+    expect(page).to have_content("April")
 
     # Check that tasks are displayed in their respective months
     expect(page).to have_content("Current Month Task")
@@ -36,8 +36,8 @@ RSpec.feature "Schedule", type: :feature do
     visit schedule_path(date: "2025-03-01")
 
     # Should still show both months but with no tasks
-    expect(page).to have_content("March 2025")
-    expect(page).to have_content("April 2025")
+    expect(page).to have_content("March")
+    expect(page).to have_content("April")
     expect(page).to have_content("No tasks scheduled")
   end
 
