@@ -1,21 +1,24 @@
-<div class="md:mt-6 sm:mx-auto sm:w-full sm:max-w-lg">
+<div class="lg:w-2/3 mx-auto">
   <%= display_flash %>
 
-  <div class="my-4 window-block">
-    <div class="window-header">
-      <h1 class="font-bold text-xl dark:text-gray-200">Import tasks and notes</h1>
+  <div class="resource-container">
+    <div class="resource-header">
+      <div>
+        <h1 class="resource-title">Import tasks and notes</h1>
+        <p class="resource-description">Upload a JSON file to import tasks and notes into this project.</p>
+      </div>
     </div>
 
     <div class="p-4">
       <%= form_with url: project_import_path(@project), local: true, multipart: true do |form| %>
-        <div class="">
-          <%= form.label :file, class:"dark:text-gray-200" %>
+        <div class="space-y-2">
+          <%= form.label :file, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
           <%= form.file_field :file,
             accept: 'application/json',
             class: "appearance-none file-select text-sm leading-tight file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-medium w-full" %>
         </div>
 
-        <div class="mt-4">
+        <div class="mt-6">
           <%= form.submit 'Upload file', class: theme_button_primary %>
         </div>
       <% end %>
