@@ -1,6 +1,7 @@
-<div class="calendar bg-white dark:bg-gray-800 shadow-sm rounded-md p-4 mb-4">
-  <!-- Calendar Legend and Navigation -->
-  <div class="mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
+<div class="calendar resource-container mb-4">
+  <div class="p-4">
+    <!-- Calendar Legend and Navigation -->
+    <div class="mb-4 pb-3 border-b border-gray-200 dark:border-gray-700">
     <div class="flex items-center justify-between">
       <!-- Calendar Legend -->
       <div class="flex flex-wrap items-center gap-4 text-xs text-gray-600 dark:text-gray-400">
@@ -41,7 +42,7 @@
   <!-- Three Month Layout - Vertical Stack -->
   <div class="space-y-0">
     <!-- Current Month -->
-    <div class="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 pb-6 border-b border-gray-200 dark:border-gray-700">
+    <div class="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-6 pb-4 border-b border-gray-200 dark:border-gray-700">
       <div class="calendar-month">
         <%= render_calendar_month(@date, @daily_task_counts, params[:date]) %>
       </div>
@@ -63,7 +64,7 @@
     </div>
 
     <!-- Next Month -->
-    <div class="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 py-6 border-b border-gray-200 dark:border-gray-700">
+    <div class="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-6 py-4 border-b border-gray-200 dark:border-gray-700">
       <div class="calendar-month">
         <%= render_calendar_month(@date.next_month, @daily_task_counts, params[:date]) %>
       </div>
@@ -85,7 +86,7 @@
     </div>
 
     <!-- Month After Next -->
-    <div class="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 pt-6">
+    <div class="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-6 pt-4">
       <div class="calendar-month">
         <%= render_calendar_month(@date.next_month.next_month, @daily_task_counts, params[:date]) %>
       </div>
@@ -105,5 +106,6 @@
         <% end %>
       </div>
     </div>
+  </div>
   </div>
 </div>

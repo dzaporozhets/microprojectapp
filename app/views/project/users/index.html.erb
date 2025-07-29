@@ -23,7 +23,7 @@
       <% if @project.users.any? || @project.user == current_user %>
         <ul role="list" class="resource-list">
           <!-- Project Owner -->
-          <li class="relative flex justify-between gap-x-6 px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+          <li class="relative flex justify-between gap-x-6">
             <div class="flex min-w-0 gap-x-4 items-center">
               <%= avatar_tag(@project.user, "h-10 w-10 flex-none rounded-full bg-gray-200 dark:bg-gray-800") %>
               <div class="min-w-0 flex-auto">
@@ -39,7 +39,7 @@
 
           <!-- Team Members -->
           <% @project.users.each do |user| %>
-            <li id="project_<%= dom_id user %>" class="relative flex justify-between gap-x-6 px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+            <li id="project_<%= dom_id user %>" class="relative flex justify-between gap-x-6">
               <div class="flex min-w-0 gap-x-4 items-center">
                 <%= avatar_tag(user, "h-10 w-10 flex-none rounded-full bg-gray-200 dark:bg-gray-800") %>
                 <div class="min-w-0 flex-auto">

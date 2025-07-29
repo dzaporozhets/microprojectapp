@@ -19,10 +19,10 @@ module CssHelper
     if task.done
       "px-3 py-1 text-sm text-gray-700 dark:text-gray-400" \
       " line-through dark:decoration-gray-400 decoration-gray-600" \
-      "  hover:bg-neutral-50 dark:hover:bg-gray-900"
+      "  hover:bg-neutral-50 dark:hover:bg-gray-800"
     else
       "px-3 py-1 text-sm text-black dark:text-gray-100" \
-        " hover:bg-neutral-50 dark:hover:bg-gray-900"
+        " hover:bg-neutral-50 dark:hover:bg-gray-800"
     end
   end
 

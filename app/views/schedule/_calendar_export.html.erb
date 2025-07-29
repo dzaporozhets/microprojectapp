@@ -1,11 +1,14 @@
 <!-- Option 1: Subscribe with URL (Highest Priority) -->
-<div class="bg-white dark:bg-gray-800 shadow-sm rounded-md p-4 my-4">
-  <h4 class="text-sm font-semibold mb-2 text-gray-900 dark:text-gray-300">Sync Tasks to Your Calendar</h4>
-  <p class="text-xs text-gray-700 dark:text-gray-300 mb-2">
-  Copy the URL below and paste it into your calendar app to subscribe. New tasks will show up there automatically.
-  </p>
+<div class="resource-container">
+  <div class="resource-header">
+    <div>
+      <h4 class="resource-title">Sync Tasks to Your Calendar</h4>
+      <p class="resource-description">Copy the URL below and paste it into your calendar app to subscribe. New tasks will show up there automatically.</p>
+    </div>
+  </div>
 
-  <div class="flex items-center">
+  <div class="p-4">
+    <div class="flex items-center">
     <div class="flex-grow">
       <input
           type="text"
@@ -41,5 +44,6 @@
     <%= link_to calendar_schedule_path(token: current_user.calendar_token, format: :ics), class: "btn-base-sm" do %>
       Download .ics File
     <% end %>
+  </div>
   </div>
 </div>
