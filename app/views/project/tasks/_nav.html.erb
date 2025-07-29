@@ -1,9 +1,9 @@
-<div class="w-full border-t dark:border-gray-700 md:border-none flex flex-col space-y-3 md:w-auto md:flex-row md:items-center md:space-y-0 md:space-x-6 md:mt-0 mt-3">
-  <div class="w-full md:w-auto mt-3 md:mt-0 md:ml-auto">
+<div class="hidden w-auto sm:flex sm:flex-row items-center space-x-6">
+  <div class="w-auto ml-auto">
     <%= content_tag :div, class: sub_subnav do %>
-      <%= link_to "Active", project_path(@project), class: " #{current_page?(project_path(@project)) || current_page?(project_tasks_path(@project)) ? sub_subnav_active_tab : sub_subnav_tab }" %>
-      <%= link_to "Upcoming", project_schedule_path(@project), class: " #{current_page?(project_schedule_path(@project)) ? sub_subnav_active_tab : sub_subnav_tab }" %>
-      <%= link_to "Completed", completed_project_tasks_path(@project), class: " #{current_page?(completed_project_tasks_path(@project)) ? sub_subnav_active_tab : sub_subnav_tab }" %>
+      <%= link_to "List", project_path(@project), class: " #{current_page?(project_path(@project)) || (controller_name == 'tasks') ? sub_subnav_active_tab : sub_subnav_tab }" %>
+      <%= link_to "Schedule", project_schedule_path(@project), class: " #{current_page?(project_schedule_path(@project)) ? sub_subnav_active_tab : sub_subnav_tab }" %>
+      <%#= link_to "Completed", completed_project_tasks_path(@project), class: " #{current_page?(completed_project_tasks_path(@project)) ? sub_subnav_active_tab : sub_subnav_tab }" %>
     <% end %>
   </div>
 </div>
