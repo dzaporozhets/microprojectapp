@@ -36,18 +36,6 @@
       </p>
     </div>
 
-    <!-- Divider -->
-    <div class="border-t border-gray-200 dark:border-gray-700"></div>
 
-    <!-- ICS Download Section -->
-    <div>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
-        Alternatively, download an .ics file and open it in your calendar app to import your tasks.
-      </p>
-
-      <%= link_to calendar_schedule_path(token: current_user.calendar_token, format: :ics), class: "btn-base-sm" do %>
-        Download .ics File
-      <% end %>
-    </div>
   </div>
 </div>

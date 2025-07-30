@@ -109,7 +109,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       expected_tabs = [
         { name: 'Projects', path: "/projects" },
         { name: 'Tasks', path: "/tasks" },
-        { name: 'Calendar', path: "/schedule" }
+        { name: 'Schedule', path: "/schedule" }
       ]
 
       expect(helper).to receive(:render_tabs).with(expected_tabs, nil)
@@ -123,7 +123,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       expected_tabs = [
         { name: 'Projects', path: "/projects" },
         { name: 'Tasks', path: "/tasks" },
-        { name: 'Calendar', path: "/schedule" }
+        { name: 'Schedule', path: "/schedule" }
       ]
 
       expect(helper).to receive(:render_tabs).with(expected_tabs, selected_tab)
