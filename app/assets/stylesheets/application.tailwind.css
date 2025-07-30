@@ -129,20 +129,7 @@
     @apply text-gray-700 bg-gray-100;
   }
 
-  /*----------------------------------------*
-   * Window Components
-   *----------------------------------------*/
-  .window-block {
-    @apply border rounded-md shadow-sm
-           border-gray-300 dark:border-gray-600
-           bg-white dark:bg-gray-800;
-  }
 
-  .window-header {
-    @apply text-sm flex items-center
-           px-3 py-2 rounded-t-md md:py-3
-           border-b border-b-gray-200 dark:border-b-gray-600;
-  }
 
   /*----------------------------------------*
    * Flash Components
