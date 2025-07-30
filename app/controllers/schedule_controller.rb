@@ -3,22 +3,7 @@ class ScheduleController < ApplicationController
   before_action :authenticate_by_token, only: :calendar
 
   def show
-    @date = user_date || Date.current
-
-    # Fetch tasks for current, next, and month after next for the calendar view
-    current_month_start = @date.beginning_of_month
-    month_after_next_end = @date.next_month.next_month.end_of_month
-
-    @monthly_tasks = tasks.where(due_date: current_month_start..month_after_next_end).order(due_date: :asc)
-
-    # Load task counts for previous, current, next, and month after next including full weeks
-    prev_month_start = @date.prev_month.beginning_of_month.beginning_of_week(:monday)
-    month_after_next_end = @date.next_month.next_month.end_of_month.end_of_week(:monday)
-
-    @daily_task_counts = tasks.where(due_date: prev_month_start..month_after_next_end)
-                              .group(:due_date)
-                              .count
-                              .transform_keys(&:to_date)
+    @tasks = tasks.order(due_date: :asc).page(params[:page]).per(20)
   end
 
   def calendar
@@ -41,16 +26,6 @@ class ScheduleController < ApplicationController
 
   def tasks
     Task.todo.where(project_id: (current_user || @user).all_active_projects).with_due_date.order(due_date: :asc)
-  end
-
-  def user_date
-    return nil if params[:date].blank?
-
-    begin
-      Date.parse(params[:date])
-    rescue Date::Error
-      Date.current
-    end
   end
 
   def authenticate_by_token
