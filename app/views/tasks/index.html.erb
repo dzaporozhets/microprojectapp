@@ -7,7 +7,19 @@
         <%= home_tabs "Tasks" %>
 
         <div class="hidden w-auto sm:flex sm:flex-row items-center space-x-6">
-          <div class="w-auto ml-auto">
+          <div class="w-auto ml-auto flex items-center space-x-4">
+            <div class="flex items-center -space-x-2">
+              <% if params[:assigned] == 'true' %>
+                <%= link_to tasks_path, title: "All tasks" do %>
+                  <%= avatar_tag(current_user, "h-8 w-8 rounded-full #{theme_bg} ring-2 #{theme_ring}") %>
+                <% end %>
+              <% else %>
+                <%= link_to tasks_path(assigned: true), title: "My tasks" do %>
+                  <%= avatar_tag(current_user, "h-8 w-8 rounded-full #{theme_bg}") %>
+                <% end %>
+              <% end %>
+            </div>
+
             <%= content_tag :div, class: sub_subnav do %>
               <%= link_to "List", tasks_path, class: "#{current_page?(tasks_path) ? sub_subnav_active_tab : sub_subnav_tab}" %>
               <%= link_to "Schedule", schedule_path, class: "#{current_page?(schedule_path) ? sub_subnav_active_tab : sub_subnav_tab}" %>
@@ -19,8 +31,6 @@
   <% end %>
 
   <div class="mx-auto space-y-6">
-
-
     <% if @tasks.any? %>
       <% @tasks.group_by_projects.each do |project, tasks| %>
         <div class="resource-container">
@@ -61,8 +71,13 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
             </svg>
           </div>
-          <h3 class="resource-empty-title">No active tasks</h3>
-          <p class="resource-empty-description">You have no active tasks across your projects. Create new tasks to get started.</p>
+          <% if params[:assigned] == 'true' %>
+            <h3 class="resource-empty-title">No tasks assigned to you</h3>
+            <p class="resource-empty-description">You don't have any active tasks assigned to you across your projects.</p>
+          <% else %>
+            <h3 class="resource-empty-title">No active tasks</h3>
+            <p class="resource-empty-description">You have no active tasks across your projects. Create new tasks to get started.</p>
+          <% end %>
         </div>
       </div>
     <% end %>

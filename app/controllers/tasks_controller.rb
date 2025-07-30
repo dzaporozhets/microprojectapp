@@ -2,7 +2,9 @@ class TasksController < ApplicationController
   before_action :task, only: :toggle_done
 
   def index
-    @tasks = tasks.page(params[:page]).per(100)
+    @tasks = tasks
+    @tasks = @tasks.where(assigned_user_id: current_user.id) if params[:assigned] == 'true'
+    @tasks = @tasks.page(params[:page]).per(100)
   end
 
   def toggle_done
@@ -27,4 +29,5 @@ class TasksController < ApplicationController
   def tasks
     Task.where(project_id: current_user.all_active_projects).todo.order(id: :desc)
   end
+
 end

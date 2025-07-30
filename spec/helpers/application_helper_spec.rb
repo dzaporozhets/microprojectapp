@@ -108,8 +108,7 @@ RSpec.describe ApplicationHelper, type: :helper do
     it 'constructs the correct tabs array' do
       expected_tabs = [
         { name: 'Projects', path: "/projects" },
-        { name: 'Tasks', path: "/tasks" },
-        { name: 'Schedule', path: "/schedule" }
+        { name: 'Tasks', path: "/tasks" }
       ]
 
       expect(helper).to receive(:render_tabs).with(expected_tabs, nil)
@@ -122,8 +121,7 @@ RSpec.describe ApplicationHelper, type: :helper do
 
       expected_tabs = [
         { name: 'Projects', path: "/projects" },
-        { name: 'Tasks', path: "/tasks" },
-        { name: 'Schedule', path: "/schedule" }
+        { name: 'Tasks', path: "/tasks" }
       ]
 
       expect(helper).to receive(:render_tabs).with(expected_tabs, selected_tab)
