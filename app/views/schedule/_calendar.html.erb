@@ -45,17 +45,17 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Current Month Calendar -->
         <div class="calendar-month">
-          <%= render_calendar_month(@date, @daily_task_counts, params[:date]) %>
+          <%= render_calendar_month(@date, @daily_task_counts) %>
         </div>
 
         <!-- Next Month Calendar -->
         <div class="calendar-month">
-          <%= render_calendar_month(@date.next_month, @daily_task_counts, params[:date]) %>
+          <%= render_calendar_month(@date.next_month, @daily_task_counts) %>
         </div>
 
         <!-- Month After Next Calendar -->
         <div class="calendar-month">
-          <%= render_calendar_month(@date.next_month.next_month, @daily_task_counts, params[:date]) %>
+          <%= render_calendar_month(@date.next_month.next_month, @daily_task_counts) %>
         </div>
       </div>
     </div>

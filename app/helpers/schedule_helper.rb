@@ -30,16 +30,12 @@ module ScheduleHelper
     options
   end
 
-  def calendar_day_classes(day, count, is_today, is_selected, is_current_month)
+  def calendar_day_classes(day, count, is_today, is_current_month)
     classes = [
       "mx-auto flex size-6 items-center justify-center rounded-full transition"
     ]
 
-    if is_selected && is_today
-      classes << "bg-red-300 text-white dark:bg-red-500 dark:text-white font-semibold"
-    elsif is_selected
-      classes << "bg-indigo-100 text-indigo-900 dark:bg-indigo-400 dark:text-black font-semibold"
-    elsif is_today
+    if is_today
       classes << "ring-2 ring-red-300 text-black dark:ring-red-500 font-semibold dark:text-red-500"
     elsif count > 0
       classes << "#{theme_bg} font-semibold"
@@ -52,14 +48,14 @@ module ScheduleHelper
     classes.join(" ")
   end
 
-  def render_calendar_month(date, daily_task_counts, selected_date = nil)
+  def render_calendar_month(date, daily_task_counts)
     start_day = date.beginning_of_month.beginning_of_week(:monday)
     end_day = date.end_of_month.end_of_week(:monday)
 
     content_tag(:div, class: "calendar-month") do
       concat(calendar_month_header(date))
       concat(calendar_day_headings)
-      concat(calendar_days_grid(start_day, end_day, daily_task_counts, selected_date, date))
+      concat(calendar_days_grid(start_day, end_day, daily_task_counts, date))
     end
   end
 
@@ -79,15 +75,14 @@ module ScheduleHelper
     end
   end
 
-  def calendar_days_grid(start_day, end_day, daily_task_counts, selected_date, current_month_date)
+  def calendar_days_grid(start_day, end_day, daily_task_counts, current_month_date)
     content_tag(:div, class: "mt-2 grid grid-cols-7 text-xs") do
       (start_day..end_day).each do |day|
         count = daily_task_counts[day] || 0
         is_today = day == Date.current
-        is_selected = selected_date && day == selected_date.to_date
         is_current_month = day.month == current_month_date.month
 
-        classes = calendar_day_classes(day, count, is_today, is_selected, is_current_month)
+        classes = calendar_day_classes(day, count, is_today, is_current_month)
 
         concat(
           content_tag(:div, class: "py-1 border-t border-gray-200 dark:border-gray-700") do
