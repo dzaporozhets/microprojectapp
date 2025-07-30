@@ -9,8 +9,6 @@ module ScheduleHelper
     )
   end
 
-
-
   def formatted_date(date)
     I18n.l(date, format: :short)
   end
