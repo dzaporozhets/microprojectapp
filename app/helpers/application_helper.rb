@@ -2,14 +2,12 @@ module ApplicationHelper
   def home_tabs(selected = nil)
     tabs = [
       { name: 'Projects', path: projects_path },
-      { name: 'Tasks', path: tasks_path },
-      { name: 'Schedule', path: schedule_path }
+      { name: 'Tasks', path: tasks_path }
     ]
 
     unless selected
       selected = 'Projects' if current_page?(projects_path)
       selected = 'Tasks' if current_page?(tasks_path)
-      selected = 'Schedule' if current_page?(schedule_path)
     end
 
     render_tabs(tabs, selected)
