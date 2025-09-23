@@ -1,4 +1,6 @@
 <div class=" space-y-6">
+  <%= display_flash %>
+
   <div class="resource-container">
     <!-- Header -->
     <div class="resource-header">
@@ -9,8 +11,6 @@
     </div>
 
     <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
-      <%= display_flash %>
-
       <!-- Project Name Section -->
       <% unless @project.personal? %>
         <div class="p-4">
