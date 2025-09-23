@@ -1,0 +1,43 @@
+CHANGELOG
+=========
+
+Version 0.12.2 (2025-09-23)
+---------------------------
+- Remove project from favourites when archived
+- Add ability to filter tasks assigned
+- Move schedule to subnav
+- Use resource ui for import show
+- Rebuild schedule feature differently
+- Improve welcome page
+
+Version 0.12.1 (2025-07-30)
+---------------------------
+- Fix current date highlight
+- Fix empty state for calendar page
+- Redesign calendar feature
+
+Version 0.12.0 (2025-07-27)
+---------------------------
+- One width for all pages
+- Add 3rd month to calendar page
+- Bump task limit to 3999
+- Redesign edit history pages
+- Improve schedule random assign
+- Add ability to randomly assign tasks to next month
+- Redesign upcoming page
+- Improve UI for task new/edit pages
+- Update tasks list
+- Use standard top level margin
+- Improve some padding and borders
+
+Version 0.11.2 (2025-07-27)
+---------------------------
+- Further improve admin ui
+- Improve task row for dashboard and project show more link
+- Redesign account show page
+- Improve ui for admin area
+- Merge Activity into Team tab
+- Merge project resources into one tab
+- Redesign new task page
+- Redesign comments section
+- Redesign task edit page
