@@ -55,6 +55,11 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update(project_params)
+        # Remove from favourites when archiving
+        if project_params[:archived] == 'true' && @project.archived?
+          @project.pins.destroy_all
+        end
+
         format.html { redirect_back fallback_location: project_url(@project), notice: "Project was successfully updated." }
         format.json { render :show, status: :ok, location: @project }
       else

@@ -33,4 +33,18 @@ RSpec.feature "Archive and Unarchive Projects", type: :feature do
     expect(page).to have_button("Archive")
     expect(project.reload.archived).to be false
   end
+
+  scenario "User archives a pinned project and it gets removed from favourites" do
+    # First pin the project
+    create(:pin, project: project, user: user)
+    expect(user.pinned_projects).to include(project)
+
+    # Then archive it
+    visit edit_project_path(project)
+    click_button "Archive Project"
+
+    # Verify project is archived and no longer pinned
+    expect(project.reload.archived).to be true
+    expect(user.reload.pinned_projects).not_to include(project)
+  end
 end
