@@ -23,6 +23,7 @@ services:
       SECRET_KEY_BASE: ${SECRET_KEY_BASE} # Pass this securely via environment variables
       DATABASE_URL: postgres://postgres:password@db:5432/myapp_production
       APP_DOMAIN: localhost
+      DISABLE_EMAIL_DELIVERY: "true"
   nginx:
     image: nginx:latest
     ports:

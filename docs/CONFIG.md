@@ -63,6 +63,7 @@ To generate some ENV variables automatically, run:
 - `APP_ALLOWED_EMAIL_DOMAIN` - restrict users to a certain domain, e.g., `APP_ALLOWED_EMAIL_DOMAIN=company.com`
 - `APP_DISABLE_SIGNUP` - disable user sign-up if you don't want to allow new users.
 - `DISABLE_EMAIL_LOGIN` - disable login and sign-up with email and password. Only OAuth (Google, Microsoft) is allowed
+- `DISABLE_EMAIL_DELIVERY` - prevent outgoing email. When enabled, Devise keeps accounts usable without confirmation by allowing indefinite access for unconfirmed users.
 
 ### AWS S3
 
@@ -97,4 +98,3 @@ Some features like 2FA require an encryption key for the database. You can gener
 - `ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY`
 - `ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY`
 - `ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT`
-

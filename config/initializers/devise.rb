@@ -28,7 +28,11 @@ Devise.setup do |config|
   config.maximum_attempts = 10
   config.unlock_in = 1.hour
   config.last_attempt_warning = true
-  config.allow_unconfirmed_access_for = 1.hour
+  config.allow_unconfirmed_access_for = if app_settings[:disable_email_delivery]
+                                          nil
+                                        else
+                                          1.hour
+                                        end
   config.paranoid = true
   config.sign_out_via = :delete
 
