@@ -21,6 +21,7 @@ require 'rspec/rails'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'capybara/rspec'
+require 'database_cleaner/active_record'
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -80,16 +81,16 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   #
-  #config.before(:suite) do
-    #DatabaseCleaner.strategy = :transaction
-    #DatabaseCleaner.clean_with(:truncation)
-  #end
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
 
-  #config.around(:each) do |example|
-    #DatabaseCleaner.cleaning do
-      #example.run
-    #end
-  #end
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
 
   # Include FactoryBot syntax to simplify calls to factories
   config.include FactoryBot::Syntax::Methods
