@@ -1,4 +1,6 @@
 class Project::ExportController < Project::BaseController
+  before_action :project_owner_only!
+
   def new
   end
 
