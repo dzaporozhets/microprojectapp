@@ -19,10 +19,13 @@ To run the application, you have 3 options:
 For testing and getting started quickly:
 
 ```bash
-# Development mode
+# Get the source code
+git clone https://gitlab.com/dzaporozhets/microprojectapp.git
+
+# Development mode (at http://localhost:3000/)
 docker-compose -f docker-compose.dev.yml up --build
 
-# Production mode
+# Production mode (at https://localhost/)
 SECRET_KEY_BASE=$(openssl rand -hex 64) docker-compose -f docker-compose.prod.yml up --build
 ```
 
