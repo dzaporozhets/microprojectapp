@@ -1,4 +1,5 @@
 class Project::ImportController < Project::BaseController
+  before_action :project_owner_only!
   MAX_FILE_SIZE = 5.megabytes # Set the file size limit
 
   def show
