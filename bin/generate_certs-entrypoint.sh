@@ -3,8 +3,8 @@
 set -e  # Stop execution on error
 
 CERTS_DIR="/etc/nginx/certs"
-CERT_KEY="$CERTS_DIR/nginx-selfsigned.key"
-CERT_CRT="$CERTS_DIR/nginx-selfsigned.crt"
+CERT_KEY="$CERTS_DIR/server.key"
+CERT_CRT="$CERTS_DIR/server.crt"
 
 # Check if certificates already exist
 if [ ! -f "$CERT_KEY" ] || [ ! -f "$CERT_CRT" ]; then

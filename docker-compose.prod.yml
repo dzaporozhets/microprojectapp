@@ -13,7 +13,7 @@ services:
       context: .
       dockerfile: Dockerfile
     # command: bundle exec rails s -b '0.0.0.0' -p 3000
-    command: bash -c "export SECRET_KEY_BASE=$(bundle exec rails secret) && bundle exec rails s -b '0.0.0.0' -p 3000"
+    command: ["./bin/rails", "server", "-b", "0.0.0.0"]
     ports:
       - "3000:3000"
     depends_on:
@@ -22,6 +22,7 @@ services:
       RAILS_ENV: production
       SECRET_KEY_BASE: ${SECRET_KEY_BASE} # Pass this securely via environment variables
       DATABASE_URL: postgres://postgres:password@db:5432/myapp_production
+      APP_DOMAIN: localhost
   nginx:
     image: nginx:latest
     ports:
@@ -31,8 +32,15 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - ./certs:/etc/nginx/certs
       - uploads_data:/myapp/public/uploads
+      - ./bin/generate_certs-entrypoint.sh:/usr/bin/generate_certs-entrypoint.sh:ro
     depends_on:
       - web
+    command: >
+      /bin/sh -c "
+        apt-get update && apt-get install -y openssl &&
+        /bin/sh /usr/bin/generate_certs-entrypoint.sh &&
+        nginx -g 'daemon off;'
+      "
 volumes:
   postgres_data:
   uploads_data:
