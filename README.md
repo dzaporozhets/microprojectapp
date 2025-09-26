@@ -12,15 +12,29 @@ MicroProject.app is a lightweight project management tool designed for individua
 
 ## Quick Start
 
-To run the application, you have 2 options:
+To run the application, you have 3 options:
 
-### 1. Deploy to Heroku
+### 1. Quick Start with Docker
 
-The simplest way to run the application is by deploying it to a cloud platform like [Heroku](https://www.heroku.com/). For step-by-step instructions, see our [Heroku deployment guide](docs/HEROKU.md).
+For testing and getting started quickly:
 
-### 2. Run on Your Server or Local Machine
+```bash
+# Development mode
+docker-compose -f docker-compose.dev.yml up --build
 
-For running the application on your own server or local machine, follow the [installation instructions](docs/INSTALL.md).
+# Production mode
+SECRET_KEY_BASE=$(openssl rand -hex 64) docker-compose -f docker-compose.prod.yml up --build
+```
+
+For detailed Docker setup, see [Docker Guide](docs/DOCKER.md).
+
+### 2. Deploy to Heroku
+
+For production deployments, use a cloud platform like [Heroku](https://www.heroku.com/). For step-by-step instructions, see our [Heroku deployment guide](docs/HEROKU.md).
+
+### 3. Run on Your Server or Local Machine
+
+For proper production setups on your own server, follow the [installation instructions](docs/INSTALL.md).
 
 ## Configuration
 
