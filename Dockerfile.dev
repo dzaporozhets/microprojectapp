@@ -48,10 +48,10 @@ RUN apt-get update -qq && \
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
 
-# Run and own only the runtime files as a non-root user for security
-RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp public/uploads
-USER rails:rails
+# For development, we'll run as the host user to avoid permission issues
+# RUN useradd rails --create-home --shell /bin/bash && \
+#     chown -R rails:rails db log storage tmp public/uploads
+# USER rails:rails
 
 # Expose port 3000 to the host
 EXPOSE 3000
