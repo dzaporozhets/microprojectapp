@@ -22,7 +22,7 @@ class ProjectImportService
 
   def import_stats
     {
-      task_ids: @imported_tasks.first(10).map(&:id),
+      task_ids: @imported_tasks.first(10).map(&:id), # rubocop:disable Performance/ChainArrayAllocation
       task_count: @imported_tasks.size,
       note_count: @imported_notes.size,
       comment_count: @imported_comment_count
