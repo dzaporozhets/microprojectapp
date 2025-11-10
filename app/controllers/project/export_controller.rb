@@ -5,28 +5,15 @@ class Project::ExportController < Project::BaseController
   end
 
   def create
-    tasks_data = project.tasks.includes(comments: :user).order(:id).map do |task|
-      task.as_json(only: [:name, :description, :done, :done_at, :due_date]).merge(
-        'comments' => task.comments.order(:id).map do |comment|
-          {
-            'body' => comment.body,
-            'user_email' => comment.user.email
-          }
-        end
-      )
-    end
-    notes_data = project.notes.as_json(only: [:title, :content])
-
-    export_data = {
-      project_name: project.name,
-      tasks: tasks_data,
-      notes: notes_data
-    }
-
-    filename = "microprojectapp-project-#{project.id}-timestamp-#{Time.now.to_i}.json"
+    export_service = ProjectExportService.new(project)
 
     respond_to do |format|
-      format.json { send_data export_data.to_json, filename: filename, type: 'application/json', disposition: 'attachment' }
+      format.json do
+        send_data export_service.export_data.to_json,
+                  filename: export_service.filename,
+                  type: 'application/json',
+                  disposition: 'attachment'
+      end
     end
   end
 end
