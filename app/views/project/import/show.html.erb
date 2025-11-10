@@ -8,22 +8,23 @@
     </div>
 
     <div class="p-4">
-      <% if @imported_task_count == 0 && @imported_note_count == 0 %>
+      <% if @imported_task_count == 0 && @imported_note_count == 0 && @imported_comment_count == 0 %>
         <div class="resource-empty-state">
           <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gray-100 dark:bg-gray-800 mx-auto">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
             </svg>
           </div>
-          <h3 class="resource-empty-title">No tasks or notes were imported</h3>
-          <p class="resource-empty-description">The file you uploaded didn't contain any importable tasks or notes.</p>
+          <h3 class="resource-empty-title">No tasks, notes, or comments were imported</h3>
+          <p class="resource-empty-description">The file you uploaded didn't contain any importable tasks, notes, or comments.</p>
         </div>
       <% else %>
         <div class="space-y-4">
           <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 text-green-800 dark:text-green-200 rounded-md p-4">
             <p class="font-medium">
-              Successfully imported <strong><%= @imported_task_count %></strong> tasks and
-              <strong><%= @imported_note_count %></strong> notes into the project.
+              Successfully imported <strong><%= @imported_task_count %></strong> tasks,
+              <strong><%= @imported_note_count %></strong> notes, and
+              <strong><%= @imported_comment_count %></strong> comments into the project.
             </p>
           </div>
 

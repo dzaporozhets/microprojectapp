@@ -5,7 +5,16 @@ class Project::ExportController < Project::BaseController
   end
 
   def create
-    tasks_data = project.tasks.as_json(only: [:name, :description, :done, :done_at, :due_date])
+    tasks_data = project.tasks.includes(comments: :user).order(:id).map do |task|
+      task.as_json(only: [:name, :description, :done, :done_at, :due_date]).merge(
+        'comments' => task.comments.order(:id).map do |comment|
+          {
+            'body' => comment.body,
+            'user_email' => comment.user.email
+          }
+        end
+      )
+    end
     notes_data = project.notes.as_json(only: [:title, :content])
 
     export_data = {

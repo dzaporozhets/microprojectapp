@@ -8,6 +8,7 @@ class Project::ImportController < Project::BaseController
     @imported_tasks = project.tasks.where(id: task_ids)
     @imported_task_count = session.delete(:imported_task_count) || 0
     @imported_note_count = session.delete(:imported_note_count) || 0
+    @imported_comment_count = session.delete(:imported_comment_count) || 0
   end
   def new
   end
@@ -51,6 +52,7 @@ class Project::ImportController < Project::BaseController
 
       imported_tasks = []
       imported_notes = []
+      imported_comment_count = 0
 
       # Use a transaction for atomicity
       Project.transaction do
@@ -59,8 +61,11 @@ class Project::ImportController < Project::BaseController
           unless task_data.is_a?(Hash)
             raise ActiveRecord::RecordInvalid.new('Invalid task data format.')
           end
+          comments_data = extract_comments(task_data)
           task_params = task_data.slice('name', 'description', 'done', 'done_at', 'due_date').merge(user: current_user)
-          imported_tasks << project.tasks.create!(task_params)
+          task = project.tasks.create!(task_params)
+          imported_tasks << task
+          imported_comment_count += create_comments_for(task, comments_data)
         end
 
         notes.each do |note_data|
@@ -77,6 +82,7 @@ class Project::ImportController < Project::BaseController
       session[:imported_task_ids] = first_ten_tasks.map(&:id)
       session[:imported_task_count] = imported_tasks.size
       session[:imported_note_count] = imported_notes.size
+      session[:imported_comment_count] = imported_comment_count
 
       redirect_to project_import_path(project), notice: 'Data imported successfully.'
     rescue JSON::ParserError
@@ -87,6 +93,37 @@ class Project::ImportController < Project::BaseController
       # Catch all other errors to prevent unhandled exceptions and reveal less internal info
       redirect_to new_project_import_path(project), alert: 'An error occurred during import. Please try again.'
     end
+  end
+
+  private
+
+  def extract_comments(task_data)
+    comments = task_data['comments'] || []
+    unless comments.is_a?(Array)
+      raise ActiveRecord::RecordInvalid.new('Invalid JSON file format: comments should be an array.')
+    end
+    comments
+  end
+
+  def create_comments_for(task, comments_data)
+    comments_data.reduce(0) do |count, comment_data|
+      unless comment_data.is_a?(Hash)
+        raise ActiveRecord::RecordInvalid.new('Invalid comment data format.')
+      end
+
+      body = comment_data['body'].to_s.strip
+      next count if body.blank?
+
+      user = find_comment_user(comment_data['user_email'])
+      task.comments.create!(body: body, user: user)
+      count + 1
+    end
+  end
+
+  def find_comment_user(email)
+    return current_user if email.blank?
+
+    User.find_by(email: email) || current_user
   end
 
 end

@@ -27,7 +27,7 @@ RSpec.feature "Project::Import", type: :feature do
     attach_file('file', file_path)
     click_button 'Upload file'
 
-    expect(page).to have_content('Successfully imported 2 tasks and 0 notes into the project')
+    expect(page).to have_content('Successfully imported 2 tasks, 0 notes, and 0 comments into the project')
     expect(page).to have_content('Imported Task 1')
     expect(page).to have_content('Imported Task 2')
     expect(project.tasks.count).to eq(2)
@@ -51,7 +51,7 @@ RSpec.feature "Project::Import", type: :feature do
     attach_file('file', file_path)
     click_button 'Upload file'
 
-    expect(page).to have_content('Successfully imported 1 tasks and 2 notes into the project.')
+    expect(page).to have_content('Successfully imported 1 tasks, 2 notes, and 0 comments into the project')
     expect(project.tasks.count).to eq(1)
     expect(project.notes.count).to eq(2)
   end
@@ -150,5 +150,33 @@ RSpec.feature "Project::Import", type: :feature do
     click_button 'Upload file'
 
     expect(page).to have_content("Too many tasks or notes. Maximum allowed is #{max_import_count} items each.")
+  end
+
+  scenario "User imports tasks with comments" do
+    another_user = create(:user, email: 'commenter@example.com')
+    tasks = [
+      {
+        name: "Imported Task 1",
+        description: "Description 1",
+        comments: [
+          { body: "First comment", user_email: user.email },
+          { body: "Second comment", user_email: another_user.email }
+        ]
+      }
+    ]
+
+    File.open(file_path, 'w') do |f|
+      f.write({ project_name: project.name, tasks: tasks }.to_json)
+    end
+
+    visit new_project_import_path(project)
+    attach_file('file', file_path)
+    click_button 'Upload file'
+
+    expect(page).to have_content('Successfully imported 1 tasks, 0 notes, and 2 comments into the project')
+    imported_task = project.tasks.last
+    expect(imported_task.comments.count).to eq(2)
+    expect(imported_task.comments.pluck(:body)).to include("First comment", "Second comment")
+    expect(imported_task.comments.pluck(:user_id)).to include(user.id, another_user.id)
   end
 end
