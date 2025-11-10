@@ -2,6 +2,8 @@
 
 # Service object to handle project data import
 class ProjectImportService
+  class ImportFormatError < StandardError; end
+
   attr_reader :imported_tasks, :imported_notes, :imported_comment_count
 
   def initialize(project, data, current_user)
@@ -93,10 +95,10 @@ class ProjectImportService
   end
 
   def validate_hash!(value, error_message)
-    raise ActiveRecord::RecordInvalid, error_message unless value.is_a?(Hash)
+    raise ImportFormatError, error_message unless value.is_a?(Hash)
   end
 
   def validate_array!(value, error_message)
-    raise ActiveRecord::RecordInvalid, error_message unless value.is_a?(Array)
+    raise ImportFormatError, error_message unless value.is_a?(Array)
   end
 end

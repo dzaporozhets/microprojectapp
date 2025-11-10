@@ -27,6 +27,8 @@ class Project::ImportController < Project::BaseController
     redirect_to new_project_import_path(project), alert: 'Invalid JSON file.'
   rescue ActiveRecord::RecordInvalid => e
     redirect_to new_project_import_path(project), alert: e.message
+  rescue ProjectImportService::ImportFormatError => e
+    redirect_to new_project_import_path(project), alert: e.message
   rescue StandardError
     redirect_to new_project_import_path(project),
                 alert: 'An error occurred during import. Please try again.'
