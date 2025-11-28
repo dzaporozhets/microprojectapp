@@ -145,7 +145,7 @@
    * Project Resource Components
    *----------------------------------------*/
   .resource-container {
-    @apply bg-white dark:bg-gray-900 shadow-sm rounded-lg overflow-hidden;
+    @apply bg-white dark:bg-gray-900 shadow-sm rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700;
   }
 
   .resource-header {
@@ -205,5 +205,20 @@
    *----------------------------------------*/
   .nav-border {
     @apply border-b border-gray-200 dark:border-gray-800;
+  }
+
+  /*----------------------------------------*
+   * Content Block Layout
+   *----------------------------------------*/
+  .content-block {
+    @apply bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700;
+  }
+
+  .content-block-nav {
+    @apply bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3;
+  }
+
+  .content-block-main {
+    @apply p-4;
   }
 }

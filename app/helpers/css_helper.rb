@@ -12,7 +12,7 @@ module CssHelper
   end
 
   def subnav_css
-    'py-3 border-b border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400'
+    'py-3 border-b border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 bg-white dark:bg-gray-900'
   end
 
   def task_css(task)

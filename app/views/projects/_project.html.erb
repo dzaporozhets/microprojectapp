@@ -2,7 +2,7 @@
   <div class="min-w-0 flex-1">
     <%= link_to project, class: "block" do %>
       <div class="flex items-center justify-between">
-        <h3 class="text-sm font-medium <%= project.archived ? 'text-gray-500' : 'text-gray-900 dark:text-white' %>">
+        <h3 class="text-base font-semibold <%= project.archived ? 'text-gray-500' : 'text-gray-900 dark:text-white' %>">
           <%= project.name.truncate(100) %>
           <% if project.archived? %>
             <svg class="inline h-4 w-4 ml-1 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -12,8 +12,9 @@
         </h3>
 
         <% if !project.archived && project.tasks.todo.any? %>
-          <span class="ml-4 text-sm text-gray-700 dark:text-gray-300">
-            <%= pluralize(project.tasks.todo.count, 'task') %>
+          <span class="ml-4 text-base text-gray-700 dark:text-gray-300">
+            <strong><%= project.tasks.todo.count %></strong>
+            <span class="text-gray-500 text-sm"><%= 'task'.pluralize(project.tasks.todo.count) %></span>
           </span>
         <% end %>
       </div>
