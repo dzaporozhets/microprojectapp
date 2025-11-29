@@ -15,7 +15,7 @@
 
 
       <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "min-w-0 grow flex h-12 items-center" do %>
-        <p class="list-text-primary line-clamp-2 truncate"><%= task.name %></p>
+        <p class="list-text-primary line-clamp-2"><%= task.name %></p>
       <% end %>
 
       <% if task.due_date %>
