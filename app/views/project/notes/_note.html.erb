@@ -10,7 +10,7 @@
 
       <div class="ml-4 min-w-0 flex-1">
         <div class="flex items-center">
-          <%= link_to note.title, edit_project_note_path(note.project, note), class: "#{theme_link_primary} list-text-primary truncate" %>
+          <%= link_to note.title, edit_project_note_path(note.project, note), class: "link-primary list-text-primary truncate" %>
         </div>
         <% if note.content.present? %>
           <div class="mt-1 list-text-secondary">

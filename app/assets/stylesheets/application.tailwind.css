@@ -283,4 +283,21 @@
   .task-details-todo {
     @apply bg-gray-100 dark:bg-gray-800 text-black dark:text-gray-100;
   }
+
+  /* Avatar Styles */
+  .avatar-bg {
+    @apply bg-gray-200 dark:bg-gray-800 rounded-full;
+  }
+
+  /* Link Styles */
+  .link-primary {
+    @apply text-violet-900 dark:text-violet-100 hover:text-violet-700 hover:dark:text-violet-300;
+  }
+
+  /* Checkbox Styles */
+  .checkbox-round {
+    @apply focus-visible:ring-violet-500 text-violet-700 dark:text-violet-300
+           bg-gray-100 border-gray-300 dark:border-gray-600 rounded-xl
+           focus-visible:ring-2 dark:bg-gray-700;
+  }
 }

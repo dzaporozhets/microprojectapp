@@ -10,7 +10,7 @@
               <%= form.check_box :done,
                 checked: @task.done,
                 id: "task_#{@task.id}",
-                class: "w-5 h-5 #{theme_checkbox_round} mr-2",
+                class: "w-5 h-5 checkbox-round mr-2",
                 data: { turbo_action: "advance" },
                 onchange: "this.form.requestSubmit()" %>
               <span class="text-sm text-gray-600 dark:text-gray-400">

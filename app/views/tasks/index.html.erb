@@ -11,11 +11,11 @@
             <div class="flex items-center -space-x-2">
               <% if params[:assigned] == 'true' %>
                 <%= link_to tasks_path, title: "All tasks" do %>
-                  <%= avatar_tag(current_user, "h-8 w-8 rounded-full #{theme_bg} ring-2 #{theme_ring}") %>
+                  <%= avatar_tag(current_user, "h-8 w-8 avatar-bg ring-2 ring-violet-500") %>
                 <% end %>
               <% else %>
                 <%= link_to tasks_path(assigned: true), title: "My tasks" do %>
-                  <%= avatar_tag(current_user, "h-8 w-8 rounded-full #{theme_bg}") %>
+                  <%= avatar_tag(current_user, "h-8 w-8 avatar-bg") %>
                 <% end %>
               <% end %>
             </div>

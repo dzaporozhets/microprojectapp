@@ -97,42 +97,6 @@ module ThemeHelper
     end
   end
 
-  def theme_ring
-    case theme_name
-    when 'violet' then 'ring-violet-500'
-    when 'lime' then 'ring-lime-500'
-    when 'pink' then 'ring-pink-500'
-    when 'sky' then 'ring-sky-500'
-    when 'orange' then 'ring-orange-500'
-    when 'indigo' then 'ring-indigo-500'
-    when 'gray' then 'ring-gray-500'
-    end
-  end
-
-  def theme_focus_ring_visible
-    case theme_name
-    when 'violet' then 'focus-visible:ring-violet-500'
-    when 'lime' then 'focus-visible:ring-lime-500'
-    when 'pink' then 'focus-visible:ring-pink-500'
-    when 'sky' then 'focus-visible:ring-sky-500'
-    when 'orange' then 'focus-visible:ring-orange-500'
-    when 'indigo' then 'focus-visible:ring-indigo-500'
-    when 'gray' then 'focus-visible:ring-gray-500'
-    end
-  end
-
-  def theme_focus_ring_within
-    case theme_name
-    when 'violet' then 'focus-within:ring-violet-500'
-    when 'lime' then 'focus-within:ring-lime-500'
-    when 'pink' then 'focus-within:ring-pink-500'
-    when 'sky' then 'focus-within:ring-sky-500'
-    when 'orange' then 'focus-within:ring-orange-500'
-    when 'indigo' then 'focus-within:ring-indigo-500'
-    when 'gray' then 'focus-within:ring-gray-500'
-    end
-  end
-
   private
 
   def theme_name

@@ -30,7 +30,7 @@
 
                   <div class="ml-4 min-w-0 flex-1">
                     <div class="flex items-center">
-                      <%= link_to user.email, admin_user_path(user), class: "text-sm font-medium #{theme_link_primary} truncate" %>
+                      <%= link_to user.email, admin_user_path(user), class: "text-sm font-medium link-primary truncate" %>
                       
                       <% if user.admin %>
                         <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">

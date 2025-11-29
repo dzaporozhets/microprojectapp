@@ -25,14 +25,4 @@ module CssHelper
   def theme_button_primary
     "btn border #{theme_bg} #{theme_text} #{theme_border} #{theme_hover}"
   end
-
-  def theme_link_primary
-    "#{theme_text} hover:#{theme_text_subtle}"
-  end
-
-  # Checkbox round style
-  def theme_checkbox_round
-    "#{theme_focus_ring_visible} #{theme_text_subtle} bg-gray-100" \
-      " border-gray-300 dark:border-gray-600 rounded-xl focus-visible:ring-2 dark:bg-gray-700"
-  end
 end

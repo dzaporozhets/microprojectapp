@@ -37,12 +37,12 @@
           <li>
             <div class="flex items-center ml-auto -space-x-2 hidden md:flex">
               <%= link_to project_tasks_path(@project, assigned_user_id: @project.user_id), title: @project.user.email do %>
-                <%= avatar_tag(@project.user, "h-8 w-8 rounded-full #{theme_bg}") %>
+                <%= avatar_tag(@project.user, "h-8 w-8 avatar-bg") %>
               <% end %>
 
               <% @project.users.each do |user| %>
                 <%= link_to project_tasks_path(@project, assigned_user_id: user.id), title: user.email do %>
-                  <%= avatar_tag(user, "h-8 w-8 rounded-full #{theme_bg}") %>
+                  <%= avatar_tag(user, "h-8 w-8 avatar-bg") %>
                 <% end %>
               <% end %>
             </div>
