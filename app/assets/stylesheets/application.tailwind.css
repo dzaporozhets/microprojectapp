@@ -145,11 +145,11 @@
    * Project Resource Components
    *----------------------------------------*/
   .resource-container {
-    @apply bg-white dark:bg-gray-900 shadow-sm rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700;
+    @apply bg-white dark:bg-gray-900 shadow-sm rounded-lg overflow-hidden border border-base;
   }
 
   .resource-header {
-    @apply p-4 flex justify-between items-center border-b border-gray-200 dark:border-gray-700;
+    @apply p-4 flex justify-between items-center border-b border-base;
   }
 
   .resource-title {
@@ -204,18 +204,22 @@
    * Misc
    *----------------------------------------*/
   .nav-border {
-    @apply border-b border-gray-200 dark:border-gray-800;
+    @apply border-b border-base;
+  }
+
+  .border-base {
+    @apply border-gray-200 dark:border-gray-700;
   }
 
   /*----------------------------------------*
    * Content Block Layout
    *----------------------------------------*/
   .content-block {
-    @apply bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700;
+    @apply bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden border border-base;
   }
 
   .content-block-nav {
-    @apply bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-3;
+    @apply bg-gray-50 dark:bg-gray-800 border-b border-base px-4 py-3;
   }
 
   .content-block-main {

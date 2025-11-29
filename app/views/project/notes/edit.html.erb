@@ -19,7 +19,7 @@
             placeholder: "Write your note content here..." %>
         </div>
 
-        <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+        <div class="flex items-center justify-between mt-6 pt-4 border-t border-base">
           <%= link_to last_update_text(@note), history_project_note_path(@project, @note), class: 'text-gray-600 dark:text-gray-400 hover:underline mr-2 text-sm' %>
           <div class="flex items-center gap-2 dark:text-gray-400">
             <% if flash[:notice].present? %>

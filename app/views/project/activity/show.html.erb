@@ -12,7 +12,7 @@
     <div class="bg-white dark:bg-gray-800">
       <% if @records.any? %>
         <div class="px-4 py-4 sm:px-6">
-          <ol class="relative border-l border-gray-200 dark:border-gray-700 space-y-6">
+          <ol class="relative border-l border-base space-y-6">
             <% @records.each do |record| %>
               <%= render 'project/activity/record', record: record %>
             <% end %>

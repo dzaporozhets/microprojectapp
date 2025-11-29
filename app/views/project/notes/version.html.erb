@@ -29,7 +29,7 @@
             <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3">Content Changes</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <!-- Before Content -->
-              <div class="p-4 bg-red-50 dark:bg-red-950 border border-gray-200 dark:border-gray-700 rounded-lg">
+              <div class="p-4 bg-red-50 dark:bg-red-950 border border-base rounded-lg">
                 <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300 mb-2">Before</h3>
                 <div class="text-sm text-gray-700 dark:text-gray-200 whitespace-pre-line">
                   <%= @version.changeset["content"][0] || "nil" %>
@@ -37,7 +37,7 @@
               </div>
 
               <!-- After Content -->
-              <div class="p-4 bg-green-50 dark:bg-green-950 border border-gray-200 dark:border-gray-700 rounded-lg">
+              <div class="p-4 bg-green-50 dark:bg-green-950 border border-base rounded-lg">
                 <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300 mb-2">After</h3>
                 <div class="text-sm text-gray-700 dark:text-gray-200 whitespace-pre-line">
                   <%= @version.changeset["content"][1] || "nil" %>
