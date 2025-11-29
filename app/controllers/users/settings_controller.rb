@@ -6,6 +6,7 @@ class Users::SettingsController < ApplicationController
   layout 'user'
 
   def show
+    @tab_name = 'Settings'
     @user = current_user
   end
 

@@ -265,6 +265,10 @@
     @apply py-3 border-b border-base text-base bg-base;
   }
 
+  .title-subnav {
+    @apply pt-1 pb-4 border-b border-base text-base bg-base;
+  }
+
   /* Task Details Styles */
   .task-details-done {
     @apply bg-gray-300 dark:bg-gray-700 text-base;

@@ -6,6 +6,7 @@ class Users::AccountsController < ApplicationController
   layout 'user'
 
   def show
+    @tab_name = 'Account'
     @user = current_user
   end
 

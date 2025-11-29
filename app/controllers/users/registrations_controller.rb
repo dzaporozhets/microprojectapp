@@ -15,6 +15,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
+    @tab_name = 'Password'
+
     super
   end
 
