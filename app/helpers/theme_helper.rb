@@ -1,8 +1,4 @@
 module ThemeHelper
-  def theme_bg_neutral
-    'bg-gray-200 dark:bg-gray-800'
-  end
-
   def theme_bg
     case theme_name
     when 'violet' then 'bg-violet-200 dark:bg-violet-900'
