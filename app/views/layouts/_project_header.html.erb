@@ -4,10 +4,8 @@
       <ol role="list" class="flex space-x-4 flex-grow min-w-0">
         <li class="flex flex-grow min-w-0">
           <div class="flex items-center text-gray-400">
-            <%#= link_to 'Project:', root_path, class: "flex items-center font-base mr-4" %>
-
             <%= link_to @project do %>
-              <div class="font-medium leading-8 text-lg line-clamp-1 text-black dark:text-white">
+              <div class="font-semibold leading-8 text-lg line-clamp-1 text-black dark:text-white">
                 <span><%= @project.name %></span>
               </div>
             <% end %>

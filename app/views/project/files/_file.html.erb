@@ -29,7 +29,7 @@
 
       <div class="ml-4">
         <div class="flex items-center">
-          <%= link_to download_project_files_path(@project, file: project_file.identifier), data: { turbo: false }, class: "text-sm font-medium #{theme_link_primary} truncate" do %>
+          <%= link_to download_project_files_path(@project, file: project_file.identifier), data: { turbo: false }, class: "#{theme_link_primary} truncate" do %>
             <%= project_file.file.filename %>
           <% end %>
         </div>
