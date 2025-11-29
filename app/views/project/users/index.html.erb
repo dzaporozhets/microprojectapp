@@ -23,39 +23,41 @@
       <% if @project.users.any? || @project.user == current_user %>
         <ul role="list" class="resource-list">
           <!-- Project Owner -->
-          <li class="relative flex justify-between gap-x-6">
-            <div class="flex min-w-0 gap-x-4 items-center">
-              <%= avatar_tag(@project.user, "h-10 w-10 flex-none rounded-full bg-gray-200 dark:bg-gray-800") %>
-              <div class="min-w-0 flex-auto">
-                <p class="text-sm font-medium text-gray-900 dark:text-gray-200">
-                  <%= link_to @project.user.email, project_tasks_path(@project, assigned_user_id: @project.user_id), class: theme_link_primary %>
-                </p>
-                <span class="inline-flex items-center rounded-md bg-violet-50 dark:bg-violet-900/30 px-2 py-1 text-xs font-medium text-violet-700 dark:text-violet-300 ring-1 ring-inset ring-violet-600/20 dark:ring-violet-500/30">
-                  Project Owner
-                </span>
+          <li class="flex justify-between">
+            <div class="flex min-w-0 items-center">
+              <%= avatar_tag(@project.user, "h-10 w-10 flex-none rounded-full") %>
+              <div class="ml-4 min-w-0 flex-1">
+                <div class="flex items-center">
+                  <%= link_to @project.user.email, project_tasks_path(@project, assigned_user_id: @project.user_id), class: "#{theme_link_primary} list-text-primary truncate" %>
+                </div>
+                <div class="mt-1">
+                  <span class="inline-flex items-center rounded-md bg-violet-50 dark:bg-violet-900/30 px-2 py-1 text-xs font-medium text-violet-700 dark:text-violet-300 ring-1 ring-inset ring-violet-600/20 dark:ring-violet-500/30">
+                    Project Owner
+                  </span>
+                </div>
               </div>
             </div>
           </li>
 
           <!-- Team Members -->
           <% @project.users.each do |user| %>
-            <li id="project_<%= dom_id user %>" class="relative flex justify-between gap-x-6">
-              <div class="flex min-w-0 gap-x-4 items-center">
-                <%= avatar_tag(user, "h-10 w-10 flex-none rounded-full bg-gray-200 dark:bg-gray-800") %>
-                <div class="min-w-0 flex-auto">
-                  <p class="text-sm font-medium text-gray-900 dark:text-gray-200">
-                    <%= link_to user.email, project_tasks_path(@project, assigned_user_id: user.id), class: theme_link_primary %>
-                  </p>
-                  <p class="mt-1 truncate text-xs text-muted">
+            <li id="project_<%= dom_id user %>" class="flex justify-between">
+              <div class="flex min-w-0 items-center">
+                <%= avatar_tag(user, "h-10 w-10 flex-none rounded-full") %>
+                <div class="ml-4 min-w-0 flex-1">
+                  <div class="flex items-center">
+                    <%= link_to user.email, project_tasks_path(@project, assigned_user_id: user.id), class: "#{theme_link_primary} list-text-primary truncate" %>
+                  </div>
+                  <div class="mt-1 list-text-secondary">
                     Team Member
-                  </p>
+                  </div>
                 </div>
               </div>
 
               <% if current_user == @project.owner %>
-                <div class="flex items-center gap-x-2">
+                <div class="flex-shrink-0 flex items-center space-x-2">
                   <%= button_to project_user_path(@project, user), method: :delete,
-                    class: "rounded-full p-1 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400",
+                    class: "inline-flex items-center p-1.5",
                     title: "Remove",
                     data: { turbo_confirm: 'Remove team member? Are you sure?' } do %>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
