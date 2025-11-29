@@ -30,7 +30,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <!-- Before Content -->
               <div class="p-4 bg-red-50 dark:bg-red-950 border border-base rounded-lg">
-                <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300 mb-2">Before</h3>
+                <h3 class="text-lg font-bold text-base mb-2">Before</h3>
                 <div class="text-sm text-gray-700 dark:text-gray-200 whitespace-pre-line">
                   <%= @version.changeset["content"][0] || "nil" %>
                 </div>
@@ -38,7 +38,7 @@
 
               <!-- After Content -->
               <div class="p-4 bg-green-50 dark:bg-green-950 border border-base rounded-lg">
-                <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300 mb-2">After</h3>
+                <h3 class="text-lg font-bold text-base mb-2">After</h3>
                 <div class="text-sm text-gray-700 dark:text-gray-200 whitespace-pre-line">
                   <%= @version.changeset["content"][1] || "nil" %>
                 </div>
@@ -54,7 +54,7 @@
             </svg>
           </div>
           <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-200">No changes tracked</h3>
-          <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">No changes were tracked for this version.</p>
+          <p class="mt-1 text-sm text-muted">No changes were tracked for this version.</p>
         </div>
       <% end %>
     </div>

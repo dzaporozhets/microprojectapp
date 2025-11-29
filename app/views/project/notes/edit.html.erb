@@ -3,7 +3,7 @@
     <%= form_with(model: [@project, @note], class: "contents", data: { controller: "notes", note_id: @note.id }) do |form| %>
       <%= render "shared/errors", resource: @note %>
 
-      <div class="p-4 bg-white dark:bg-gray-800 shadow-sm rounded-lg overflow-hidden">
+      <div class="p-4 bg-base shadow-sm rounded-lg overflow-hidden">
         <div class="mb-4">
           <%= form.text_field :title,
             class: "block w-full text-lg font-semibold border-none bg-transparent outline-none focus:ring-0 focus:outline-none dark:text-gray-100",

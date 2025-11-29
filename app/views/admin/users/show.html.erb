@@ -29,51 +29,51 @@
     <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">ID</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.id %></dd>
+        <dd class="text-sm text-base"><%= @user.id %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Email</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.email %></dd>
+        <dd class="text-sm text-base"><%= @user.email %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Confirmed At</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.confirmed_at %></dd>
+        <dd class="text-sm text-base"><%= @user.confirmed_at %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Confirmation Sent At</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.confirmation_sent_at %></dd>
+        <dd class="text-sm text-base"><%= @user.confirmation_sent_at %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Unconfirmed Email</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.unconfirmed_email %></dd>
+        <dd class="text-sm text-base"><%= @user.unconfirmed_email %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Created At</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.created_at %></dd>
+        <dd class="text-sm text-base"><%= @user.created_at %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Updated At</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.updated_at %></dd>
+        <dd class="text-sm text-base"><%= @user.updated_at %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Admin</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.admin %></dd>
+        <dd class="text-sm text-base"><%= @user.admin %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Allow Invites</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.allow_invites %></dd>
+        <dd class="text-sm text-base"><%= @user.allow_invites %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Provider</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.provider %></dd>
+        <dd class="text-sm text-base"><%= @user.provider %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Created from OAuth</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.created_from_oauth %></dd>
+        <dd class="text-sm text-base"><%= @user.created_from_oauth %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">OAuth Linked At</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.oauth_linked_at %></dd>
+        <dd class="text-sm text-base"><%= @user.oauth_linked_at %></dd>
       </div>
     </div>
   </div>
@@ -90,35 +90,35 @@
     <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Projects created</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.projects.count %></dd>
+        <dd class="text-sm text-base"><%= @user.projects.count %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Tasks created</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.tasks.count %></dd>
+        <dd class="text-sm text-base"><%= @user.tasks.count %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Comments created</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.comments.count %></dd>
+        <dd class="text-sm text-base"><%= @user.comments.count %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Failed Attempts</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.failed_attempts %></dd>
+        <dd class="text-sm text-base"><%= @user.failed_attempts %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Locked At</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.locked_at %></dd>
+        <dd class="text-sm text-base"><%= @user.locked_at %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Confirmation sent at</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.confirmation_sent_at %></dd>
+        <dd class="text-sm text-base"><%= @user.confirmation_sent_at %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Confirmed at</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.confirmed_at %></dd>
+        <dd class="text-sm text-base"><%= @user.confirmed_at %></dd>
       </div>
       <div class="flex justify-between items-center p-4">
         <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Unconfirmed email</dt>
-        <dd class="text-sm text-gray-700 dark:text-gray-300"><%= @user.unconfirmed_email %></dd>
+        <dd class="text-sm text-base"><%= @user.unconfirmed_email %></dd>
       </div>
     </div>
   </div>

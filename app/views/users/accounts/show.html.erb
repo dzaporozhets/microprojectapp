@@ -23,11 +23,11 @@
         <div class="space-y-3">
           <div class="flex items-center">
             <span class="text-sm font-medium text-gray-900 dark:text-gray-200 w-32">Provider:</span>
-            <span class="text-sm text-gray-700 dark:text-gray-300"><%= current_user.provider_human %></span>
+            <span class="text-sm text-base"><%= current_user.provider_human %></span>
           </div>
           <div class="flex items-center">
             <span class="text-sm font-medium text-gray-900 dark:text-gray-200 w-32">Email:</span>
-            <span class="text-sm text-gray-700 dark:text-gray-300"><%= current_user.email %></span>
+            <span class="text-sm text-base"><%= current_user.email %></span>
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@
 
       <%= link_to "Regenerate Calendar Token", regenerate_calendar_token_users_account_path,
           method: :post,
-          class: "inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500",
+          class: "inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm text-sm font-medium text-base bg-base hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500",
           data: { turbo_method: :post, turbo_confirm: "Are you sure? This will invalidate any existing calendar subscriptions." } %>
     </div>
   </div>

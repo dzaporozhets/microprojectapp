@@ -48,7 +48,7 @@ module ThemeHelper
     when 'sky' then 'text-sky-700 dark:text-sky-300'
     when 'orange' then 'text-orange-700 dark:text-orange-300'
     when 'indigo' then 'text-indigo-700 dark:text-indigo-300'
-    when 'gray' then 'text-gray-700 dark:text-gray-300'
+    when 'gray' then 'text-base'
     end
   end
 

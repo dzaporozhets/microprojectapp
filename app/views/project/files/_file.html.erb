@@ -33,7 +33,7 @@
             <%= project_file.file.filename %>
           <% end %>
         </div>
-        <div class="mt-1 flex items-center text-xs text-gray-500 dark:text-gray-400">
+        <div class="mt-1 flex items-center text-xs text-muted">
           <span><%= number_to_human_size project_file.file.size %></span>
           <%
             # Try to get content type, handling both S3 and local storage
@@ -53,14 +53,14 @@
 
     <div class="flex-shrink-0 flex items-center space-x-2">
       <!-- Download button -->
-      <%= link_to download_project_files_path(@project, file: project_file.identifier), data: { turbo: false }, class: "inline-flex items-center p-1.5 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500", title: "Download" do %>
+      <%= link_to download_project_files_path(@project, file: project_file.identifier), data: { turbo: false }, class: "inline-flex items-center p-1.5 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm text-muted bg-base hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500", title: "Download" do %>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
       <% end %>
 
       <!-- Delete button -->
-      <%= button_to delete_project_files_path(@project, file: project_file.identifier), method: :delete, data: { turbo_confirm: 'Delete the file? Are you sure?' }, alt: 'Delete file', class: "inline-flex items-center p-1.5 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm text-red-500 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500", title: "Delete" do %>
+      <%= button_to delete_project_files_path(@project, file: project_file.identifier), method: :delete, data: { turbo_confirm: 'Delete the file? Are you sure?' }, alt: 'Delete file', class: "inline-flex items-center p-1.5 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm text-red-500 bg-base hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500", title: "Delete" do %>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
         </svg>

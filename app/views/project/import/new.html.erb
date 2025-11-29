@@ -12,7 +12,7 @@
     <div class="p-4">
       <%= form_with url: project_import_path(@project), local: true, multipart: true do |form| %>
         <div class="space-y-2">
-          <%= form.label :file, class: "block text-sm font-medium text-gray-700 dark:text-gray-300" %>
+          <%= form.label :file, class: "block text-sm font-medium text-base" %>
           <%= form.file_field :file,
             accept: 'application/json',
             class: "appearance-none file-select text-sm leading-tight file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-medium w-full" %>

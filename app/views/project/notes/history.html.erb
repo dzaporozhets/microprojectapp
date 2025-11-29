@@ -41,7 +41,7 @@
             </svg>
           </div>
           <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-200">No versions available</h3>
-          <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">No version history found for this note.</p>
+          <p class="mt-1 text-sm text-muted">No version history found for this note.</p>
         </div>
       <% end %>
     </div>
@@ -58,7 +58,7 @@
 
     <div class="p-4">
       <div class="flex items-center justify-between">
-        <div class="text-sm text-gray-500 dark:text-gray-400">
+        <div class="text-sm text-muted">
           Created by <%= @note.user.email %> at <%= l(@note.created_at, format: :long) %>
         </div>
 

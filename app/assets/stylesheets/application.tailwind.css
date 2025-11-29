@@ -145,7 +145,7 @@
    * Project Resource Components
    *----------------------------------------*/
   .resource-container {
-    @apply bg-white dark:bg-gray-900 shadow-sm rounded-lg overflow-hidden border border-base;
+    @apply bg-base shadow-sm rounded-lg overflow-hidden border border-base;
   }
 
   .resource-header {
@@ -157,7 +157,7 @@
   }
 
   .resource-description {
-    @apply mt-1 max-w-2xl text-sm text-gray-500 dark:text-gray-400;
+    @apply mt-1 max-w-2xl text-sm text-muted;
   }
 
   .resource-list {
@@ -182,7 +182,7 @@
   }
 
   .resource-empty-description {
-    @apply mt-1 text-sm text-gray-500 dark:text-gray-400;
+    @apply mt-1 text-sm text-muted;
   }
 
   .resource-empty-action {
@@ -197,7 +197,7 @@
    * Project Tasks
    *----------------------------------------*/
   .tasks-list {
-    @apply divide-y divide-dashed bg-white dark:bg-gray-900 rounded-lg divide-gray-200 dark:divide-gray-700;
+    @apply divide-y divide-dashed bg-base rounded-lg divide-gray-200 dark:divide-gray-700;
   }
 
   /*----------------------------------------*
@@ -207,11 +207,27 @@
     @apply border-gray-200 dark:border-gray-700;
   }
 
+  .text-base {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+
+  .text-muted {
+    @apply text-gray-500 dark:text-gray-400;
+  }
+
+  .text-primary {
+    @apply text-gray-900 dark:text-white;
+  }
+
+  .bg-base {
+    @apply bg-white dark:bg-gray-900;
+  }
+
   /*----------------------------------------*
    * Content Block Layout
    *----------------------------------------*/
   .content-block {
-    @apply bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden border border-base;
+    @apply bg-base rounded-lg shadow-lg overflow-hidden border border-base;
   }
 
   .content-block-nav {
