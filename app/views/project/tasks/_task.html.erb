@@ -1,5 +1,5 @@
 <%= turbo_frame_tag dom_id(task) do %>
-  <%= content_tag :div, class: task_css(task) do %>
+  <%= content_tag :div, class: (task.done ? 'task-done' : 'task-todo') do %>
     <div class="flex col-span-1 items-center h-12">
       <div class="mr-3 flex">
         <%= form_with(model: task, url: toggle_done_project_task_path(task.project, task), local: false, data: { turbo_frame: dom_id(task) }) do |form| %>

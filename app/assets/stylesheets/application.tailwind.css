@@ -248,4 +248,39 @@
   .content-block-main {
     @apply p-4;
   }
+
+  /*----------------------------------------*
+   * CSS Helper Classes (non-theme)
+   *----------------------------------------*/
+
+  /* Body Color */
+  .body-color {
+    @apply bg-neutral-100 dark:bg-gray-950 text-gray-800 dark:text-gray-300;
+  }
+
+  /* Subnav */
+  .subnav-css {
+    @apply py-3 border-b border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 bg-base;
+  }
+
+  /* Task Styles */
+  .task-done {
+    @apply px-4 py-1 text-sm text-gray-700 dark:text-gray-400
+           line-through dark:decoration-gray-400 decoration-gray-600
+           hover:bg-neutral-50 dark:hover:bg-gray-800;
+  }
+
+  .task-todo {
+    @apply px-4 py-1 text-sm text-black dark:text-gray-100
+           hover:bg-neutral-50 dark:hover:bg-gray-800;
+  }
+
+  /* Task Details Styles */
+  .task-details-done {
+    @apply bg-gray-300 dark:bg-gray-700 text-base;
+  }
+
+  .task-details-todo {
+    @apply bg-gray-100 dark:bg-gray-800 text-black dark:text-gray-100;
+  }
 }

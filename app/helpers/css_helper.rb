@@ -1,35 +1,10 @@
 module CssHelper
-  def body_color
-    'bg-neutral-100 dark:bg-gray-950 text-gray-800 dark:text-gray-300'
-  end
-
   def nav_color
     "#{theme_text} #{theme_bg} border-b #{theme_border}"
   end
 
   def subnav_active_tab
     "btn-tab btn-tab-active #{theme_text} #{theme_bg} #{theme_border_accent}"
-  end
-
-  def subnav_css
-    'py-3 border-b border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 bg-base'
-  end
-
-  def task_css(task)
-    if task.done
-      "px-4 py-1 text-sm text-gray-700 dark:text-gray-400" \
-      " line-through dark:decoration-gray-400 decoration-gray-600" \
-      "  hover:bg-neutral-50 dark:hover:bg-gray-800"
-    else
-      "px-4 py-1 text-sm text-black dark:text-gray-100" \
-        " hover:bg-neutral-50 dark:hover:bg-gray-800"
-    end
-  end
-
-  def task_details_css(task)
-    task.done ?
-      'bg-gray-300 dark:bg-gray-700 text-base' :
-      'bg-gray-100 dark:bg-gray-800 text-black dark:text-gray-100'
   end
 
   def sub_subnav
