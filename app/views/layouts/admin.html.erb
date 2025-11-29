@@ -7,23 +7,15 @@
   <body class='<%= body_color %>'>
     <%= render 'layouts/header_compact' %>
 
-    <nav class="nav-border">
-      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-md px-4 py-4">
-        <ol role="list" class="flex space-x-4">
-          <li class="flex">
-            <div class="flex items-center justify-between gap-x-6">
-              <div class="min-w-0">
-                <%= link_to admin_path do %>
-                  <div class="flex items-start gap-x-3">
-                    <div class="font-medium leading-6 text-base">
-                      <span>Admin area</span>
-                    </div>
-                  </div>
-                <% end %>
-              </div>
+    <nav class="bg-white dark:bg-gray-900">
+      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-md px-4 py-4 pb-1">
+        <%= link_to admin_path do %>
+          <div class="flex items-start gap-x-3">
+            <div class="font-medium leading-6 text-base">
+              <span>Admin area</span>
             </div>
-          </li>
-        </ol>
+          </div>
+        <% end %>
       </div>
     </nav>
 

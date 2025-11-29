@@ -203,10 +203,6 @@
   /*----------------------------------------*
    * Misc
    *----------------------------------------*/
-  .nav-border {
-    @apply border-b border-base;
-  }
-
   .border-base {
     @apply border-gray-200 dark:border-gray-700;
   }
