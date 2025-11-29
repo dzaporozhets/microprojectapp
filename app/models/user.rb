@@ -4,15 +4,13 @@ class User < ApplicationRecord
   THEMES = {
     1 => 'Gray',
     2 => 'Indigo',
-    3 => 'Lime',
-    4 => 'Orange',
-    5 => 'Pink',
-    6 => 'Sky',
-    7 => 'Violet'
+    3 => 'Orange',
+    4 => 'Pink',
+    5 => 'Violet'
   }.freeze
 
-  # Set default theme to Violet (7)
-  attribute :theme, default: 7
+  # Set default theme to Violet (5)
+  attribute :theme, default: 5
 
   OAUTH_PROVIDERS = {
     'google_oauth2' => 'Google',
