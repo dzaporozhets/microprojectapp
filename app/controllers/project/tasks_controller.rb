@@ -2,7 +2,7 @@ class Project::TasksController < Project::BaseController
   PER_PAGE = 100
 
   before_action :set_task, only: %i[ show edit update destroy details toggle_done toggle_star changes]
-  before_action :set_tab, only: %i[ details changes index completed]
+  before_action :set_tab
 
   def index
     if params[:assigned_user_id].present?
