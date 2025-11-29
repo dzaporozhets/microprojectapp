@@ -1,0 +1,24 @@
+Website Sitemap
+===============
+
+Homepage (/)
+│
+├── About (/about)
+│   ├── Team (/about/team)
+│   └── History (/about/history)
+│
+├── Services (/services)
+│   ├── Web Development (/services/web-development)
+│   ├── Mobile Apps (/services/mobile-apps)
+│   └── Consulting (/services/consulting)
+│
+├── Portfolio (/portfolio)
+│   └── Case Studies (/portfolio/:project-slug)
+│
+├── Blog (/blog)
+│   ├── Categories (/blog/:category)
+│   └── Articles (/blog/:article-slug)
+│
+└── Contact (/contact)
+
+Total pages: ~15-20 including dynamic content

@@ -1,0 +1,23 @@
+Bathroom Renovation Budget
+==========================
+
+Materials:
+- Floor tiles (50 sq ft): $800
+- Wall tiles (120 sq ft): $1,700
+- Vanity unit: $900
+- Sink and faucet: $300
+- Bathtub: $1,200
+- Shower fixtures: $600
+- Toilet: $350
+- Mirror and lighting: $450
+- Paint and supplies: $150
+
+Labor:
+- Demolition: $800
+- Plumbing: $1,500
+- Tile installation: $2,200
+- Electrical work: $500
+
+Total: $11,450
+Contingency (10%): $1,145
+Grand Total: $12,595
