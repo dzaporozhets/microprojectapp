@@ -208,7 +208,7 @@
 
   .task {
     @apply px-4 py-1 text-sm border
-           first:rounded-t-md last:rounded-b-md;
+           first:rounded-t-md last:rounded-b-md
            hover:bg-neutral-50 dark:hover:bg-gray-800;
   }
 
