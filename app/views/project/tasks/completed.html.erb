@@ -1,7 +1,11 @@
 <div class="w-full">
-  <div class="mb-4 md:mb-0">
-    <div class="flex flex-col md:flex-row md:space-x-12">
-      <div class="mb-4 md:mb-0 md:w-full">
+  <div class="">
+    <div class="resource-container">
+      <div class="resource-body">
+        <div class="flex">
+          <%= link_to "Completed tasks only", project_path(@project), class: ui_active_tab %>
+        </div>
+
         <%= turbo_frame_tag "completed_tasks", class: "mt-2 grid grid-cols-1 tasks-list" do %>
           <% if @tasks.any? %>
             <% @tasks.each do |task| %>

@@ -154,6 +154,10 @@
     @apply bg-base shadow-sm rounded-lg overflow-hidden border border-base;
   }
 
+  .resource-body {
+    @apply p-4;
+  }
+
   .resource-header {
     @apply p-4 flex justify-between items-center border-b border-base;
   }
@@ -203,12 +207,11 @@
    * Project Tasks
    *----------------------------------------*/
   .tasks-list {
-    @apply divide-y bg-base rounded-lg divide-gray-200 dark:divide-gray-700;
+    @apply bg-base divide-y rounded-lg divide-gray-200 dark:divide-gray-700;
   }
 
   .task {
-    @apply px-4 py-1 text-sm border
-           first:rounded-t-md last:rounded-b-md
+    @apply px-4 py-1 text-sm
            hover:bg-neutral-50 dark:hover:bg-gray-800;
   }
 
@@ -249,21 +252,6 @@
   }
 
   /*----------------------------------------*
-   * Content Block Layout
-   *----------------------------------------*/
-  .content-block {
-    @apply bg-base rounded-lg shadow-lg overflow-hidden border border-base;
-  }
-
-  .content-block-nav {
-    @apply bg-gray-50 dark:bg-gray-800 border-b border-base px-4 py-3;
-  }
-
-  .content-block-main {
-    @apply p-4;
-  }
-
-  /*----------------------------------------*
    * CSS Helper Classes (non-theme)
    *----------------------------------------*/
 
@@ -274,7 +262,7 @@
 
   /* Subnav */
   .subnav-css {
-    @apply py-3 border-b border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 bg-base;
+    @apply py-3 border-b border-base text-base bg-base;
   }
 
   /* Task Details Styles */

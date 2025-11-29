@@ -1,9 +1,15 @@
 <div class="w-full">
-  <div class="mb-4 md:mb-0">
-    <div class="flex flex-col md:flex-row md:space-x-12">
-      <div class="mb-4 md:mb-0 md:w-full">
-
+  <div class="">
+    <div class="resource-container">
+      <div class="resource-body">
         <%= render 'project/tasks/form', project: @project %>
+
+        <% unless @tasks_todo.any? || @tasks_done.any? %>
+          <div class="resource-empty-state">
+            <h3 class="resource-empty-title">No tasks yet</h3>
+            <p class="resource-empty-description">Create your first project task to get started.</p>
+          </div>
+        <% end %>
 
         <%= turbo_frame_tag "tasks", class: "mt-2 grid grid-cols-1 tasks-list" do %>
           <% @tasks_todo.each do |task| %>
@@ -28,7 +34,7 @@
         <% end %>
 
         <% if @project.tasks.done.count > ProjectsController::DONE_TASKS %>
-          <div class="my-10 text-center">
+          <div class="my-4 text-center">
             <%= link_to completed_project_tasks_path(@project), class: "btn-base" do %>
               Show all completed tasks
             <% end %>
