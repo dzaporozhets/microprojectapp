@@ -22,7 +22,7 @@
 
 
     <% unless task.done %>
-      <div class="space-x-2 flex">
+      <div class="space-x-2 sm:flex hidden">
         <% if task.assigned_user_id %>
           <%= link_to project_tasks_path(task.project, assigned_user_id: task.assigned_user_id), title: task.assigned_user.email, data: { turbo: false } do %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
