@@ -219,6 +219,10 @@
     @apply text-gray-900 dark:text-white;
   }
 
+  .text-secondary {
+    @apply text-sm text-muted;
+  }
+
   .bg-base {
     @apply bg-white dark:bg-gray-900;
   }

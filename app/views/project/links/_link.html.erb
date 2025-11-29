@@ -1,20 +1,20 @@
-<li id="<%= dom_id link %>" class="relative">
+<li id="<%= dom_id link %>">
   <div class="flex items-center justify-between">
     <div class="flex items-center min-w-0">
       <!-- Default link icon -->
-      <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-md bg-gray-100 dark:bg-gray-800">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div class="flex-shrink-0 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
         </svg>
       </div>
 
-      <div class="ml-4">
+      <div class="ml-4 min-w-0 flex-1">
         <div class="flex items-center">
-          <%= link_to link.url, target: :_blank, class: "text-sm font-medium #{theme_link_primary} truncate" do %>
+          <%= link_to link.url, target: :_blank, class: "#{theme_link_primary} truncate" do %>
             <%= link.safe_title %>
           <% end %>
         </div>
-        <div class="mt-1 flex items-center text-xs text-muted">
+        <div class="mt-1 flex items-center text-secondary">
           <span><%= link.url.truncate(50) %></span>
           <% if link.created_at.present? %>
             <span class="mx-1">&middot;</span>
@@ -26,14 +26,14 @@
 
     <div class="flex-shrink-0 flex items-center space-x-2">
       <!-- Visit button -->
-      <%= link_to link.url, target: :_blank, class: "inline-flex items-center p-1.5 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm text-muted bg-base hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500", title: "Visit" do %>
+      <%= link_to link.url, target: :_blank, class: "inline-flex items-center p-1.5", title: "Visit" do %>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
         </svg>
       <% end %>
 
       <!-- Delete button -->
-      <%= button_to project_link_path(link.project, link), method: :delete, data: { "turbo-method": :delete, turbo_confirm: 'Delete this link? Are you sure?' }, alt: 'Delete link', class: "inline-flex items-center p-1.5 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm text-red-500 bg-base hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500", title: "Delete" do %>
+      <%= button_to project_link_path(link.project, link), method: :delete, data: { "turbo-method": :delete, turbo_confirm: 'Delete this link? Are you sure?' }, alt: 'Delete link', class: "inline-flex items-center p-1.5", title: "Delete" do %>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
         </svg>

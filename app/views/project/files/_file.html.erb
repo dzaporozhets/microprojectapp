@@ -1,39 +1,39 @@
-<li class="relative">
+<li>
   <div class="flex items-center justify-between">
     <div class="flex items-center min-w-0">
       <!-- File type icon - dynamically choose based on file extension if possible -->
-      <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-md bg-gray-100 dark:bg-gray-800">
+      <div class="flex-shrink-0 flex items-center justify-center">
         <% file_extension = File.extname(project_file.file.filename).downcase %>
         <% if %w[.jpg .jpeg .png .gif .svg].include?(file_extension) %>
           <!-- Image file icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="size-6 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
         <% elsif %w[.pdf .doc .docx .txt .rtf].include?(file_extension) %>
           <!-- Document file icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="size-6 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
         <% elsif %w[.zip .rar .tar .gz .7z].include?(file_extension) %>
           <!-- Archive file icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="size-6 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
           </svg>
         <% else %>
           <!-- Default file icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="size-6 text-gray-400 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
           </svg>
         <% end %>
       </div>
 
-      <div class="ml-4">
+      <div class="ml-4 min-w-0 flex-1">
         <div class="flex items-center">
           <%= link_to download_project_files_path(@project, file: project_file.identifier), data: { turbo: false }, class: "#{theme_link_primary} truncate" do %>
             <%= project_file.file.filename %>
           <% end %>
         </div>
-        <div class="mt-1 flex items-center text-xs text-muted">
+        <div class="mt-1 flex items-center text-secondary">
           <span><%= number_to_human_size project_file.file.size %></span>
           <%
             # Try to get content type, handling both S3 and local storage
@@ -53,14 +53,14 @@
 
     <div class="flex-shrink-0 flex items-center space-x-2">
       <!-- Download button -->
-      <%= link_to download_project_files_path(@project, file: project_file.identifier), data: { turbo: false }, class: "inline-flex items-center p-1.5 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm text-muted bg-base hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500", title: "Download" do %>
+      <%= link_to download_project_files_path(@project, file: project_file.identifier), data: { turbo: false }, class: "inline-flex items-center p-1.5", title: "Download" do %>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
       <% end %>
 
       <!-- Delete button -->
-      <%= button_to delete_project_files_path(@project, file: project_file.identifier), method: :delete, data: { turbo_confirm: 'Delete the file? Are you sure?' }, alt: 'Delete file', class: "inline-flex items-center p-1.5 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm text-red-500 bg-base hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500", title: "Delete" do %>
+      <%= button_to delete_project_files_path(@project, file: project_file.identifier), method: :delete, data: { turbo_confirm: 'Delete the file? Are you sure?' }, alt: 'Delete file', class: "inline-flex items-center p-1.5", title: "Delete" do %>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
         </svg>
