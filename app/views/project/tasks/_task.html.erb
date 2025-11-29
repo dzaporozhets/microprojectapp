@@ -1,56 +1,54 @@
-<%= turbo_frame_tag dom_id(task) do %>
-  <%= content_tag :div, class: (task.done ? 'task-done' : 'task-todo') do %>
-    <div class="flex col-span-1 items-center h-12">
-      <div class="mr-3 flex">
-        <%= form_with(model: task, url: toggle_done_project_task_path(task.project, task), local: false, data: { turbo_frame: dom_id(task) }) do |form| %>
+<%= turbo_frame_tag dom_id(task), class: (task.done ? 'task task-done' : 'task task-todo')  do %>
+  <div class="flex col-span-1 items-center h-12">
+    <div class="mr-3 flex">
+      <%= form_with(model: task, url: toggle_done_project_task_path(task.project, task), local: false, data: { turbo_frame: dom_id(task) }) do |form| %>
 
-          <%= hidden_field_tag :status, params[:status] %>
-          <%= hidden_field_tag :page, params[:page] %>
-          <%= hidden_field_tag :sctl, params[:sctl] || (current_page?(project_path(task.project)) ? 'projects' : 'tasks') %>
+        <%= hidden_field_tag :status, params[:status] %>
+        <%= hidden_field_tag :page, params[:page] %>
+        <%= hidden_field_tag :sctl, params[:sctl] || (current_page?(project_path(task.project)) ? 'projects' : 'tasks') %>
 
-          <%= form.check_box :done,
-            checked: task.done,
-            id: "checkbox_task_#{task.id}",
-            class: "w-5 h-5 checkbox-round flex",
-            data: { turbo_action: "advance" },
-            onchange: "this.form.requestSubmit()" %>
-        <% end %>
-      </div>
-
-      <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "min-w-0 grow flex h-12 items-center" do %>
-        <p class="list-text-primary line-clamp-2"><%= task.name %></p>
-      <% end %>
-
-
-      <% unless task.done %>
-        <div class="space-x-2 flex">
-          <% if task.assigned_user_id %>
-            <%= link_to project_tasks_path(task.project, assigned_user_id: task.assigned_user_id), title: task.assigned_user.email, data: { turbo: false } do %>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-              </svg>
-            <% end %>
-          <% end %>
-
-          <% if task.comments.any? %>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 0 1 1.037-.443 48.282 48.282 0 0 0 5.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
-            </svg>
-          <% end %>
-
-          <% if task.due_date %>
-            <%= link_to '#', title: I18n.l(task.due_date.to_date, format: :short) do %>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-              </svg>
-            <% end %>
-          <% end %>
-
-          <%= link_to toggle_star_project_task_path(task.project, task), method: :patch, data: { turbo: true, turbo_method: :patch }, title: 'Star' do %>
-            <%= render 'project/tasks/star', task: task %>
-          <% end %>
-        </div>
+        <%= form.check_box :done,
+          checked: task.done,
+          id: "checkbox_task_#{task.id}",
+          class: "w-5 h-5 checkbox-round flex",
+          data: { turbo_action: "advance" },
+          onchange: "this.form.requestSubmit()" %>
       <% end %>
     </div>
-  <% end %>
+
+    <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "min-w-0 grow flex h-12 items-center" do %>
+      <p class="list-text-primary line-clamp-2"><%= task.name %></p>
+    <% end %>
+
+
+    <% unless task.done %>
+      <div class="space-x-2 flex">
+        <% if task.assigned_user_id %>
+          <%= link_to project_tasks_path(task.project, assigned_user_id: task.assigned_user_id), title: task.assigned_user.email, data: { turbo: false } do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+          <% end %>
+        <% end %>
+
+        <% if task.comments.any? %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 0 1 1.037-.443 48.282 48.282 0 0 0 5.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+          </svg>
+        <% end %>
+
+        <% if task.due_date %>
+          <%= link_to '#', title: I18n.l(task.due_date.to_date, format: :short) do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+            </svg>
+          <% end %>
+        <% end %>
+
+        <%= link_to toggle_star_project_task_path(task.project, task), method: :patch, data: { turbo: true, turbo_method: :patch }, title: 'Star' do %>
+          <%= render 'project/tasks/star', task: task %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
