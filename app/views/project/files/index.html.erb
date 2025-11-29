@@ -7,7 +7,7 @@
         <p class="resource-description">Upload and organize project-related files to keep all your resources in one place.</p>
       </div>
       <div>
-        <%= link_to new_project_file_path(@project), class: theme_button_primary do %>
+        <%= link_to new_project_file_path(@project), class: "btn-base" do %>
           Add File
         <% end %>
       </div>
@@ -29,7 +29,7 @@
           <h3 class="resource-empty-title">No files</h3>
           <p class="resource-empty-description">Get started by uploading your first project file.</p>
           <div class="resource-empty-action">
-            <%= link_to new_project_file_path(@project), class: theme_button_primary do %>
+            <%= link_to new_project_file_path(@project), class: "btn-base" do %>
               Upload a file
             <% end %>
           </div>

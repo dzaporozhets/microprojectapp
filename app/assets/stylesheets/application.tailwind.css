@@ -289,6 +289,10 @@
     @apply bg-gray-200 dark:bg-gray-800 rounded-full;
   }
 
+  .avatar-nav {
+    @apply rounded-full border-2 border-black/20 dark:border-white/20;
+  }
+
   /* Link Styles */
   .link-primary {
     @apply text-violet-900 dark:text-violet-100 hover:text-violet-700 hover:dark:text-violet-300;

@@ -19,7 +19,7 @@ module ProjectsHelper
   def project_nav_class(active)
     [
       "flex items-center justify-between px-3 py-2 text-gray-600 dark:text-gray-400 font-base",
-      active ? subnav_active_tab : "btn-tab"
+      active ? ui_active_tab : "btn-tab"
     ].join(" ")
   end
 end

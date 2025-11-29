@@ -6,7 +6,7 @@
         <div class="flex items-center">
           <h2 class="resource-title">Notes</h2>
         </div>
-        <%= link_to new_project_note_path(@project), class: theme_button_primary do %>
+        <%= link_to new_project_note_path(@project), class: "btn-base" do %>
           Add Note
         <% end %>
       </div>
@@ -26,7 +26,7 @@
         <h3 class="resource-empty-title">No notes</h3>
         <p class="resource-empty-description">Create your first project note to get started.</p>
         <div class="resource-empty-action">
-          <%= link_to new_project_note_path(@project), class: theme_button_primary do %>
+          <%= link_to new_project_note_path(@project), class: "btn-base" do %>
             Add a note
           <% end %>
         </div>
@@ -41,7 +41,7 @@
         <div class="flex items-center">
           <h2 class="resource-title">Files</h2>
         </div>
-        <%= link_to new_project_file_path(@project), class: theme_button_primary do %>
+        <%= link_to new_project_file_path(@project), class: "btn-base" do %>
           Upload File
         <% end %>
       </div>
@@ -61,7 +61,7 @@
         <h3 class="resource-empty-title">No files</h3>
         <p class="resource-empty-description">Upload your first project file to get started.</p>
         <div class="resource-empty-action">
-          <%= link_to new_project_file_path(@project), class: theme_button_primary do %>
+          <%= link_to new_project_file_path(@project), class: "btn-base" do %>
             Upload a file
           <% end %>
         </div>
@@ -76,7 +76,7 @@
         <div class="flex items-center">
           <h2 class="resource-title">Links</h2>
         </div>
-        <%= link_to new_project_link_path(@project), class: theme_button_primary do %>
+        <%= link_to new_project_link_path(@project), class: "btn-base" do %>
           Add Link
         <% end %>
       </div>
@@ -96,7 +96,7 @@
         <h3 class="resource-empty-title">No links</h3>
         <p class="resource-empty-description">Add your first project link to get started.</p>
         <div class="resource-empty-action">
-          <%= link_to new_project_link_path(@project), class: theme_button_primary do %>
+          <%= link_to new_project_link_path(@project), class: "btn-base" do %>
             Add a link
           <% end %>
         </div>

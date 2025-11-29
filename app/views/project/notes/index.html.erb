@@ -7,7 +7,7 @@
         <p class="resource-description">Create notes or instructions and attach them to tasks for seamless collaboration.</p>
       </div>
       <div>
-        <%= link_to 'Add Note', new_project_note_path(@project), class: theme_button_primary %>
+        <%= link_to 'Add Note', new_project_note_path(@project), class: "btn-base" %>
       </div>
     </div>
 
@@ -27,7 +27,7 @@
           <h3 class="resource-empty-title">No notes</h3>
           <p class="resource-empty-description">Get started by creating your first project note.</p>
           <div class="resource-empty-action">
-            <%= link_to new_project_note_path(@project), class: theme_button_primary do %>
+            <%= link_to new_project_note_path(@project), class: "btn-base" do %>
               Add a note
             <% end %>
           </div>

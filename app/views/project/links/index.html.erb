@@ -7,7 +7,7 @@
         <p class="resource-description">Save and manage useful URLs to quickly access external resources or references.</p>
       </div>
       <div>
-        <%= link_to 'Add Link', new_project_link_path(@project), class: theme_button_primary %>
+        <%= link_to 'Add Link', new_project_link_path(@project), class: "btn-base" %>
       </div>
     </div>
 
@@ -27,7 +27,7 @@
           <h3 class="resource-empty-title">No links</h3>
           <p class="resource-empty-description">Get started by adding your first project link.</p>
           <div class="resource-empty-action">
-            <%= link_to new_project_link_path(@project), class: theme_button_primary do %>
+            <%= link_to new_project_link_path(@project), class: "btn-base" do %>
               Add a link
             <% end %>
           </div>

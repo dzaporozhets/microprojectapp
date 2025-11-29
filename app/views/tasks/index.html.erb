@@ -20,9 +20,9 @@
               <% end %>
             </div>
 
-            <%= content_tag :div, class: sub_subnav do %>
-              <%= link_to "List", tasks_path, class: "#{current_page?(tasks_path) ? sub_subnav_active_tab : sub_subnav_tab}" %>
-              <%= link_to "Schedule", schedule_path, class: "#{current_page?(schedule_path) ? sub_subnav_active_tab : sub_subnav_tab}" %>
+            <%= content_tag :div, class: ui_toggle do %>
+              <%= link_to "List", tasks_path, class: "#{current_page?(tasks_path) ? ui_toggle_active_tab : ui_toggle_tab}" %>
+              <%= link_to "Schedule", schedule_path, class: "#{current_page?(schedule_path) ? ui_toggle_active_tab : ui_toggle_tab}" %>
             <% end %>
           </div>
         </div>
