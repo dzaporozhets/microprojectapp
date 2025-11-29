@@ -197,7 +197,7 @@
    * Project Tasks
    *----------------------------------------*/
   .tasks-list {
-    @apply divide-y divide-dashed bg-base rounded-lg divide-gray-200 dark:divide-gray-700;
+    @apply divide-y bg-base rounded-lg divide-gray-200 dark:divide-gray-700;
   }
 
   /*----------------------------------------*
@@ -216,7 +216,7 @@
   }
 
   .text-primary {
-    @apply text-gray-900 dark:text-white;
+    @apply text-base font-medium;
   }
 
   .text-secondary {

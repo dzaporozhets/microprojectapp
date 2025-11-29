@@ -15,8 +15,8 @@
       <% unless @project.personal? %>
         <div class="p-4">
           <div class="mb-4">
-            <h4 class="text-base font-medium text-primary">Name</h4>
-            <p class="mt-1 text-sm text-muted">
+            <h4 class="text-primary">Name</h4>
+            <p class="mt-1 text-secondary">
               Change the name of your project.
             </p>
           </div>
@@ -38,8 +38,8 @@
       <!-- Import/Export Section -->
       <div class="p-4">
         <div class="mb-4">
-          <h4 class="text-base font-medium text-primary">Import and Export</h4>
-          <p class="mt-1 text-sm text-muted">
+          <h4 class="text-primary">Import and Export</h4>
+          <p class="mt-1 text-secondary">
             Export your project data as a JSON file including all tasks, notes, and comments, then import it into another project.
           </p>
         </div>
@@ -53,8 +53,8 @@
       <!-- Archive Section -->
       <div class="p-4">
         <div class="mb-4">
-          <h4 class="text-base font-medium text-primary">Project Status</h4>
-          <p class="mt-1 text-sm text-muted">
+          <h4 class="text-primary">Project Status</h4>
+          <p class="mt-1 text-secondary">
             <% if @project.archived? %>
               This project is archived. Unarchiving it will allow the creation of new tasks.
             <% else %>
@@ -83,7 +83,7 @@
 
     <div class="p-4">
       <div class="mb-4">
-        <p class="text-sm text-muted">
+        <p class="text-secondary">
           Deleting this project will permanently erase all data. Please consider exporting tasks before proceeding.
         </p>
       </div>

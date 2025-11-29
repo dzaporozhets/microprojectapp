@@ -13,11 +13,11 @@
         <% end %>
       </div>
 
-      <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "text-sm min-w-0 grow flex h-12 items-center" do %>
-        <p class="font-medium line-clamp-2"><%= task.name %></p>
+      <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "min-w-0 grow flex h-12 items-center" do %>
+        <p class="list-text-primary line-clamp-2 truncate"><%= task.name %></p>
       <% end %>
 
-      <div class="space-x-2 flex text-gray-500">
+      <div class="space-x-2 flex">
         <% if task.assigned_user_id %>
           <%= link_to project_tasks_path(task.project, assigned_user_id: task.assigned_user_id), title: task.assigned_user.email, data: { turbo: false } do %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
