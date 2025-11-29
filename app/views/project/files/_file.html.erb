@@ -29,11 +29,11 @@
 
       <div class="ml-4 min-w-0 flex-1">
         <div class="flex items-center">
-          <%= link_to download_project_files_path(@project, file: project_file.identifier), data: { turbo: false }, class: "#{theme_link_primary} truncate" do %>
+          <%= link_to download_project_files_path(@project, file: project_file.identifier), data: { turbo: false }, class: "#{theme_link_primary} list-text-primary truncate" do %>
             <%= project_file.file.filename %>
           <% end %>
         </div>
-        <div class="mt-1 flex items-center text-secondary">
+        <div class="mt-1 flex items-center list-text-secondary">
           <span><%= number_to_human_size project_file.file.size %></span>
           <%
             # Try to get content type, handling both S3 and local storage

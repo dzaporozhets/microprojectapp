@@ -223,6 +223,14 @@
     @apply text-sm text-muted;
   }
 
+  .list-text-primary {
+    @apply text-sm font-medium;
+  }
+
+  .list-text-secondary {
+    @apply text-xs text-muted;
+  }
+
   .bg-base {
     @apply bg-white dark:bg-gray-900;
   }
