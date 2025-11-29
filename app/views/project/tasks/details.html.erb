@@ -49,49 +49,49 @@
         </div>
       <% end %>
 
-      <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
+      <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-2">
         <% if @task.note_id %>
-          <div class="flex items-center py-3">
-            <span class="text-sm font-medium text-gray-900 dark:text-gray-200 w-24">Note:</span>
-            <span class="text-sm text-base">
+          <div class="flex items-center pt-2 text-secondary">
+            <span class="w-24">Note:</span>
+            <span>
               <%= link_to @task.note&.title, [@task.project, @task.note], target: '_blank', class: 'underline hover:text-gray-900 dark:hover:text-gray-100' %>
             </span>
           </div>
         <% end %>
 
         <% if @task.assigned_user_id %>
-          <div class="flex items-center py-3">
-            <span class="text-sm font-medium text-gray-900 dark:text-gray-200 w-24">Assigned:</span>
-            <span class="text-sm text-base"><%= @task.assigned_user&.email %></span>
+          <div class="flex items-center pt-2 text-secondary">
+            <span class="w-24">Assigned:</span>
+            <span><%= @task.assigned_user&.email %></span>
           </div>
         <% end %>
 
         <% if @task.due_date.present? %>
-          <div class="flex items-center py-3">
-            <span class="text-sm font-medium text-gray-900 dark:text-gray-200 w-24">Due:</span>
-            <span class="text-sm text-base"><%= l(@task.due_date.to_date, format: :long) %></span>
+          <div class="flex items-center pt-2 text-secondary">
+            <span class="w-24">Due:</span>
+            <span><%= l(@task.due_date.to_date, format: :long) %></span>
           </div>
         <% end %>
 
-        <div class="flex items-center py-3">
-          <span class="text-sm font-medium text-gray-900 dark:text-gray-200 w-24">Created by:</span>
-          <span class="text-sm text-base"><%= @task.user.email %></span>
+        <div class="flex items-center pt-2 text-secondary">
+          <span class="w-24">Created by:</span>
+          <span><%= @task.user.email %></span>
         </div>
 
-        <div class="flex items-center py-3">
-          <span class="text-sm font-medium text-gray-900 dark:text-gray-200 w-24">Created at:</span>
-          <span class="text-sm text-base"><%= l(@task.created_at, format: :long) %></span>
+        <div class="flex items-center pt-2 text-secondary">
+          <span class="w-24">Created at:</span>
+          <span><%= l(@task.created_at, format: :long) %></span>
         </div>
 
-        <div class="flex items-center py-3">
-          <span class="text-sm font-medium text-gray-900 dark:text-gray-200 w-24">Last updated:</span>
-          <span class="text-sm text-base"><%= l(@task.updated_at, format: :long) %></span>
+        <div class="flex items-center pt-2 text-secondary">
+          <span class="w-24">Last updated:</span>
+          <span><%= l(@task.updated_at, format: :long) %></span>
         </div>
 
         <% if @task.done && @task.done_at %>
-          <div class="flex items-center py-3">
-            <span class="text-sm font-medium text-gray-900 dark:text-gray-200 w-24">Completed at:</span>
-            <span class="text-sm text-base"><%= l(@task.done_at, format: :long) %></span>
+          <div class="flex items-center pt-2 text-secondary">
+            <span class="w-24">Completed at:</span>
+            <span><%= l(@task.done_at, format: :long) %></span>
           </div>
         <% end %>
       </div>

@@ -4,13 +4,13 @@
       <%= avatar_tag(comment.user, "h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600") %>
     </div>
     <div class="flex-1 ml-3 min-w-0">
-      <div class="flex items-center text-sm text-muted mb-2">
-        <span class="font-medium text-gray-900 dark:text-gray-200"><%= comment.user.email %></span>
+      <div class="flex items-center text-secondary mb-1">
+        <span><%= comment.user.email %></span>
         <span class="mx-2">•</span>
         <span><%= time_ago_short(comment.created_at) %></span>
       </div>
 
-      <div class="text-sm text-gray-900 dark:text-gray-100 break-words">
+      <div class="text-primary break-words">
         <%= simple_format comment.body %>
       </div>
 

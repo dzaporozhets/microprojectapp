@@ -23,8 +23,7 @@
     @apply btn py-1 px-2;
   }
 
-  .btn-base,
-  .btn-gray {
+  .btn-base {
     @apply btn border bg-gray-100 dark:bg-gray-800
            hover:bg-gray-200 hover:shadow transition
            border-gray-300 dark:border-gray-700 dark:hover:bg-gray-700;

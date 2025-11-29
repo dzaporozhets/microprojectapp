@@ -1,7 +1,7 @@
 <div class="mt-10">
   <% if ENV['GOOGLE_CLIENT_ID'].present? %>
     <div class="mb-4">
-      <%= button_to user_google_oauth2_omniauth_authorize_path, data: { turbo: false }, method: :post, class: "btn-gray btn-google flex w-full justify-center" do %>
+      <%= button_to user_google_oauth2_omniauth_authorize_path, data: { turbo: false }, method: :post, class: "btn-base btn-google flex w-full justify-center" do %>
         <svg class="h-6 w-6" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12.0003 4.75C13.7703 4.75 15.3553 5.36002 16.6053 6.54998L20.0303 3.125C17.9502 1.19 15.2353 0 12.0003 0C7.31028 0 3.25527 2.69 1.28027 6.60998L5.27028 9.70498C6.21525 6.86002 8.87028 4.75 12.0003 4.75Z" fill="#EA4335" />
           <path d="M23.49 12.275C23.49 11.49 23.415 10.73 23.3 10H12V14.51H18.47C18.18 15.99 17.34 17.25 16.08 18.1L19.945 21.1C22.2 19.01 23.49 15.92 23.49 12.275Z" fill="#4285F4" />
@@ -15,7 +15,7 @@
 
   <% if ENV['MICROSOFT_CLIENT_ID'].present? %>
     <div class="mb-4">
-      <%= button_to user_entra_id_omniauth_authorize_path, data: { turbo: false }, method: :post, class: "btn-gray btn-google flex w-full justify-center" do %>
+      <%= button_to user_entra_id_omniauth_authorize_path, data: { turbo: false }, method: :post, class: "btn-base btn-google flex w-full justify-center" do %>
         <svg class="h-6 w-6" viewBox="0 0 48 48" aria-hidden="true">
           <g fill="none">
           <path fill="#F25022" d="M22 22H4V4h18v18z"/>
