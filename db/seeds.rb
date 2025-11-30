@@ -1,4 +1,8 @@
 if Rails.env.development?
+  puts ''
+  puts '!!! Developer mode seeds. Dont run in production. !!!'
+  puts ''
+  puts 'Creating admin user dev@localhost.'
   # Load all project seed modules
   Dir[Rails.root.join('db/seed/projects/*.rb')].each { |file| require file }
 
@@ -6,6 +10,7 @@ if Rails.env.development?
   user = User.find_or_create_by!(email: "dev@localhost") do |u|
     u.password = "dev@localhost"
     u.password_confirmation = "dev@localhost"
+    u.admin = true
     u.skip_confirmation! if u.respond_to?(:skip_confirmation!)
   end
   puts "Creating sample projects for #{user.email}"
