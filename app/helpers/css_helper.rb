@@ -16,12 +16,12 @@ module CssHelper
   end
 
   def ui_toggle_tab
-    "px-3 py-1 text-sm border border-transparent font-medium rounded-full #{theme_hover} #{theme_text} #{theme_focus_ring} " \
+    "px-3 py-0.5 text-sm border border-transparent font-medium rounded-full #{theme_hover} #{theme_text} #{theme_focus_ring} " \
       'hover:bg-white hover:shadow-sm focus:outline-none focus:ring-2 '
   end
 
   def ui_toggle_active_tab
-    "px-3 py-1 text-sm border #{theme_border} #{theme_bg} #{theme_text} #{theme_focus_ring} font-medium rounded-full " \
+    "px-3 py-0.5 text-sm border #{theme_border} #{theme_bg} #{theme_text} #{theme_focus_ring} font-medium rounded-full " \
       "shadow-sm focus:outline-none focus:ring-2 "
   end
 
