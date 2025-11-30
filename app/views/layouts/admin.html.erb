@@ -11,7 +11,7 @@
       <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-md px-4 py-4 pb-1">
         <%= link_to admin_path do %>
           <div class="flex items-start gap-x-3">
-            <div class="font-medium leading-6 text-base">
+            <div class="font-semibold leading-8 text-lg line-clamp-1 text-black dark:text-white">
               <span>Admin area</span>
             </div>
           </div>
@@ -19,7 +19,7 @@
       </div>
     </nav>
 
-    <div class="subnav-css">
+    <div class="title-subnav">
       <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-md px-4">
         <%= admin_tabs @tab_name %>
       </div>
