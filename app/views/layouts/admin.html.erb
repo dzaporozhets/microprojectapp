@@ -19,7 +19,11 @@
       </div>
     </nav>
 
-    <%= yield :subnav %>
+    <div class="subnav-css">
+      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-md px-4">
+        <%= admin_tabs @tab_name %>
+      </div>
+    </div>
 
     <main class="main-container">
       <div class="mx-auto w-full">

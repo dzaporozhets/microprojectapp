@@ -1,11 +1,3 @@
-<% content_for :subnav do %>
-  <div class="subnav-css">
-    <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-md px-4">
-      <%= admin_tabs 'Users' %>
-    </div>
-  </div>
-<% end %>
-
 <div class="">
   <div class="resource-container">
     <div class="resource-header">
@@ -31,17 +23,17 @@
                   <div class="ml-4 min-w-0 flex-1">
                     <div class="flex items-center">
                       <%= link_to user.email, admin_user_path(user), class: "text-sm font-medium link-primary truncate" %>
-                      
+
                       <% if user.admin %>
                         <span class="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
                           Admin
                         </span>
                       <% end %>
                     </div>
-                    
+
                     <div class="mt-1 flex items-center text-xs text-muted">
                       <span>ID: <%= user.id %></span>
-                      
+
                       <% if user.confirmed_at %>
                         <span class="mx-1">&middot;</span>
                         <span class="flex items-center">

@@ -6,5 +6,7 @@ class Admin::ActivityController < ApplicationController
 
   def index
     @records = Activity.includes(:user, :project).order(id: :desc).limit(40)
+
+    @tab_name = 'Activity'
   end
 end

@@ -2,6 +2,7 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :authenticate_admin!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_tab
 
   layout 'admin'
 
@@ -40,5 +41,9 @@ class Admin::UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:confirmed_at)
+  end
+
+  def set_tab
+    @tab_name = 'Users'
   end
 end
