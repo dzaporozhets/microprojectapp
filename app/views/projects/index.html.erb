@@ -1,4 +1,4 @@
-<div class="w-full">
+<div>
   <% content_for :title, "Projects" %>
 
   <% content_for :subnav do %>
@@ -12,8 +12,8 @@
 
   <%= display_flash %>
 
-  <div class="resource-container">
-    <div class="resource-body space-y-8">
+  <div>
+    <div class="space-y-6">
       <% if @pinned_projects.present? %>
         <div class="flex items-center justify-center text-sm">
           <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
