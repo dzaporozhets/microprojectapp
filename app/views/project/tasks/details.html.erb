@@ -1,7 +1,7 @@
 <%= display_flash %>
 
 <div class="space-y-6">
-  <div class="task-header">
+  <div class="task-header m-4">
     <div class="flex items-center justify-between w-full">
       <div class="flex items-center">
         <%= form_with(model: @task, url: project_task_path(@task.project, @task), local: false, data: { turbo: false }) do |form| %>
@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <div class="task-details space-y-4 px-4">
+  <div class="task-details space-y-4 m-4">
     <h1 class="font-semibold text-lg">
       <%= @task.name %>
     </h1>

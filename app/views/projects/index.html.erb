@@ -15,11 +15,7 @@
   <div>
     <div class="space-y-6">
       <% if @pinned_projects.present? %>
-        <div class="flex items-center justify-center text-sm">
-          <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
-          <span class="px-4 text-center text-gray-500 dark:text-gray-600">Favorite Projects</span>
-          <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
-        </div>
+        <%= render 'shared/divider', text: 'Favorite Projects' %>
         <ul id="pinned-projects" role="list" class="projects-list">
           <% @pinned_projects.each do |project| %>
             <%= render project %>
@@ -28,11 +24,7 @@
       <% end %>
 
       <% if @projects.present? %>
-        <div class="flex items-center justify-center text-sm">
-          <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
-          <span class="px-4 text-center text-gray-500 dark:text-gray-600">All Projects</span>
-          <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
-        </div>
+        <%= render 'shared/divider', text: 'All Projects' %>
         <ul id="projects" role="list" class="projects-list">
           <% @projects.each do |project| %>
             <%= render project %>
@@ -41,11 +33,7 @@
       <% end %>
 
       <% if @archived_projects.any? %>
-        <div class="flex items-center justify-center text-sm">
-          <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
-          <span class="px-4 text-center text-gray-500 dark:text-gray-600">Archived Projects</span>
-          <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
-        </div>
+        <%= render 'shared/divider', text: 'Archived Projects' %>
         <ul id="archived-projects" role="list" class="projects-list">
           <% @archived_projects.each do |project| %>
             <%= render project %>

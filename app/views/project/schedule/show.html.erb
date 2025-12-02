@@ -1,11 +1,7 @@
 <div class="space-y-6">
   <!-- Past Due Tasks -->
   <% if @tasks_past_due.any? %>
-    <div class="flex items-center justify-center text-sm">
-      <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
-      <span class="px-4 text-center text-red-700 dark:text-red-400">Older Tasks</span>
-      <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
-    </div>
+    <%= render 'shared/divider', text: 'Older Tasks', text_class: 'text-red-700 dark:text-red-400' %>
 
     <ol class="text-sm leading-6 text-gray-500 tasks-list">
       <% @tasks_past_due.each do |task| %>
@@ -15,11 +11,7 @@
   <% end %>
 
   <!-- Current Month -->
-  <div class="flex items-center justify-center text-sm">
-    <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
-    <span class="px-4 text-center text-gray-500 dark:text-gray-600"><%= Date.current.strftime("%B") %></span>
-    <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
-  </div>
+  <%= render 'shared/divider', text: Date.current.strftime("%B") %>
 
   <% if @tasks_due_this_month.any? %>
     <ol class="text-sm leading-6 text-gray-500 tasks-list">
@@ -41,11 +33,7 @@
   <% end %>
 
   <!-- Next Month -->
-  <div class="flex items-center justify-center text-sm">
-    <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
-    <span class="px-4 text-center text-gray-500 dark:text-gray-600"><%= Date.current.next_month.strftime("%B") %></span>
-    <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
-  </div>
+  <%= render 'shared/divider', text: Date.current.next_month.strftime("%B") %>
 
   <% if @tasks_due_next_month.any? %>
     <ol class="text-sm leading-6 text-gray-500 tasks-list">
@@ -67,11 +55,7 @@
   <% end %>
 
   <!-- Month After Next -->
-  <div class="flex items-center justify-center text-sm">
-    <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
-    <span class="px-4 text-center text-gray-500 dark:text-gray-600"><%= Date.current.next_month.next_month.strftime("%B") %></span>
-    <span class="flex-grow border-t border-gray-300 dark:border-gray-900"></span>
-  </div>
+  <%= render 'shared/divider', text: Date.current.next_month.next_month.strftime("%B") %>
 
   <% if @tasks_due_month_after_next.any? %>
     <ol class="text-sm leading-6 text-gray-500 tasks-list">
