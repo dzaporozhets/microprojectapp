@@ -184,7 +184,7 @@
   }
 
   .resource-empty-state {
-    @apply text-center py-12;
+    @apply text-center px-4 py-6;
   }
 
   .resource-empty-icon {
@@ -220,8 +220,7 @@
   }
 
   .resource-body .task {
-    @apply px-0 sm:px-4;
-
+    @apply px-4;
   }
 
   .task-done {
