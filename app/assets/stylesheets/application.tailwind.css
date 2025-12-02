@@ -244,6 +244,10 @@
            hover:bg-neutral-50 dark:hover:bg-gray-800 transition;
   }
 
+  .status-dot-overdue {
+    @apply inline-block h-2 w-2 rounded-full bg-red-500;
+  }
+
   /*----------------------------------------*
    * Misc
    *----------------------------------------*/

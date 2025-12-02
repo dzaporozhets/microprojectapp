@@ -69,7 +69,12 @@
         <% if @task.due_date.present? %>
           <div class="flex items-center pt-2 text-secondary">
             <span class="w-24">Due:</span>
-            <span><%= l(@task.due_date.to_date, format: :long) %></span>
+            <span class="flex items-center gap-2">
+              <%= l(@task.due_date.to_date, format: :long) %>
+              <% if !@task.done? && @task.due_date < Date.current %>
+                <span class="status-dot-overdue" title="Overdue task" aria-label="Overdue task"></span>
+              <% end %>
+            </span>
           </div>
         <% end %>
 

@@ -31,6 +31,10 @@ class Task < ApplicationRecord
     self.includes(:project).group_by(&:project).sort_by { |project, _| project.name }
   end
 
+  def overdue?
+    due_date.present? && !done? && due_date < Date.current
+  end
+
   private
 
   def task_limit

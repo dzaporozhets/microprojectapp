@@ -50,6 +50,10 @@ class Project < ApplicationRecord
     users.any?
   end
 
+  def overdue_tasks?
+    tasks.todo.with_due_date.exists?(due_date: ...Date.current)
+  end
+
   def find_user(user_id)
     return if user_id.blank?
 
