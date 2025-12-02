@@ -1,6 +1,6 @@
 <%= turbo_frame_tag dom_task_comment_form_id(@task) do %>
   <%= form_with(model: [ @task.project, @task, Comment.new ], local: true, id: 'new_comment_form', html: { multipart: true }) do |form| %>
-    <div class="flex items-start space-x-3">
+    <div class="comment-row items-start gap-3">
       <div class="flex-shrink-0">
         <%= avatar_tag(current_user, "h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600") %>
       </div>

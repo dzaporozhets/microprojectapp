@@ -1,0 +1,59 @@
+<div>
+  <% if task.description.present? %>
+    <div class="prose max-w-none break-words mb-6">
+      <%= simple_format task.description %>
+    </div>
+  <% end %>
+
+  <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-2">
+    <% if task.note_id %>
+      <div class="flex items-center pt-2 text-secondary">
+        <span class="w-24">Note:</span>
+        <span>
+          <%= link_to task.note&.title, [task.project, task.note], target: '_blank', class: 'underline hover:text-gray-900 dark:hover:text-gray-100' %>
+        </span>
+      </div>
+    <% end %>
+
+    <% if task.assigned_user_id %>
+      <div class="flex items-center pt-2 text-secondary">
+        <span class="w-24">Assigned:</span>
+        <span><%= task.assigned_user&.email %></span>
+      </div>
+    <% end %>
+
+    <% if task.due_date.present? %>
+      <div class="flex items-center pt-2 text-secondary">
+        <span class="w-24">Due:</span>
+        <span class="flex items-center gap-2">
+          <%= l(task.due_date.to_date, format: :long) %>
+          <% if !task.done? && task.due_date < Date.current %>
+            <span class="status-dot-overdue" title="Overdue task" aria-label="Overdue task"></span>
+          <% end %>
+        </span>
+      </div>
+    <% end %>
+
+    <div class="flex items-center pt-2 text-secondary">
+      <span class="w-24">Created by:</span>
+      <span><%= task.user.email %></span>
+    </div>
+
+    <div class="flex items-center pt-2 text-secondary">
+      <span class="w-24">Created at:</span>
+      <span><%= l(task.created_at, format: :long) %></span>
+    </div>
+
+    <div class="flex items-center pt-2 text-secondary">
+      <span class="w-24">Last updated:</span>
+      <span><%= l(task.updated_at, format: :long) %></span>
+    </div>
+
+    <% if task.done && task.done_at %>
+      <div class="flex items-center pt-2 text-secondary">
+        <span class="w-24">Completed at:</span>
+        <span><%= l(task.done_at, format: :long) %></span>
+      </div>
+    <% end %>
+  </div>
+</div>
