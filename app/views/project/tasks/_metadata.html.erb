@@ -35,18 +35,20 @@
     <% end %>
 
     <div class="flex items-center pt-2 text-secondary">
-      <span class="w-24">Created by:</span>
-      <span><%= task.user.email %></span>
+      <span class="w-24">Created:</span>
+      <span><%= "#{l(task.created_at, format: :long)} by #{task.user.email}" %></span>
     </div>
 
     <div class="flex items-center pt-2 text-secondary">
-      <span class="w-24">Created at:</span>
-      <span><%= l(task.created_at, format: :long) %></span>
-    </div>
-
-    <div class="flex items-center pt-2 text-secondary">
-      <span class="w-24">Last updated:</span>
-      <span><%= l(task.updated_at, format: :long) %></span>
+      <span class="w-24">Updated:</span>
+      <span>
+        <% updater_email = task.updated_by_user_id.present? ? User.find_by(id: task.updated_by_user_id)&.email : nil %>
+        <% if updater_email.present? %>
+          <%= "#{l(task.updated_at, format: :long)} by #{updater_email}" %>
+        <% else %>
+          <%= l(task.updated_at, format: :long) %>
+        <% end %>
+      </span>
     </div>
 
     <% if task.done && task.done_at %>

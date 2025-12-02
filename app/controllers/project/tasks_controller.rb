@@ -63,6 +63,8 @@ class Project::TasksController < Project::BaseController
 
   def update
     respond_to do |format|
+      @task.updated_by_user_id = current_user.id
+
       if @task.update(task_params)
         # When we change task name or description,
         # we just update a single item with a task

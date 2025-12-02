@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_28_134447) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_02_123727) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -103,10 +103,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_28_134447) do
     t.boolean "star", default: false, null: false
     t.bigint "assigned_user_id"
     t.bigint "note_id"
+    t.bigint "updated_by_user_id"
     t.index ["assigned_user_id"], name: "index_tasks_on_assigned_user_id"
     t.index ["note_id"], name: "index_tasks_on_note_id"
     t.index ["project_id", "done"], name: "index_tasks_on_project_id_and_done"
     t.index ["project_id"], name: "index_tasks_on_project_id"
+    t.index ["updated_by_user_id"], name: "index_tasks_on_updated_by_user_id"
     t.index ["user_id", "done"], name: "index_tasks_on_user_id_and_done"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
@@ -182,4 +184,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_28_134447) do
   add_foreign_key "tasks", "projects"
   add_foreign_key "tasks", "users"
   add_foreign_key "tasks", "users", column: "assigned_user_id"
+  add_foreign_key "tasks", "users", column: "updated_by_user_id", on_delete: :nullify
 end
