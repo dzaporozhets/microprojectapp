@@ -47,7 +47,7 @@ RSpec.feature "Project::Tasks", type: :feature do
   scenario 'User visits tasks details' do
     visit details_project_task_path(project, task)
 
-    expect(page).to have_content('Created by')
+    expect(page).to have_content('Created:')
     expect(page).to have_content(user.email)
     expect(page).to have_content(task.name)
   end

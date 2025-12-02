@@ -1,25 +1,24 @@
 <%- task = @task %>
+<%= display_flash %>
 
-<div class="">
-  <%= display_flash %>
+<div class="space-y-6">
+  <div class="task-header">
+    <div class="flex items-center justify-between w-full">
+      <div>
+        <h1 class="resource-title">Edit task</h1>
+      </div>
 
-  <div class="resource-container">
-    <div class="resource-header">
-      <div class="flex items-center justify-between w-full">
-        <div>
-          <h1 class="resource-title">Edit task</h1>
-        </div>
-
-        <div class="flex items-center space-x-2">
-          <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, title: 'Cancel', class: 'btn-sm' do %>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg>
-          <% end %>
-        </div>
+      <div class="flex items-center space-x-2">
+        <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, title: 'Cancel', class: 'btn-sm' do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        <% end %>
       </div>
     </div>
+  </div>
 
+  <div class="resource-container">
     <%= form_with(model: [task.project, task], data: { turbo: turbo_frame_request? }) do |form| %>
       <% if task.errors.any? %>
         <div id="ar-errors-text" data-turbo-cache="false" class="p-4 mb-4 bg-red-50 border border-red-200 rounded-md dark:bg-red-900/20 dark:border-red-800">

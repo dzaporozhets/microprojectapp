@@ -1,10 +1,4 @@
 <div>
-  <% if task.description.present? %>
-    <div class="prose max-w-none break-words mb-6">
-      <%= simple_format task.description %>
-    </div>
-  <% end %>
-
   <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-2">
     <% if task.note_id %>
       <div class="flex items-center pt-2 text-secondary">
