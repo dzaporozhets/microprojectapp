@@ -54,3 +54,15 @@
     </div>
   </div>
 </nav>
+
+<% if @tab_name %>
+  <div class="title-subnav">
+    <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-md px-4">
+      <div class="flex flex-grow items-center">
+        <%= project_tabs @project, @tab_name %>
+      </div>
+
+      <%= render 'project/tasks/nav' if tasks_lists_page?(@project) %>
+    </div>
+  </div>
+<% end %>

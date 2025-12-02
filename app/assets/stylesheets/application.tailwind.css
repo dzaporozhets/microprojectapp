@@ -4,11 +4,12 @@
 
 @layer components {
   .main-container {
-    @apply container mx-auto max-w-screen-md p-4 flex;
+    @apply container mx-auto max-w-screen-md flex;
   }
 
   .content {
-    @apply md:bg-base md:shadow-sm md:rounded-lg md:border md:border-base md:p-4;
+    @apply bg-base p-4;
+    @apply md:shadow-sm md:rounded-lg md:border md:border-base md:m-4;
   }
 
   .border-base {
