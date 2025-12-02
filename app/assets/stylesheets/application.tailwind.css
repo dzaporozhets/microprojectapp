@@ -7,6 +7,10 @@
     @apply container mx-auto max-w-screen-md p-4 flex;
   }
 
+  .content {
+    @apply md:bg-base md:shadow-sm md:rounded-lg md:border md:border-base md:p-4;
+  }
+
   .border-base {
     @apply border-gray-300 dark:border-gray-700;
   }
