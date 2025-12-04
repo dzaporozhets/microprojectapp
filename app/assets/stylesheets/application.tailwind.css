@@ -160,7 +160,6 @@
    * Project Resource Components
    *----------------------------------------*/
   .resource-container {
-    @apply bg-base shadow-sm rounded-lg overflow-hidden border border-base;
   }
 
   .resource-body {
