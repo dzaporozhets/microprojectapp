@@ -1,11 +1,11 @@
 <div class="flex w-full">
-  <div class="w-full md:w-2/3 lg:w-1/2 p-4 overflow-y-auto mx-auto">
-    <div class="p-4 bg-yellow-50 dark:bg-gray-800 min-h-[20rem]">
-      <h2 class="text-lg font-bold text-yellow-950 dark:text-gray-200">
+  <div class="">
+    <div class="min-h-[20rem]">
+      <h2 class="p-4 text-primary text-xl">
         <%= @note.title %>
       </h2>
 
-      <div class="prose prose-sm max-w-none text-yellow-950 dark:text-gray-200">
+      <div class="p-4 prose prose-sm max-w-none text-base">
         <%= simple_format(@note.content) %>
       </div>
     </div>

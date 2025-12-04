@@ -7,7 +7,6 @@ class Project::NotesController < Project::BaseController
   end
 
   def show
-    @tab_name = nil
   end
 
   def history
