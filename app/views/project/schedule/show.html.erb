@@ -20,13 +20,12 @@
       <% end %>
     </ol>
   <% else %>
-    <div class="text-center py-8">
-      <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gray-100 dark:bg-gray-800 mx-auto">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-        </svg>
-      </div>
-      <p class="mt-2 text-sm text-muted">
+    <div class="resource-empty-state">
+      <svg xmlns="http://www.w3.org/2000/svg" class="resource-empty-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+      </svg>
+      <h3 class="resource-empty-title">No tasks this month</h3>
+      <p class="resource-empty-description">
         No tasks due this month. <%= link_to 'Assign some random tasks?', saturate_project_schedule_path(@project, month: Date.current.strftime("%Y-%m")), method: :post, data: { turbo_method: :post }, class: "link-primary" %>
       </p>
     </div>
@@ -42,13 +41,12 @@
       <% end %>
     </ol>
   <% else %>
-    <div class="text-center py-8">
-      <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gray-100 dark:bg-gray-800 mx-auto">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-        </svg>
-      </div>
-      <p class="mt-2 text-sm text-muted">
+    <div class="resource-empty-state">
+      <svg xmlns="http://www.w3.org/2000/svg" class="resource-empty-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+      </svg>
+      <h3 class="resource-empty-title">No tasks next month</h3>
+      <p class="resource-empty-description">
         No tasks due next month. <%= link_to 'Assign some random tasks?', saturate_project_schedule_path(@project, month: Date.current.next_month.strftime("%Y-%m")), method: :post, data: { turbo_method: :post }, class: "link-primary" %>
       </p>
     </div>
@@ -64,13 +62,12 @@
       <% end %>
     </ol>
   <% else %>
-    <div class="text-center py-8">
-      <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gray-100 dark:bg-gray-800 mx-auto">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-        </svg>
-      </div>
-      <p class="mt-2 text-sm text-muted">
+    <div class="resource-empty-state">
+      <svg xmlns="http://www.w3.org/2000/svg" class="resource-empty-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+      </svg>
+      <h3 class="resource-empty-title">No tasks in <%= Date.current.next_month.next_month.strftime("%B") %></h3>
+      <p class="resource-empty-description">
         No tasks due <%= Date.current.next_month.next_month.strftime("%B") %>. <%= link_to 'Assign some random tasks?', saturate_project_schedule_path(@project, month: Date.current.next_month.next_month.strftime("%Y-%m")), method: :post, data: { turbo_method: :post }, class: "link-primary" %>
       </p>
     </div>
