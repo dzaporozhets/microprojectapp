@@ -14,7 +14,7 @@
         </div>
         <% if note.content.present? %>
           <div class="mt-1 list-text-secondary">
-            <span><%= truncate(note.content, length: 100) %></span>
+            <span><%= truncate(note.content, length: 80) %></span>
           </div>
         <% end %>
         <% if note.updated_at.present? %>

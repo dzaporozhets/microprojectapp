@@ -8,7 +8,7 @@ export default class extends Controller {
 
     // Create a countdown display element below the form with Tailwind styling
     this.countdownEl = document.createElement("div");
-    this.countdownEl.className = "mt-2 text-xs text-gray-500";
+    this.countdownEl.className = "text-xs text-gray-500 p-4";
     this.countdownEl.innerHTML = `
       <div id="autosave-countdown"></div>
       <div id="autoreload-countdown"></div>

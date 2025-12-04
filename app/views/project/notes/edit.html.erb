@@ -1,12 +1,12 @@
-<div class=" space-y-6">
-  <div class="w-full">
+<div>
+  <div>
     <%= form_with(model: [@project, @note], class: "contents", data: { controller: "notes", note_id: @note.id }) do |form| %>
       <%= render "shared/errors", resource: @note %>
 
-      <div class="p-4 bg-base shadow-sm rounded-lg overflow-hidden">
+      <div class="overflow-hidden">
         <div class="mb-4">
           <%= form.text_field :title,
-            class: "block w-full text-lg font-semibold border-none bg-transparent outline-none focus:ring-0 focus:outline-none dark:text-gray-100",
+            class: "p-4 block w-full text-lg font-semibold border-none bg-transparent outline-none focus:ring-0 focus:outline-none dark:text-gray-100",
             placeholder: "Note Title",
             required: true %>
         </div>
@@ -15,11 +15,11 @@
           <%= form.text_area :content,
             data: { notes_target: "textarea" },
             rows: 12,
-            class: "block w-full border-none bg-transparent outline-none focus:ring-0 focus:outline-none dark:text-gray-300",
+            class: "p-4 block w-full border-none bg-transparent outline-none focus:ring-0 focus:outline-none dark:text-gray-300",
             placeholder: "Write your note content here..." %>
         </div>
 
-        <div class="flex items-center justify-between mt-6 pt-4 border-t border-base">
+        <div class="flex items-center justify-between mt-6 p-4 border-t border-base">
           <%= link_to last_update_text(@note), history_project_note_path(@project, @note), class: 'text-gray-600 dark:text-gray-400 hover:underline mr-2 text-sm' %>
           <div class="flex items-center gap-2 dark:text-gray-400">
             <% if flash[:notice].present? %>
