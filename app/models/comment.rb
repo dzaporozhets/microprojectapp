@@ -11,4 +11,8 @@ class Comment < ApplicationRecord
   end
 
   delegate :email, to: :user, prefix: true
+
+  def removed?
+    removed_at.present?
+  end
 end

@@ -21,7 +21,7 @@ class Project::CommentsController < Project::BaseController
 
   def destroy
     @comment = @task.comments.find(params[:id])
-    @comment.destroy
+    @comment.update(removed_at: Time.current)
 
     respond_to do |format|
       format.html { redirect_to task_path, notice: 'Comment was successfully deleted.' }

@@ -1,1 +1,1 @@
-<%= turbo_stream.remove dom_id(@comment) %>
+<%= turbo_stream.replace dom_id(@comment), partial: "project/comments/comment", locals: { comment: @comment } %>

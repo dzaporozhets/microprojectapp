@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature "Task Comments", type: :feature do
+  include ActionView::RecordIdentifier
+
   let(:user) { create(:user) }
   let(:project) { user.personal_project }
   let(:task) { create(:task, project: project, user: user) }
@@ -26,5 +28,19 @@ RSpec.feature "Task Comments", type: :feature do
 
     expect(page).to have_content('Existing comment')
     expect(page).to have_content(user.email)
+  end
+
+  scenario 'User removes their own comment and sees a placeholder' do
+    comment = create(:comment, task: task, user: user, body: 'Removable comment')
+
+    visit details_project_task_path(project, task)
+    expect(page).to have_content('Removable comment')
+
+    within "##{dom_id(comment)}" do
+      find('form button').click
+    end
+
+    expect(page).to have_content('This comment was removed.')
+    expect(page).not_to have_content('Removable comment')
   end
 end
