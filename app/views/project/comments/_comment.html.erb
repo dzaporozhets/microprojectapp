@@ -9,8 +9,8 @@
       <span><%= time_ago_short(comment.created_at) %></span>
     </div>
 
-    <div class="text-sm text-gray-900 dark:text-gray-200 break-words">
-      <%= simple_format comment.body %>
+    <div class="comment-body">
+      <%= simple_format(auto_link(comment.body)) %>
     </div>
 
     <% if comment.attachment.present? %>

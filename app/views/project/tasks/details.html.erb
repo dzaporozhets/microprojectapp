@@ -46,7 +46,7 @@
 
     <% if @task.description.present? %>
       <div class="prose max-w-none break-words">
-        <%= simple_format @task.description %>
+        <%= simple_format(auto_link(@task.description)) %>
       </div>
     <% end %>
 
