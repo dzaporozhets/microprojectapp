@@ -18,67 +18,132 @@
 
   <div class="mx-auto space-y-6">
     <div class="resource-container">
-      <div class="space-y-4">
-        <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Search tasks</h2>
+      <div class="resource-header">
+        <h3 class="resource-title">Search tasks, notes, and links</h3>
+      </div>
 
-        <%= form_with url: search_path, method: :get, local: true, class: "flex flex-col sm:flex-row gap-3" do |form| %>
+      <div class="p-4">
+        <%= form_with url: search_path, method: :get, local: true, class: "flex flex-col sm:flex-row sm:items-end gap-3" do |form| %>
           <div class="flex-1">
-            <%= form.label :query, "Task title", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" %>
+            <%= form.label :query, "Search query", class: "sr-only" %>
             <%= form.text_field :query,
               value: @query,
               placeholder: "Enter at least #{@min_query_length} characters",
-              class: "w-full rounded-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-sm p-3 focus:ring-2 focus:ring-violet-500 focus:border-violet-500" %>
+              class: "block w-full base-input",
+              autofocus: true %>
           </div>
 
-          <div class="sm:self-end">
-            <%= form.submit "Search", class: "btn-base px-4 py-3 w-full sm:w-auto" %>
+          <div class="sm:self-start">
+            <%= form.submit "Search", class: "btn-base w-full sm:w-auto" %>
           </div>
         <% end %>
       </div>
     </div>
 
     <% if @can_search %>
-      <div class="resource-container">
-        <% if @results.any? %>
-          <ul class="divide-y divide-gray-200 dark:divide-gray-800">
-            <% @results.each do |task| %>
-              <li class="py-3">
-                <div class="flex items-start justify-between space-x-3">
-                  <div class="space-y-1">
-                    <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
-                      <%= link_to task.name, details_project_task_path(task.project, task), data: { turbo: false }, class: "hover:underline" %>
-                    </p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">
-                      <span class="mr-1 text-gray-400 dark:text-gray-500">Project:</span>
-                      <%= link_to task.project.name, project_path(task.project), class: "hover:underline" %>
-                    </p>
-                  </div>
+      <% has_results = @task_results.any? || @note_results.any? || @link_results.any? %>
 
-                  <% if task.done? %>
-                    <span class="inline-flex items-center rounded-full bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 dark:bg-green-900 dark:text-green-200">
-                      Done
-                    </span>
-                  <% end %>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-        <% else %>
+      <% if has_results %>
+        <div class="resource-container space-y-6">
+          <div class="resource-header">
+            <h3 class="resource-title">Search results</h3>
+          </div>
+
+          <% if @task_results.any? %>
+            <div class="space-y-3">
+              <%= render 'shared/divider', text: 'Tasks' %>
+              <ul class="divide-y divide-gray-200 dark:divide-gray-800 p-4">
+                <% @task_results.each do |task| %>
+                  <li class="py-3">
+                    <div class="flex items-start justify-between space-x-3">
+                      <div class="space-y-1">
+                        <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
+                          <%= link_to task.name, details_project_task_path(task.project, task), data: { turbo: false }, class: "hover:underline" %>
+                        </p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">
+                          <span class="mr-1 text-gray-400 dark:text-gray-500">Project:</span>
+                          <%= link_to task.project.name, project_path(task.project), class: "hover:underline" %>
+                        </p>
+                      </div>
+
+                      <% if task.done? %>
+                        <span class="inline-flex items-center rounded-full bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 dark:bg-green-900 dark:text-green-200">
+                          Done
+                        </span>
+                      <% end %>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <% if @note_results.any? %>
+            <div class="space-y-3">
+              <%= render 'shared/divider', text: 'Notes' %>
+              <ul class="divide-y divide-gray-200 dark:divide-gray-800 p-4">
+                <% @note_results.each do |note| %>
+                  <li class="py-3">
+                    <div class="flex items-center justify-between space-x-3">
+                      <div>
+                        <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
+                          <%= link_to note.title, project_note_path(note.project, note), class: "hover:underline" %>
+                        </p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">
+                          <span class="mr-1 text-gray-400 dark:text-gray-500">Project:</span>
+                          <%= link_to note.project.name, project_path(note.project), class: "hover:underline" %>
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <% if @link_results.any? %>
+            <div class="space-y-3">
+              <%= render 'shared/divider', text: 'Links' %>
+              <ul class="divide-y divide-gray-200 dark:divide-gray-800 p-4">
+                <% @link_results.each do |link| %>
+                  <li class="py-3">
+                    <div class="flex items-start justify-between space-x-3">
+                      <div class="space-y-1">
+                        <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
+                          <%= link_to link.safe_title, project_link_path(link.project, link), class: "hover:underline" %>
+                        </p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 break-all">
+                          <%= link.url %>
+                        </p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">
+                          <span class="mr-1 text-gray-400 dark:text-gray-500">Project:</span>
+                          <%= link_to link.project.name, project_path(link.project), class: "hover:underline" %>
+                        </p>
+                      </div>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="resource-container">
           <div class="resource-empty-state">
             <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gray-100 dark:bg-gray-800 mx-auto">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-gray-600 dark:text-gray-400">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
               </svg>
             </div>
-            <h3 class="resource-empty-title">No tasks found</h3>
+            <h3 class="resource-empty-title">No results found</h3>
             <p class="resource-empty-description">Try adjusting your search or using different keywords.</p>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     <% elsif @query.present? %>
       <div class="resource-container">
         <p class="text-sm text-gray-600 dark:text-gray-400">
-          Enter at least <%= @min_query_length %> characters to search tasks.
+          Enter at least <%= @min_query_length %> characters to search tasks, notes, and links.
         </p>
       </div>
     <% end %>
