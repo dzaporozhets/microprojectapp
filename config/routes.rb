@@ -84,6 +84,7 @@ Rails.application.routes.draw do
       get :calendar
     end
   end
+  get 'search', to: 'search#index'
   resources :tasks, only: :index, controller: 'tasks' do
     member do
       patch :toggle_done
