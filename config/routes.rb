@@ -78,6 +78,7 @@ Rails.application.routes.draw do
       post :regenerate_calendar_token
     end
   end
+  get 'users/:id/avatar', to: 'users/avatars#show', as: :user_avatar
 
   resource :schedule, only: :show, controller: 'schedule' do
     member do

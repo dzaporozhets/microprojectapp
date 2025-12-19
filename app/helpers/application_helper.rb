@@ -19,9 +19,9 @@ module ApplicationHelper
   end
 
   def avatar_tag(user, css_class = '', options = { size: 40, alt: 'Avatar' })
-    if user.img_url.present?
+    if avatar_src(user).present?
       content_tag(:div, class: 'flex') do
-        image_tag(user.img_url, class: "rounded-full #{css_class}", size: options[:size], alt: options[:alt])
+        image_tag(avatar_src(user), class: "rounded-full #{css_class}", size: options[:size], alt: options[:alt])
       end
     else
       first_letter = user.email[0].upcase
@@ -29,6 +29,16 @@ module ApplicationHelper
       style = ""
 
       content_tag(:div, first_letter, class: "flex items-center justify-center rounded-full #{css_class}", style: style, alt: alt)
+    end
+  end
+
+  def avatar_src(user)
+    return unless user
+
+    if user.avatar?
+      user_avatar_path(user)
+    else
+      user.oauth_avatar_url
     end
   end
 

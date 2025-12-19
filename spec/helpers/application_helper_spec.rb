@@ -66,27 +66,29 @@ RSpec.describe ApplicationHelper, type: :helper do
   end
 
   describe '#avatar_tag' do
-    let(:user) { double('User', email: 'test@example.com', avatar_url: nil) }
+    let(:user) { double('User', id: 1, email: 'test@example.com') }
     let(:default_options) { { size: 40, alt: 'Avatar' } }
 
-    context 'when user has an img_url' do
+    context 'when user has an uploaded avatar' do
       before do
-        allow(user).to receive(:img_url).and_return('http://example.com/avatar.jpg')
+        allow(user).to receive(:avatar?).and_return(true)
+        allow(helper).to receive(:user_avatar_path).with(user).and_return('/users/1/avatar')
       end
 
-      it 'generates an image tag with the avatar_url' do
+      it 'generates an image tag with the avatar path' do
         result = helper.avatar_tag(user, 'css-class', default_options)
 
         expect(result).to include('img')
-        expect(result).to include('http://example.com/avatar.jpg')
+        expect(result).to include('/users/1/avatar')
         expect(result).to include('class="rounded-full css-class"')
         expect(result).to include('alt="Avatar"')
       end
     end
 
-    context 'when user does not have an img_url' do
+    context 'when user does not have an avatar' do
       before do
-        allow(user).to receive(:img_url).and_return(nil)
+        allow(user).to receive(:avatar?).and_return(false)
+        allow(user).to receive(:oauth_avatar_url).and_return(nil)
       end
 
       it 'generates a div with the correct initial' do

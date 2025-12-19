@@ -73,8 +73,8 @@
 
             <!-- Avatar Preview -->
             <div class="flex-shrink-0">
-              <% if @user.img_url.present? %>
-                <%= image_tag @user.img_url, alt: "Current Avatar", class: "w-10 h-10 rounded-full object-cover" %>
+              <% if avatar_src(@user).present? %>
+                <%= image_tag avatar_src(@user), alt: "Current Avatar", class: "w-10 h-10 rounded-full object-cover" %>
               <% end %>
             </div>
           </div>
