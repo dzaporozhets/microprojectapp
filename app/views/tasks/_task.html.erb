@@ -14,6 +14,9 @@
 
     <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "min-w-0 grow flex h-12 items-center" do %>
       <p class="list-text-primary line-clamp-2"><%= task.name %></p>
+      <% if task.overdue? %>
+        <span class="status-dot-overdue ml-2 flex-shrink-0" title="Overdue task" aria-label="Overdue task"></span>
+      <% end %>
     <% end %>
 
     <div class="space-x-2 flex">
