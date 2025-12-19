@@ -10,4 +10,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def size_range
     1..500.kilobytes
   end
+
+  def fog_attributes
+    { 'Cache-Control' => 'public, max-age=31536000, immutable' }
+  end
 end
