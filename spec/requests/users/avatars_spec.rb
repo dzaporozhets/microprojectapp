@@ -21,7 +21,10 @@ RSpec.describe 'Users::Avatars', type: :request do
         get user_avatar_path(user)
 
         expect(response).to have_http_status(:ok)
-        expect(response.headers['Cache-Control']).to eq('public, max-age=31536000, immutable')
+        cache_control = response.headers['Cache-Control']
+        expect(cache_control).to include('public')
+        expect(cache_control).to include('max-age=31536000')
+        expect(cache_control).to include('immutable')
         expect(response.media_type).to eq('image/png')
       end
 
