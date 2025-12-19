@@ -27,7 +27,10 @@ class TasksController < ApplicationController
   end
 
   def tasks
-    Task.where(project_id: current_user.all_active_projects).todo.order(id: :desc)
+    Task.where(project_id: current_user.all_active_projects)
+        .includes(:project, :assigned_user, :comments)
+        .todo
+        .order(id: :desc)
   end
 
 end

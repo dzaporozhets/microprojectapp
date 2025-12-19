@@ -20,8 +20,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1 or /projects/1.json
   def show
     @tab_name = 'Tasks'
-    @tasks_todo = @project.tasks.todo.basic_order
-    @tasks_done = @project.tasks.done.order(updated_at: :desc).limit(DONE_TASKS)
+    @tasks_todo = @project.tasks.todo.includes(:assigned_user, :comments).basic_order
+    @tasks_done = @project.tasks.done.includes(:assigned_user, :comments).order(updated_at: :desc).limit(DONE_TASKS)
   end
 
   # GET /projects/new
