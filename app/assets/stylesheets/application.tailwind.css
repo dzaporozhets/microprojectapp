@@ -298,7 +298,7 @@
   }
 
   .title-subnav {
-    @apply pt-1 pb-3 border-b border-base text-base bg-base;
+    @apply py-3 border-b border-base text-base bg-base;
   }
 
   /* Task Details Styles */
