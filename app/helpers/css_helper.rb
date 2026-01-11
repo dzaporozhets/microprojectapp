@@ -4,15 +4,15 @@ module CssHelper
   end
 
   def ui_tabs
-    ""
+    "inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg"
   end
 
   def ui_tab
-    "btn-tab #{theme_text_subtle}"
+    "inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700"
   end
 
   def ui_active_tab
-    "btn-tab btn-tab-active #{theme_text} #{theme_bg} #{theme_border_accent}"
+    "inline-flex items-center px-3 py-2 text-sm font-medium rounded-md #{theme_text} bg-white dark:bg-gray-900 shadow-sm"
   end
 
   def ui_toggle
@@ -88,6 +88,16 @@ module CssHelper
     when 'orange' then 'border-orange-400 dark:border-orange-700'
     when 'indigo' then 'border-indigo-400 dark:border-indigo-700'
     when 'gray' then 'border-gray-400 dark:border-gray-700'
+    end
+  end
+
+  def theme_underline
+    case theme_name
+    when 'violet' then 'border-violet-600 dark:border-violet-400'
+    when 'pink' then 'border-pink-600 dark:border-pink-400'
+    when 'orange' then 'border-orange-600 dark:border-orange-400'
+    when 'indigo' then 'border-indigo-600 dark:border-indigo-400'
+    when 'gray' then 'border-gray-600 dark:border-gray-400'
     end
   end
 
