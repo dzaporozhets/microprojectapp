@@ -1,5 +1,5 @@
 <nav class="bg-base">
-  <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-md px-4 py-4 pb-1">
+  <div class="flex flex-wrap nav-title">
     <div class="flex flex-grow items-center">
       <ol role="list" class="flex space-x-4 flex-grow min-w-0">
         <li class="flex flex-grow min-w-0">
@@ -53,14 +53,12 @@
   </div>
 
   <% if @tab_name %>
-    <div class="title-subnav">
-      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-md px-4">
-        <div class="flex flex-grow items-center">
-          <%= project_tabs @project, @tab_name %>
-        </div>
-
-        <%= render 'project/tasks/nav' if tasks_lists_page?(@project) %>
+    <div class="flex flex-wrap nav-tabs">
+      <div class="flex flex-grow items-center">
+        <%= project_tabs @project, @tab_name %>
       </div>
+
+      <%= render 'project/tasks/nav' if tasks_lists_page?(@project) %>
     </div>
   <% end %>
 </nav>
