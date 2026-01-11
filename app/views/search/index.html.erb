@@ -2,8 +2,8 @@
   <% content_for :title, "Search" %>
 
   <% content_for :subnav do %>
-    <div class="subnav-css">
-      <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-md px-4">
+    <nav class="nav-container">
+      <div class="flex flex-wrap nav-tabs">
         <%= render_tabs(
           [
             { name: 'Projects', path: projects_path },
@@ -13,7 +13,7 @@
           'Search'
         ) %>
       </div>
-    </div>
+    </nav>
   <% end %>
 
   <div class="mx-auto space-y-4">
