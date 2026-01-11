@@ -3,6 +3,10 @@ module CssHelper
     "#{theme_text} #{theme_bg} border-b #{theme_border}"
   end
 
+  def ui_tabs
+    ""
+  end
+
   def ui_tab
     "btn-tab #{theme_text_subtle}"
   end

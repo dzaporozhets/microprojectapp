@@ -39,7 +39,7 @@
     @apply justify-between items-center mx-auto max-w-screen-md px-4;
   }
 
-  .nav-tabs {
+  .nav-controls {
     @apply justify-between items-center mx-auto max-w-screen-md px-4;
   }
 
