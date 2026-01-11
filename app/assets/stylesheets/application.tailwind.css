@@ -48,7 +48,6 @@
    *----------------------------------------*/
   .btn {
     @apply py-2 px-3 rounded-md text-sm cursor-pointer
-           md:px-4
            whitespace-nowrap
            transition transform duration-200 ease-in-out
            focus:outline-none focus-visible:ring-2
@@ -104,14 +103,20 @@
   /*----------------------------------------*
    * Tab Buttons
    *----------------------------------------*/
-  .btn-tab {
-    @apply rounded-md border border-transparent
-           py-2 px-4 text-sm font-medium
-           focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500;
+  .tab-container {
+    @apply inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg;
   }
 
-  .btn-tab:hover {
-    @apply text-black dark:text-gray-300;
+  .tab {
+    @apply inline-flex items-center px-3 py-2 text-sm font-medium rounded-md
+           text-gray-600 dark:text-gray-400
+           hover:text-gray-900 dark:hover:text-gray-100
+           hover:bg-gray-50 dark:hover:bg-gray-700;
+  }
+
+  .tab-active {
+    @apply inline-flex items-center px-3 py-2 text-sm font-medium rounded-md
+           bg-white dark:bg-gray-900 shadow-sm;
   }
 
 

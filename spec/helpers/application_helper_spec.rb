@@ -47,15 +47,15 @@ RSpec.describe ApplicationHelper, type: :helper do
     it 'highlights the selected tab' do
       html = helper.render_tabs(tabs, 'Company')
 
-      expect(html).to have_css('a.btn-tab-active', text: 'Company')
+      expect(html).to have_css('a.tab-active', text: 'Company')
     end
 
     it 'does not highlight non-selected tabs' do
       html = helper.render_tabs(tabs, 'Company')
 
       puts html
-      expect(html).to have_css('a.btn-tab', text: 'My Account')
-      expect(html).to have_css('a.btn-tab', text: 'Team Members')
+      expect(html).to have_css('a.tab', text: 'My Account')
+      expect(html).to have_css('a.tab', text: 'Team Members')
     end
 
     it 'marks the selected tab with aria-current' do

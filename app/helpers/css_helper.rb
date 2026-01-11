@@ -4,29 +4,27 @@ module CssHelper
   end
 
   def ui_tabs
-    "inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg"
+    "tab-container"
   end
 
   def ui_tab
-    "inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700"
+    "tab"
   end
 
   def ui_active_tab
-    "inline-flex items-center px-3 py-2 text-sm font-medium rounded-md #{theme_text} bg-white dark:bg-gray-900 shadow-sm"
+    "tab-active #{theme_text}"
   end
 
   def ui_toggle
-    "inline-flex items-center gap-1 p-1 #{theme_bg_subtle} rounded-full border #{theme_border}"
+    "tab-container"
   end
 
   def ui_toggle_tab
-    "px-3 py-0.5 text-sm border border-transparent font-medium rounded-full #{theme_hover} #{theme_text} #{theme_focus_ring} " \
-      'hover:bg-white hover:shadow-sm focus:outline-none focus:ring-2 '
+    "tab"
   end
 
   def ui_toggle_active_tab
-    "px-3 py-0.5 text-sm border #{theme_border} #{theme_bg} #{theme_text} #{theme_focus_ring} font-medium rounded-full " \
-      "shadow-sm focus:outline-none focus:ring-2 "
+    "tab-active #{theme_text}"
   end
 
   private
@@ -41,16 +39,6 @@ module CssHelper
     end
   end
 
-  def theme_bg_subtle
-    case theme_name
-    when 'violet' then 'bg-violet-50 dark:bg-violet-900'
-    when 'pink' then 'bg-pink-50 dark:bg-pink-900'
-    when 'orange' then 'bg-orange-50 dark:bg-orange-900'
-    when 'indigo' then 'bg-indigo-50 dark:bg-indigo-900'
-    when 'gray' then 'bg-gray-50 dark:bg-gray-900'
-    end
-  end
-
   def theme_text
     case theme_name
     when 'violet' then 'text-violet-900 dark:text-violet-100'
@@ -61,16 +49,6 @@ module CssHelper
     end
   end
 
-  def theme_text_subtle
-    case theme_name
-    when 'violet' then 'text-violet-800 dark:text-violet-200'
-    when 'pink' then 'text-pink-800 dark:text-pink-200'
-    when 'orange' then 'text-orange-800 dark:text-orange-200'
-    when 'indigo' then 'text-indigo-800 dark:text-indigo-200'
-    when 'gray' then 'text-base'
-    end
-  end
-
   def theme_border
     case theme_name
     when 'violet' then 'border-violet-300 dark:border-violet-800'
@@ -78,46 +56,6 @@ module CssHelper
     when 'orange' then 'border-orange-300 dark:border-orange-800'
     when 'indigo' then 'border-indigo-300 dark:border-indigo-800'
     when 'gray' then 'border-gray-300 dark:border-gray-800'
-    end
-  end
-
-  def theme_border_accent
-    case theme_name
-    when 'violet' then 'border-violet-400 dark:border-violet-700'
-    when 'pink' then 'border-pink-400 dark:border-pink-700'
-    when 'orange' then 'border-orange-400 dark:border-orange-700'
-    when 'indigo' then 'border-indigo-400 dark:border-indigo-700'
-    when 'gray' then 'border-gray-400 dark:border-gray-700'
-    end
-  end
-
-  def theme_underline
-    case theme_name
-    when 'violet' then 'border-violet-600 dark:border-violet-400'
-    when 'pink' then 'border-pink-600 dark:border-pink-400'
-    when 'orange' then 'border-orange-600 dark:border-orange-400'
-    when 'indigo' then 'border-indigo-600 dark:border-indigo-400'
-    when 'gray' then 'border-gray-600 dark:border-gray-400'
-    end
-  end
-
-  def theme_hover
-    case theme_name
-    when 'violet' then 'hover:bg-violet-50 hover:dark:bg-violet-950 hover:border-violet-100 hover:dark:border-violet-700'
-    when 'pink' then 'hover:bg-pink-50 hover:dark:bg-pink-950 hover:border-pink-100 hover:dark:border-pink-700'
-    when 'orange' then 'hover:bg-orange-50 hover:dark:bg-orange-950 hover:border-orange-100 hover:dark:border-orange-700'
-    when 'indigo' then 'hover:bg-indigo-50 hover:dark:bg-indigo-950 hover:border-indigo-100 hover:dark:border-indigo-700'
-    when 'gray' then 'hover:bg-gray-50 hover:dark:bg-gray-950 hover:border-gray-100 hover:dark:border-gray-700'
-    end
-  end
-
-  def theme_focus_ring
-    case theme_name
-    when 'violet' then 'focus:ring-violet-500'
-    when 'pink' then 'focus:ring-pink-500'
-    when 'orange' then 'focus:ring-orange-500'
-    when 'indigo' then 'focus:ring-indigo-500'
-    when 'gray' then 'focus:ring-gray-500'
     end
   end
 
