@@ -13,7 +13,7 @@
   }
 
   .border-base {
-    @apply border-gray-300 dark:border-gray-700;
+    @apply border-gray-200 dark:border-gray-700;
   }
 
   .text-base {
@@ -289,11 +289,11 @@
 
   /* Body Color */
   .body-color {
-    @apply bg-neutral-100 dark:bg-gray-950 text-gray-800 dark:text-gray-300;
+    @apply bg-gray-100 dark:bg-gray-950 text-gray-800 dark:text-gray-300;
   }
 
   .nav-container {
-    @apply py-3 border-b border-base text-base space-y-2 bg-neutral-50 dark:bg-gray-900;
+    @apply py-3 border-b border-base text-base space-y-2 bg-white dark:bg-gray-900;
   }
 
   .nav-title {
