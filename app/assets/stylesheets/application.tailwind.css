@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 @layer components {
+  .body-color {
+    @apply bg-gray-100 dark:bg-black text-gray-800 dark:text-gray-300;
+  }
+
+  .bg-base {
+    @apply bg-white dark:bg-gray-900;
+  }
+
   .main-container {
     @apply container mx-auto max-w-screen-md flex;
   }
@@ -18,6 +26,21 @@
 
   .text-base {
     @apply text-gray-700 dark:text-gray-300;
+  }
+
+  /*----------------------------------------*
+   * Nav
+   *----------------------------------------*/
+  .nav-container {
+    @apply py-3 border-b border-base text-base space-y-2 bg-base;
+  }
+
+  .nav-title {
+    @apply justify-between items-center mx-auto max-w-screen-md px-4;
+  }
+
+  .nav-tabs {
+    @apply justify-between items-center mx-auto max-w-screen-md px-4;
   }
 
   /*----------------------------------------*
@@ -279,30 +302,9 @@
     @apply text-xs text-muted;
   }
 
-  .bg-base {
-    @apply bg-white dark:bg-gray-900;
-  }
-
   /*----------------------------------------*
    * CSS Helper Classes (non-theme)
    *----------------------------------------*/
-
-  /* Body Color */
-  .body-color {
-    @apply bg-gray-100 dark:bg-gray-950 text-gray-800 dark:text-gray-300;
-  }
-
-  .nav-container {
-    @apply py-3 border-b border-base text-base space-y-2 bg-white dark:bg-gray-900;
-  }
-
-  .nav-title {
-    @apply justify-between items-center mx-auto max-w-screen-md px-4;
-  }
-
-  .nav-tabs {
-    @apply justify-between items-center mx-auto max-w-screen-md px-4;
-  }
 
   /* Task Details Styles */
   .task-details-done {
