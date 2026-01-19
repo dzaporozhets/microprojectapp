@@ -1,7 +1,7 @@
 <%= display_flash %>
 
-<div class="space-y-6">
-  <div class="task-header m-4">
+<div class="resource-container">
+  <div class="resource-header">
     <div class="flex items-center justify-between w-full">
       <div class="flex items-center">
         <%= form_with(model: @task, url: project_task_path(@task.project, @task), local: false, data: { turbo: false }) do |form| %>
@@ -39,21 +39,25 @@
     </div>
   </div>
 
-  <div class="task-details space-y-4 m-4">
-    <h1 class="font-semibold text-lg">
-      <%= @task.name %>
-    </h1>
+  <div>
+    <div class="m-4 space-y-4">
+      <div class="task-details">
+        <h1 class="resource-title">
+          <%= @task.name %>
+        </h1>
 
-    <% if @task.description.present? %>
-      <div class="prose max-w-none break-words">
-        <%= simple_format(auto_link(@task.description)) %>
+        <% if @task.description.present? %>
+          <div class="mt-1 text-sm prose max-w-none break-words">
+            <%= simple_format(auto_link(@task.description)) %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
 
-    <%= render 'project/tasks/metadata', task: @task %>
-  </div>
+      <%= render 'project/tasks/metadata', task: @task %>
+    </div>
 
-  <div class="task-comments">
-    <%= render 'project/tasks/comments' %>
+    <div class="task-comments">
+      <%= render 'project/tasks/comments' %>
+    </div>
   </div>
 </div>

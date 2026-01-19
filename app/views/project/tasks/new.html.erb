@@ -1,7 +1,7 @@
 <%= display_flash %>
 
-<div class="space-y-6">
-  <div class="task-header m-4">
+<div class="resource-container">
+  <div class="resource-header">
     <div class="flex items-center justify-between w-full">
       <div>
         <h1 class="resource-title">New task</h1>
@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <div class="resource-container">
+  <div>
     <%= form_with(model: [@project, @task], data: { turbo: false }) do |form| %>
       <% if @task.errors.any? %>
         <div id="ar-errors-text" data-turbo-cache="false" class="p-4 mb-4 bg-red-50 border border-red-200 rounded-md dark:bg-red-900/20 dark:border-red-800">

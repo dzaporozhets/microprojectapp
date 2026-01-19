@@ -1,7 +1,7 @@
 <div>
-  <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-2">
+  <div class="text-secondary space-y-1">
     <% if task.note_id %>
-      <div class="flex items-center pt-2 text-secondary">
+      <div class="flex items-center">
         <span class="w-24">Note:</span>
         <span>
           <%= link_to task.note&.title, [task.project, task.note], target: '_blank', class: 'underline hover:text-gray-900 dark:hover:text-gray-100' %>
@@ -10,14 +10,14 @@
     <% end %>
 
     <% if task.assigned_user_id %>
-      <div class="flex items-center pt-2 text-secondary">
+      <div class="flex items-center">
         <span class="w-24">Assigned:</span>
         <span><%= task.assigned_user&.email %></span>
       </div>
     <% end %>
 
     <% if task.due_date.present? %>
-      <div class="flex items-center pt-2 text-secondary">
+      <div class="flex items-center">
         <span class="w-24">Due:</span>
         <span class="flex items-center gap-2">
           <%= l(task.due_date.to_date, format: :long) %>
@@ -28,12 +28,12 @@
       </div>
     <% end %>
 
-    <div class="flex items-center pt-2 text-secondary">
+    <div class="flex items-center">
       <span class="w-24">Created:</span>
       <span><%= "#{l(task.created_at, format: :long)} by #{task.user.email}" %></span>
     </div>
 
-    <div class="flex items-center pt-2 text-secondary">
+    <div class="flex items-center">
       <span class="w-24">Updated:</span>
       <span>
         <% if task.updated_by_user.present? %>
@@ -47,7 +47,7 @@
     </div>
 
     <% if task.done && task.done_at %>
-      <div class="flex items-center pt-2 text-secondary">
+      <div class="flex items-center">
         <span class="w-24">Completed at:</span>
         <span><%= l(task.done_at, format: :long) %></span>
       </div>

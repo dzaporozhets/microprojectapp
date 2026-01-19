@@ -311,15 +311,6 @@
    * CSS Helper Classes (non-theme)
    *----------------------------------------*/
 
-  /* Task Details Styles */
-  .task-details-done {
-    @apply bg-gray-300 dark:bg-gray-700 text-base;
-  }
-
-  .task-details-todo {
-    @apply bg-gray-100 dark:bg-gray-800 text-black dark:text-gray-100;
-  }
-
   /* Avatar Styles */
   .avatar-bg {
     @apply bg-gray-200 dark:bg-gray-800 rounded-full;
