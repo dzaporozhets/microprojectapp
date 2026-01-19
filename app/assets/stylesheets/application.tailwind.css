@@ -16,8 +16,7 @@
   }
 
   .content {
-    @apply bg-base p-4;
-    @apply md:shadow-sm md:rounded-lg md:border md:border-base md:m-4;
+    @apply m-4;
   }
 
   .border-base {
@@ -188,6 +187,7 @@
    * Project Resource Components
    *----------------------------------------*/
   .resource-container {
+    @apply bg-base shadow-sm rounded-lg;
   }
 
   .resource-body {
