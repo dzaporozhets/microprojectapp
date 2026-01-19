@@ -13,38 +13,47 @@
   <%= display_flash %>
 
   <div>
-    <div class="space-y-4">
+    <div class="divide-y divide-dashed divide-gray-500">
       <% if @pinned_projects.present? %>
-        <%= render 'shared/divider', text: 'Favorite Projects' %>
-        <ul id="pinned-projects" role="list" class="projects-list">
-          <% @pinned_projects.each do |project| %>
-            <%= render project %>
-          <% end %>
-        </ul>
+        <div class="resource-container">
+          <div>
+            <ul id="pinned-projects" role="list" class="projects-list">
+              <% @pinned_projects.each do |project| %>
+                <%= render project, pinned: true %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
       <% end %>
 
       <% if @projects.present? %>
-        <%= render 'shared/divider', text: 'All Projects' %>
-        <ul id="projects" role="list" class="projects-list">
-          <% @projects.each do |project| %>
-            <%= render project %>
-          <% end %>
-        </ul>
+        <div class="resource-container">
+          <div>
+            <ul id="projects" role="list" class="projects-list">
+              <% @projects.each do |project| %>
+                <%= render project %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
       <% end %>
 
       <% if @archived_projects.any? %>
-        <%= render 'shared/divider', text: 'Archived Projects' %>
-        <ul id="archived-projects" role="list" class="projects-list">
-          <% @archived_projects.each do |project| %>
-            <%= render project %>
-          <% end %>
-        </ul>
+        <div class="resource-container">
+          <div>
+            <ul id="archived-projects" role="list" class="projects-list">
+              <% @archived_projects.each do |project| %>
+                <%= render project %>
+              <% end %>
+            </ul>
 
-        <% if @archived_projects.total_pages > 1 %>
-          <div class="mt-4">
-            <%= paginate @archived_projects %>
+            <% if @archived_projects.total_pages > 1 %>
+              <div class="mt-4">
+                <%= paginate @archived_projects %>
+              </div>
+            <% end %>
           </div>
-        <% end %>
+        </div>
       <% end %>
     </div>
   </div>
