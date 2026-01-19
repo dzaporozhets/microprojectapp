@@ -19,33 +19,37 @@
   <% end %>
 
   <div class="space-y-6">
-    <%= render 'shared/divider', text: 'Tasks with due date' %>
-
-    <div>
-      <% if @tasks.any? %>
-        <ol class="text-sm leading-6 text-gray-500 grid grid-cols-1 tasks-list">
-          <% @tasks.each do |task| %>
-            <%= render 'schedule/task', task: task %>
-          <% end %>
-        </ol>
-      <% else %>
-        <div class="resource-empty-state">
-          <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gray-100 dark:bg-gray-800 mx-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-            </svg>
-          </div>
-          <h3 class="resource-empty-title">No upcoming tasks</h3>
-          <p class="resource-empty-description">Create a task and set due date for it to appear here.</p>
-        </div>
-      <% end %>
-    </div>
-
-    <% if @tasks.any? && @tasks.total_pages > 1 %>
-      <div class="flex items-center justify-center">
-        <%= paginate @tasks %>
+    <div class="resource-container">
+      <div class="resource-header">
+        <h3 class="resource-title">Tasks with due date</h3>
       </div>
-    <% end %>
+
+      <div>
+        <% if @tasks.any? %>
+          <ol class="text-sm leading-6 text-gray-500 grid grid-cols-1 tasks-list">
+            <% @tasks.each do |task| %>
+              <%= render 'schedule/task', task: task %>
+            <% end %>
+          </ol>
+        <% else %>
+          <div class="resource-empty-state">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gray-100 dark:bg-gray-800 mx-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 dark:text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+            </div>
+            <h3 class="resource-empty-title">No upcoming tasks</h3>
+            <p class="resource-empty-description">Create a task and set due date for it to appear here.</p>
+          </div>
+        <% end %>
+
+        <% if @tasks.any? && @tasks.total_pages > 1 %>
+          <div class="flex items-center justify-center">
+            <%= paginate @tasks %>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
     <div>
       <% if current_user.calendar_token.present? %>
