@@ -1,6 +1,18 @@
 CHANGELOG
 =========
 
+Version 0.12.5 (2026-01-20)
+---------------------------
+- Improved UI across tasks, projects, schedule, navigation, and notes
+- Add task search
+- Add search results for notes and links
+- Add links support to comments and task descriptions
+- Add automatic links for URLs in content
+- Enable comment submit with Ctrl+Enter
+- Add soft delete to comments
+- Show placeholder on mobile
+- Use empty state on task schedule page
+
 Version 0.12.4 (2025-12-04)
 ---------------------------
 - Redesign task details, project tasks, and schedule pages
