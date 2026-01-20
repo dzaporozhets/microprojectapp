@@ -1,44 +1,49 @@
-<h2 class="text-4xl font-extrabold dark:text-gray-200">Log in</h2>
-<% if ENV['APP_DOMAIN'].present? %>
-  <p class="text-gray-500"><%= ENV['APP_DOMAIN'] %></p>
-<% end %>
-
 <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-  <%= render 'devise/shared/alerts' %>
-
-  <%= render 'devise/sessions/oauth' if devise_mapping.omniauthable? && Devise.omniauth_providers.any? %>
-
-  <% if Rails.application.config.app_settings[:disable_email_login] %>
-    <% unless Devise.omniauth_providers.any? %>
-      <p class="p-4 my-4 border border-gray-500">
-      Email login and signup are disabled due to <strong>DISABLE_EMAIL_LOGIN</strong>, but no OAuth providers have been configured.
-      As a result, login and signup are not available.
-      </p>
-    <% end %>
-  <% else %>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }, data: { turbo: false }) do |f| %>
-      <div class="mt-2">
-        <%= f.label :email, class:"dark:text-gray-200" %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: 'base-input block w-full sm:text-m sm:leading-6' %>
-      </div>
-
-      <div class="mt-2">
-        <%= f.label :password, class:"dark:text-gray-200" %>
-        <%= f.password_field :password, autocomplete: "current-password", class: 'base-input block w-full sm:text-m sm:leading-6' %>
-      </div>
-
-      <% if devise_mapping.rememberable? %>
-        <div class="mt-2">
-          <%= f.check_box :remember_me, class: 'checkbox mr-1', checked: true %>
-          <%= f.label :remember_me, class:"dark:text-gray-200" %>
-        </div>
+  <div class="resource-container">
+    <div class="resource-header">
+      <h2 class="text-4xl font-extrabold dark:text-gray-200">Log in</h2>
+      <% if ENV['APP_DOMAIN'].present? %>
+        <p class="text-gray-500"><%= ENV['APP_DOMAIN'] %></p>
       <% end %>
+    </div>
+    <div class="resource-body">
+      <%= render 'devise/shared/alerts' %>
 
-      <div class="mt-2">
-        <%= f.submit "Log in", class: "btn-primary w-full" %>
-      </div>
-    <% end %>
+      <%= render 'devise/sessions/oauth' if devise_mapping.omniauthable? && Devise.omniauth_providers.any? %>
 
-    <%= render "devise/shared/links" %>
-  <% end %>
+      <% if Rails.application.config.app_settings[:disable_email_login] %>
+        <% unless Devise.omniauth_providers.any? %>
+          <p class="p-4 my-4 border border-gray-500">
+          Email login and signup are disabled due to <strong>DISABLE_EMAIL_LOGIN</strong>, but no OAuth providers have been configured.
+          As a result, login and signup are not available.
+          </p>
+        <% end %>
+      <% else %>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }, data: { turbo: false }) do |f| %>
+          <div class="mt-2">
+            <%= f.label :email, class:"dark:text-gray-200" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true, class: 'base-input block w-full sm:text-m sm:leading-6' %>
+          </div>
+
+          <div class="mt-2">
+            <%= f.label :password, class:"dark:text-gray-200" %>
+            <%= f.password_field :password, autocomplete: "current-password", class: 'base-input block w-full sm:text-m sm:leading-6' %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="mt-2">
+              <%= f.check_box :remember_me, class: 'checkbox mr-1', checked: true %>
+              <%= f.label :remember_me, class:"dark:text-gray-200" %>
+            </div>
+          <% end %>
+
+          <div class="mt-2">
+            <%= f.submit "Log in", class: "btn-primary w-full" %>
+          </div>
+        <% end %>
+
+        <%= render "devise/shared/links" %>
+      <% end %>
+    </div>
+  </div>
 </div>

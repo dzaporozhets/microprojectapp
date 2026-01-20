@@ -1,19 +1,20 @@
-<div class="dark:bg-gray-800 shadow-md rounded-lg overflow-hidden max-w-md mx-auto mt-10">
-  <div class="bg-gray-100 px-4 py-2 border-b border-gray-200 dark:bg-gray-700 dark:border-gray-600">
-    <h2 class="text-lg font-semibold text-base">Two Factor Authentication</h2>
-  </div>
+<div class="sm:mx-auto sm:w-full sm:max-w-sm">
+  <div class="resource-container">
+    <div class="resource-header">
+      <h2 class="text-lg font-semibold text-base">Two Factor Authentication</h2>
+    </div>
+    <div class="resource-body">
+      <%= render 'devise/shared/alerts' %>
 
-  <div class="p-6">
-    <%= render 'devise/shared/alerts' %>
-
-    <%= form_for(resource, as: 'user', url: session_path(:user), method: :post, local: true, data: { turbo: false }) do |f| %>
-      <div class="mb-4">
-        <%= f.label :otp_attempt, 'OTP', class: 'block text-sm font-medium text-gray-700 dark:text-gray-500' %>
-        <%= f.text_field :otp_attempt, class: 'block w-full base-input', required: true %>
-      </div>
-      <div class="mt-4">
-        <%= f.submit 'Login', class: 'w-full inline-flex justify-center btn-primary' %>
-      </div>
-    <% end %>
+      <%= form_for(resource, as: 'user', url: session_path(:user), method: :post, local: true, data: { turbo: false }, html: { class: 'space-y-6' }) do |f| %>
+        <div class="mt-2">
+          <%= f.label :otp_attempt, 'OTP', class: 'block text-sm font-medium text-gray-700 dark:text-gray-500' %>
+          <%= f.text_field :otp_attempt, class: 'block w-full base-input', required: true %>
+        </div>
+        <div class="mt-4">
+          <%= f.submit 'Login', class: 'w-full inline-flex justify-center btn-primary' %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
