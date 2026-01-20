@@ -16,7 +16,7 @@ RSpec.feature 'Task Toggle', type: :feature do
 
     find('input[name="task[done]"]').click
 
-    within('.tasks-list') do
+    within('.resource-list') do
       expect(page).not_to have_content(task.name)
     end
 

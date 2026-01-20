@@ -1,4 +1,4 @@
-<div>
+<div class="space-y-4">
   <% if params[:assigned_user_id].present? %>
     <div class="flex">
       <%= link_to "Tasks assigned to #{@project.find_user(params[:assigned_user_id])&.email} only", project_path(@project), class: ui_active_tab %>
@@ -7,11 +7,13 @@
     <%= render 'project/tasks/form', project: @project %>
   <% end %>
 
-  <%= turbo_frame_tag "tasks", class: "mt-2 grid grid-cols-1 tasks-list" do %>
-    <% @tasks.each do |task| %>
-      <%= render partial: "project/tasks/task", locals: { task: task } %>
+  <div class="resource-container">
+    <%= turbo_frame_tag "tasks", class: "resource-list" do %>
+      <% @tasks.each do |task| %>
+        <%= render partial: "project/tasks/task", locals: { task: task } %>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 
   <%= paginate @tasks %>
 </div>

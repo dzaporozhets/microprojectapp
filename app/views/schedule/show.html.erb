@@ -26,11 +26,11 @@
 
       <div>
         <% if @tasks.any? %>
-          <ol class="text-sm leading-6 text-gray-500 grid grid-cols-1 tasks-list">
+          <div class="resource-list">
             <% @tasks.each do |task| %>
               <%= render 'schedule/task', task: task %>
             <% end %>
-          </ol>
+          </div>
         <% else %>
           <div class="resource-empty-state">
             <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gray-100 dark:bg-gray-800 mx-auto">

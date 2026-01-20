@@ -1,15 +1,17 @@
-<div>
+<div class="space-y-4">
   <div class="flex">
     <%= link_to "Completed tasks only", project_path(@project), class: ui_active_tab %>
   </div>
 
-  <%= turbo_frame_tag "completed_tasks", class: "mt-2 grid grid-cols-1 tasks-list" do %>
-    <% if @tasks.any? %>
-      <% @tasks.each do |task| %>
-        <%= render partial: "project/tasks/task", locals: { task: task } %>
+  <div class="resource-container">
+    <%= turbo_frame_tag "completed_tasks", class: "resource-list" do %>
+      <% if @tasks.any? %>
+        <% @tasks.each do |task| %>
+          <%= render partial: "project/tasks/task", locals: { task: task } %>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
+  </div>
 
   <%= paginate @tasks %>
 </div>

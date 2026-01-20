@@ -211,8 +211,8 @@
     list-style: none;
   }
 
-  .resource-list li {
-    @apply p-4 text-sm hover:bg-neutral-50 dark:hover:bg-gray-800 transition-colors duration-200;
+  .resource-list > * {
+    @apply block p-4 text-sm hover:bg-neutral-50 dark:hover:bg-gray-800 transition-colors duration-200;
   }
 
   .resource-empty-state {
@@ -242,17 +242,13 @@
   /*----------------------------------------*
    * Project Tasks
    *----------------------------------------*/
-  .tasks-list {
-    @apply bg-base divide-y rounded-lg divide-gray-200 dark:divide-gray-700;
-  }
-
-  .task {
-    @apply px-4 py-1 text-sm
-           hover:bg-neutral-50 dark:hover:bg-gray-800;
-  }
-
   .resource-body .task {
     @apply px-4;
+  }
+
+  .resource-list .task {
+    @apply px-4 py-2 text-sm
+           hover:bg-neutral-50 dark:hover:bg-gray-800;
   }
 
   .task-done {

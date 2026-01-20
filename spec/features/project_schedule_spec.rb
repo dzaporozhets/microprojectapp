@@ -20,7 +20,7 @@ RSpec.feature "Project Schedule", type: :feature do
       visit project_schedule_path(project)
 
       # Get all task lists on the page in order
-      task_lists = page.all('.tasks-list')
+      task_lists = page.all('.resource-list')
 
       # Check Older Tasks section (first list)
       expect(page).to have_content("Older Tasks")

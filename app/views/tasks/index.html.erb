@@ -48,12 +48,10 @@
             </div>
           </div>
 
-          <div>
-            <ol class="text-sm leading-6 text-gray-500 grid grid-cols-1 tasks-list">
-              <% tasks.each do |task| %>
-                <%= render 'tasks/task', task: task %>
-              <% end %>
-            </ol>
+          <div class="resource-list">
+            <% tasks.each do |task| %>
+              <%= render 'tasks/task', task: task %>
+            <% end %>
           </div>
         </div>
       <% end %>
