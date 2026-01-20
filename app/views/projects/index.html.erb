@@ -17,7 +17,7 @@
       <% if @pinned_projects.present? %>
         <div class="resource-container">
           <div>
-            <ul id="pinned-projects" role="list" class="projects-list">
+            <ul id="pinned-projects" role="list" class="resource-list">
               <% @pinned_projects.each do |project| %>
                 <%= render project, pinned: true %>
               <% end %>
@@ -29,7 +29,7 @@
       <% if @projects.present? %>
         <div class="resource-container">
           <div>
-            <ul id="projects" role="list" class="projects-list">
+            <ul id="projects" role="list" class="resource-list">
               <% @projects.each do |project| %>
                 <%= render project %>
               <% end %>
@@ -41,7 +41,7 @@
       <% if @archived_projects.any? %>
         <div class="resource-container">
           <div>
-            <ul id="archived-projects" role="list" class="projects-list">
+            <ul id="archived-projects" role="list" class="resource-list">
               <% @archived_projects.each do |project| %>
                 <%= render project %>
               <% end %>
