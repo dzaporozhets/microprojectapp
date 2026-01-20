@@ -4,7 +4,7 @@
       <h2 class="text-3xl font-extrabold dark:text-gray-200">Resend unlock instructions</h2>
     </div>
     <div class="resource-body">
-      <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, class: 'space-y-6' }) do |f| %>
+      <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, class: 'space-y-6' }, data: { turbo: false }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="field mt-2">
