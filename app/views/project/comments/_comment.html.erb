@@ -1,4 +1,4 @@
-<div id="<%= dom_id(comment) %>" class="comment-row">
+<li id="<%= dom_id(comment) %>" class="flex items-start gap-4">
   <div class="flex-shrink-0">
     <%= avatar_tag(comment.user, "h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-600") %>
   </div>
@@ -40,4 +40,4 @@
       </div>
     <% end %>
   </div>
-</div>
+</li>

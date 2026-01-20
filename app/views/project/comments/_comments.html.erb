@@ -1,5 +1,5 @@
-<div id="<%= dom_task_comments_id(@task) %>" class="divide-y divide-gray-200 dark:divide-gray-700">
+<ul id="<%= dom_task_comments_id(@task) %>" role="list" class="resource-list">
   <% @task.comments.order(id: :asc).each do |comment| %>
     <%= render comment %>
   <% end %>
-</div>
+</ul>
