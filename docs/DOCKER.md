@@ -32,7 +32,8 @@ SECRET_KEY_BASE=$(openssl rand -hex 64) docker-compose -f docker-compose.prod.ym
 
 ## Docker Files
 
-- **Dockerfile**: Production environment
+- **Dockerfile**: Minimal production image for cloud platforms (DO, Render, etc.)
+- **Dockerfile.full**: Full production environment with nginx/sendmail for docker-compose
 - **Dockerfile.dev**: Development environment with hot reload
 - **docker-compose.dev.yml**: Development stack (Rails + PostgreSQL)
 - **docker-compose.prod.yml**: Production stack (Rails + PostgreSQL + Nginx)
@@ -59,10 +60,45 @@ docker-compose -f docker-compose.dev.yml exec web bundle exec rails db:reset
 SECRET_KEY_BASE=$(openssl rand -hex 64) docker-compose -f docker-compose.prod.yml exec web bundle exec rails console
 ```
 
+## Cloud Deployment (DigitalOcean, Render, etc.)
+
+The minimal `Dockerfile` is optimized for cloud platforms that provide managed databases and TLS termination.
+
+### Required Environment Variables
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `SECRET_KEY_BASE` | Rails secret key | `openssl rand -hex 64` |
+| `DATABASE_URL` | PostgreSQL connection string | `postgres://user:pass@host:5432/db` |
+| `RAILS_ENV` | Environment (usually auto-set) | `production` |
+
+### Optional Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `APP_DOMAIN` | Your app's domain for emails | - |
+| `SMTP_SERVER` | SMTP host for email delivery | - |
+| `SMTP_LOGIN` | SMTP username | - |
+| `SMTP_PASSWORD` | SMTP password | - |
+| `DISABLE_EMAIL_DELIVERY` | Disable all emails | `false` |
+
+### DigitalOcean App Platform
+
+1. Connect your GitHub repo
+2. Edit App Spec to use Dockerfile:
+   ```yaml
+   services:
+   - dockerfile_path: Dockerfile
+     http_port: 3000
+   ```
+3. Add a managed PostgreSQL database
+4. Bind `DATABASE_URL` to `${db.DATABASE_URL}`
+5. Set `SECRET_KEY_BASE` in environment variables
+
 ## Notes
 
-- Docker is for **testing and quick starts only**
-- For production deployments, use Heroku or proper VPS setup
-- Email functionality is limited in Docker environment
-- SSL certificates are self-signed (browser security warnings expected)
+- `docker-compose` setups are for **testing and local development**
+- For production, use cloud platforms (DO, Render, Heroku) with the minimal `Dockerfile`
+- Configure SMTP for email delivery in production (sendmail not included in minimal image)
+- Cloud platforms handle TLS termination - no certificate setup needed
 
