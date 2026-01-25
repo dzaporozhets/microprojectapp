@@ -8,7 +8,8 @@ WORKDIR /rails
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+    BUNDLE_WITHOUT="development" \
+    WEB_CONCURRENCY="0"
 
 # Build stage
 FROM base as build
@@ -31,8 +32,11 @@ RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 FROM base
 
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libvips postgresql-client && \
+    apt-get install --no-install-recommends -y curl libvips postgresql-client libjemalloc2 && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+
+# Use jemalloc for better memory management
+ENV LD_PRELOAD="libjemalloc.so.2"
 
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
