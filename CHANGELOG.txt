@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+Version 0.12.5 (unreleased)
+---------------------------
+- Disable email delivery by default
+- Rewrite Dockerfile
+
 Version 0.12.5 (2026-01-20)
 ---------------------------
 - Improved UI across tasks, projects, schedule, navigation, and notes

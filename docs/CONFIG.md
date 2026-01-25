@@ -21,7 +21,7 @@ For self-hosted deployments, you may also need:
 | `APP_ALLOWED_EMAIL_DOMAIN` | Restrict signups to domain (e.g., `company.com`) | - |
 | `APP_DISABLE_SIGNUP` | Disable new user registration | `false` |
 | `DISABLE_EMAIL_LOGIN` | Only allow OAuth login | `false` |
-| `DISABLE_EMAIL_DELIVERY` | Disable all outgoing email | `false` |
+| `DISABLE_EMAIL_DELIVERY` | Disable all outgoing email | `true` |
 | `WEB_CONCURRENCY` | Puma worker processes | `0` |
 
 ## SMTP (Email)
@@ -34,7 +34,7 @@ Required for email confirmations, password resets, and notifications.
 | `SMTP_LOGIN` | SMTP username |
 | `SMTP_PASSWORD` | SMTP password |
 
-**Note**: Set `DISABLE_EMAIL_DELIVERY=true` if not configuring SMTP. Users can still sign up but won't receive confirmation emails.
+**Note**: Email delivery is disabled by default. Set `DISABLE_EMAIL_DELIVERY=false` after configuring SMTP to enable emails.
 
 ## AWS S3 (File Uploads)
 

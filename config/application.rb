@@ -60,7 +60,7 @@ module MicroProjectApp
       # Feature Flags
       disable_email_login: %w[true 1 yes].include?(ENV.fetch('DISABLE_EMAIL_LOGIN', 'false').downcase),
       disable_signup: %w[true 1 yes].include?(ENV.fetch('APP_DISABLE_SIGNUP', 'false').downcase),
-      disable_email_delivery: %w[true 1 yes].include?(ENV.fetch('DISABLE_EMAIL_DELIVERY', 'false').downcase)
+      disable_email_delivery: %w[true 1 yes].include?(ENV.fetch('DISABLE_EMAIL_DELIVERY', 'true').downcase)
     }
   end
 end
