@@ -2,46 +2,27 @@
 
 MicroProject.app is a lightweight project management tool designed for individuals and small teams to collaborate, track progress, and manage tasks efficiently without the complexity of traditional project management software.
 
-
 * [Website](https://about.microproject.app/)
-* [MIT License](LICENSE)
-* [Quick Start](#quick-start)
-* [Configuration](docs/CONFIG.md)
-* [Contact](#contact)
 * [App Screenshot](https://microproject.app/screenshot_xl.png)
 
-## Quick Start
+## Getting Started
 
-To run the application, you have 3 options:
+| Goal | Guide |
+|------|-------|
+| Develop locally | [Development Guide](docs/development.md) |
+| Deploy to cloud | [Production Guide](docs/production.md) |
+| Self-host on VPS | [Self-Hosted Guide](docs/self-hosted.md) |
+| Configure the app | [Configuration Reference](docs/config.md) |
 
-### 1. Quick Start with Docker
-
-For testing and getting started quickly:
+## Quick Start (Docker)
 
 ```bash
-# Get the source code
 git clone https://gitlab.com/dzaporozhets/microprojectapp.git
-
-# Development mode (at http://localhost:3000/)
+cd microprojectapp
 docker-compose -f docker-compose.dev.yml up --build
-
-# Production mode (at https://localhost/)
-SECRET_KEY_BASE=$(openssl rand -hex 64) docker-compose -f docker-compose.prod.yml up --build
 ```
 
-For detailed Docker setup, see [Docker Guide](docs/DOCKER.md).
-
-### 2. Deploy to Heroku
-
-For production deployments, use a cloud platform like [Heroku](https://www.heroku.com/). For step-by-step instructions, see our [Heroku deployment guide](docs/HEROKU.md).
-
-### 3. Run on Your Server or Local Machine
-
-For proper production setups on your own server, follow the [installation instructions](docs/INSTALL.md).
-
-## Configuration
-
-The app requires several environment variables to be set for proper configuration. For detailed configuration steps and a complete list of required environment variables, refer to the [Configuration Guide](docs/CONFIG.md).
+Access at http://localhost:3000
 
 ## Contact
 
