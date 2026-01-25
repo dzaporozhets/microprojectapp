@@ -10,12 +10,10 @@ module AdminHelper
   end
 
   def admin_config_email_delivery
-    if Rails.env.production? && Rails.application.config.action_mailer.delivery_method == :test
+    if Rails.application.config.app_settings[:disable_email_delivery]
       'Disabled'
-    elsif
-      Rails.application.config.action_mailer.delivery_method
     else
-      'Not configured'
+      Rails.application.config.action_mailer.delivery_method || 'Not configured'
     end
   end
 

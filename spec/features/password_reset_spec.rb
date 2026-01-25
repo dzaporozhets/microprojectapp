@@ -4,6 +4,10 @@ RSpec.feature "PasswordResets", type: :feature do
   let(:user) { create(:user) }
   let(:error_message) { 'If your email address exists in our database, you will receive a password recovery link'.freeze }
 
+  before do
+    ActionMailer::Base.deliveries = []
+  end
+
   scenario "User requests a password reset" do
     visit new_user_password_path
 
@@ -26,8 +30,6 @@ RSpec.feature "PasswordResets", type: :feature do
 
   scenario "User requests a password reset within throttle period" do
     user.update(reset_password_sent_at: Time.now)
-
-    ActionMailer::Base.deliveries = []
 
     visit new_user_password_path
 
