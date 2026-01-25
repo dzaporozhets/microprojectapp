@@ -10,7 +10,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.full
     # command: bundle exec rails s -b '0.0.0.0' -p 3000
     command: ["./bin/rails", "server", "-b", "0.0.0.0"]
     ports:
