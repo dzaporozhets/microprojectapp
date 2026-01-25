@@ -17,7 +17,7 @@ For self-hosted deployments, you may also need:
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `RAILS_ENV` | Environment mode | `development` |
-| `APP_DOMAIN` | Domain for emails and links | - |
+| `APP_DOMAIN` | Domain for emails and links | `localhost` |
 | `APP_ALLOWED_EMAIL_DOMAIN` | Restrict signups to domain (e.g., `company.com`) | - |
 | `APP_DISABLE_SIGNUP` | Disable new user registration | `false` |
 | `DISABLE_EMAIL_LOGIN` | Only allow OAuth login | `false` |
@@ -34,7 +34,7 @@ Required for email confirmations, password resets, and notifications.
 | `SMTP_LOGIN` | SMTP username |
 | `SMTP_PASSWORD` | SMTP password |
 
-**Note**: Email delivery is disabled by default. Set `DISABLE_EMAIL_DELIVERY=false` after configuring SMTP to enable emails.
+**Note**: Email delivery is disabled by default. Users are auto-confirmed when email is disabled. Set `DISABLE_EMAIL_DELIVERY=false` after configuring SMTP to enable emails and require confirmation.
 
 ## AWS S3 (File Uploads)
 

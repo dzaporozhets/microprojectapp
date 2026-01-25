@@ -37,7 +37,7 @@ module MicroProjectApp
       smtp_password: ENV['SMTP_PASSWORD'].presence || ENV['MAILGUN_SMTP_PASSWORD'].presence,
 
       # App Domain & Email Config
-      app_domain: ENV['APP_DOMAIN'].presence,
+      app_domain: ENV['APP_DOMAIN'].presence || 'localhost',
       app_allowed_email_domain: ENV['APP_ALLOWED_EMAIL_DOMAIN'].to_s.presence,
       mailgun_domain: ENV['MAILGUN_DOMAIN'].presence,
       email_domain: ENV['MAILGUN_DOMAIN'].presence || ENV['APP_DOMAIN'].presence || 'example.com',

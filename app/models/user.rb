@@ -39,6 +39,7 @@ class User < ApplicationRecord
 
   before_save :generate_otp_secret, if: -> { otp_required_for_login_changed? }
   before_create :ensure_calendar_token
+  before_create :skip_confirmation_if_email_disabled
   # Callbacks
   after_create :create_personal_project
   after_create :create_sample_project, unless: -> { Rails.env.test? }
@@ -286,5 +287,12 @@ class User < ApplicationRecord
     unless email.end_with?("@#{allowed_domain}")
       errors.add(:email, "is not from an allowed domain.")
     end
+  end
+
+  def skip_confirmation_if_email_disabled
+    return unless Rails.application.config.app_settings[:disable_email_delivery]
+    return unless respond_to?(:skip_confirmation!)
+
+    skip_confirmation!
   end
 end
