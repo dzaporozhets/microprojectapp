@@ -33,7 +33,7 @@ docker-compose -f docker-compose.dev.yml exec web bundle exec rails test
 
 ### Prerequisites
 
-- Ruby 3.2.6
+- Ruby 3.2.8
 - PostgreSQL 14+
 
 ### Install the Application
