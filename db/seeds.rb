@@ -11,7 +11,6 @@ if Rails.env.development?
     u.password = "dev@localhost"
     u.password_confirmation = "dev@localhost"
     u.admin = true
-    u.skip_confirmation! if u.respond_to?(:skip_confirmation!)
   end
   puts "Creating sample projects for #{user.email}"
 
@@ -19,7 +18,6 @@ if Rails.env.development?
   second_user = User.find_or_create_by!(email: "user2@example.com") do |u|
     u.password = "user2@example.com"
     u.password_confirmation = "user2@example.com"
-    u.skip_confirmation! if u.respond_to?(:skip_confirmation!)
   end
   puts "Created second user: #{second_user.email}\n"
 
