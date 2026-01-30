@@ -2,12 +2,6 @@
 
 require 'devise/orm/active_record'
 
-# Load cached environment settings
-app_settings = Rails.application.config.app_settings
-
-# Allow OTP drift (in seconds)
-Devise.otp_allowed_drift = 600
-
 Devise.setup do |config|
   #=========================================
   #============ GENERAL SETTINGS ===========
@@ -21,30 +15,19 @@ Devise.setup do |config|
   config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
   config.remember_for = 2.weeks
   config.expire_all_remember_me_on_sign_out = true
-  config.reconfirmable = true
-  config.reset_password_within = 6.hours
   config.lock_strategy = :failed_attempts
   config.unlock_strategy = :time
   config.maximum_attempts = 10
   config.unlock_in = 1.hour
   config.last_attempt_warning = true
-  config.allow_unconfirmed_access_for = if app_settings[:disable_email_delivery]
-                                          nil
-                                        else
-                                          1.hour
-                                        end
   config.paranoid = true
   config.sign_out_via = :delete
 
   #=========================================
-  #=========== EMAIL CONFIGURATION =========
-  #=========================================
-
-  config.mailer_sender = "no-reply@#{app_settings[:email_domain]}"
-
-  #=========================================
   #=========== OAUTH CONFIGURATION =========
   #=========================================
+
+  app_settings = Rails.application.config.app_settings
 
   if app_settings[:google_client_id]
     config.omniauth :google_oauth2,

@@ -21,13 +21,6 @@
               <%= f.check_box :allow_invites, class: 'checkbox' %>
               <%= f.label :allow_invites, "Allow other users to add you to projects", class: 'ml-2 text-sm text-base' %>
             </div>
-
-            <% unless current_user.oauth_user? %>
-              <div class="flex items-center">
-                <%= f.check_box :otp_required_for_login, class: 'checkbox' %>
-                <%= f.label :otp_required_for_login, "Enable Two-Factor Authentication", class: 'ml-2 text-sm text-base' %>
-              </div>
-            <% end %>
           </div>
         </section>
 

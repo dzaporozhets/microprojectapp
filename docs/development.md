@@ -98,14 +98,6 @@ rails db:reset
 bundle exec rake user:make_admin EMAIL=user@example.com
 ```
 
-### Confirm User Email
-
-If email confirmation isn't working:
-
-```bash
-bundle exec rake user:confirm_email EMAIL=user@example.com
-```
-
 ### Running Tests
 
 ```bash

@@ -88,7 +88,6 @@ end
 
 gem 'carrierwave', '~> 3.0'
 gem "devise", "~> 4.9"
-gem "devise-two-factor"
 gem "fog-aws"
 gem 'icalendar'
 gem 'kaminari'

@@ -1,9 +1,6 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  # Load cached environment settings
-  app_settings = Rails.application.config.app_settings
-
   #=========================================
   #============== GENERAL CONFIG ===========
   #=========================================
@@ -39,44 +36,5 @@ Rails.application.configure do
   #============== EMAIL CONFIG =============
   #=========================================
 
-  if app_settings[:disable_email_login] || app_settings[:disable_email_delivery]
-    config.action_mailer.perform_deliveries = false
-    config.action_mailer.raise_delivery_errors = false
-    config.action_mailer.delivery_method = :test
-  elsif app_settings[:smtp_server].present?
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      address: app_settings[:smtp_server],
-      port: 587,
-      domain: app_settings[:app_domain],
-      user_name: app_settings[:smtp_login],
-      password: app_settings[:smtp_password],
-      authentication: "plain",
-      enable_starttls_auto: true
-    }
-  else
-    config.action_mailer.delivery_method = :sendmail
-    config.action_mailer.raise_delivery_errors = true
-    config.action_mailer.perform_deliveries = true
-  end
-
-  config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: app_settings[:app_domain] }
-
-  #=========================================
-  #==== DATABASE ENCRYPTION CONFIG =========
-  #=========================================
-
-  if app_settings[:active_record_encryption_primary_key]
-    config.active_record.encryption.primary_key = app_settings[:active_record_encryption_primary_key]
-    config.active_record.encryption.deterministic_key = app_settings[:active_record_encryption_deterministic_key]
-    config.active_record.encryption.key_derivation_salt = app_settings[:active_record_encryption_key_derivation_salt]
-  elsif Rails.application.credentials.active_record_encryption.present?
-    # Credentials will be used automatically
-  else
-    puts "Warning: Using randomly generated encryption keys for ActiveRecord. Configure ENV variables to secure data."
-    config.active_record.encryption.primary_key = SecureRandom.hex(32)
-    config.active_record.encryption.deterministic_key = SecureRandom.hex(32)
-    config.active_record.encryption.key_derivation_salt = SecureRandom.hex(32)
-  end
+  config.action_mailer.perform_deliveries = false
 end
