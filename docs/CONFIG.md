@@ -17,24 +17,11 @@ For self-hosted deployments, you may also need:
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `RAILS_ENV` | Environment mode | `development` |
-| `APP_DOMAIN` | Domain for emails and links | `localhost` |
+| `APP_DOMAIN` | Domain for the application | `localhost` |
 | `APP_ALLOWED_EMAIL_DOMAIN` | Restrict signups to domain (e.g., `company.com`) | - |
 | `APP_DISABLE_SIGNUP` | Disable new user registration | `false` |
 | `DISABLE_EMAIL_LOGIN` | Only allow OAuth login | `false` |
-| `DISABLE_EMAIL_DELIVERY` | Disable all outgoing email | `true` |
 | `WEB_CONCURRENCY` | Puma worker processes | `0` |
-
-## SMTP (Email)
-
-Required for email confirmations, password resets, and notifications.
-
-| Variable | Description |
-|----------|-------------|
-| `SMTP_SERVER` | SMTP host (e.g., `smtp.mailgun.org`) |
-| `SMTP_LOGIN` | SMTP username |
-| `SMTP_PASSWORD` | SMTP password |
-
-**Note**: Email delivery is disabled by default. Users are auto-confirmed when email is disabled. Set `DISABLE_EMAIL_DELIVERY=false` after configuring SMTP to enable emails and require confirmation.
 
 ## AWS S3 (File Uploads)
 
@@ -66,21 +53,6 @@ Required for file attachments.
 
 Redirect URI: `https://YOUR_DOMAIN/users/auth/azure_activedirectory_v2/callback`
 
-## Database Encryption
-
-Required for two-factor authentication (2FA).
-
-| Variable | Description |
-|----------|-------------|
-| `ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY` | Primary encryption key |
-| `ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY` | Deterministic encryption key |
-| `ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT` | Key derivation salt |
-
-Generate with:
-```bash
-rails db:encryption:init
-```
-
 ## Admin Tasks
 
 ### Make User Admin
@@ -91,18 +63,6 @@ bundle exec rake user:make_admin EMAIL=user@example.com
 
 # Heroku
 heroku run rake user:make_admin EMAIL=user@example.com
-```
-
-### Confirm User Email
-
-If email delivery isn't configured:
-
-```bash
-# Local/Docker
-bundle exec rake user:confirm_email EMAIL=user@example.com
-
-# Heroku
-heroku run rake user:confirm_email EMAIL=user@example.com
 ```
 
 ## Generating Secrets

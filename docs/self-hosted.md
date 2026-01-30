@@ -215,7 +215,5 @@ sudo systemctl restart microprojectapp
 ## Configuration
 
 See [Configuration Reference](config.md) for environment variables including:
-- Email (SMTP)
 - File uploads (AWS S3)
 - OAuth providers (Google, Microsoft)
-- Database encryption (for 2FA)

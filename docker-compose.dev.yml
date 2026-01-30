@@ -23,7 +23,6 @@ services:
     environment:
       RAILS_ENV: development
       DATABASE_URL: postgres://postgres:password@db:5432/myapp_development
-      DISABLE_EMAIL_DELIVERY: "true"
 volumes:
   postgres_data:
   uploads_data:

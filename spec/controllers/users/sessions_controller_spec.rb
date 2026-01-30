@@ -8,7 +8,7 @@ RSpec.describe Users::SessionsController, type: :controller do
   end
 
   describe 'POST #create' do
-    context 'when user does not have 2FA enabled' do
+    context 'with valid credentials' do
       it 'signs in the user normally' do
         post :create, params: { user: { email: user.email, password: user.password } }
 

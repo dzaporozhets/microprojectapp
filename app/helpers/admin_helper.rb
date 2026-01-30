@@ -9,14 +9,6 @@ module AdminHelper
     render_tabs(tabs, selected)
   end
 
-  def admin_config_email_delivery
-    if Rails.application.config.app_settings[:disable_email_delivery]
-      'Disabled'
-    else
-      Rails.application.config.action_mailer.delivery_method || 'Not configured'
-    end
-  end
-
   def admin_config_uploads_storage
     if Rails.application.config.app_settings[:aws_s3_bucket].present?
       if ENV['BUCKETEER_BUCKET_NAME'].present?
