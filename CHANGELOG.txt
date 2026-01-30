@@ -1,10 +1,12 @@
 CHANGELOG
 =========
 
-Version 0.12.5 (unreleased)
+Version 0.14.0 (2026-01-30)
 ---------------------------
+- Remove email-dependent features
 - Disable email delivery by default
-- Rewrite Dockerfile
+- Rewrite Dockerfile for easy deployment
+- Update Rails to 7.2
 
 Version 0.12.5 (2026-01-20)
 ---------------------------
