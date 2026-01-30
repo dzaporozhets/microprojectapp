@@ -18,28 +18,21 @@ class User < ApplicationRecord
     'entra_id' => 'Microsoft'
   }.freeze
 
-  PASSWORD_RESET_THROTTLE = 5.minutes
-
   # Configuration
   app_settings = Rails.application.config.app_settings
 
   # Devise setup
   devise_modules = [:omniauthable, :rememberable]
   devise_modules += [
-    :two_factor_authenticatable, :registerable,
-    :recoverable, :validatable,
-    :lockable, :confirmable
+    :database_authenticatable, :registerable, :validatable, :lockable
   ] unless app_settings[:disable_email_login]
 
   devise *devise_modules, omniauth_providers: [:google_oauth2, :entra_id]
-  devise :two_factor_authenticatable
 
   # Uploaders
   mount_uploader :avatar, AvatarUploader
 
-  before_save :generate_otp_secret, if: -> { otp_required_for_login_changed? }
   before_create :ensure_calendar_token
-  before_create :skip_confirmation_if_email_disabled
   # Callbacks
   after_create :create_personal_project
   after_create :create_sample_project, unless: -> { Rails.env.test? }
@@ -166,29 +159,6 @@ class User < ApplicationRecord
     super
   end
 
-  # Override Devise's send_reset_password_instructions method
-  def send_reset_password_instructions
-    if reset_password_sent_at && reset_password_sent_at > PASSWORD_RESET_THROTTLE.ago
-      # Skip sending instructions if the last request was less than 5 minutes ago
-      errors.add(:email, 'Password reset request already sent, please check your email.')
-      false
-    else
-      super
-    end
-  end
-
-  def two_factor_enabled?
-    otp_required_for_login
-  end
-
-  def generate_otp_secret
-    if otp_required_for_login
-      self.otp_secret ||= User.generate_otp_secret
-    else
-      self.otp_secret = nil
-    end
-  end
-
   #
   # Project-related methods
   #
@@ -287,12 +257,5 @@ class User < ApplicationRecord
     unless email.end_with?("@#{allowed_domain}")
       errors.add(:email, "is not from an allowed domain.")
     end
-  end
-
-  def skip_confirmation_if_email_disabled
-    return unless Rails.application.config.app_settings[:disable_email_delivery]
-    return unless respond_to?(:skip_confirmation!)
-
-    skip_confirmation!
   end
 end
