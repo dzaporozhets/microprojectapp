@@ -22,9 +22,9 @@ class User < ApplicationRecord
   app_settings = Rails.application.config.app_settings
 
   # Devise setup
-  devise_modules = [:omniauthable, :rememberable]
+  devise_modules = [:omniauthable]
   devise_modules += [
-    :database_authenticatable, :registerable, :validatable, :lockable
+    :database_authenticatable, :registerable, :validatable, :lockable, :rememberable
   ] unless app_settings[:disable_email_login]
 
   devise *devise_modules, omniauth_providers: [:google_oauth2, :entra_id]
