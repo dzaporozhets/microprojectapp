@@ -35,11 +35,9 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libvips postgresql-client libjemalloc2 && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
-# Use jemalloc for better memory management
-ENV LD_PRELOAD="libjemalloc.so.2"
-
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
+
 
 RUN useradd rails --create-home --shell /bin/bash && \
     mkdir -p tmp log storage public/uploads && \
@@ -48,4 +46,5 @@ RUN useradd rails --create-home --shell /bin/bash && \
 USER rails:rails
 
 EXPOSE 3000
-CMD ["sh", "-c", "./bin/rails db:prepare && ./bin/rails server -b 0.0.0.0"]
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+CMD ["./bin/rails", "server", "-b", "0.0.0.0"]
