@@ -53,25 +53,38 @@
           </div>
         </section>
 
-        <section class="mb-4">
-          <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Avatar</h2>
+        <% if file_storage_enabled? %>
+          <section class="mb-4">
+            <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Avatar</h2>
 
-          <div class="flex items-center justify-between space-x-4">
-            <!-- File Upload -->
-            <div class="flex-grow">
-              <%= f.file_field :avatar,
-                accept: allowed_img_file_types,
-                class: "appearance-none file-select text-sm leading-tight file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-medium w-full" %>
+            <div class="flex items-center justify-between space-x-4">
+              <!-- File Upload -->
+              <div class="flex-grow">
+                <%= f.file_field :avatar,
+                  accept: allowed_img_file_types,
+                  class: "appearance-none file-select text-sm leading-tight file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-medium w-full" %>
+              </div>
+
+              <!-- Avatar Preview -->
+              <div class="flex-shrink-0">
+                <% if avatar_src(@user).present? %>
+                  <%= image_tag avatar_src(@user), alt: "Current Avatar", class: "w-10 h-10 rounded-full object-cover" %>
+                <% end %>
+              </div>
             </div>
+          </section>
+        <% elsif avatar_src(@user).present? %>
+          <section class="mb-4">
+            <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Avatar</h2>
 
-            <!-- Avatar Preview -->
-            <div class="flex-shrink-0">
-              <% if avatar_src(@user).present? %>
+            <div class="flex items-center space-x-4">
+              <div class="flex-shrink-0">
                 <%= image_tag avatar_src(@user), alt: "Current Avatar", class: "w-10 h-10 rounded-full object-cover" %>
-              <% end %>
+              </div>
+              <p class="text-sm text-gray-500 dark:text-gray-400">Avatar provided by OAuth login</p>
             </div>
-          </div>
-        </section>
+          </section>
+        <% end %>
 
         <div class="pt-4 border-t border-base">
           <%= f.submit "Save Settings", class: "btn-base" %>

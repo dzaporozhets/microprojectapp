@@ -191,6 +191,12 @@ RSpec.describe "Project Resources Security", type: :request do
   end
 
   describe "Project files access" do
+    before do
+      allow(Rails.application.config).to receive(:app_settings).and_return(
+        Rails.application.config.app_settings.merge(enable_local_file_storage: true)
+      )
+    end
+
     context "when user is project owner" do
       before { sign_in owner }
 
@@ -235,6 +241,23 @@ RSpec.describe "Project Resources Security", type: :request do
       it "denies access to project files" do
         get project_files_path(project)
         expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context "when file storage is disabled" do
+      before do
+        allow(Rails.application.config).to receive(:app_settings).and_return(
+          Rails.application.config.app_settings.merge(
+            aws_s3_bucket: nil,
+            enable_local_file_storage: false
+          )
+        )
+        sign_in owner
+      end
+
+      it "redirects when accessing new file page" do
+        get new_project_file_path(project)
+        expect(response).to have_http_status(:found)
       end
     end
   end

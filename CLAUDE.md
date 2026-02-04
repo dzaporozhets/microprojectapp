@@ -116,3 +116,4 @@ See `/docs/CONFIG.md` for full reference. Key variables:
 - `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` - Google OAuth
 - `MICROSOFT_CLIENT_ID`, `MICROSOFT_CLIENT_SECRET`, `MICROSOFT_TENANT_ID` - Microsoft OAuth
 - `DISABLE_EMAIL_LOGIN` - Disable email/password auth when using OAuth only
+- `ENABLE_LOCAL_FILE_STORAGE` - Enable file uploads without S3 configured

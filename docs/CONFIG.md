@@ -21,6 +21,7 @@ For self-hosted deployments, you may also need:
 | `APP_ALLOWED_EMAIL_DOMAIN` | Restrict signups to domain (e.g., `company.com`) | - |
 | `APP_DISABLE_SIGNUP` | Disable new user registration | `false` |
 | `DISABLE_EMAIL_LOGIN` | Only allow OAuth login | `false` |
+| `ENABLE_LOCAL_FILE_STORAGE` | Enable file uploads without S3 | `false` |
 | `WEB_CONCURRENCY` | Puma worker processes | `0` |
 
 ## AWS S3 (File Uploads)

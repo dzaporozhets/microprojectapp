@@ -43,4 +43,35 @@ RSpec.feature "Task Comments", type: :feature do
     expect(page).to have_content('This comment was removed.')
     expect(page).not_to have_content('Removable comment')
   end
+
+  context "when file storage is enabled" do
+    before do
+      allow(Rails.application.config).to receive(:app_settings).and_return(
+        Rails.application.config.app_settings.merge(enable_local_file_storage: true)
+      )
+    end
+
+    scenario 'Attachment field is visible in comment form' do
+      visit details_project_task_path(project, task)
+
+      expect(page).to have_field('comment[attachment]')
+    end
+  end
+
+  context "when file storage is disabled" do
+    before do
+      allow(Rails.application.config).to receive(:app_settings).and_return(
+        Rails.application.config.app_settings.merge(
+          aws_s3_bucket: nil,
+          enable_local_file_storage: false
+        )
+      )
+    end
+
+    scenario 'Attachment field is hidden in comment form' do
+      visit details_project_task_path(project, task)
+
+      expect(page).not_to have_field('comment[attachment]')
+    end
+  end
 end

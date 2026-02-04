@@ -1,5 +1,6 @@
 class Project::FilesController < Project::BaseController
   before_action :set_tab
+  before_action :require_file_storage!, only: [:new, :create]
 
   def index
     redirect_to overview_project_path(@project)

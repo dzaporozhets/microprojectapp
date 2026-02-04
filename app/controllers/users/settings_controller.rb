@@ -21,6 +21,8 @@ class Users::SettingsController < ApplicationController
   private
 
   def settings_params
-    params.require(:user).permit(:allow_invites, :dark_mode, :avatar, :theme)
+    permitted = params.require(:user).permit(:allow_invites, :dark_mode, :avatar, :theme)
+    permitted.delete(:avatar) unless file_storage_enabled?
+    permitted
   end
 end

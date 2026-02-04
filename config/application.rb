@@ -47,7 +47,8 @@ module MicroProjectApp
 
       # Feature Flags
       disable_email_login: %w[true 1 yes].include?(ENV.fetch('DISABLE_EMAIL_LOGIN', 'false').downcase),
-      disable_signup: %w[true 1 yes].include?(ENV.fetch('APP_DISABLE_SIGNUP', 'false').downcase)
+      disable_signup: %w[true 1 yes].include?(ENV.fetch('APP_DISABLE_SIGNUP', 'false').downcase),
+      enable_local_file_storage: %w[true 1 yes].include?(ENV.fetch('ENABLE_LOCAL_FILE_STORAGE', 'false').downcase)
     }
   end
 end

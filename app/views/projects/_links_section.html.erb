@@ -1,0 +1,33 @@
+<div class="resource-container">
+  <div class="resource-header">
+    <div class="flex items-center justify-between w-full">
+      <div class="flex items-center">
+        <h2 class="resource-title">Links</h2>
+      </div>
+      <%= link_to new_project_link_path(project), class: "btn-base-sm" do %>
+        Add Link
+      <% end %>
+    </div>
+  </div>
+
+  <% if project.links.any? %>
+    <div class="resource-list">
+      <% project.links.each do |link| %>
+        <%= render 'project/links/link', link: link %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="resource-empty-state">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="resource-empty-icon">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+      </svg>
+      <h3 class="resource-empty-title">No links</h3>
+      <p class="resource-empty-description">Add your first project link to get started.</p>
+      <div class="resource-empty-action">
+        <%= link_to new_project_link_path(project), class: "btn-base" do %>
+          Add a link
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
