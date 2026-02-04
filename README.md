@@ -12,7 +12,7 @@ MicroProject.app is a lightweight project management tool designed for individua
 | Develop locally | [Development Guide](docs/development.md) |
 | Deploy to cloud | [Production Guide](docs/production.md) |
 | Self-host on VPS | [Self-Hosted Guide](docs/self-hosted.md) |
-| Configure the app | [Configuration Reference](docs/config.md) |
+| Configure the app | [Configuration Reference](docs/CONFIG.md) |
 
 ## Quick Start (Docker)
 
