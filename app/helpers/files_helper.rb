@@ -22,7 +22,11 @@ module FilesHelper
   end
 
   def s3_storage?
-    ENV['AWS_S3_BUCKET'].present?
+    Rails.application.config.app_settings[:aws_s3_bucket].present?
+  end
+
+  def file_storage_enabled?
+    s3_storage? || Rails.application.config.app_settings[:enable_local_file_storage]
   end
 
   def project_file_field(f)

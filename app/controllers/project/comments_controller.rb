@@ -36,7 +36,9 @@ class Project::CommentsController < Project::BaseController
   end
 
   def comment_params
-    params.require(:comment).permit(:body, :attachment)
+    permitted = params.require(:comment).permit(:body, :attachment)
+    permitted.delete(:attachment) unless file_storage_enabled?
+    permitted
   end
 
   def task_path
