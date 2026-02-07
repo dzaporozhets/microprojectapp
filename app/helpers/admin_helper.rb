@@ -16,8 +16,10 @@ module AdminHelper
       else
         'AWS S3'
       end
-    else
+    elsif Rails.application.config.app_settings[:enable_local_file_storage].present?
       'Local'
+    else
+      'Disabled'
     end
   end
 end
