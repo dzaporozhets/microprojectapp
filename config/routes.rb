@@ -72,17 +72,11 @@ Rails.application.routes.draw do
 
   namespace :users do
     resource :settings, only: [:show, :update]
-    resource :account, only: [:show, :update, :destroy] do
-      post :regenerate_calendar_token
-    end
+    resource :account, only: [:show, :update, :destroy]
   end
   get 'users/:id/avatar', to: 'users/avatars#show', as: :user_avatar
 
-  resource :schedule, only: :show, controller: 'schedule' do
-    member do
-      get :calendar
-    end
-  end
+  get 'schedule', to: redirect('/tasks')
   get 'search', to: 'search#index'
   resources :tasks, only: :index, controller: 'tasks' do
     member do
