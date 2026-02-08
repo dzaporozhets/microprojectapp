@@ -28,8 +28,9 @@ class Task < ApplicationRecord
 
   before_save :set_done_at, if: :done_changed?
 
-  def self.group_by_projects
-    self.includes(:project).group_by(&:project).sort_by { |project, _| project.name }
+  def self.group_by_projects(user = nil)
+    pinned_ids = user ? user.pins.pluck(:project_id) : []
+    self.includes(:project).group_by(&:project).sort_by { |project, _| [pinned_ids.include?(project.id) ? 0 : 1, project.name] }
   end
 
   def overdue?

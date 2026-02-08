@@ -15,6 +15,7 @@ class TasksController < ApplicationController
 
     # Section 3: All tasks, grouped by project (exclude tasks already shown above)
     @tasks = base.where.not(id: @tasks_due).where.not(id: @starred_tasks).order(id: :desc).page(params[:page]).per(100)
+    @pinned_project_ids = current_user.pins.pluck(:project_id).to_set
   end
 
   def toggle_done

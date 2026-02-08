@@ -93,5 +93,13 @@ RSpec.describe Task, type: :model do
       expect(grouped_tasks[1].last).to contain_exactly(task1)
       expect(grouped_tasks[2].last).to contain_exactly(task3)
     end
+
+    it 'sorts pinned projects first when user is provided' do
+      pin_user = create(:user)
+      create(:pin, user: pin_user, project: project_c)
+      grouped_tasks = Task.all.group_by_projects(pin_user)
+
+      expect(grouped_tasks.map(&:first)).to eq([project_c, project_a, project_b])
+    end
   end
 end
