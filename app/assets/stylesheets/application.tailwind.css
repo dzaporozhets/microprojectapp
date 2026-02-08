@@ -42,6 +42,10 @@
     @apply justify-between items-center mx-auto max-w-screen-md px-4;
   }
 
+  .nav-title-link {
+    @apply font-bold leading-8 text-base line-clamp-1 text-black dark:text-white;
+  }
+
   /*----------------------------------------*
    * Buttons
    *----------------------------------------*/
