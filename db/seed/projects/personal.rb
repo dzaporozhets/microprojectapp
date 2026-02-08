@@ -29,10 +29,10 @@ module SeedData
 
         # Active tasks (things to do) with due dates
         { name: "Book flight for summer vacation", done: false, star: true, due_date: 2.weeks.from_now.to_date },
-        { name: "Find a new gym", done: false, due_date: 1.week.from_now.to_date },
+        { name: "Find a new gym", done: false, due_date: nil },
         { name: "Schedule annual checkup", done: false, star: true, due_date: 3.days.from_now.to_date },
-        { name: "Fix leaky bathroom faucet", done: false, due_date: 5.days.from_now.to_date },
-        { name: "Research new phone plans", done: false, due_date: 10.days.from_now.to_date },
+        { name: "Fix leaky bathroom faucet", done: false, due_date: nil },
+        { name: "Research new phone plans", done: false, due_date: nil },
         { name: "Donate old clothes to charity", done: false },
         { name: "Change smoke detector batteries", done: false }
       ]

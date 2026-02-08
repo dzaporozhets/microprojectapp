@@ -17,7 +17,7 @@ module SeedData
         { name: "Design mockups in Figma", done: false, due_date: 3.days.from_now.to_date, assigned_to: :user1 },
         { name: "Get stakeholder approval on design", done: false, due_date: 1.week.from_now.to_date, assigned_to: :user1 },
         { name: "Create homepage layout", done: false, star: true, due_date: 10.days.from_now.to_date, assigned_to: :user2 },
-        { name: "Implement contact form", done: false, due_date: 2.weeks.from_now.to_date, assigned_to: :user2 }
+        { name: "Implement contact form", done: false, due_date: nil, assigned_to: :user2 }
       ]
 
       tasks_user1.each do |task_data|
@@ -39,9 +39,9 @@ module SeedData
         { name: "Build responsive navbar", done: true, assigned_to: :user2 },
         { name: "Add image gallery component", done: false, due_date: 5.days.from_now.to_date, assigned_to: :user2 },
         { name: "Test on mobile devices", done: false, star: true, due_date: 12.days.from_now.to_date, assigned_to: :user1 },
-        { name: "Optimize images for web", done: false, due_date: 2.weeks.from_now.to_date, assigned_to: :user2 },
-        { name: "Deploy to staging server", done: false, due_date: 18.days.from_now.to_date, assigned_to: :user2 },
-        { name: "Final review and launch", done: false, star: true, due_date: 3.weeks.from_now.to_date, assigned_to: :user1 }
+        { name: "Optimize images for web", done: false, due_date: nil, assigned_to: :user2 },
+        { name: "Deploy to staging server", done: false, due_date: nil, assigned_to: :user2 },
+        { name: "Final review and launch", done: false, star: true, due_date: 2.months.from_now.to_date, assigned_to: :user1 }
       ]
 
       tasks_user2.each do |task_data|

@@ -11,9 +11,9 @@ module SeedData
         { name: "Implement authentication flow", done: false, due_date: 1.week.from_now.to_date, assigned_to: owner },
         { name: "Build user profile screen", done: false, due_date: 10.days.from_now.to_date, assigned_to: owner },
         { name: "Design app icon and splash screen", done: false, assigned_to: invited_user },
-        { name: "Test on iOS devices", done: false, star: true, due_date: 2.weeks.from_now.to_date, assigned_to: invited_user },
-        { name: "Test on Android devices", done: false, star: true, due_date: 2.weeks.from_now.to_date, assigned_to: owner },
-        { name: "Submit to App Store", done: false, due_date: 3.weeks.from_now.to_date }
+        { name: "Test on iOS devices", done: false, star: true, due_date: nil, assigned_to: invited_user },
+        { name: "Test on Android devices", done: false, star: true, due_date: nil, assigned_to: owner },
+        { name: "Submit to App Store", done: false, due_date: nil }
       ]
 
       tasks.each do |task_data|
