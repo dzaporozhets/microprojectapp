@@ -79,6 +79,8 @@
     <% end %>
 
     <% if @tasks.any? %>
+      <%= render 'shared/divider', text: 'All tasks, grouped by projects' %>
+
       <% @tasks.group_by_projects.each do |project, tasks| %>
         <div class="resource-container">
           <div class="resource-header">

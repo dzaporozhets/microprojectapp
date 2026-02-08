@@ -19,8 +19,8 @@ class TasksController < ApplicationController
     # Section 2: Starred (no due date)
     @starred_tasks = base.no_due_date.where(star: true).order(id: :desc)
 
-    # Section 3: Project-grouped (no due date, not starred)
-    @tasks = base.no_due_date.where(star: false).order(id: :desc).page(params[:page]).per(100)
+    # Section 3: All tasks, grouped by project
+    @tasks = base.order(id: :desc).page(params[:page]).per(100)
   end
 
   def toggle_done
