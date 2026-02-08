@@ -52,7 +52,10 @@
             <ul class="divide-y divide-gray-200 dark:divide-gray-800">
               <% @task_results.each do |task| %>
                 <li class="p-4">
-                  <div class="flex items-start justify-between space-x-3">
+                  <div class="flex items-start">
+                    <div class="flex items-center mr-3">
+                      <%= check_box_tag "task_done_#{task.id}", 1, task.done?, disabled: true, class: "w-5 h-5 checkbox-round" %>
+                    </div>
                     <div class="space-y-1">
                       <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
                         <%= link_to task.name, details_project_task_path(task.project, task), data: { turbo: false }, class: "hover:underline" %>
@@ -61,10 +64,6 @@
                         <span class="mr-1 text-gray-400 dark:text-gray-500">Project:</span>
                         <%= link_to task.project.name, project_path(task.project), class: "hover:underline" %>
                       </p>
-                    </div>
-
-                    <div class="flex items-center">
-                      <%= check_box_tag "task_done_#{task.id}", 1, task.done?, disabled: true, class: "w-5 h-5 checkbox-round" %>
                     </div>
                   </div>
                 </li>
