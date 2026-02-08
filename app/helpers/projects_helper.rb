@@ -1,8 +1,8 @@
 module ProjectsHelper
   def project_tabs(project, selected = nil)
     tabs = [
-      { name: 'Tasks', path: project_path(project) },
-      { name: 'Project', path: overview_project_path(project) }
+      { name: 'Project', path: project_path(project) },
+      { name: 'Tasks', path: project_tasks_path(project) }
     ]
 
     unless project.personal?

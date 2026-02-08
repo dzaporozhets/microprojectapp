@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1 or /projects/1.json
   def show
-    @tab_name = 'Tasks'
+    @tab_name = 'Project'
 
     today = Date.current
     @tasks_due = @project.tasks.todo.with_due_date.where(due_date: ..(today + 1.month)).includes(:assigned_user, :comments).order(due_date: :asc)
