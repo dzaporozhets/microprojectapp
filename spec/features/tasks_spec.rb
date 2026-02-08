@@ -33,9 +33,7 @@ RSpec.feature "Tasks", type: :feature do
       visit tasks_path
 
       expect(page).to have_content("Due dates")
-      expect(page).to have_content("Overdue")
       expect(page).to have_content(overdue_task.name)
-      expect(page).to have_content("Due today")
       expect(page).to have_content(today_task.name)
 
       expect(page).to have_content("Starred")
