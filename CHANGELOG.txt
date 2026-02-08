@@ -1,6 +1,15 @@
 CHANGELOG
 =========
 
+Version 0.15.0 (2026-02-08)
+---------------------------
+- Remove Resources tab and link overview from project page
+- Improve task edit page
+- Remove project schedule page and bring due date block
+- Consolidate tasks and schedule pages
+- Disable file uploads by default
+- Update Ruby to 3.3.7
+
 Version 0.14.0 (2026-01-30)
 ---------------------------
 - Remove email-dependent features
