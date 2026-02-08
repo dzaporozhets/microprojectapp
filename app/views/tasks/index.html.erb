@@ -19,11 +19,6 @@
                 <% end %>
               <% end %>
             </div>
-
-            <%= content_tag :div, class: ui_toggle do %>
-              <%= link_to "List", tasks_path, class: "#{current_page?(tasks_path) ? ui_toggle_active_tab : ui_toggle_tab}" %>
-              <%= link_to "Schedule", schedule_path, class: "#{current_page?(schedule_path) ? ui_toggle_active_tab : ui_toggle_tab}" %>
-            <% end %>
           </div>
         </div>
       </div>
@@ -31,6 +26,58 @@
   <% end %>
 
   <div class="space-y-6">
+    <% if @has_due_date_tasks %>
+      <div class="resource-container">
+        <div class="resource-header">
+          <h3 class="resource-title">Due dates</h3>
+        </div>
+
+        <div class="resource-list">
+          <% if @tasks_overdue.any? %>
+            <div class="px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400">Overdue</div>
+            <% @tasks_overdue.each do |task| %>
+              <%= render 'tasks/task', task: task %>
+            <% end %>
+          <% end %>
+
+          <% if @tasks_due_today.any? %>
+            <div class="px-4 py-2 text-sm font-medium text-gray-900 dark:text-gray-200">Due today</div>
+            <% @tasks_due_today.each do |task| %>
+              <%= render 'tasks/task', task: task %>
+            <% end %>
+          <% end %>
+
+          <% if @tasks_due_this_week.any? %>
+            <div class="px-4 py-2 text-sm font-medium text-gray-900 dark:text-gray-200">Due this week</div>
+            <% @tasks_due_this_week.each do |task| %>
+              <%= render 'tasks/task', task: task %>
+            <% end %>
+          <% end %>
+
+          <% if @tasks_due_later.any? %>
+            <div class="px-4 py-2 text-sm font-medium text-gray-900 dark:text-gray-200">Due later</div>
+            <% @tasks_due_later.each do |task| %>
+              <%= render 'tasks/task', task: task %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @starred_tasks.any? %>
+      <div class="resource-container">
+        <div class="resource-header">
+          <h3 class="resource-title">Starred</h3>
+        </div>
+
+        <div class="resource-list">
+          <% @starred_tasks.each do |task| %>
+            <%= render 'tasks/task', task: task %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
     <% if @tasks.any? %>
       <% @tasks.group_by_projects.each do |project, tasks| %>
         <div class="resource-container">
@@ -59,7 +106,7 @@
       <div class="flex justify-center">
         <%= paginate @tasks %>
       </div>
-    <% else %>
+    <% elsif !@has_due_date_tasks && @starred_tasks.none? %>
       <div class="resource-container">
         <div class="resource-empty-state">
           <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gray-100 dark:bg-gray-800 mx-auto">

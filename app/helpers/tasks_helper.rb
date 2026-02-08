@@ -21,8 +21,6 @@ module TasksHelper
       project_path(project)
     elsif referer_uri.path.ends_with?('/tasks')
       tasks_path
-    elsif referer_uri.path.ends_with?('/schedule')
-      schedule_path
     elsif referer_uri.path.ends_with?('/activity')
       project_activity_path(project)
     else

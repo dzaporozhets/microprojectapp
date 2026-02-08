@@ -26,31 +26,6 @@
     </div>
   <% end %>
 
-  <!-- Calendar Integration -->
-  <div class="resource-container">
-    <div class="resource-header">
-      <div>
-        <h3 class="resource-title">Calendar Integration</h3>
-        <p class="resource-description">Manage your calendar token for task integration.</p>
-      </div>
-    </div>
-
-    <div class="p-4">
-      <div class="mb-4">
-        <p class="text-sm text-gray-600 dark:text-gray-400">
-          Your calendar token allows you to subscribe to your tasks with due dates in your calendar application.
-          If you think your token has been compromised or you're experiencing issues with calendar integration,
-          you can regenerate it below.
-        </p>
-      </div>
-
-      <%= link_to "Regenerate Calendar Token", regenerate_calendar_token_users_account_path,
-          method: :post,
-          class: "inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm text-sm font-medium text-base bg-base hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500",
-          data: { turbo_method: :post, turbo_confirm: "Are you sure? This will invalidate any existing calendar subscriptions." } %>
-    </div>
-  </div>
-
   <!-- Delete Account -->
   <div class="resource-container">
     <div class="resource-header">
