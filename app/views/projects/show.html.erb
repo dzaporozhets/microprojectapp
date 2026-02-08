@@ -1,18 +1,6 @@
 <div class="space-y-4">
   <%= render 'project/tasks/form', project: @project %>
-
-  <div class="resource-container">
-    <%= link_to overview_project_path(@project), class: "block p-4 md:flex md:items-center md:justify-between" do %>
-      <h3 class="resource-title"><%= file_storage_enabled? ? 'Notes, Files & Links' : 'Notes & Links' %></h3>
-      <p class="text-sm text-muted mt-1 md:mt-0">
-        <%= pluralize(@project.notes.count, 'note') %> ·
-        <% if file_storage_enabled? %>
-          <%= pluralize(@project.project_files.count, 'file') %> ·
-        <% end %>
-        <%= pluralize(@project.links.count, 'link') %>
-      </p>
-    <% end %>
-  </div>
+  <%= render 'notes_widget', project: @project %>
 
   <% unless @tasks_due.any? || @tasks_todo.any? || @tasks_done.any? %>
     <div class="resource-empty-state" id="no-tasks-message">
