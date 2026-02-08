@@ -338,55 +338,6 @@ RSpec.describe "Project Resources Security", type: :request do
     end
   end
 
-  describe "Project schedule access" do
-    context "when user is project owner" do
-      before { sign_in owner }
-
-      it "allows viewing project schedule" do
-        get project_schedule_path(project)
-        expect(response).to have_http_status(:ok)
-      end
-
-      it "allows saturating schedule" do
-        post saturate_project_schedule_path(project)
-        expect(response).to have_http_status(:found) # redirect after saturation
-      end
-
-      it "denies access to other project's schedule" do
-        get project_schedule_path(other_project)
-        expect(response).to have_http_status(:not_found)
-      end
-    end
-
-    context "when user is invited to project" do
-      before { sign_in invited_user }
-
-      it "allows viewing project schedule" do
-        get project_schedule_path(project)
-        expect(response).to have_http_status(:ok)
-      end
-
-      it "allows saturating schedule" do
-        post saturate_project_schedule_path(project)
-        expect(response).to have_http_status(:found) # redirect after saturation
-      end
-
-      it "denies access to unauthorized project's schedule" do
-        get project_schedule_path(other_project)
-        expect(response).to have_http_status(:not_found)
-      end
-    end
-
-    context "when user is not authorized" do
-      before { sign_in unauthorized_user }
-
-      it "denies access to project schedule" do
-        get project_schedule_path(project)
-        expect(response).to have_http_status(:not_found)
-      end
-    end
-  end
-
   describe "Project activity access" do
     context "when user is project owner" do
       before { sign_in owner }

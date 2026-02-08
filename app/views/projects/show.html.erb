@@ -1,10 +1,24 @@
 <div class="space-y-4">
   <%= render 'project/tasks/form', project: @project %>
 
-  <% unless @tasks_todo.any? || @tasks_done.any? %>
+  <% unless @tasks_due.any? || @tasks_todo.any? || @tasks_done.any? %>
     <div class="resource-empty-state" id="no-tasks-message">
       <h3 class="resource-empty-title">No tasks yet</h3>
       <p class="resource-empty-description">Create your first project task to get started.</p>
+    </div>
+  <% end %>
+
+  <% if @tasks_due.any? %>
+    <div class="resource-container">
+      <div class="resource-header">
+        <h3 class="resource-title">Due dates</h3>
+      </div>
+
+      <div class="resource-list">
+        <% @tasks_due.each do |task| %>
+          <%= render partial: "project/tasks/task", locals: { task: task, show_due_date: true } %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 

@@ -20,7 +20,11 @@ class ProjectsController < ApplicationController
   # GET /projects/1 or /projects/1.json
   def show
     @tab_name = 'Tasks'
-    @tasks_todo = @project.tasks.todo.includes(:assigned_user, :comments).basic_order
+
+    today = Date.current
+    @tasks_due = @project.tasks.todo.with_due_date.where(due_date: ..(today + 1.month)).includes(:assigned_user, :comments).order(due_date: :asc)
+
+    @tasks_todo = @project.tasks.todo.where.not(id: @tasks_due).includes(:assigned_user, :comments).basic_order
     @tasks_done = @project.tasks.done.includes(:assigned_user, :comments).order(updated_at: :desc).limit(DONE_TASKS)
   end
 

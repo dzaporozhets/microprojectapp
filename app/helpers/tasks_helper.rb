@@ -11,9 +11,7 @@ module TasksHelper
     referer_uri = URI.parse(request.referer) rescue nil
     return project_path(project) unless referer_uri && referer_uri.path
 
-    if referer_uri.path.ends_with?(project_schedule_path(project))
-      project_schedule_path(project)
-    elsif referer_uri.path.ends_with?(project_tasks_path(project))
+    if referer_uri.path.ends_with?(project_tasks_path(project))
       project_tasks_path(project)
     elsif referer_uri.path.ends_with?(completed_project_tasks_path(project))
       completed_project_tasks_path(project)
@@ -37,7 +35,6 @@ module TasksHelper
   def tasks_lists_page?(project)
     current_page?(project_path(project)) ||
       current_page?(completed_project_tasks_path(project)) ||
-      current_page?(project_tasks_path(project)) ||
-      current_page?(project_schedule_path(project))
+      current_page?(project_tasks_path(project))
   end
 end

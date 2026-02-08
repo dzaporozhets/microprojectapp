@@ -49,12 +49,6 @@ Rails.application.routes.draw do
       end
     end
 
-    resource :schedule, only: :show, controller: 'project/schedule' do
-      member do
-        post 'saturate'
-      end
-    end
-
     resource :pins, controller: 'project/pins', only: [:create, :destroy]
 
     resource :activity, only: :show, controller: 'project/activity'
@@ -76,6 +70,7 @@ Rails.application.routes.draw do
   end
   get 'users/:id/avatar', to: 'users/avatars#show', as: :user_avatar
 
+  get 'projects/:id/schedule', to: redirect { |params, _| "/projects/#{params[:id]}" }
   get 'schedule', to: redirect('/tasks')
   get 'search', to: 'search#index'
   resources :tasks, only: :index, controller: 'tasks' do
