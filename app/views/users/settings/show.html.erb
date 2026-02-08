@@ -9,12 +9,12 @@
       </div>
     </div>
 
-    <div class="p-4">
-      <%= form_for(@user, url: users_settings_path, html: { method: :put }, data: { turbo: false }) do |f| %>
-        <%= render "shared/errors", resource: @user %>
+    <%= form_for(@user, url: users_settings_path, html: { method: :put }, data: { turbo: false }) do |f| %>
+      <%= render "shared/errors", resource: @user %>
 
-        <section class="mb-8">
-          <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Privacy and Security</h2>
+      <div class="divide-y divide-gray-200 dark:divide-gray-700">
+        <div class="p-4">
+          <h2 class="resource-subtitle">Privacy and Security</h2>
 
           <div class="space-y-4">
             <div class="flex items-center">
@@ -22,10 +22,10 @@
               <%= f.label :allow_invites, "Allow other users to add you to projects", class: 'ml-2 text-sm text-base' %>
             </div>
           </div>
-        </section>
+        </div>
 
-        <section class="mb-8">
-          <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Appearance</h2>
+        <div class="p-4">
+          <h2 class="resource-subtitle">Appearance</h2>
           <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Choose your preferred dark mode setting</p>
 
           <div class="space-y-4 mb-6">
@@ -51,31 +51,29 @@
               User.available_themes.map { |id, name| [name, id] }, {},
               class: "block w-full base-input" %>
           </div>
-        </section>
+        </div>
 
         <% if file_storage_enabled? %>
-          <section class="mb-4">
-            <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Avatar</h2>
+          <div class="p-4">
+            <h2 class="resource-subtitle">Avatar</h2>
 
             <div class="flex items-center justify-between space-x-4">
-              <!-- File Upload -->
               <div class="flex-grow">
                 <%= f.file_field :avatar,
                   accept: allowed_img_file_types,
                   class: "appearance-none file-select text-sm leading-tight file:mr-3 file:py-2 file:px-3 file:rounded-md file:border-0 file:text-sm file:font-medium w-full" %>
               </div>
 
-              <!-- Avatar Preview -->
               <div class="flex-shrink-0">
                 <% if avatar_src(@user).present? %>
                   <%= image_tag avatar_src(@user), alt: "Current Avatar", class: "w-10 h-10 rounded-full object-cover" %>
                 <% end %>
               </div>
             </div>
-          </section>
+          </div>
         <% elsif avatar_src(@user).present? %>
-          <section class="mb-4">
-            <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Avatar</h2>
+          <div class="p-4">
+            <h2 class="resource-subtitle">Avatar</h2>
 
             <div class="flex items-center space-x-4">
               <div class="flex-shrink-0">
@@ -83,13 +81,13 @@
               </div>
               <p class="text-sm text-gray-500 dark:text-gray-400">Avatar provided by OAuth login</p>
             </div>
-          </section>
+          </div>
         <% end %>
 
-        <div class="pt-4 border-t border-base">
+        <div class="p-4">
           <%= f.submit "Save Settings", class: "btn-base" %>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>
