@@ -1,10 +1,7 @@
 <div class="sm:mx-auto sm:w-full sm:max-w-sm">
   <div class="resource-container">
     <div class="resource-header">
-      <h2 class="text-4xl font-extrabold dark:text-gray-200">Log in</h2>
-      <% if ENV['APP_DOMAIN'].present? %>
-        <p class="text-gray-500"><%= ENV['APP_DOMAIN'] %></p>
-      <% end %>
+      <h2 class="text-2xl font-extrabold dark:text-gray-200">Log in</h2>
     </div>
     <div class="resource-body">
       <%= render 'devise/shared/alerts' %>
