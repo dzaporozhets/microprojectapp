@@ -46,6 +46,11 @@
     @apply font-bold leading-8 text-base line-clamp-1 text-black dark:text-white;
   }
 
+  .nav-container .btn-base {
+    @apply border-none;
+  }
+
+
   /*----------------------------------------*
    * Buttons
    *----------------------------------------*/
@@ -111,14 +116,14 @@
   }
 
   .tab {
-    @apply inline-flex items-center px-3 py-2 text-sm font-medium rounded-md
+    @apply inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md
            text-gray-600 dark:text-gray-400
            hover:text-gray-900 dark:hover:text-gray-100
            hover:bg-gray-50 dark:hover:bg-gray-700;
   }
 
   .tab-active {
-    @apply inline-flex items-center px-3 py-2 text-sm font-medium rounded-md
+    @apply inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md
            bg-white dark:bg-gray-900 shadow-sm;
   }
 
