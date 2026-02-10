@@ -80,21 +80,21 @@
         <% end %>
 
         <div class="p-4">
-          <%= form.submit 'Save changes', class: "btn-base" %>
+          <%= form.submit 'Save changes', class: "btn-primary" %>
         </div>
       </div>
     <% end %>
   </div>
+</div>
 
-  <div class="resource-container mt-6">
-    <div class="p-4">
-      <div class="flex items-center justify-between">
-        <div class="text-sm text-gray-600 dark:text-gray-400">
-          <%= link_to last_update_text(task), changes_project_task_path(task.project, task), class: 'underline hover:text-gray-900 dark:hover:text-gray-200' %>
-        </div>
-
-        <%= button_to "Delete this task", [task.project, task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?', turbo: turbo_frame_request? }, class: "btn-remove", form_class: "" %>
+<div class="resource-container mt-6">
+  <div class="p-4">
+    <div class="flex items-center justify-between">
+      <div class="text-sm text-gray-600 dark:text-gray-400">
+        <%= link_to last_update_text(task), changes_project_task_path(task.project, task), class: 'underline hover:text-gray-900 dark:hover:text-gray-200' %>
       </div>
+
+      <%= button_to "Delete this task", [task.project, task], method: :delete, data: { turbo_confirm: 'Delete the task? Are you sure?', turbo: turbo_frame_request? }, class: "btn-remove", form_class: "" %>
     </div>
   </div>
 </div>
