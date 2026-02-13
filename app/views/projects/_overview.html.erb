@@ -1,0 +1,19 @@
+<% compact = !current_page?(project_path(project)) %>
+
+<div class="resource-container">
+  <div class="resource-body">
+    <% unless compact  %>
+      <div class="text-center">
+        <h2 class="text-balance text-xl font-semibold tracking-tight text-gray-900 sm:text-2xl dark:text-white">Project overview</h2>
+        <p class="mt-2 text-xs/5 text-gray-600 dark:text-gray-300">Everything you need at a glance.</p>
+      </div>
+    <% end %>
+
+    <dl class="mt-4 grid grid-cols-1 gap-0.5 overflow-hidden rounded-xl text-center sm:grid-cols-2 lg:grid-cols-4">
+      <%= project_nav_link project_tasks_path(project), "Tasks", project.tasks.todo.count, compact: compact %>
+      <%= project_nav_link project_notes_path(project), "Notes", project.notes.count, compact: compact %>
+      <%= project_nav_link project_links_path(project), "Links", project.links.count, compact: compact %>
+      <%= project_nav_link project_files_path(project), "Files", project.project_files.count, compact: compact %>
+    </dl>
+  </div>
+</div>
