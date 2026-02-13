@@ -4,7 +4,7 @@
       <ol role="list" class="flex space-x-4 flex-grow min-w-0">
         <li class="flex flex-grow min-w-0">
           <div class="flex items-center text-gray-400">
-            <%= link_to @project do %>
+            <%= link_to @project, class: 'hover:underline' do %>
               <div class="nav-title-link">
                 <span><%= @project.name %></span>
               </div>
@@ -34,7 +34,7 @@
         </li>
 
         <% if @project.has_team? %>
-          <li>
+          <li class="flex align-center">
             <div class="flex items-center ml-auto -space-x-2 hidden md:flex">
               <%= link_to project_tasks_path(@project, assigned_user_id: @project.user_id), title: @project.user.email do %>
                 <%= avatar_tag(@project.user, "h-8 w-8 avatar-bg") %>
@@ -48,15 +48,15 @@
             </div>
           </li>
         <% end %>
+
+        <% if @tab_name %>
+          <li>
+            <div class="flex flex-grow items-center">
+              <%= project_tabs @project, @tab_name %>
+            </div>
+          </li>
+        <% end %>
       </ol>
     </div>
   </div>
-
-  <% if @tab_name %>
-    <div class="flex flex-wrap nav-controls">
-      <div class="flex flex-grow items-center">
-        <%= project_tabs @project, @tab_name %>
-      </div>
-    </div>
-  <% end %>
 </nav>

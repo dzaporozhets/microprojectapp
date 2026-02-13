@@ -170,6 +170,6 @@ class Project::TasksController < Project::BaseController
   end
 
   def set_tab
-    @tab_name = 'Tasks'
+    @tab_name = 'Project'
   end
 end
