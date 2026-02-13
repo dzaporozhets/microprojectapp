@@ -4,7 +4,7 @@
   <div class="resource-body">
     <% unless compact  %>
       <div class="text-center">
-        <h2 class="text-balance text-xl font-semibold tracking-tight text-gray-900 sm:text-2xl dark:text-white">Project overview</h2>
+        <h2 class="text-balance text-xl font-semibold tracking-tight text-gray-900 sm:text-2xl dark:text-white"><%= project.archived? ? "Project is archived" : "Project overview" %></h2>
         <p class="mt-2 text-xs/5 text-gray-600 dark:text-gray-300">Everything you need at a glance.</p>
       </div>
     <% end %>
