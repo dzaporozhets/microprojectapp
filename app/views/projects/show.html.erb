@@ -1,20 +1,12 @@
 <div class="space-y-4">
-  <%= render 'project/tasks/form', project: @project %>
-  <%= render 'notes_widget', project: @project %>
+  <%= render 'resources_overview', project: @project, tasks_due: @tasks_due %>
 
-  <% unless @tasks_due.any? || @tasks_todo.any? || @tasks_done.any? %>
-    <div class="resource-empty-state" id="no-tasks-message">
-      <h3 class="resource-empty-title">No tasks yet</h3>
-      <p class="resource-empty-description">Create your first project task to get started.</p>
-    </div>
-  <% end %>
+  <div>
+    <%= render 'project/tasks/form', project: @project %>
+  </div>
 
   <% if @tasks_due.any? %>
     <div class="resource-container">
-      <div class="resource-header">
-        <h3 class="resource-title">Due dates</h3>
-      </div>
-
       <div class="resource-list">
         <% @tasks_due.each do |task| %>
           <%= render partial: "project/tasks/task", locals: { task: task, show_due_date: true } %>
@@ -24,6 +16,13 @@
   <% end %>
 
   <div class="resource-container">
+    <% unless @tasks_due.any? || @tasks_todo.any? || @tasks_done.any? %>
+      <div class="resource-empty-state" id="no-tasks-message">
+        <h3 class="resource-empty-title">No tasks yet</h3>
+        <p class="resource-empty-description">Create your first project task to get started.</p>
+      </div>
+    <% end %>
+
     <%= turbo_frame_tag "tasks", class: "resource-list" do %>
       <% @tasks_todo.each do |task| %>
         <%= render partial: "project/tasks/task", locals: { task: task } %>
@@ -32,25 +31,22 @@
   </div>
 
   <% if @tasks_done.any? %>
-    <%= render 'shared/divider', text: 'Completed' %>
-  <% end %>
-
-  <div class="resource-container">
-    <%= turbo_frame_tag "completed_tasks", class: "resource-list" do %>
-      <% if @tasks_done.any? %>
+    <div class="resource-container">
+      <div class="resource-header">
+        <h3 class="resource-title">Completed</h3>
+      </div>
+      <%= turbo_frame_tag "completed_tasks", class: "resource-list" do %>
         <% @tasks_done.each do |task| %>
           <%= render partial: "project/tasks/task", locals: { task: task } %>
         <% end %>
-      <% end %>
-    <% end %>
-  </div>
-
-  <% if @project.tasks.done.count > ProjectsController::DONE_TASKS %>
-    <div class="text-center">
-      <%= link_to completed_project_tasks_path(@project), class: "btn-base" do %>
-        Show all completed tasks
+        <% if @project.tasks.done.count > ProjectsController::DONE_TASKS %>
+          <li class="text-center">
+            <%= link_to completed_project_tasks_path(@project), class: "link-primary" do %>
+              Show all completed tasks
+            <% end %>
+          </li>
+        <% end %>
       <% end %>
     </div>
   <% end %>
-
 </div>

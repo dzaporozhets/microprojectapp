@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  DONE_TASKS = 12
+  DONE_TASKS = 8
 
   before_action :authenticate_user!
   before_action :project, only: %i[ show edit update destroy]
