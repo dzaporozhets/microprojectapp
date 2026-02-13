@@ -30,23 +30,23 @@
     <% end %>
   </div>
 
-  <% if @tasks_done.any? %>
-    <div class="resource-container">
+  <div class="resource-container">
+    <% if @tasks_done.any? %>
       <div class="resource-header">
         <h3 class="resource-title">Completed</h3>
       </div>
-      <%= turbo_frame_tag "completed_tasks", class: "resource-list" do %>
-        <% @tasks_done.each do |task| %>
-          <%= render partial: "project/tasks/task", locals: { task: task } %>
-        <% end %>
-        <% if @project.tasks.done.count > ProjectsController::DONE_TASKS %>
-          <li class="text-center">
-            <%= link_to completed_project_tasks_path(@project), class: "link-primary" do %>
-              Show all completed tasks
-            <% end %>
-          </li>
-        <% end %>
+    <% end %>
+    <%= turbo_frame_tag "completed_tasks", class: "resource-list" do %>
+      <% @tasks_done.each do |task| %>
+        <%= render partial: "project/tasks/task", locals: { task: task } %>
       <% end %>
-    </div>
-  <% end %>
+      <% if @project.tasks.done.count > ProjectsController::DONE_TASKS %>
+        <li class="text-center">
+          <%= link_to completed_project_tasks_path(@project), class: "link-primary" do %>
+            Show all completed tasks
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </div>
 </div>
