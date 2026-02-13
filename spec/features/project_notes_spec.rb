@@ -46,6 +46,6 @@ RSpec.feature "Project::Notes", type: :feature do
     click_button "Delete this note"
 
     expect(page).not_to have_text(note.title)
-    expect(page).to have_current_path(overview_project_path(project))
+    expect(page).to have_current_path(project_notes_path(project))
   end
 end

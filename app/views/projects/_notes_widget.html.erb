@@ -1,12 +1,30 @@
 <div class="resource-container">
-  <%= link_to overview_project_path(project), class: "block p-4 md:flex md:items-center md:justify-between" do %>
-    <h3 class="resource-title"><%= file_storage_enabled? ? 'Notes, Files & Links' : 'Notes & Links' %></h3>
-    <p class="text-sm text-muted mt-1 md:mt-0">
-    <%= pluralize(project.notes.count, 'note') %> ·
+  <ul role="list" class="resource-list">
+    <li>
+      <%= link_to project_notes_path(project), class: "block" do %>
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="list-text-primary font-semibold">Notes</h3>
+          <p class="text-sm text-muted"><%= pluralize(project.notes.count, 'note') %></p>
+        </div>
+      <% end %>
+    </li>
     <% if file_storage_enabled? %>
-      <%= pluralize(project.project_files.count, 'file') %> ·
+      <li>
+        <%= link_to project_files_path(project), class: "block" do %>
+          <div class="flex items-center justify-between gap-4">
+            <h3 class="list-text-primary font-semibold">Files</h3>
+            <p class="text-sm text-muted"><%= pluralize(project.project_files.count, 'file') %></p>
+          </div>
+        <% end %>
+      </li>
     <% end %>
-    <%= pluralize(project.links.count, 'link') %>
-    </p>
-  <% end %>
+    <li>
+      <%= link_to project_links_path(project), class: "block" do %>
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="list-text-primary font-semibold">Links</h3>
+          <p class="text-sm text-muted"><%= pluralize(project.links.count, 'link') %></p>
+        </div>
+      <% end %>
+    </li>
+  </ul>
 </div>

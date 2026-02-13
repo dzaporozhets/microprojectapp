@@ -46,15 +46,15 @@ RSpec.feature "Project::Files", type: :feature do
     scenario "User visits files page" do
       visit project_files_path(project_with_files)
 
-      expect(page).to have_current_path(overview_project_path(project_with_files))
+      expect(page).to have_current_path(project_files_path(project_with_files))
       expect(page).to have_text('test_file.txt')
     end
 
-    scenario "Files section is visible on overview page" do
-      visit overview_project_path(project)
+    scenario "Files section is visible on files index page" do
+      visit project_files_path(project)
 
-      expect(page).to have_text('Files')
-      expect(page).to have_link('Upload File')
+      expect(page).to have_text('Project Files')
+      expect(page).to have_link('Add File')
     end
   end
 
@@ -68,11 +68,11 @@ RSpec.feature "Project::Files", type: :feature do
       )
     end
 
-    scenario "Files section is hidden on overview page" do
-      visit overview_project_path(project)
+    scenario "Files section is hidden on files index page" do
+      visit project_files_path(project)
 
-      expect(page).not_to have_text('Files')
-      expect(page).not_to have_link('Upload File')
+      expect(page).to have_text('File uploads disabled')
+      expect(page).not_to have_link('Add File')
     end
 
     scenario "Upload page redirects when storage is disabled" do

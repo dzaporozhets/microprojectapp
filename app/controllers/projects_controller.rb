@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   DONE_TASKS = 12
 
   before_action :authenticate_user!
-  before_action :project, only: %i[ show edit update destroy overview]
+  before_action :project, only: %i[ show edit update destroy]
   before_action :authorize_access, except: [:index, :new, :create]
   before_action :authorize_update, only: [:edit, :update, :destroy]
 
@@ -83,10 +83,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def overview
-    @tab_name = 'Project'
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -109,7 +105,7 @@ class ProjectsController < ApplicationController
 
   def set_layout
     case action_name
-    when 'show', 'edit', 'update', 'overview' then 'project'
+    when 'show', 'edit', 'update' then 'project'
     else
       'application'
     end

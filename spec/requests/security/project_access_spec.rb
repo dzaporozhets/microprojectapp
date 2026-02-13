@@ -24,11 +24,6 @@ RSpec.describe "Project Access Security", type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it "allows access to project overview" do
-        get overview_project_path(project)
-        expect(response).to have_http_status(:ok)
-      end
-
       it "allows access to project edit page" do
         get edit_project_path(project)
         expect(response).to have_http_status(:ok)
@@ -58,11 +53,6 @@ RSpec.describe "Project Access Security", type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it "allows access to project overview" do
-        get overview_project_path(project)
-        expect(response).to have_http_status(:ok)
-      end
-
       it "denies access to project edit page" do
         get edit_project_path(project)
         expect(response).to have_http_status(:not_found)
@@ -89,11 +79,6 @@ RSpec.describe "Project Access Security", type: :request do
 
       it "denies access to project" do
         get project_path(project)
-        expect(response).to have_http_status(:not_found)
-      end
-
-      it "denies access to project overview" do
-        get overview_project_path(project)
         expect(response).to have_http_status(:not_found)
       end
 

@@ -23,7 +23,7 @@ RSpec.describe "Project Resources Security", type: :request do
 
       it "allows viewing links index" do
         get project_links_path(project)
-        expect(response).to have_http_status(:found) # redirects to overview
+        expect(response).to have_http_status(:ok)
       end
 
       it "allows viewing link details" do
@@ -57,7 +57,7 @@ RSpec.describe "Project Resources Security", type: :request do
 
       it "allows viewing links index" do
         get project_links_path(project)
-        expect(response).to have_http_status(:found) # redirects to overview
+        expect(response).to have_http_status(:ok)
       end
 
       it "allows viewing link details" do
@@ -108,7 +108,7 @@ RSpec.describe "Project Resources Security", type: :request do
 
       it "allows viewing notes index" do
         get project_notes_path(project)
-        expect(response).to have_http_status(:found) # redirects to overview
+        expect(response).to have_http_status(:ok)
       end
 
       it "allows viewing note details" do
@@ -153,7 +153,7 @@ RSpec.describe "Project Resources Security", type: :request do
 
       it "allows viewing notes index" do
         get project_notes_path(project)
-        expect(response).to have_http_status(:found) # redirects to overview
+        expect(response).to have_http_status(:ok)
       end
 
       it "allows viewing note details" do
@@ -202,7 +202,7 @@ RSpec.describe "Project Resources Security", type: :request do
 
       it "allows viewing files index" do
         get project_files_path(project)
-        expect(response).to have_http_status(:found) # redirects to overview
+        expect(response).to have_http_status(:ok)
       end
 
       it "allows accessing new file page" do
@@ -221,7 +221,7 @@ RSpec.describe "Project Resources Security", type: :request do
 
       it "allows viewing files index" do
         get project_files_path(project)
-        expect(response).to have_http_status(:found) # redirects to overview
+        expect(response).to have_http_status(:ok)
       end
 
       it "allows accessing new file page" do

@@ -3,7 +3,6 @@ class Project::NotesController < Project::BaseController
   before_action :set_tab, only: %i[ show edit index history version ]
 
   def index
-    redirect_to overview_project_path(@project)
   end
 
   def show
@@ -55,7 +54,7 @@ class Project::NotesController < Project::BaseController
     @project.add_activity(current_user, 'removed', @note)
 
     respond_to do |format|
-      format.html { redirect_to overview_project_path(@project) }
+      format.html { redirect_to project_notes_path(@project) }
       format.json { head :no_content }
     end
   end

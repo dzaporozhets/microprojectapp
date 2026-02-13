@@ -3,7 +3,6 @@ class Project::LinksController < Project::BaseController
   before_action :set_tab
 
   def index
-    redirect_to overview_project_path(@project)
   end
 
   def show
@@ -19,7 +18,7 @@ class Project::LinksController < Project::BaseController
 
     respond_to do |format|
       if @link.save
-        format.html { redirect_to overview_project_path(@project), notice: "Link was successfully created." }
+        format.html { redirect_to project_links_path(@project), notice: "Link was successfully created." }
         format.json { render :show, status: :created, location: @link }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -32,7 +31,7 @@ class Project::LinksController < Project::BaseController
     @link.destroy!
 
     respond_to do |format|
-      format.html { redirect_to overview_project_path(@project) }
+      format.html { redirect_to project_links_path(@project) }
       format.json { head :no_content }
     end
   end

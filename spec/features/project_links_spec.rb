@@ -42,13 +42,13 @@ RSpec.feature "Project::Links", type: :feature do
     find("button[alt='Delete link']").click
 
     expect(page).not_to have_text(link.title)
-    expect(page).to have_current_path(overview_project_path(project))
+    expect(page).to have_current_path(project_links_path(project))
   end
 
   scenario "User visits links page" do
     visit project_links_path(project)
 
-    expect(page).to have_current_path(overview_project_path(project))
+    expect(page).to have_current_path(project_links_path(project))
     expect(page).to have_text(link.title)
     expect(page).to have_link(link.title, href: link.url)
   end
