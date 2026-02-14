@@ -304,10 +304,6 @@
     @apply bg-gray-200 dark:bg-gray-800 rounded-full;
   }
 
-  .avatar-nav {
-    @apply rounded-full bg-white dark:bg-black;
-  }
-
   /* Link Styles */
   .link-primary {
     @apply text-violet-900 dark:text-violet-100 hover:text-violet-700 hover:dark:text-violet-300;
