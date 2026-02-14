@@ -1,7 +1,7 @@
 <nav class="nav-container">
   <div class="flex flex-wrap nav-title">
     <div class="flex flex-grow items-center">
-      <ol role="list" class="flex space-x-4 flex-grow min-w-0">
+      <ol role="list" class="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-4 flex-grow min-w-0">
         <li class="flex flex-grow min-w-0">
           <div class="flex items-center text-gray-400">
             <%= link_to @project, class: 'hover:underline' do %>
@@ -34,8 +34,8 @@
         </li>
 
         <% if @project.has_team? %>
-          <li class="flex align-center">
-            <div class="flex items-center ml-auto -space-x-2 hidden md:flex">
+          <li class="align-center hidden md:flex">
+            <div class="flex items-center ml-auto -space-x-2">
               <%= link_to project_tasks_path(@project, assigned_user_id: @project.user_id), title: @project.user.email do %>
                 <%= avatar_tag(@project.user, "h-8 w-8 avatar-bg") %>
               <% end %>
