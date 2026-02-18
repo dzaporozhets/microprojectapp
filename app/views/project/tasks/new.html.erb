@@ -56,15 +56,6 @@
           </div>
         </div>
 
-        <% if @project.notes.any? %>
-          <div class="p-4">
-            <div>
-              <%= form.label :note_id, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
-              <%= form.collection_select :note_id, @project.notes, :id, :title, { include_blank: "None" }, { class: "block w-full base-input" } %>
-            </div>
-          </div>
-        <% end %>
-
         <div class="p-4">
           <%= form.submit 'Create task', class: "btn-base" %>
         </div>

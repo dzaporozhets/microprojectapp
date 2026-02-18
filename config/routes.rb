@@ -24,13 +24,6 @@ Rails.application.routes.draw do
     end
 
     resources :links, controller: 'project/links', only: [:index, :new, :create, :show, :destroy]
-    resources :notes, controller: 'project/notes' do
-      member do
-        get :history
-        get :version
-      end
-    end
-
     resources :files, controller: 'project/files', only: [:index, :new, :create] do
       collection do
         get :download

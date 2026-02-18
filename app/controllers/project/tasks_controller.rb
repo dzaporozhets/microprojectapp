@@ -154,7 +154,7 @@ class Project::TasksController < Project::BaseController
   end
 
   def task_params
-    @task_params ||= filter_params(params.require(:task).permit(:name, :description, :done, :due_date, :assigned_user_id, :note_id))
+    @task_params ||= filter_params(params.require(:task).permit(:name, :description, :done, :due_date, :assigned_user_id))
   end
 
   def filter_params(permitted_params)

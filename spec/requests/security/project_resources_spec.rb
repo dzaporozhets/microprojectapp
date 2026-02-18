@@ -10,7 +10,6 @@ RSpec.describe "Project Resources Security", type: :request do
   let(:other_project) { create(:project, user: unauthorized_user) }
   
   let(:link) { create(:link, project: project, user: owner) }
-  let(:note) { create(:note, project: project, user: owner) }
   
   before do
     # Invite one user to the project
@@ -99,94 +98,6 @@ RSpec.describe "Project Resources Security", type: :request do
         post project_links_path(project), params: { link: { url: "https://example.com" } }
         expect(response).to have_http_status(:not_found)
       end
-    end
-  end
-
-  describe "Project notes access" do
-    context "when user is project owner" do
-      before { sign_in owner }
-
-      it "allows viewing notes index" do
-        get project_notes_path(project)
-        expect(response).to have_http_status(:ok)
-      end
-
-      it "allows viewing note details" do
-        get project_note_path(project, note)
-        expect(response).to have_http_status(:ok)
-      end
-
-      it "allows accessing new note page" do
-        get new_project_note_path(project)
-        expect(response).to have_http_status(:found) # redirects to edit after creating note
-      end
-
-      it "allows accessing edit note page" do
-        get edit_project_note_path(project, note)
-        expect(response).to have_http_status(:ok)
-      end
-
-
-      it "allows updating notes" do
-        patch project_note_path(project, note), params: { note: { content: "Updated content" } }
-        expect(response).to have_http_status(:found) # redirect after update
-      end
-
-      it "allows deleting notes" do
-        delete project_note_path(project, note)
-        expect(response).to have_http_status(:found) # redirect after delete
-      end
-
-      it "allows viewing note history" do
-        get history_project_note_path(project, note)
-        expect(response).to have_http_status(:ok)
-      end
-
-      it "denies access to other project's notes" do
-        get project_notes_path(other_project)
-        expect(response).to have_http_status(:not_found)
-      end
-    end
-
-    context "when user is invited to project" do
-      before { sign_in invited_user }
-
-      it "allows viewing notes index" do
-        get project_notes_path(project)
-        expect(response).to have_http_status(:ok)
-      end
-
-      it "allows viewing note details" do
-        get project_note_path(project, note)
-        expect(response).to have_http_status(:ok)
-      end
-
-      it "allows accessing new note page" do
-        get new_project_note_path(project)
-        expect(response).to have_http_status(:found) # redirects to edit after creating note
-      end
-
-
-      it "allows editing own notes" do
-        invited_note = create(:note, project: project, user: invited_user)
-        get edit_project_note_path(project, invited_note)
-        expect(response).to have_http_status(:ok)
-      end
-
-      it "denies access to unauthorized project's notes" do
-        get project_notes_path(other_project)
-        expect(response).to have_http_status(:not_found)
-      end
-    end
-
-    context "when user is not authorized" do
-      before { sign_in unauthorized_user }
-
-      it "denies access to project notes" do
-        get project_notes_path(project)
-        expect(response).to have_http_status(:not_found)
-      end
-
     end
   end
 

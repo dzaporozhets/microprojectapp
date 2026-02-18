@@ -9,9 +9,8 @@
       </div>
     <% end %>
 
-    <dl class="mt-4 grid grid-cols-2 gap-0.5 overflow-hidden rounded-xl text-center lg:grid-cols-4">
+    <dl class="mt-4 grid grid-cols-2 gap-0.5 overflow-hidden rounded-xl text-center lg:grid-cols-3">
       <%= project_nav_link project_tasks_path(project), "Tasks", project.tasks.todo.count, compact: compact %>
-      <%= project_nav_link project_notes_path(project), "Notes", project.notes.count, compact: compact %>
       <%= project_nav_link project_links_path(project), "Links", project.links.count, compact: compact %>
       <%= project_nav_link project_files_path(project), "Files", project.project_files.count, compact: compact %>
     </dl>
