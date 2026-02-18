@@ -19,7 +19,7 @@
   <div class="mx-auto space-y-4">
     <div class="resource-container">
       <div class="resource-header">
-        <h3 class="resource-title">Search tasks, notes, and links</h3>
+        <h3 class="resource-title">Search tasks and links</h3>
       </div>
 
       <div class="p-4">
@@ -41,7 +41,7 @@
     </div>
 
     <% if @can_search %>
-      <% has_results = @task_results.any? || @note_results.any? || @link_results.any? %>
+      <% has_results = @task_results.any? || @link_results.any? %>
 
       <% if has_results %>
         <% if @task_results.any? %>
@@ -63,31 +63,6 @@
                       <p class="text-xs text-gray-500 dark:text-gray-400">
                         <span class="mr-1 text-gray-400 dark:text-gray-500">Project:</span>
                         <%= link_to task.project.name, project_path(task.project), class: "hover:underline" %>
-                      </p>
-                    </div>
-                  </div>
-                </li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-
-        <% if @note_results.any? %>
-          <div class="resource-container">
-            <div class="resource-header">
-              <h3 class="resource-title">Notes</h3>
-            </div>
-            <ul class="divide-y divide-gray-200 dark:divide-gray-800">
-              <% @note_results.each do |note| %>
-                <li class="p-4">
-                  <div class="flex items-center justify-between space-x-3">
-                    <div>
-                      <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
-                        <%= link_to note.title, project_note_path(note.project, note), class: "hover:underline" %>
-                      </p>
-                      <p class="text-xs text-gray-500 dark:text-gray-400">
-                        <span class="mr-1 text-gray-400 dark:text-gray-500">Project:</span>
-                        <%= link_to note.project.name, project_path(note.project), class: "hover:underline" %>
                       </p>
                     </div>
                   </div>
@@ -140,7 +115,7 @@
     <% elsif @query.present? %>
       <div class="resource-container">
         <p class="text-sm text-gray-600 dark:text-gray-400">
-          Enter at least <%= @min_query_length %> characters to search tasks, notes, and links.
+          Enter at least <%= @min_query_length %> characters to search tasks and links.
         </p>
       </div>
     <% end %>

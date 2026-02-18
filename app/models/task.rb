@@ -5,8 +5,6 @@ class Task < ApplicationRecord
   belongs_to :user, optional: false
   belongs_to :assigned_user, class_name: 'User', optional: true
   belongs_to :updated_by_user, class_name: 'User', optional: true
-  belongs_to :note, optional: true
-
   has_many :comments, dependent: :destroy
 
   has_paper_trail(

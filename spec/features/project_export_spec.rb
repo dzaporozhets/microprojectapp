@@ -41,21 +41,6 @@ RSpec.feature "Project::Export", type: :feature do
 
     expect(json['project_name']).to eq("Empty Project")
     expect(json['tasks']).to be_empty
-    expect(json['notes']).to be_empty
-  end
-
-  scenario "User exports project with notes" do
-    create(:note, project: project, user: user, title: "Important Note", content: "Note content")
-
-    visit edit_project_path(project)
-
-    click_button 'Export Tasks'
-
-    json = JSON.parse(page.body)
-
-    expect(json['notes'].size).to eq(1)
-    expect(json['notes'][0]['title']).to eq("Important Note")
-    expect(json['notes'][0]['content']).to eq("Note content")
   end
 
   scenario "Non-owner cannot export project" do

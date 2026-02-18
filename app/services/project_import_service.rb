@@ -4,21 +4,19 @@
 class ProjectImportService
   class ImportFormatError < StandardError; end
 
-  attr_reader :imported_tasks, :imported_notes, :imported_comment_count
+  attr_reader :imported_tasks, :imported_comment_count
 
   def initialize(project, data, current_user)
     @project = project
     @data = data
     @current_user = current_user
     @imported_tasks = []
-    @imported_notes = []
     @imported_comment_count = 0
   end
 
   def import!
     Project.transaction do
       import_tasks
-      import_notes
     end
   end
 
@@ -26,7 +24,6 @@ class ProjectImportService
     {
       task_ids: @imported_tasks.first(10).map(&:id), # rubocop:disable Performance/ChainArrayAllocation
       task_count: @imported_tasks.size,
-      note_count: @imported_notes.size,
       comment_count: @imported_comment_count
     }
   end
@@ -47,26 +44,10 @@ class ProjectImportService
     end
   end
 
-  def import_notes
-    notes = @data['notes'] || []
-
-    notes.each do |note_data|
-      validate_hash!(note_data, 'Invalid note data format.')
-
-      note = create_note(note_data)
-      @imported_notes << note
-    end
-  end
-
   def create_task(task_data)
     task_params = task_data.slice('name', 'description', 'done', 'done_at', 'due_date')
                            .merge(user: @current_user)
     @project.tasks.create!(task_params)
-  end
-
-  def create_note(note_data)
-    note_params = note_data.slice('title', 'content').merge(user: @current_user)
-    @project.notes.create!(note_params)
   end
 
   def extract_comments(task_data)
