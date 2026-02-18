@@ -57,7 +57,7 @@
                       <%= check_box_tag "task_done_#{task.id}", 1, task.done?, disabled: true, class: "w-5 h-5 checkbox-round" %>
                     </div>
                     <div class="space-y-1">
-                      <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
+                      <p class="task-name">
                         <%= link_to task.name, details_project_task_path(task.project, task), data: { turbo: false }, class: "hover:underline" %>
                       </p>
                       <p class="text-xs text-gray-500 dark:text-gray-400">

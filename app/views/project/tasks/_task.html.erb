@@ -1,8 +1,9 @@
-<%= turbo_frame_tag dom_id(task), class: (task.done ? 'task task-done' : 'task task-todo')  do %>
+<% toggle_url = local_assigns.fetch(:toggle_url, toggle_done_project_task_path(task.project, task)) %>
+
+<%= turbo_frame_tag dom_id(task), class: (task.done ? 'task task-done' : 'task task-todo') do %>
   <div class="flex col-span-1 items-center h-12">
     <div class="mr-3 flex">
-      <%= form_with(model: task, url: toggle_done_project_task_path(task.project, task), local: false, data: { turbo_frame: dom_id(task) }) do |form| %>
-
+      <%= form_with(model: task, url: toggle_url, local: false, data: { turbo_frame: dom_id(task) }) do |form| %>
         <%= hidden_field_tag :status, params[:status] %>
         <%= hidden_field_tag :page, params[:page] %>
         <%= hidden_field_tag :sctl, params[:sctl] || (current_page?(project_path(task.project)) ? 'projects' : 'tasks') %>
@@ -16,13 +17,9 @@
       <% end %>
     </div>
 
-    <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "min-w-0 grow flex h-12 items-center" do %>
-      <p class="list-text-primary line-clamp-2 min-w-0"><%= task.name %></p>
-      <% if task.overdue? %>
-        <span class="status-dot-overdue ml-2 flex-shrink-0" title="Overdue task" aria-label="Overdue task"></span>
-      <% end %>
+    <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "min-w-0 grow flex h-12 items-center mr-2" do %>
+      <p class="task-name min-w-0"><%= task.name %></p>
     <% end %>
-
 
     <% unless task.done %>
       <div class="space-x-2 sm:flex hidden">
@@ -42,11 +39,17 @@
 
         <% if task.due_date %>
           <%= link_to '#', title: I18n.l(task.due_date.to_date, format: :short), class: "flex items-center space-x-1" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-            </svg>
+            <% if task.overdue? %>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-red-700">
+                <path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z" clip-rule="evenodd" />
+              </svg>
+            <% else %>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+              </svg>
+            <% end %>
             <% if local_assigns[:show_due_date] %>
-              <span class="text-xs"><%= I18n.l(task.due_date.to_date, format: :short) %></span>
+              <span class="text-xs whitespace-nowrap"><%= I18n.l(task.due_date.to_date, format: :short) %></span>
             <% end %>
           <% end %>
         <% end %>

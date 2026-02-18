@@ -291,6 +291,10 @@
     @apply text-sm font-medium;
   }
 
+  .task-name {
+    @apply list-text-primary text-gray-900 dark:text-gray-100 line-clamp-2;
+  }
+
   .list-text-secondary {
     @apply text-xs text-muted;
   }
