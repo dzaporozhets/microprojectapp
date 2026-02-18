@@ -10,31 +10,45 @@
       </div>
     </div>
 
-    <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
-      <!-- Project Name Section -->
-      <% unless @project.personal? %>
+    <%= form_with(model: @project) do |form| %>
+      <%= render "shared/errors", resource: @project %>
+
+      <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
+        <!-- Project Name Section -->
+        <% unless @project.personal? %>
+          <div class="p-4">
+            <div class="mb-4">
+              <h4 class="resource-subtitle mb-0">Name</h4>
+              <p class="mt-1 text-secondary">
+                Change the name of your project.
+              </p>
+            </div>
+
+            <%= form.text_field :name, required: true, class: "base-input w-full" %>
+          </div>
+        <% end %>
+
+        <!-- Description Section -->
         <div class="p-4">
           <div class="mb-4">
-            <h4 class="resource-subtitle mb-0">Name</h4>
+            <h4 class="resource-subtitle mb-0">Description</h4>
             <p class="mt-1 text-secondary">
-              Change the name of your project.
+              Optional. Shown on the project home page.
             </p>
           </div>
 
-          <%= form_with(model: @project, class: "mt-4") do |form| %>
-            <%= render "shared/errors", resource: @project %>
-
-            <div>
-              <%= form.text_field :name, required: true, class: "base-input w-full" %>
-            </div>
-
-            <div class="mt-4">
-              <%= form.submit "Save Changes", class: "btn-base" %>
-            </div>
-          <% end %>
+          <%= form.text_area :description, class: "base-input w-full", rows: 4 %>
         </div>
-      <% end %>
 
+        <div class="p-4">
+          <%= form.submit "Save Changes", class: "btn-base" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="resource-container">
+    <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
       <!-- Import/Export Section -->
       <div class="p-4">
         <div class="mb-4">

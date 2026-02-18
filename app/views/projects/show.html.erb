@@ -1,5 +1,13 @@
 <div class="space-y-4">
-  <%= render 'projects/overview', project: @project %>
+  <% if @project.description.present? %>
+    <div class="resource-container">
+      <div class="resource-body">
+        <div class="comment-body">
+          <%= simple_format(auto_link(@project.description)) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
   <% unless @project.archived? %>
     <div>

@@ -26,6 +26,31 @@ RSpec.feature "Project", type: :feature do
     expect(page).to have_current_path(projects_path)
   end
 
+  scenario "User saves a description and sees it on the project home page" do
+    visit edit_project_path(project)
+
+    fill_in "project_description", with: "Check out this link: https://example.com\nAnd some notes below."
+    click_button "Save Changes"
+
+    visit project_path(project)
+
+    expect(page).to have_link("https://example.com", href: "https://example.com")
+    expect(page).to have_text("And some notes below.")
+  end
+
+  scenario "User clears the description and it no longer appears on the project home page" do
+    project.update!(description: "Temporary description")
+
+    visit edit_project_path(project)
+
+    fill_in "project_description", with: ""
+    click_button "Save Changes"
+
+    visit project_path(project)
+
+    expect(page).not_to have_text("Temporary description")
+  end
+
   scenario "Unauthorized user cannot edit project" do
     another_user = create(:user)
     another_project = create(:project, user: another_user)

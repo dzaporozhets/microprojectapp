@@ -92,7 +92,7 @@ class ProjectsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def project_params
-    params.require(:project).permit(:name, :archived)
+    params.require(:project).permit(:name, :archived, :description)
   end
 
   def authorize_update
