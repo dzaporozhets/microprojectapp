@@ -4,7 +4,7 @@
   <div class="mx-auto space-y-4">
     <div class="resource-container">
       <div class="resource-header">
-        <h3 class="resource-title">Search tasks and links</h3>
+        <h3 class="resource-title">Search</h3>
       </div>
 
       <div class="p-4">
@@ -26,64 +26,39 @@
     </div>
 
     <% if @can_search %>
-      <% has_results = @task_results.any? || @link_results.any? %>
-
-      <% if has_results %>
-        <% if @task_results.any? %>
-          <div class="resource-container">
-            <div class="resource-header">
-              <h3 class="resource-title">Tasks</h3>
-            </div>
-            <ul class="divide-y divide-gray-200 dark:divide-gray-800">
-              <% @task_results.each do |task| %>
-                <li class="p-4">
-                  <div class="flex items-start">
-                    <div class="flex items-center mr-3">
-                      <%= check_box_tag "task_done_#{task.id}", 1, task.done?, disabled: true, class: "w-5 h-5 checkbox-round" %>
-                    </div>
-                    <div class="space-y-1">
-                      <p class="task-name">
-                        <%= link_to task.name, details_project_task_path(task.project, task), data: { turbo: false }, class: "hover:underline" %>
-                      </p>
-                      <p class="text-xs text-gray-500 dark:text-gray-400">
-                        <span class="mr-1 text-gray-400 dark:text-gray-500">Project:</span>
-                        <%= link_to task.project.name, project_path(task.project), class: "hover:underline" %>
-                      </p>
-                    </div>
-                  </div>
-                </li>
-              <% end %>
-            </ul>
+      <% if @task_results.any? %>
+        <div class="resource-container">
+          <div class="resource-header">
+            <h3 class="resource-title">Tasks</h3>
           </div>
-        <% end %>
-
-        <% if @link_results.any? %>
-          <div class="resource-container">
-            <div class="resource-header">
-              <h3 class="resource-title">Links</h3>
-            </div>
-            <ul class="divide-y divide-gray-200 dark:divide-gray-800">
-              <% @link_results.each do |link| %>
-                <li class="p-4">
-                  <div class="flex items-start justify-between space-x-3">
-                    <div class="space-y-1">
-                      <p class="text-sm font-medium text-gray-900 dark:text-gray-100">
-                        <%= link_to link.safe_title, project_link_path(link.project, link), class: "hover:underline" %>
-                      </p>
-                      <p class="text-xs text-gray-500 dark:text-gray-400 break-all">
-                        <%= link.url %>
-                      </p>
-                      <p class="text-xs text-gray-500 dark:text-gray-400">
-                        <span class="mr-1 text-gray-400 dark:text-gray-500">Project:</span>
-                        <%= link_to link.project.name, project_path(link.project), class: "hover:underline" %>
-                      </p>
-                    </div>
+          <ul class="divide-y divide-gray-200 dark:divide-gray-800">
+            <% @task_results.each do |task| %>
+              <li class="p-4">
+                <div class="flex items-start">
+                  <div class="flex items-center mr-3">
+                    <%= form_with(model: task, url: toggle_done_project_task_path(task.project, task), local: false) do |form| %>
+                      <%= form.check_box :done,
+                        checked: task.done,
+                        id: "checkbox_task_#{task.id}",
+                        class: "w-5 h-5 checkbox-round flex",
+                        data: { turbo_action: "advance" },
+                        onchange: "this.form.requestSubmit()" %>
+                    <% end %>
                   </div>
-                </li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+                  <div class="space-y-1">
+                    <p class="task-name">
+                      <%= link_to task.name, details_project_task_path(task.project, task), data: { turbo: false }, class: "hover:underline" %>
+                    </p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                      <span class="mr-1 text-gray-400 dark:text-gray-500">Project:</span>
+                      <%= link_to task.project.name, project_path(task.project), class: "hover:underline" %>
+                    </p>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       <% else %>
         <div class="resource-container">
           <div class="resource-empty-state">
@@ -99,8 +74,8 @@
       <% end %>
     <% elsif @query.present? %>
       <div class="resource-container">
-        <p class="text-sm text-gray-600 dark:text-gray-400">
-          Enter at least <%= @min_query_length %> characters to search tasks and links.
+        <p class="text-sm text-gray-600 dark:text-gray-400 p-4">
+          Enter at least <%= @min_query_length %> characters to search.
         </p>
       </div>
     <% end %>
