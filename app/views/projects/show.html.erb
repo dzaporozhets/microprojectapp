@@ -1,4 +1,12 @@
 <div class="space-y-4">
+  <% if @project.archived? %>
+    <div class="resource-container">
+      <div class="resource-body">
+        <p class="text-sm text-gray-500 dark:text-gray-400">This project is archived. No new tasks can be added.</p>
+      </div>
+    </div>
+  <% end %>
+
   <% if @project.description.present? %>
     <div class="resource-container">
       <div class="resource-body">
