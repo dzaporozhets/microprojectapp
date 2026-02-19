@@ -68,32 +68,6 @@ module SeedData
         print '.'
       end
 
-      # Add notes
-      notes = [
-        {
-          title: "Tech Stack Decision",
-          content: "**Chosen:** React Native\n\n**Reasons:**\n- Team already knows React\n- Large community and libraries\n- Code sharing with web app\n- Expo for easier development\n\n**Alternatives Considered:**\n- Flutter (steeper learning curve)\n- Native (too much duplicate code)"
-        },
-        {
-          title: "App Requirements",
-          content: "**Core Features:**\n- User authentication (Google, Apple, Email)\n- User profile management\n- Push notifications\n- Offline mode support\n- Dark mode\n\n**Target Platforms:**\n- iOS 14+\n- Android 11+\n\n**Launch Date:** End of Q2"
-        },
-        {
-          title: "Design Guidelines",
-          content: "**Colors:**\n- Primary: #2563eb (same as website)\n- Secondary: #10b981\n- Background: #ffffff / #1a1a1a (dark mode)\n\n**Typography:**\n- System fonts (San Francisco on iOS, Roboto on Android)\n- Headings: Bold, 24px\n- Body: Regular, 16px"
-        }
-      ]
-
-      notes.each do |note_data|
-        project.notes.find_or_create_by!(
-          title: note_data[:title],
-          user: owner
-        ) do |note|
-          note.content = note_data[:content]
-        end
-        print '.'
-      end
-
       # Add links
       links = [
         { title: "React Native Documentation", url: "https://reactnative.dev/" },

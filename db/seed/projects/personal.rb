@@ -95,50 +95,6 @@ module SeedData
 
       puts "Personal project populated with #{tasks.count} tasks"
 
-      # Add notes to personal project
-      notes = [
-        {
-          title: "Vacation Ideas",
-          content: "**Destinations to Consider:**\n- Japan (cherry blossom season - April)\n- Iceland (Northern Lights - Sept-March)\n- Portugal (Porto and Lisbon)\n- New Zealand (hiking and nature)\n\n**Budget:** ~$3,000-4,000 per person\n**Duration:** 10-14 days\n\n**Need to decide by:** End of January"
-        },
-        {
-          title: "Home Improvements Wishlist",
-          content: "**Priority:**\n1. Fix leaky bathroom faucet (urgent)\n2. Paint bedroom (spring project)\n3. Replace kitchen cabinet handles\n4. Install smart thermostat\n5. Upgrade outdoor lighting\n\n**Long-term:**\n- Renovate guest bathroom\n- Add deck to backyard\n- Replace old windows"
-        },
-        {
-          title: "Books to Read",
-          content: "**Currently Reading:**\n- \"Atomic Habits\" by James Clear\n\n**Up Next:**\n- \"Project Hail Mary\" by Andy Weir\n- \"The Psychology of Money\" by Morgan Housel\n- \"Educated\" by Tara Westover\n- \"Shoe Dog\" by Phil Knight\n\n**Genre Mix:** Business/Self-help + Fiction"
-        },
-        {
-          title: "Health & Wellness Goals",
-          content: "**Fitness:**\n- Join gym by end of month\n- Work out 3-4x per week\n- Try yoga class\n\n**Medical:**\n- Schedule annual checkup ✓ (need to book)\n- Dentist cleaning every 6 months\n- Eye exam (last one: 2 years ago)\n\n**Diet:**\n- Meal prep Sundays\n- Cut back on coffee (max 2 cups/day)\n- Drink more water (8 glasses/day goal)"
-        },
-        {
-          title: "Gift Ideas",
-          content: "**Mom's Birthday (March 15):**\n- Spa day gift certificate\n- Photo album of family memories\n- Kitchen gadget she mentioned\n\n**Dad's Birthday (July 8):**\n- Golf accessories\n- Book about history\n- BBQ tools set\n\n**Sarah's Wedding (June):**\n- From registry + personal card\n- Budget: $150-200"
-        },
-        {
-          title: "Monthly Budget Notes",
-          content: "**Fixed Expenses:**\n- Rent: $1,800\n- Car payment: $350\n- Insurance: $180\n- Phone: $70\n- Utilities: ~$150\n- Subscriptions: $45 (Netflix, Spotify, etc.)\n\n**Variable:**\n- Groceries: $400-500\n- Gas: $120\n- Entertainment: $200\n- Dining out: $150\n\n**Savings Goal:** $800/month"
-        },
-        {
-          title: "Phone & Internet Plans",
-          content: "**Current Plan:**\n- Provider: Verizon\n- Cost: $70/month\n- Data: Unlimited\n\n**Alternatives to Research:**\n- T-Mobile: $60/month (unlimited)\n- Mint Mobile: $30/month (35GB)\n- Google Fi: $50/month (flexible)\n\n**Internet:**\n- Current: Xfinity $65/month (400 Mbps)\n- Could switch to AT&T Fiber ($55 for 500 Mbps)\n\n**Potential Savings:** $20-40/month"
-        }
-      ]
-
-      notes.each do |note_data|
-        project.notes.find_or_create_by!(
-          title: note_data[:title],
-          user: user
-        ) do |note|
-          note.content = note_data[:content]
-        end
-        print '.'
-      end
-
-      puts "Added #{notes.count} notes to Personal project"
-
       # Add useful links to personal project
       links = [
         { title: "Vacation Booking - Expedia", url: "https://www.expedia.com/" },

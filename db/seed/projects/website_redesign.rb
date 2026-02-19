@@ -149,60 +149,6 @@ module SeedData
         print '.'
       end
 
-      # Add notes
-      notes = [
-        {
-          title: "Design Notes",
-          user: user1,
-          content: "**Color Palette:**\n- Primary: #2563eb (blue)\n- Secondary: #10b981 (green)\n- Accent: #f59e0b (orange)\n\n**Fonts:**\n- Headings: Inter Bold\n- Body: Inter Regular"
-        },
-        {
-          title: "Technical Stack",
-          user: user2,
-          content: "**Frontend:**\n- React 18.2\n- Tailwind CSS 3.4\n- Vite for build tooling\n\n**Backend:**\n- Node.js + Express\n- PostgreSQL database\n\n**Hosting:**\n- Vercel (frontend)\n- Railway (backend)\n\n**Domain:**\n- Currently: staging.example.com\n- Production: www.example.com"
-        },
-        {
-          title: "Responsive Breakpoints",
-          user: user1,
-          content: "Mobile: 320px - 767px\nTablet: 768px - 1023px\nDesktop: 1024px+\nWide: 1440px+\n\nPriority: Mobile-first approach\nAll designs must work perfectly on iPhone SE (375px) and up."
-        },
-        {
-          title: "Performance Goals",
-          user: user2,
-          content: "**Target Metrics:**\n- First Contentful Paint: < 1.5s\n- Largest Contentful Paint: < 2.5s\n- Time to Interactive: < 3.5s\n- Lighthouse Score: 90+\n\n**Optimizations:**\n- Image lazy loading\n- Code splitting\n- CDN for static assets\n- Compress all images (WebP format)"
-        },
-        {
-          title: "Browser Support",
-          user: user1,
-          content: "**Required:**\n- Chrome (last 2 versions)\n- Firefox (last 2 versions)\n- Safari (last 2 versions)\n- Edge (last 2 versions)\n\n**Mobile:**\n- iOS Safari 14+\n- Chrome Mobile (latest)\n\n**NOT Supporting:**\n- Internet Explorer (any version)\n- Opera Mini"
-        },
-        {
-          title: "Content Strategy",
-          user: user1,
-          content: "**Homepage:**\n- Hero section with main value proposition\n- 3 key features showcased\n- Client testimonials carousel\n- Call-to-action for demo\n\n**About Page:**\n- Company story timeline\n- Team photos and bios\n- Mission and values\n\n**Contact:**\n- Form with validation\n- Office location map\n- Social media links"
-        },
-        {
-          title: "Deployment Checklist",
-          user: user2,
-          content: "**Pre-Launch:**\n- [ ] All pages tested on real devices\n- [ ] Forms tested with validation\n- [ ] SEO meta tags added\n- [ ] Google Analytics installed\n- [ ] SSL certificate configured\n- [ ] 404 page designed\n- [ ] Backup strategy in place\n\n**Post-Launch:**\n- [ ] Monitor error logs first 24h\n- [ ] Check analytics tracking\n- [ ] Submit sitemap to Google\n- [ ] Set up uptime monitoring"
-        },
-        {
-          title: "API Endpoints",
-          user: user2,
-          content: "**Public:**\n- GET /api/content - Fetch page content\n- POST /api/contact - Submit contact form\n- GET /api/blog - List blog posts\n\n**Authentication:**\n- POST /api/auth/login\n- POST /api/auth/logout\n- GET /api/auth/me\n\n**Admin:**\n- POST /api/admin/content - Update content\n- GET /api/admin/analytics - View stats\n\nBase URL (staging): https://api-staging.example.com\nBase URL (prod): https://api.example.com"
-        }
-      ]
-
-      notes.each do |note_data|
-        project.notes.find_or_create_by!(
-          title: note_data[:title],
-          user: note_data[:user]
-        ) do |note|
-          note.content = note_data[:content]
-        end
-        print '.'
-      end
-
       # Add links
       links = [
         { title: "Figma - Design Tool", url: "https://www.figma.com/" },
