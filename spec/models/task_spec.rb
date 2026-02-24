@@ -48,15 +48,6 @@ RSpec.describe Task, type: :model do
       end
     end
 
-    describe ".order_by_star_then_old" do
-      let!(:task1) { create(:task, user: user, project: project, star: false, created_at: 3.days.ago) }
-      let!(:task2) { create(:task, user: user, project: project, star: false, created_at: 2.day.ago) }
-      let!(:task3) { create(:task, user: user, project: project, star: true, created_at: 1.day.ago) }
-
-      it "orders by star in descending order and then by created_at in ascending order" do
-        expect(Task.order_by_star_then_old).to eq([task3, task1, task2])
-      end
-    end
   end
 
   describe 'callbacks' do

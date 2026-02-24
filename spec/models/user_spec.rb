@@ -165,12 +165,6 @@ RSpec.describe User, type: :model do
   end
 
   describe "methods" do
-    describe "#invited?" do
-      it "returns false (TODO: needs implementation)" do
-        expect(user.invited?).to be false
-      end
-    end
-
     describe "#admin?" do
       it "returns false by default" do
         expect(user.admin?).to be false
@@ -290,50 +284,6 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe '#oauth_config?' do
-      before do
-        allow(Devise.mappings[:user]).to receive(:omniauthable?).and_return(omniauthable)
-
-        allow(Rails.application.config).to receive(:app_settings).and_return(
-          Rails.application.config.app_settings.merge(
-            google_client_id: '123'
-          )
-        )
-      end
-
-      context 'when omniauthable and GOOGLE_CLIENT_ID is present' do
-        let(:omniauthable) { true }
-
-        it 'returns true' do
-          expect(user.oauth_config?).to be true
-        end
-      end
-
-      context 'when omniauthable is false' do
-        let(:omniauthable) { false }
-
-        it 'returns false' do
-          expect(user.oauth_config?).to be false
-        end
-      end
-
-      context 'when GOOGLE_CLIENT_ID is nil' do
-        let(:omniauthable) { true }
-
-        before do
-          allow(Rails.application.config).to receive(:app_settings).and_return(
-            Rails.application.config.app_settings.merge(
-              google_client_id: nil
-            )
-          )
-        end
-
-        it 'returns false' do
-          expect(user.oauth_config?).to be false
-        end
-      end
-    end
-
     describe '#all_active_projects' do
       let(:user) { create(:user) }
       let!(:personal_project) { user.personal_project }
@@ -373,20 +323,5 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe "#created_today?" do
-      context "when the user is created today" do
-        it "returns true" do
-          user = create(:user, created_at: Time.current)
-          expect(user.created_today?).to be true
-        end
-      end
-
-      context "when the user is not created today" do
-        it "returns false" do
-          user = create(:user, created_at: 2.days.ago)
-          expect(user.created_today?).to be false
-        end
-      end
-    end
   end
 end

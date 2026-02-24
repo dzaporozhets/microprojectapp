@@ -6,10 +6,6 @@ class Comment < ApplicationRecord
 
   mount_uploader :attachment, AttachmentUploader
 
-  def image_attachment?
-    attachment.content_type.start_with?('image/')
-  end
-
   delegate :email, to: :user, prefix: true
 
   def removed?

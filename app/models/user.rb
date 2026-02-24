@@ -54,9 +54,6 @@ class User < ApplicationRecord
   # Enums
   enum :dark_mode, { off: 0, on: 1, auto: 2 }
 
-  # Scopes
-  scope :admins, -> { where(admin: true) }
-
   # Validations
   validate :email_domain_check, on: :create
 
@@ -133,11 +130,6 @@ class User < ApplicationRecord
   #
   # Authentication methods
   #
-  def oauth_config?
-    Devise.mappings[:user].omniauthable? &&
-      Rails.application.config.app_settings[:google_client_id].present?
-  end
-
   def oauth_user?
     uid.present? && provider.present?
   end
@@ -167,16 +159,8 @@ class User < ApplicationRecord
     @personal_project ||= projects.find_by(name: "Personal")
   end
 
-  def personal_projects
-    if personal_project.present?
-      [personal_project]
-    else
-      []
-    end
-  end
-
   def all_active_projects
-    personal_projects +
+    (personal_project ? [personal_project] : []) +
       projects.active.without_personal.ordered_by_id +
       invited_projects.active.ordered_by_id
   end
@@ -200,10 +184,6 @@ class User < ApplicationRecord
     theme_name&.downcase
   end
 
-  def img_url
-    avatar&.url || oauth_avatar_url
-  end
-
   def provider_human
     OAUTH_PROVIDERS[provider]
   end
@@ -211,17 +191,8 @@ class User < ApplicationRecord
   #
   # Status methods
   #
-  def invited?
-    # TODO: Implement invitation logic
-    false
-  end
-
   def admin?
     admin
-  end
-
-  def created_today?
-    created_at.to_date == Date.current
   end
 
   private

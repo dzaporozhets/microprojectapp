@@ -11,7 +11,6 @@ RSpec.describe Project, type: :model do
     it { is_expected.to have_many(:project_users).dependent(:destroy) }
     it { is_expected.to have_many(:users).through(:project_users) }
     it { is_expected.to have_many(:pins).dependent(:destroy) }
-    it { is_expected.to have_many(:users_who_pinned).through(:pins).source(:user) }
   end
 
   describe "validations" do
