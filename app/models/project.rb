@@ -16,7 +16,6 @@ class Project < ApplicationRecord
   has_many :users, through: :project_users
   has_many :activities, dependent: :destroy
   has_many :pins, dependent: :destroy
-  has_many :users_who_pinned, through: :pins, source: :user
 
   # Validations
   validates :name, presence: true, length: { maximum: 512 }
@@ -32,7 +31,6 @@ class Project < ApplicationRecord
   scope :active, -> { where(archived: false) }
   scope :archived, -> { where(archived: true) }
   scope :ordered_by_id, -> { order(id: :asc) }
-  scope :ordered_by_id_desc, -> { order(id: :desc) }
   scope :without_personal, -> { where.not(name: PERSONAL_PROJECT_NAME) }
 
   # Project type methods
