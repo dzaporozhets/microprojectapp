@@ -18,42 +18,42 @@
       </div>
     </div>
 
-    <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">ID</dt>
-        <dd class="text-sm text-base"><%= @user.id %></dd>
+    <div class="form-section">
+      <div class="data-row">
+        <dt class="data-label">ID</dt>
+        <dd class="text-sm text-default"><%= @user.id %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Email</dt>
-        <dd class="text-sm text-base"><%= @user.email %></dd>
+      <div class="data-row">
+        <dt class="data-label">Email</dt>
+        <dd class="text-sm text-default"><%= @user.email %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Created At</dt>
-        <dd class="text-sm text-base"><%= @user.created_at %></dd>
+      <div class="data-row">
+        <dt class="data-label">Created At</dt>
+        <dd class="text-sm text-default"><%= @user.created_at %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Updated At</dt>
-        <dd class="text-sm text-base"><%= @user.updated_at %></dd>
+      <div class="data-row">
+        <dt class="data-label">Updated At</dt>
+        <dd class="text-sm text-default"><%= @user.updated_at %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Admin</dt>
-        <dd class="text-sm text-base"><%= @user.admin %></dd>
+      <div class="data-row">
+        <dt class="data-label">Admin</dt>
+        <dd class="text-sm text-default"><%= @user.admin %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Allow Invites</dt>
-        <dd class="text-sm text-base"><%= @user.allow_invites %></dd>
+      <div class="data-row">
+        <dt class="data-label">Allow Invites</dt>
+        <dd class="text-sm text-default"><%= @user.allow_invites %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Provider</dt>
-        <dd class="text-sm text-base"><%= @user.provider %></dd>
+      <div class="data-row">
+        <dt class="data-label">Provider</dt>
+        <dd class="text-sm text-default"><%= @user.provider %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Created from OAuth</dt>
-        <dd class="text-sm text-base"><%= @user.created_from_oauth %></dd>
+      <div class="data-row">
+        <dt class="data-label">Created from OAuth</dt>
+        <dd class="text-sm text-default"><%= @user.created_from_oauth %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">OAuth Linked At</dt>
-        <dd class="text-sm text-base"><%= @user.oauth_linked_at %></dd>
+      <div class="data-row">
+        <dt class="data-label">OAuth Linked At</dt>
+        <dd class="text-sm text-default"><%= @user.oauth_linked_at %></dd>
       </div>
     </div>
   </div>
@@ -67,26 +67,26 @@
       </div>
     </div>
 
-    <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Projects created</dt>
-        <dd class="text-sm text-base"><%= @user.projects.count %></dd>
+    <div class="form-section">
+      <div class="data-row">
+        <dt class="data-label">Projects created</dt>
+        <dd class="text-sm text-default"><%= @user.projects.count %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Tasks created</dt>
-        <dd class="text-sm text-base"><%= @user.tasks.count %></dd>
+      <div class="data-row">
+        <dt class="data-label">Tasks created</dt>
+        <dd class="text-sm text-default"><%= @user.tasks.count %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Comments created</dt>
-        <dd class="text-sm text-base"><%= @user.comments.count %></dd>
+      <div class="data-row">
+        <dt class="data-label">Comments created</dt>
+        <dd class="text-sm text-default"><%= @user.comments.count %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Failed Attempts</dt>
-        <dd class="text-sm text-base"><%= @user.failed_attempts %></dd>
+      <div class="data-row">
+        <dt class="data-label">Failed Attempts</dt>
+        <dd class="text-sm text-default"><%= @user.failed_attempts %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Locked At</dt>
-        <dd class="text-sm text-base"><%= @user.locked_at %></dd>
+      <div class="data-row">
+        <dt class="data-label">Locked At</dt>
+        <dd class="text-sm text-default"><%= @user.locked_at %></dd>
       </div>
     </div>
   </div>
@@ -102,7 +102,7 @@
       </div>
 
       <div class="p-4">
-        <%= button_to 'Delete this account', admin_user_path(@user), method: :delete, data: { turbo_confirm: "Delete account with all the data? Are you sure?", confirm: "Are you sure you want to delete this user?" }, class: 'px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 text-sm' %>
+        <%= button_to 'Delete this account', admin_user_path(@user), method: :delete, data: { turbo_confirm: "Delete account with all the data? Are you sure?", confirm: "Are you sure you want to delete this user?" }, class: 'btn-danger' %>
       </div>
     </div>
   <% end %>

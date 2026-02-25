@@ -8,22 +8,22 @@
       </div>
     </div>
 
-    <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Application Version</dt>
-        <dd class="text-sm text-base"><%= @version %></dd>
+    <div class="form-section">
+      <div class="data-row">
+        <dt class="data-label">Application Version</dt>
+        <dd class="text-sm text-default"><%= @version %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Rails environment</dt>
-        <dd class="text-sm text-base"><%= @rails_env %></dd>
+      <div class="data-row">
+        <dt class="data-label">Rails environment</dt>
+        <dd class="text-sm text-default"><%= @rails_env %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">File uploads storage</dt>
-        <dd class="text-sm text-base"><%= admin_config_uploads_storage %></dd>
+      <div class="data-row">
+        <dt class="data-label">File uploads storage</dt>
+        <dd class="text-sm text-default"><%= admin_config_uploads_storage %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Application domain</dt>
-        <dd class="text-sm text-base">
+      <div class="data-row">
+        <dt class="data-label">Application domain</dt>
+        <dd class="text-sm text-default">
           <% if @domain.present? %>
             <%= @domain %>
           <% else %>
@@ -36,38 +36,38 @@
           <% end %>
         </dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">New users sign-up</dt>
-        <dd class="text-sm text-base"><%= @app_signup %></dd>
+      <div class="data-row">
+        <dt class="data-label">New users sign-up</dt>
+        <dd class="text-sm text-default"><%= @app_signup %></dd>
       </div>
       <div class="p-4">
         <div class="flex justify-between items-start">
           <div class="flex-1">
-            <dt class="text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">
+            <dt class="data-label mb-1">
               Restrict sign-up to a single domain
             </dt>
             <dd class="text-sm text-gray-600 dark:text-gray-400">
               For instance, only users whose email addresses end with @yourcompany.com can register.
             </dd>
           </div>
-          <dd class="text-sm text-base ml-4 text-right"><%= @allowed_domain %></dd>
+          <dd class="text-sm text-default ml-4 text-right"><%= @allowed_domain %></dd>
         </div>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">OAuth Login Providers</dt>
-        <dd class="text-sm text-base">
+      <div class="data-row">
+        <dt class="data-label">OAuth Login Providers</dt>
+        <dd class="text-sm text-default">
           <%= @oauth_providers.present? ? @oauth_providers : "Not configured" %>
         </dd>
       </div>
       <div class="p-4">
         <div class="flex justify-between items-start">
           <div class="flex-1">
-            <dt class="text-sm font-medium text-gray-900 dark:text-gray-200 mb-1">Email Login</dt>
+            <dt class="data-label mb-1">Email Login</dt>
             <dd class="text-sm text-gray-600 dark:text-gray-400">
               Controls whether users can register and log in using email and password. This setting does not affect OAuth providers like Google or Microsoft.
             </dd>
           </div>
-          <dd class="text-sm text-base ml-4 text-right">
+          <dd class="text-sm text-default ml-4 text-right">
             <%= @disable_email_login ? "Disabled (OAuth only)" : "Enabled" %>
           </dd>
         </div>
@@ -84,38 +84,38 @@
       </div>
     </div>
 
-    <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Users</dt>
-        <dd class="text-sm text-base"><%= @total_users %></dd>
+    <div class="form-section">
+      <div class="data-row">
+        <dt class="data-label">Users</dt>
+        <dd class="text-sm text-default"><%= @total_users %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Projects</dt>
-        <dd class="text-sm text-base"><%= @total_projects %></dd>
+      <div class="data-row">
+        <dt class="data-label">Projects</dt>
+        <dd class="text-sm text-default"><%= @total_projects %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">File uploads</dt>
-        <dd class="text-sm text-base"><%= @total_files %></dd>
+      <div class="data-row">
+        <dt class="data-label">File uploads</dt>
+        <dd class="text-sm text-default"><%= @total_files %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Tasks</dt>
-        <dd class="text-sm text-base"><%= @total_tasks %></dd>
+      <div class="data-row">
+        <dt class="data-label">Tasks</dt>
+        <dd class="text-sm text-default"><%= @total_tasks %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">Comments</dt>
-        <dd class="text-sm text-base"><%= @total_comments %></dd>
+      <div class="data-row">
+        <dt class="data-label">Comments</dt>
+        <dd class="text-sm text-default"><%= @total_comments %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">
+      <div class="data-row">
+        <dt class="data-label">
           Activities <span class="font-light text-gray-500">(24 hours)</span>
         </dt>
-        <dd class="text-sm text-base"><%= @recent_activities_count %></dd>
+        <dd class="text-sm text-default"><%= @recent_activities_count %></dd>
       </div>
-      <div class="flex justify-between items-center p-4">
-        <dt class="text-sm font-medium text-gray-900 dark:text-gray-200">
+      <div class="data-row">
+        <dt class="data-label">
           Users <span class="font-light text-gray-500">(24 hours)</span>
         </dt>
-        <dd class="text-sm text-base"><%= @recent_users_count %></dd>
+        <dd class="text-sm text-default"><%= @recent_users_count %></dd>
       </div>
     </div>
   </div>

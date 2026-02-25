@@ -26,7 +26,7 @@
           <li class="flex justify-between">
             <div class="flex min-w-0 items-center">
               <%= avatar_tag(@project.user, "h-10 w-10 flex-none rounded-full") %>
-              <div class="ml-4 min-w-0 flex-1">
+              <div class="list-item-content">
                 <div class="flex items-center">
                   <%= link_to @project.user.email, project_tasks_path(@project, assigned_user_id: @project.user_id), class: "link-primary list-text-primary truncate" %>
                 </div>
@@ -44,7 +44,7 @@
             <li id="project_<%= dom_id user %>" class="flex justify-between">
               <div class="flex min-w-0 items-center">
                 <%= avatar_tag(user, "h-10 w-10 flex-none rounded-full") %>
-                <div class="ml-4 min-w-0 flex-1">
+                <div class="list-item-content">
                   <div class="flex items-center">
                     <%= link_to user.email, project_tasks_path(@project, assigned_user_id: user.id), class: "link-primary list-text-primary truncate" %>
                   </div>
@@ -55,9 +55,9 @@
               </div>
 
               <% if current_user == @project.owner %>
-                <div class="flex-shrink-0 flex items-center space-x-2">
+                <div class="list-item-actions">
                   <%= button_to project_user_path(@project, user), method: :delete,
-                    class: "inline-flex items-center p-1.5",
+                    class: "icon-btn",
                     title: "Remove",
                     data: { turbo_confirm: 'Remove team member? Are you sure?' } do %>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">

@@ -21,22 +21,22 @@
   <div>
     <%= form_with(model: [task.project, task], data: { turbo: turbo_frame_request? }) do |form| %>
       <% if task.errors.any? %>
-        <div id="ar-errors-text" data-turbo-cache="false" class="p-4 mb-4 bg-red-50 border border-red-200 rounded-md dark:bg-red-900/20 dark:border-red-800">
+        <div id="ar-errors-text" data-turbo-cache="false" class="error-box">
           <%= render("project/tasks/form_errors", resource: task) %>
         </div>
       <% end %>
 
-      <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
+      <div class="form-section">
         <div class="p-4">
           <div>
-            <%= form.label :name, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
+            <%= form.label :name, class: "form-label" %>
             <%= form.text_area :name, class: "block w-full base-input", required: true, rows: 2, placeholder: "Enter task name..." %>
           </div>
         </div>
 
         <div class="p-4">
           <div>
-            <%= form.label :description, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
+            <%= form.label :description, class: "form-label" %>
             <%= form.text_area :description, class: "block w-full base-input resize-y", rows: 5, placeholder: "Enter task description..." %>
           </div>
         </div>

@@ -29,7 +29,7 @@
 
           <% if @imported_tasks.present? %>
             <div>
-              <h4 class="text-sm font-medium text-gray-900 dark:text-gray-200 mb-2">Imported tasks preview:</h4>
+              <h4 class="form-label">Imported tasks preview:</h4>
               <ul class="resource-list">
                 <% @imported_tasks.first(10).each do |task| %>
                   <li class="text-sm text-gray-600 dark:text-gray-400"><%= task.name %></li>

@@ -23,7 +23,7 @@
     @apply border-gray-200 dark:border-gray-700;
   }
 
-  .text-base {
+  .text-default {
     @apply text-gray-700 dark:text-gray-300;
   }
 
@@ -31,7 +31,7 @@
    * Nav
    *----------------------------------------*/
   .nav-container {
-    @apply py-3 border-b border-base text-base space-y-2 bg-base;
+    @apply py-3 border-b border-base text-default space-y-2 bg-base;
   }
 
   .nav-title {
@@ -70,6 +70,10 @@
     @apply btn py-1 px-2;
   }
 
+  .icon-btn {
+    @apply inline-flex items-center p-1.5;
+  }
+
   .btn-base {
     @apply btn border bg-gray-100 dark:bg-gray-800
            dark:hover:bg-gray-700 hover:bg-gray-200 hover:shadow transition
@@ -90,11 +94,32 @@
     @apply btn-primary py-1 px-2;
   }
 
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700
+           border-red-600 dark:border-red-700
+           focus-visible:ring-red-600;
+  }
+
   .btn-remove {
     @apply btn border font-medium
            bg-gray-100 text-red-600 border-red-600 hover:bg-red-600 hover:text-white
            dark:bg-gray-800 dark:text-red-500 dark:border-red-500 dark:hover:bg-red-600 dark:hover:text-white
            focus-visible:ring-red-600;
+  }
+
+  /*----------------------------------------*
+   * Form Components
+   *----------------------------------------*/
+  .form-label {
+    @apply block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2;
+  }
+
+  .form-section {
+    @apply divide-y divide-gray-200 dark:divide-gray-700 space-y-0;
+  }
+
+  .error-box {
+    @apply p-4 mb-4 bg-red-50 border border-red-200 rounded-md dark:bg-red-900/20 dark:border-red-800;
   }
 
   /*----------------------------------------*
@@ -211,6 +236,26 @@
     @apply mt-1 max-w-2xl text-sm text-muted;
   }
 
+  .data-row {
+    @apply flex justify-between items-center p-4;
+  }
+
+  .data-label {
+    @apply text-sm font-medium text-gray-900 dark:text-gray-200;
+  }
+
+  .list-row {
+    @apply flex items-center justify-between;
+  }
+
+  .list-item-content {
+    @apply ml-4 min-w-0 flex-1;
+  }
+
+  .list-item-actions {
+    @apply flex-shrink-0 flex items-center space-x-2;
+  }
+
   .resource-list {
     @apply divide-y divide-gray-200 dark:divide-gray-800;
     list-style: none;
@@ -238,10 +283,6 @@
 
   .resource-empty-action {
     @apply mt-6;
-  }
-
-  .resource-action-icon {
-    @apply -ml-1 mr-2 h-5 w-5;
   }
 
   /*----------------------------------------*
@@ -280,7 +321,7 @@
   }
 
   .text-primary {
-    @apply text-base font-medium;
+    @apply text-default font-medium;
   }
 
   .text-secondary {

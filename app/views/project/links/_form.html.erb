@@ -3,12 +3,12 @@
 
   <div class="space-y-6">
     <div>
-      <%= form.label :url, "Put your URL here", class: 'block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2' %>
+      <%= form.label :url, "Put your URL here", class: 'form-label' %>
       <%= form.text_field :url, class: "block w-full base-input", required: true, placeholder: "https://example.com" %>
     </div>
 
     <div>
-      <%= form.label :title, 'Give it a name or leave blank', class: 'block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2' %>
+      <%= form.label :title, 'Give it a name or leave blank', class: 'form-label' %>
       <%= form.text_field :title, class: "block w-full base-input", placeholder: "Optional title for the link" %>
     </div>
 

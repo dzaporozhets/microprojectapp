@@ -15,11 +15,11 @@
         <div class="space-y-3">
           <div class="flex items-center">
             <span class="text-sm font-medium text-gray-900 dark:text-gray-200 w-32">Provider:</span>
-            <span class="text-sm text-base"><%= current_user.provider_human %></span>
+            <span class="text-sm text-default"><%= current_user.provider_human %></span>
           </div>
           <div class="flex items-center">
             <span class="text-sm font-medium text-gray-900 dark:text-gray-200 w-32">Email:</span>
-            <span class="text-sm text-base"><%= current_user.email %></span>
+            <span class="text-sm text-default"><%= current_user.email %></span>
           </div>
         </div>
       </div>
@@ -40,7 +40,7 @@
         <div class="mb-4">
           <p class="text-sm font-medium text-gray-900 dark:text-gray-200 mb-2">Your new token (copy it now — it won't be shown in full again):</p>
           <div class="flex items-center gap-2">
-            <code id="api-token-value" class="text-sm text-base bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded select-all break-all"><%= flash[:api_token] %></code>
+            <code id="api-token-value" class="text-sm text-default bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded select-all break-all"><%= flash[:api_token] %></code>
             <button type="button" class="btn-base" onclick="navigator.clipboard.writeText(document.getElementById('api-token-value').textContent).then(() => { this.textContent = 'Copied!'; setTimeout(() => { this.textContent = 'Copy'; }, 2000) })">
               Copy
             </button>
@@ -60,7 +60,7 @@
       <% elsif current_user.api_token_digest.present? %>
         <div class="mb-4">
           <span class="text-sm font-medium text-gray-900 dark:text-gray-200">Token:</span>
-          <code class="text-sm text-base ml-2"><%= ("•" * 24) + current_user.api_token_last8 %></code>
+          <code class="text-sm text-default ml-2"><%= ("•" * 24) + current_user.api_token_last8 %></code>
         </div>
 
         <div class="flex gap-2">
