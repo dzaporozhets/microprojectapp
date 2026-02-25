@@ -68,6 +68,36 @@ class MicroProjectMCP
         },
         required: ['task_id']
       }
+    },
+    {
+      name: 'create_task',
+      description: 'Create a new task in a MicroProject project.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          name: {
+            type: 'string',
+            description: 'Task name (required)'
+          },
+          description: {
+            type: 'string',
+            description: 'Task description'
+          },
+          due_date: {
+            type: 'string',
+            description: 'Due date in YYYY-MM-DD format'
+          },
+          star: {
+            type: 'boolean',
+            description: 'Star the task'
+          },
+          project_id: {
+            type: 'string',
+            description: 'Project ID (uses default from MICROPROJECT_PROJECT_ID if omitted)'
+          }
+        },
+        required: ['name']
+      }
     }
   ].freeze
 
@@ -122,6 +152,7 @@ class MicroProjectMCP
              when 'list_tasks'   then call_list_tasks(args)
              when 'get_task'     then call_get_task(args)
              when 'toggle_task_done' then call_toggle_task_done(args)
+             when 'create_task'     then call_create_task(args)
              else return jsonrpc_error(id, -32602, "Unknown tool: #{tool_name}")
              end
 
@@ -203,6 +234,21 @@ class MicroProjectMCP
     "Task ##{t['id']} \"#{t['name']}\" marked as **#{status}**."
   end
 
+  def call_create_task(args)
+    project_id = resolve_project_id(args)
+    path = "/api/v1/projects/#{project_id}/tasks"
+
+    body = { task: { name: args.fetch('name') } }
+    body[:task][:description] = args['description'] if args['description']
+    body[:task][:due_date] = args['due_date'] if args['due_date']
+    body[:task][:star] = args['star'] if args.key?('star')
+
+    data = api_post(path, body)
+    t = data['task']
+
+    "Created task ##{t['id']} \"#{t['name']}\" in project #{project_id}."
+  end
+
   def resolve_project_id(args)
     args['project_id'] || project_id_from_file || @default_project_id ||
       raise('No project_id provided and MICROPROJECT_PROJECT_ID not set')
@@ -230,6 +276,16 @@ class MicroProjectMCP
     req['Authorization'] = "Bearer #{@api_token}"
     req['Accept'] = 'application/json'
     req['Content-Type'] = 'application/json'
+    perform_request(uri, req)
+  end
+
+  def api_post(path, body)
+    uri = URI("#{@api_url}#{path}")
+    req = Net::HTTP::Post.new(uri)
+    req['Authorization'] = "Bearer #{@api_token}"
+    req['Accept'] = 'application/json'
+    req['Content-Type'] = 'application/json'
+    req.body = JSON.generate(body)
     perform_request(uri, req)
   end
 

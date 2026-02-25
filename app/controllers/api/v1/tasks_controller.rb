@@ -1,5 +1,5 @@
 class Api::V1::TasksController < Api::V1::BaseController
-  before_action :set_task, only: [:show, :toggle_done]
+  before_action :set_task, only: %i[show toggle_done]
 
   def index
     tasks = case params[:status]
@@ -25,6 +25,23 @@ class Api::V1::TasksController < Api::V1::BaseController
     }
   end
 
+  def create
+    if @project.archived?
+      render json: { error: 'Cannot add tasks to an archived project' }, status: :unprocessable_entity
+      return
+    end
+
+    @task = @project.tasks.new(task_params)
+    @task.user = @current_api_user
+
+    if @task.save
+      @project.add_activity(@current_api_user, 'created', @task)
+      render json: { task: task_detail(@task, []) }, status: :created
+    else
+      render json: { errors: @task.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   def toggle_done
     new_done = !@task.done
 
@@ -44,6 +61,18 @@ class Api::V1::TasksController < Api::V1::BaseController
     unless @task
       render json: { error: 'Not found' }, status: :not_found
     end
+  end
+
+  def task_params
+    permitted = params.require(:task).permit(:name, :description, :due_date, :star, :assigned_user_id)
+
+    if permitted[:assigned_user_id].present?
+      unless @project.find_user(permitted[:assigned_user_id])
+        permitted.delete(:assigned_user_id)
+      end
+    end
+
+    permitted
   end
 
   def task_summary(task)

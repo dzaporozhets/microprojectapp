@@ -102,6 +102,68 @@ RSpec.describe "Api::V1::Tasks", type: :request do
     end
   end
 
+  describe "POST /api/v1/projects/:project_id/tasks" do
+    it "creates a task with just a name" do
+      expect {
+        post api_v1_project_tasks_path(project), params: { task: { name: "New task" } }, headers: headers, as: :json
+      }.to change(Task, :count).by(1)
+
+      expect(response).to have_http_status(:created)
+      body = JSON.parse(response.body)
+      expect(body['task']['name']).to eq("New task")
+      expect(body['task']['done']).to be false
+    end
+
+    it "creates a task with all optional fields" do
+      post api_v1_project_tasks_path(project),
+        params: { task: { name: "Full task", description: "Details here", due_date: "2026-03-01", star: true } },
+        headers: headers, as: :json
+
+      expect(response).to have_http_status(:created)
+      body = JSON.parse(response.body)
+      expect(body['task']['name']).to eq("Full task")
+      expect(body['task']['description']).to eq("Details here")
+      expect(body['task']['due_date']).to include("2026-03-01")
+      expect(body['task']['star']).to be true
+    end
+
+    it "creates an activity log entry" do
+      expect {
+        post api_v1_project_tasks_path(project), params: { task: { name: "Logged task" } }, headers: headers, as: :json
+      }.to change(Activity, :count).by(1)
+    end
+
+    it "returns 422 when name is blank" do
+      post api_v1_project_tasks_path(project), params: { task: { name: "" } }, headers: headers, as: :json
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      body = JSON.parse(response.body)
+      expect(body['errors']).to include("Name can't be blank")
+    end
+
+    it "returns 422 when project is archived" do
+      project.update!(archived: true)
+
+      post api_v1_project_tasks_path(project), params: { task: { name: "Nope" } }, headers: headers, as: :json
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      body = JSON.parse(response.body)
+      expect(body['error']).to include('archived')
+    end
+
+    it "returns 422 when task limit is reached" do
+      allow_any_instance_of(Task).to receive(:task_limit).and_wrap_original do |method|
+        method.receiver.errors.add(:base, "This project has reached the limit of #{Task::TASK_LIMIT} tasks.")
+      end
+
+      post api_v1_project_tasks_path(project), params: { task: { name: "Over limit" } }, headers: headers, as: :json
+
+      expect(response).to have_http_status(:unprocessable_entity)
+      body = JSON.parse(response.body)
+      expect(body['errors'].first).to include("limit")
+    end
+  end
+
   describe "PATCH /api/v1/projects/:project_id/tasks/:id/toggle_done" do
     it "toggles a todo task to done" do
       patch toggle_done_api_v1_project_task_path(project, task_todo), headers: headers

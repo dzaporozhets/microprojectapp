@@ -1,6 +1,6 @@
 # MicroProject MCP Server for Claude Code
 
-Connect Claude Code to your MicroProject instance so it can read tasks, view details, and toggle tasks done — from any project directory.
+Connect Claude Code to your MicroProject instance so it can read tasks, view details, create tasks, and toggle tasks done — from any project directory.
 
 ## 1. Generate an API Token
 
@@ -74,6 +74,7 @@ Once configured, Claude Code can use these tools:
 |------|-------------|
 | `list_tasks` | List tasks with status, stars, due dates. Filterable by `todo`, `done`, or `all`. |
 | `get_task` | Get full task detail — description, assigned user, and comments. |
+| `create_task` | Create a new task. Requires `name`, optional `description`, `due_date`, `star`. |
 | `toggle_task_done` | Mark a task as done or reopen it. |
 
 All tools accept an optional `project_id` parameter to override the default.

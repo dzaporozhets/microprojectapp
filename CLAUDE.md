@@ -118,6 +118,7 @@ Include `Authorization: Bearer <token>` header. Generate tokens at `/users/accou
 ### Endpoints
 - `GET /api/v1/projects/:project_id/tasks?status=todo|done|all` — List tasks
 - `GET /api/v1/projects/:project_id/tasks/:id` — Task detail with comments
+- `POST /api/v1/projects/:project_id/tasks` — Create task (params: `name`, `description`, `due_date`, `star`, `assigned_user_id`)
 - `PATCH /api/v1/projects/:project_id/tasks/:id/toggle_done` — Toggle done
 
 ### Rate Limit
@@ -143,6 +144,7 @@ See `mcp/README.md` for full setup instructions.
 ### Tools
 - `list_tasks` — List tasks with checkbox notation
 - `get_task` — Full detail with description + comments
+- `create_task` — Create a new task
 - `toggle_task_done` — Toggle done/undone
 
 ## Environment Variables
