@@ -36,6 +36,11 @@ class Project::TasksController < Project::BaseController
   end
 
   def new
+    if project.archived?
+      redirect_to project_url(@project), alert: "Cannot add tasks to an archived project."
+      return
+    end
+
     @task = Task.new
   end
 
@@ -43,6 +48,11 @@ class Project::TasksController < Project::BaseController
   end
 
   def create
+    if project.archived?
+      redirect_to project_url(@project), alert: "Cannot add tasks to an archived project."
+      return
+    end
+
     @task = project.tasks.new(task_params)
     @task.user = current_user
 
