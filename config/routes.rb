@@ -58,6 +58,7 @@ Rails.application.routes.draw do
     resource :settings, only: [:show, :update]
     resource :account, only: [:show, :update, :destroy] do
       post :generate_api_token
+      delete :revoke_api_token
     end
   end
   get 'users/:id/avatar', to: 'users/avatars#show', as: :user_avatar

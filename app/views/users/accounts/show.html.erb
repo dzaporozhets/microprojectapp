@@ -47,20 +47,32 @@
           </div>
         </div>
 
-        <%= button_to "Regenerate Token", generate_api_token_users_account_path,
-            method: :post,
-            data: { turbo_confirm: "This will invalidate your current token. Continue?" },
-            class: "btn-base" %>
+        <div class="flex gap-2">
+          <%= button_to "Regenerate Token", generate_api_token_users_account_path,
+              method: :post,
+              data: { turbo_confirm: "This will invalidate your current token. Continue?" },
+              class: "btn-base" %>
+          <%= button_to "Revoke Token", revoke_api_token_users_account_path,
+              method: :delete,
+              data: { turbo_confirm: "This will revoke your API token. Continue?" },
+              class: "btn-remove" %>
+        </div>
       <% elsif current_user.api_token_digest.present? %>
         <div class="mb-4">
           <span class="text-sm font-medium text-gray-900 dark:text-gray-200">Token:</span>
           <code class="text-sm text-base ml-2"><%= ("•" * 24) + current_user.api_token_last8 %></code>
         </div>
 
-        <%= button_to "Regenerate Token", generate_api_token_users_account_path,
-            method: :post,
-            data: { turbo_confirm: "This will invalidate your current token. Continue?" },
-            class: "btn-base" %>
+        <div class="flex gap-2">
+          <%= button_to "Regenerate Token", generate_api_token_users_account_path,
+              method: :post,
+              data: { turbo_confirm: "This will invalidate your current token. Continue?" },
+              class: "btn-base" %>
+          <%= button_to "Revoke Token", revoke_api_token_users_account_path,
+              method: :delete,
+              data: { turbo_confirm: "This will revoke your API token. Continue?" },
+              class: "btn-remove" %>
+        </div>
       <% else %>
         <div class="mb-4">
           <p class="text-sm text-gray-600 dark:text-gray-400">No token generated.</p>

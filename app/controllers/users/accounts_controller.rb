@@ -24,6 +24,11 @@ class Users::AccountsController < ApplicationController
     redirect_to users_account_path, notice: 'API token generated. Copy it now — it won\'t be shown in full again.'
   end
 
+  def revoke_api_token
+    current_user.clear_api_token!
+    redirect_to users_account_path, notice: 'API token revoked.'
+  end
+
   def destroy
     if current_user.destroy
       sign_out current_user
