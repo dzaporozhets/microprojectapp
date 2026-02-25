@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+Version 0.16.0 (2026-02-25)
+---------------------------
+- Add API and MCP server support for task management
+- Add ability to revoke API tokens
+- Add optional description to projects
+- Remove notes feature
+- Redesign project, user, and admin navigation
+- Refactor CSS and add frontend documentation
+- Fix UI for archived projects and task show on mobile
+- Remove dead code and cleanup specs
+
 Version 0.15.0 (2026-02-08)
 ---------------------------
 - Remove Resources tab and link overview from project page
