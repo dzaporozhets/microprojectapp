@@ -284,6 +284,50 @@ RSpec.describe User, type: :model do
       end
     end
 
+    describe '#generate_api_token!' do
+      it 'returns a 64-character hex token' do
+        raw_token = user.generate_api_token!
+        expect(raw_token).to match(/\A[0-9a-f]{64}\z/)
+      end
+
+      it 'stores a SHA256 digest, not the raw token' do
+        raw_token = user.generate_api_token!
+        expected_digest = Digest::SHA256.hexdigest(raw_token)
+        expect(user.reload.api_token_digest).to eq(expected_digest)
+      end
+
+      it 'stores the last 8 characters' do
+        raw_token = user.generate_api_token!
+        expect(user.reload.api_token_last8).to eq(raw_token.last(8))
+      end
+    end
+
+    describe '#clear_api_token!' do
+      it 'sets digest and last8 to nil' do
+        user.generate_api_token!
+        user.clear_api_token!
+        expect(user.reload.api_token_digest).to be_nil
+        expect(user.reload.api_token_last8).to be_nil
+      end
+    end
+
+    describe '.authenticate_by_api_token' do
+      it 'finds user by raw token' do
+        raw_token = user.generate_api_token!
+        expect(User.authenticate_by_api_token(raw_token)).to eq(user)
+      end
+
+      it 'returns nil for wrong token' do
+        user.generate_api_token!
+        expect(User.authenticate_by_api_token('wrong')).to be_nil
+      end
+
+      it 'returns nil for blank token' do
+        expect(User.authenticate_by_api_token('')).to be_nil
+        expect(User.authenticate_by_api_token(nil)).to be_nil
+      end
+    end
+
     describe '#all_active_projects' do
       let(:user) { create(:user) }
       let!(:personal_project) { user.personal_project }
