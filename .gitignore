@@ -46,6 +46,7 @@
 /certs/*
 !/certs/.keep
 .DS_Store
+.microproject
 
 .clj-kondo/
 .lsp/
