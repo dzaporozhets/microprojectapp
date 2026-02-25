@@ -204,7 +204,16 @@ class MicroProjectMCP
   end
 
   def resolve_project_id(args)
-    args['project_id'] || @default_project_id || raise('No project_id provided and MICROPROJECT_PROJECT_ID not set')
+    args['project_id'] || project_id_from_file || @default_project_id ||
+      raise('No project_id provided and MICROPROJECT_PROJECT_ID not set')
+  end
+
+  def project_id_from_file
+    path = File.join(Dir.pwd, '.microproject')
+    return unless File.exist?(path)
+
+    id = File.read(path).strip
+    id.empty? ? nil : id
   end
 
   def api_get(path)

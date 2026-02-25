@@ -134,7 +134,9 @@ claude mcp add -s user microproject -- ruby /absolute/path/to/microprojectapp/mc
 Then add env vars to `~/.claude.json` under `mcpServers.microproject.env`:
 - `MICROPROJECT_API_URL` — your instance URL
 - `MICROPROJECT_API_TOKEN` — token from Account page
-- `MICROPROJECT_PROJECT_ID` — default project ID
+- `MICROPROJECT_PROJECT_ID` — default project ID (optional if using `.microproject` file)
+
+Alternatively, create a `.microproject` file in any project root with just the project ID to use per-directory configuration.
 
 See `mcp/README.md` for full setup instructions.
 

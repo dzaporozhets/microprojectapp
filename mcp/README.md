@@ -44,11 +44,29 @@ Replace:
 
 Using `-s user` scope makes the tools available from **any** project directory, not just this repo.
 
-## 3. Restart Claude Code
+## 3. Per-Project Configuration
+
+Instead of setting a global `MICROPROJECT_PROJECT_ID`, you can create a `.microproject` file in any project root containing just the project ID:
+
+```bash
+echo "42" > .microproject
+```
+
+The server resolves the project ID in this order:
+
+1. Explicit `project_id` parameter passed to the tool
+2. `.microproject` file in the current working directory
+3. `MICROPROJECT_PROJECT_ID` env var
+
+This lets you work with different MicroProject projects across different codebases. Add `.microproject` to your `.gitignore` since it contains a user-specific ID.
+
+If you use `.microproject` files, the `MICROPROJECT_PROJECT_ID` env var becomes optional.
+
+## 4. Restart Claude Code
 
 After saving `settings.json`, restart Claude Code (or start a new session) for the MCP server to load.
 
-## 4. Available Tools
+## 5. Available Tools
 
 Once configured, Claude Code can use these tools:
 
@@ -60,7 +78,7 @@ Once configured, Claude Code can use these tools:
 
 All tools accept an optional `project_id` parameter to override the default.
 
-## 5. Verify It Works
+## 6. Verify It Works
 
 In any Claude Code session, ask:
 
