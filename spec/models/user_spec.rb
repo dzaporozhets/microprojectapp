@@ -311,20 +311,20 @@ RSpec.describe User, type: :model do
       end
     end
 
-    describe '.find_by_api_token' do
+    describe '.authenticate_by_api_token' do
       it 'finds user by raw token' do
         raw_token = user.generate_api_token!
-        expect(User.find_by_api_token(raw_token)).to eq(user)
+        expect(User.authenticate_by_api_token(raw_token)).to eq(user)
       end
 
       it 'returns nil for wrong token' do
         user.generate_api_token!
-        expect(User.find_by_api_token('wrong')).to be_nil
+        expect(User.authenticate_by_api_token('wrong')).to be_nil
       end
 
       it 'returns nil for blank token' do
-        expect(User.find_by_api_token('')).to be_nil
-        expect(User.find_by_api_token(nil)).to be_nil
+        expect(User.authenticate_by_api_token('')).to be_nil
+        expect(User.authenticate_by_api_token(nil)).to be_nil
       end
     end
 

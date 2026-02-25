@@ -1,6 +1,4 @@
-class Api::V1::BaseController < ActionController::Base
-  skip_before_action :verify_authenticity_token
-
+class Api::V1::BaseController < ActionController::Base # rubocop:disable Rails/ApplicationController
   before_action :authenticate_api_user!
   before_action :set_project
   before_action :authorize_api_access
@@ -15,7 +13,7 @@ class Api::V1::BaseController < ActionController::Base
       return
     end
 
-    @current_api_user = User.find_by_api_token(token)
+    @current_api_user = User.authenticate_by_api_token(token)
 
     unless @current_api_user
       render json: { error: 'Unauthorized' }, status: :unauthorized

@@ -204,7 +204,7 @@ class User < ApplicationRecord
     update!(api_token_digest: nil, api_token_last8: nil)
   end
 
-  def self.find_by_api_token(raw_token)
+  def self.authenticate_by_api_token(raw_token)
     return nil if raw_token.blank?
 
     find_by(api_token_digest: Digest::SHA256.hexdigest(raw_token))

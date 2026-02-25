@@ -173,7 +173,7 @@ class MicroProjectMCP
     lines << "**Created:** #{t['created_at']}"
     lines << "**Updated:** #{t['updated_at']}"
 
-    if t['description'] && !t['description'].empty?
+    if t['description']&.length&.positive?
       lines << "" << "### Description" << "" << t['description']
     end
 
