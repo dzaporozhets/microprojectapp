@@ -32,9 +32,16 @@ module ApplicationHelper
 
     if user.avatar?
       user_avatar_path(user)
-    else
+    elsif user.oauth_avatar_url.present?
       user.oauth_avatar_url
+    elsif user.use_gravatar?
+      gravatar_url(user.email)
     end
+  end
+
+  def gravatar_url(email, size: 80)
+    hash = Digest::SHA256.hexdigest(email.strip.downcase)
+    "https://www.gravatar.com/avatar/#{hash}?s=#{size}&d=404"
   end
 
   def time_ago_short(time)

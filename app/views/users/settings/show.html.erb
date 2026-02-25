@@ -71,7 +71,7 @@
               </div>
             </div>
           </div>
-        <% elsif avatar_src(@user).present? %>
+        <% elsif @user.oauth_avatar_url.present? %>
           <div class="p-4">
             <h2 class="resource-subtitle">Avatar</h2>
 
@@ -81,6 +81,25 @@
               </div>
               <p class="text-sm text-gray-500 dark:text-gray-400">Avatar provided by OAuth login</p>
             </div>
+          </div>
+        <% else %>
+          <div class="p-4">
+            <h2 class="resource-subtitle">Avatar</h2>
+
+            <div class="flex items-center space-x-4">
+              <div class="flex items-center">
+                <%= f.check_box :use_gravatar, class: 'checkbox' %>
+                <%= f.label :use_gravatar, "Use Gravatar", class: 'ml-2 text-sm text-default' %>
+              </div>
+
+              <% if avatar_src(@user).present? %>
+                <div class="flex-shrink-0">
+                  <%= image_tag avatar_src(@user), alt: "Current Avatar", class: "w-10 h-10 rounded-full object-cover" %>
+                </div>
+              <% end %>
+            </div>
+
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Display your <a href="https://gravatar.com" target="_blank" class="underline">Gravatar</a> based on your email address</p>
           </div>
         <% end %>
 

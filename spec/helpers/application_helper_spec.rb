@@ -98,6 +98,76 @@ RSpec.describe ApplicationHelper, type: :helper do
     end
   end
 
+  describe '#avatar_src' do
+    let(:user) { double('User', id: 1, email: 'test@example.com') }
+
+    context 'when user has an uploaded avatar' do
+      before do
+        allow(user).to receive(:avatar?).and_return(true)
+        allow(helper).to receive(:user_avatar_path).with(user).and_return('/users/1/avatar')
+      end
+
+      it 'returns the uploaded avatar path' do
+        expect(helper.avatar_src(user)).to eq('/users/1/avatar')
+      end
+    end
+
+    context 'when user has an oauth avatar' do
+      before do
+        allow(user).to receive(:avatar?).and_return(false)
+        allow(user).to receive(:oauth_avatar_url).and_return('https://oauth.example.com/photo.jpg')
+        allow(user).to receive(:use_gravatar?).and_return(true)
+      end
+
+      it 'returns oauth_avatar_url over gravatar' do
+        expect(helper.avatar_src(user)).to eq('https://oauth.example.com/photo.jpg')
+      end
+    end
+
+    context 'when user has gravatar enabled' do
+      before do
+        allow(user).to receive(:avatar?).and_return(false)
+        allow(user).to receive(:oauth_avatar_url).and_return(nil)
+        allow(user).to receive(:use_gravatar?).and_return(true)
+      end
+
+      it 'returns gravatar URL' do
+        result = helper.avatar_src(user)
+        expect(result).to start_with('https://www.gravatar.com/avatar/')
+      end
+    end
+
+    context 'when user has no avatar at all' do
+      before do
+        allow(user).to receive(:avatar?).and_return(false)
+        allow(user).to receive(:oauth_avatar_url).and_return(nil)
+        allow(user).to receive(:use_gravatar?).and_return(false)
+      end
+
+      it 'returns nil' do
+        expect(helper.avatar_src(user)).to be_nil
+      end
+    end
+
+    it 'returns nil when user is nil' do
+      expect(helper.avatar_src(nil)).to be_nil
+    end
+  end
+
+  describe '#gravatar_url' do
+    it 'returns a gravatar URL with SHA256 hash' do
+      result = helper.gravatar_url('test@example.com')
+      hash = Digest::SHA256.hexdigest('test@example.com')
+      expect(result).to eq("https://www.gravatar.com/avatar/#{hash}?s=80&d=404")
+    end
+
+    it 'normalizes email case and whitespace' do
+      result = helper.gravatar_url(' Test@Example.com ')
+      hash = Digest::SHA256.hexdigest('test@example.com')
+      expect(result).to include(hash)
+    end
+  end
+
   describe '#avatar_tag' do
     let(:user) { double('User', id: 1, email: 'test@example.com') }
     let(:default_options) { { size: 40, alt: 'Avatar' } }
@@ -122,6 +192,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       before do
         allow(user).to receive(:avatar?).and_return(false)
         allow(user).to receive(:oauth_avatar_url).and_return(nil)
+        allow(user).to receive(:use_gravatar?).and_return(false)
       end
 
       it 'generates a div with the correct initial' do
