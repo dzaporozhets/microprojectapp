@@ -66,6 +66,7 @@ bundle exec rake user:make_admin EMAIL=user@example.com
 - **Stimulus controllers** in `app/javascript/controllers/` handle client-side interactivity
 - **Turbo Rails** provides SPA-like navigation without full-page reloads
 - **Tailwind CSS** for styling; themes available: Gray, Indigo, Orange, Pink, Violet
+- **Reusable CSS components** defined in `app/assets/stylesheets/application.tailwind.css` — see `docs/dev/frontend.md` for the full reference with ERB examples. Prefer these classes over inline Tailwind for common UI patterns (buttons, forms, cards, lists, etc.)
 
 ### Key Domain Limits
 - Max 3,999 tasks per project

@@ -2,7 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/*  Table of Contents
+ *  -----------------
+ *  1. Base & Theme
+ *  2. Navigation
+ *  3. Buttons
+ *  4. Forms & Inputs
+ *  5. Tabs
+ *  6. Flash Messages
+ *  7. Resource Containers
+ *  8. Lists & Data Display
+ *  9. Tasks
+ *  10. Typography & Text
+ *  11. Utilities
+ */
+
 @layer components {
+
+  /*----------------------------------------*
+   * 1. Base & Theme
+   *----------------------------------------*/
   .body-color {
     @apply bg-gray-100 dark:bg-black text-gray-800 dark:text-gray-300;
   }
@@ -27,8 +46,12 @@
     @apply text-gray-700 dark:text-gray-300;
   }
 
+  .turbo-progress-bar {
+    background: #312e81 !important;
+  }
+
   /*----------------------------------------*
-   * Nav
+   * 2. Navigation
    *----------------------------------------*/
   .nav-container {
     @apply py-3 border-b border-base text-default space-y-2 bg-base;
@@ -50,9 +73,8 @@
     @apply border-none;
   }
 
-
   /*----------------------------------------*
-   * Buttons
+   * 3. Buttons
    *----------------------------------------*/
   .btn {
     @apply py-2 px-3 rounded-md text-sm cursor-pointer
@@ -108,7 +130,7 @@
   }
 
   /*----------------------------------------*
-   * Form Components
+   * 4. Forms & Inputs
    *----------------------------------------*/
   .form-label {
     @apply block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2;
@@ -122,9 +144,6 @@
     @apply p-4 mb-4 bg-red-50 border border-red-200 rounded-md dark:bg-red-900/20 dark:border-red-800;
   }
 
-  /*----------------------------------------*
-   * Input Fields
-   *----------------------------------------*/
   .base-input {
     @apply rounded-md px-2 py-2 shadow-sm border text-base md:text-sm
            border-base
@@ -133,29 +152,6 @@
            placeholder-gray-600 dark:placeholder-gray-300 dark:focus:bg-gray-950;
   }
 
-  /*----------------------------------------*
-   * Tab Buttons
-   *----------------------------------------*/
-  .tab-container {
-    @apply inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg;
-  }
-
-  .tab {
-    @apply inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md
-           text-gray-600 dark:text-gray-400
-           hover:text-gray-900 dark:hover:text-gray-100
-           hover:bg-gray-50 dark:hover:bg-gray-700;
-  }
-
-  .tab-active {
-    @apply inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md
-           bg-white dark:bg-gray-900 shadow-sm;
-  }
-
-
-  /*----------------------------------------*
-   * Form Controls: Checkbox, Radio
-   *----------------------------------------*/
   .checkbox {
     @apply text-violet-600 bg-gray-100 border-gray-300 rounded
            focus-visible:ring-2 focus-visible:ring-violet-600 dark:bg-gray-700 dark:border-gray-600;
@@ -166,16 +162,6 @@
            focus-visible:ring-2 focus-visible:ring-violet-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600;
   }
 
-  /*----------------------------------------*
-   * Turbo Progress Bar
-   *----------------------------------------*/
-  .turbo-progress-bar {
-    background: #312e81 !important;
-  }
-
-  /*----------------------------------------*
-   * File Select
-   *----------------------------------------*/
   .file-select {
     @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2
            text-gray-700 dark:text-gray-300
@@ -196,10 +182,27 @@
     @apply text-gray-700 bg-gray-100;
   }
 
+  /*----------------------------------------*
+   * 5. Tabs
+   *----------------------------------------*/
+  .tab-container {
+    @apply inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg;
+  }
 
+  .tab {
+    @apply inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md
+           text-gray-600 dark:text-gray-400
+           hover:text-gray-900 dark:hover:text-gray-100
+           hover:bg-gray-50 dark:hover:bg-gray-700;
+  }
+
+  .tab-active {
+    @apply inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md
+           bg-white dark:bg-gray-900 shadow-sm;
+  }
 
   /*----------------------------------------*
-   * Flash Components
+   * 6. Flash Messages
    *----------------------------------------*/
    .flash-notice {
      @apply bg-violet-50 border rounded-md border-violet-300 text-violet-900 dark:bg-violet-950 dark:border-violet-800 dark:text-violet-200;
@@ -210,18 +213,18 @@
    }
 
   /*----------------------------------------*
-   * Project Resource Components
+   * 7. Resource Containers
    *----------------------------------------*/
   .resource-container {
     @apply bg-base shadow-sm rounded-lg;
   }
 
-  .resource-body {
-    @apply p-4;
-  }
-
   .resource-header {
     @apply p-4 flex justify-between items-center border-b border-base;
+  }
+
+  .resource-body {
+    @apply p-4;
   }
 
   .resource-title {
@@ -234,26 +237,6 @@
 
   .resource-description {
     @apply mt-1 max-w-2xl text-sm text-muted;
-  }
-
-  .data-row {
-    @apply flex justify-between items-center p-4;
-  }
-
-  .data-label {
-    @apply text-sm font-medium text-gray-900 dark:text-gray-200;
-  }
-
-  .list-row {
-    @apply flex items-center justify-between;
-  }
-
-  .list-item-content {
-    @apply ml-4 min-w-0 flex-1;
-  }
-
-  .list-item-actions {
-    @apply flex-shrink-0 flex items-center space-x-2;
   }
 
   .resource-list {
@@ -286,7 +269,30 @@
   }
 
   /*----------------------------------------*
-   * Project Tasks
+   * 8. Lists & Data Display
+   *----------------------------------------*/
+  .data-row {
+    @apply flex justify-between items-center p-4;
+  }
+
+  .data-label {
+    @apply text-sm font-medium text-gray-900 dark:text-gray-200;
+  }
+
+  .list-row {
+    @apply flex items-center justify-between;
+  }
+
+  .list-item-content {
+    @apply ml-4 min-w-0 flex-1;
+  }
+
+  .list-item-actions {
+    @apply flex-shrink-0 flex items-center space-x-2;
+  }
+
+  /*----------------------------------------*
+   * 9. Tasks
    *----------------------------------------*/
   .resource-body .task {
     @apply px-4;
@@ -306,15 +312,16 @@
     @apply text-black dark:text-gray-100;
   }
 
-  /*----------------------------------------*
-   * Project Lists
-   *----------------------------------------*/
+  .task-name {
+    @apply list-text-primary text-gray-900 dark:text-gray-100 line-clamp-2;
+  }
+
   .status-dot-overdue {
     @apply inline-block h-2 w-2 rounded-full bg-red-500;
   }
 
   /*----------------------------------------*
-   * Misc
+   * 10. Typography & Text
    *----------------------------------------*/
   .text-muted {
     @apply text-gray-500 dark:text-gray-400;
@@ -332,33 +339,8 @@
     @apply text-sm font-medium;
   }
 
-  .task-name {
-    @apply list-text-primary text-gray-900 dark:text-gray-100 line-clamp-2;
-  }
-
   .list-text-secondary {
     @apply text-xs text-muted;
-  }
-
-  /*----------------------------------------*
-   * CSS Helper Classes (non-theme)
-   *----------------------------------------*/
-
-  /* Avatar Styles */
-  .avatar-bg {
-    @apply bg-gray-200 dark:bg-gray-800 rounded-full;
-  }
-
-  /* Link Styles */
-  .link-primary {
-    @apply text-violet-900 dark:text-violet-100 hover:text-violet-700 hover:dark:text-violet-300;
-  }
-
-  /* Checkbox Styles */
-  .checkbox-round {
-    @apply focus-visible:ring-violet-500 text-violet-700 dark:text-violet-300
-           bg-gray-100 border-gray-300 dark:border-gray-600 rounded-xl
-           focus-visible:ring-2 dark:bg-gray-700;
   }
 
   .comment-body {
@@ -367,5 +349,22 @@
 
   .comment-body a {
     @apply underline text-violet-700;
+  }
+
+  /*----------------------------------------*
+   * 11. Utilities
+   *----------------------------------------*/
+  .avatar-bg {
+    @apply bg-gray-200 dark:bg-gray-800 rounded-full;
+  }
+
+  .link-primary {
+    @apply text-violet-900 dark:text-violet-100 hover:text-violet-700 hover:dark:text-violet-300;
+  }
+
+  .checkbox-round {
+    @apply focus-visible:ring-violet-500 text-violet-700 dark:text-violet-300
+           bg-gray-100 border-gray-300 dark:border-gray-600 rounded-xl
+           focus-visible:ring-2 dark:bg-gray-700;
   }
 }
