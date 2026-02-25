@@ -127,22 +127,15 @@ Include `Authorization: Bearer <token>` header. Generate tokens at `/users/accou
 A standalone MCP server at `mcp/server.rb` exposes MicroProject tasks to Claude Code.
 
 ### Setup
-Add to `~/.claude/settings.json`:
-```json
-{
-  "mcpServers": {
-    "microproject": {
-      "command": "ruby",
-      "args": ["/absolute/path/to/microprojectapp/mcp/server.rb"],
-      "env": {
-        "MICROPROJECT_API_URL": "https://your-vps.example.com",
-        "MICROPROJECT_API_TOKEN": "your-token-from-account-page",
-        "MICROPROJECT_PROJECT_ID": "1"
-      }
-    }
-  }
-}
+```bash
+claude mcp add -s user microproject -- ruby /absolute/path/to/microprojectapp/mcp/server.rb
 ```
+Then add env vars to `~/.claude.json` under `mcpServers.microproject.env`:
+- `MICROPROJECT_API_URL` — your instance URL
+- `MICROPROJECT_API_TOKEN` — token from Account page
+- `MICROPROJECT_PROJECT_ID` — default project ID
+
+See `mcp/README.md` for full setup instructions.
 
 ### Tools
 - `list_tasks` — List tasks with checkbox notation

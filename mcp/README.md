@@ -11,12 +11,19 @@ Connect Claude Code to your MicroProject instance so it can read tasks, view det
 
 ## 2. Configure Claude Code
 
-Add the following to your **global** Claude Code settings at `~/.claude/settings.json`:
+The recommended way is with the CLI:
+
+```bash
+claude mcp add -s user microproject -- ruby /absolute/path/to/microprojectapp/mcp/server.rb
+```
+
+Then edit `~/.claude.json` to add the env vars to the `mcpServers.microproject.env` object:
 
 ```json
 {
   "mcpServers": {
     "microproject": {
+      "type": "stdio",
       "command": "ruby",
       "args": ["/absolute/path/to/microprojectapp/mcp/server.rb"],
       "env": {
@@ -35,7 +42,7 @@ Replace:
 - `MICROPROJECT_API_TOKEN` — the token you copied in step 1
 - `MICROPROJECT_PROJECT_ID` — default project ID (visible in the URL when viewing a project)
 
-Because this is in `~/.claude/settings.json` (global), the tools are available from **any** project directory, not just this repo.
+Using `-s user` scope makes the tools available from **any** project directory, not just this repo.
 
 ## 3. Restart Claude Code
 
