@@ -51,10 +51,10 @@
             method: :post,
             data: { turbo_confirm: "This will invalidate your current token. Continue?" },
             class: "btn-base" %>
-      <% elsif current_user.api_token.present? %>
+      <% elsif current_user.api_token_digest.present? %>
         <div class="mb-4">
           <span class="text-sm font-medium text-gray-900 dark:text-gray-200">Token:</span>
-          <code class="text-sm text-base ml-2"><%= ("•" * 24) + current_user.api_token.last(8) %></code>
+          <code class="text-sm text-base ml-2"><%= ("•" * 24) + current_user.api_token_last8 %></code>
         </div>
 
         <%= button_to "Regenerate Token", generate_api_token_users_account_path,

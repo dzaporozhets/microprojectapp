@@ -5,7 +5,7 @@ RSpec.describe "Api::V1::Tasks", type: :request do
   let(:project) { create(:project, user: user) }
   let!(:task_todo) { create(:task, project: project, user: user, done: false, star: true) }
   let!(:task_done) { create(:task, project: project, user: user, done: true) }
-  let(:token) { user.generate_api_token!; user.api_token }
+  let(:token) { user.generate_api_token! }
   let(:headers) { { 'Authorization' => "Bearer #{token}" } }
 
   describe "authentication" do

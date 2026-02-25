@@ -15,7 +15,7 @@ class Api::V1::BaseController < ActionController::Base
       return
     end
 
-    @current_api_user = User.find_by(api_token: token)
+    @current_api_user = User.find_by_api_token(token)
 
     unless @current_api_user
       render json: { error: 'Unauthorized' }, status: :unauthorized

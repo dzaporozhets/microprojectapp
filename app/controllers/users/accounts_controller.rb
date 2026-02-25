@@ -19,8 +19,8 @@ class Users::AccountsController < ApplicationController
   end
 
   def generate_api_token
-    current_user.generate_api_token!
-    flash[:api_token] = current_user.api_token
+    raw_token = current_user.generate_api_token!
+    flash[:api_token] = raw_token
     redirect_to users_account_path, notice: 'API token generated. Copy it now — it won\'t be shown in full again.'
   end
 

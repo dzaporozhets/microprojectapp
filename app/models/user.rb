@@ -192,11 +192,22 @@ class User < ApplicationRecord
   # API token methods
   #
   def generate_api_token!
-    update!(api_token: SecureRandom.hex(32))
+    raw_token = SecureRandom.hex(32)
+    update!(
+      api_token_digest: Digest::SHA256.hexdigest(raw_token),
+      api_token_last8: raw_token.last(8)
+    )
+    raw_token
   end
 
   def clear_api_token!
-    update!(api_token: nil)
+    update!(api_token_digest: nil, api_token_last8: nil)
+  end
+
+  def self.find_by_api_token(raw_token)
+    return nil if raw_token.blank?
+
+    find_by(api_token_digest: Digest::SHA256.hexdigest(raw_token))
   end
 
   #
