@@ -15,18 +15,6 @@ module CssHelper
     "tab-active #{theme_text}"
   end
 
-  def ui_toggle
-    "tab-container"
-  end
-
-  def ui_toggle_tab
-    "tab"
-  end
-
-  def ui_toggle_active_tab
-    "tab-active #{theme_text}"
-  end
-
   private
 
   def theme_bg

@@ -15,15 +15,4 @@ module ProjectsHelper
     render_tabs(tabs, selected)
   end
 
-  def project_nav_link(path, label, count = nil, compact: false)
-    link_to path, class: "flex flex-col bg-gray-400/5 p-3 sm:p-6 dark:bg-white/5" do
-      content = tag.dt(label, class: "text-xs/5 font-semibold text-gray-600 dark:text-gray-300")
-
-      unless compact
-        content += tag.dd(count, class: "order-first text-2xl font-semibold tracking-tight text-gray-900 dark:text-white")
-      end
-
-      content
-    end
-  end
 end

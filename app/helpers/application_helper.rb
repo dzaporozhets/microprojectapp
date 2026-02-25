@@ -13,11 +13,6 @@ module ApplicationHelper
     render_tabs(tabs, selected)
   end
 
-  def formatted_date(date)
-    day_with_ordinal = date.day.ordinalize
-    date.strftime("%A, #{day_with_ordinal}")
-  end
-
   def avatar_tag(user, css_class = '', options = { size: 40, alt: 'Avatar' })
     if avatar_src(user).present?
       content_tag(:div, class: 'flex') do
@@ -40,10 +35,6 @@ module ApplicationHelper
     else
       user.oauth_avatar_url
     end
-  end
-
-  def current_page
-    params[:page].to_i || 1
   end
 
   def time_ago_short(time)

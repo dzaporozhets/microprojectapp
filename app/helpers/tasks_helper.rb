@@ -26,15 +26,4 @@ module TasksHelper
     end
   end
 
-  def task_star_icon(task)
-    return unless task.star
-
-    render 'project/tasks/star', task: task
-  end
-
-  def tasks_lists_page?(project)
-    current_page?(project_path(project)) ||
-      current_page?(completed_project_tasks_path(project)) ||
-      current_page?(project_tasks_path(project))
-  end
 end
