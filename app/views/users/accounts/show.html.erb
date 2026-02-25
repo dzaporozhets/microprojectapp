@@ -26,6 +26,53 @@
     </div>
   <% end %>
 
+  <!-- API Access -->
+  <div class="resource-container">
+    <div class="resource-header">
+      <div>
+        <h3 class="resource-title">API Access</h3>
+        <p class="resource-description">Use an API token to access your projects from external tools.</p>
+      </div>
+    </div>
+
+    <div class="p-4">
+      <% if flash[:api_token].present? %>
+        <div class="mb-4">
+          <p class="text-sm font-medium text-gray-900 dark:text-gray-200 mb-2">Your new token (copy it now — it won't be shown in full again):</p>
+          <div class="flex items-center gap-2">
+            <code id="api-token-value" class="text-sm text-base bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded select-all break-all"><%= flash[:api_token] %></code>
+            <button type="button" class="btn-base" onclick="navigator.clipboard.writeText(document.getElementById('api-token-value').textContent).then(() => { this.textContent = 'Copied!'; setTimeout(() => { this.textContent = 'Copy'; }, 2000) })">
+              Copy
+            </button>
+          </div>
+        </div>
+
+        <%= button_to "Regenerate Token", generate_api_token_users_account_path,
+            method: :post,
+            data: { turbo_confirm: "This will invalidate your current token. Continue?" },
+            class: "btn-base" %>
+      <% elsif current_user.api_token.present? %>
+        <div class="mb-4">
+          <span class="text-sm font-medium text-gray-900 dark:text-gray-200">Token:</span>
+          <code class="text-sm text-base ml-2"><%= ("•" * 24) + current_user.api_token.last(8) %></code>
+        </div>
+
+        <%= button_to "Regenerate Token", generate_api_token_users_account_path,
+            method: :post,
+            data: { turbo_confirm: "This will invalidate your current token. Continue?" },
+            class: "btn-base" %>
+      <% else %>
+        <div class="mb-4">
+          <p class="text-sm text-gray-600 dark:text-gray-400">No token generated.</p>
+        </div>
+
+        <%= button_to "Generate Token", generate_api_token_users_account_path,
+            method: :post,
+            class: "btn-base" %>
+      <% end %>
+    </div>
+  </div>
+
   <!-- Delete Account -->
   <div class="resource-container">
     <div class="resource-header">

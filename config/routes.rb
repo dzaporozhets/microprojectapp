@@ -56,7 +56,9 @@ Rails.application.routes.draw do
 
   namespace :users do
     resource :settings, only: [:show, :update]
-    resource :account, only: [:show, :update, :destroy]
+    resource :account, only: [:show, :update, :destroy] do
+      post :generate_api_token
+    end
   end
   get 'users/:id/avatar', to: 'users/avatars#show', as: :user_avatar
 
@@ -74,6 +76,18 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   get "hello" => "hello#welcome"
+
+  namespace :api do
+    namespace :v1 do
+      resources :projects, only: [] do
+        resources :tasks, only: [:index, :show] do
+          member do
+            patch :toggle_done
+          end
+        end
+      end
+    end
+  end
 
   # Defines the root path route ("/")
   root "projects#index"

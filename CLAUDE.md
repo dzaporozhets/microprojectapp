@@ -107,6 +107,48 @@ if condition
 end
 ```
 
+## API
+
+Token-authenticated REST API scoped to projects the user has access to.
+
+### Authentication
+Include `Authorization: Bearer <token>` header. Generate tokens at `/users/account`.
+
+### Endpoints
+- `GET /api/v1/projects/:project_id/tasks?status=todo|done|all` — List tasks
+- `GET /api/v1/projects/:project_id/tasks/:id` — Task detail with comments
+- `PATCH /api/v1/projects/:project_id/tasks/:id/toggle_done` — Toggle done
+
+### Rate Limit
+60 requests/minute per token.
+
+## MCP Server
+
+A standalone MCP server at `mcp/server.rb` exposes MicroProject tasks to Claude Code.
+
+### Setup
+Add to `~/.claude/settings.json`:
+```json
+{
+  "mcpServers": {
+    "microproject": {
+      "command": "ruby",
+      "args": ["/absolute/path/to/microprojectapp/mcp/server.rb"],
+      "env": {
+        "MICROPROJECT_API_URL": "https://your-vps.example.com",
+        "MICROPROJECT_API_TOKEN": "your-token-from-account-page",
+        "MICROPROJECT_PROJECT_ID": "1"
+      }
+    }
+  }
+}
+```
+
+### Tools
+- `list_tasks` — List tasks with checkbox notation
+- `get_task` — Full detail with description + comments
+- `toggle_task_done` — Toggle done/undone
+
 ## Environment Variables
 
 See `/docs/CONFIG.md` for full reference. Key variables:

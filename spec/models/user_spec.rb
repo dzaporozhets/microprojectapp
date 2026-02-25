@@ -284,6 +284,26 @@ RSpec.describe User, type: :model do
       end
     end
 
+    describe '#generate_api_token!' do
+      it 'generates a 64-character hex token' do
+        user.generate_api_token!
+        expect(user.api_token).to match(/\A[0-9a-f]{64}\z/)
+      end
+
+      it 'persists the token' do
+        user.generate_api_token!
+        expect(user.reload.api_token).to be_present
+      end
+    end
+
+    describe '#clear_api_token!' do
+      it 'sets the token to nil' do
+        user.generate_api_token!
+        user.clear_api_token!
+        expect(user.reload.api_token).to be_nil
+      end
+    end
+
     describe '#all_active_projects' do
       let(:user) { create(:user) }
       let!(:personal_project) { user.personal_project }

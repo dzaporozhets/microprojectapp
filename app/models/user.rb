@@ -189,6 +189,17 @@ class User < ApplicationRecord
   end
 
   #
+  # API token methods
+  #
+  def generate_api_token!
+    update!(api_token: SecureRandom.hex(32))
+  end
+
+  def clear_api_token!
+    update!(api_token: nil)
+  end
+
+  #
   # Status methods
   #
   def admin?
