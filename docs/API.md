@@ -12,11 +12,15 @@ Authorization: Bearer YOUR_API_TOKEN
 
 Generate a token from your **Account** page (`/users/account`). Tokens are scoped to your user — you can access any project you own or are invited to.
 
-To revoke a token, click **Regenerate Token** (invalidates the old one).
-
 ## Rate Limiting
 
-API requests are throttled to **60 requests per minute** per token. Exceeding this returns `429 Too Many Requests`.
+Requests to `/api/*` are throttled to `60` requests per minute per bearer token. When the limit is exceeded, the app returns:
+
+```json
+{ "error": "Throttle limit reached. Try again later." }
+```
+
+with HTTP `429 Too Many Requests`.
 
 ## Endpoints
 
@@ -31,7 +35,7 @@ GET /api/v1/projects/:project_id/tasks
 | Param | Type | Description |
 |-------|------|-------------|
 | `project_id` | integer | **Required.** Project ID (path) |
-| `status` | string | Filter: `todo`, `done`, or `all` (default: `all`) |
+| `status` | string | Filter: `todo` or `done`. Any other value returns all tasks. |
 
 **Response:**
 
@@ -92,15 +96,30 @@ Returns full task detail including description and comments.
 }
 ```
 
+### Create Task
+
+```
+POST /api/v1/projects/:project_id/tasks
+Content-Type: application/json
+```
+
+**Parameters:**
+
+| Param | Type | Description |
+|-------|------|-------------|
+| `name` | string | **Required.** Max length `512`. |
+| `description` | string | Optional task description |
+| `due_date` | date | Optional due date |
+| `star` | boolean | Optional starred state |
+| `assigned_user_id` | integer | Optional assignee. Must belong to the project team or it is ignored. |
+
+Successful response: HTTP `201 Created`
+
 ### Toggle Task Done
 
 ```
 PATCH /api/v1/projects/:project_id/tasks/:id/toggle_done
 ```
-
-Toggles the task between done and not done. Creates an activity log entry.
-
-**Response:**
 
 ```json
 {
@@ -120,10 +139,16 @@ Toggles the task between done and not done. Creates an activity log entry.
 
 ## Errors
 
-All errors return JSON with an `error` key:
+Errors return JSON with either an `error` key or an `errors` key for validation failures:
 
 ```json
 { "error": "Unauthorized" }
+```
+
+Validation failures:
+
+```json
+{ "errors": ["Name can't be blank"] }
 ```
 
 | Status | Meaning |
@@ -131,21 +156,27 @@ All errors return JSON with an `error` key:
 | `401` | Missing or invalid token |
 | `403` | Token valid but no access to this project |
 | `404` | Project or task not found |
-| `422` | Update failed (validation error) |
+| `422` | Validation error or failed update |
 | `429` | Rate limit exceeded |
 
 ## Example: curl
 
 ```bash
-# List todo tasks
 curl -H "Authorization: Bearer TOKEN" \
   https://your-instance.example.com/api/v1/projects/1/tasks?status=todo
 
-# Get task detail
 curl -H "Authorization: Bearer TOKEN" \
   https://your-instance.example.com/api/v1/projects/1/tasks/42
 
+# Create a task
+curl -X POST \
+  -H "Authorization: Bearer TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"task":{"name":"Write API docs","star":true}}' \
+  https://your-instance.example.com/api/v1/projects/1/tasks
+
 # Mark task done (or reopen)
-curl -X PATCH -H "Authorization: Bearer TOKEN" \
+curl -X PATCH \
+  -H "Authorization: Bearer TOKEN" \
   https://your-instance.example.com/api/v1/projects/1/tasks/42/toggle_done
 ```
