@@ -77,7 +77,7 @@
    * 3. Buttons
    *----------------------------------------*/
   .btn {
-    @apply py-2 px-3 rounded-md text-sm cursor-pointer
+    @apply py-2 px-3 rounded-md text-sm cursor-pointer font-medium
            whitespace-nowrap
            transition transform duration-200 ease-in-out
            focus:outline-none focus-visible:ring-2
@@ -99,6 +99,7 @@
   .btn-base {
     @apply btn border bg-gray-100 dark:bg-gray-800
            dark:hover:bg-gray-700 hover:bg-gray-200 hover:shadow transition
+           text-gray-600 dark:text-gray-400
            border-base;
   }
 
