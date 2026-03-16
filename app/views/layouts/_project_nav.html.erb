@@ -1,8 +1,8 @@
-<nav class="nav-container">
-  <div class="flex flex-wrap nav-title">
+<div class="nav-container">
+  <div class="nav-title">
     <div class="flex flex-grow items-center">
-      <ol role="list" class="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-4 flex-grow min-w-0">
-        <li class="flex flex-grow min-w-0">
+      <div class="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-4 flex-grow min-w-0">
+        <div class="flex flex-grow min-w-0">
           <div class="flex items-center text-gray-400">
             <%= link_to @project, class: 'hover:underline' do %>
               <div class="nav-title-link">
@@ -32,10 +32,10 @@
               <% end %>
             </div>
           </div>
-        </li>
+        </div>
 
         <% if @project.has_team? %>
-          <li class="align-center hidden md:flex">
+          <div class="align-center hidden md:flex">
             <div class="flex items-center ml-auto -space-x-2">
               <%= link_to project_tasks_path(@project, assigned_user_id: @project.user_id), title: @project.user.email do %>
                 <%= avatar_tag(@project.user, "h-8 w-8 avatar-bg") %>
@@ -47,17 +47,17 @@
                 <% end %>
               <% end %>
             </div>
-          </li>
+          </div>
         <% end %>
-
-        <% if @tab_name %>
-          <li>
-            <div class="flex flex-grow items-center">
-              <%= project_tabs @project, @tab_name %>
-            </div>
-          </li>
-        <% end %>
-      </ol>
+      </div>
     </div>
   </div>
-</nav>
+
+  <% if @tab_name %>
+    <div class="nav-controls">
+      <div class="flex flex-grow items-center">
+        <%= project_tabs @project, @tab_name %>
+      </div>
+    </div>
+  <% end %>
+</div>

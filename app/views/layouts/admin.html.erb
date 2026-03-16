@@ -7,8 +7,8 @@
   <body class='body-color'>
     <%= render 'layouts/header_compact' %>
 
-    <nav class="nav-container">
-      <div class="flex flex-wrap nav-title">
+    <div class="nav-container">
+      <div class="nav-title">
         <%= link_to admin_path do %>
           <div class="flex items-start gap-x-3">
             <div class="nav-title-link">
@@ -16,10 +16,12 @@
             </div>
           </div>
         <% end %>
+      </div>
 
+      <div class="flex nav-controls">
         <%= admin_tabs @tab_name %>
       </div>
-    </nav>
+    </div>
 
     <main class="main-container">
       <div class="content w-full">
