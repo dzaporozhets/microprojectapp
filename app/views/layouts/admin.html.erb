@@ -4,29 +4,32 @@
     <%= render 'layouts/head' %>
   </head>
 
-  <body class='body-color'>
+  <body class="body-color">
     <%= render 'layouts/header_compact' %>
+    <%= render 'layouts/sidebar' %>
 
-    <div class="nav-container">
-      <div class="nav-title">
-        <%= link_to admin_path do %>
-          <div class="flex items-start gap-x-3">
-            <div class="nav-title-link">
-              <span>Admin area</span>
+    <div class="page-content">
+      <div class="nav-container">
+        <div class="nav-title">
+          <%= link_to admin_path do %>
+            <div class="flex items-start gap-x-3">
+              <div class="nav-title-link">
+                <span>Admin area</span>
+              </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
+
+        <div class="flex nav-controls">
+          <%= admin_tabs @tab_name %>
+        </div>
       </div>
 
-      <div class="flex nav-controls">
-        <%= admin_tabs @tab_name %>
-      </div>
+      <main class="main-container">
+        <div class="content w-full">
+          <%= yield %>
+        </div>
+      </main>
     </div>
-
-    <main class="main-container">
-      <div class="content w-full">
-        <%= yield %>
-      </div>
-    </main>
   </body>
 </html>

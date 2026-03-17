@@ -51,6 +51,18 @@
   }
 
   /*----------------------------------------*
+   * 1b. Sidebar
+   *----------------------------------------*/
+  .page-content {
+    @apply lg:pl-56;
+  }
+
+  .sidebar-bottom-link {
+    @apply flex items-center gap-x-2 rounded-md px-3 py-2 text-sm font-medium
+           hover:bg-black/5 dark:hover:bg-white/10;
+  }
+
+  /*----------------------------------------*
    * 2. Navigation
    *----------------------------------------*/
   .nav-container {
