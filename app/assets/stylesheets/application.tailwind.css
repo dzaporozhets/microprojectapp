@@ -82,7 +82,7 @@
   }
 
   .nav-container .btn-base {
-    @apply border-none;
+    @apply border border-gray-200 dark:border-gray-700;
   }
 
   /*----------------------------------------*
@@ -110,7 +110,8 @@
 
   .btn-base {
     @apply btn border bg-gray-100 dark:bg-gray-800
-           dark:hover:bg-gray-700 hover:bg-gray-200 hover:shadow transition
+           hover:text-gray-900 dark:hover:text-gray-100
+           hover:bg-gray-50 dark:hover:bg-gray-700 transition
            text-gray-600 dark:text-gray-400
            border-base;
   }
@@ -199,7 +200,8 @@
    * 5. Tabs
    *----------------------------------------*/
   .tab-container {
-    @apply inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg;
+    @apply inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg
+           border border-gray-200 dark:border-gray-700;
   }
 
   .tab {
