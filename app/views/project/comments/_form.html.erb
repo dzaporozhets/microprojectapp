@@ -11,17 +11,16 @@
             <%= form.text_area :body, required: true, rows: 3, class: "block w-full resize-none border-0 p-3 text-gray-900 placeholder-gray-400 focus:ring-0 sm:text-sm dark:bg-gray-800 dark:focus:bg-gray-950 dark:text-gray-300", placeholder: "Type your comment here...", data: { submit_on_ctrl_enter_target: "textarea" } %>
           </div>
 
-          <div class="mt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
-            <% if file_storage_enabled? %>
-              <div class="flex-1">
-                <%= styled_file_field(form, :attachment) %>
-              </div>
-            <% else %>
-              <div class="flex-1"></div>
-            <% end %>
+          <div class="mt-3 flex items-center">
             <div class="flex-shrink-0">
               <%= form.submit 'Comment', class: "btn-base" %>
             </div>
+            <% if file_storage_enabled? %>
+              <div class="hidden sm:block mx-4 h-6 w-px bg-gray-300 dark:bg-gray-600"></div>
+              <div class="hidden sm:block flex-shrink-0">
+                <%= styled_file_field(form, :attachment) %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
