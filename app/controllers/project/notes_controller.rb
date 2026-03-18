@@ -18,6 +18,7 @@ class Project::NotesController < Project::BaseController
 
     respond_to do |format|
       if @note.save
+        @project.add_activity(current_user, 'created', @note)
         format.html { redirect_to project_notes_path(@project), notice: "Note was successfully created." }
         format.json { render :show, status: :created, location: @note }
       else
@@ -29,6 +30,7 @@ class Project::NotesController < Project::BaseController
 
   def destroy
     @note.destroy!
+    @project.add_activity(current_user, 'removed', @note)
 
     respond_to do |format|
       format.html { redirect_to project_notes_path(@project) }
