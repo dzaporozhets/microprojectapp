@@ -11,6 +11,34 @@ RSpec.describe Project::CommentsController, type: :controller do
     sign_in user
   end
 
+  describe "POST #create" do
+    context "with valid params" do
+      it "creates a comment" do
+        expect {
+          post :create, params: {
+            project_id: project.id,
+            task_id: task.id,
+            comment: { body: "A new comment" }
+          }
+        }.to change(Comment, :count).by(1)
+        expect(response).to redirect_to(details_project_task_path(project, task))
+      end
+    end
+
+    context "with invalid params" do
+      it "redirects with alert" do
+        post :create, params: {
+          project_id: project.id,
+          task_id: task.id,
+          comment: { body: "" }
+        }
+
+        expect(response).to redirect_to(details_project_task_path(project, task))
+        expect(flash[:alert]).to eq('Comment could not be created.')
+      end
+    end
+  end
+
   describe "DELETE #destroy" do
     context "with HTML format" do
       it "soft deletes the comment" do

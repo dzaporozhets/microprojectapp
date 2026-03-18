@@ -39,6 +39,7 @@ rspec:
     - bundle exec rails db:seed
     - bundle exec rails assets:precompile
     - bundle exec rspec spec
+    - ruby -e 'require "json"; cov = JSON.parse(File.read("coverage/.last_run.json"))["result"]["line"]; abort "FAIL Coverage #{cov}% < 98%" if cov < 98'
   coverage: '/\((\d+\.\d+)%\) covered/'
   cache:
     key: ${CI_COMMIT_REF_SLUG}-bundle
