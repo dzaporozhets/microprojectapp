@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -e
 
+echo "=== RuboCop ==="
+bin/rubocop
+
+echo ""
+echo "=== Brakeman ==="
+bundle exec brakeman -q
+
+echo ""
 echo "=== RSpec ==="
 bundle exec rspec
 
@@ -15,14 +23,6 @@ if [ "$passed" != "yes" ]; then
 else
   echo "OK: ${coverage}% line coverage (>= ${min_coverage}%)"
 fi
-
-echo ""
-echo "=== RuboCop ==="
-bin/rubocop
-
-echo ""
-echo "=== Brakeman ==="
-bundle exec brakeman -q
 
 echo ""
 echo "All checks passed!"

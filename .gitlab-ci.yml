@@ -18,7 +18,7 @@ build:
     - docker build -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
 
-rspec:
+test:
   stage: test
   services:
     - postgres:latest
@@ -34,29 +34,12 @@ rspec:
     - bundle config set --local deployment true
     - bundle config set --local path 'vendor/bundle'
     - bundle install -j $(nproc) --clean
-  script:
     - bundle exec rails db:migrate
     - bundle exec rails db:seed
     - bundle exec rails assets:precompile
-    - bundle exec rspec spec
-    - ruby -e 'require "json"; cov = JSON.parse(File.read("coverage/.last_run.json"))["result"]["line"]; abort "FAIL Coverage #{cov}% < 98%" if cov < 98'
-  coverage: '/\((\d+\.\d+)%\) covered/'
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}-bundle
-    paths:
-      - vendor/bundle
-
-brakeman_and_rubocop:
-  stage: test
-  variables:
-    RAILS_ENV: test
-  before_script:
-    - bundle config set --local deployment true
-    - bundle config set --local path 'vendor/bundle'
-    - bundle install -j $(nproc) --clean
   script:
-    - bundle exec brakeman -z -q
-    - bundle exec rubocop
+    - bin/all_tests
+  coverage: '/\((\d+\.\d+)%\) covered/'
   cache:
     key: ${CI_COMMIT_REF_SLUG}-bundle
     paths:
