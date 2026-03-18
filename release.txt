@@ -12,9 +12,9 @@ Release Procedure
 
 4. Update CHANGELOG.txt:
    - Add a new version section at the top
-   - Summarize meaningful changes from commit history
-   - Skip minor/trivial commits (CSS tweaks, spec additions, typo fixes)
-   - Focus on features, improvements, and notable bug fixes
+   - Summarize user-facing changes only: new features, UI changes, notable fixes
+   - Skip internal/dev-only changes (CI, test coverage, refactors, spec additions, CSS tweaks)
+   - Write entries from the user's perspective (what they can see or do differently)
 
 5. Bump version in app/controllers/admin_controller.rb:
    - Update @version = '0.17.0'
@@ -25,5 +25,6 @@ Release Procedure
    git add CHANGELOG.txt app/controllers/admin_controller.rb
    git commit -m "Bump version to 0.17.0"
 
-8. Create the git tag:
+8. Create and push the git tag:
    git tag v0.17.0
+   git push origin main --tags
