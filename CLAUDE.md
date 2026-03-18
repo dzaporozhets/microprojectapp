@@ -22,6 +22,13 @@ rails db:setup
 rails server
 ```
 
+### Validate Changes
+```bash
+bin/all_tests                 # Run all checks (rubocop, brakeman, rspec, coverage >= 98%)
+```
+
+Always run `bin/all_tests` after completing a task to verify nothing is broken.
+
 ### Testing
 ```bash
 # Run full test suite
