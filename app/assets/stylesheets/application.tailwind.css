@@ -111,8 +111,8 @@
   .btn-base {
     @apply btn border bg-gray-100 dark:bg-gray-800
            hover:text-gray-900 dark:hover:text-gray-100
-           hover:bg-gray-50 dark:hover:bg-gray-700 transition
-           text-gray-600 dark:text-gray-400
+           hover:bg-gray-200 dark:hover:bg-gray-700 transition
+           text-gray-600 dark:text-gray-300
            border-base;
   }
 
@@ -121,24 +121,18 @@
   }
 
   .btn-primary {
-    @apply btn border text-white
-           bg-violet-800 hover:bg-violet-900
-           border-violet-600 dark:border-violet-700;
+    @apply btn border text-violet-800
+           bg-violet-50 dark:bg-violet-700 dark:text-violet-200 hover:bg-violet-100
+           border-violet-400 dark:border-violet-700;
   }
 
   .btn-primary-sm {
     @apply btn-primary py-1 px-2;
   }
 
-  .btn-danger {
-    @apply btn bg-red-600 text-white hover:bg-red-700
-           border-red-600 dark:border-red-700
-           focus-visible:ring-red-600;
-  }
-
   .btn-remove {
     @apply btn border font-medium
-           bg-gray-100 text-red-600 border-red-600 hover:bg-red-600 hover:text-white
+           bg-red-50 text-red-600 border-red-600 hover:bg-red-600 hover:text-white
            dark:bg-gray-800 dark:text-red-500 dark:border-red-500 dark:hover:bg-red-600 dark:hover:text-white
            focus-visible:ring-red-600;
   }
@@ -178,7 +172,7 @@
 
   .file-select {
     @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2
-           text-gray-700 dark:text-gray-300
+           text-gray-700 dark:text-gray-400
            file:bg-gray-100 file:text-gray-700 file:cursor-pointer;
   }
 

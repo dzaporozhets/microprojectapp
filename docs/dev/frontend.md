@@ -23,8 +23,7 @@ Reusable CSS component classes defined in `app/assets/stylesheets/application.ta
 | `.btn-base-sm` | Small gray button |
 | `.btn-primary` | Violet primary action button |
 | `.btn-primary-sm` | Small primary button |
-| `.btn-danger` | Red destructive button |
-| `.btn-remove` | Gray button that turns red on hover |
+| `.btn-remove` | Destructive action button (red) |
 | `.form-label` | Form field label |
 | `.form-section` | Divided form group |
 | `.error-box` | Validation error container |
@@ -124,15 +123,7 @@ All buttons extend the `.btn` base class which provides padding, rounded corners
 <%= f.submit "Save", class: "btn-primary-sm" %>
 ```
 
-**Danger (red) button** — `.btn-danger`
-```erb
-<%= button_to "Delete this account", admin_user_path(@user),
-    method: :delete,
-    data: { turbo_confirm: "Delete account with all the data? Are you sure?" },
-    class: "btn-danger" %>
-```
-
-**Remove (gray-to-red hover) button** — `.btn-remove`
+**Destructive action button** — `.btn-remove`
 ```erb
 <%= button_to "Delete this task", [task.project, task],
     method: :delete,
