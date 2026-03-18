@@ -251,7 +251,7 @@
   }
 
   .resource-description {
-    @apply mt-1 max-w-2xl text-sm text-muted;
+    @apply max-w-2xl text-sm text-muted;
   }
 
   .resource-list {
