@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   }
 
   resources :projects do
+    member do
+      get :extra
+    end
 
     resources :tasks, controller: 'project/tasks' do
       member do
@@ -40,9 +43,7 @@ Rails.application.routes.draw do
     end
 
     resource :pins, controller: 'project/pins', only: [:create, :destroy]
-
     resource :activity, only: :show, controller: 'project/activity'
-
     resource :import, only: [:new, :create, :show], controller: 'project/import'
     resource :export, only: [:new, :create], controller: 'project/export'
   end

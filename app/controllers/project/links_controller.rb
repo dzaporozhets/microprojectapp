@@ -47,6 +47,6 @@ class Project::LinksController < Project::BaseController
   end
 
   def set_tab
-    @tab_name = 'Project'
+    @tab_name = 'Extra'
   end
 end
