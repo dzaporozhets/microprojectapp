@@ -1,25 +1,29 @@
 Release Procedure
 ==================
 
-1. Determine the new version number (e.g., 0.17.0)
+1. Fetch tags and determine the last version:
+   git fetch --tags
+   git tag --sort=-v:refname | head -5
 
-2. Review commits since the last release tag:
+2. Determine the new version number (e.g., 0.17.0)
+
+3. Review commits since the last release tag:
    git log v0.16.0..HEAD --oneline
 
-3. Update CHANGELOG.txt:
+4. Update CHANGELOG.txt:
    - Add a new version section at the top
    - Summarize meaningful changes from commit history
    - Skip minor/trivial commits (CSS tweaks, spec additions, typo fixes)
    - Focus on features, improvements, and notable bug fixes
 
-4. Bump version in app/controllers/admin_controller.rb:
+5. Bump version in app/controllers/admin_controller.rb:
    - Update @version = '0.17.0'
 
-5. Run bin/all_tests to verify everything passes
+6. Run bin/all_tests to verify everything passes
 
-6. Create the release commit:
+7. Create the release commit:
    git add CHANGELOG.txt app/controllers/admin_controller.rb
    git commit -m "Bump version to 0.17.0"
 
-7. Create the git tag:
+8. Create the git tag:
    git tag v0.17.0

@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+Version 0.17.0 (2026-03-18)
+---------------------------
+- Bring back notes feature with simplified format
+- Add global notes page listing notes across all projects
+- Log note creation and removal in project activity
+- Add desktop sidebar navigation
+- Add optional gravatar support when file uploads are disabled
+- Consolidate CI jobs into single pipeline
+- Enforce 98% minimum test coverage
+- Add release procedure documentation
+
 Version 0.16.0 (2026-02-25)
 ---------------------------
 - Add API and MCP server support for task management
