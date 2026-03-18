@@ -1,0 +1,19 @@
+<%= form_with(model: [@project, note], class: "contents") do |form| %>
+  <%= render "shared/errors", resource: note %>
+
+  <div class="space-y-6">
+    <div>
+      <%= form.label :title, "Title", class: 'form-label' %>
+      <%= form.text_field :title, class: "block w-full base-input", required: true, placeholder: "Note title" %>
+    </div>
+
+    <div>
+      <%= form.label :content, 'Content', class: 'form-label' %>
+      <%= form.text_area :content, class: "block w-full base-input", rows: 6, placeholder: "Write your note here..." %>
+    </div>
+
+    <div class="pt-4 border-t border-base">
+      <%= form.submit class: "btn-base" %>
+    </div>
+  </div>
+<% end %>

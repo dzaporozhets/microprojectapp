@@ -12,6 +12,7 @@ class Project < ApplicationRecord
 
   has_many :tasks, dependent: :destroy
   has_many :links, dependent: :destroy
+  has_many :notes, dependent: :destroy
   has_many :project_users, dependent: :destroy
   has_many :users, through: :project_users
   has_many :activities, dependent: :destroy
