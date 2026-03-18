@@ -10,6 +10,21 @@ RSpec.describe Project::UsersController, type: :controller do
     project.users << member
   end
 
+  describe "DELETE #destroy" do
+    before do
+      sign_in owner
+    end
+
+    context "when user is not a member" do
+      it "redirects with alert" do
+        delete :destroy, params: { project_id: project.id, id: non_member.id }
+
+        expect(response).to redirect_to(project_users_path(project))
+        expect(flash[:alert]).to eq('User could not be found or removed.')
+      end
+    end
+  end
+
   describe "DELETE #leave" do
     context "when user is a member of the project" do
       before do

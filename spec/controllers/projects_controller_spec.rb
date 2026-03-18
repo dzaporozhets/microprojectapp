@@ -8,6 +8,16 @@ RSpec.describe ProjectsController, type: :controller do
     sign_in user
   end
 
+  describe 'POST #create' do
+    context 'with invalid params' do
+      it 'renders new with unprocessable entity' do
+        post :create, params: { project: { name: '' } }
+
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
+
   describe 'PATCH #update' do
     context 'when archiving a project' do
       it 'removes the project from favourites' do
