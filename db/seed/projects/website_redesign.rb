@@ -167,19 +167,6 @@ module SeedData
         print '.'
       end
 
-      # Add files
-      seed_files_path = Rails.root.join('db', 'seed', 'files')
-      files = ["design_brief.txt", "sitemap.txt"]
-
-      files.each do |filename|
-        file_path = seed_files_path.join(filename)
-        if File.exist?(file_path)
-          project.project_files = project.project_files + [File.open(file_path)]
-          project.save!
-          print '.'
-        end
-      end
-
       # Add activities to populate activity tab
       puts "Creating activity history..."
 
@@ -239,18 +226,32 @@ module SeedData
 
       # Add notes
       notes = [
-        { title: "Brand guidelines", content: "Primary color: #2563EB (blue-600)\nSecondary: #10B981 (green-500)\nFont: Inter for headings, System UI for body\nBorder radius: 8px for cards, 4px for buttons\nMax content width: 1280px", user: user1 },
+        { title: "Brand guidelines", content: "Primary color: #2563EB (blue-600)\nSecondary: #10B981 (green-500)\nFont: Inter for headings, System UI for body\nBorder radius: 8px for cards, 4px for buttons\nMax content width: 1280px", user: user1, attachment: "design_brief.txt" },
         { title: "Meeting notes - Kickoff", content: "Attendees: design team, stakeholders\n\nKey decisions:\n- Target launch date: end of Q2\n- Mobile-first approach\n- Keep existing blog content, redesign layout\n- New hero section with product demo video\n- Reduce page load time to under 2 seconds", user: user1 },
-        { title: "SEO requirements", content: "- Maintain existing URL structure to preserve rankings\n- Add structured data (JSON-LD) for all pages\n- Ensure all images have alt text\n- Target Core Web Vitals: LCP < 2.5s, FID < 100ms, CLS < 0.1\n- Create XML sitemap and submit to Search Console", user: user2 },
+        { title: "SEO requirements", content: "- Maintain existing URL structure to preserve rankings\n- Add structured data (JSON-LD) for all pages\n- Ensure all images have alt text\n- Target Core Web Vitals: LCP < 2.5s, FID < 100ms, CLS < 0.1\n- Create XML sitemap and submit to Search Console", user: user2, attachment: "sitemap.txt" },
         { title: "Accessibility checklist", content: "WCAG 2.1 AA compliance required:\n- Color contrast ratio minimum 4.5:1\n- All interactive elements keyboard accessible\n- ARIA labels on icons and buttons\n- Skip navigation link\n- Form labels and error messages\n- Tested with screen reader (VoiceOver + NVDA)", user: user2 },
         { title: "Performance budget", content: "Page weight targets:\n- HTML: < 50KB\n- CSS: < 80KB\n- JS: < 200KB\n- Images: < 500KB per page (use WebP)\n- Total: < 1MB first load\n\nTools: Lighthouse CI in pipeline, WebPageTest for baseline", user: user2 }
       ]
 
+      seed_files_path = Rails.root.join('db', 'seed', 'files')
+
       notes.each do |note_data|
-        project.notes.find_or_create_by!(title: note_data[:title]) do |n|
+        note = project.notes.find_or_create_by!(title: note_data[:title]) do |n|
           n.content = note_data[:content]
           n.user = note_data[:user]
         end
+
+        if note_data[:attachment]
+          file_path = seed_files_path.join(note_data[:attachment])
+          unless note.attachment.attached?
+            note.attachment.attach(
+              io: File.open(file_path),
+              filename: note_data[:attachment],
+              content_type: 'text/plain'
+            )
+          end
+        end
+
         print '.'
       end
       puts "Created notes"

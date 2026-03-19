@@ -54,6 +54,55 @@ RSpec.describe Project::NotesController, type: :controller do
     end
   end
 
+  describe "POST #create with attachment" do
+    context "when file storage is enabled" do
+      before do
+        allow(controller).to receive(:file_storage_enabled?).and_return(true)
+      end
+
+      it "creates a note with an attachment" do
+        file = fixture_file_upload(
+          Rails.root.join('spec/fixtures/files/test_file.txt'),
+          'text/plain'
+        )
+
+        expect {
+          post :create, params: {
+            project_id: project.id,
+            note: { title: "With file", content: "Content", attachment: file }
+          }
+        }.to change(Note, :count).by(1)
+
+        note = Note.last
+        expect(note.attachment).to be_attached
+        expect(note.attachment.filename.to_s).to eq('test_file.txt')
+      end
+    end
+
+    context "when file storage is disabled" do
+      before do
+        allow(controller).to receive(:file_storage_enabled?).and_return(false)
+      end
+
+      it "creates a note but strips the attachment" do
+        file = fixture_file_upload(
+          Rails.root.join('spec/fixtures/files/test_file.txt'),
+          'text/plain'
+        )
+
+        expect {
+          post :create, params: {
+            project_id: project.id,
+            note: { title: "No file", content: "Content", attachment: file }
+          }
+        }.to change(Note, :count).by(1)
+
+        note = Note.last
+        expect(note.attachment).not_to be_attached
+      end
+    end
+  end
+
   describe "DELETE #destroy" do
     it "destroys the note" do
       note = create(:note, project: project, user: user)

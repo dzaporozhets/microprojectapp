@@ -45,7 +45,9 @@ class Project::NotesController < Project::BaseController
   end
 
   def note_params
-    params.require(:note).permit(:title, :content)
+    permitted = params.require(:note).permit(:title, :content, :attachment)
+    permitted.delete(:attachment) unless file_storage_enabled?
+    permitted
   end
 
   def set_tab

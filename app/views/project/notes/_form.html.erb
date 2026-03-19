@@ -12,6 +12,12 @@
       <%= form.text_area :content, class: "block w-full base-input", rows: 6, placeholder: "Write your note here..." %>
     </div>
 
+    <% if file_storage_enabled? %>
+      <div>
+        <%= styled_file_field(form, :attachment) %>
+      </div>
+    <% end %>
+
     <div class="pt-4 border-t border-base">
       <%= form.submit class: "btn-base" %>
     </div>

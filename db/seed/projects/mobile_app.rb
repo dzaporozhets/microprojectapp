@@ -82,14 +82,23 @@ module SeedData
         print '.'
       end
 
-      # Add files
+      # Add notes
       seed_files_path = Rails.root.join('db', 'seed', 'files')
-      file_path = seed_files_path.join("project_requirements.txt")
-      if File.exist?(file_path)
-        project.project_files = project.project_files + [File.open(file_path)]
-        project.save!
-        print '.'
+      note = project.notes.find_or_create_by!(title: "Project requirements") do |n|
+        n.content = "Full requirements document attached."
+        n.user = owner
       end
+
+      file_path = seed_files_path.join("project_requirements.txt")
+      unless note.attachment.attached?
+        note.attachment.attach(
+          io: File.open(file_path),
+          filename: "project_requirements.txt",
+          content_type: 'text/plain'
+        )
+      end
+      print '.'
+      puts "Created notes"
 
       project
     end
