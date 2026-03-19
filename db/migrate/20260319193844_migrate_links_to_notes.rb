@@ -1,18 +1,19 @@
 class MigrateLinksToNotes < ActiveRecord::Migration[7.2]
   def up
-    Project.includes(:links).find_each do |project|
-      links = project.links.order(:created_at)
-      next if links.empty?
+    project_ids = execute("SELECT DISTINCT project_id FROM links").map { |row| row['project_id'] }
 
-      content = links.map { |link|
-        line = link.url
-        line = "#{link.title} - #{line}" if link.title.present?
+    project_ids.each do |project_id|
+      rows = execute("SELECT title, url, user_id FROM links WHERE project_id = #{project_id} ORDER BY created_at")
+
+      content = rows.map { |row|
+        line = row['url']
+        line = "#{row['title']} - #{line}" if row['title'].present?
         line
       }.join("\n")
 
       Note.create!(
-        project: project,
-        user_id: links.first.user_id,
+        project_id: project_id,
+        user_id: rows.first['user_id'],
         title: "Links",
         content: content
       )
