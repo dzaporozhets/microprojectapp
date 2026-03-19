@@ -6,7 +6,6 @@ RSpec.describe Project::FilesController, type: :controller do
 
   before do
     sign_in user
-    allow(controller).to receive(:file_storage_enabled?).and_return(true)
   end
 
   describe "GET #download" do
@@ -37,19 +36,6 @@ RSpec.describe Project::FilesController, type: :controller do
         get :download, params: { project_id: project.id, file: 'nonexistent.txt' }
         expect(response).to redirect_to(project_path(project))
         expect(flash[:alert]).to eq('File not found.')
-      end
-    end
-  end
-
-  describe "POST #create" do
-    context "when save fails" do
-      it "renders new with unprocessable entity" do
-        allow_any_instance_of(Project).to receive(:save).and_return(false)
-        file = Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/test_file.txt'), 'text/plain')
-
-        post :create, params: { project_id: project.id, project: { project_files: [file] } }
-
-        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end

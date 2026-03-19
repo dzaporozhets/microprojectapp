@@ -111,17 +111,6 @@ RSpec.describe Project, type: :model do
     end
   end
 
-  describe "#project_files_count_within_limit" do
-    it "adds error when file count exceeds limit" do
-      stub_const("Project::FILE_LIMIT", 0)
-      project.project_files = [
-        Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/test_file.txt'), 'text/plain')
-      ]
-      project.valid?
-      expect(project.errors[:project_files]).to include("exceeds the limit of 0 files per project")
-    end
-  end
-
   describe "#create_sample_tasks" do
     it "returns false for unsaved project" do
       p = build(:project, user: user)

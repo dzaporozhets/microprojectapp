@@ -2,7 +2,6 @@
 
 class Project < ApplicationRecord
   # Constants
-  FILE_LIMIT = 100
   PROJECT_LIMIT = 999
   ACTIVITY_LIMIT = 999
   PERSONAL_PROJECT_NAME = 'Personal'
@@ -22,7 +21,6 @@ class Project < ApplicationRecord
   validates :name, uniqueness: { scope: :user_id, message: "should be unique per user" }
 
   validate :project_limit, on: :create
-  validate :project_files_count_within_limit
 
   # Uploaders
   mount_uploaders :project_files, ProjectFileUploader
@@ -84,12 +82,6 @@ class Project < ApplicationRecord
   end
 
   # Validation methods
-  def project_files_count_within_limit
-    return if project_files.count <= FILE_LIMIT
-
-    errors.add(:project_files, "exceeds the limit of #{FILE_LIMIT} files per project")
-  end
-
   def project_limit
     return unless user && user.projects.count >= PROJECT_LIMIT
 

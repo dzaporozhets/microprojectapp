@@ -9,7 +9,6 @@ class AdminController < ApplicationController
 
     @total_users = User.count
     @total_projects = Project.count
-    @total_files = Project.count(:project_files)
     @total_tasks = Task.count
     @total_comments = Comment.count
     @version = '0.17.0'

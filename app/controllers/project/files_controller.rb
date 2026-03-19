@@ -1,13 +1,4 @@
 class Project::FilesController < Project::BaseController
-  before_action :set_tab
-  before_action :require_file_storage!, only: [:new, :create]
-
-  def index
-  end
-
-  def new
-  end
-
   def download
     file = project.project_files.find { |f| f.identifier == params[:file] }
 
@@ -20,49 +11,5 @@ class Project::FilesController < Project::BaseController
     else
       redirect_to project_path(project), alert: 'File not found.'
     end
-  end
-
-  def create
-    add_more_files(params[:project][:project_files])
-
-    if project.save
-      redirect_to project_files_path(@project), notice: 'Files were successfully uploaded.'
-    else
-      render :new, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    remove_file(params[:file])
-
-    project.save
-
-    respond_to do |format|
-      format.html { redirect_to project_files_path(@project) }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-
-  def project_params
-    params.require(:project).permit({ project_files: [] })
-  end
-
-  def add_more_files(new_files)
-    existing_files = project.project_files || []
-    project.project_files = existing_files.map(&:identifier) + new_files
-  end
-
-  def remove_file(file_name)
-    remain_project_files = project.project_files.reject { |f| f.identifier == file_name }
-
-    if remain_project_files.size != project.project_files.size
-      project.project_files = remain_project_files.map(&:identifier)
-    end
-  end
-
-  def set_tab
-    @tab_name = 'Extra'
   end
 end

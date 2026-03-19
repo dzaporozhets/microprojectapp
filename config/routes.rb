@@ -27,10 +27,9 @@ Rails.application.routes.draw do
     end
 
     resources :notes, controller: 'project/notes', only: [:index, :new, :create, :show, :edit, :update, :destroy]
-    resources :files, controller: 'project/files', only: [:index, :new, :create] do
+    resources :files, controller: 'project/files', only: [] do
       collection do
         get :download
-        delete :destroy, as: 'delete'
       end
     end
 
