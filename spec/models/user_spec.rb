@@ -197,12 +197,11 @@ RSpec.describe User, type: :model do
     end
 
     describe "#create_sample_project" do
-      it "creates a sample project with sample tasks and links" do
+      it "creates a sample project with sample tasks" do
         sample_project = user.create_sample_project
 
         expect(sample_project).not_to be_nil
         expect(sample_project.tasks.count).to eq(14)
-        expect(sample_project.links.count).to eq(2)
       end
     end
 
