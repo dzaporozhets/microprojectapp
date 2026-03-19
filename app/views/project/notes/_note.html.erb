@@ -17,11 +17,6 @@
         <% if note.content.present? %>
           <p class="mt-1 text-sm text-secondary line-clamp-2 whitespace-pre-line"><%= note.content.truncate(200) %></p>
         <% end %>
-        <div class="mt-1 flex items-center list-text-secondary">
-          <% if note.created_at.present? %>
-            <span>Added <%= time_ago_in_words(note.created_at) %> ago</span>
-          <% end %>
-        </div>
         <% if note.attachment.attached? %>
           <div class="mt-1">
             <%= link_to rails_blob_path(note.attachment, disposition: 'attachment'), class: "inline-flex items-center px-3 py-1 text-xs font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-600", data: { turbo: false } do %>
