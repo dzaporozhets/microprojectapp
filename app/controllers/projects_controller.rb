@@ -28,10 +28,6 @@ class ProjectsController < ApplicationController
     @tasks_done = @project.tasks.done.includes(:assigned_user, :comments).order(updated_at: :desc).limit(DONE_TASKS)
   end
 
-  def extra
-    @tab_name = 'Notes'
-  end
-
   # GET /projects/new
   def new
     @project = Project.new
@@ -109,7 +105,7 @@ class ProjectsController < ApplicationController
 
   def set_layout
     case action_name
-    when 'show', 'edit', 'update', 'extra' then 'project'
+    when 'show', 'edit', 'update' then 'project'
     else
       'application'
     end

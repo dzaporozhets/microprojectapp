@@ -6,10 +6,6 @@ Rails.application.routes.draw do
   }
 
   resources :projects do
-    member do
-      get :extra
-    end
-
     resources :tasks, controller: 'project/tasks' do
       member do
         get :details

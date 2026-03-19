@@ -233,7 +233,7 @@ Direct usage:
 ```erb
 <nav class="flex nav-tabs <%= ui_tabs %>">
   <%= link_to "Tasks", project_tasks_path(@project), class: ui_active_tab %>
-  <%= link_to "Files", project_files_path(@project), class: ui_tab %>
+  <%= link_to "Notes", project_notes_path(@project), class: ui_tab %>
 </nav>
 ```
 

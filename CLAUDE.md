@@ -85,7 +85,7 @@ bundle exec rake user:make_admin EMAIL=user@example.com
 - Max 999 projects per user
 
 ### File Uploads
-CarrierWave handles uploads to AWS S3 (production) or local storage (development). Uploaders are in `app/uploaders/`.
+Active Storage handles file attachments (note attachments, comment attachments, user avatars) with AWS S3 or local storage. Disabled by default — requires S3 configuration or `ENABLE_LOCAL_FILE_STORAGE`.
 
 ## Testing Conventions
 
