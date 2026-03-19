@@ -66,6 +66,6 @@ class Project::NotesController < Project::BaseController
   end
 
   def set_tab
-    @tab_name = 'Extra'
+    @tab_name = 'Notes'
   end
 end

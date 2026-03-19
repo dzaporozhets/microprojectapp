@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
   end
 
   def extra
-    @tab_name = 'Extra'
+    @tab_name = 'Notes'
   end
 
   # GET /projects/new

@@ -8,7 +8,7 @@ module ProjectsHelper
       tabs << { name: 'Team', path: project_users_path(project) }
     end
 
-    tabs << { name: 'Extra', path: extra_project_path(project) }
+    tabs << { name: 'Notes', path: project_notes_path(project) }
 
     if project.user == current_user
       tabs << { name: 'Settings', path: edit_project_path(project) }
