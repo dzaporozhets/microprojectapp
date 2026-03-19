@@ -29,8 +29,8 @@ class User < ApplicationRecord
 
   devise *devise_modules, omniauth_providers: [:google_oauth2, :entra_id]
 
-  # Uploaders
-  mount_uploader :avatar, AvatarUploader
+  # Attachments
+  has_one_attached :avatar
 
   # Callbacks
   after_create :create_personal_project
@@ -57,6 +57,7 @@ class User < ApplicationRecord
 
   # Validations
   validate :email_domain_check, on: :create
+  validate :acceptable_avatar
 
   #
   # Class methods
@@ -214,11 +215,22 @@ class User < ApplicationRecord
   #
   # Status methods
   #
+  def avatar?
+    avatar.attached?
+  end
+
   def admin?
     admin
   end
 
   private
+
+  def acceptable_avatar
+    return unless avatar.attached?
+
+    errors.add(:avatar, 'must be a JPEG or PNG') unless avatar.blob.content_type.in?(%w[image/jpeg image/png])
+    errors.add(:avatar, 'is too large (max 500KB)') if avatar.blob.byte_size > 500.kilobytes
+  end
 
   def email_domain_check
     allowed_domain = Rails.application.config.app_settings[:app_allowed_email_domain]

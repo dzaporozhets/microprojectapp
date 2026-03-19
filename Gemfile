@@ -86,6 +86,7 @@ group :test do
   gem 'simplecov-cobertura'
 end
 
+gem "aws-sdk-s3", require: false
 gem 'carrierwave', '~> 3.0'
 gem "devise", "~> 4.9"
 gem "fog-aws"

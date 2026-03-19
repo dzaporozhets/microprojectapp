@@ -84,8 +84,7 @@ RSpec.feature "User Settings", type: :feature do
       click_button 'Save Settings'
 
       expect(page).to have_content('Saved')
-      expect(user.reload.avatar).to be_present
-      expect(user.reload.avatar.url).to be_present
+      expect(user.reload.avatar).to be_attached
     end
   end
 

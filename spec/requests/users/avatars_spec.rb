@@ -12,11 +12,11 @@ RSpec.describe 'Users::Avatars', type: :request do
       end
 
       it 'returns the avatar image with cache headers' do
-        user.avatar = Rack::Test::UploadedFile.new(
-          Rails.root.join('spec/fixtures/files/test_img.png'),
-          'image/png'
+        user.avatar.attach(
+          io: File.open(Rails.root.join('spec/fixtures/files/test_img.png')),
+          filename: 'test_img.png',
+          content_type: 'image/png'
         )
-        user.save!
 
         get user_avatar_path(user)
 

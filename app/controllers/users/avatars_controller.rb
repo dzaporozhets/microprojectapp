@@ -7,8 +7,8 @@ class Users::AvatarsController < ApplicationController
 
     cache_headers
 
-    if stale?(etag: avatar_etag(user), last_modified: avatar_last_modified(user), public: true)
-      send_data user.avatar.read, type: avatar_content_type(user), disposition: 'inline'
+    if stale?(etag: avatar_etag(user), last_modified: user.avatar.blob.created_at, public: true)
+      send_data user.avatar.download, type: user.avatar.content_type, disposition: 'inline'
     end
   end
 
@@ -19,21 +19,6 @@ class Users::AvatarsController < ApplicationController
   end
 
   def avatar_etag(user)
-    [user.id, user.avatar.identifier]
-  end
-
-  def avatar_last_modified(user)
-    file = user.avatar.file
-    return file.mtime if file.respond_to?(:mtime)
-    return file.last_modified if file.respond_to?(:last_modified)
-
-    user.updated_at
-  end
-
-  def avatar_content_type(user)
-    file = user.avatar.file
-    return file.content_type if file.respond_to?(:content_type) && file.content_type.present?
-
-    user.avatar.content_type if user.avatar.respond_to?(:content_type)
+    [user.id, user.avatar.blob.checksum]
   end
 end
