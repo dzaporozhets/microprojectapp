@@ -14,15 +14,25 @@
             <%= note.title %>
           <% end %>
         </div>
+        <% if note.content.present? %>
+          <p class="mt-1 text-sm text-secondary line-clamp-2 whitespace-pre-line"><%= note.content.truncate(200) %></p>
+        <% end %>
         <div class="mt-1 flex items-center list-text-secondary">
-          <% if note.content.present? %>
-            <span><%= note.content.truncate(50) %></span>
-            <span class="mx-1">&middot;</span>
-          <% end %>
           <% if note.created_at.present? %>
             <span>Added <%= time_ago_in_words(note.created_at) %> ago</span>
           <% end %>
         </div>
+        <% if note.attachment.attached? %>
+          <div class="mt-1">
+            <%= link_to rails_blob_path(note.attachment, disposition: 'attachment'), class: "inline-flex items-center px-3 py-1 text-xs font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-600", data: { turbo: false } do %>
+              <svg class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z" clip-rule="evenodd" />
+              </svg>
+              <%= note.attachment.filename %>
+              (<%= number_to_human_size note.attachment.byte_size %>)
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
 
