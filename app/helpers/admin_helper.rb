@@ -11,11 +11,7 @@ module AdminHelper
 
   def admin_config_uploads_storage
     if Rails.application.config.app_settings[:aws_s3_bucket].present?
-      if ENV['BUCKETEER_BUCKET_NAME'].present?
-        'AWS S3 (via Bucketeer)'
-      else
-        'AWS S3'
-      end
+      'AWS S3'
     elsif Rails.application.config.app_settings[:enable_local_file_storage].present?
       'Local'
     else

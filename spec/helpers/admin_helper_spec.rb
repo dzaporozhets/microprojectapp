@@ -2,27 +2,13 @@ require 'rails_helper'
 
 RSpec.describe AdminHelper, type: :helper do
   describe '#admin_config_uploads_storage' do
-    context 'when BUCKETEER_BUCKET_NAME is set' do
-      it 'returns AWS S3 (via Bucketeer)' do
-        allow(Rails.application.config).to receive(:app_settings).and_return(
-          aws_s3_bucket: 'my-bucket'
-        )
-
-        ClimateControl.modify(BUCKETEER_BUCKET_NAME: 'my-bucketeer-bucket') do
-          expect(helper.admin_config_uploads_storage).to eq('AWS S3 (via Bucketeer)')
-        end
-      end
-    end
-
-    context 'when S3 is configured without Bucketeer' do
+    context 'when S3 is configured' do
       it 'returns AWS S3' do
         allow(Rails.application.config).to receive(:app_settings).and_return(
           aws_s3_bucket: 'my-bucket'
         )
 
-        ClimateControl.modify(BUCKETEER_BUCKET_NAME: nil) do
-          expect(helper.admin_config_uploads_storage).to eq('AWS S3')
-        end
+        expect(helper.admin_config_uploads_storage).to eq('AWS S3')
       end
     end
 
