@@ -1,6 +1,16 @@
 CHANGELOG
 =========
 
+Version 0.18.0 (2026-03-19)
+---------------------------
+- Add ability to edit notes and attach files to notes
+- Switch to Active Storage for file uploads (avatars, comment attachments) (warning: potential data loss)
+- Remove links feature in favor of notes
+- Deprecate project files feature in favor of notes and comment attachments (warning: potential data loss)
+- Rename Extra tab to Notes
+- Improve note list and comment form UI
+- Drop BUCKETEER env support, use AWS env vars instead
+
 Version 0.17.0 (2026-03-18)
 ---------------------------
 - Bring back notes feature with simplified format

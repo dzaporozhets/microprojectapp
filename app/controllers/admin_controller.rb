@@ -11,7 +11,7 @@ class AdminController < ApplicationController
     @total_projects = Project.count
     @total_tasks = Task.count
     @total_comments = Comment.count
-    @version = '0.17.0'
+    @version = '0.18.0'
     @rails_env = Rails.env
     @domain = app_settings[:app_domain]
     @allowed_domain = app_settings[:app_allowed_email_domain] || 'Not configured'
