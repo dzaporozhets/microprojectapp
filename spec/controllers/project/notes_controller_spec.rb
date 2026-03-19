@@ -103,6 +103,47 @@ RSpec.describe Project::NotesController, type: :controller do
     end
   end
 
+  describe "GET #edit" do
+    it "returns a success response" do
+      note = create(:note, project: project, user: user)
+      get :edit, params: { project_id: project.id, id: note.id }
+      expect(response).to be_successful
+    end
+  end
+
+  describe "PATCH #update" do
+    context "with valid params" do
+      it "updates the note" do
+        note = create(:note, project: project, user: user, title: "Old Title")
+
+        patch :update, params: {
+          project_id: project.id,
+          id: note.id,
+          note: { title: "New Title", content: "Updated content" }
+        }
+
+        note.reload
+        expect(note.title).to eq("New Title")
+        expect(note.content).to eq("Updated content")
+        expect(response).to redirect_to(project_note_path(project, note))
+      end
+    end
+
+    context "with invalid params" do
+      it "renders edit with unprocessable entity" do
+        note = create(:note, project: project, user: user)
+
+        patch :update, params: {
+          project_id: project.id,
+          id: note.id,
+          note: { title: "" }
+        }
+
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
+
   describe "DELETE #destroy" do
     it "destroys the note" do
       note = create(:note, project: project, user: user)

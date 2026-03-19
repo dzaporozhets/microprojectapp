@@ -1,5 +1,5 @@
 class Project::NotesController < Project::BaseController
-  before_action :set_note, only: %i[ show destroy ]
+  before_action :set_note, only: %i[ show edit update destroy ]
   before_action :set_tab
 
   def index
@@ -23,6 +23,21 @@ class Project::NotesController < Project::BaseController
         format.json { render :show, status: :created, location: @note }
       else
         format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @note.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    respond_to do |format|
+      if @note.update(note_params)
+        format.html { redirect_to project_note_path(@project, @note), notice: "Note was successfully updated." }
+        format.json { render :show, status: :ok, location: @note }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
