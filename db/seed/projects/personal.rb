@@ -95,23 +95,6 @@ module SeedData
 
       puts "Personal project populated with #{tasks.count} tasks"
 
-      # Add useful links to personal project
-      links = [
-        { title: "Vacation Booking - Expedia", url: "https://www.expedia.com/" },
-        { title: "Gym Finder - ClassPass", url: "https://classpass.com/" },
-        { title: "Book Reviews - Goodreads", url: "https://www.goodreads.com/" },
-        { title: "Budget Tracker - Mint", url: "https://mint.intuit.com/" },
-        { title: "Phone Plan Comparison", url: "https://www.whistleout.com/CellPhones" },
-        { title: "Home Improvement Ideas - Houzz", url: "https://www.houzz.com/" }
-      ]
-
-      links.each do |link_data|
-        project.links.find_or_create_by!(title: link_data[:title], url: link_data[:url], user: user)
-        print '.'
-      end
-
-      puts "Added #{links.count} links to Personal project"
-
       # Pin Personal project as favorite
       Pin.find_or_create_by!(user: user, project: project)
       puts "Pinned Personal project as favorite"

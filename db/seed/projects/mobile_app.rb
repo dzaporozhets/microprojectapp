@@ -68,20 +68,6 @@ module SeedData
         print '.'
       end
 
-      # Add links
-      links = [
-        { title: "React Native Documentation", url: "https://reactnative.dev/" },
-        { title: "Expo Documentation", url: "https://docs.expo.dev/" },
-        { title: "Firebase Auth Guide", url: "https://firebase.google.com/docs/auth" },
-        { title: "App Store Guidelines", url: "https://developer.apple.com/app-store/review/guidelines/" },
-        { title: "Google Play Console", url: "https://play.google.com/console/" }
-      ]
-
-      links.each do |link_data|
-        project.links.find_or_create_by!(title: link_data[:title], url: link_data[:url], user: owner)
-        print '.'
-      end
-
       # Add notes
       seed_files_path = Rails.root.join('db', 'seed', 'files')
       note = project.notes.find_or_create_by!(title: "Project requirements") do |n|

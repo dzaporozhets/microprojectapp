@@ -9,96 +9,9 @@ RSpec.describe "Project Resources Security", type: :request do
   let(:project) { create(:project, user: owner) }
   let(:other_project) { create(:project, user: unauthorized_user) }
   
-  let(:link) { create(:link, project: project, user: owner) }
-  
   before do
     # Invite one user to the project
     project.users << invited_user
-  end
-
-  describe "Project links access" do
-    context "when user is project owner" do
-      before { sign_in owner }
-
-      it "allows viewing links index" do
-        get project_links_path(project)
-        expect(response).to have_http_status(:ok)
-      end
-
-      it "allows viewing link details" do
-        get project_link_path(project, link)
-        expect(response).to have_http_status(:ok)
-      end
-
-      it "allows accessing new link page" do
-        get new_project_link_path(project)
-        expect(response).to have_http_status(:ok)
-      end
-
-      it "allows creating links" do
-        post project_links_path(project), params: { link: { url: "https://example.com" } }
-        expect(response).to have_http_status(:found) # redirect after creation
-      end
-
-      it "allows deleting links" do
-        delete project_link_path(project, link)
-        expect(response).to have_http_status(:found) # redirect after delete
-      end
-
-      it "denies access to other project's links" do
-        get project_links_path(other_project)
-        expect(response).to have_http_status(:not_found)
-      end
-    end
-
-    context "when user is invited to project" do
-      before { sign_in invited_user }
-
-      it "allows viewing links index" do
-        get project_links_path(project)
-        expect(response).to have_http_status(:ok)
-      end
-
-      it "allows viewing link details" do
-        get project_link_path(project, link)
-        expect(response).to have_http_status(:ok)
-      end
-
-      it "allows accessing new link page" do
-        get new_project_link_path(project)
-        expect(response).to have_http_status(:ok)
-      end
-
-      it "allows creating links" do
-        post project_links_path(project), params: { link: { url: "https://example.com" } }
-        expect(response).to have_http_status(:found) # redirect after creation
-      end
-
-      it "allows deleting own links" do
-        invited_link = create(:link, project: project, user: invited_user)
-        delete project_link_path(project, invited_link)
-        expect(response).to have_http_status(:found) # redirect after delete
-      end
-
-      it "denies access to unauthorized project's links" do
-        get project_links_path(other_project)
-        expect(response).to have_http_status(:not_found)
-      end
-    end
-
-    context "when user is not authorized" do
-      before { sign_in unauthorized_user }
-
-      it "denies access to project links" do
-        get project_links_path(project)
-        expect(response).to have_http_status(:not_found)
-      end
-
-      it "denies creating links" do
-        post project_links_path(project), params: { link: { url: "https://example.com" } }
-        expect(response).to have_http_status(:not_found)
-      end
-    end
   end
 
   describe "Project files access" do

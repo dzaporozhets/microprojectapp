@@ -11,7 +11,6 @@ class Project < ApplicationRecord
   belongs_to :user, optional: false
 
   has_many :tasks, dependent: :destroy
-  has_many :links, dependent: :destroy
   has_many :notes, dependent: :destroy
   has_many :project_users, dependent: :destroy
   has_many :users, through: :project_users
@@ -84,24 +83,6 @@ class Project < ApplicationRecord
     false
   end
 
-  def create_sample_links
-    return false unless persisted?
-
-    common_params = {
-      user_id: user_id,
-      project_id: id
-    }
-
-    sample_links_data.each do |link_data|
-      links.create(link_data.merge(common_params))
-    end
-
-    true
-  rescue ActiveRecord::RecordInvalid => e
-    Rails.logger.error("Failed to create sample links: #{e.message}")
-    false
-  end
-
   # Validation methods
   def project_files_count_within_limit
     return if project_files.count <= FILE_LIMIT
@@ -159,10 +140,4 @@ class Project < ApplicationRecord
     ]
   end
 
-  def sample_links_data
-    [
-      { url: "https://en.wikipedia.org/wiki/Project_management" },
-      { url: "https://en.wikipedia.org/wiki/Time_management" }
-    ]
-  end
 end

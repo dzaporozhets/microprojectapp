@@ -149,24 +149,6 @@ module SeedData
         print '.'
       end
 
-      # Add links
-      links = [
-        { title: "Figma - Design Tool", url: "https://www.figma.com/" },
-        { title: "Tailwind CSS Documentation", url: "https://tailwindcss.com/docs" },
-        { title: "Web Design Inspiration - Dribbble", url: "https://dribbble.com/tags/web-design" },
-        { title: "React Documentation", url: "https://react.dev/" },
-        { title: "Vite Build Tool", url: "https://vitejs.dev/" },
-        { title: "Vercel Deployment Guide", url: "https://vercel.com/docs" },
-        { title: "Google Lighthouse - Performance Testing", url: "https://developers.google.com/web/tools/lighthouse" },
-        { title: "WebPageTest - Speed Analysis", url: "https://www.webpagetest.org/" },
-        { title: "Staging Environment", url: "https://staging.example.com" }
-      ]
-
-      links.each do |link_data|
-        project.links.find_or_create_by!(title: link_data[:title], url: link_data[:url], user: user1)
-        print '.'
-      end
-
       # Add activities to populate activity tab
       puts "Creating activity history..."
 

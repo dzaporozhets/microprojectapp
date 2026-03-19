@@ -26,7 +26,6 @@ Rails.application.routes.draw do
       resources :comments, controller: 'project/comments', only: [:create, :destroy]
     end
 
-    resources :links, controller: 'project/links', only: [:index, :new, :create, :show, :destroy]
     resources :notes, controller: 'project/notes', only: [:index, :new, :create, :show, :edit, :update, :destroy]
     resources :files, controller: 'project/files', only: [:index, :new, :create] do
       collection do

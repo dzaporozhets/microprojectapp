@@ -7,7 +7,6 @@ RSpec.describe Project, type: :model do
   describe "associations" do
     it { is_expected.to belong_to(:user).required(true) }
     it { is_expected.to have_many(:tasks).dependent(:destroy) }
-    it { is_expected.to have_many(:links).dependent(:destroy) }
     it { is_expected.to have_many(:project_users).dependent(:destroy) }
     it { is_expected.to have_many(:users).through(:project_users) }
     it { is_expected.to have_many(:pins).dependent(:destroy) }
@@ -44,11 +43,6 @@ RSpec.describe Project, type: :model do
       end
     end
 
-    describe "#create_sample_links" do
-      it "creates sample links associated with the project" do
-        expect { project.create_sample_links }.to change { project.links.count }.by(2)
-      end
-    end
   end
 
    describe "#team" do
@@ -138,19 +132,6 @@ RSpec.describe Project, type: :model do
       allow(project.tasks).to receive(:create).and_raise(ActiveRecord::RecordInvalid)
       expect(Rails.logger).to receive(:error).with(/Failed to create sample tasks/)
       expect(project.create_sample_tasks).to be false
-    end
-  end
-
-  describe "#create_sample_links" do
-    it "returns false for unsaved project" do
-      p = build(:project, user: user)
-      expect(p.create_sample_links).to be false
-    end
-
-    it "returns false and logs error on RecordInvalid" do
-      allow(project.links).to receive(:create).and_raise(ActiveRecord::RecordInvalid)
-      expect(Rails.logger).to receive(:error).with(/Failed to create sample links/)
-      expect(project.create_sample_links).to be false
     end
   end
 

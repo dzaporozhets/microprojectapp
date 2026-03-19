@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_03_19_175411) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_19_193844) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,17 +66,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_19_175411) do
     t.index ["removed_at"], name: "index_comments_on_removed_at"
     t.index ["task_id"], name: "index_comments_on_task_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
-  end
-
-  create_table "links", force: :cascade do |t|
-    t.string "title"
-    t.string "url", null: false
-    t.bigint "user_id", null: false
-    t.bigint "project_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_links_on_project_id"
-    t.index ["user_id"], name: "index_links_on_user_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -204,8 +193,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_19_175411) do
   add_foreign_key "activities", "users"
   add_foreign_key "comments", "tasks"
   add_foreign_key "comments", "users"
-  add_foreign_key "links", "projects"
-  add_foreign_key "links", "users"
   add_foreign_key "notes", "projects"
   add_foreign_key "notes", "users"
   add_foreign_key "pins", "projects"

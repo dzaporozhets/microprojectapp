@@ -153,7 +153,6 @@ class User < ApplicationRecord
   def create_sample_project
     project = projects.create(name: "Sample")
     project.create_sample_tasks
-    project.create_sample_links
     project
   end
 
