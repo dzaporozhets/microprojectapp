@@ -12,6 +12,9 @@ class Project::NotesController < Project::BaseController
     @note = Note.new
   end
 
+  def edit
+  end
+
   def create
     @note = project.notes.new(note_params)
     @note.user = current_user
@@ -26,9 +29,6 @@ class Project::NotesController < Project::BaseController
         format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def edit
   end
 
   def update
