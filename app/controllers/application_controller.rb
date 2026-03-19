@@ -42,12 +42,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def require_file_storage!
-    unless file_storage_enabled?
-      redirect_back(fallback_location: root_path, alert: 'File uploads are not enabled.')
-    end
-  end
-
   def file_storage_enabled?
     app_settings = Rails.application.config.app_settings
     app_settings[:aws_s3_bucket].present? || app_settings[:enable_local_file_storage]

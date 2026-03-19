@@ -23,12 +23,6 @@ Rails.application.routes.draw do
     end
 
     resources :notes, controller: 'project/notes', only: [:index, :new, :create, :show, :edit, :update, :destroy]
-    resources :files, controller: 'project/files', only: [] do
-      collection do
-        get :download
-      end
-    end
-
     resources :users, only: [:index, :destroy], controller: 'project/users' do
       collection do
         get 'invite', to: 'project/users#invite'
