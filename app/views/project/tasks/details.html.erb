@@ -57,9 +57,15 @@
       <%= render 'project/tasks/metadata', task: @task %>
 
       <div class="flex items-center gap-2 flex-wrap">
-        <%= button_to "Assign to myself",
-            project_task_path(@task.project, @task, task: { assigned_user_id: current_user.id }),
-            method: :patch, data: { turbo: false }, class: "btn-base-sm" %>
+        <% if @task.assigned_user_id %>
+          <%= button_to "Unassign",
+              project_task_path(@task.project, @task, task: { assigned_user_id: "" }),
+              method: :patch, data: { turbo: false }, class: "btn-base-sm" %>
+        <% else %>
+          <%= button_to "Assign to myself",
+              project_task_path(@task.project, @task, task: { assigned_user_id: current_user.id }),
+              method: :patch, data: { turbo: false }, class: "btn-base-sm" %>
+        <% end %>
         <%= button_to "Today",
             project_task_path(@task.project, @task, task: { due_date: Date.current }),
             method: :patch, data: { turbo: false }, class: "btn-base-sm" %>

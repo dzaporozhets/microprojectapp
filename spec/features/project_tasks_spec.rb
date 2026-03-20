@@ -52,6 +52,54 @@ RSpec.feature "Project::Tasks", type: :feature do
     expect(page).to have_content(task.name)
   end
 
+  describe 'Quick actions on task details' do
+    scenario 'User assigns task to themselves' do
+      visit details_project_task_path(project, task)
+
+      expect(page).to have_button('Assign to myself')
+      click_button 'Assign to myself'
+
+      expect(page).to have_content(user.email)
+      expect(page).to have_button('Unassign')
+      expect(page).not_to have_button('Assign to myself')
+    end
+
+    scenario 'User unassigns task' do
+      task.update!(assigned_user: user)
+      visit details_project_task_path(project, task)
+
+      expect(page).to have_button('Unassign')
+      click_button 'Unassign'
+
+      expect(page).to have_button('Assign to myself')
+      expect(page).not_to have_button('Unassign')
+    end
+
+    scenario 'User schedules task for today' do
+      visit details_project_task_path(project, task)
+
+      click_button 'Today'
+
+      expect(page).to have_content('Due:')
+    end
+
+    scenario 'User schedules task for tomorrow' do
+      visit details_project_task_path(project, task)
+
+      click_button 'Tomorrow'
+
+      expect(page).to have_content('Due:')
+    end
+
+    scenario 'User schedules task for Monday' do
+      visit details_project_task_path(project, task)
+
+      click_button 'Monday'
+
+      expect(page).to have_content('Due:')
+    end
+  end
+
   scenario 'User visits completed tasks page' do
     create(:task, name: 'New task', project: project, user: user, done: false)
     create(:task, name: 'Completed task', project: project, user: user, done: true)
