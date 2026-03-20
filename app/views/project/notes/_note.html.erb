@@ -8,14 +8,14 @@
         </svg>
       </div>
 
-      <div class="list-item-content">
+      <div class="list-item-content overflow-hidden">
         <div class="flex items-center">
           <%= link_to project_note_path(note.project, note), class: "link-primary list-text-primary truncate" do %>
             <%= note.title %>
           <% end %>
         </div>
         <% if note.content.present? %>
-          <p class="mt-1 text-sm text-secondary line-clamp-2 whitespace-pre-line"><%= note.content.truncate(200) %></p>
+          <p class="mt-1 text-sm text-secondary line-clamp-2 whitespace-pre-line break-all"><%= note.content.truncate(200) %></p>
         <% end %>
         <% if note.attachment.attached? %>
           <div class="mt-1">
