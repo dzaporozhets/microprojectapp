@@ -1,5 +1,8 @@
 class MigrateLinksToNotes < ActiveRecord::Migration[7.2]
   def up
+    # Skip if links table no longer exists (already cleaned up)
+    return unless table_exists?(:links)
+
     project_ids = execute("SELECT DISTINCT project_id FROM links").map { |row| row['project_id'] }
 
     project_ids.each do |project_id|

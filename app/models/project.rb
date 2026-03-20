@@ -22,9 +22,6 @@ class Project < ApplicationRecord
 
   validate :project_limit, on: :create
 
-  # Uploaders
-  mount_uploaders :project_files, ProjectFileUploader
-
   # Scopes
   scope :active, -> { where(archived: false) }
   scope :archived, -> { where(archived: true) }
