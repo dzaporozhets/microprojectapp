@@ -17,18 +17,17 @@ class MigrateCommentAttachmentsAndDropColumn < ActiveRecord::Migration[7.2]
       by_project[project_id][:files] << row['attachment']
     end
 
+    remove_column :comments, :attachment
+    Comment.reset_column_information
+
     by_project.each do |project_id, data|
       content = data[:files].map { |f| "Comment attachment: #{f}" }.join("\n")
 
-      Note.create!(
-        project_id: project_id,
-        user_id: data[:user_id],
-        title: "Comment attachments",
-        content: content
-      )
+      execute(<<-SQL)
+        INSERT INTO notes (project_id, user_id, title, content, created_at, updated_at)
+        VALUES (#{project_id}, #{data[:user_id]}, 'Comment attachments', #{connection.quote(content)}, NOW(), NOW())
+      SQL
     end
-
-    remove_column :comments, :attachment
   end
 
   def down
