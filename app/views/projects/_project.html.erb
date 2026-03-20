@@ -20,9 +20,23 @@
             <% end %>
           </h3>
 
-          <div class="mt-1 list-text-secondary truncate">
-            Created by <%= project.user.email %>
-          </div>
+          <% if project.user != current_user %>
+            <div class="mt-1 list-text-secondary truncate">
+              Shared by <%= project.user.email %>
+            </div>
+          <% elsif project.has_team? %>
+            <div class="mt-1 list-text-secondary truncate">
+              <% if project.users.size == 1 %>
+                Shared with <%= project.users.first.email %>
+              <% else %>
+                Shared with others
+              <% end %>
+            </div>
+          <% else %>
+            <div class="mt-1 list-text-secondary truncate">
+              Only visible to you
+            </div>
+          <% end %>
         </div>
 
         <% if !project.archived && project.tasks.todo.any? %>
