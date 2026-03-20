@@ -21,6 +21,31 @@ class TasksController < ApplicationController
                  .page(params[:page]).per(100)
   end
 
+  def new
+    @task = Task.new
+    @projects = current_user.all_active_projects.reject(&:archived?)
+  end
+
+  def create
+    @project = current_user.all_active_projects.find { |p| p.id == params[:task][:project_id].to_i }
+
+    if @project.nil? || @project.archived?
+      redirect_to tasks_path, alert: "Invalid project."
+      return
+    end
+
+    @task = @project.tasks.new(task_params)
+    @task.user = current_user
+
+    if @task.save
+      @project.add_activity(current_user, 'created', @task)
+      redirect_to tasks_path, notice: "Task was successfully created."
+    else
+      @projects = current_user.all_active_projects.reject(&:archived?)
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   def toggle_done
     respond_to do |format|
       if @task.update(params.require(:task).permit(:done))
@@ -44,6 +69,10 @@ class TasksController < ApplicationController
     Task.where(project_id: current_user.all_active_projects)
         .includes(:project, :assigned_user, :comments)
         .todo
+  end
+
+  def task_params
+    params.require(:task).permit(:name, :description, :due_date)
   end
 
 end

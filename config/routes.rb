@@ -56,7 +56,7 @@ Rails.application.routes.draw do
   get 'projects/:id/schedule', to: redirect { |params, _| "/projects/#{params[:id]}" }
   get 'schedule', to: redirect('/tasks')
   get 'search', to: 'search#index'
-  resources :tasks, only: :index, controller: 'tasks' do
+  resources :tasks, only: [:index, :new, :create], controller: 'tasks' do
     member do
       patch :toggle_done
     end

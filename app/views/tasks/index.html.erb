@@ -5,22 +5,7 @@
     <nav class="nav-container">
       <div class="flex flex-wrap nav-controls">
         <%= home_tabs "Tasks" %>
-
-        <div class="hidden w-auto sm:flex sm:flex-row items-center space-x-6">
-          <div class="w-auto ml-auto flex items-center space-x-4">
-            <div class="flex items-center -space-x-2">
-              <% if params[:assigned] == 'true' %>
-                <%= link_to tasks_path, title: "All tasks" do %>
-                  <%= avatar_tag(current_user, "h-8 w-8 avatar-bg ring-2 ring-violet-500") %>
-                <% end %>
-              <% else %>
-                <%= link_to tasks_path(assigned: true), title: "My tasks" do %>
-                  <%= avatar_tag(current_user, "h-8 w-8 avatar-bg") %>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-        </div>
+        <%= link_to "New Task", new_task_path, class: "btn-base" %>
       </div>
     </nav>
   <% end %>

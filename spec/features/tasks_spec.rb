@@ -43,6 +43,25 @@ RSpec.feature "Tasks", type: :feature do
     end
   end
 
+  context "creating a task from tasks index" do
+    scenario "user creates a task via the new task page" do
+      visit tasks_path
+
+      click_link "New Task"
+
+      expect(page).to have_current_path(new_task_path)
+      expect(page).to have_content("New task")
+
+      select project1.name, from: "Project"
+      fill_in "Name", with: "My new task"
+      click_button "Create task"
+
+      expect(page).to have_current_path(tasks_path)
+      expect(page).to have_content("Task was successfully created.")
+      expect(page).to have_content("My new task")
+    end
+  end
+
   scenario "/schedule redirects to /tasks" do
     visit "/schedule"
 
