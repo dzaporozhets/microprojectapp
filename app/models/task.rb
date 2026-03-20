@@ -22,6 +22,7 @@ class Task < ApplicationRecord
   validates :name, presence: true, length: { maximum: 512 }
   validate :task_limit, on: :create
 
+  before_validation :parse_due_date_from_name, on: :create
   before_save :set_done_at, if: :done_changed?
 
   def self.group_by_projects(user = nil)
@@ -39,6 +40,12 @@ class Task < ApplicationRecord
     if project && project.tasks.count >= TASK_LIMIT
       errors.add(:base, "This project has reached the limit of #{TASK_LIMIT} tasks.")
     end
+  end
+
+  def parse_due_date_from_name
+    return if due_date.present?
+
+    self.due_date = TaskNameParser.parse(name)
   end
 
   def set_done_at

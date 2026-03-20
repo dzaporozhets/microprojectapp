@@ -67,6 +67,38 @@ RSpec.describe Task, type: :model do
     end
   end
 
+  describe 'due date parsing from name' do
+    it 'sets due_date when name contains a date pattern' do
+      travel_to Date.new(2026, 3, 18) do
+        task = create(:task, user: user, project: project, name: 'Buy groceries tomorrow')
+
+        expect(task.due_date).to eq(Date.new(2026, 3, 19))
+        expect(task.name).to eq('Buy groceries tomorrow')
+      end
+    end
+
+    it 'does not override an explicitly provided due_date' do
+      travel_to Date.new(2026, 3, 18) do
+        explicit_date = Date.new(2026, 6, 1)
+        task = create(:task, user: user, project: project, name: 'Buy groceries tomorrow', due_date: explicit_date)
+
+        expect(task.due_date).to eq(explicit_date)
+      end
+    end
+
+    it 'does not parse due date on update' do
+      task = create(:task, user: user, project: project, name: 'Buy groceries')
+
+      expect(task.due_date).to be_nil
+
+      travel_to Date.new(2026, 3, 18) do
+        task.update!(name: 'Buy groceries tomorrow')
+
+        expect(task.due_date).to be_nil
+      end
+    end
+  end
+
   describe '.group_by_projects' do
     let!(:project_a) { create(:project, name: 'Project A') }
     let!(:project_b) { create(:project, name: 'Project B') }
