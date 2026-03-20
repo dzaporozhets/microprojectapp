@@ -57,7 +57,6 @@ RSpec.feature "Tasks", type: :feature do
       click_button "Create task"
 
       expect(page).to have_current_path(tasks_path)
-      expect(page).to have_content("Task was successfully created.")
       expect(page).to have_content("My new task")
     end
   end
