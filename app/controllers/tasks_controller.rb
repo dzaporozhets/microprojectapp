@@ -7,8 +7,8 @@ class TasksController < ApplicationController
 
     today = Date.current
 
-    # Section 1: Due dates (not paginated, typically small)
-    @tasks_due = base.with_due_date.where(due_date: ..(today + 1.month)).order(due_date: :asc)
+    # Section 1: Due soon (not paginated, typically small)
+    @tasks_due = base.with_due_date.where(due_date: (today - 1.week)..(today + 2.weeks)).order(due_date: :asc)
 
     # Section 2: Starred (no due date)
     @starred_tasks = base.no_due_date.where(star: true).order(id: :desc)
