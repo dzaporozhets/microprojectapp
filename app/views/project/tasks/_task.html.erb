@@ -1,7 +1,7 @@
 <% toggle_url = local_assigns.fetch(:toggle_url, toggle_done_project_task_path(task.project, task)) %>
 
 <%= turbo_frame_tag dom_id(task), class: (task.done ? 'task task-done' : 'task task-todo') do %>
-  <div class="flex col-span-1 items-center h-12">
+  <div class="flex col-span-1 items-center min-h-12">
     <div class="mr-3 flex">
       <%= form_with(model: task, url: toggle_url, local: false, data: { turbo_frame: dom_id(task) }) do |form| %>
         <%= hidden_field_tag :status, params[:status] %>
@@ -17,7 +17,7 @@
       <% end %>
     </div>
 
-    <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "min-w-0 grow flex flex-col justify-center h-12 mr-2" do %>
+    <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "min-w-0 grow flex flex-col justify-center min-h-12 mr-2" do %>
       <p class="task-name min-w-0"><%= task.name %></p>
       <% if current_page?(tasks_path) || current_page?(tasks_path(assigned: true)) %>
         <p class="text-xs text-secondary min-w-0 truncate"><%= task.project.name %></p>

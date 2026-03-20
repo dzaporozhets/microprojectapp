@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (max-width: 639px) {
-  html {
-    zoom: 0.9;
-  }
-}
-
 /*  Table of Contents
  *  -----------------
  *  1. Base & Theme
@@ -332,6 +326,14 @@
 
   .status-dot-overdue {
     @apply inline-block h-2 w-2 rounded-full bg-red-500;
+  }
+
+  .task-title {
+    @apply text-lg font-semibold leading-6 text-gray-900 dark:text-gray-100;
+  }
+
+  .task-description {
+    @apply mt-1 text-sm prose max-w-none break-words;
   }
 
   /*----------------------------------------*

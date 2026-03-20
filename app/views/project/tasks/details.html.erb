@@ -42,12 +42,12 @@
   <div>
     <div class="m-4 space-y-4">
       <div class="task-details">
-        <h1 class="resource-title">
+        <h1 class="task-title">
           <%= @task.name %>
         </h1>
 
         <% if @task.description.present? %>
-          <div class="mt-1 text-sm prose max-w-none break-words">
+          <div class="task-description">
             <%= format_user_content(@task.description) %>
           </div>
         <% end %>
