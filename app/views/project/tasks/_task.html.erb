@@ -22,7 +22,12 @@
     <% end %>
 
     <% unless task.done %>
-      <div class="space-x-2 sm:flex hidden">
+      <div class="space-x-2 sm:flex hidden items-center">
+        <% if task.due_date %>
+          <span class="text-xs whitespace-nowrap <%= task.overdue? ? 'text-red-700 dark:text-red-400' : 'text-secondary' %>"><%= I18n.l(task.due_date.to_date, format: :short) %></span>
+          <span class="text-gray-300 dark:text-gray-600">|</span>
+        <% end %>
+
         <% if task.assigned_user_id %>
           <%= link_to project_tasks_path(task.project, assigned_user_id: task.assigned_user_id), title: task.assigned_user.email, data: { turbo: false } do %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
@@ -35,23 +40,6 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 0 1 1.037-.443 48.282 48.282 0 0 0 5.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
           </svg>
-        <% end %>
-
-        <% if task.due_date %>
-          <%= link_to '#', title: I18n.l(task.due_date.to_date, format: :short), class: "flex items-center space-x-1" do %>
-            <% if task.overdue? %>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-red-700">
-                <path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z" clip-rule="evenodd" />
-              </svg>
-            <% else %>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-              </svg>
-            <% end %>
-            <% if local_assigns[:show_due_date] %>
-              <span class="text-xs whitespace-nowrap"><%= I18n.l(task.due_date.to_date, format: :short) %></span>
-            <% end %>
-          <% end %>
         <% end %>
 
         <%= link_to toggle_star_project_task_path(task.project, task), method: :patch, data: { turbo: true, turbo_method: :patch }, title: 'Star' do %>

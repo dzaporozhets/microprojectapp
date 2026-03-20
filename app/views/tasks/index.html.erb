@@ -34,7 +34,7 @@
 
         <div class="resource-list">
           <% @tasks_due.each do |task| %>
-            <%= render 'tasks/task', task: task, show_due_date: true %>
+            <%= render 'tasks/task', task: task %>
           <% end %>
         </div>
       </div>

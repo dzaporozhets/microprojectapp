@@ -27,7 +27,7 @@
     <div class="resource-container">
       <div class="resource-list">
         <% @tasks_due.each do |task| %>
-          <%= render partial: "project/tasks/task", locals: { task: task, show_due_date: true } %>
+          <%= render partial: "project/tasks/task", locals: { task: task } %>
         <% end %>
       </div>
     </div>
