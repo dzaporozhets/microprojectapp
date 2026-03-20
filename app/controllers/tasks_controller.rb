@@ -7,15 +7,18 @@ class TasksController < ApplicationController
 
     today = Date.current
 
-    # Section 1: Due soon (not paginated, typically small)
-    @tasks_due = base.with_due_date.where(due_date: (today - 1.week)..(today + 2.weeks)).order(due_date: :asc)
+    # Assigned to you
+    @assigned_tasks = base.where(assigned_user_id: current_user.id).order(star: :desc, id: :desc)
 
-    # Section 2: Starred (no due date)
-    @starred_tasks = base.no_due_date.where(star: true).order(id: :desc)
+    # Due soon (exclude assigned tasks to avoid duplicates)
+    @tasks_due = base.with_due_date.where(due_date: (today - 1.week)..(today + 2.weeks))
+                     .where.not(id: @assigned_tasks).order(due_date: :asc)
 
-    # Section 3: All tasks, grouped by project (exclude tasks already shown above)
-    @tasks = base.where.not(id: @tasks_due).where.not(id: @starred_tasks).order(id: :desc).page(params[:page]).per(100)
-    @pinned_project_ids = current_user.pins.pluck(:project_id).to_set
+    # All remaining tasks: starred first, then the rest
+    @tasks = base.where.not(id: @tasks_due)
+                 .where.not(id: @assigned_tasks)
+                 .order(star: :desc, id: :desc)
+                 .page(params[:page]).per(100)
   end
 
   def toggle_done

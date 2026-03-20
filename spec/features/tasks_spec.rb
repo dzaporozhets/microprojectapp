@@ -27,19 +27,18 @@ RSpec.feature "Tasks", type: :feature do
   context "tasks page sections" do
     let!(:overdue_task) { create(:task, project: project1, name: "Overdue chore", due_date: Date.current - 3.days) }
     let!(:today_task) { create(:task, project: project1, name: "Today chore", due_date: Date.current) }
-    let!(:starred_task) { create(:task, project: project1, name: "Starred chore", star: true) }
+    let!(:assigned_task) { create(:task, project: project1, name: "Assigned chore", assigned_user: user) }
 
-    scenario "user sees due-date, starred, and project sections" do
+    scenario "user sees due-soon and assigned-to-you sections" do
       visit tasks_path
 
       expect(page).to have_content("Due soon")
       expect(page).to have_content(overdue_task.name)
       expect(page).to have_content(today_task.name)
 
-      expect(page).to have_content("Starred")
-      expect(page).to have_content(starred_task.name)
+      expect(page).to have_content("Assigned to you")
+      expect(page).to have_content(assigned_task.name)
 
-      # Regular tasks still appear in project-grouped section
       expect(page).to have_content(task1.name)
     end
   end

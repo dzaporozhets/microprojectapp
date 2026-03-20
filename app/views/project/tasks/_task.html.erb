@@ -17,8 +17,11 @@
       <% end %>
     </div>
 
-    <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "min-w-0 grow flex h-12 items-center mr-2" do %>
+    <%= link_to details_project_task_path(task.project, task), data: { turbo: false }, class: "min-w-0 grow flex flex-col justify-center h-12 mr-2" do %>
       <p class="task-name min-w-0"><%= task.name %></p>
+      <% if current_page?(tasks_path) || current_page?(tasks_path(assigned: true)) %>
+        <p class="text-xs text-secondary min-w-0 truncate"><%= task.project.name %></p>
+      <% end %>
     <% end %>
 
     <% unless task.done %>
