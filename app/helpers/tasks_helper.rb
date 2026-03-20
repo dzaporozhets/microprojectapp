@@ -7,6 +7,18 @@ module TasksHelper
     "task_#{task.id}_new_comment"
   end
 
+  def human_due_date(date)
+    today = Date.current
+    date = date.to_date
+
+    case (date - today).to_i
+    when 0 then "Today"
+    when 1 then "Tomorrow"
+    when -1 then "Yesterday"
+    else I18n.l(date, format: :short)
+    end
+  end
+
   def collapse_task_path(project)
     referer_uri = URI.parse(request.referer) rescue nil
     return project_path(project) unless referer_uri && referer_uri.path
