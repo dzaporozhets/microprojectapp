@@ -9,7 +9,7 @@
     </nav>
   <% end %>
 
-  <div class="space-y-6">
+  <div class="space-y-4">
     <% if @notes.any? %>
       <% @notes.group_by(&:project).sort_by { |project, _| [@pinned_project_ids.include?(project.id) ? 0 : 1, project.name] }.each do |project, notes| %>
         <div class="resource-container">
