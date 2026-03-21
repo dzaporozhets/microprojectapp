@@ -27,7 +27,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @project = current_user.all_active_projects.find { |p| p.id == params[:task][:project_id].to_i }
+    @project = current_user.find_active_project(params[:task][:project_id])
 
     if @project.nil? || @project.archived?
       redirect_to tasks_path, alert: "Invalid project."

@@ -166,6 +166,10 @@ class User < ApplicationRecord
       invited_projects.active.ordered_by_id
   end
 
+  def find_active_project(id)
+    all_active_projects.find { |p| p.id == id.to_i }
+  end
+
   def has_access_to?(project)
     projects.include?(project) || invited_projects.include?(project)
   end

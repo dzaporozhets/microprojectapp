@@ -366,5 +366,32 @@ RSpec.describe User, type: :model do
       end
     end
 
+    describe '#find_active_project' do
+      let(:user) { create(:user) }
+      let!(:active_project) { create(:project, user: user) }
+      let!(:archived_project) { create(:project, user: user, archived: true) }
+      let!(:other_user_project) { create(:project, user: create(:user)) }
+
+      it 'finds an active project by id' do
+        expect(user.find_active_project(active_project.id)).to eq(active_project)
+      end
+
+      it 'finds a project when id is a string' do
+        expect(user.find_active_project(active_project.id.to_s)).to eq(active_project)
+      end
+
+      it 'returns nil for an archived project' do
+        expect(user.find_active_project(archived_project.id)).to be_nil
+      end
+
+      it 'returns nil for another user project' do
+        expect(user.find_active_project(other_user_project.id)).to be_nil
+      end
+
+      it 'returns nil for a non-existent id' do
+        expect(user.find_active_project(0)).to be_nil
+      end
+    end
+
   end
 end

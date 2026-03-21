@@ -1,0 +1,68 @@
+<% content_for :title, "New Note" %>
+
+<% content_for :subnav do %>
+  <nav class="nav-container">
+    <div class="flex flex-wrap nav-controls">
+      <%= home_tabs "Notes" %>
+    </div>
+  </nav>
+<% end %>
+
+<div class="resource-container">
+  <div class="resource-header">
+    <div class="flex items-center justify-between w-full">
+      <div>
+        <h1 class="resource-title">New note</h1>
+      </div>
+
+      <div class="flex items-center space-x-2">
+        <%= link_to notes_path, class: 'btn-sm', title: 'Back to notes' do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <%= form_with(model: @note, url: notes_path, data: { turbo: false }) do |form| %>
+      <% if @note.errors.any? %>
+        <div id="ar-errors-text" data-turbo-cache="false" class="error-box">
+          <ul>
+            <% @note.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-section">
+        <div class="p-4">
+          <div>
+            <%= form.label :project_id, "Project", class: "form-label" %>
+            <%= form.collection_select :project_id, @projects, :id, :name, { prompt: "Select a project" }, { class: "block w-full base-input", required: true } %>
+          </div>
+        </div>
+
+        <div class="p-4">
+          <div>
+            <%= form.label :title, class: "form-label" %>
+            <%= form.text_field :title, class: "block w-full base-input", required: true, placeholder: "Enter note title..." %>
+          </div>
+        </div>
+
+        <div class="p-4">
+          <div>
+            <%= form.label :content, class: "form-label" %>
+            <%= form.text_area :content, class: "block w-full base-input resize-y", rows: 5, placeholder: "Enter note content..." %>
+          </div>
+        </div>
+
+        <div class="p-4">
+          <%= form.submit 'Create note', class: "btn-base" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
