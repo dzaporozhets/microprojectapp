@@ -5,6 +5,5 @@ class NotesController < ApplicationController
                  .order(id: :desc)
                  .page(params[:page]).per(100)
 
-    @pinned_project_ids = current_user.pins.pluck(:project_id).to_set
   end
 end
