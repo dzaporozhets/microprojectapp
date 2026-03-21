@@ -7,7 +7,7 @@ class NotesController < ApplicationController
   end
 
   def new
-    @note = Note.new
+    @note = Note.new(project_id: current_user.personal_project&.id)
     @projects = current_user.all_active_projects.reject(&:archived?)
   end
 

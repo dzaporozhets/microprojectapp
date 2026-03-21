@@ -22,7 +22,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
+    @task = Task.new(project_id: current_user.personal_project&.id)
     @projects = current_user.all_active_projects.reject(&:archived?)
   end
 
