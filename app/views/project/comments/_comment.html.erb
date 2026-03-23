@@ -23,9 +23,7 @@
         This comment was removed.
       </div>
     <% else %>
-      <div class="comment-body">
-        <%= format_user_content(comment.body) %>
-      </div>
+      <div class="user-content"><%= format_user_content(comment.body) %></div>
     <% end %>
 
     <% if comment.attachment.attached? %>

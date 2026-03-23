@@ -35,9 +35,7 @@
                 <p class="text-sm text-gray-900 dark:text-gray-200"><span class="font-medium">Name was:</span> <%= old_name %></p>
               <% end %>
               <% if old_description.present? %>
-                <div class="prose dark:prose-invert max-w-none text-sm break-words<%= ' mt-2' if old_name.present? %>">
-                  <%= format_user_content(old_description) %>
-                </div>
+                <div class="user-content<%= ' mt-2' if old_name.present? %>"><%= format_user_content(old_description) %></div>
               <% end %>
             </div>
           </div>

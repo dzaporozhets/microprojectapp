@@ -24,9 +24,7 @@
 
     <div class="p-4">
       <% if @note.content.present? %>
-        <div class="prose dark:prose-invert max-w-none text-sm break-words">
-          <%= format_user_content(@note.content) %>
-        </div>
+        <div class="user-content"><%= format_user_content(@note.content) %></div>
       <% else %>
         <p class="text-sm text-secondary">No content.</p>
       <% end %>

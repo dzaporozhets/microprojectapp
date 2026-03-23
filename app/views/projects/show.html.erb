@@ -10,9 +10,7 @@
   <% if @project.description.present? %>
     <div class="resource-container">
       <div class="resource-body">
-        <div class="comment-body">
-          <%= format_user_content(@project.description) %>
-        </div>
+        <div class="user-content"><%= format_user_content(@project.description) %></div>
       </div>
     </div>
   <% end %>

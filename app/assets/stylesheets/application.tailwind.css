@@ -354,7 +354,15 @@
   }
 
   .task-description {
-    @apply mt-1 text-sm prose max-w-none break-words;
+    @apply mt-1 user-content;
+  }
+
+  .user-content {
+    @apply text-sm text-gray-900 dark:text-gray-200 break-words;
+  }
+
+  .user-content a {
+    @apply underline text-violet-700;
   }
 
   /*----------------------------------------*
