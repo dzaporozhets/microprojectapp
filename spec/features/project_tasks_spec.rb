@@ -164,7 +164,6 @@ RSpec.feature "Project::Tasks", type: :feature do
       expect(page).to have_content(user.email)
 
       # Check for old values displayed
-      expect(page).to have_content('Name was:')
       expect(page).to have_content('Original Task Name')
       expect(page).to have_content('Original description')
     end

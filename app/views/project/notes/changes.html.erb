@@ -19,9 +19,10 @@
 
     <% if @versions.any? %>
       <div class="p-4 space-y-4">
-        <% @versions.reverse.first(4).each do |version| %>
-          <% old_content = version.changeset.dig("content", 0) if version.changeset.present? %>
-          <% next unless old_content.present? %>
+        <% @versions.reverse_each do |version| %>
+          <% old_content = version.changeset&.dig("content", 0) %>
+          <% next if old_content.blank? %>
+
           <div class="version-card">
             <div class="version-card-header">
               <p class="version-card-title"><%= @note.title %></p>

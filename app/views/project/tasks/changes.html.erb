@@ -19,10 +19,11 @@
 
     <% if @versions.any? %>
       <div class="p-4 space-y-4">
-        <% @versions.reverse.first(4).each do |version| %>
-          <% next unless version.changeset.present? %>
+        <% @versions.reverse_each do |version| %>
+          <% next if version.changeset.blank? %>
           <% old_name = version.changeset.dig("name", 0) %>
           <% old_description = version.changeset.dig("description", 0) %>
+
           <div class="version-card">
             <div class="version-card-header">
               <p class="version-card-title"><%= @task.name %></p>
@@ -32,10 +33,10 @@
             </div>
             <div class="version-card-body">
               <% if old_name.present? %>
-                <p class="text-sm text-gray-900 dark:text-gray-200"><span class="font-medium">Name was:</span> <%= old_name %></p>
+                <p class="font-medium text-sm text-gray-900 dark:text-gray-200"><%= old_name %></p>
               <% end %>
               <% if old_description.present? %>
-                <div class="user-content<%= ' mt-2' if old_name.present? %>"><%= format_user_content(old_description) %></div>
+                <div class="user-content"><%= format_user_content(old_description) %></div>
               <% end %>
             </div>
           </div>
