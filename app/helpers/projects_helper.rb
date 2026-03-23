@@ -1,7 +1,7 @@
 module ProjectsHelper
   def project_tabs(project, selected = nil)
     tabs = [
-      { name: 'Project', path: project_path(project) },
+      { name: 'Tasks', path: project_path(project) },
       { name: 'Notes', path: project_notes_path(project) }
     ]
 
