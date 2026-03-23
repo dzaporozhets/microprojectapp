@@ -405,6 +405,18 @@
     @apply border-l-4 border-gray-300 dark:border-gray-600 pl-3 italic mb-2;
   }
 
+  .user-content table {
+    @apply w-full mb-2 border-collapse;
+  }
+
+  .user-content th {
+    @apply text-left font-semibold p-2 border-b-2 border-gray-300 dark:border-gray-600;
+  }
+
+  .user-content td {
+    @apply p-2 border-b border-gray-200 dark:border-gray-700;
+  }
+
   /*----------------------------------------*
    * 10. Typography & Text
    *----------------------------------------*/

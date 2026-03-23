@@ -79,6 +79,34 @@ RSpec.describe MarkdownHelper, type: :helper do
       expect(result).to have_css('ul li', text: 'item two')
     end
 
+    it 'renders strikethrough' do
+      result = helper.format_user_content('~~deleted~~')
+
+      expect(result).to have_css('del', text: 'deleted')
+    end
+
+    it 'renders tables' do
+      result = helper.format_user_content("| Name | Value |\n|------|-------|\n| foo  | bar   |")
+
+      expect(result).to have_css('table')
+      expect(result).to have_css('th', text: 'Name')
+      expect(result).to have_css('td', text: 'foo')
+    end
+
+    it 'does not apply emphasis to underscores within words' do
+      result = helper.format_user_content('source_investment_id')
+
+      expect(result).not_to have_css('em')
+      expect(result).to include('source_investment_id')
+    end
+
+    it 'opens links in new tab with nofollow' do
+      result = helper.format_user_content('https://example.com')
+
+      expect(result).to include('target="_blank"')
+      expect(result).to include('rel="nofollow"')
+    end
+
     it 'returns html safe string' do
       expect(helper.format_user_content('hello')).to be_html_safe
     end
