@@ -1,6 +1,19 @@
 CHANGELOG
 =========
 
+Version 0.19.0 (2026-03-23)
+---------------------------
+- Add ability to create notes and tasks from the dashboard
+- Add quick action buttons to task show page
+- Redesign tasks index page
+- Redesign project notes index page with card layout
+- Redesign change history page for tasks and notes
+- Rename Project tab to Tasks in project navigation
+- Pre-select personal project for new task/note
+- Show human-readable due dates and project visibility details
+- Parse dates when creating new tasks
+- Remove Carrierwave and migrate to Active Storage for comment attachments
+
 Version 0.18.0 (2026-03-19)
 ---------------------------
 - Add ability to edit notes and attach files to notes
