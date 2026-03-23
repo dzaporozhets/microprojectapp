@@ -144,6 +144,26 @@ RSpec.describe Project::NotesController, type: :controller do
     end
   end
 
+  describe "GET #changes" do
+    it "returns a success response" do
+      note = create(:note, project: project, user: user)
+      get :changes, params: { project_id: project.id, id: note.id }
+      expect(response).to be_successful
+    end
+
+    it "shows version history after content update" do
+      note = create(:note, project: project, user: user, content: "Original content")
+
+      PaperTrail.request(whodunnit: user.id.to_s) do
+        note.update(content: "Updated content")
+      end
+
+      get :changes, params: { project_id: project.id, id: note.id }
+      expect(response).to be_successful
+      expect(note.versions.count).to eq(1)
+    end
+  end
+
   describe "DELETE #destroy" do
     it "destroys the note" do
       note = create(:note, project: project, user: user)

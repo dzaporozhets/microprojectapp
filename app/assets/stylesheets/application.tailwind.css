@@ -276,6 +276,27 @@
     @apply mt-6;
   }
 
+  .version-card {
+    @apply border border-gray-200 dark:border-gray-700 rounded-lg;
+  }
+
+  .version-card-header {
+    @apply px-4 py-2 border-b border-gray-200 dark:border-gray-700
+           bg-gray-50 dark:bg-gray-800 rounded-t-lg;
+  }
+
+  .version-card-title {
+    @apply font-medium text-gray-900 dark:text-gray-200 text-sm;
+  }
+
+  .version-card-meta {
+    @apply text-xs text-gray-500 dark:text-gray-400;
+  }
+
+  .version-card-body {
+    @apply p-4;
+  }
+
   /*----------------------------------------*
    * 8. Lists & Data Display
    *----------------------------------------*/

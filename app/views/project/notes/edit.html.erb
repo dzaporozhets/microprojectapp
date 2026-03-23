@@ -25,7 +25,7 @@
     <div class="p-4">
       <div class="flex items-center justify-between">
         <div class="text-sm text-gray-600 dark:text-gray-400">
-          <%= last_update_text(@note) %>
+          <%= link_to last_update_text(@note), changes_project_note_path(@project, @note), class: 'underline hover:text-gray-900 dark:hover:text-gray-200' %>
         </div>
 
         <%= button_to "Delete this note", project_note_path(@project, @note), method: :delete, data: { turbo_confirm: 'Delete this note? Are you sure?' }, class: "btn-remove" %>

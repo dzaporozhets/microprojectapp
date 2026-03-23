@@ -10,7 +10,7 @@ class Task < ApplicationRecord
   has_paper_trail(
     only: [:name, :description],
     on: [:update],
-    version_limit: 5
+    version_limit: 4
   )
 
   scope :todo, -> { where(done: false) }

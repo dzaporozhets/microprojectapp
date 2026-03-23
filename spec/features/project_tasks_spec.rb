@@ -129,10 +129,9 @@ RSpec.feature "Project::Tasks", type: :feature do
 
       visit changes_project_task_path(project, new_task)
 
-      expect(page).to have_content('Task with no changes')
-      expect(page).to have_content('Showing the last 5 changes to this task')
-      expect(page).to have_content('No versions available')
-      expect(page).to have_content('No version history found for this task')
+      expect(page).to have_content('Change history')
+      expect(page).to have_content('Last 4 changes')
+      expect(page).to have_content('No changes yet.')
     end
 
     scenario 'User views task change history with multiple changes' do
@@ -157,21 +156,17 @@ RSpec.feature "Project::Tasks", type: :feature do
       visit changes_project_task_path(project, task_to_change)
 
       # Verify page content
-      expect(page).to have_content('Updated Task Name')
-      expect(page).to have_content('Showing the last 5 changes to this task')
+      expect(page).to have_content('Change history')
+      expect(page).to have_content('Last 4 changes')
 
       # Check for version information
-      expect(page).to have_content('by')
+      expect(page).to have_content('ago by')
       expect(page).to have_content(user.email)
 
-      # Check for change details
-      expect(page).to have_content('Name:')
+      # Check for old values displayed
+      expect(page).to have_content('Name was:')
       expect(page).to have_content('Original Task Name')
-      expect(page).to have_content('Updated Task Name')
-
-      expect(page).to have_content('Description:')
       expect(page).to have_content('Original description')
-      expect(page).to have_content('Updated description')
     end
 
     scenario 'User views task change history with unknown user' do

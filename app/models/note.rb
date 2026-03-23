@@ -2,6 +2,12 @@ class Note < ApplicationRecord
   belongs_to :user, optional: false
   belongs_to :project, optional: false
 
+  has_paper_trail(
+    only: [:content],
+    on: [:update],
+    version_limit: 4
+  )
+
   validates :title, presence: true
   validate :acceptable_attachment
 

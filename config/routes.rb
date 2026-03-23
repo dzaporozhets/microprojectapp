@@ -22,7 +22,11 @@ Rails.application.routes.draw do
       resources :comments, controller: 'project/comments', only: [:create, :destroy]
     end
 
-    resources :notes, controller: 'project/notes', only: [:index, :new, :create, :show, :edit, :update, :destroy]
+    resources :notes, controller: 'project/notes', only: [:index, :new, :create, :show, :edit, :update, :destroy] do
+      member do
+        get :changes
+      end
+    end
     resources :users, only: [:index, :destroy], controller: 'project/users' do
       collection do
         get 'invite', to: 'project/users#invite'

@@ -8,7 +8,7 @@
         </div>
 
         <div class="flex items-center space-x-2">
-          <%= link_to edit_project_task_path(@project, @task), class: "btn-sm", title: "Close" do %>
+          <%= link_to edit_project_note_path(@project, @note), class: "btn-sm", title: "Close" do %>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
@@ -20,25 +20,19 @@
     <% if @versions.any? %>
       <div class="p-4 space-y-4">
         <% @versions.reverse.first(4).each do |version| %>
-          <% next unless version.changeset.present? %>
-          <% old_name = version.changeset.dig("name", 0) %>
-          <% old_description = version.changeset.dig("description", 0) %>
+          <% old_content = version.changeset.dig("content", 0) if version.changeset.present? %>
+          <% next unless old_content.present? %>
           <div class="version-card">
             <div class="version-card-header">
-              <p class="version-card-title"><%= @task.name %></p>
+              <p class="version-card-title"><%= @note.title %></p>
               <span class="version-card-meta">
                 <%= time_ago_in_words(version.created_at) %> ago by <%= @users_by_version[version.id]&.email || "Unknown" %>
               </span>
             </div>
             <div class="version-card-body">
-              <% if old_name.present? %>
-                <p class="text-sm text-gray-900 dark:text-gray-200"><span class="font-medium">Name was:</span> <%= old_name %></p>
-              <% end %>
-              <% if old_description.present? %>
-                <div class="prose dark:prose-invert max-w-none text-sm break-words<%= ' mt-2' if old_name.present? %>">
-                  <%= format_user_content(old_description) %>
-                </div>
-              <% end %>
+              <div class="prose dark:prose-invert max-w-none text-sm break-words">
+                <%= format_user_content(old_content) %>
+              </div>
             </div>
           </div>
         <% end %>

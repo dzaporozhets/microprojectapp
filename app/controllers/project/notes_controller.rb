@@ -1,11 +1,24 @@
 class Project::NotesController < Project::BaseController
-  before_action :set_note, only: %i[ show edit update destroy ]
+  before_action :set_note, only: %i[ show edit update destroy changes ]
   before_action :set_tab
 
   def index
   end
 
   def show
+  end
+
+  def changes
+    @versions = @note.versions.order(created_at: :desc)
+
+    user_ids = @versions.map(&:whodunnit)
+    user_ids.compact!
+    user_ids.uniq!
+    users_by_id = User.where(id: user_ids).index_by(&:id)
+
+    @users_by_version = @versions.each_with_object({}) do |version, hash|
+      hash[version.id] = users_by_id[version.whodunnit.to_i]
+    end
   end
 
   def new

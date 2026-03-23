@@ -13,6 +13,21 @@ RSpec.describe Note, type: :model do
     end
   end
 
+  describe 'version history' do
+    it 'tracks content changes' do
+      note = create(:note, content: "Original")
+      note.update(content: "Updated")
+      expect(note.versions.count).to eq(1)
+    end
+
+    it 'does not track title changes' do
+      note = create(:note, title: "Original")
+      note.update(title: "Updated")
+      expect(note.versions.count).to eq(0)
+    end
+
+  end
+
   describe 'attachment' do
     it 'rejects files over 5MB' do
       note = create(:note)
