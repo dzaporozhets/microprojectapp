@@ -13,20 +13,7 @@
   <% if @project.notes.any? %>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
       <% @project.notes.each do |note| %>
-        <%= link_to project_note_path(@project, note), class: "resource-container p-4 hover:bg-neutral-50 dark:hover:bg-gray-800 block" do %>
-          <h3 class="list-text-primary font-semibold truncate"><%= note.title %></h3>
-          <% if note.content.present? %>
-            <p class="mt-2 text-sm text-muted line-clamp-6 whitespace-pre-line break-all"><%= note.content.truncate(500) %></p>
-          <% end %>
-          <% if note.attachment.attached? %>
-            <div class="mt-2 flex items-center text-xs text-muted">
-              <svg class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z" clip-rule="evenodd" />
-              </svg>
-              <%= note.attachment.filename %>
-            </div>
-          <% end %>
-        <% end %>
+        <%= render 'project/notes/note', note: note %>
       <% end %>
     </div>
   <% else %>
