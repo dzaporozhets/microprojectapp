@@ -353,10 +353,6 @@
     @apply text-lg font-semibold leading-6 text-gray-900 dark:text-gray-100;
   }
 
-  .task-description {
-    @apply mt-1 user-content;
-  }
-
   .user-content {
     @apply text-sm text-gray-900 dark:text-gray-200 break-words;
   }
