@@ -7,38 +7,6 @@ RSpec.describe ApplicationHelper, type: :helper do
     allow(helper).to receive(:current_user).and_return(user)
   end
 
-  describe '#format_user_content' do
-    it 'wraps plain text in a paragraph' do
-      expect(helper.format_user_content('hello world')).to have_css('p', text: 'hello world')
-    end
-
-    it 'converts URLs to links' do
-      result = helper.format_user_content('visit https://example.com today')
-
-      expect(result).to have_link('https://example.com', href: 'https://example.com')
-    end
-
-    it 'escapes HTML tags instead of rendering them' do
-      result = helper.format_user_content('<b>bold</b>')
-
-      expect(result).to include('&lt;b&gt;')
-      expect(result).not_to have_css('b')
-    end
-
-    it 'escapes script tags' do
-      result = helper.format_user_content('<script>alert(1)</script>')
-
-      expect(result).to include('&lt;script&gt;')
-      expect(result).not_to include('<script>')
-    end
-
-    it 'preserves line breaks as separate paragraphs' do
-      result = helper.format_user_content("first\n\nsecond")
-
-      expect(result).to have_css('p', text: 'first')
-      expect(result).to have_css('p', text: 'second')
-    end
-  end
 
   describe '#time_ago_short' do
     it 'returns "now" for times less than a minute ago' do

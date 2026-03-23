@@ -97,4 +97,4 @@ gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
 gem 'paper_trail'
 gem 'rack-attack'
-gem 'rails_autolink'
+gem 'redcarpet'

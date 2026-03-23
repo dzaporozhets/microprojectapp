@@ -85,10 +85,6 @@ module ApplicationHelper
     "Last updated: #{l(entity.updated_at, format: :long)}"
   end
 
-  def format_user_content(text)
-    simple_format(auto_link(h(text), sanitize: false))
-  end
-
   def display_flash
     if alert
       content_tag(:p, alert, id: "notice", class: 'flash-alert p-3 text-sm mb-2')
