@@ -30,7 +30,7 @@ bin/all_tests                 # Run all checks (rubocop, brakeman, rspec, covera
 Always run `bin/all_tests` after completing a task to verify nothing is broken.
 
 ### Releasing
-See `release.txt` for the full release procedure. Run `git fetch --tags` first to ensure you have the latest tags before determining the current version. Key steps: bump version in `app/controllers/admin_controller.rb` and `CHANGELOG.txt`, run `bin/all_tests`, commit, and tag.
+See `release.txt` for the full release procedure. Run `git fetch --tags` first to ensure you have the latest tags before determining the current version. Key steps: bump version in `config/initializers/version.rb` and `CHANGELOG.txt`, run `bin/all_tests`, commit, and tag.
 
 ### Testing
 ```bash

@@ -1,0 +1,75 @@
+<div class="space-y-6">
+  <div class="resource-container">
+    <div class="resource-header">
+      <div>
+        <h1 class="resource-title">MicroProject.app</h1>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="data-row">
+        <dt class="data-label">Version</dt>
+        <dd class="text-sm text-default"><%= APP_VERSION %></dd>
+      </div>
+      <div class="data-row">
+        <dt class="data-label">Website</dt>
+        <dd><%= link_to "microproject.app", "https://microproject.app", target: "_blank", class: "text-sm link-primary" %></dd>
+      </div>
+      <div class="data-row">
+        <dt class="data-label">Source code</dt>
+        <dd><%= link_to "GitLab", "https://gitlab.com/dzaporozhets/microprojectapp", target: "_blank", class: "text-sm link-primary" %></dd>
+      </div>
+      <div class="data-row">
+        <dt class="data-label">Source code mirror</dt>
+        <dd><%= link_to "GitHub", "https://github.com/dzaporozhets/microprojectapp", target: "_blank", class: "text-sm link-primary" %></dd>
+      </div>
+      <div class="data-row">
+        <dt class="data-label">Issues and feedback</dt>
+        <dd><%= link_to "GitLab Issues", "https://gitlab.com/dzaporozhets/microprojectapp/-/issues", target: "_blank", class: "text-sm link-primary" %></dd>
+      </div>
+    </div>
+  </div>
+
+  <div class="resource-container">
+    <div class="resource-header">
+      <div>
+        <h1 class="resource-title">API</h1>
+        <p class="resource-description">Access your projects programmatically.</p>
+      </div>
+    </div>
+
+    <div class="p-4 space-y-3">
+      <p class="text-sm text-default">
+        MicroProject provides a REST API for managing tasks. Generate an API token in
+        <%= link_to "Account settings", users_account_path, class: "link-primary" %>.
+      </p>
+
+      <p class="text-sm text-default">
+        See the
+        <%= link_to "API documentation", "https://gitlab.com/dzaporozhets/microprojectapp/-/blob/main/docs/API.md", target: "_blank", class: "link-primary" %>
+        for details.
+      </p>
+    </div>
+  </div>
+
+  <div class="resource-container">
+    <div class="resource-header">
+      <div>
+        <h1 class="resource-title">MCP Server</h1>
+        <p class="resource-description">Use MicroProject with Claude Code and other AI tools.</p>
+      </div>
+    </div>
+
+    <div class="p-4 space-y-3">
+      <p class="text-sm text-default">
+        MicroProject includes an MCP server that exposes tasks to AI assistants like Claude Code.
+      </p>
+
+      <p class="text-sm text-default">
+        See the
+        <%= link_to "MCP setup guide", "https://gitlab.com/dzaporozhets/microprojectapp/-/blob/main/mcp/README.md", target: "_blank", class: "link-primary" %>
+        for instructions.
+      </p>
+    </div>
+  </div>
+</div>

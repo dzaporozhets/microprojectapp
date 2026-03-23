@@ -16,13 +16,13 @@ Release Procedure
    - Skip internal/dev-only changes (CI, test coverage, refactors, spec additions, CSS tweaks)
    - Write entries from the user's perspective (what they can see or do differently)
 
-5. Bump version in app/controllers/admin_controller.rb:
-   - Update @version = '0.17.0'
+5. Bump version in config/initializers/version.rb:
+   - Update APP_VERSION = '0.17.0'
 
 6. Run bin/all_tests to verify everything passes
 
 7. Create the release commit:
-   git add CHANGELOG.txt app/controllers/admin_controller.rb
+   git add CHANGELOG.txt config/initializers/version.rb
    git commit -m "Bump version to 0.17.0"
 
 8. Create and push the git tag:
