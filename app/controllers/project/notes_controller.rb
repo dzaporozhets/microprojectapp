@@ -35,7 +35,7 @@ class Project::NotesController < Project::BaseController
     respond_to do |format|
       if @note.save
         @project.add_activity(current_user, 'created', @note)
-        format.html { redirect_to project_notes_path(@project), notice: "Note was successfully created." }
+        format.html { redirect_to project_note_path(@project, @note), notice: "Note was successfully created." }
         format.json { render :show, status: :created, location: @note }
       else
         format.html { render :new, status: :unprocessable_entity }

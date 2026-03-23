@@ -39,7 +39,7 @@ RSpec.describe Project::NotesController, type: :controller do
             note: { title: "My Note", content: "Some content" }
           }
         }.to change(Note, :count).by(1)
-        expect(response).to redirect_to(project_notes_path(project))
+        expect(response).to redirect_to(project_note_path(project, Note.last))
       end
     end
 
