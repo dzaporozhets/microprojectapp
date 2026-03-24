@@ -1,0 +1,96 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+RSpec.describe ProjectImportService do
+  let(:user) { create(:user) }
+  let(:project) { create(:project, user: user) }
+
+  describe '#import!' do
+    context 'when comments have a different user_email' do
+      let(:data) do
+        {
+          'tasks' => [
+            {
+              'name' => 'Test task',
+              'comments' => [
+                { 'body' => 'A comment', 'user_email' => 'other@example.com' }
+              ]
+            }
+          ]
+        }
+      end
+
+      it 'attributes the comment to the current user' do
+        service = described_class.new(project, data, user)
+        service.import!
+
+        comment = Comment.last
+        expect(comment.user).to eq(user)
+      end
+
+      it 'appends the original author email to the comment body' do
+        service = described_class.new(project, data, user)
+        service.import!
+
+        comment = Comment.last
+        expect(comment.body).to include('A comment')
+        expect(comment.body).to include('— originally by other@example.com')
+      end
+    end
+
+    context 'when comments have the current user email' do
+      let(:data) do
+        {
+          'tasks' => [
+            {
+              'name' => 'Test task',
+              'comments' => [
+                { 'body' => 'My comment', 'user_email' => user.email }
+              ]
+            }
+          ]
+        }
+      end
+
+      it 'does not append original author to the body' do
+        service = described_class.new(project, data, user)
+        service.import!
+
+        comment = Comment.last
+        expect(comment.body).to eq('My comment')
+      end
+    end
+
+    context 'when comments have no user_email' do
+      let(:data) do
+        {
+          'tasks' => [
+            {
+              'name' => 'Test task',
+              'comments' => [
+                { 'body' => 'Anonymous comment' }
+              ]
+            }
+          ]
+        }
+      end
+
+      it 'attributes the comment to the current user' do
+        service = described_class.new(project, data, user)
+        service.import!
+
+        comment = Comment.last
+        expect(comment.user).to eq(user)
+      end
+
+      it 'does not append original author to the body' do
+        service = described_class.new(project, data, user)
+        service.import!
+
+        comment = Comment.last
+        expect(comment.body).to eq('Anonymous comment')
+      end
+    end
+  end
+end

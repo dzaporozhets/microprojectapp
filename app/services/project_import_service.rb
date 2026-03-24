@@ -63,16 +63,15 @@ class ProjectImportService
       body = comment_data['body'].to_s.strip
       next false if body.blank?
 
-      user = find_comment_user(comment_data['user_email'])
-      task.comments.create!(body: body, user: user)
+      original_email = comment_data['user_email'].to_s.strip
+
+      if original_email.present? && original_email != @current_user.email
+        body = "#{body}\n\n— originally by #{original_email}"
+      end
+
+      task.comments.create!(body: body, user: @current_user)
       true
     end
-  end
-
-  def find_comment_user(email)
-    return @current_user if email.blank?
-
-    User.find_by(email: email) || @current_user
   end
 
   def validate_hash!(value, error_message)
