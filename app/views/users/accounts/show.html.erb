@@ -38,9 +38,9 @@
       <% if flash[:api_token].present? %>
         <div class="mb-4">
           <p class="text-sm font-medium text-gray-900 dark:text-gray-200 mb-2">Your new token (copy it now — it won't be shown in full again):</p>
-          <div class="flex items-center gap-2">
-            <code id="api-token-value" class="text-sm text-default bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded select-all break-all"><%= flash[:api_token] %></code>
-            <button type="button" class="btn-base" onclick="navigator.clipboard.writeText(document.getElementById('api-token-value').textContent).then(() => { this.textContent = 'Copied!'; setTimeout(() => { this.textContent = 'Copy'; }, 2000) })">
+          <div class="flex items-center gap-2" data-controller="clipboard">
+            <code id="api-token-value" data-clipboard-target="source" class="text-sm text-default bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded select-all break-all"><%= flash[:api_token] %></code>
+            <button type="button" class="btn-base" data-action="click->clipboard#copy">
               Copy
             </button>
           </div>

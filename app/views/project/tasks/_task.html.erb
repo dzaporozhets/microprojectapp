@@ -12,8 +12,7 @@
           checked: task.done,
           id: "checkbox_task_#{task.id}",
           class: "w-5 h-5 checkbox-round flex",
-          data: { turbo_action: "advance" },
-          onchange: "this.form.requestSubmit()" %>
+          data: { turbo_action: "advance", controller: "auto-submit", action: "change->auto-submit#submit" } %>
       <% end %>
     </div>
 
