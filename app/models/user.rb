@@ -231,8 +231,9 @@ class User < ApplicationRecord
   def acceptable_avatar
     return unless avatar.attached?
 
-    detected_type = Marcel::MimeType.for(avatar.download)
-    errors.add(:avatar, 'must be a JPEG or PNG') unless detected_type.in?(%w[image/jpeg image/png])
+    content_type = avatar.blob.content_type
+    filename_type = Marcel::MimeType.for(name: avatar.blob.filename.to_s)
+    errors.add(:avatar, 'must be a JPEG or PNG') unless content_type.in?(%w[image/jpeg image/png]) && filename_type.in?(%w[image/jpeg image/png])
     errors.add(:avatar, 'is too large (max 500KB)') if avatar.blob.byte_size > 500.kilobytes
   end
 

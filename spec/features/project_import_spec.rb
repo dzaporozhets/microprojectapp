@@ -117,7 +117,10 @@ RSpec.feature "Project::Import", type: :feature do
     expect(page).to have_content('Successfully imported 1 tasks and 2 comments into the project')
     imported_task = project.tasks.last
     expect(imported_task.comments.count).to eq(2)
-    expect(imported_task.comments.pluck(:body)).to include("First comment", "Second comment")
-    expect(imported_task.comments.pluck(:user_id)).to include(user.id, another_user.id)
+    comments = imported_task.comments.order(:id)
+    expect(comments.first.body).to eq("First comment")
+    expect(comments.second.body).to include("Second comment")
+    expect(comments.second.body).to include("— originally by commenter@example.com")
+    expect(comments.pluck(:user_id)).to all(eq(user.id))
   end
 end
