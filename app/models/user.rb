@@ -56,7 +56,7 @@ class User < ApplicationRecord
   enum :dark_mode, { off: 0, on: 1, auto: 2 }
 
   # Validations
-  validate :email_domain_check, on: :create
+  validate :email_domain_check
   validate :acceptable_avatar
 
   #
@@ -231,7 +231,8 @@ class User < ApplicationRecord
   def acceptable_avatar
     return unless avatar.attached?
 
-    errors.add(:avatar, 'must be a JPEG or PNG') unless avatar.blob.content_type.in?(%w[image/jpeg image/png])
+    detected_type = Marcel::MimeType.for(avatar.download)
+    errors.add(:avatar, 'must be a JPEG or PNG') unless detected_type.in?(%w[image/jpeg image/png])
     errors.add(:avatar, 'is too large (max 500KB)') if avatar.blob.byte_size > 500.kilobytes
   end
 
