@@ -20,6 +20,20 @@ module SeedData
         print '.'
       end
 
+      # Add notes
+      project.notes.find_or_create_by!(title: "Contractor contacts") do |n|
+        n.content = "Plumber: Mike's Plumbing (555) 234-5678 — recommended by neighbor\nTile installer: ABC Tiles (555) 345-6789 — quoted $2,500 for floor + walls\nElectrician: Spark Electric (555) 456-7890 — available next week"
+        n.user = user
+      end
+      print '.'
+
+      project.notes.find_or_create_by!(title: "Material selections") do |n|
+        n.content = "Floor tile: Porcelain 12x24 in Light Gray — $4.50/sqft from Home Depot\nWall tile: Subway 3x6 White Glossy — $2.00/sqft\nVanity: 36\" single sink, walnut finish — $450 from Wayfair\nFaucet: Brushed nickel single-handle — $120\nShowerhead: Rain shower 10\" chrome — $85"
+        n.user = user
+      end
+      print '.'
+      puts "Created notes"
+
       puts "Created 'Bathroom Renovation' project"
       project
     end

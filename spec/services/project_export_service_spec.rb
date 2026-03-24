@@ -19,6 +19,12 @@ RSpec.describe ProjectExportService do
       expect(data[:tasks]).to eq([])
     end
 
+    it 'returns an empty notes array when project has no notes' do
+      data = described_class.new(project).export_data
+
+      expect(data[:notes]).to eq([])
+    end
+
     context 'with tasks' do
       let!(:task) { create(:task, project: project, user: user, name: 'Export me', description: 'Details') }
 
@@ -46,6 +52,19 @@ RSpec.describe ProjectExportService do
           expect(exported_comment['body']).to eq('A comment')
           expect(exported_comment['user_email']).to eq(user.email)
         end
+      end
+    end
+
+    context 'with notes' do
+      let!(:note) { create(:note, project: project, user: user, title: 'My Note', content: 'Note content') }
+
+      it 'includes note attributes' do
+        data = described_class.new(project).export_data
+
+        exported_note = data[:notes].first
+        expect(exported_note['title']).to eq('My Note')
+        expect(exported_note['content']).to eq('Note content')
+        expect(exported_note['user_email']).to eq(user.email)
       end
     end
 

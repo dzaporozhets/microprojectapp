@@ -39,10 +39,20 @@ class ProjectImportValidator
     return unless @data
 
     validate_array_field('tasks')
+    validate_optional_array_field('notes')
   end
 
   def validate_array_field(field_name)
     field = @data[field_name]
+
+    unless field.is_a?(Array)
+      @errors << "Invalid JSON file format: #{field_name} should be an array."
+    end
+  end
+
+  def validate_optional_array_field(field_name)
+    field = @data[field_name]
+    return if field.nil?
 
     unless field.is_a?(Array)
       @errors << "Invalid JSON file format: #{field_name} should be an array."

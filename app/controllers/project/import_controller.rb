@@ -5,6 +5,7 @@ class Project::ImportController < Project::BaseController
     @imported_tasks = project.tasks.where(id: import_session_data(:task_ids))
     @imported_task_count = import_session_data(:task_count)
     @imported_comment_count = import_session_data(:comment_count)
+    @imported_note_count = import_session_data(:note_count)
   end
 
   def new
@@ -54,6 +55,7 @@ class Project::ImportController < Project::BaseController
     session[:imported_task_ids] = stats[:task_ids]
     session[:imported_task_count] = stats[:task_count]
     session[:imported_comment_count] = stats[:comment_count]
+    session[:imported_note_count] = stats[:note_count]
   end
 
   def import_session_data(key)

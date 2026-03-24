@@ -95,6 +95,20 @@ module SeedData
 
       puts "Personal project populated with #{tasks.count} tasks"
 
+      # Add notes
+      project.notes.find_or_create_by!(title: "Vacation research") do |n|
+        n.content = "Japan options:\n- Cherry blossom season: late March to mid April\n- Tokyo + Kyoto combo: 10 days recommended\n- JR Pass: ~$250 for 7 days\n- Budget: $3,000-4,000 per person\n\nIceland options:\n- Northern Lights: September to March\n- Ring Road: 7-10 days\n- Rental car essential\n- Budget: $2,000-3,000 per person"
+        n.user = user
+      end
+      print '.'
+
+      project.notes.find_or_create_by!(title: "Home maintenance schedule") do |n|
+        n.content = "Monthly:\n- Check smoke detectors\n- Clean HVAC filters\n- Test garage door auto-reverse\n\nQuarterly:\n- Flush water heater\n- Clean gutters\n- Inspect roof for damage\n\nAnnually:\n- Service HVAC system\n- Power wash exterior\n- Check weather stripping on doors/windows"
+        n.user = user
+      end
+      print '.'
+      puts "Created notes"
+
       # Pin Personal project as favorite
       Pin.find_or_create_by!(user: user, project: project)
       puts "Pinned Personal project as favorite"

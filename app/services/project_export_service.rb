@@ -9,7 +9,8 @@ class ProjectExportService
   def export_data
     {
       project_name: @project.name,
-      tasks: serialize_tasks
+      tasks: serialize_tasks,
+      notes: serialize_notes
     }
   end
 
@@ -22,6 +23,12 @@ class ProjectExportService
   def serialize_tasks
     @project.tasks.includes(comments: :user).order(:id).map do |task|
       TaskExportSerializer.new(task).as_json
+    end
+  end
+
+  def serialize_notes
+    @project.notes.includes(:user).order(:id).map do |note|
+      NoteExportSerializer.new(note).as_json
     end
   end
 end

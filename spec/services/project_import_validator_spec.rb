@@ -63,6 +63,31 @@ RSpec.describe ProjectImportValidator do
       end
     end
 
+    context 'when data notes field is not an array' do
+      let(:file) { double('file', size: 1.megabyte) }
+
+      subject { described_class.new(file, { 'tasks' => [], 'notes' => 'not-an-array' }) }
+
+      it 'returns false' do
+        expect(subject.valid?).to be false
+      end
+
+      it 'adds a JSON structure error' do
+        subject.valid?
+        expect(subject.errors).to include('Invalid JSON file format: notes should be an array.')
+      end
+    end
+
+    context 'when data has no notes key' do
+      let(:file) { double('file', size: 1.megabyte) }
+
+      subject { described_class.new(file, { 'tasks' => [] }) }
+
+      it 'returns true' do
+        expect(subject.valid?).to be true
+      end
+    end
+
     context 'with a valid file and data' do
       let(:file) { double('file', size: 1.megabyte) }
 

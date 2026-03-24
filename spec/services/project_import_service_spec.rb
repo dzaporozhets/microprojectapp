@@ -92,5 +92,73 @@ RSpec.describe ProjectImportService do
         expect(comment.body).to eq('Anonymous comment')
       end
     end
+
+    context 'when importing notes' do
+      let(:data) do
+        {
+          'tasks' => [],
+          'notes' => [
+            { 'title' => 'A note', 'content' => 'Note body', 'user_email' => 'other@example.com' }
+          ]
+        }
+      end
+
+      it 'creates the note in the project' do
+        service = described_class.new(project, data, user)
+        service.import!
+
+        expect(project.notes.count).to eq(1)
+        note = project.notes.last
+        expect(note.title).to eq('A note')
+        expect(note.user).to eq(user)
+      end
+
+      it 'appends original author when user_email differs' do
+        service = described_class.new(project, data, user)
+        service.import!
+
+        note = project.notes.last
+        expect(note.content).to include('Note body')
+        expect(note.content).to include('— originally by other@example.com')
+      end
+
+      it 'tracks the imported note count' do
+        service = described_class.new(project, data, user)
+        service.import!
+
+        expect(service.imported_note_count).to eq(1)
+        expect(service.import_stats[:note_count]).to eq(1)
+      end
+    end
+
+    context 'when notes have the current user email' do
+      let(:data) do
+        {
+          'tasks' => [],
+          'notes' => [
+            { 'title' => 'My note', 'content' => 'My content', 'user_email' => user.email }
+          ]
+        }
+      end
+
+      it 'does not append original author to the content' do
+        service = described_class.new(project, data, user)
+        service.import!
+
+        note = project.notes.last
+        expect(note.content).to eq('My content')
+      end
+    end
+
+    context 'when data has no notes key' do
+      let(:data) { { 'tasks' => [] } }
+
+      it 'imports zero notes' do
+        service = described_class.new(project, data, user)
+        service.import!
+
+        expect(service.imported_note_count).to eq(0)
+      end
+    end
   end
 end

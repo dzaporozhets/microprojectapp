@@ -30,6 +30,21 @@ RSpec.feature "Project::Export", type: :feature do
     )
   end
 
+  scenario "User exports project with notes" do
+    create(:note, project: project, user: user, title: "Test Note", content: "Note content")
+
+    visit edit_project_path(project)
+
+    click_button 'Export Tasks'
+
+    json = JSON.parse(page.body)
+
+    expect(json['notes'].size).to eq(1)
+    expect(json['notes'][0]['title']).to eq("Test Note")
+    expect(json['notes'][0]['content']).to eq("Note content")
+    expect(json['notes'][0]['user_email']).to eq(user.email)
+  end
+
   scenario "User exports empty project" do
     empty_project = create(:project, user: user, name: "Empty Project")
 
