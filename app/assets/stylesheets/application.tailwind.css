@@ -17,6 +17,8 @@
  *  11. Utilities
  */
 
+html.compact { zoom: 0.95; }
+
 @layer components {
 
   /*----------------------------------------*

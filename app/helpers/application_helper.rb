@@ -64,17 +64,21 @@ module ApplicationHelper
     end
   end
 
-  def dark_mode_class
+  def html_class
     return unless current_user
+
+    classes = []
 
     case current_user.dark_mode
     when 'on'
-      'light'
+      classes << 'light'
     when 'off'
-      'dark'
-    else
-      ''
+      classes << 'dark'
     end
+
+    classes << 'compact' if current_user.compact_mode?
+
+    classes.join(' ')
   end
 
   def disable_email_login?

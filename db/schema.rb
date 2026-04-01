@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_03_20_063707) do
+ActiveRecord::Schema[7.2].define(version: 2026_04_01_182933) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -166,6 +166,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_20_063707) do
     t.string "api_token_digest"
     t.string "api_token_last8"
     t.boolean "use_gravatar", default: false, null: false
+    t.boolean "compact_mode", default: false, null: false
     t.index ["api_token_digest"], name: "index_users_on_api_token_digest", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

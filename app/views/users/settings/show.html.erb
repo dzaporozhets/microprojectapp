@@ -49,6 +49,14 @@
               User.available_themes.map { |id, name| [name, id] }, {},
               class: "block w-full base-input" %>
           </div>
+
+          <div class="mt-4">
+            <div class="flex items-center">
+              <%= f.check_box :compact_mode, class: 'checkbox' %>
+              <%= f.label :compact_mode, "Compact mode", class: 'ml-2 text-sm text-default' %>
+            </div>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Slightly reduces the UI scale for a more compact layout</p>
+          </div>
         </div>
 
         <% if file_storage_enabled? %>
