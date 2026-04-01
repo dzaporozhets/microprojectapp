@@ -1,8 +1,5 @@
 image: ruby:3.3.7
 
-include:
-  - local: .kai-sync.gitlab-ci.yml
-
 stages:
   - build
   - test
