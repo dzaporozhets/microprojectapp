@@ -10,14 +10,14 @@
         </div>
       </div>
 
-      <div class="p-4">
+      <div class="form-group">
         <div class="space-y-3">
           <div class="flex items-center">
-            <span class="text-sm font-medium text-gray-900 dark:text-gray-200 w-32">Provider:</span>
+            <span class="form-label mb-0 w-32">Provider:</span>
             <span class="text-sm text-default"><%= current_user.provider_human %></span>
           </div>
           <div class="flex items-center">
-            <span class="text-sm font-medium text-gray-900 dark:text-gray-200 w-32">Email:</span>
+            <span class="form-label mb-0 w-32">Email:</span>
             <span class="text-sm text-default"><%= current_user.email %></span>
           </div>
         </div>
@@ -34,10 +34,10 @@
       </div>
     </div>
 
-    <div class="p-4">
+    <div class="form-group">
       <% if flash[:api_token].present? %>
         <div class="mb-4">
-          <p class="text-sm font-medium text-gray-900 dark:text-gray-200 mb-2">Your new token (copy it now — it won't be shown in full again):</p>
+          <p class="form-label">Your new token (copy it now — it won't be shown in full again):</p>
           <div class="flex items-center gap-2" data-controller="clipboard">
             <code id="api-token-value" data-clipboard-target="source" class="text-sm text-default bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded select-all break-all"><%= flash[:api_token] %></code>
             <button type="button" class="btn-base" data-action="click->clipboard#copy">
@@ -58,7 +58,7 @@
         </div>
       <% elsif current_user.api_token_digest.present? %>
         <div class="mb-4">
-          <span class="text-sm font-medium text-gray-900 dark:text-gray-200">Token:</span>
+          <span class="form-label">Token:</span>
           <code class="text-sm text-default ml-2"><%= ("•" * 24) + current_user.api_token_last8 %></code>
         </div>
 
@@ -74,7 +74,7 @@
         </div>
       <% else %>
         <div class="mb-4">
-          <p class="text-sm text-gray-600 dark:text-gray-400">No token generated.</p>
+          <p class="form-hint">No token generated.</p>
         </div>
 
         <%= button_to "Generate Token", generate_api_token_users_account_path,
@@ -93,9 +93,9 @@
       </div>
     </div>
 
-    <div class="p-4">
-      <div class="mb-4">
-        <p class="text-sm text-gray-600 dark:text-gray-400">
+    <div class="form-group">
+      <div class="form-group-header">
+        <p class="form-hint">
           This action will completely remove your account and all associated data. This action cannot be undone.
         </p>
       </div>

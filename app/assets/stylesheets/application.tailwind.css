@@ -150,6 +150,18 @@ html.compact { zoom: 0.95; }
     @apply divide-y divide-gray-200 dark:divide-gray-700 space-y-0;
   }
 
+  .form-group {
+    @apply p-4;
+  }
+
+  .form-group-header {
+    @apply mb-4;
+  }
+
+  .form-hint {
+    @apply text-sm text-muted;
+  }
+
   .error-box {
     @apply p-4 mb-4 bg-red-50 border border-red-200 rounded-md dark:bg-red-900/20 dark:border-red-800;
   }

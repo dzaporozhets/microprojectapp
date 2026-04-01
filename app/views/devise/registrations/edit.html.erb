@@ -10,13 +10,15 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "shared/errors", resource: resource %>
 
-      <div class="divide-y divide-gray-200 dark:divide-gray-700">
-        <div class="p-4">
-          <h2 class="resource-subtitle">Email Address</h2>
+      <div class="form-section">
+        <div class="form-group">
+          <div class="form-group-header">
+            <h2 class="resource-subtitle">Email Address</h2>
+          </div>
 
-          <div class="space-y-4 mt-1">
+          <div class="space-y-4">
             <div>
-              <%= f.label :email, class: 'block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2' %>
+              <%= f.label :email, class: 'form-label' %>
 
               <% if resource.oauth_user? %>
                 <%= f.email_field :email, disabled: true, class: 'base-input w-full bg-gray-100 text-gray-500' %>
@@ -25,7 +27,7 @@
               <% end %>
 
               <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+                <p class="form-hint mt-2">Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
               <% end %>
 
               <% if resource.provider.present? %>
@@ -35,14 +37,16 @@
           </div>
         </div>
 
-        <div class="p-4">
-          <h2 class="resource-subtitle">Change Password</h2>
+        <div class="form-group">
+          <div class="form-group-header">
+            <h2 class="resource-subtitle">Change Password</h2>
+          </div>
 
-          <div class="space-y-4 mt-1">
+          <div class="space-y-4">
             <div>
-              <%= f.label :password, 'New password', class: 'block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2' %>
+              <%= f.label :password, 'New password', class: 'form-label' %>
 
-              <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              <p class="form-hint mb-3">
                 <% if @minimum_password_length %>
                   <%= @minimum_password_length %> characters minimum.
                 <% end %>
@@ -53,27 +57,29 @@
             </div>
 
             <div>
-              <%= f.label :password_confirmation, class: 'block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2' %>
+              <%= f.label :password_confirmation, class: 'form-label' %>
               <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'base-input w-full' %>
             </div>
           </div>
         </div>
 
-        <div class="p-4">
-          <h2 class="resource-subtitle">Confirm Changes</h2>
+        <div class="form-group">
+          <div class="form-group-header">
+            <h2 class="resource-subtitle">Confirm Changes</h2>
+          </div>
 
-          <div class="space-y-4 mt-1">
+          <div class="space-y-4">
             <div>
-              <%= f.label :current_password, class: "block text-sm font-medium text-gray-900 dark:text-gray-200 mb-2" %>
+              <%= f.label :current_password, class: "form-label" %>
 
-              <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">We need your current password to confirm your changes</p>
+              <p class="form-hint mb-3">We need your current password to confirm your changes</p>
 
               <%= f.password_field :current_password, autocomplete: "current-password", class: 'base-input w-full', required: true %>
             </div>
           </div>
         </div>
 
-        <div class="p-4">
+        <div class="form-group">
           <%= f.submit "Save Changes", class: "btn-base" %>
         </div>
       </div>

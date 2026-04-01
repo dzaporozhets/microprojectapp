@@ -12,12 +12,12 @@
     <%= form_with(model: @project) do |form| %>
       <%= render "shared/errors", resource: @project %>
 
-      <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
+      <div class="form-section">
         <!-- Project Name Section -->
         <% unless @project.personal? %>
-          <div class="p-4">
-            <div class="mb-4">
-              <h4 class="resource-subtitle mb-0">Name</h4>
+          <div class="form-group">
+            <div class="form-group-header">
+              <h2 class="resource-subtitle mb-0">Name</h2>
               <p class="mt-1 text-secondary">
                 Change the name of your project.
               </p>
@@ -28,9 +28,9 @@
         <% end %>
 
         <!-- Description Section -->
-        <div class="p-4">
-          <div class="mb-4">
-            <h4 class="resource-subtitle mb-0">Description</h4>
+        <div class="form-group">
+          <div class="form-group-header">
+            <h2 class="resource-subtitle mb-0">Description</h2>
             <p class="mt-1 text-secondary">
               Optional. Shown on the project home page.
             </p>
@@ -39,7 +39,7 @@
           <%= form.text_area :description, class: "base-input w-full", rows: 4 %>
         </div>
 
-        <div class="p-4">
+        <div class="form-group">
           <%= form.submit "Save Changes", class: "btn-primary" %>
         </div>
       </div>
@@ -47,11 +47,11 @@
   </div>
 
   <div class="resource-container">
-    <div class="divide-y divide-gray-200 dark:divide-gray-700 space-y-0">
+    <div class="form-section">
       <!-- Import/Export Section -->
-      <div class="p-4">
-        <div class="mb-4">
-          <h4 class="resource-subtitle mb-0">Import and Export</h4>
+      <div class="form-group">
+        <div class="form-group-header">
+          <h2 class="resource-subtitle mb-0">Import and Export</h2>
           <p class="mt-1 text-secondary">
             Export your project data as a JSON file including all tasks and comments, then import it into another project.
           </p>
@@ -64,9 +64,9 @@
       </div>
 
       <!-- Archive Section -->
-      <div class="p-4">
-        <div class="mb-4">
-          <h4 class="resource-subtitle mb-0">Project Status</h4>
+      <div class="form-group">
+        <div class="form-group-header">
+          <h2 class="resource-subtitle mb-0">Project Status</h2>
           <p class="mt-1 text-secondary">
             <% if @project.archived? %>
               This project is archived. Unarchiving it will allow the creation of new tasks.
@@ -94,8 +94,8 @@
       </div>
     </div>
 
-    <div class="p-4">
-      <div class="mb-4">
+    <div class="form-group">
+      <div class="form-group-header">
         <p class="text-secondary">
           Deleting this project will permanently erase all data. Please consider exporting tasks before proceeding.
         </p>
