@@ -36,5 +36,33 @@ RSpec.describe "Search", type: :request do
 
       expect(response.body).not_to include("Hidden task")
     end
+
+    it "returns notes from projects the user can access" do
+      create(:note, project: project, user: user, title: "Meeting notes")
+
+      get search_path(query: "Meeting")
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Meeting notes")
+      expect(response.body).to include("Notes")
+    end
+
+    it "returns notes matching on content" do
+      create(:note, project: project, user: user, title: "Untitled", content: "Important details here")
+
+      get search_path(query: "Important")
+
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include("Untitled")
+    end
+
+    it "does not return notes from other projects" do
+      other_project = create(:project)
+      create(:note, title: "Secret note", project: other_project, user: create(:user))
+
+      get search_path(query: "Secret")
+
+      expect(response.body).not_to include("Secret note")
+    end
   end
 end

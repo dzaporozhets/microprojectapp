@@ -58,7 +58,35 @@
             <% end %>
           </ul>
         </div>
-      <% else %>
+      <% end %>
+
+      <% if @note_results.any? %>
+        <div class="resource-container">
+          <div class="resource-header">
+            <h3 class="resource-title">Notes</h3>
+          </div>
+          <ul class="divide-y divide-gray-200 dark:divide-gray-800">
+            <% @note_results.each do |note| %>
+              <li class="p-4">
+                <div class="space-y-1">
+                  <p class="list-text-primary font-semibold">
+                    <%= link_to note.title, project_note_path(note.project, note), class: "hover:underline" %>
+                  </p>
+                  <% if note.content.present? %>
+                    <p class="text-sm text-muted line-clamp-2 whitespace-pre-line break-all"><%= note.content.truncate(200) %></p>
+                  <% end %>
+                  <p class="text-xs text-gray-500 dark:text-gray-400">
+                    <span class="mr-1 text-gray-400 dark:text-gray-500">Project:</span>
+                    <%= link_to note.project.name, project_path(note.project), class: "hover:underline" %>
+                  </p>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if @task_results.empty? && @note_results.empty? %>
         <div class="resource-container">
           <div class="resource-empty-state">
             <div class="flex items-center justify-center h-12 w-12 rounded-md bg-gray-100 dark:bg-gray-800 mx-auto">
