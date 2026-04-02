@@ -20,6 +20,17 @@ build:
 
 test:
   stage: test
+  rules:
+    - changes:
+        - CLAUDE.md
+        - CHANGELOG.txt
+        - release.txt
+        - LICENSE
+        - README.md
+        - "docs/**/*"
+        - "*.modules.yaml"
+      when: never
+    - when: on_success
   services:
     - postgres:latest
   variables:
