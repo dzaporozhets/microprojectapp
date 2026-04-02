@@ -19,7 +19,9 @@ RSpec.feature "User login with Google", type: :feature do
     OmniAuth.config.test_mode = false
   end
 
-  scenario "User successfully signs in with Google to existing account" do
+  scenario "User successfully signs in with Google to existing OAuth account" do
+    user.update(provider: 'google_oauth2', uid: '123456789')
+
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
       provider: 'google_oauth2',
       uid: '123456789',
@@ -42,7 +44,7 @@ RSpec.feature "User login with Google", type: :feature do
     visit new_user_session_path
     click_button "Sign in with Google"
 
-    expect(page).to have_content("Login with Google failed")
+    expect(page).to have_content("An account with this email already exists. Please sign in with email and password.")
     expect(page).to have_current_path(new_user_session_path)
   end
 

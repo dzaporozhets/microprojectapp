@@ -44,7 +44,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_out_all_scopes
       sign_in_and_redirect user, event: :authentication
     else
-      flash[:alert] = "Login with Google failed"
+      flash[:alert] = "An account with this email already exists. Please sign in with email and password."
       redirect_to new_user_session_path
     end
 
@@ -66,7 +66,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_out_all_scopes
       sign_in_and_redirect user, event: :authentication
     else
-      flash[:alert] = "Login with Microsoft failed"
+      flash[:alert] = "An account with this email already exists. Please sign in with email and password."
       redirect_to new_user_session_path
     end
 

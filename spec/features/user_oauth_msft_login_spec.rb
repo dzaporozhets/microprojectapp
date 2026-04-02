@@ -19,7 +19,9 @@ RSpec.feature "User login with Microsoft", type: :feature do
     OmniAuth.config.test_mode = false
   end
 
-  scenario "User successfully signs in with Microsoft to existing account" do
+  scenario "User successfully signs in with Microsoft to existing OAuth account" do
+    user.update(provider: 'entra_id', uid: '123456789')
+
     OmniAuth.config.mock_auth[:entra_id] = OmniAuth::AuthHash.new({
       provider: 'entra_id',
       uid: '123456789',
@@ -42,7 +44,7 @@ RSpec.feature "User login with Microsoft", type: :feature do
     visit new_user_session_path
     click_button "Sign in with Microsoft"
 
-    expect(page).to have_content("Login with Microsoft failed")
+    expect(page).to have_content("An account with this email already exists. Please sign in with email and password.")
     expect(page).to have_current_path(new_user_session_path)
   end
 

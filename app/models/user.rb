@@ -95,15 +95,8 @@ class User < ApplicationRecord
         # User logged in with provider before, nothing to do here
         user
       else
-        # Update user uid and provider based on email
-        user.update(
-          uid: uid,
-          provider: provider,
-          oauth_avatar_url: image,
-          oauth_linked_at: Time.current
-        )
-
-        user
+        # Don't link OAuth to existing password-only or different OAuth accounts
+        nil
       end
     end
 

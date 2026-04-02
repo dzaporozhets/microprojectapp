@@ -30,7 +30,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
       it 'redirects to sign in with alert' do
         allow(User).to receive(:from_omniauth).and_return(nil)
         get :google_oauth2
-        expect(flash[:alert]).to eq("Login with Google failed")
+        expect(flash[:alert]).to eq("An account with this email already exists. Please sign in with email and password.")
         expect(response).to redirect_to(new_user_session_path)
       end
     end
@@ -70,7 +70,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
       it 'redirects to sign in with alert' do
         allow(User).to receive(:from_omniauth).and_return(nil)
         get :entra_id
-        expect(flash[:alert]).to eq("Login with Microsoft failed")
+        expect(flash[:alert]).to eq("An account with this email already exists. Please sign in with email and password.")
         expect(response).to redirect_to(new_user_session_path)
       end
     end
