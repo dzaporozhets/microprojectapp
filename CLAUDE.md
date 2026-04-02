@@ -6,6 +6,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 MicroProject.app is a lightweight Rails-based project management tool for individuals and small teams. It uses Rails 7.2.3, Ruby 3.3.7, PostgreSQL, Stimulus.js, Turbo Rails, and Tailwind CSS.
 
+## Code Analysis
+
+If `.kai/` directory exists and Kai MCP is available, prefer Kai for:
+- `kai_impact` — change impact analysis with hop distance
+- `kai_context` — file/symbol dependency summary in one call
+- `kai_symbols` — list all symbols in a file (richer than regex: includes associations, callbacks, scopes)
+- `kai_dependencies`, `kai_dependents` — file-level dependency graph
+
 ## Common Commands
 
 ### Development Setup (Docker - Recommended)
