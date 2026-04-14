@@ -78,6 +78,7 @@ Once configured, Claude Code can use these tools:
 | `list_tasks` | List tasks with status, stars, due dates. Filterable by `todo`, `done`, or `all`. |
 | `get_task` | Get full task detail — description, assigned user, and comments. |
 | `create_task` | Create a new task. Requires `name`, optional `description`, `due_date`, `star`. |
+| `create_comment` | Add a comment to a task. Requires `task_id` and `body`. |
 | `toggle_task_done` | Mark a task as done or reopen it. |
 
 All task tools accept an optional `project_id` parameter to override the default.

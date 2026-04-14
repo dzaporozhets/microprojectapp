@@ -81,6 +81,8 @@ Rails.application.routes.draw do
           member do
             patch :toggle_done
           end
+
+          resources :comments, only: [:create]
         end
       end
     end

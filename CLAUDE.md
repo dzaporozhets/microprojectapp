@@ -145,6 +145,7 @@ Include `Authorization: Bearer <token>` header. Generate tokens at `/users/accou
 - `GET /api/v1/projects/:project_id/tasks/:id` — Task detail with comments
 - `POST /api/v1/projects/:project_id/tasks` — Create task (params: `name`, `description`, `due_date`, `star`, `assigned_user_id`)
 - `PATCH /api/v1/projects/:project_id/tasks/:id/toggle_done` — Toggle done
+- `POST /api/v1/projects/:project_id/tasks/:task_id/comments` — Add a comment (params: `body`)
 
 ### Rate Limit
 60 requests/minute per token.
@@ -171,6 +172,7 @@ See `mcp/README.md` for full setup instructions.
 - `list_tasks` — List tasks with checkbox notation
 - `get_task` — Full detail with description + comments
 - `create_task` — Create a new task
+- `create_comment` — Add a comment to a task
 - `toggle_task_done` — Toggle done/undone
 
 ## Environment Variables

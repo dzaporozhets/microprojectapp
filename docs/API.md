@@ -137,6 +137,32 @@ PATCH /api/v1/projects/:project_id/tasks/:id/toggle_done
 }
 ```
 
+### Create Comment
+
+```
+POST /api/v1/projects/:project_id/tasks/:task_id/comments
+Content-Type: application/json
+```
+
+**Parameters:**
+
+| Param | Type | Description |
+|-------|------|-------------|
+| `body` | string | **Required.** Comment body |
+
+**Response:** HTTP `201 Created`
+
+```json
+{
+  "comment": {
+    "id": 7,
+    "body": "Draft is ready for review.",
+    "user_email": "bob@example.com",
+    "created_at": "2026-02-22T09:00:00.000Z"
+  }
+}
+```
+
 ## Errors
 
 Errors return JSON with either an `error` key or an `errors` key for validation failures:
@@ -179,4 +205,11 @@ curl -X POST \
 curl -X PATCH \
   -H "Authorization: Bearer TOKEN" \
   https://your-instance.example.com/api/v1/projects/1/tasks/42/toggle_done
+
+# Add a comment to a task
+curl -X POST \
+  -H "Authorization: Bearer TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"comment":{"body":"Looks good to me."}}' \
+  https://your-instance.example.com/api/v1/projects/1/tasks/42/comments
 ```

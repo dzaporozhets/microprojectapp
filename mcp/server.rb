@@ -79,6 +79,28 @@ class MicroProjectMCP
       }
     },
     {
+      name: 'create_comment',
+      description: 'Add a comment to a task in a MicroProject project.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          task_id: {
+            type: 'string',
+            description: 'Task ID'
+          },
+          body: {
+            type: 'string',
+            description: 'Comment body (required)'
+          },
+          project_id: {
+            type: 'string',
+            description: 'Project ID (uses default from MICROPROJECT_PROJECT_ID if omitted)'
+          }
+        },
+        required: %w[task_id body]
+      }
+    },
+    {
       name: 'create_task',
       description: 'Create a new task in a MicroProject project.',
       inputSchema: {
@@ -163,6 +185,7 @@ class MicroProjectMCP
              when 'get_task'     then call_get_task(args)
              when 'toggle_task_done' then call_toggle_task_done(args)
              when 'create_task'     then call_create_task(args)
+             when 'create_comment'  then call_create_comment(args)
              else return jsonrpc_error(id, -32602, "Unknown tool: #{tool_name}")
              end
 
@@ -269,6 +292,18 @@ class MicroProjectMCP
     t = data['task']
 
     "Created task ##{t['id']} \"#{t['name']}\" in project #{project_id}."
+  end
+
+  def call_create_comment(args)
+    project_id = resolve_project_id(args)
+    task_id = args.fetch('task_id')
+    body = args.fetch('body')
+    path = "/api/v1/projects/#{project_id}/tasks/#{task_id}/comments"
+
+    data = api_post(path, { comment: { body: body } })
+    c = data['comment']
+
+    "Added comment ##{c['id']} by #{c['user_email']} on task ##{task_id}."
   end
 
   def resolve_project_id(args)
