@@ -28,8 +28,7 @@ Then edit `~/.claude.json` to add the env vars to the `mcpServers.microproject.e
       "args": ["/absolute/path/to/microprojectapp/mcp/server.rb"],
       "env": {
         "MICROPROJECT_API_URL": "https://your-instance.example.com",
-        "MICROPROJECT_API_TOKEN": "your-token-here",
-        "MICROPROJECT_PROJECT_ID": "1"
+        "MICROPROJECT_API_TOKEN": "your-token-here"
       }
     }
   }
@@ -40,27 +39,30 @@ Replace:
 - `/absolute/path/to/microprojectapp/mcp/server.rb` — full path to where you cloned this repo
 - `MICROPROJECT_API_URL` — your MicroProject URL (no trailing slash)
 - `MICROPROJECT_API_TOKEN` — the token you copied in step 1
-- `MICROPROJECT_PROJECT_ID` — default project ID (visible in the URL when viewing a project)
 
 Using `-s user` scope makes the tools available from **any** project directory, not just this repo.
 
-## 3. Per-Project Configuration
+## 3. Pointing at a Project
 
-Instead of setting a global `MICROPROJECT_PROJECT_ID`, you can create a `.microproject` file in any project root containing just the project ID:
+The MCP server resolves the project ID for each task-related call in this order:
+
+1. Explicit `project_id` parameter passed to the tool (Claude can use `list_projects` to discover IDs)
+2. `.microproject` file in the current working directory
+3. `MICROPROJECT_PROJECT_ID` env var (optional default)
+
+All three are optional individually — you just need at least one to apply when calling task tools.
+
+**Option A — discover on demand (multi-project workflows).** Leave all three unset. Claude calls `list_projects` to find the project ID it needs, then passes `project_id` explicitly to task tools. Best when you regularly switch between several projects in the same session.
+
+**Option B — per-repo pinning.** Drop a `.microproject` file in each codebase containing just the project ID:
 
 ```bash
 echo "42" > .microproject
 ```
 
-The server resolves the project ID in this order:
+Add `.microproject` to your `.gitignore` since it contains a user-specific ID.
 
-1. Explicit `project_id` parameter passed to the tool
-2. `.microproject` file in the current working directory
-3. `MICROPROJECT_PROJECT_ID` env var
-
-This lets you work with different MicroProject projects across different codebases. Add `.microproject` to your `.gitignore` since it contains a user-specific ID.
-
-If you use `.microproject` files, the `MICROPROJECT_PROJECT_ID` env var becomes optional.
+**Option C — single default.** Set `MICROPROJECT_PROJECT_ID` in the env block if you almost always work with the same project.
 
 ## 4. Restart Claude Code
 
@@ -72,12 +74,13 @@ Once configured, Claude Code can use these tools:
 
 | Tool | What it does |
 |------|-------------|
+| `list_projects` | List every project the authenticated user has access to. Use to discover project IDs. |
 | `list_tasks` | List tasks with status, stars, due dates. Filterable by `todo`, `done`, or `all`. |
 | `get_task` | Get full task detail — description, assigned user, and comments. |
 | `create_task` | Create a new task. Requires `name`, optional `description`, `due_date`, `star`. |
 | `toggle_task_done` | Mark a task as done or reopen it. |
 
-All tools accept an optional `project_id` parameter to override the default.
+All task tools accept an optional `project_id` parameter to override the default.
 
 ## 6. Verify It Works
 

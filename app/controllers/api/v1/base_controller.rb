@@ -2,8 +2,8 @@ class Api::V1::BaseController < ActionController::Base # rubocop:disable Rails/A
   skip_forgery_protection
 
   before_action :authenticate_api_user!
-  before_action :set_project
-  before_action :authorize_api_access
+  before_action :set_project, if: -> { params[:project_id].present? }
+  before_action :authorize_api_access, if: -> { params[:project_id].present? }
 
   private
 

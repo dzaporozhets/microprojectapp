@@ -1,3 +1,9 @@
+## Code Analysis — MANDATORY
+
+**You MUST use Kai MCP tools** (kai_diff, kai_grep, kai_context, kai_callers, kai_callees, kai_impact, etc.) for ALL code exploration, searching, diffing, and analysis. Do NOT use raw Grep, Read, git-diff, or the Explore agent for these tasks. Only fall back to raw tools when the Kai MCP server is unavailable or the specific query is not covered by any Kai tool.
+
+**Do NOT delegate code exploration to subagents (e.g., Explore agents).** Subagents cannot use Kai MCP tools. Instead, call the Kai MCP tools directly from the main conversation.
+
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -134,6 +140,7 @@ Token-authenticated REST API scoped to projects the user has access to.
 Include `Authorization: Bearer <token>` header. Generate tokens at `/users/account`.
 
 ### Endpoints
+- `GET /api/v1/projects` — List projects the authenticated user has access to
 - `GET /api/v1/projects/:project_id/tasks?status=todo|done|all` — List tasks
 - `GET /api/v1/projects/:project_id/tasks/:id` — Task detail with comments
 - `POST /api/v1/projects/:project_id/tasks` — Create task (params: `name`, `description`, `due_date`, `star`, `assigned_user_id`)
@@ -153,13 +160,14 @@ claude mcp add -s user microproject -- ruby /absolute/path/to/microprojectapp/mc
 Then add env vars to `~/.claude.json` under `mcpServers.microproject.env`:
 - `MICROPROJECT_API_URL` — your instance URL
 - `MICROPROJECT_API_TOKEN` — token from Account page
-- `MICROPROJECT_PROJECT_ID` — default project ID (optional if using `.microproject` file)
+- `MICROPROJECT_PROJECT_ID` — optional default project ID
 
-Alternatively, create a `.microproject` file in any project root with just the project ID to use per-directory configuration.
+For multi-project workflows, leave `MICROPROJECT_PROJECT_ID` unset and let Claude call `list_projects` to discover IDs, or create a `.microproject` file per repo with just the project ID.
 
 See `mcp/README.md` for full setup instructions.
 
 ### Tools
+- `list_projects` — List projects accessible to the token's user
 - `list_tasks` — List tasks with checkbox notation
 - `get_task` — Full detail with description + comments
 - `create_task` — Create a new task

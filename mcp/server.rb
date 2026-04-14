@@ -7,7 +7,8 @@
 # Config via env vars:
 #   MICROPROJECT_API_URL    - Base URL of the MicroProject instance (e.g. https://app.example.com)
 #   MICROPROJECT_API_TOKEN  - API token from the Account page
-#   MICROPROJECT_PROJECT_ID - Default project ID
+#   MICROPROJECT_PROJECT_ID - Default project ID (optional — can also be set per-dir via .microproject file,
+#                             or passed as a tool argument, or discovered via list_projects)
 
 require 'json'
 require 'net/http'
@@ -15,6 +16,14 @@ require 'uri'
 
 class MicroProjectMCP
   TOOLS = [
+    {
+      name: 'list_projects',
+      description: 'List all MicroProject projects the authenticated user has access to. Use this to discover project IDs when working across multiple projects.',
+      inputSchema: {
+        type: 'object',
+        properties: {}
+      }
+    },
     {
       name: 'list_tasks',
       description: 'List tasks in a MicroProject project. Returns task names with checkbox notation.',
@@ -149,6 +158,7 @@ class MicroProjectMCP
     args = params['arguments'] || {}
 
     result = case tool_name
+             when 'list_projects' then call_list_projects
              when 'list_tasks'   then call_list_tasks(args)
              when 'get_task'     then call_get_task(args)
              when 'toggle_task_done' then call_toggle_task_done(args)
@@ -162,6 +172,18 @@ class MicroProjectMCP
       content: [{ type: 'text', text: "Error: #{e.message}" }],
       isError: true
     })
+  end
+
+  def call_list_projects
+    data = api_get('/api/v1/projects')
+    projects = data['projects'] || []
+
+    return 'No projects found.' if projects.empty?
+
+    lines = ['## Projects', '']
+    projects.each { |p| lines << "- ##{p['id']} #{p['name']}" }
+    lines << '' << "#{projects.size} project(s)"
+    lines.join("\n")
   end
 
   def call_list_tasks(args)
@@ -251,7 +273,7 @@ class MicroProjectMCP
 
   def resolve_project_id(args)
     args['project_id'] || project_id_from_file || @default_project_id ||
-      raise('No project_id provided and MICROPROJECT_PROJECT_ID not set')
+      raise('No project_id provided. Pass project_id as an argument, create a .microproject file in the current directory, set MICROPROJECT_PROJECT_ID, or call list_projects to discover available project IDs.')
   end
 
   def project_id_from_file
