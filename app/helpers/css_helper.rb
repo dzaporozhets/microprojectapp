@@ -15,7 +15,38 @@ module CssHelper
     "tab-active #{theme_text}"
   end
 
+  def sidebar_link(path = nil)
+    classes = [
+      'flex items-center gap-x-2 rounded-md p-2 text-sm font-medium transition-colors',
+      sidebar_link_hover_background,
+      theme_text
+    ]
+
+    classes << sidebar_link_active_background if path && current_page?(path)
+    classes.join(' ')
+  end
+
   private
+
+  def sidebar_link_hover_background
+    case theme_name
+    when 'violet' then 'hover:bg-violet-950/5 dark:hover:bg-violet-100/5'
+    when 'pink' then 'hover:bg-pink-950/5 dark:hover:bg-pink-100/5'
+    when 'orange' then 'hover:bg-orange-950/5 dark:hover:bg-orange-100/5'
+    when 'indigo' then 'hover:bg-indigo-950/5 dark:hover:bg-indigo-100/5'
+    when 'gray' then 'hover:bg-gray-950/5 dark:hover:bg-gray-100/5'
+    end
+  end
+
+  def sidebar_link_active_background
+    case theme_name
+    when 'violet' then 'bg-violet-950/5 dark:bg-violet-100/5'
+    when 'pink' then 'bg-pink-950/5 dark:bg-pink-100/5'
+    when 'orange' then 'bg-orange-950/5 dark:bg-orange-100/5'
+    when 'indigo' then 'bg-indigo-950/5 dark:bg-indigo-100/5'
+    when 'gray' then 'bg-gray-950/5 dark:bg-gray-100/5'
+    end
+  end
 
   def theme_bg
     case theme_name

@@ -37,6 +37,30 @@ RSpec.describe CssHelper, type: :helper do
     end
   end
 
+  describe '#sidebar_link' do
+    let(:path) { '/projects' }
+
+    it 'returns base sidebar classes with hover tint' do
+      allow(helper).to receive(:current_page?).with(path).and_return(false)
+
+      result = helper.sidebar_link(path)
+
+      expect(result).to include('flex items-center gap-x-2')
+      expect(result).to include('rounded-md')
+      expect(result).to include('hover:bg-violet-950/5')
+      expect(result).to include('dark:hover:bg-violet-100/5')
+    end
+
+    it 'adds the active background for the current page' do
+      allow(helper).to receive(:current_page?).with(path).and_return(true)
+
+      result = helper.sidebar_link(path)
+
+      expect(result).to include('bg-violet-950/5')
+      expect(result).to include('dark:bg-violet-100/5')
+    end
+  end
+
   describe 'theme variations' do
     themes = {
       1 => 'gray',
