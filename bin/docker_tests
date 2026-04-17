@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Run full test suite in Docker with proper test DB isolation.
+# Runs the same checks as bin/all_tests: RuboCop + Brakeman + RSpec + coverage.
+#
+# Usage:
+#   bin/docker_tests                              # full suite (bin/all_tests)
+#   bin/docker_tests spec/models                  # rspec only, specific path
+#   bin/docker_tests spec/models/user_spec.rb     # rspec only, single file
+
+COMPOSE="docker compose -f docker-compose.dev.yml"
+TEST_DB_URL="postgres://postgres:password@db:5432/myapp_test"
+ENV_ARGS="-e DATABASE_URL=$TEST_DB_URL -e RAILS_ENV=test -e DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL=true"
+
+if [ $# -eq 0 ]; then
+  exec $COMPOSE run --rm -T $ENV_ARGS web bash -c "bin/rails db:prepare && bin/all_tests"
+else
+  exec $COMPOSE run --rm -T $ENV_ARGS web bash -c "bin/rails db:prepare && bundle exec rspec $*"
+fi
