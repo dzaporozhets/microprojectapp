@@ -91,6 +91,24 @@ RSpec.describe CssHelper, type: :helper do
           expect(result).to include("border-#{theme_name}-")
           expect(result).to include("dark:border-#{theme_name}-")
         end
+
+        it 'returns correct sidebar link hover classes' do
+          allow(helper).to receive(:current_page?).with('/projects').and_return(false)
+
+          result = helper.sidebar_link('/projects')
+
+          expect(result).to include("hover:bg-#{theme_name}-950/5")
+          expect(result).to include("dark:hover:bg-#{theme_name}-100/5")
+        end
+
+        it 'returns correct sidebar link active classes' do
+          allow(helper).to receive(:current_page?).with('/projects').and_return(true)
+
+          result = helper.sidebar_link('/projects')
+
+          expect(result).to include("bg-#{theme_name}-950/5")
+          expect(result).to include("dark:bg-#{theme_name}-100/5")
+        end
       end
     end
   end
