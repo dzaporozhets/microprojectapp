@@ -92,6 +92,12 @@ RSpec.describe CssHelper, type: :helper do
           expect(result).to include("dark:border-#{theme_name}-")
         end
 
+        it 'returns washed-out sidebar background classes' do
+          result = helper.sidebar_bg
+          expect(result).to include("bg-#{theme_name}-100")
+          expect(result).to include("dark:bg-#{theme_name}-950/40")
+        end
+
         it 'returns correct sidebar link hover classes' do
           allow(helper).to receive(:current_page?).with('/projects').and_return(false)
 

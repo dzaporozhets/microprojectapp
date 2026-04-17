@@ -15,6 +15,16 @@ module CssHelper
     "tab-active #{theme_text}"
   end
 
+  def sidebar_bg
+    case theme_name
+    when 'violet' then 'bg-violet-100 dark:bg-violet-950/40'
+    when 'pink' then 'bg-pink-100 dark:bg-pink-950/40'
+    when 'orange' then 'bg-orange-100 dark:bg-orange-950/40'
+    when 'indigo' then 'bg-indigo-100 dark:bg-indigo-950/40'
+    when 'gray' then 'bg-gray-100 dark:bg-gray-950/40'
+    end
+  end
+
   def sidebar_link(path = nil)
     classes = [
       'flex items-center gap-x-2 rounded-md p-2 text-sm font-medium transition-colors',
