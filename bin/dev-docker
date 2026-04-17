@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+COMPOSE="docker compose -f docker-compose.dev.yml"
+
+echo "Stopping services..."
+$COMPOSE down
+
+echo "Starting services..."
+$COMPOSE up --build -d
+
+echo "Installing gems..."
+$COMPOSE exec web bundle install
+
+echo "Running database migrations..."
+$COMPOSE exec web bin/rails db:prepare
+
+echo "Done. Services:"
+$COMPOSE ps
