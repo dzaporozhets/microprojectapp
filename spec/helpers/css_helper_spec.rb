@@ -94,8 +94,8 @@ RSpec.describe CssHelper, type: :helper do
 
         it 'returns washed-out sidebar background classes' do
           result = helper.sidebar_bg
-          expect(result).to include("bg-#{theme_name}-100")
-          expect(result).to include("dark:bg-#{theme_name}-950/40")
+          expect(result).to include("bg-#{theme_name}-200/75")
+          expect(result).to include("dark:bg-#{theme_name}-950/60")
         end
 
         it 'returns correct sidebar link hover classes' do

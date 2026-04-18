@@ -17,11 +17,11 @@ module CssHelper
 
   def sidebar_bg
     case theme_name
-    when 'violet' then 'bg-violet-100 dark:bg-violet-950/40'
-    when 'pink' then 'bg-pink-100 dark:bg-pink-950/40'
-    when 'orange' then 'bg-orange-100 dark:bg-orange-950/40'
-    when 'indigo' then 'bg-indigo-100 dark:bg-indigo-950/40'
-    when 'gray' then 'bg-gray-100 dark:bg-gray-950/40'
+    when 'violet' then 'bg-violet-200/75 dark:bg-violet-950/60'
+    when 'pink' then 'bg-pink-200/75 dark:bg-pink-950/60'
+    when 'orange' then 'bg-orange-200/75 dark:bg-orange-950/60'
+    when 'indigo' then 'bg-indigo-200/75 dark:bg-indigo-950/60'
+    when 'gray' then 'bg-gray-200/75 dark:bg-gray-950/60'
     end
   end
 
