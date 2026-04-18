@@ -26,7 +26,7 @@
     <% unless task.done %>
       <div class="space-x-2 sm:flex hidden items-center">
         <% if task.due_date %>
-          <span class="text-xs whitespace-nowrap <%= task.overdue? ? 'text-red-700 dark:text-red-400' : 'text-secondary' %>"><%= human_due_date(task.due_date) %></span>
+          <span class="text-xs whitespace-nowrap <%= task.overdue? ? 'text-red-700 dark:text-red-500' : 'text-secondary' %>"><%= human_due_date(task.due_date) %></span>
           <span class="text-gray-300 dark:text-gray-600">|</span>
         <% end %>
 

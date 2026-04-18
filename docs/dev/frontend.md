@@ -207,7 +207,7 @@ Dark mode for `.file-select` is handled automatically via `@media (prefers-color
 
 ## Tabs
 
-Tabs are rendered via the `render_tabs` helper in `ApplicationHelper`. The class names (`tab-container`, `tab`, `tab-active`) are defined in `application.tailwind.css`; the active tab also gets `theme-text` so it picks up the current theme color.
+Tabs are rendered via the `render_tabs` helper in `ApplicationHelper`. The class names (`tab-container`, `tab`, `tab-active`) are defined in `application.tailwind.css`.
 
 Usage in views (via project-specific helper):
 
@@ -219,7 +219,7 @@ Direct usage:
 
 ```erb
 <nav class="flex nav-tabs tab-container">
-  <%= link_to "Tasks", project_tasks_path(@project), class: "tab-active theme-text" %>
+  <%= link_to "Tasks", project_tasks_path(@project), class: "tab-active" %>
   <%= link_to "Notes", project_notes_path(@project), class: "tab" %>
 </nav>
 ```

@@ -41,7 +41,7 @@ module ApplicationHelper
     content_tag(:nav, class: 'flex nav-tabs tab-container', aria: { label: 'Tabs' }) do
       safe_join(tabs.map do |tab|
         current_tab = selected == tab[:name]
-        link_class = current_tab ? 'tab-active theme-text' : 'tab'
+        link_class = current_tab ? 'tab-active' : 'tab'
         link_options = current_tab ? { 'aria-current' => 'page' } : {}
         link_to tab[:name], tab[:path], class: link_class, **link_options
       end)
