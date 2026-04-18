@@ -38,10 +38,10 @@ module ApplicationHelper
   end
 
   def render_tabs(tabs, selected = nil)
-    content_tag(:nav, class: "flex nav-tabs #{ui_tabs}", aria: { label: 'Tabs' }) do
+    content_tag(:nav, class: 'flex nav-tabs tab-container', aria: { label: 'Tabs' }) do
       safe_join(tabs.map do |tab|
         current_tab = selected == tab[:name]
-        link_class = current_tab ? ui_active_tab : ui_tab
+        link_class = current_tab ? 'tab-active theme-text' : 'tab'
         link_options = current_tab ? { 'aria-current' => 'page' } : {}
         link_to tab[:name], tab[:path], class: link_class, **link_options
       end)
@@ -63,6 +63,11 @@ module ApplicationHelper
     classes << 'compact' if current_user.compact_mode?
 
     classes.join(' ')
+  end
+
+  def body_class
+    theme = current_user&.theme_css_name || 'violet'
+    "body-color theme-#{theme}"
   end
 
   def disable_email_login?

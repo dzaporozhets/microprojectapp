@@ -59,10 +59,47 @@ html.compact { zoom: 0.95; }
     @apply lg:pl-56;
   }
 
-  .sidebar-bottom-link {
-    @apply flex items-center gap-x-2 rounded-md px-3 py-2 text-sm font-medium
-           hover:bg-black/5 dark:hover:bg-white/10;
+  .sidebar-link {
+    @apply flex items-center gap-x-2 rounded-md p-2 text-sm font-medium transition-colors;
   }
+
+  /*----------------------------------------*
+   * 1c. Themes
+   *----------------------------------------*/
+  .theme-violet .theme-bg      { @apply bg-violet-200 dark:bg-violet-950; }
+  .theme-violet .theme-text    { @apply text-violet-900 dark:text-violet-100; }
+  .theme-violet .theme-border  { @apply border-violet-300 dark:border-violet-800/50; }
+  .theme-violet .sidebar-link  { @apply text-violet-900 dark:text-violet-100; }
+  .theme-violet .sidebar-link:hover,
+  .theme-violet .sidebar-link[aria-current="page"] { @apply bg-violet-950/5 dark:bg-violet-100/5; }
+
+  .theme-pink .theme-bg        { @apply bg-pink-200 dark:bg-pink-950; }
+  .theme-pink .theme-text      { @apply text-pink-900 dark:text-pink-100; }
+  .theme-pink .theme-border    { @apply border-pink-300 dark:border-pink-800/50; }
+  .theme-pink .sidebar-link    { @apply text-pink-900 dark:text-pink-100; }
+  .theme-pink .sidebar-link:hover,
+  .theme-pink .sidebar-link[aria-current="page"] { @apply bg-pink-950/5 dark:bg-pink-100/5; }
+
+  .theme-orange .theme-bg      { @apply bg-orange-200 dark:bg-orange-950; }
+  .theme-orange .theme-text    { @apply text-orange-900 dark:text-orange-100; }
+  .theme-orange .theme-border  { @apply border-orange-300 dark:border-orange-800/50; }
+  .theme-orange .sidebar-link  { @apply text-orange-900 dark:text-orange-100; }
+  .theme-orange .sidebar-link:hover,
+  .theme-orange .sidebar-link[aria-current="page"] { @apply bg-orange-950/5 dark:bg-orange-100/5; }
+
+  .theme-indigo .theme-bg      { @apply bg-indigo-200 dark:bg-indigo-950; }
+  .theme-indigo .theme-text    { @apply text-indigo-900 dark:text-indigo-100; }
+  .theme-indigo .theme-border  { @apply border-indigo-300 dark:border-indigo-800/50; }
+  .theme-indigo .sidebar-link  { @apply text-indigo-900 dark:text-indigo-100; }
+  .theme-indigo .sidebar-link:hover,
+  .theme-indigo .sidebar-link[aria-current="page"] { @apply bg-indigo-950/5 dark:bg-indigo-100/5; }
+
+  .theme-gray .theme-bg        { @apply bg-gray-200 dark:bg-gray-950; }
+  .theme-gray .theme-text      { @apply text-gray-900 dark:text-gray-100; }
+  .theme-gray .theme-border    { @apply border-gray-300 dark:border-gray-800/50; }
+  .theme-gray .sidebar-link    { @apply text-gray-900 dark:text-gray-100; }
+  .theme-gray .sidebar-link:hover,
+  .theme-gray .sidebar-link[aria-current="page"] { @apply bg-gray-950/5 dark:bg-gray-100/5; }
 
   /*----------------------------------------*
    * 2. Navigation

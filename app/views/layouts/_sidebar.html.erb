@@ -1,7 +1,7 @@
 <div class="fixed inset-y-0 left-0 w-56 flex flex-col z-40 -translate-x-full transition-transform lg:translate-x-0" data-sidebar-target="panel">
-  <div class="flex grow flex-col overflow-y-auto <%= theme_bg %> <%= theme_border %> border-r px-4">
+  <div class="flex grow flex-col overflow-y-auto theme-bg theme-border border-r px-4">
     <div class="flex h-12 shrink-0 items-center justify-between px-2 my-3">
-      <%= link_to 'MicroProject.app', root_path, class: "#{theme_text} font-bold" %>
+      <%= link_to 'MicroProject.app', root_path, class: "theme-text font-bold" %>
 
       <button type="button" class="lg:hidden p-1" aria-label="Close navigation" data-action="click->sidebar#toggle">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -11,28 +11,28 @@
     </div>
 
     <nav class="flex flex-1 flex-col space-y-1">
-      <%= link_to projects_path, class: sidebar_link(projects_path) do %>
+      <%= link_to projects_path, class: "sidebar-link", aria: { current: ("page" if current_page?(projects_path)) } do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 shrink-0">
           <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
         </svg>
         Projects
       <% end %>
 
-      <%= link_to tasks_path, class: sidebar_link(tasks_path) do %>
+      <%= link_to tasks_path, class: "sidebar-link", aria: { current: ("page" if current_page?(tasks_path)) } do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 shrink-0">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2" />
         </svg>
         Tasks
       <% end %>
 
-      <%= link_to notes_path, class: sidebar_link(notes_path) do %>
+      <%= link_to notes_path, class: "sidebar-link", aria: { current: ("page" if current_page?(notes_path)) } do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 shrink-0">
           <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
         </svg>
         Notes
       <% end %>
 
-      <%= link_to search_path, class: sidebar_link(search_path) do %>
+      <%= link_to search_path, class: "sidebar-link", aria: { current: ("page" if current_page?(search_path)) } do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 shrink-0">
           <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
         </svg>
@@ -40,7 +40,7 @@
       <% end %>
 
       <% if current_user&.admin? %>
-        <%= link_to admin_path, class: sidebar_link(admin_path) do %>
+        <%= link_to admin_path, class: "sidebar-link", aria: { current: ("page" if current_page?(admin_path)) } do %>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 shrink-0">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
           </svg>
@@ -49,24 +49,24 @@
       <% end %>
 
       <div class="py-2">
-        <div class="border-t <%= theme_border %>"></div>
+        <div class="border-t theme-border"></div>
       </div>
 
-      <%= link_to users_settings_path, class: sidebar_link(users_settings_path) do %>
+      <%= link_to users_settings_path, class: "sidebar-link", aria: { current: ("page" if current_page?(users_settings_path)) } do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 shrink-0">
           <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
         </svg>
         Settings
       <% end %>
 
-      <%= link_to help_path, class: sidebar_link(help_path) do %>
+      <%= link_to help_path, class: "sidebar-link", aria: { current: ("page" if current_page?(help_path)) } do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 shrink-0">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
         </svg>
         Help
       <% end %>
 
-      <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: sidebar_link do %>
+      <%= link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "sidebar-link" do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 shrink-0">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
         </svg>
