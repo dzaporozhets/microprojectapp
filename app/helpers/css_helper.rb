@@ -17,11 +17,11 @@ module CssHelper
 
   def theme_bg
     case theme_name
-    when 'violet' then 'bg-violet-200/75 dark:bg-violet-950/50'
-    when 'pink' then 'bg-pink-200/75 dark:bg-pink-950/50'
-    when 'orange' then 'bg-orange-200/75 dark:bg-orange-950/50'
-    when 'indigo' then 'bg-indigo-200/75 dark:bg-indigo-950/50'
-    when 'gray' then 'bg-gray-200/75 dark:bg-gray-950/50'
+    when 'violet' then 'bg-violet-200 dark:bg-violet-950'
+    when 'pink' then 'bg-pink-200 dark:bg-pink-950'
+    when 'orange' then 'bg-orange-200 dark:bg-orange-950'
+    when 'indigo' then 'bg-indigo-200 dark:bg-indigo-950'
+    when 'gray' then 'bg-gray-200 dark:bg-gray-950'
     end
   end
 
