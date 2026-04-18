@@ -159,11 +159,11 @@ html.compact { zoom: 0.95; }
   }
 
   .nav-title {
-    @apply justify-between items-center mx-auto max-w-screen-md px-4;
+    @apply justify-between items-center mx-auto max-w-screen-md px-8;
   }
 
   .nav-controls {
-    @apply justify-between items-center mx-auto max-w-screen-md px-4;
+    @apply justify-between items-center mx-auto max-w-screen-md px-8;
   }
 
   .nav-title-link {
