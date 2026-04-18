@@ -25,7 +25,7 @@ html.compact { zoom: 0.95; }
    * 1. Base & Theme
    *----------------------------------------*/
   .body-color {
-    @apply bg-gray-100 dark:bg-black text-gray-800 dark:text-gray-300;
+    @apply bg-gray-100 dark:bg-gray-950 text-gray-800 dark:text-gray-300;
   }
 
   .bg-base {
@@ -220,7 +220,7 @@ html.compact { zoom: 0.95; }
 
   .tab-active {
     @apply inline-flex items-center px-3 py-1.5 text-sm font-medium rounded-md
-           bg-white dark:bg-gray-900 shadow-sm;
+           bg-white dark:bg-gray-700 shadow-sm;
   }
 
   /*----------------------------------------*

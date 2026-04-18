@@ -15,13 +15,13 @@ module CssHelper
     "tab-active #{theme_text}"
   end
 
-  def sidebar_bg
+  def theme_bg
     case theme_name
-    when 'violet' then 'bg-violet-200/75 dark:bg-violet-950/60'
-    when 'pink' then 'bg-pink-200/75 dark:bg-pink-950/60'
-    when 'orange' then 'bg-orange-200/75 dark:bg-orange-950/60'
-    when 'indigo' then 'bg-indigo-200/75 dark:bg-indigo-950/60'
-    when 'gray' then 'bg-gray-200/75 dark:bg-gray-950/60'
+    when 'violet' then 'bg-violet-200/75 dark:bg-violet-950/50'
+    when 'pink' then 'bg-pink-200/75 dark:bg-pink-950/50'
+    when 'orange' then 'bg-orange-200/75 dark:bg-orange-950/50'
+    when 'indigo' then 'bg-indigo-200/75 dark:bg-indigo-950/50'
+    when 'gray' then 'bg-gray-200/75 dark:bg-gray-950/50'
     end
   end
 
@@ -58,16 +58,6 @@ module CssHelper
     end
   end
 
-  def theme_bg
-    case theme_name
-    when 'violet' then 'bg-violet-200 dark:bg-violet-950'
-    when 'pink' then 'bg-pink-200 dark:bg-pink-950'
-    when 'orange' then 'bg-orange-200 dark:bg-orange-950'
-    when 'indigo' then 'bg-indigo-200 dark:bg-indigo-950'
-    when 'gray' then 'bg-gray-200 dark:bg-gray-950'
-    end
-  end
-
   def theme_text
     case theme_name
     when 'violet' then 'text-violet-900 dark:text-violet-100'
@@ -80,11 +70,11 @@ module CssHelper
 
   def theme_border
     case theme_name
-    when 'violet' then 'border-violet-300 dark:border-violet-800'
-    when 'pink' then 'border-pink-300 dark:border-pink-800'
-    when 'orange' then 'border-orange-300 dark:border-orange-800'
-    when 'indigo' then 'border-indigo-300 dark:border-indigo-800'
-    when 'gray' then 'border-gray-300 dark:border-gray-800'
+    when 'violet' then 'border-violet-300 dark:border-violet-800/50'
+    when 'pink' then 'border-pink-300 dark:border-pink-800/50'
+    when 'orange' then 'border-orange-300 dark:border-orange-800/50'
+    when 'indigo' then 'border-indigo-300 dark:border-indigo-800/50'
+    when 'gray' then 'border-gray-300 dark:border-gray-800/50'
     end
   end
 
