@@ -1,9 +1,13 @@
 <% content_for :subnav do %>
-  <nav class="nav-container">
-    <div class="flex flex-wrap nav-controls">
-      <%= home_tabs "Projects" %>
+  <div class="nav-container">
+    <div class="nav-title">
+      <%= link_to projects_path do %>
+        <div class="nav-title-link">
+          <span>Projects</span>
+        </div>
+      <% end %>
     </div>
-  </nav>
+  </div>
 <% end %>
 
 <div class="">

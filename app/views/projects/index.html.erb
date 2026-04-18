@@ -2,12 +2,17 @@
   <% content_for :title, "Projects" %>
 
   <% content_for :subnav do %>
-    <nav class="nav-container">
-      <div class="flex flex-wrap nav-controls">
-        <%= home_tabs "Projects" %>
+    <div class="nav-container">
+      <div class="nav-title flex items-center justify-between">
+        <%= link_to projects_path do %>
+          <div class="nav-title-link">
+            <span>Projects</span>
+          </div>
+        <% end %>
+
         <%= link_to "New Project", new_project_path, class: "btn-base" %>
       </div>
-    </nav>
+    </div>
   <% end %>
 
 

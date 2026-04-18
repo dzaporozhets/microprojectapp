@@ -1,20 +1,4 @@
 module ApplicationHelper
-  def home_tabs(selected = nil)
-    tabs = [
-      { name: 'Projects', path: projects_path },
-      { name: 'Tasks', path: tasks_path },
-      { name: 'Notes', path: notes_path }
-    ]
-
-    unless selected
-      selected = 'Projects' if current_page?(projects_path)
-      selected = 'Tasks' if current_page?(tasks_path)
-      selected = 'Notes' if current_page?(notes_path)
-    end
-
-    render_tabs(tabs, selected)
-  end
-
   def avatar_tag(user, css_class = '', options = { size: 40, alt: 'Avatar' })
     if avatar_src(user).present?
       content_tag(:div, class: 'flex') do

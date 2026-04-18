@@ -222,12 +222,6 @@ Usage in views (via project-specific helper):
 <%= project_tabs @project, @tab_name %>
 ```
 
-Or the home page variant:
-
-```erb
-<%= home_tabs "Projects" %>
-```
-
 Direct usage:
 
 ```erb
