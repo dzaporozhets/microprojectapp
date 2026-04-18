@@ -36,6 +36,10 @@ html.compact { zoom: 0.95; }
     @apply container mx-auto max-w-screen-md flex;
   }
 
+  #new-tasks-section:not(:has(.task)) {
+    display: none;
+  }
+
   .content {
     @apply m-4;
   }

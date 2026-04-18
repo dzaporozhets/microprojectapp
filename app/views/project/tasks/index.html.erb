@@ -7,6 +7,10 @@
     <%= render 'project/tasks/form', project: @project %>
   <% end %>
 
+  <div id="new-tasks-section" class="resource-container">
+    <%= turbo_frame_tag "new_tasks", class: "resource-list" %>
+  </div>
+
   <div class="resource-container">
     <%= turbo_frame_tag "tasks", class: "resource-list" do %>
       <% @tasks.each do |task| %>
