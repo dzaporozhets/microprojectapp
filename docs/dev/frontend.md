@@ -207,14 +207,7 @@ Dark mode for `.file-select` is handled automatically via `@media (prefers-color
 
 ## Tabs
 
-Tabs are rendered via the `render_tabs` helper in `ApplicationHelper`, which uses CSS helper methods from `CssHelper`:
-
-```ruby
-# app/helpers/css_helper.rb
-def ui_tabs      = "tab-container"
-def ui_tab       = "tab"
-def ui_active_tab = "tab-active #{theme_text}"
-```
+Tabs are rendered via the `render_tabs` helper in `ApplicationHelper`. The class names (`tab-container`, `tab`, `tab-active`) are defined in `application.tailwind.css`.
 
 Usage in views (via project-specific helper):
 
@@ -222,18 +215,12 @@ Usage in views (via project-specific helper):
 <%= project_tabs @project, @tab_name %>
 ```
 
-Or the home page variant:
-
-```erb
-<%= home_tabs "Projects" %>
-```
-
 Direct usage:
 
 ```erb
-<nav class="flex nav-tabs <%= ui_tabs %>">
-  <%= link_to "Tasks", project_tasks_path(@project), class: ui_active_tab %>
-  <%= link_to "Notes", project_notes_path(@project), class: ui_tab %>
+<nav class="flex nav-tabs tab-container">
+  <%= link_to "Tasks", project_tasks_path(@project), class: "tab-active" %>
+  <%= link_to "Notes", project_notes_path(@project), class: "tab" %>
 </nav>
 ```
 

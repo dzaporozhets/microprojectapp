@@ -1,11 +1,15 @@
 <% content_for :title, "New Note" %>
 
 <% content_for :subnav do %>
-  <nav class="nav-container">
-    <div class="flex flex-wrap nav-controls">
-      <%= home_tabs "Notes" %>
+  <div class="nav-container">
+    <div class="nav-title">
+      <%= link_to notes_path do %>
+        <div class="nav-title-link">
+          <span>Notes</span>
+        </div>
+      <% end %>
     </div>
-  </nav>
+  </div>
 <% end %>
 
 <div class="resource-container">
