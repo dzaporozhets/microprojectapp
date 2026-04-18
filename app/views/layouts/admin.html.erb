@@ -19,11 +19,15 @@
             </div>
           <% end %>
         </div>
-
-        <div class="flex nav-controls">
-          <%= admin_tabs @tab_name %>
-        </div>
       </div>
+
+      <% if @tab_name %>
+        <div class="nav-container">
+          <div class="nav-title">
+            <%= admin_tabs @tab_name %>
+          </div>
+        </div>
+      <% end %>
 
       <main class="main-container">
         <div class="content w-full">

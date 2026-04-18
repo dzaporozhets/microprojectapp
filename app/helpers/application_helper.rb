@@ -38,7 +38,7 @@ module ApplicationHelper
   end
 
   def render_tabs(tabs, selected = nil)
-    content_tag(:nav, class: 'flex nav-tabs tab-container', aria: { label: 'Tabs' }) do
+    content_tag(:nav, class: 'nav-tabs tab-container', aria: { label: 'Tabs' }) do
       safe_join(tabs.map do |tab|
         current_tab = selected == tab[:name]
         link_class = current_tab ? 'tab-active' : 'tab'

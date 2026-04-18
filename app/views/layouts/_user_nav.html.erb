@@ -8,8 +8,12 @@
       </div>
     <% end %>
   </div>
-
-  <div class="flex nav-controls">
-    <%= users_tabs @tab_name %>
-  </div>
 </div>
+
+<% if @tab_name %>
+  <div class="nav-container">
+    <div class="nav-title">
+      <%= users_tabs @tab_name %>
+    </div>
+  </div>
+<% end %>
