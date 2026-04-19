@@ -27,23 +27,25 @@
         <div class="form-group">
           <div class="form-group-header">
             <h2 class="resource-subtitle">Appearance</h2>
-            <p class="form-hint">Choose your preferred dark mode setting</p>
           </div>
 
-          <div class="space-y-4 mb-6">
-            <div class="flex items-center">
-              <%= f.radio_button :dark_mode, :on, class: "h-4 w-4 radio" %>
-              <%= f.label :dark_mode_on, "Light", class: "ml-2 block text-sm font-medium text-gray-900 dark:text-gray-200" %>
-            </div>
+          <div class="mb-6">
+            <span class="form-label">Dark mode</span>
+            <div class="flex items-center gap-6">
+              <div class="flex items-center">
+                <%= f.radio_button :dark_mode, :on, class: "h-4 w-4 radio" %>
+                <%= f.label :dark_mode_on, "Light", class: "ml-2 block text-sm font-medium text-gray-900 dark:text-gray-200" %>
+              </div>
 
-            <div class="flex items-center">
-              <%= f.radio_button :dark_mode, :off, class: "h-4 w-4 radio" %>
-              <%= f.label :dark_mode_off, "Dark", class: "ml-2 block text-sm font-medium text-gray-900 dark:text-gray-200" %>
-            </div>
+              <div class="flex items-center">
+                <%= f.radio_button :dark_mode, :off, class: "h-4 w-4 radio" %>
+                <%= f.label :dark_mode_off, "Dark", class: "ml-2 block text-sm font-medium text-gray-900 dark:text-gray-200" %>
+              </div>
 
-            <div class="flex items-center">
-              <%= f.radio_button :dark_mode, :auto, class: "h-4 w-4 radio" %>
-              <%= f.label :dark_mode_auto, "Auto", class: "ml-2 block text-sm font-medium text-gray-900 dark:text-gray-200" %>
+              <div class="flex items-center">
+                <%= f.radio_button :dark_mode, :auto, class: "h-4 w-4 radio" %>
+                <%= f.label :dark_mode_auto, "Auto", class: "ml-2 block text-sm font-medium text-gray-900 dark:text-gray-200" %>
+              </div>
             </div>
           </div>
 
