@@ -356,7 +356,8 @@ html.compact { zoom: 0.95; }
   }
 
   .resource-list > * {
-    @apply block p-4 text-sm hover:bg-neutral-50 dark:hover:bg-gray-800 transition-colors duration-200;
+    @apply block p-4 text-sm hover:bg-neutral-50 dark:hover:bg-gray-800 transition-colors duration-200
+           first:rounded-t-lg last:rounded-b-lg;
   }
 
   .resource-empty-state {
