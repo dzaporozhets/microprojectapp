@@ -1,6 +1,17 @@
 CHANGELOG
 =========
 
+Version 0.21.0 (2026-04-18)
+---------------------------
+- Add mobile navigation with hamburger menu and sidebar
+- Redesign navigation with page titles in place of tab navigation
+- Show newly created tasks in a separate section at the top of the list
+- Simplify the task quick-add form with an inline keyboard hint
+- Improve dark theme with a calmer palette and subtle theme accents
+- Apply theme color to primary buttons, links, checkboxes, and radios
+- Add creating task comments via API and MCP
+- Add listing projects via MCP
+
 Version 0.20.0 (2026-04-02)
 ---------------------------
 - Add compact mode to user settings
