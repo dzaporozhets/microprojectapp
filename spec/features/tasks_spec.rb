@@ -59,6 +59,18 @@ RSpec.feature "Tasks", type: :feature do
       expect(page).to have_current_path(tasks_path)
       expect(page).to have_content("My new task")
     end
+
+    scenario "user creates a task via the quick-add form into personal project" do
+      visit tasks_path
+
+      expect(page).to have_field("task_name")
+
+      fill_in "task_name", with: "Pick up groceries"
+      click_button "Add task"
+
+      expect(page).to have_text("Pick up groceries")
+      expect(user.personal_project.tasks.where(name: "Pick up groceries")).to exist
+    end
   end
 
   scenario "/schedule redirects to /tasks" do
