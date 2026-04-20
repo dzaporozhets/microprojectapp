@@ -19,7 +19,12 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <% @notes.each do |note| %>
         <%= link_to project_note_path(note.project, note), class: "resource-container p-4 hover:bg-neutral-50 dark:hover:bg-gray-800 block" do %>
-          <h3 class="list-text-primary font-semibold truncate"><%= note.title %></h3>
+          <div class="flex items-start gap-2">
+            <h3 class="list-text-primary font-semibold truncate flex-1"><%= note.title %></h3>
+            <% if note.star %>
+              <%= render 'project/notes/star', note: note %>
+            <% end %>
+          </div>
           <p class="list-text-secondary mt-1"><%= note.project.name %></p>
           <% if note.content.present? %>
             <p class="mt-2 text-sm text-muted line-clamp-3 whitespace-pre-line break-all"><%= note.content.truncate(200) %></p>

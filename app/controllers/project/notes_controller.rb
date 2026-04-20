@@ -1,5 +1,5 @@
 class Project::NotesController < Project::BaseController
-  before_action :set_note, only: %i[ show edit update destroy changes ]
+  before_action :set_note, only: %i[ show edit update destroy changes toggle_star ]
   before_action :set_tab
 
   def index
@@ -63,6 +63,16 @@ class Project::NotesController < Project::BaseController
     respond_to do |format|
       format.html { redirect_to project_notes_path(@project) }
       format.json { head :no_content }
+    end
+  end
+
+  def toggle_star
+    @note.star = !@note.star
+
+    if @note.save
+      redirect_to project_note_path(@project, @note), notice: "Note star status was successfully updated."
+    else
+      redirect_to project_note_path(@project, @note), alert: "Failed to update note star status."
     end
   end
 

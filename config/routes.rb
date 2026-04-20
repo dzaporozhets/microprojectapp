@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :notes, controller: 'project/notes', only: [:index, :new, :create, :show, :edit, :update, :destroy] do
       member do
         get :changes
+        patch :toggle_star
       end
     end
     resources :users, only: [:index, :destroy], controller: 'project/users' do

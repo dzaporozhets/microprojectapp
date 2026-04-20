@@ -28,6 +28,24 @@ RSpec.describe Note, type: :model do
 
   end
 
+  describe '.basic_order' do
+    it 'returns starred notes before unstarred notes' do
+      project = create(:project)
+      older_starred = create(:note, project: project, star: true)
+      newer_unstarred = create(:note, project: project, star: false)
+
+      expect(Note.basic_order).to eq([older_starred, newer_unstarred])
+    end
+
+    it 'orders notes of the same star status by id descending' do
+      project = create(:project)
+      older = create(:note, project: project, star: false)
+      newer = create(:note, project: project, star: false)
+
+      expect(Note.basic_order).to eq([newer, older])
+    end
+  end
+
   describe 'attachment' do
     it 'rejects files over 5MB' do
       note = create(:note)

@@ -8,6 +8,8 @@ class Note < ApplicationRecord
     version_limit: 4
   )
 
+  scope :basic_order, -> { order(star: :desc, id: :desc) }
+
   validates :title, presence: true
   validate :acceptable_attachment
 

@@ -164,6 +164,25 @@ RSpec.describe Project::NotesController, type: :controller do
     end
   end
 
+  describe "PATCH #toggle_star" do
+    it "toggles star from false to true" do
+      note = create(:note, project: project, user: user, star: false)
+
+      patch :toggle_star, params: { project_id: project.id, id: note.id }
+
+      expect(note.reload.star).to be(true)
+      expect(response).to redirect_to(project_note_path(project, note))
+    end
+
+    it "toggles star from true to false" do
+      note = create(:note, project: project, user: user, star: true)
+
+      patch :toggle_star, params: { project_id: project.id, id: note.id }
+
+      expect(note.reload.star).to be(false)
+    end
+  end
+
   describe "DELETE #destroy" do
     it "destroys the note" do
       note = create(:note, project: project, user: user)

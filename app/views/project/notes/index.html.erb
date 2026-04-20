@@ -12,7 +12,7 @@
 
   <% if @project.notes.any? %>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-      <% @project.notes.each do |note| %>
+      <% @project.notes.basic_order.each do |note| %>
         <%= render 'project/notes/note', note: note %>
       <% end %>
     </div>
