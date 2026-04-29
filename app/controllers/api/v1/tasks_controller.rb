@@ -16,6 +16,11 @@ class Api::V1::TasksController < Api::V1::BaseController
       return if performed?
     end
 
+    if params[:assigned].present?
+      tasks = filter_by_assigned(tasks, params[:assigned])
+      return if performed?
+    end
+
     render json: {
       project: { id: @project.id, name: @project.name },
       tasks: tasks.map { |t| task_summary(t) }
@@ -82,6 +87,22 @@ class Api::V1::TasksController < Api::V1::BaseController
     end
   end
 
+  def filter_by_assigned(scope, value)
+    case value
+    when 'me'
+      scope.where(assigned_user_id: @current_api_user.id)
+    when 'unassigned'
+      scope.where(assigned_user_id: nil)
+    else
+      if value.match?(/\A\d+\z/)
+        scope.where(assigned_user_id: value.to_i)
+      else
+        render json: { error: "Invalid assigned filter: #{value}. Use me, unassigned, or a numeric user ID." }, status: :bad_request
+        nil
+      end
+    end
+  end
+
   def set_task
     @task = @project.tasks.find_by(id: params[:id])
 
@@ -110,6 +131,8 @@ class Api::V1::TasksController < Api::V1::BaseController
       star: task.star,
       due_date: task.due_date,
       done_at: task.done_at,
+      assigned_user_id: task.assigned_user_id,
+      assigned_user_email: task.assigned_user&.email,
       created_at: task.created_at,
       updated_at: task.updated_at,
       comment_count: task.comments.size

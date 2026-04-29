@@ -141,7 +141,7 @@ Include `Authorization: Bearer <token>` header. Generate tokens at `/users/accou
 
 ### Endpoints
 - `GET /api/v1/projects` — List projects the authenticated user has access to
-- `GET /api/v1/projects/:project_id/tasks?status=todo|done|all&due=today|overdue|this_week|none|YYYY-MM-DD` — List tasks (`status` and `due` are independent and can be combined)
+- `GET /api/v1/projects/:project_id/tasks?status=todo|done|all&due=today|overdue|this_week|none|YYYY-MM-DD&assigned=me|unassigned|<user_id>` — List tasks (filters are independent and can be combined)
 - `GET /api/v1/projects/:project_id/tasks/:id` — Task detail with comments
 - `POST /api/v1/projects/:project_id/tasks` — Create task (params: `name`, `description`, `due_date`, `star`, `assigned_user_id`)
 - `PATCH /api/v1/projects/:project_id/tasks/:id/toggle_done` — Toggle done

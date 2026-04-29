@@ -133,6 +133,59 @@ RSpec.describe "Api::V1::Tasks", type: :request do
         expect(JSON.parse(response.body)['error']).to include('Invalid due filter')
       end
     end
+
+    describe "assigned filter and assignee fields" do
+      let(:teammate) { create(:user) }
+
+      before do
+        create(:project_user, project: project, user: teammate)
+      end
+
+      let!(:task_assigned_to_me) { create(:task, project: project, user: user, name: "Mine", assigned_user: user) }
+      let!(:task_assigned_to_teammate) { create(:task, project: project, user: user, name: "Theirs", assigned_user: teammate) }
+
+      it "includes assigned_user_id and assigned_user_email in summaries" do
+        get api_v1_project_tasks_path(project), headers: headers
+
+        body = JSON.parse(response.body)
+        mine = body['tasks'].find { |t| t['id'] == task_assigned_to_me.id }
+        unassigned = body['tasks'].find { |t| t['id'] == task_todo.id }
+        expect(mine['assigned_user_id']).to eq(user.id)
+        expect(mine['assigned_user_email']).to eq(user.email)
+        expect(unassigned['assigned_user_id']).to be_nil
+        expect(unassigned['assigned_user_email']).to be_nil
+      end
+
+      it "filters by assigned=me" do
+        get api_v1_project_tasks_path(project), params: { assigned: 'me' }, headers: headers
+
+        body = JSON.parse(response.body)
+        expect(body['tasks'].map { |t| t['id'] }).to contain_exactly(task_assigned_to_me.id)
+      end
+
+      it "filters by assigned=unassigned" do
+        get api_v1_project_tasks_path(project), params: { assigned: 'unassigned' }, headers: headers
+
+        body = JSON.parse(response.body)
+        ids = body['tasks'].map { |t| t['id'] }
+        expect(ids).to include(task_todo.id, task_done.id)
+        expect(ids).not_to include(task_assigned_to_me.id, task_assigned_to_teammate.id)
+      end
+
+      it "filters by an explicit user ID" do
+        get api_v1_project_tasks_path(project), params: { assigned: teammate.id.to_s }, headers: headers
+
+        body = JSON.parse(response.body)
+        expect(body['tasks'].map { |t| t['id'] }).to contain_exactly(task_assigned_to_teammate.id)
+      end
+
+      it "returns 400 for a non-numeric, non-keyword assigned value" do
+        get api_v1_project_tasks_path(project), params: { assigned: 'someone@example.com' }, headers: headers
+
+        expect(response).to have_http_status(:bad_request)
+        expect(JSON.parse(response.body)['error']).to include('Invalid assigned filter')
+      end
+    end
   end
 
   describe "GET /api/v1/projects/:project_id/tasks/:id" do

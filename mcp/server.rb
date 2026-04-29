@@ -26,7 +26,7 @@ class MicroProjectMCP
     },
     {
       name: 'list_tasks',
-      description: 'List tasks in a MicroProject project. Each line includes ID, checkbox (done/todo), name, star, due date, and comment count — no need to call get_task just to read those fields.',
+      description: 'List tasks in a MicroProject project. Each line includes ID, checkbox (done/todo), name, star, due date, assignee, and comment count — no need to call get_task just to read those fields.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -38,6 +38,10 @@ class MicroProjectMCP
           due: {
             type: 'string',
             description: 'Filter by due date: today, overdue (past due and not done), this_week, none (no due date), or an explicit YYYY-MM-DD'
+          },
+          assigned: {
+            type: 'string',
+            description: 'Filter by assignee: me (the token owner), unassigned, or a numeric user ID'
           },
           project_id: {
             type: 'string',
@@ -218,21 +222,25 @@ class MicroProjectMCP
     status = args['status'] || 'all'
     query = { status: status }
     query[:due] = args['due'] if args['due']
+    query[:assigned] = args['assigned'] if args['assigned']
     path = "/api/v1/projects/#{project_id}/tasks?#{URI.encode_www_form(query)}"
     data = api_get(path)
 
     project = data['project']
     tasks = data['tasks']
 
-    heading_suffix = args['due'] ? "#{status}, due=#{args['due']}" : status
-    lines = ["## #{project['name']} — Tasks (#{heading_suffix})", ""]
+    heading_parts = [status]
+    heading_parts << "due=#{args['due']}" if args['due']
+    heading_parts << "assigned=#{args['assigned']}" if args['assigned']
+    lines = ["## #{project['name']} — Tasks (#{heading_parts.join(', ')})", ""]
 
     tasks.each do |t|
       checkbox = t['done'] ? '[x]' : '[ ]'
       star = t['star'] ? ' *' : ''
       due = t['due_date'] ? " (due #{t['due_date']})" : ''
+      assignee = t['assigned_user_email'] ? " @#{t['assigned_user_email']}" : ''
       comments = t['comment_count'] > 0 ? " [#{t['comment_count']} comments]" : ''
-      lines << "- #{checkbox} ##{t['id']} #{t['name']}#{star}#{due}#{comments}"
+      lines << "- #{checkbox} ##{t['id']} #{t['name']}#{star}#{due}#{assignee}#{comments}"
     end
 
     lines << "" << "#{tasks.size} task(s)"

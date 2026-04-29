@@ -36,6 +36,10 @@ GET /api/v1/projects/:project_id/tasks
 |-------|------|-------------|
 | `project_id` | integer | **Required.** Project ID (path) |
 | `status` | string | Filter: `todo` or `done`. Any other value returns all tasks. |
+| `due` | string | Filter by due date: `today`, `overdue` (past due and not done), `this_week`, `none` (no due date), or an explicit `YYYY-MM-DD`. Returns `400` for an invalid value. |
+| `assigned` | string | Filter by assignee: `me` (the token owner), `unassigned`, or a numeric user ID. Returns `400` for an invalid value. |
+
+Filters are independent — `status`, `due`, and `assigned` can be combined.
 
 **Response:**
 
@@ -53,6 +57,8 @@ GET /api/v1/projects/:project_id/tasks
       "star": true,
       "due_date": "2026-03-01",
       "done_at": null,
+      "assigned_user_id": 7,
+      "assigned_user_email": "alice@example.com",
       "created_at": "2026-02-20T10:00:00.000Z",
       "updated_at": "2026-02-24T15:30:00.000Z",
       "comment_count": 3
@@ -130,6 +136,8 @@ PATCH /api/v1/projects/:project_id/tasks/:id/toggle_done
     "star": true,
     "due_date": "2026-03-01",
     "done_at": "2026-02-25T12:00:00.000Z",
+    "assigned_user_id": 7,
+    "assigned_user_email": "alice@example.com",
     "created_at": "2026-02-20T10:00:00.000Z",
     "updated_at": "2026-02-25T12:00:00.000Z",
     "comment_count": 3
