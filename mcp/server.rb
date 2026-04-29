@@ -26,7 +26,7 @@ class MicroProjectMCP
     },
     {
       name: 'list_tasks',
-      description: 'List tasks in a MicroProject project. Returns task names with checkbox notation.',
+      description: 'List tasks in a MicroProject project. Each line includes ID, checkbox (done/todo), name, star, due date, and comment count — no need to call get_task just to read those fields.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -34,6 +34,10 @@ class MicroProjectMCP
             type: 'string',
             enum: %w[todo done all],
             description: 'Filter by status: todo, done, or all (default: all)'
+          },
+          due: {
+            type: 'string',
+            description: 'Filter by due date: today, overdue (past due and not done), this_week, none (no due date), or an explicit YYYY-MM-DD'
           },
           project_id: {
             type: 'string',
@@ -212,13 +216,16 @@ class MicroProjectMCP
   def call_list_tasks(args)
     project_id = resolve_project_id(args)
     status = args['status'] || 'all'
-    path = "/api/v1/projects/#{project_id}/tasks?status=#{status}"
+    query = { status: status }
+    query[:due] = args['due'] if args['due']
+    path = "/api/v1/projects/#{project_id}/tasks?#{URI.encode_www_form(query)}"
     data = api_get(path)
 
     project = data['project']
     tasks = data['tasks']
 
-    lines = ["## #{project['name']} — Tasks (#{status})", ""]
+    heading_suffix = args['due'] ? "#{status}, due=#{args['due']}" : status
+    lines = ["## #{project['name']} — Tasks (#{heading_suffix})", ""]
 
     tasks.each do |t|
       checkbox = t['done'] ? '[x]' : '[ ]'

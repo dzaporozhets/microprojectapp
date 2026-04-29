@@ -11,6 +11,11 @@ class Api::V1::TasksController < Api::V1::BaseController
               @project.tasks.basic_order
             end
 
+    if params[:due].present?
+      tasks = filter_by_due(tasks, params[:due])
+      return if performed?
+    end
+
     render json: {
       project: { id: @project.id, name: @project.name },
       tasks: tasks.map { |t| task_summary(t) }
@@ -54,6 +59,28 @@ class Api::V1::TasksController < Api::V1::BaseController
   end
 
   private
+
+  def filter_by_due(scope, value)
+    case value
+    when 'today'
+      scope.where(due_date: Date.current)
+    when 'overdue'
+      scope.todo.where(due_date: ...Date.current)
+    when 'this_week'
+      scope.where(due_date: Date.current.all_week)
+    when 'none'
+      scope.no_due_date
+    else
+      date = Date.parse(value) rescue nil
+
+      if date
+        scope.where(due_date: date)
+      else
+        render json: { error: "Invalid due filter: #{value}. Use today, overdue, this_week, none, or YYYY-MM-DD." }, status: :bad_request
+        nil
+      end
+    end
+  end
 
   def set_task
     @task = @project.tasks.find_by(id: params[:id])

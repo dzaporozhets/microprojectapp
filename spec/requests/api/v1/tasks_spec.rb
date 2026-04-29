@@ -66,6 +66,73 @@ RSpec.describe "Api::V1::Tasks", type: :request do
       todo_json = body['tasks'].find { |t| t['id'] == task_todo.id }
       expect(todo_json['comment_count']).to eq(2)
     end
+
+    describe "due filter" do
+      let!(:task_due_today) { create(:task, project: project, user: user, name: "Due today", due_date: Date.current) }
+      let!(:task_overdue) { create(:task, project: project, user: user, name: "Overdue", due_date: Date.current - 3, done: false) }
+      let!(:task_overdue_done) { create(:task, project: project, user: user, name: "Overdue but done", due_date: Date.current - 3, done: true) }
+
+      it "filters by due=today" do
+        get api_v1_project_tasks_path(project), params: { due: 'today' }, headers: headers
+
+        body = JSON.parse(response.body)
+        expect(body['tasks'].map { |t| t['id'] }).to contain_exactly(task_due_today.id)
+      end
+
+      it "filters by due=overdue (excludes done tasks)" do
+        get api_v1_project_tasks_path(project), params: { due: 'overdue' }, headers: headers
+
+        body = JSON.parse(response.body)
+        expect(body['tasks'].map { |t| t['id'] }).to contain_exactly(task_overdue.id)
+      end
+
+      it "filters by due=this_week" do
+        in_week = create(:task, project: project, user: user, name: "Mid-week", due_date: Date.current.beginning_of_week)
+        end_of_week = create(:task, project: project, user: user, name: "End of week", due_date: Date.current.end_of_week)
+        create(:task, project: project, user: user, name: "Next week", due_date: Date.current.end_of_week + 1)
+        create(:task, project: project, user: user, name: "Last week", due_date: Date.current.beginning_of_week - 1)
+
+        get api_v1_project_tasks_path(project), params: { due: 'this_week' }, headers: headers
+
+        body = JSON.parse(response.body)
+        ids = body['tasks'].map { |t| t['id'] }
+        expect(ids).to include(in_week.id, end_of_week.id, task_due_today.id)
+        expect(ids).not_to include(task_todo.id, task_done.id)
+      end
+
+      it "filters by due=none" do
+        get api_v1_project_tasks_path(project), params: { due: 'none' }, headers: headers
+
+        body = JSON.parse(response.body)
+        ids = body['tasks'].map { |t| t['id'] }
+        expect(ids).to include(task_todo.id, task_done.id)
+        expect(ids).not_to include(task_due_today.id, task_overdue.id)
+      end
+
+      it "filters by an explicit YYYY-MM-DD" do
+        target = (Date.current + 30).to_s
+        tomorrow_task = create(:task, project: project, user: user, name: "Future", due_date: target)
+
+        get api_v1_project_tasks_path(project), params: { due: target }, headers: headers
+
+        body = JSON.parse(response.body)
+        expect(body['tasks'].map { |t| t['id'] }).to contain_exactly(tomorrow_task.id)
+      end
+
+      it "combines with status=todo" do
+        get api_v1_project_tasks_path(project), params: { status: 'todo', due: 'today' }, headers: headers
+
+        body = JSON.parse(response.body)
+        expect(body['tasks'].map { |t| t['id'] }).to contain_exactly(task_due_today.id)
+      end
+
+      it "returns 400 for an invalid due value" do
+        get api_v1_project_tasks_path(project), params: { due: 'not-a-date' }, headers: headers
+
+        expect(response).to have_http_status(:bad_request)
+        expect(JSON.parse(response.body)['error']).to include('Invalid due filter')
+      end
+    end
   end
 
   describe "GET /api/v1/projects/:project_id/tasks/:id" do
